@@ -30,33 +30,35 @@ of join request;
 The client connects to a socket named \textit{\$HOME/.ceof/clients/socket}.
 If the environment variable "`\textit{CEOF\_DIR}`" is set,
 \textit{\$HOME/.ceof} should be replaced with that content.
-If the environment variable \textit{\$CEOF\_CLIENT\_SOCKET} is set,
+If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
-If \textit{\$HOME} and \textit{\$CEOF\_DIR} is empty, you should fallback
- to the directory .ceof in the currenty directory.
+If the environment variable \textit{HOME} and \textit{CEOF\_DIR}
+is empty, you should fallback to the directory .ceof in the currenty directory.
 
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
-All answers and all numbers are ASCII-numbers. We never transmit binary numbers.
-\textbf{Client commands} always begin with "`0"' ("`0042"' for instance),
-\textbf{answers} or notifications from ceof begin with "`1"' ("`1023"' for instance).
- After each command follows individual data. The second byte indicates the type of message:
+All answers and all numbers are ASCII-numbers. We
+\textbf{never} transmit binary numbers.
+\textbf{Client commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+ceof begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
 \begin{itemize}
-\item 00: client meta command (something that does not affect the user)
-\item 01: messages
-\item 11: sucess answers from ceof
-\item 12: error answers from ceof
-\item 13: messages / notifications initiated by ceof
+\item \textbf{00}: client meta command (something that does not affect the user)
+\item \textbf{01}: messages
+\item \textbf{11}: sucess answers from ceof
+\item \textbf{12}: error answers from ceof
+\item \textbf{13}: messages / notifications initiated by ceof
 \end{itemize}
 
 \subsection{0000: Register client}
-
-After the "0000" the client directly appensd two ASCII digits containing the version of the client to ceof protocol it speaks ("01" in this case).
-
+After the "`0000"' the client directly appensd two ASCII digits containing the
+version of the client to ceof protocol it speaks ("01" in this case).
 Answers from ceof:
-
-    * 1100: sucess, you are connected
-    * 1200: version not supported
+\begin{itemize}
+\item \textbf{1100}: sucess, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
 
 
 \subsection{0001: connect to markschreier}
@@ -68,18 +70,22 @@ If the URI is shorter than 512 bytes, the remain should be filled with 0 bytes
 
 Answers from ceof:
 
-    * 1100: success
-    * 1201: high level protocol (like "`tcp://"') not supported
-    * 1202: connection could not be established
+\begin{itemize}
+\item \textbf{1100}: success
+\item \textbf{1201}: high level protocol (like "`tcp://"') not supported
+\item \textbf{1202}: connection could not be established
+\end{itemize}
 
 
 \subsection{0002: get list of channels}
 
 Answers from ceof:
 
-    * 1101: got list; following four ASCII-digits containing number of channels
+\begin{itemize}
+\item \textbf{1101}: got list; following four ASCII-digits containing number of channels
  ("`num\_chan"'); after that  num\_chan 512 Bytes packets follow containing the channel name, padded with 0-bytes
-    * 1202: connection could not be established
+\item \textbf{1202}: connection could not be established
+\end{itemize}
 
 
 \subsection{0003: ask to join a channel}
@@ -88,9 +94,11 @@ After the "0003" follow 512 Bytes describing the channel name.
 
 Answers from ceof:
 
-    * 1100: success (means: markschreier asked knows peers to connect to us); 4 Bytes follow, giving the internal channel id
-    * 1202: connection could not be established
-    * 1203: access denied by markschreier: you are not allowed to join
+\begin{itemize}
+\item \textbf{1100}: success (means: markschreier asked knows peers to connect to us); 4 Bytes follow, giving the internal channel id
+\item \textbf{1202}: connection could not be established
+\item \textbf{1203}: access denied by markschreier: you are not allowed to join
+\end{itemize}
 
 
 \subsection{0004: send message to channel}
@@ -99,8 +107,10 @@ Aftere the "0004" follow four bytes for the ceof internal channel id and after t
 
 Answers from ceof:
 
-    * 1100: success
-    * 1204: unknown channel
+\begin{itemize}
+\item \textbf{1100}: success
+\item \textbf{1204}: unknown channel
+\end{itemize}
 
 
 \subsection{0005: send message to peer}
@@ -109,16 +119,19 @@ Aftere the "0004" follow four bytes for the ceof internal peer id and after that
 
 Answers from ceof:
 
-    * 1100: success
-    * 1205: unknown peer
+\begin{itemize}
+\item \textbf{1100}: success
+\item \textbf{1205}: unknown peer
+\end{itemize}
 
 
 \subsection{0006: retrieve list of known peers}
-
 Answers from ceof:
-
-    * 1102: list follows; following four ASCII-digits containing number
- of peers ("`num\_peer"'); after that  num\_peer  XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
+\begin{itemize}
+\item \textbf{1102}: list follows; following four ASCII-digits containing number
+of peers ("`num\_peer"'); after that  num\_peer
+XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
+\end{itemize}
 
 \subsection{0099: request for exit}
 
@@ -126,15 +139,16 @@ Tells ceof to exit and to notify all clients to exit. It will not reply anything
 
 
 \subsection{1300: recieved message}
-
 After the "1300" follows:
-
-    * 4 Byte channel id; if the id is "9999" it is a private message, directly send to you
-    * 4 Byte peer id (the person who send the message)
-    * 512 Byte message
-
+\begin{itemize}
+\item 4 Byte channel id; if the id is "`9999"' it is a private message, directly send to you
+\item 4 Byte peer id (the person who send the message)
+\item 512 Byte message
+\end{itemize}
 
 \subsection{1399: exit notify}
-
-ceof is being shutdown. Shutdown yourself, too. After that message ceof will exit and you should do the same. No answer possible, ceof already decided to vanish.
+ceof is being shutdown.
+Shutdown yourself, too.
+After that message ceof will exit and you should do the same.
+No answer possible, ceof already decided to vanish.
 \end{document}
