@@ -1,0 +1,130 @@
+\documentclass[12pt,a4paper]{article}
+% FIXME: UTF8
+\usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
+\usepackage{german}
+\usepackage{longtable}           % lange Tabellen
+%\usepackage[dvips]{epsfig}
+
+\begin{document}
+\title{gui2ceof}
+\date{2007-09-15 v0.2-mrmcd110b}
+\author{telmich}
+
+\maketitle
+
+\section{Introduction}
+Missing.- Commands from GUI to and from
+ceof\footnote{the central EOF-1 application}.
+
+How the clients can communicate with ceof, the central application of EOF-1.
+
+\subsection{Changelog}
+Changes to draft-1: Change socket location, clearified what todo without CEOF_DIR and HOME. Added exit command. TODO: how client gets peer ids? necessary? retrieve list of channels, retrieve list of peers / peer-ids. mapping from peer-id to real id. channel list: known channels on marktschreier, joined channels; members of channel; add notification of join request;
+
+\section{Connection}
+The client connects to a socket named \verb=$HOME/.ceof/clients/socket=.
+If the environment variable "`\textit{CEOF_DIR}`" is set,
+\verb=$HOME/.ceof= should be replaced with that content.
+If the environment variable \verb=$CEOF_CLIENT_SOCKET= is set,
+"`\textit{clients/socket}"` should be replaced by its content.
+If \verb=$HOME= and \verb=$CEOF_DIR= is empty, you should fallback
+ to the directory .ceof in the currenty directory.
+
+\section{Commands}
+All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+All answers and all numbers are ASCII-numbers. We never transmit binary numbers.
+\textbf{Client commands} always begin with "`0"' ("`0042"' for instance),
+\textbf{answers} or notifications from ceof begin with "`1"' ("`1023"' for instance).
+ After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item 00: client meta command (something that does not affect the user)
+\item 01: messages
+\item 11: sucess answers from ceof
+\item 12: error answers from ceof
+\item 13: messages / notifications initiated by ceof
+\end{itemize}
+
+\subsection{0000: Register client}
+
+After the "0000" the client directly appensd two ASCII digits containing the version of the client to ceof protocol it speaks ("01" in this case).
+
+Answers from ceof:
+
+    * 1100: sucess, you are connected
+    * 1200: version not supported
+
+
+\subsection{0001: connect to markschreier}
+
+After the "0001" follow 512 Bytes describing how to connect to the marktschreier ("tcp://62.65.138.66:42" for instance). If the URI is shorter than 512 bytes, the remain should be filled with 0 bytes (also known as '\0').
+
+Answers from ceof:
+
+    * 1100: success
+    * 1201: high level protocol (like "tcp://") not supported
+    * 1202: connection could not be established
+
+
+\subsection{0002: get list of channels}
+
+Answers from ceof:
+
+    * 1101: got list; following four ASCII-digits containing number of channels ("num_chan"); after that  num_chan 512 Bytes packets follow containing the channel name, padded with 0-bytes
+    * 1202: connection could not be established
+
+
+\subsection{0003: ask to join a channel}
+
+After the "0003" follow 512 Bytes describing the channel name.
+
+Answers from ceof:
+
+    * 1100: success (means: markschreier asked knows peers to connect to us); 4 Bytes follow, giving the internal channel id
+    * 1202: connection could not be established
+    * 1203: access denied by markschreier: you are not allowed to join
+
+
+\subsection{0004: send message to channel}
+
+Aftere the "0004" follow four bytes for the ceof internal channel id and after that 512 Bytes for the message.
+
+Answers from ceof:
+
+    * 1100: success
+    * 1204: unknown channel
+
+
+\subsection{0005: send message to peer}
+
+Aftere the "0004" follow four bytes for the ceof internal peer id and after that 512 Bytes for the message.
+
+Answers from ceof:
+
+    * 1100: success
+    * 1205: unknown peer
+
+
+\subsection{0006: retrieve list of known peers}
+
+Answers from ceof:
+
+    * 1102: list follows; following four ASCII-digits containing number of peers ("num_peer"); after that  num_peer  XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
+
+\subsection{0099: request for exit}
+
+Tells ceof to exit and to notify all clients to exit. It will not reply anything to you, but issue an exit notify to all clients, including the requesting one.
+
+
+\subsection{1300: recieved message}
+
+After the "1300" follows:
+
+    * 4 Byte channel id; if the id is "9999" it is a private message, directly send to you
+    * 4 Byte peer id (the person who send the message)
+    * 512 Byte message
+
+
+\subsection{1399: exit notify}
+
+ceof is being shutdown. Shutdown yourself, too. After that message ceof will exit and you should do the same. No answer possible, ceof already decided to vanish.
+\end{document}
