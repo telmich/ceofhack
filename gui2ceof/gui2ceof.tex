@@ -1,7 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 % FIXME: UTF8
 \usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
-\usepackage{german}
 \usepackage{longtable}           % lange Tabellen
 %\usepackage[dvips]{epsfig}
 
@@ -11,23 +10,29 @@
 \author{telmich}
 
 \maketitle
+\tableofcontents
 
 \section{Introduction}
-Missing.- Commands from GUI to and from
+Commands from GUI to and from
 ceof\footnote{the central EOF-1 application}.
 
-How the clients can communicate with ceof, the central application of EOF-1.
-
 \subsection{Changelog}
-Changes to draft-1: Change socket location, clearified what todo without CEOF_DIR and HOME. Added exit command. TODO: how client gets peer ids? necessary? retrieve list of channels, retrieve list of peers / peer-ids. mapping from peer-id to real id. channel list: known channels on marktschreier, joined channels; members of channel; add notification of join request;
+\subsubsection{draft-1 to v0.2-mrmcd110b}
+Change socket location, clearified what todo without
+\textit{CEOF\_DIR} and \textit{HOME}. Added exit command.
+
+TODO: how client gets peer ids? necessary? retrieve list of channels, retrieve
+list of peers / peer-ids.  mapping from peer-id to real id. channel list: known
+channels on marktschreier, joined channels; members of channel; add notification
+of join request;
 
 \section{Connection}
-The client connects to a socket named \verb=$HOME/.ceof/clients/socket=.
-If the environment variable "`\textit{CEOF_DIR}`" is set,
-\verb=$HOME/.ceof= should be replaced with that content.
-If the environment variable \verb=$CEOF_CLIENT_SOCKET= is set,
+The client connects to a socket named \textit{\$HOME/.ceof/clients/socket}.
+If the environment variable "`\textit{CEOF\_DIR}`" is set,
+\textit{\$HOME/.ceof} should be replaced with that content.
+If the environment variable \textit{\$CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
-If \verb=$HOME= and \verb=$CEOF_DIR= is empty, you should fallback
+If \textit{\$HOME} and \textit{\$CEOF\_DIR} is empty, you should fallback
  to the directory .ceof in the currenty directory.
 
 \section{Commands}
@@ -56,12 +61,15 @@ Answers from ceof:
 
 \subsection{0001: connect to markschreier}
 
-After the "0001" follow 512 Bytes describing how to connect to the marktschreier ("tcp://62.65.138.66:42" for instance). If the URI is shorter than 512 bytes, the remain should be filled with 0 bytes (also known as '\0').
+After the "`0001"' follow 512 Bytes describing how to connect
+to the marktschreier ("`tcp://62.65.138.66:42'" for instance).
+If the URI is shorter than 512 bytes, the remain should be filled with 0 bytes
+(also known as \verb='\0'=).
 
 Answers from ceof:
 
     * 1100: success
-    * 1201: high level protocol (like "tcp://") not supported
+    * 1201: high level protocol (like "`tcp://"') not supported
     * 1202: connection could not be established
 
 
@@ -69,7 +77,8 @@ Answers from ceof:
 
 Answers from ceof:
 
-    * 1101: got list; following four ASCII-digits containing number of channels ("num_chan"); after that  num_chan 512 Bytes packets follow containing the channel name, padded with 0-bytes
+    * 1101: got list; following four ASCII-digits containing number of channels
+ ("`num\_chan"'); after that  num\_chan 512 Bytes packets follow containing the channel name, padded with 0-bytes
     * 1202: connection could not be established
 
 
@@ -108,7 +117,8 @@ Answers from ceof:
 
 Answers from ceof:
 
-    * 1102: list follows; following four ASCII-digits containing number of peers ("num_peer"); after that  num_peer  XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
+    * 1102: list follows; following four ASCII-digits containing number
+ of peers ("`num\_peer"'); after that  num\_peer  XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
 
 \subsection{0099: request for exit}
 
