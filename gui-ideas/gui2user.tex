@@ -1,0 +1,60 @@
+\documentclass[12pt,a4paper]{article}
+% FIXME: UTF8
+\usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
+\usepackage{german}
+\usepackage{longtable}           % lange Tabellen
+%\usepackage[dvips]{epsfig}
+
+\begin{document}
+\title{gui2user}
+\date{2007-09-15 v0.1-mrmcd110b}
+\author{apic, ilo, telmich}
+
+\section{Introduction}
+Missing.- What commands must be supported by all GUIs.
+
+\section{Commands}
+All commands begin with a "`/"' as first character.
+
+\subsection{Send text}
+If there is no /, it should be assumed that it is a message send to the current channel or nick.
+
+\subsection{/msg <nick> <message>}
+Sends a message to the specified nick.
+
+\subsection{/join <marktschreier> <channel>}
+Join the specific channel on the specified marktschreier.
+
+\subsection{/list <markschreier>}
+List channels available on marktschreier.
+
+\subsection{/mslist}
+List connected marktschreier.
+
+\subsection{/mconnect <marktschreier>}
+Connect to marktschreier.
+
+\subsection{/whois <nick>}
+Display detailled information about a nick:
+\begin{itemize}
+\item PGP fingerprint
+\item Full name
+\item E-Mail
+\end{itemize}
+
+\subsection{/clist <channel>}
+Display nicks in a channel.
+
+\subsection{/names}
+Display nicks in current active channel.
+
+\subsection{/plist}
+List known peers.
+
+\subsection{/leave <channel>}
+Leave a channel.
+
+\subsection{/quit}
+Tell ceof to quit, ceof tells all GUIs to quit, quit.
+
+\end{document}
