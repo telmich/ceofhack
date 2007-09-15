@@ -10,6 +10,8 @@
 \date{2007-09-15 v0.1-mrmcd110b}
 \author{apic, ilo, telmich}
 
+\maketitle
+
 \section{Introduction}
 Missing.- What commands must be supported by all GUIs.
 
@@ -19,22 +21,22 @@ All commands begin with a "`/"' as first character.
 \subsection{Send text}
 If there is no /, it should be assumed that it is a message send to the current channel or nick.
 
-\subsection{/msg <nick> <message>}
+\subsection{/msg $<nick>$ $<message>$}
 Sends a message to the specified nick.
 
-\subsection{/join <marktschreier> <channel>}
+\subsection{/join $<marktschreier>$ $<channel>$}
 Join the specific channel on the specified marktschreier.
 
-\subsection{/list <markschreier>}
+\subsection{/list $<markschreier>$}
 List channels available on marktschreier.
 
 \subsection{/mslist}
 List connected marktschreier.
 
-\subsection{/mconnect <marktschreier>}
+\subsection{/mconnect $<marktschreier>$}
 Connect to marktschreier.
 
-\subsection{/whois <nick>}
+\subsection{/whois $<nick>$}
 Display detailled information about a nick:
 \begin{itemize}
 \item PGP fingerprint
@@ -42,7 +44,7 @@ Display detailled information about a nick:
 \item E-Mail
 \end{itemize}
 
-\subsection{/clist <channel>}
+\subsection{/clist $<channel>$}
 Display nicks in a channel.
 
 \subsection{/names}
@@ -51,7 +53,7 @@ Display nicks in current active channel.
 \subsection{/plist}
 List known peers.
 
-\subsection{/leave <channel>}
+\subsection{/leave $<channel>$}
 Leave a channel.
 
 \subsection{/quit}
