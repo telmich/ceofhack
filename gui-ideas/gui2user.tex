@@ -7,19 +7,43 @@
 
 \begin{document}
 \title{gui2user}
-\date{2007-09-15 v0.1-mrmcd110b}
+\date{2007-09-15 v0.2-train}
 \author{apic, ilo, telmich}
 
 \maketitle
 
 \section{Introduction}
-Missing.- What commands must be supported by all GUIs.
+This specification lists Commands to be supported by all GUIs. It
+specifies, how the GUI presents itself to the user (gui2user).
+
+\subsection{Writing convention}
+Parameters enclosed in $<$ and $>$ must be specified to the command.
+Parameters enclosed in $[$ and $]$ can be specified optionally .
+
+\subsection{Minimal philosophy}
+This specifications describes all the commands that \textbf{must} be
+supported by every client. This means clients may have additional possibilities
+to send commands via different methdos (like clicking on a button or via
+voice input), but they must support all of the commands listed, because this
+way the user always has the familar commands available.
+
+\subsection{Changelog}
+\subsubsection{v0.1-mrmcd110b to v0.2-train}
+   \begin{itemize}
+      \item Renamed \textbf{mslist} to \textbf{mlist}, so it is consequently the prefix
+      "`m"' for marktschreier.
+      \item Some minor language cleanup 
+      \item Added "`minimal philosophy"'
+      \item Added minimal writing convention
+      \item \textbf{Change by}: telmich
+   \end{itemize}
 
 \section{Commands}
 All commands begin with a "`/"' as first character.
 
 \subsection{Send text}
-If there is no /, it should be assumed that it is a message send to the current channel or nick.
+If there is no /, it should be assumed that it is a message.
+The text will be send to the currently seleceted channel or nick.
 
 \subsection{/msg $<nick>$ $<message>$}
 Sends a message to the specified nick.
@@ -28,9 +52,9 @@ Sends a message to the specified nick.
 Join the specific channel on the specified marktschreier.
 
 \subsection{/list $<markschreier>$}
-List channels available on marktschreier.
+List available channels on specified marktschreier.
 
-\subsection{/mslist}
+\subsection{/mlist}
 List connected marktschreier.
 
 \subsection{/mconnect $<marktschreier>$}
@@ -45,13 +69,13 @@ Display detailled information about a nick:
 \end{itemize}
 
 \subsection{/clist $<channel>$}
-Display nicks in a channel.
+Display nicks in the specified channel.
 
 \subsection{/names}
-Display nicks in current active channel.
+Display nicks in the currently active channel.
 
 \subsection{/plist}
-List known peers.
+List currently known peers.
 
 \subsection{/leave $<channel>$}
 Leave a channel.
