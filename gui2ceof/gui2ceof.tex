@@ -6,7 +6,7 @@
 
 \begin{document}
 \title{gui2ceof}
-\date{2007-09-16 v0.2-train}
+\date{2007-10-01 v0.2-bed}
 \author{telmich}
 
 \maketitle
@@ -17,25 +17,16 @@ This document specifies the commands send from GUI to and from
 ceof\footnote{the central EOF-1 application} to the GUIs.
 
 \subsection{Changelog}
-\subsubsection{draft-1 to v0.2-mrmcd110b}
+\subsubsection{draft-1 to v0.2-bed}
 \begin{itemize}
 \item Changed socket location
 \item Clearified what todo without \textit{CEOF\_DIR} and \textit{HOME} set
 \item Added exit command.
 \item Changed number of bytes for marktschreier from 512 Bytes to 128 Bytes
 \item Changed number of bytes for channel name from 512 Bytes to 128 Bytes
+\item Added ranges (001-00x)
 \end{itemize}
-
-TODO: how client gets peer ids? necessary?
-retrieve list of channels,
-retrieve list of peers / peer-ids.
-
-mapping from peer-id to real id.
-channel list: known channels on marktschreier,
-joined channels;
-members of channel;
-add notification of join request;
-
+% -----------------------------------------------------------------------------
 \section{Connection}
 The client connects to a socket named \textit{\$HOME/.ceof/clients/socket}.
 If the environment variable "`\textit{CEOF\_DIR}`" is set,
@@ -56,6 +47,12 @@ ceof begin with \textbf{1} ("`1023"' for instance).
 After each command follows individual data. The second byte indicates the type of message:
 \begin{itemize}
 \item \textbf{00}: client meta command (something that does not affect the user)
+\begin{itemize}
+\item \textbf{000}: (De-)Initialisation
+\item \textbf{001}: Marktschreier related
+\item \textbf{002}: Peer related
+\item \textbf{003}: Channel related
+\end{itemize}
 \item \textbf{01}: messages
 \item \textbf{11}: sucess answers from ceof
 \item \textbf{12}: error answers from ceof
@@ -72,83 +69,154 @@ Answers from ceof:
 \item \textbf{1100}: sucess, you are connected
 \item \textbf{1200}: version not supported
 \end{itemize}
-% OK
 % -----------------------------------------------------------------------------
-
+\subsection{0001: Deregister client}
+This client derigesters from ceof. Ceof will keep on running, even if this
+was the last client.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1101}: sucess, you are disconnected
+\end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0001: connect to markschreier}
-After the "`0001"' follow 128 Bytes describing how to connect
+\subsection{0009: Request for exit}
+Tells ceof to exit and to notify all clients to exit.
+It will not reply anything to you, but issue an exit notify to all clients,
+including the requesting one.
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{0010: List connected markschreiers}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1102}: list follows
+\begin{itemize}
+\item four ASCII-digits containing number of peers ("`num\_peer"')
+\item after that follow \textit{num\_peer} peer ids:
+\begin{itemize}
+\item 4 ASCII Bytes containing the internal peer id
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes)
+\item 40 Byte containing the fingerprint of the
+key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0011: Connect to markschreier}
+After the "`0011"' follow 128 Bytes describing how to connect
 to the marktschreier ("`tcp://62.65.138.66:42'" for instance).
 If the URI is shorter than 128 bytes, the remain should be filled with 0 bytes
 (also known as \verb='\0'=).
 
 Answers from ceof:
 \begin{itemize}
-\item \textbf{1100}: success
+\item \textbf{1103}: success
 \begin{itemize}
-\item After the 1100 follow four ASCII digits containing the
+\item After the 1103 follow four ASCII digits containing the
 internal marktschreier id
 \end{itemize}
-\item \textbf{1201}: high level protocol (like "`tcp://"') not supported
-\item \textbf{1202}: connection could not be established
+\item \textbf{1210}: high level protocol (like "`tcp://"') not supported
+\item \textbf{1211}: connection could not be established
 \end{itemize}
-% OK
 % -----------------------------------------------------------------------------
-\subsection{0002: get list of channels}
-After the "`0002"' follow 4 ASCII Bytes containing the internal
+\subsection{0020: Retrieve list of known peers}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1120}: list follows
+\begin{itemize}
+\item four ASCII-digits containing number of peers ("`num\_peer"')
+\item after that follow \textit{num\_peer} peer ids:
+\begin{itemize}
+\item 4 ASCII Bytes containing the internal peer id
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes)
+\item 40 Byte containing the fingerprint of the
+key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0021: Add peer}
+Aftere the "`0021"' follow 128 bytes describing how to connect to the
+peer.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1121}: success, registered peer
+\begin{itemize}
+\item Follows four bytes containing the internal peer id
+\end{itemize}
+\item \textbf{1220}: unknown peer
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0022: Send message to peer}
+Aftere the "`0022"' follow four bytes for the ceof internal peer
+id and after that 512 Bytes for the message.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1122}: success
+\item \textbf{1221}: unknown peer
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0030: Get list of channels}
+After the "`0030"' follow 4 ASCII Bytes containing the internal
 markschreier id.
 
 Answers from ceof:
 
 \begin{itemize}
-\item \textbf{1101}: got list; following four ASCII-digits containing
+\item \textbf{1130}: got list; following four ASCII-digits containing
 number of channels ("`num\_chan"'); after that  num\_chan 128 Bytes packets
 follow containing the channel name, padded with 0-bytes
-\item \textbf{1202}: connection could not be established
+\item \textbf{1230}: connection could not be established
 \end{itemize}
 % OK
 % -----------------------------------------------------------------------------
+\subsection{0031: Ask to join a channel via marktschreier}
+After the "0031" follow
 
-\subsection{0003: ask to join a channel}
-After the "0003" follow 128 Bytes describing the channel name.
+\begin{enumerate}
+\item 4 Bytes containing the internal markschreier id
+\item 128 Bytes describing the channel name.
+\end{enumerate}
+
 Answers from ceof:
 \begin{itemize}
-\item \textbf{1100}: success (means: markschreier asked knows peers to
-connect to us); 4 Bytes follow, giving the internal channel id
-\item \textbf{1202}: connection could not be established
-\item \textbf{1203}: access denied by markschreier: you are not allowed to join
+\item \textbf{1131}: success (means: markschreier asked known peers to
+connect to us)
+\begin{itemize}
+\item 4 Bytes follow, giving the internal channel id
 \end{itemize}
+\item \textbf{1231}: connection could not be established
+\item \textbf{1232}: access denied by markschreier: you are not allowed to join
+\end{itemize}
+% Ok
 % -----------------------------------------------------------------------------
-\subsection{0004: send message to channel}
-Aftere the "0004" follow four bytes for the ceof internal channel id and after
+\subsection{0032: Send message to channel}
+Aftere the "0032" follow four bytes for the ceof internal channel id and after
 that 512 Bytes for the message.
 Answers from ceof:
 \begin{itemize}
-\item \textbf{1100}: success
-\item \textbf{1204}: unknown channel
+\item \textbf{1132}: success
+\item \textbf{1233}: unknown channel
 \end{itemize}
+% Ok
+eof
 % -----------------------------------------------------------------------------
-\subsection{0005: send message to peer}
-Aftere the "`0005"' follow four bytes for the ceof internal peer
-id and after that 512 Bytes for the message.
-Answers from ceof:
+\subsection{0033: Create channel}
+Aftere the "`0033"' follow 128 bytes containing the name of the channel.
 \begin{itemize}
-\item \textbf{1100}: success
-\item \textbf{1205}: unknown peer
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{0006: retrieve list of known peers}
-Answers from ceof:
+\item \textbf{1133}: success
 \begin{itemize}
-\item \textbf{1102}: list follows; following four ASCII-digits containing number
-of peers ("`num\_peer"'); after that  num\_peer
-XXX Bytes packets follow containing the peer name, real peer id, padded with 0-byte
+\item Follows 4 Byte containing the internal channel id
+\end{itemize}
+\item \textbf{1234}: Channel already exists
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0099: request for exit}
-Tells ceof to exit and to notify all clients to exit. It will not reply anything to you, but issue an exit notify to all clients, including the requesting one.
+\subsection{0034: Submit channel to marktschreier}
+Aftere the "`0034"' follow 4 bytes containing the internal channel id.
+\begin{itemize}
+\item \textbf{1134}: success
+\item \textbf{1235}: Channel already exists
+\end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1300: recieved message}
+\subsection{1300: Recieved message}
 After the "1300" follows:
 \begin{itemize}
 \item 4 Byte channel id; if the id is "`9999"' it is a private message, directly send to you
@@ -156,7 +224,7 @@ After the "1300" follows:
 \item 512 Byte message
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1399: exit notify}
+\subsection{1399: Exit notify}
 ceof is being shutdown.
 Shutdown yourself, too.
 After that message ceof will exit and you should do the same.
@@ -168,6 +236,9 @@ in which order.
 
 % -----------------------------------------------------------------------------
 \subsection{GUI initiated commands}
+This section and all subsections are not yet finished. They
+are in this draft to show the interested reader a preview of the
+content of the next draft.
 % -----------------------------------------------------------------------------
 \subsubsection{GUI startup}
 What todo, when the GUI starts.
