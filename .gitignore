@@ -4,3 +4,5 @@
 *.pdf
 .*.swp
 *.toc
+dia/*.png
+dia/*.dia~
