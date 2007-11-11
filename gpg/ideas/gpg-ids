@@ -1,0 +1,15 @@
+pub   1024D/9885188C 2006-09-27 [expires: 2009-09-26]
+      Key fingerprint = BFE4 C736 ABE5 406F 8F42  F7CF B8BE F92A 9885 188C
+uid                  Nico Schottelius (telmich) <nico-public@schottelius.org>
+sub   4096g/AB793A5C 2006-09-27 [expires: 2009-09-26]
+
+[0:16] denkbrett:~% echo BFE4 C736 ABE5 406F 8F42  F7CF B8BE F92A 9885 188C | sed 's/ //g'
+BFE4C736ABE5406F8F42F7CFB8BEF92A9885188C
+[0:16] denkbrett:~% echo BFE4 C736 ABE5 406F 8F42  F7CF B8BE F92A 9885 188C | sed 's/ //g' | bc   
+9994973699954069894297999899992998851889
+[0:16] denkbrett:~% echo BFE4 C736 ABE5 406F 8F42  F7CF B8BE F92A 9885 188C | sed 's/ //g' | wc 
+      1       1      41
+[0:16] denkbrett:~% echo -n  BFE4 C736 ABE5 406F 8F42  F7CF B8BE F92A 9885 188C | sed 's/ //g' | wc 
+      0       1      40
+[0:16] denkbrett:~% 
+

@@ -1,0 +1,53 @@
+key management:
+   char *keyid'
+   `char *name'
+
+
+public-keys:
+[0:30] denkbrett:mathe-2% gpg --export 9885188C  | wc   
+wc: Standardeingabe:1: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:2: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:3: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:4: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:5: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:6: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:7: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:8: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:9: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:10: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:11: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:12: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:13: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+wc: Standardeingabe:14: Ungültiges oder unvollständiges Multi-Byte- oder Wide-Zeichen
+     13      55    2479
+[0:30] denkbrett:mathe-2% gpg --export -a 9885188C  | wc  
+     57      67    3473
+
+
+Contexte!
+
+-- Function: gpgme_error_t gpgme_op_import (gpgme_ctx_t CTX,
+          gpgme_data_t KEYDATA)
+
+char *fpr!
+
+gpgme_error_t gpgme_new (gpgme_ctx_t *CTX)
+
+
+#include <gpgme.h>
+ gcc -o foo foo.o `gpgme-config --libs`
+gcc -o foo foo.c `gpgme-config --cflags --libs`
+
+Nutzt SIGPIPE
+
+
+Anderes home dir:
+`const char *home_dir'
+          This is a string holding the directory name of the crypto
+          engine's configuration directory.  If it is `NULL', then the
+          default directory is used.
+
+ -- Function: gpgme_error_t gpgme_set_engine_info
+          (gpgme_protocol_t PROTO, const char *FILE_NAME,
+          const char *HOME_DIR)
+
