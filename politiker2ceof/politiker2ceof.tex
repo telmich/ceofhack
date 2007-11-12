@@ -27,7 +27,7 @@ The politiker is started by ceof at startup and communicates through stdin
 and stdout.
 % -----------------------------------------------------------------------------
 \section{Commands}
-All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+All commands are send as uint32\_t types.
 \textbf{Politiker commands} always begin with
 \textbf{3} ("`3042"' for instance),
 \textbf{answers} or \textbf{notifications} from
@@ -103,7 +103,7 @@ Passes the following information to ceof:
 \item The packet (\textit{pck})
 \end{itemize}
 
-After the \textbf{politiker} send \textit{pck_len},
+After the \textbf{politiker} send \textit{pck\_len},
 \textbf{ceof} must respond with either
 \begin{itemize}
 \item \textbf{1030}: pagket length is accepted
