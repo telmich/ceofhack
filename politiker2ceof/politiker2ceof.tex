@@ -28,9 +28,8 @@ and stdout.
 % -----------------------------------------------------------------------------
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
-All answers and all numbers are ASCII-numbers. We
-\textbf{never} transmit binary numbers.
-\textbf{Client commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{Politiker commands} always begin with
+\textbf{3} ("`3042"' for instance),
 \textbf{answers} or \textbf{notifications} from
 ceof begin with \textbf{1} ("`1023"' for instance).
 After each command follows individual data. The second byte indicates the type of message:
@@ -46,6 +45,7 @@ After each command follows individual data. The second byte indicates the type o
 \item \textbf{100}: (De-)Initialisation
 \item \textbf{101}: Peer related messages
 \item \textbf{102}: Message related messages
+\item \textbf{103}: Message related answers
 \end{itemize}
 \end{itemize}
 
@@ -53,9 +53,9 @@ After each command follows individual data. The second byte indicates the type o
 \subsection{30: Politiker messages}
 % -----------------------------------------------------------------------------
 \subsection{3000: Register politker}
-After the "`3000"' the politker directly appends two ASCII digits containing the
-version of the politker to ceof protocol it speaks. This specification
-uses version "`00"'.
+After the "`3000"' the politker directly appends an
+\textit{uint32\_t} containing the version of the politker to ceof protocol
+it speaks. This specification uses version number "`0"'.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1100}: sucess, you are connected
@@ -95,6 +95,24 @@ Answers from ceof:
 \item \textit{number\_of\_peers}: uint32\_t
 \end{itemize}
 \end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{3020: Created an encrypted packet}
+Passes the following information to ceof:
+\begin{itemize}
+\item The length of the packet (uint32\_t) (\textit{pck\_len})
+\item The packet (\textit{pck})
+\end{itemize}
+
+After the \textbf{politiker} send \textit{pck_len},
+\textbf{ceof} must respond with either
+\begin{itemize}
+\item \textbf{1030}: pagket length is accepted
+\item \textbf{1031}: pagket length is too long
+\end{itemize}
+
+If the response is \textit{1030}, \textbf{politiker} should send the
+pcaket, otherwise this session is finished and \textbf{politiker}
+should drop the packet.
 % -----------------------------------------------------------------------------
 \subsection{10: Ceof messages}
 % -----------------------------------------------------------------------------
