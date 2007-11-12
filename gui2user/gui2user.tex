@@ -7,7 +7,7 @@
 
 \begin{document}
 \title{gui2user}
-\date{2007-09-16 v0.2-train}
+\date{2007-11-12 v0.2-train}
 \author{apic, ilo, telmich}
 
 \maketitle
@@ -35,31 +35,39 @@ way the user always has the familar commands available.
       \item Some minor language cleanup 
       \item Added "`minimal philosophy"'
       \item Added minimal writing convention
+      \item Added /peer commands
+      \item Gave the document some structure
       \item \textbf{Change by}: telmich
    \end{itemize}
 
 \section{Commands}
 All commands begin with a "`/"' as first character.
 
-\subsection{Send text}
+%---------------------------------------------------------------------
+\subsection{Version 0.1 commands}
+Those commands may need to be reworked.
+%---------------------------------------------------------------------
+\subsubsection{Send text}
 If there is no /, it should be assumed that it is a message.
 The text will be send to the currently seleceted channel or nick.
 
-\subsection{/msg $<nick>$ $<message>$}
-Sends a message to the specified nick.
-
-\subsection{/join $<marktschreier>$ $<channel>$}
+%---------------------------------------------------------------------
+\subsubsection{/join $<marktschreier>$ $<channel>$}
 Join the specific channel on the specified marktschreier.
 
-\subsection{/list $<markschreier>$}
+%---------------------------------------------------------------------
+\subsubsection{/list $<markschreier>$}
 List available channels on specified marktschreier.
 
+%---------------------------------------------------------------------
 \subsection{/mlist}
 List connected marktschreier.
 
+%---------------------------------------------------------------------
 \subsection{/mconnect $<marktschreier>$}
 Connect to marktschreier.
 
+%---------------------------------------------------------------------
 \subsection{/whois $<nick>$}
 Display detailled information about a nick:
 \begin{itemize}
@@ -68,19 +76,52 @@ Display detailled information about a nick:
 \item E-Mail
 \end{itemize}
 
-\subsection{/clist $<channel>$}
+%---------------------------------------------------------------------
+\subsubsection{/clist $<channel>$}
 Display nicks in the specified channel.
 
-\subsection{/names}
+%---------------------------------------------------------------------
+\subsubsection{/names}
 Display nicks in the currently active channel.
 
-\subsection{/plist}
+%---------------------------------------------------------------------
+\subsubsection{/plist}
 List currently known peers.
 
-\subsection{/leave $<channel>$}
+%---------------------------------------------------------------------
+\subsubsection{/leave $<channel>$}
 Leave a channel.
 
-\subsection{/quit}
-Tell ceof to quit, ceof tells all GUIs to quit, quit.
+%---------------------------------------------------------------------
+\subsection{General commands}
+\subsubsection{/quit}
+Tell ceof to quit, ceof tells all GUIs and subcomponents to quit and quits.
+
+%---------------------------------------------------------------------
+\subsection{Peer commands}
+Peer related commands.
+
+%---------------------------------------------------------------------
+\subsubsection{/peer add $<$name$>$ $<$initial address$>$}
+Add the peer as \textit{name} to the list of known peers
+and connect to it, to retrieve other addresses.
+\begin{itemize}
+\item \textit{name} is 128 Bytes, including 0-byte termination.
+If the name is shorter it is padded with 0-bytes.
+\item \textit{initial address} is 128 Bytes, including 0-byte termination.
+If the initial address is shorter it is padded with 0-bytes.
+\end{itemize}
+%---------------------------------------------------------------------
+\subsubsection{/peer rename $<$oldname$>$ $<$newname$>$}
+Renames the peer.
+%---------------------------------------------------------------------
+
+\subsection{Alias}
+Those commands are provided for easier integration of
+new people using EOF.
+%---------------------------------------------------------------------
+\subsection{/msg $<nick>$ $<message>$}
+Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
+%---------------------------------------------------------------------
 
 \end{document}
