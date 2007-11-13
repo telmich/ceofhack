@@ -35,7 +35,6 @@ If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
 If the environment variable \textit{HOME} and \textit{CEOF\_DIR}
 is empty, you should fallback to the directory .ceof in the currenty directory.
-
 % -----------------------------------------------------------------------------
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
@@ -43,7 +42,7 @@ All answers and all numbers are ASCII-numbers. We
 \textbf{never} transmit binary numbers.
 \textbf{Client commands} always begin with \textbf{0} ("`0042"' for instance),
 \textbf{answers} or \textbf{notifications} from
-ceof begin with \textbf{1} ("`1023"' for instance).
+\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
 After each command follows individual data. The second byte indicates the type of message:
 \begin{itemize}
 \item \textbf{00}: client meta command (something that does not affect the user)
@@ -63,7 +62,7 @@ After each command follows individual data. The second byte indicates the type o
 \subsection{0000: Register client}
 After the "`0000"' the client directly appends two ASCII digits containing the
 version of the client to ceof protocol it speaks. This specification
-uses version "`02"'.
+uses version "`03"'.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1100}: sucess, you are connected
@@ -79,7 +78,7 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0009: Request for exit}
-Tells ceof to exit and to notify all clients to exit.
+Tells ceof to exit and to notify all guis to exit.
 It will not reply anything to you, but issue an exit notify to all clients,
 including the requesting one.
 % -----------------------------------------------------------------------------
@@ -92,13 +91,14 @@ Answers from ceof:
 \item four ASCII-digits containing number of peers ("`num\_peer"')
 \item after that follow \textit{num\_peer} peer ids:
 \begin{itemize}
-\item 4 ASCII Bytes containing the internal peer id
-\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes)
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
 \item 40 Byte containing the fingerprint of the
 key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 \end{itemize}
 \end{itemize}
+% -----------------------------------------------------------------------------
+% ok
 % -----------------------------------------------------------------------------
 \subsection{0011: Connect to markschreier}
 After the "`0011"' follow 128 Bytes describing how to connect
@@ -109,11 +109,7 @@ If the URI is shorter than 128 bytes, the remain should be filled with 0 bytes
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1103}: success
-\begin{itemize}
-\item After the 1103 follow four ASCII digits containing the
-internal marktschreier id
-\end{itemize}
-\item \textbf{1210}: high level protocol (like "`tcp://"') not supported
+\item \textbf{1210}: protocol (like "`tcp://"') not supported
 \item \textbf{1211}: connection could not be established
 \end{itemize}
 % -----------------------------------------------------------------------------
@@ -125,8 +121,7 @@ Answers from ceof:
 \item four ASCII-digits containing number of peers ("`num\_peer"')
 \item after that follow \textit{num\_peer} peer ids:
 \begin{itemize}
-\item 4 ASCII Bytes containing the internal peer id
-\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes)
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
 \item 40 Byte containing the fingerprint of the
 key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
@@ -134,20 +129,23 @@ key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0021: Add peer}
-Aftere the "`0021"' follow 128 bytes describing how to connect to the
-peer.
+Aftere the "`0021"' follow
+
+\begin{itemize}
+\item 128 bytes for the name of the peer
+\item 128 bytes describing how to connect to the peer.
+\end{itemize}
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1121}: success, registered peer
-\begin{itemize}
-\item Follows four bytes containing the internal peer id
-\end{itemize}
 \item \textbf{1220}: unknown peer
+\item \textbf{1222}: peer name already used
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0022: Send message to peer}
-Aftere the "`0022"' follow four bytes for the ceof internal peer
-id and after that 512 Bytes for the message.
+Aftere the "`0022"' follow 128 bytes for the peer name
+and after that 128 Bytes for the message.
+Both 0-terminated, 0 padded.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1122}: success
@@ -155,8 +153,8 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0030: Get list of channels}
-After the "`0030"' follow 4 ASCII Bytes containing the internal
-markschreier id.
+After the "`0030"' follow 128 Bytes containing the 
+name of the peer.
 
 Answers from ceof:
 
@@ -172,7 +170,7 @@ follow containing the channel name, padded with 0-bytes
 After the "0031" follow
 
 \begin{enumerate}
-\item 4 Bytes containing the internal markschreier id
+\item 128 Bytes containing the peer name
 \item 128 Bytes describing the channel name.
 \end{enumerate}
 
@@ -180,37 +178,29 @@ Answers from ceof:
 \begin{itemize}
 \item \textbf{1131}: success (means: markschreier asked known peers to
 connect to us)
-\begin{itemize}
-\item 4 Bytes follow, giving the internal channel id
-\end{itemize}
 \item \textbf{1231}: connection could not be established
 \item \textbf{1232}: access denied by markschreier: you are not allowed to join
 \end{itemize}
 % Ok
 % -----------------------------------------------------------------------------
 \subsection{0032: Send message to channel}
-Aftere the "0032" follow four bytes for the ceof internal channel id and after
-that 512 Bytes for the message.
+Aftere the "0032" follow 128 bytes for the channel name and after
+that 128 Bytes for the message.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1132}: success
 \item \textbf{1233}: unknown channel
 \end{itemize}
-% Ok
-eof
 % -----------------------------------------------------------------------------
 \subsection{0033: Create channel}
 Aftere the "`0033"' follow 128 bytes containing the name of the channel.
 \begin{itemize}
 \item \textbf{1133}: success
-\begin{itemize}
-\item Follows 4 Byte containing the internal channel id
-\end{itemize}
 \item \textbf{1234}: Channel already exists
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0034: Submit channel to marktschreier}
-Aftere the "`0034"' follow 4 bytes containing the internal channel id.
+Aftere the "`0034"' follow 128 bytes containing the channel channel.
 \begin{itemize}
 \item \textbf{1134}: success
 \item \textbf{1235}: Channel already exists
@@ -219,9 +209,10 @@ Aftere the "`0034"' follow 4 bytes containing the internal channel id.
 \subsection{1300: Recieved message}
 After the "1300" follows:
 \begin{itemize}
-\item 4 Byte channel id; if the id is "`9999"' it is a private message, directly send to you
-\item 4 Byte peer id (the person who send the message)
-\item 512 Byte message
+\item "`C"' for recieved in channel or "`P"' for recieved by a peer
+\item 128 byte containing either the channel or the peer name
+\item 128 byte containing either the channelname, if the first byte was a "`C"'
+\item 128 Byte message
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{1399: Exit notify}
@@ -275,6 +266,7 @@ user: "Nico Schottelius (telmich) <nico-public@schottelius.org>"
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \subsubsection{Finding a channel}
+UNFINISHED
 replace internal id with signature!
 
 The GUI asks ceof, which channels are known. After that the GUI
@@ -282,28 +274,36 @@ can use the internal ID (which is "`unique"', as in: it is a 32 bit integer
 that is increased as long as ceof is running) to join it.
 % -----------------------------------------------------------------------------
 \subsubsection{Joining a channel}
+UNFINISHED
 The channel must be known through 
 % -----------------------------------------------------------------------------
 \subsubsection{Leaving a channel}
+UNFINISHED
 Sends a message to all known participants that we leave the channel now.
 % -----------------------------------------------------------------------------
 \subsubsection{Invite to channel}
+UNFINISHED
 If you create a new channel, you may want to invite people to it.
 % -----------------------------------------------------------------------------
 \subsubsection{Listing friends}
 % -----------------------------------------------------------------------------
 \subsection{ceof initiated commands / messages}
+UNFINISHED
 % -----------------------------------------------------------------------------
 \subsubsection{Recieved a join request}
+UNFINISHED
 Somebody wants to join in a channel, in which you are a member.
 % -----------------------------------------------------------------------------
 \subsubsection{Recieved a join notification request}
+UNFINISHED
 Somebody wants us to tell all members of the channel that she wants to join us.
 % -----------------------------------------------------------------------------
 \subsubsection{Recieved a channel message}
+UNFINISHED
 Must contain which channel, who send it and what is in the message.
 % -----------------------------------------------------------------------------
 \subsubsection{Recieved a private message}
+UNFINISHED
 This messages was send only to us, not to a channel.
 % -----------------------------------------------------------------------------
 \end{document}
