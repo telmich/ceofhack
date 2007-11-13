@@ -1,0 +1,5 @@
+- Create one document containing
+   - limits / sizes
+   - 0 padding / 0 termination
+- Make ASCII digits also 0 terminated
+
