@@ -47,7 +47,9 @@ After each command follows individual data. The second byte indicates the type o
 \end{itemize}
 
 % -----------------------------------------------------------------------------
-\subsection{0000: Register pmg}
+\subsection{Pmg commands}
+% -----------------------------------------------------------------------------
+\subsubsection{0000: Register pmg}
 After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
 version of the client to ceof protocol it speaks. This specification
 uses version "`00"'.
@@ -57,7 +59,7 @@ Answers from ceof:
 \item \textbf{1200}: version not supported
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0001: Deregister pmg}
+\subsubsection{0001: Deregister pmg}
 \textbf{Pmg} detected an internal error and has to exit. \textbf{Ceof}
 will restart it.
 Answers from ceof:
@@ -65,14 +67,16 @@ Answers from ceof:
 \item \textbf{1101}: sucess, you are disconnected
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1099: Exit}
+\subsection{Ceof commands}
+% -----------------------------------------------------------------------------
+\subsubsection{1099: Exit}
 Answers from \textbf{pmg}:
 \begin{itemize}
 \item \textbf{0199}: Exiting
 \item \textbf{0223}: strange error (results in being killed -9)
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1300: Add peer}
+\subsubsection{1300: Add peer}
 After the \textbf{1300} follows
 \begin{itemize}
 \item a 128 byte "`fixed length string"' containing the peer name
@@ -84,7 +88,7 @@ Answers from \textbf{pmg}:
 \item \textbf{0223}: strange error
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1301: Get peer fingerprint}
+\subsubsection{1301: Get peer fingerprint}
 After the \textbf{1301} follows
 \begin{itemize}
 \item 128 byte "`fixed length string"' containing the name of the peer
@@ -99,7 +103,7 @@ Answers from \textbf{pmg}:
 \item \textbf{0223}: strange error
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1302: Rename peer}
+\subsubsection{1302: Rename peer}
 After the \textbf{1302} follows
 \begin{itemize}
 \item 128 byte "`fixed length string"' containing the old name of the peer
@@ -111,7 +115,7 @@ Answers from \textbf{pmg}:
 \item \textbf{0223}: strange error
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{1303: Get address of peer}
+\subsubsection{1303: Get address of peer}
 After the \textbf{1303} follows
 \begin{itemize}
 \item 128 byte "`fixed length string"' containing the name of the peer
