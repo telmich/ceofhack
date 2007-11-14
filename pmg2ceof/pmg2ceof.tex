@@ -1,0 +1,128 @@
+\documentclass[12pt,a4paper]{article}
+% FIXME: UTF8
+\usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
+\usepackage{longtable}           % lange Tabellen
+%\usepackage[dvips]{epsfig}
+
+\begin{document}
+\title{pmg2ceof}
+\date{2007-11-14 v0.1-dock18}
+\author{adi, telmich}
+
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+This document specifies the commands send from \textbf{pmg} to and from
+\textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
+
+\subsection{Changelog}
+\subsubsection{v0.1}
+\begin{itemize}
+\item Initial release
+\end{itemize}
+% -----------------------------------------------------------------------------
+\section{Commands}
+All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+There is no transfer of binary numbers between \textbf{ceof} and \textbf{pmg}.
+All answers and all numbers are ASCII-numbers. We
+\textbf{pmg commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item \textbf{0}: \textbf{pmg} messages
+\begin{itemize}
+\item \textbf{00}: \textbf{pmg} (de-)initialisation
+\item \textbf{01}: \textbf{pmg} success messages
+\item \textbf{02}: \textbf{pmg} error messages
+\end{itemize}
+\item \textbf{1}: \textbf{ceof} messages
+\begin{itemize}
+\item \textbf{10}: \textbf{ceof} (de-)initialisation
+\item \textbf{11}: \textbf{ceof} success messages
+\item \textbf{12}: \textbf{ceof} error messages
+\item \textbf{13}: \textbf{ceof} peer messages
+\end{itemize}
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{0000: Register pmg}
+After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
+version of the client to ceof protocol it speaks. This specification
+uses version "`00"'.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1100}: sucess, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0001: Deregister pmg}
+\textbf{Pmg} detected an internal error and has to exit. \textbf{Ceof}
+will restart it.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1101}: sucess, you are disconnected
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1099: Exit}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0199}: Exiting
+\item \textbf{0223}: strange error (results in being killed -9)
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1300: Add peer}
+After the \textbf{1300} follows
+\begit{itemize}
+\item a 128 byte "`fixed length string"' containing the peer name
+\item a 128 byte "`fixed length string"' containing the peer address
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: peer added
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1301: Get peer fingerprint}
+After the \textbf{1301} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: Success: fingerprint follows
+\begin{itemize}
+\item 40 byte "`fixed length string"' containing the fingerprint
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1302: Rename peer}
+After the \textbf{1302} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the old name of the peer
+\item 128 byte "`fixed length string"' containing the new name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0101}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1303: Get address of peer}
+After the \textbf{1303} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0102}: success
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the address
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\end{document}
