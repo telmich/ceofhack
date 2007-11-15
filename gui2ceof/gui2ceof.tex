@@ -6,17 +6,19 @@
 
 \begin{document}
 \title{gui2ceof}
-\date{2007-11-13 v0.2-bed}
+\date{2007-11-16 v0.2-bed}
 \author{telmich}
 
 \maketitle
 \tableofcontents
 
+% -----------------------------------------------------------------------------
 \section{Introduction}
 This document specifies the commands send from GUI to and from
 ceof\footnote{the central EOF-1 application} to the GUIs.
-
+% -----------------------------------------------------------------------------
 \subsection{Changelog}
+% -----------------------------------------------------------------------------
 \subsubsection{draft-1 to v0.2-bed}
 \begin{itemize}
 \item Many cleanups
@@ -24,18 +26,19 @@ ceof\footnote{the central EOF-1 application} to the GUIs.
 \item Clearified what todo without \textit{CEOF\_DIR} and \textit{HOME} set
 \item Added exit command.
 \item Changed number of bytes for marktschreier from 512 Bytes to 128 Bytes
-\item Changed number of bytes for channel name from 512 Bytes to 128 Bytes
+\item Changed number of bytes for channel name  from 512 Bytes to 128 Bytes
 \item Added ranges (001-00x)
 \end{itemize}
 % -----------------------------------------------------------------------------
+\subsubsection{v0.2-bed to v0.3-bed}
+\begin{itemize}
+\item Add fingerprint to \textbf{0021}
+\item Add command \textbf{0023}: Retrieve peer fingerprint
+\item Link to the basic documentation
+\end{itemize}
+% -----------------------------------------------------------------------------
 \section{Connection}
-The client connects to a socket named \textit{\$HOME/.ceof/clients/socket}.
-If the environment variable "`\textit{CEOF\_DIR}`" is set,
-\textit{\$HOME/.ceof} should be replaced with that content.
-If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
-"`\textit{clients/socket}"` should be replaced by its content.
-If the environment variable \textit{HOME} and \textit{CEOF\_DIR}
-is empty, you should fallback to the directory .ceof in the currenty directory.
+Use the ceof client socket, as specified in the basic documentation.
 % -----------------------------------------------------------------------------
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
@@ -62,11 +65,11 @@ After each command follows individual data. The second byte indicates the type o
 % -----------------------------------------------------------------------------
 \subsection{0000: Register client}
 After the "`0000"' the client directly appends two ASCII digits containing the
-version of the client to ceof protocol it speaks. This specification
-uses version "`03"'.
+version of the client to ceof protocol it speaks. This specification uses version
+"`04"'.
 Answers from ceof:
 \begin{itemize}
-\item \textbf{1100}: sucess, you are connected
+\item \textbf{1100}: success, you are connected
 \item \textbf{1200}: version not supported
 \end{itemize}
 % -----------------------------------------------------------------------------
@@ -135,6 +138,7 @@ Aftere the "`0021"' follow
 \begin{itemize}
 \item 128 bytes for the name of the peer
 \item 128 bytes describing how to connect to the peer.
+\item 40 bytes  containing the pgp-fingerprint of the key
 \end{itemize}
 Answers from ceof:
 \begin{itemize}
@@ -150,6 +154,17 @@ Both 0-terminated, 0 padded.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1122}: success
+\item \textbf{1221}: unknown peer
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0023: Retrieve peer fingerprint}
+Aftere the "`0023"' follows a 128 bytes fixed length string for the peer name.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1123}: success
+\begin{itemize}
+\item follows 40 bytes fixed length string containing the fingerprint
+\end{itemize}
 \item \textbf{1221}: unknown peer
 \end{itemize}
 % -----------------------------------------------------------------------------
