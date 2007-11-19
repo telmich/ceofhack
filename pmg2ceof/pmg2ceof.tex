@@ -6,7 +6,7 @@
 
 \begin{document}
 \title{pmg2ceof}
-\date{2007-11-14 v0.1-dock18}
+\date{2007-11-19 v0.1.1-gossau}
 \author{adi, telmich}
 
 \maketitle
@@ -17,6 +17,15 @@ This document specifies the commands send from \textbf{pmg} to and from
 \textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
 
 \subsection{Changelog}
+\subsubsection{v0.1 to v0.1.1}
+\begin{itemize}
+\item Removed support for "`0001"'
+\begin{itemize}
+\item No need to deregister on crash, \textbf{ceof} will restart you anyway.
+\end{itemize}
+\item Changed protocol version to "`01"'
+\end{itemize}
+% -----------------------------------------------------------------------------
 \subsubsection{v0.1}
 \begin{itemize}
 \item Initial release
@@ -52,19 +61,11 @@ After each command follows individual data. The second byte indicates the type o
 \subsubsection{0000: Register pmg}
 After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
 version of the client to ceof protocol it speaks. This specification
-uses version "`00"'.
+uses version "`01"'.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1100}: sucess, you are connected
 \item \textbf{1200}: version not supported
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{0001: Deregister pmg}
-\textbf{Pmg} detected an internal error and has to exit. \textbf{Ceof}
-will restart it.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1101}: sucess, you are disconnected
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{Ceof commands}
