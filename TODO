@@ -3,3 +3,8 @@
    - 0 padding / 0 termination
 - Make ASCII digits also 0 terminated
 
+- add support for multiple addresses of a peer!
+   => gui
+   => pmg
+      - needs to save last used address
+      - mark unreachable address
