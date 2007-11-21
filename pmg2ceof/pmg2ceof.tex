@@ -6,20 +6,30 @@
 
 \begin{document}
 \title{pmg2ceof}
-\date{2007-11-19 v0.1.1-gossau}
+\date{2007-11-22 v0.1.2-bed}
 \author{adi, telmich}
 
 \maketitle
 \tableofcontents
+\newpage
 
 \section{Introduction}
 This document specifies the commands send from \textbf{pmg} to and from
 \textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
 
 \subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.1 to v0.1.2}
+\begin{itemize}
+\item "`\textbf{1300}"' expanded: Now also passing the fingerprint
+\item "`\textbf{1303}"' expanded: Return the next address
+\item Added commands "`\textbf{1304}"' to "`\textbf{1307}"'
+\item Changed protocol version to "`02"'
+\end{itemize}
+% -----------------------------------------------------------------------------
 \subsubsection{v0.1 to v0.1.1}
 \begin{itemize}
-\item Removed support for "`0001"'
+\item Removed support for "`\textbf{0001}"'
 \begin{itemize}
 \item No need to deregister on crash, \textbf{ceof} will restart you anyway.
 \end{itemize}
@@ -61,7 +71,7 @@ After each command follows individual data. The second byte indicates the type o
 \subsubsection{0000: Register pmg}
 After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
 version of the client to ceof protocol it speaks. This specification
-uses version "`01"'.
+uses version "`02"'.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1100}: sucess, you are connected
@@ -82,6 +92,7 @@ After the \textbf{1300} follows
 \begin{itemize}
 \item a 128 byte "`fixed length string"' containing the peer name
 \item a 128 byte "`fixed length string"' containing the peer address
+\item a 40 byte  "`fixed length string"' containing the peer fingerprint
 \end{itemize}
 Answers from \textbf{pmg}:
 \begin{itemize}
@@ -127,6 +138,55 @@ Answers from \textbf{pmg}:
 \begin{itemize}
 \item 128 byte "`fixed length string"' containing the address
 \end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+\textbf{Pmg} MUST keep state of the last sent address.
+\textbf{Pmg} MUST return the next address it knows of the peer.
+If there is only one address, it is the next address.
+% -----------------------------------------------------------------------------
+\subsubsection{1304: Add address to peer}
+After the \textbf{1304} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing an address to add
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0104}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1305: Remove address from peer}
+After the command follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the address to remove
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0105}: success
+\item \textbf{0205}: Cannot remove, because it is the last known address
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1306: Update peer fingerprint}
+After the command follows
+\begin{itemize}
+\item a 40 byte  "`fixed length string"' containing the new peer fingerprint
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0106}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1307: Remove peer}
+After the \textbf{1307} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0107}: success, peer removed
 \item \textbf{0200}: unknown peer
 \item \textbf{0223}: strange error
 \end{itemize}
