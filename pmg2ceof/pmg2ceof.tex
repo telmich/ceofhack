@@ -6,7 +6,7 @@
 
 \begin{document}
 \title{pmg2ceof}
-\date{2007-11-22 v0.1.2-bed}
+\date{2007-12-03 v0.1.3-bed}
 \author{adi, telmich}
 
 \maketitle
@@ -18,6 +18,12 @@ This document specifies the commands send from \textbf{pmg} to and from
 \textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
 
 \subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.2 to v0.1.3}
+\begin{itemize}
+\item Added name of peer to "`\textbf{1304}"', "`\textbf{1305}"' and "`\textbf{1306}"'
+\item Changed protocol version to "`03"'
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{v0.1.1 to v0.1.2}
 \begin{itemize}
@@ -71,10 +77,10 @@ After each command follows individual data. The second byte indicates the type o
 \subsubsection{0000: Register pmg}
 After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
 version of the client to ceof protocol it speaks. This specification
-uses version "`02"'.
+uses version "`\textbf{03}"'.
 Answers from ceof:
 \begin{itemize}
-\item \textbf{1100}: sucess, you are connected
+\item \textbf{1100}: success, you are connected
 \item \textbf{1200}: version not supported
 \end{itemize}
 % -----------------------------------------------------------------------------
@@ -107,7 +113,7 @@ After the \textbf{1301} follows
 \end{itemize}
 Answers from \textbf{pmg}:
 \begin{itemize}
-\item \textbf{0100}: Success: fingerprint follows
+\item \textbf{0100}: success: fingerprint follows
 \begin{itemize}
 \item 40 byte "`fixed length string"' containing the fingerprint
 \end{itemize}
@@ -148,6 +154,7 @@ If there is only one address, it is the next address.
 \subsubsection{1304: Add address to peer}
 After the \textbf{1304} follows
 \begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
 \item 128 byte "`fixed length string"' containing an address to add
 \end{itemize}
 Answers from \textbf{pmg}:
@@ -159,6 +166,7 @@ Answers from \textbf{pmg}:
 \subsubsection{1305: Remove address from peer}
 After the command follows
 \begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
 \item 128 byte "`fixed length string"' containing the address to remove
 \end{itemize}
 Answers from \textbf{pmg}:
@@ -171,7 +179,8 @@ Answers from \textbf{pmg}:
 \subsubsection{1306: Update peer fingerprint}
 After the command follows
 \begin{itemize}
-\item a 40 byte  "`fixed length string"' containing the new peer fingerprint
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 40  byte "`fixed length string"' containing the new peer fingerprint
 \end{itemize}
 Answers from \textbf{pmg}:
 \begin{itemize}
