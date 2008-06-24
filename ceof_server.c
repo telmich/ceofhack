@@ -3,6 +3,7 @@
 char *home="/home/user/nico/.ceof/gnupg";
 #define SIZE 1024
 
+#define MAX_RCP 1
 
 int main()
 {
@@ -13,14 +14,16 @@ int main()
 
    gpgme_data_t g_plain;
    gpgme_data_t g_encrypt;
+
+   gpgme_key_t g_recipient[MAX_RCP];
    char *p;
 
-   p = gpgme_check_version(NULL);
+   gpgme_check_version(NULL);
 
    gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
    if(gerr != GPG_ERR_NO_ERROR) return 10;
 
-   p = gpgme_get_protocol_name(GPGME_PROTOCOL_OpenPGP);
+   p = (char *) gpgme_get_protocol_name(GPGME_PROTOCOL_OpenPGP);
    printf("Version: %s\n",p);
 
 
@@ -54,9 +57,20 @@ int main()
    //gpgme_set_armor(ceofcontext, 0);
    gpgme_set_armor(ceofcontext, 1);
 
-   /* create buffer */
+   /* create buffers */
    gerr = gpgme_data_new(&data);
    if(gerr != GPG_ERR_NO_ERROR) return 6;
+
+   gerr = gpgme_data_new(&g_plain);
+   if(gerr != GPG_ERR_NO_ERROR) return 6;
+
+   gerr = gpgme_data_new(&g_encrypt);
+   if(gerr != GPG_ERR_NO_ERROR) return 6;
+
+   /* en/decrypt message */
+   gerr = gpgme_op_encrypt(ceofcontext, g_recipient, 0, g_plain, g_enrypt);
+   if(gerr != GPG_ERR_NO_ERROR) return 6;
+
 
 
    /* open communication channel: netcat */
