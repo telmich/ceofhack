@@ -8,7 +8,7 @@ char *home="/home/user/nico/.ceof/gnupg";
 int main()
 {
    gpgme_error_t gerr;
-   gpgme_ctx_t ceofcontext;
+   gpgme_ctx_t g_context;
    gpgme_engine_info_t enginfo;
    gpgme_data_t data;
 
@@ -42,20 +42,20 @@ int main()
    printf("file=%s, home=%s\n",enginfo->file_name,enginfo->home_dir);
 
    /* create our own context */
-   gerr = gpgme_new(&ceofcontext);
+   gerr = gpgme_new(&g_context);
    if(gerr != GPG_ERR_NO_ERROR) return 1;
 
 
    /* FIXME: both needed? */
    /* FIXME: why is the path (FILE_NAME) needed? */
    /* FIXME: /usr/bin/gpg must be changed to ~/.ceof/gpg/binary or similar */
-   gerr = gpgme_ctx_set_engine_info (ceofcontext, GPGME_PROTOCOL_OpenPGP,
+   gerr = gpgme_ctx_set_engine_info (g_context, GPGME_PROTOCOL_OpenPGP,
                "/usr/bin/gpg","/home/user/nico/.ceof/gpg/");
    if(gerr != GPG_ERR_NO_ERROR) return 4;
 
    /* do not ascii armor data; use 1 for testing */
-   //gpgme_set_armor(ceofcontext, 0);
-   gpgme_set_armor(ceofcontext, 1);
+   //gpgme_set_armor(g_context, 0);
+   gpgme_set_armor(g_context, 1);
 
    /* create buffers */
    gerr = gpgme_data_new(&data);
@@ -68,7 +68,11 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 6;
 
    /* en/decrypt message */
-   gerr = gpgme_op_encrypt(ceofcontext, g_recipient, 0, g_plain, g_enrypt);
+
+   gerr = gpgme_op_encrypt(g_context, g_recipient, 0, g_plain, g_encrypt);
+   if(gerr != GPG_ERR_NO_ERROR) return 6;
+
+   gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain);
    if(gerr != GPG_ERR_NO_ERROR) return 6;
 
 
