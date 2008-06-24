@@ -1,0 +1,15 @@
+All commands contain 4 Byte commands;
+The HELO command contains only
+
+--------------------------------------------------------------------------------
+--> Public keys must be exchanged before!
+   --> all communication is encrypted
+--------------------------------------------------------------------------------
+
+WHERE_I_AM = 0000
+   who I am == my public key id!
+   how I can be reached == transport protocols
+      -> to be done later, currently empty
+
+MSG = 0001
+   
