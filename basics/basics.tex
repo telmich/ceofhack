@@ -134,6 +134,9 @@ which is then not zero terminated!
 If the text it contains is shorter than the specified length,
 it must be padded with zero Bytes (see above).
 % -----------------------------------------------------------------------------
+\subsubsection{Padding data}
+Should be random data.
+% -----------------------------------------------------------------------------
 \subsection{EOF simple data types}
 The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
@@ -153,10 +156,14 @@ The channel name is a 128 Byte fixed length string.
 \subsubsection{Message text (msgtext)}
 The message text is a 128 Byte fixed length string.
 % -----------------------------------------------------------------------------
+\subsubsection{Peer fingerprint (pfpr)}
+The peer fingerprint is a 40 Byte fixed length string.
+% -----------------------------------------------------------------------------
 \subsection{EOF packet data types}
 All packets must be signed by the sender and encrypted for the reciever.
 The different datatypes are just concatenated in the order
 described.
+An EOF packet always contains 512 Bytes.
 % -----------------------------------------------------------------------------
 \subsubsection{Message packet}
 \begin{itemize}
@@ -164,8 +171,21 @@ described.
 \item Channel name
 \item Message text
 \end{itemize}
-
-
+% -----------------------------------------------------------------------------
+\subsubsection{Retrieve peer address}
+\begin{itemize}
+\item Command type "`1000"'
+\item Peer fingerprint
+\item Padding
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{Submit peer address}
+\begin{itemize}
+\item Command type "`2000"'
+\item Peer fingerprint
+\item Peer address
+\item Padding
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{EOF network data types}
 These datatypes are transmitted over the network and are only
@@ -173,8 +193,8 @@ encapsulated by the specific network protocol.
 % -----------------------------------------------------------------------------
 \subsection{General network packet}
 \begin{itemize}
-\item 
-\item Channel name
+\item Type of packet
+\item Next reciever peer fingerprint
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
