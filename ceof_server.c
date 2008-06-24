@@ -78,6 +78,14 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 6;
 
    /* fill buffers */
+   i = strlen(msg);
+   i -= gpgme_data_write(g_plain, msg, i);
+   if(i) {
+      printf("size mismatch\n");
+      return 12;
+   }
+
+   /* setup recipient */
 
    /* en/decrypt message */
 
