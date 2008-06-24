@@ -1,9 +1,11 @@
 #include <gpgme.h>
+#include <string.h>     /* strncpy */
 
 char *home="/home/user/nico/.ceof/gnupg";
 #define SIZE 1024
 
 #define MAX_RCP 1
+#define EOF_MSG_SIZE 64
 
 int main()
 {
@@ -17,6 +19,14 @@ int main()
 
    gpgme_key_t g_recipient[MAX_RCP];
    char *p;
+
+   char msg[EOF_MSG_SIZE];
+   char msg_in[EOF_MSG_SIZE];
+
+   int i;
+
+   strncpy(msg,"Erste Nachricht",EOF_MSG_SIZE);
+   for(i=0;i<EOF_MSG_SIZE; i++) msg_in[i] = 0;
 
    gpgme_check_version(NULL);
 
@@ -66,6 +76,8 @@ int main()
 
    gerr = gpgme_data_new(&g_encrypt);
    if(gerr != GPG_ERR_NO_ERROR) return 6;
+
+   /* fill buffers */
 
    /* en/decrypt message */
 
