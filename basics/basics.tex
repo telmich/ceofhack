@@ -110,20 +110,18 @@ If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 % -----------------------------------------------------------------------------
 \subsection{Basic data types}
 % -----------------------------------------------------------------------------
-\subsubsection{ASCII numbers}
-ASCII numbers use the string representation of a number and
-4 Byte, used when other programming langua
-Excluding 0
-% -----------------------------------------------------------------------------
 \subsubsection{Binary numbers}
 Between some parts of EOF-1 are binary numbers (as in \textit{uint32\t})
-exchanged.
+exchanged. -- IS THIS TRUE?
 % -----------------------------------------------------------------------------
 \subsubsection{The zero Byte}
 The zero Byte is a Byte with the value 0.
 % -----------------------------------------------------------------------------
-\subsubsection{Strings}
+\subsubsection{Strings in general}
 Strings are transmitted without termination (i.e. no new line, no 0 byte).
+% -----------------------------------------------------------------------------
+\subsubsection{ASCII numbers}
+ASCII numbers use the string representation of a number.
 % -----------------------------------------------------------------------------
 \subsubsection{Variable length strings}
 Before variable length strings the length is submitted in a fixed size
@@ -136,10 +134,13 @@ which is then not zero terminated!
 If the text it contains is shorter than the specified length,
 it must be padded with zero Bytes (see above).
 % -----------------------------------------------------------------------------
-\subsection{EOF data types specification}
+\subsection{EOF simple data types}
 The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
+% -----------------------------------------------------------------------------
+\subsubsection{Command type (cmd)}
+Commands are 4 Byte ASCII numbers.
 % -----------------------------------------------------------------------------
 \subsubsection{Peer name (peername)}
 The peer name is a 128 Byte fixed length string. It is only
@@ -151,5 +152,30 @@ The channel name is a 128 Byte fixed length string.
 % -----------------------------------------------------------------------------
 \subsubsection{Message text (msgtext)}
 The message text is a 128 Byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{EOF packet data types}
+All packets must be signed by the sender and encrypted for the reciever.
+The different datatypes are just concatenated in the order
+described.
+% -----------------------------------------------------------------------------
+\subsubsection{Message packet}
+\begin{itemize}
+\item Command type "`0000"'
+\item Channel name
+\item Message text
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------
+\subsection{EOF network data types}
+These datatypes are transmitted over the network and are only
+encapsulated by the specific network protocol.
+% -----------------------------------------------------------------------------
+\subsection{General network packet}
+\begin{itemize}
+\item 
+\item Channel name
+\item Message text
+\end{itemize}
 % -----------------------------------------------------------------------------
 \end{document}
