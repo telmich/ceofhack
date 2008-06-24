@@ -167,21 +167,29 @@ An EOF packet always contains 512 Bytes.
 % -----------------------------------------------------------------------------
 \subsubsection{Message packet}
 \begin{itemize}
-\item Command type "`0000"'
+\item Command type "`8000"'
 \item Channel name
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{Retrieve peer address}
 \begin{itemize}
-\item Command type "`1000"'
+\item Command type "`8001"'
 \item Peer fingerprint
 \item Padding
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{Submit peer address}
 \begin{itemize}
-\item Command type "`2000"'
+\item Command type "`8002"'
+\item Peer fingerprint
+\item Peer address
+\item Padding
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{Forward packet}
+\begin{itemize}
+\item Command type "`8003"'
 \item Peer fingerprint
 \item Peer address
 \item Padding
