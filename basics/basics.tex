@@ -117,6 +117,9 @@ Excluding 0
 Between some parts of EOF-1 are binary numbers (as in \textit{uint32\t})
 exchanged.
 % -----------------------------------------------------------------------------
+\subsection{The zero Byte}
+The zero Byte is a Byte with the value 0.
+% -----------------------------------------------------------------------------
 \subsection{Strings}
 Strings are transmitted without termination (i.e. no new line, no 0 byte).
 % -----------------------------------------------------------------------------
@@ -125,7 +128,14 @@ Before variable length strings the length is submitted in a fixed size
 datatype.
 % -----------------------------------------------------------------------------
 \subsection{Fixed length strings}
-Fixed length strings must be padded with 0 Bytes, if they are shorter
-than the defined length.
+Fixed length strings contain exactly the specified number of Bytes:
+In a 128 Byte fixed length string fits at most 128 Bytes of text,
+which is then not zero terminated!
+If the text it contains is shorter than the specified length,
+it must be padded with 0 Bytes, if they are shorter than the defined length.
 % -----------------------------------------------------------------------------
+\section{Data specification}
+% -----------------------------------------------------------------------------
+\subsection{Peer name}
+The peer name is a 128 
 \end{document}
