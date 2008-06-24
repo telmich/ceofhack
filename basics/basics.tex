@@ -106,36 +106,50 @@ to the configuration directory.
 If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
 % -----------------------------------------------------------------------------
-\section{Datatypes}
+\section{Datatypes and dataspecification}
 % -----------------------------------------------------------------------------
-\subsection{ASCII numbers}
+\subsection{Basic data types}
+% -----------------------------------------------------------------------------
+\subsubsection{ASCII numbers}
 ASCII numbers use the string representation of a number and
 4 Byte, used when other programming langua
 Excluding 0
 % -----------------------------------------------------------------------------
-\subsection{Binary numbers}
+\subsubsection{Binary numbers}
 Between some parts of EOF-1 are binary numbers (as in \textit{uint32\t})
 exchanged.
 % -----------------------------------------------------------------------------
-\subsection{The zero Byte}
+\subsubsection{The zero Byte}
 The zero Byte is a Byte with the value 0.
 % -----------------------------------------------------------------------------
-\subsection{Strings}
+\subsubsection{Strings}
 Strings are transmitted without termination (i.e. no new line, no 0 byte).
 % -----------------------------------------------------------------------------
-\subsection{Variable length strings}
+\subsubsection{Variable length strings}
 Before variable length strings the length is submitted in a fixed size
 datatype.
 % -----------------------------------------------------------------------------
-\subsection{Fixed length strings}
+\subsubsection{Fixed length strings}
 Fixed length strings contain exactly the specified number of Bytes:
 In a 128 Byte fixed length string fits at most 128 Bytes of text,
 which is then not zero terminated!
 If the text it contains is shorter than the specified length,
-it must be padded with 0 Bytes, if they are shorter than the defined length.
+it must be padded with zero Bytes (see above).
 % -----------------------------------------------------------------------------
-\section{Data specification}
+\subsection{EOF data types specification}
+The following sections define the datatypes used in EOF related
+applications. The recommened name for use in source
+code is added in parentheses after the human understandable name.
 % -----------------------------------------------------------------------------
-\subsection{Peer name}
-The peer name is a 128 
+\subsubsection{Peer name (peername)}
+The peer name is a 128 Byte fixed length string. It is only
+used internally to give a peer a rememberisable name ("`a nick'").
+It is never transmitted over the network.
+% -----------------------------------------------------------------------------
+\subsubsection{Channel name (channel)}
+The channel name is a 128 Byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsubsection{Message text (msgtext)}
+The message text is a 128 Byte fixed length string.
+% -----------------------------------------------------------------------------
 \end{document}
