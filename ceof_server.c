@@ -17,6 +17,7 @@ int main()
    gpg_err_code_t gpg_err;
 
    gpgme_data_t g_plain;
+   gpgme_data_t g_plain_recv;
    gpgme_data_t g_encrypt;
 
    gpgme_key_t g_recipient[MAX_RCP+1];
@@ -76,6 +77,9 @@ int main()
    gerr = gpgme_data_new(&g_plain);
    if(gerr != GPG_ERR_NO_ERROR) return 13;
 
+   gerr = gpgme_data_new(&g_plain_recv);
+   if(gerr != GPG_ERR_NO_ERROR) return 20;
+
    gerr = gpgme_data_new(&g_encrypt);
    if(gerr != GPG_ERR_NO_ERROR) return 14;
 
@@ -94,6 +98,8 @@ int main()
    i=0;
    gerr = gpgme_op_keylist_next(g_context, &g_recipient[0]);
    while((gpg_err = gpg_err_code(gerr)) != GPG_ERR_EOF) {
+      /* for testing: one call of gpgme_op_keylist_next is enough */
+      break;
       if(gerr == GPG_ERR_INV_VALUE) {
          printf("invalid pointer\n");
          return 15;
@@ -104,17 +110,26 @@ int main()
 
       printf ("%s: %s <%s> (%d)\n", g_recipient[0]->subkeys->keyid, g_recipient[0]->uids->name, g_recipient[0]->uids->email, i);
       i++;
+
+      /* FIXME: this resets the good filled buffer ... */
       gerr = gpgme_op_keylist_next(g_context, &g_recipient[0]);
    }
    g_recipient[1] = NULL;
 
 
    /* en/decrypt message */
+   //gerr = gpgme_op_encrypt_sign(g_context, g_recipient, 0, g_plain, g_encrypt);
    gerr = gpgme_op_encrypt(g_context, g_recipient, 0, g_plain, g_encrypt);
-   if(gerr != GPG_ERR_NO_ERROR) return 18;
+   if(gerr != GPG_ERR_NO_ERROR) {
+      printf("gerr=%d\n",gerr);
+      return 18;
+   }
 
-   gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain);
-   if(gerr != GPG_ERR_NO_ERROR) return 17;
+   gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain_recv);
+   if(gerr != GPG_ERR_NO_ERROR) {
+      printf("gerr=%d\n",gerr);
+      return 19;
+   }
 
 
 
