@@ -9,15 +9,17 @@ char *home="/home/user/nico/.ceof/gnupg";
 
 int main()
 {
-   gpgme_error_t gerr;
    gpgme_ctx_t g_context;
    gpgme_engine_info_t enginfo;
    gpgme_data_t data;
 
+   gpgme_error_t gerr;
+   gpg_err_code_t gpg_err;
+
    gpgme_data_t g_plain;
    gpgme_data_t g_encrypt;
 
-   gpgme_key_t g_recipient[MAX_RCP];
+   gpgme_key_t g_recipient[MAX_RCP+1];
    char *p;
 
    char msg[EOF_MSG_SIZE];
@@ -69,13 +71,13 @@ int main()
 
    /* create buffers */
    gerr = gpgme_data_new(&data);
-   if(gerr != GPG_ERR_NO_ERROR) return 6;
+   if(gerr != GPG_ERR_NO_ERROR) return 12;
 
    gerr = gpgme_data_new(&g_plain);
-   if(gerr != GPG_ERR_NO_ERROR) return 6;
+   if(gerr != GPG_ERR_NO_ERROR) return 13;
 
    gerr = gpgme_data_new(&g_encrypt);
-   if(gerr != GPG_ERR_NO_ERROR) return 6;
+   if(gerr != GPG_ERR_NO_ERROR) return 14;
 
    /* fill buffers */
    i = strlen(msg);
@@ -86,14 +88,33 @@ int main()
    }
 
    /* setup recipient */
+   gerr = gpgme_op_keylist_start(g_context, "nico schottelius", 0);
+   if(gerr != GPG_ERR_NO_ERROR) return 11;
+
+   i=0;
+   gerr = gpgme_op_keylist_next(g_context, &g_recipient[0]);
+   while((gpg_err = gpg_err_code(gerr)) != GPG_ERR_EOF) {
+      if(gerr == GPG_ERR_INV_VALUE) {
+         printf("invalid pointer\n");
+         return 15;
+      } else if(gerr == GPG_ERR_ENOMEM) {
+         printf("no mem\n");
+         return 16;
+      }
+
+      printf ("%s: %s <%s> (%d)\n", g_recipient[0]->subkeys->keyid, g_recipient[0]->uids->name, g_recipient[0]->uids->email, i);
+      i++;
+      gerr = gpgme_op_keylist_next(g_context, &g_recipient[0]);
+   }
+   g_recipient[1] = NULL;
+
 
    /* en/decrypt message */
-
    gerr = gpgme_op_encrypt(g_context, g_recipient, 0, g_plain, g_encrypt);
-   if(gerr != GPG_ERR_NO_ERROR) return 6;
+   if(gerr != GPG_ERR_NO_ERROR) return 18;
 
    gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain);
-   if(gerr != GPG_ERR_NO_ERROR) return 6;
+   if(gerr != GPG_ERR_NO_ERROR) return 17;
 
 
 
