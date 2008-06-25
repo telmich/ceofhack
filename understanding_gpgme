@@ -1,0 +1,11 @@
+As the creators of gpgme seem to hide the real fun of gpgme from developers,
+this small howto aims to help a gpgme-newbie to quickly make (correct) use
+of what it can do.
+
+Examples
+--------
+
+Encrypting a text
+~~~~~~~~~~~~~~~~~
+
+Error codes
