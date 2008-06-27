@@ -5,7 +5,8 @@ char *home="/home/user/nico/.ceof/gnupg";
 #define SIZE 1024
 
 #define MAX_RCP 1
-#define EOF_MSG_SIZE 64
+
+#include "ceofhack.h"
 
 int main()
 {
@@ -23,13 +24,15 @@ int main()
    gpgme_key_t g_recipient[MAX_RCP+1];
    char *p;
 
-   char msg[EOF_MSG_SIZE];
-   char msg_in[EOF_MSG_SIZE];
+   char msg[EOF_L_MESSAGE];
+   char msg_in[EOF_L_MESSAGE];
 
    int i;
 
-   strncpy(msg,"Erste Nachricht",EOF_MSG_SIZE);
-   for(i=0;i<EOF_MSG_SIZE; i++) msg_in[i] = 0;
+   for(i=0;i<EOF_L_MESSAGE; i++) msg_in[i] = 0;
+   for(i=0;i<EOF_L_MESSAGE; i++) msg[i] = 0;
+
+   strncpy(msg, "Erste Nachricht", EOF_MSG_SIZE);
 
    gpgme_check_version(NULL);
 
