@@ -9,3 +9,8 @@ Encrypting a text
 ~~~~~~~~~~~~~~~~~
 
 Error codes
+
+Debugging problems with gpgme
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Run your program this way:
+GPGME_DEBUG=9:/tmp/foo.log ./your-program-name
