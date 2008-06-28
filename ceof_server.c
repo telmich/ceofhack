@@ -81,9 +81,6 @@ int main()
    gerr = gpgme_data_new(&data);
    if(gerr != GPG_ERR_NO_ERROR) return 12;
 
-   gerr = gpgme_data_new(&g_plain);
-   if(gerr != GPG_ERR_NO_ERROR) return 13;
-
    gerr = gpgme_data_new(&g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) return 20;
 
@@ -94,14 +91,19 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 24;
 
    /* fill buffers */
-   strncpy(msg, "Erste Nachricht\n\n", EOF_L_MESSAGE);
-   i = strlen(msg);
+   /* gerr = gpgme_data_new(&g_plain);
+   if(gerr != GPG_ERR_NO_ERROR) return 13;
+
    printf("strlen(%s) = %d\n",msg,i);
    i -= gpgme_data_write(g_plain, msg, i);
    if(i) {
       printf("size mismatch\n");
       return 12;
-   }
+   } */
+   strncpy(msg, "Erste Nachricht\n\n", EOF_L_MESSAGE);
+   i = strlen(msg);
+   gerr = gpgme_data_new_from_mem (&g_plain, msg, i, 0);
+
 
    /* setup recipient */
    gerr = gpgme_op_keylist_start(g_context, "nico schottelius", 0);
@@ -127,6 +129,10 @@ int main()
       gerr = gpgme_op_keylist_next(g_context, &g_recipient[0]);
    }
    g_recipient[1] = NULL;
+
+   /* all above seems to be wrong ... */
+   gerr = gpgme_get_key(g_context,"41D89B16B16596A84C0B78C1828D71E9CE33EB52", &g_recipient[0], 0);
+   if(gerr != GPG_ERR_NO_ERROR) return 25;
 
 
    /* en/decrypt message */
