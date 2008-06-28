@@ -38,8 +38,6 @@ int main()
    for(i=0;i<EOF_L_MESSAGE; i++) msg[i] = 0;
    for(i=0;i<=BIGBUF; i++) b_encrypt[i] = 0;
 
-   strncpy(msg, "Erste Nachricht", EOF_L_MESSAGE);
-
    gpgme_check_version(NULL);
 
    gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
@@ -96,7 +94,9 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 24;
 
    /* fill buffers */
+   strncpy(msg, "Erste Nachricht\n\n", EOF_L_MESSAGE);
    i = strlen(msg);
+   printf("strlen(%s) = %d\n",msg,i);
    i -= gpgme_data_write(g_plain, msg, i);
    if(i) {
       printf("size mismatch\n");
