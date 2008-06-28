@@ -2,9 +2,12 @@
 #include <string.h>     /* strncpy */
 
 char *home="/home/user/nico/.ceof/gnupg";
+
 #define SIZE 1024
 
 #define MAX_RCP 1
+
+#define BIGBUF 65536
 
 #include "ceofhack.h"
 
@@ -20,19 +23,22 @@ int main()
    gpgme_data_t g_plain;
    gpgme_data_t g_plain_recv;
    gpgme_data_t g_encrypt;
+   gpgme_data_t g_encrypt_send;
 
    gpgme_key_t g_recipient[MAX_RCP+1];
    char *p;
+   char b_encrypt[BIGBUF+1];
 
    char msg[EOF_L_MESSAGE];
    char msg_in[EOF_L_MESSAGE];
 
-   int i;
+   int i, tmp;
 
    for(i=0;i<EOF_L_MESSAGE; i++) msg_in[i] = 0;
    for(i=0;i<EOF_L_MESSAGE; i++) msg[i] = 0;
+   for(i=0;i<=BIGBUF; i++) b_encrypt[i] = 0;
 
-   strncpy(msg, "Erste Nachricht", EOF_MSG_SIZE);
+   strncpy(msg, "Erste Nachricht", EOF_L_MESSAGE);
 
    gpgme_check_version(NULL);
 
@@ -86,6 +92,9 @@ int main()
    gerr = gpgme_data_new(&g_encrypt);
    if(gerr != GPG_ERR_NO_ERROR) return 14;
 
+   gerr = gpgme_data_new(&g_encrypt_send);
+   if(gerr != GPG_ERR_NO_ERROR) return 24;
+
    /* fill buffers */
    i = strlen(msg);
    i -= gpgme_data_write(g_plain, msg, i);
@@ -128,7 +137,33 @@ int main()
       return 18;
    }
 
-   gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain_recv);
+   /* transfer the data into our own buffer,
+    * so the data is saved; you cannot
+    * reuse the gpgme buffers directly as in
+    *    gerr = gpgme_op_decrypt(g_context, g_encrypt, g_plain_recv);
+    *
+    */
+   i = gpgme_data_seek(g_encrypt, 0, SEEK_END);
+
+   if(i > BIGBUF) return 22;
+   printf("buflen: %d\n",i);
+   
+   /* reset to the beginning */
+   gpgme_data_seek(g_encrypt, 0, SEEK_SET);
+
+   if(gpgme_data_read(g_encrypt, b_encrypt, i) == -1) {
+      perror("pgme_data_read");
+      return 23;
+   }
+   printf("crypt:\n%s\n", b_encrypt);
+
+   if((tmp = gpgme_data_write(g_encrypt_send, b_encrypt, i)) == -1) {
+      perror("pgme_data_write");
+      return 23;
+   }
+   printf("crypt-wrote:%d\n", tmp);
+
+   gerr = gpgme_op_decrypt(g_context, g_encrypt_send, g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) {
       printf("gerr=%d\n",gerr);
       return 19;
