@@ -1,7 +1,7 @@
 #include <gpgme.h>
 #include <string.h>     /* strncpy */
 
-char *home="/home/user/nico/.ceof/gnupg";
+char *home="/home/nico/.ceof/gpg";
 
 #define SIZE 1024
 
@@ -46,7 +46,6 @@ int main()
    p = (char *) gpgme_get_protocol_name(GPGME_PROTOCOL_OpenPGP);
    printf("Version: %s\n",p);
 
-
    gerr = gpgme_set_engine_info(GPGME_PROTOCOL_OpenPGP, NULL, home);
 
    if(gerr == GPG_ERR_NO_ERROR) {
@@ -65,12 +64,11 @@ int main()
    gerr = gpgme_new(&g_context);
    if(gerr != GPG_ERR_NO_ERROR) return 1;
 
-
    /* FIXME: both needed? */
    /* FIXME: why is the path (FILE_NAME) needed? */
    /* FIXME: /usr/bin/gpg must be changed to ~/.ceof/gpg/binary or similar */
    gerr = gpgme_ctx_set_engine_info (g_context, GPGME_PROTOCOL_OpenPGP,
-               "/usr/bin/gpg","/home/user/nico/.ceof/gpg/");
+               "/usr/bin/gpg",home);
    if(gerr != GPG_ERR_NO_ERROR) return 4;
 
    /* do not ascii armor data; use 1 for testing */
@@ -131,8 +129,8 @@ int main()
    g_recipient[1] = NULL;
 
    /* all above seems to be wrong ... */
-   gerr = gpgme_get_key(g_context,"41D89B16B16596A84C0B78C1828D71E9CE33EB52", &g_recipient[0], 0);
-   if(gerr != GPG_ERR_NO_ERROR) return 25;
+   gerr = gpgme_get_key(g_context,"775506B45998BF57D0D4AFF27C6E747C38616ADC", &g_recipient[0], 0);
+   if(gerr != GPG_ERR_NO_ERROR) return 32;
 
 
    /* en/decrypt message */
@@ -175,11 +173,7 @@ int main()
       return 19;
    }
 
-
-
    /* open communication channel: netcat */
-
-//   forkexecpipe
 
    /* listen for input from:
     * stdin
