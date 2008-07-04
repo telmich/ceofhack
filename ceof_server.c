@@ -173,6 +173,7 @@ int main()
     * data and can be decrypted 
     *
     * perhaps the context needs some reset?
+    * :
     */
 
    if((tmp = gpgme_data_write(g_encrypt_send, b_encrypt, i)) == -1) {
