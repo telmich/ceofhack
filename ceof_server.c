@@ -182,6 +182,8 @@ int main()
    }
    printf("crypt-wrote:%d\n", tmp);
 
+   /* look for contexts */
+
    gerr = gpgme_op_decrypt(g_context, g_encrypt_send, g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) {
       printf("gerr=%d\n",gerr);
