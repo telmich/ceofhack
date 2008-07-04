@@ -102,7 +102,7 @@ int main()
       printf("size mismatch\n");
       return 12;
    } */
-   strncpy(msg, "Erste Nachricht\n\n", EOF_L_MESSAGE);
+   strncpy(msg, "==> Erste Nachricht\n\n", EOF_L_MESSAGE);
    i = strlen(msg);
    gerr = gpgme_data_new_from_mem (&g_plain, msg, i, 0);
 
