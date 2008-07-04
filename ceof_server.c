@@ -1,5 +1,7 @@
 #include <gpgme.h>
 #include <string.h>     /* strncpy */
+#include <fcntl.h>
+#include <unistd.h>
 
 char *home="/home/nico/.ceof/gpg";
 
@@ -13,6 +15,8 @@ char *home="/home/nico/.ceof/gpg";
 
 int main()
 {
+   int fd;
+
    gpgme_ctx_t g_context;
    gpgme_engine_info_t enginfo;
    gpgme_data_t data;
@@ -160,6 +164,10 @@ int main()
       return 23;
    }
    printf("crypt:\n%s\n", b_encrypt);
+   fd = open("testcrypt",O_RDWR|O_CREAT);
+   if(fd == -1) return 40;
+   if(write(fd, b_encrypt, BIGBUF) == -1) return 41;
+   close(fd);
 
    if((tmp = gpgme_data_write(g_encrypt_send, b_encrypt, i)) == -1) {
       perror("pgme_data_write");
