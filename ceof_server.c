@@ -169,6 +169,10 @@ int main()
    if(write(fd, b_encrypt, BIGBUF) == -1) return 41;
    close(fd);
 
+   /* until here it works, testcrypt contains
+    * data and can be decrypted 
+    */
+
    if((tmp = gpgme_data_write(g_encrypt_send, b_encrypt, i)) == -1) {
       perror("pgme_data_write");
       return 23;
