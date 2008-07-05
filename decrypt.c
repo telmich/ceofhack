@@ -70,6 +70,10 @@ int main()
 
    gerr = gpgme_data_new(&g_encrypt_send);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
+   
+   /* set encoding */
+   gerr = gpgme_data_set_encoding(g_plain_recv, GPGME_DATA_ENCODING_ARMOR);
+   if(gerr != GPG_ERR_NO_ERROR) return 25;
 
    i = strlen(b_encrypt);  
    printf("strlen(%s) = %d\n",b_encrypt,i);
