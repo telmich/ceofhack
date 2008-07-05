@@ -5,12 +5,6 @@
 
 char *home="/home/nico/.ceof/gpg";
 
-#define SIZE 1024
-
-#define MAX_RCP 1
-
-#define BIGBUF 65536
-
 #include "ceofhack.h"
 
 int main()
@@ -170,10 +164,9 @@ int main()
    close(fd);
 
    /* until here it works, testcrypt contains
-    * data and can be decrypted 
+    * data and can be decrypted ...
     *
     * perhaps the context needs some reset?
-    * :
     */
 
    if((tmp = gpgme_data_write(g_encrypt_send, b_encrypt, i)) == -1) {

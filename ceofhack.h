@@ -10,5 +10,9 @@
 #define EOF_L_NICKNAME 128
 #define EOF_L_MESSAGE  128
 
+#define SIZE 1024
+#define MAX_RCP 1
+#define BIGBUF 65536
+
 
 #endif
