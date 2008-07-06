@@ -20,4 +20,9 @@ struct peer {
    char addr[EOF_L_ADDRESS+1];
 };
 
+struct peers {
+   struct peer peer;
+   struct peers *next;
+};
+
 #endif
