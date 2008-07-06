@@ -1,0 +1,2 @@
+- Listens on tcp, port 4223
+- Connects to tcp-port 4223
