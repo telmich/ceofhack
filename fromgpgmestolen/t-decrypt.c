@@ -60,6 +60,8 @@ main (int argc, char *argv[])
   if (!(agent_info && strchr (agent_info, ':')))
     gpgme_set_passphrase_cb (ctx, passphrase_cb, NULL);
 
+  /* until here it looks consistent to decrypt.c...*/
+
   err = gpgme_data_new_from_file (&in, cipher_1_asc, 1);
   fail_if_err (err);
 
