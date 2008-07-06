@@ -45,10 +45,15 @@ main (int argc, char *argv[])
   gpgme_decrypt_result_t result;
   const char *cipher_1_asc = make_filename ("testcrypt");
   char *agent_info;
+  char *home="/home/nico/.ceof/gpg";
 
   init_gpgme (GPGME_PROTOCOL_OpenPGP);
 
   err = gpgme_new (&ctx);
+  fail_if_err (err);
+
+  err = gpgme_ctx_set_engine_info(ctx, GPGME_PROTOCOL_OpenPGP,
+         "/usr/bin/gpg", home);
   fail_if_err (err);
 
   agent_info = getenv("GPG_AGENT_INFO");
