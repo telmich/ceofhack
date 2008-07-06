@@ -20,25 +20,17 @@ gpgme_error_t getpwd(void *HOOK, const char *UID_HINT,
 
 int main()
 {
-   int fd;
-
    gpgme_ctx_t g_context;
-
    gpgme_error_t gerr;
-
    gpgme_data_t g_plain_recv;
    gpgme_data_t g_encrypt_send;
 
    char *p;
    char b_encrypt[BIGBUF+1];
 
-   char msg[EOF_L_MESSAGE];
-   char msg_in[EOF_L_MESSAGE];
-
    int i, tmp;
+   int fd;
 
-   for(i=0;i<EOF_L_MESSAGE; i++) msg_in[i] = 0;
-   for(i=0;i<EOF_L_MESSAGE; i++) msg[i] = 0;
    for(i=0;i<=BIGBUF; i++) b_encrypt[i] = 0;
 
    /* init the gpgme library */
