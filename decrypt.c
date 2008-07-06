@@ -70,7 +70,7 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 20;
    /* FIXME: test: it is not in t-decrypt.c */
    i = strlen(b_encrypt);  
-   gerr = gpgme_data_new_from_mem(&g_encrypt, b_encrypt, i, 1);
+   gerr = gpgme_data_new_from_mem(&g_encrypt_send, b_encrypt, i, 1);
    //gerr = gpgme_data_new(&g_encrypt_send);
 //   gerr = gpgme_data_new_from_file (&g_encrypt_send, "./testcrypt", 1);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
