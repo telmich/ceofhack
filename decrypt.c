@@ -68,15 +68,16 @@ int main()
    /* create buffers */
    gerr = gpgme_data_new(&g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) return 20;
-
    /* FIXME: test: it is not in t-decrypt.c */
-   gerr = gpgme_data_new(&g_encrypt_send);
+   i = strlen(b_encrypt);  
+   gerr = gpgme_data_new_from_mem(&g_encrypt, b_encrypt, i, 1);
+   //gerr = gpgme_data_new(&g_encrypt_send);
 //   gerr = gpgme_data_new_from_file (&g_encrypt_send, "./testcrypt", 1);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
    
-   i = strlen(b_encrypt);  
+/* 
    printf("strlen(%s) = %d\n",b_encrypt,i);
-   gpgme_data_write(g_encrypt_send, b_encrypt, i);
+   gpgme_data_write(g_encrypt_send, b_encrypt, i); */
 
    /* decrypt */
    gerr = gpgme_op_decrypt(g_context, g_encrypt_send, g_plain_recv);
