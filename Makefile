@@ -9,6 +9,9 @@ ceof_server_exec: ceof_server
 ceof_server: ceof_server.c
 	$(CC) -o $@ $^
 
+gpgmedecrypt: fromgpgmestolen/t-decrypt.c
+	$(CC) -o $@ $^
+
 decrypt: decrypt.c
 	$(CC) -o $@ $^
 
