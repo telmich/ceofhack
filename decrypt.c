@@ -52,10 +52,13 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 2;
 
    /* do not ascii armor data; use 1 for testing only */
+
+   /* FIXME: test: it is not in t-decrypt.c */
    gpgme_set_armor(g_context, 1);
 
    gpgme_set_passphrase_cb(g_context, getpwd, NULL);
 
+   /* FIXME: test: it is not in t-decrypt.c */
    /* read crypted data */
    fd = open("testcrypt",O_RDONLY);
    if(fd == -1) return 40;
@@ -67,7 +70,9 @@ int main()
    gerr = gpgme_data_new(&g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) return 20;
 
-   gerr = gpgme_data_new(&g_encrypt_send);
+   /* FIXME: test: it is not in t-decrypt.c */
+//   gerr = gpgme_data_new(&g_encrypt_send);
+   gerr = gpgme_data_new_from_file (&g_encrypt_send, "./testcrypt", 1);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
    
    /* set encoding */
