@@ -3,7 +3,7 @@ The HELO command contains only
 
 --------------------------------------------------------------------------------
 --> Public keys must be exchanged before!
-   --> all communication is encrypted
+   --> all communication is encrypted!
 --------------------------------------------------------------------------------
 
 WHERE_I_AM = 0000

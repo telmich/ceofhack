@@ -1,3 +1,17 @@
 A very minimalistic EOF-2 client.
 
    -- Nico Schottelius, 2008-06-23
+
+Compile:
+   $ make
+
+Usage:
+   $ ./ceofhack
+   /peer add <name> tcp://<ip>:<port> (use from user2ceof)
+   /msg <peer> <msg>
+
+Bugs:
+   Many. This is just a hack.
+
+   Your port is currently ignored.
+   You cannot connect to somebody behind NAT.
