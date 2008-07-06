@@ -65,24 +65,18 @@ int main()
    if((tmp = read(fd, b_encrypt, BIGBUF)) == -1) return 41;
    close(fd);
 
-
    /* create buffers */
    gerr = gpgme_data_new(&g_plain_recv);
    if(gerr != GPG_ERR_NO_ERROR) return 20;
 
    /* FIXME: test: it is not in t-decrypt.c */
-//   gerr = gpgme_data_new(&g_encrypt_send);
-   gerr = gpgme_data_new_from_file (&g_encrypt_send, "./testcrypt", 1);
+   gerr = gpgme_data_new(&g_encrypt_send);
+//   gerr = gpgme_data_new_from_file (&g_encrypt_send, "./testcrypt", 1);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
    
-   /* set encoding */
-//   gerr = gpgme_data_set_encoding(g_plain_recv, GPGME_DATA_ENCODING_ARMOR);
-//   if(gerr != GPG_ERR_NO_ERROR) return 25;
-
-/*   i = strlen(b_encrypt);  
+   i = strlen(b_encrypt);  
    printf("strlen(%s) = %d\n",b_encrypt,i);
    gpgme_data_write(g_encrypt_send, b_encrypt, i);
-   gpgme_data_write(g_plain_recv, b_encrypt, i); */
 
    /* decrypt */
    gerr = gpgme_op_decrypt(g_context, g_encrypt_send, g_plain_recv);
