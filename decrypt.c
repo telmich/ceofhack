@@ -78,13 +78,18 @@ int main()
    if(gerr != GPG_ERR_NO_ERROR) return 20;
 
    i = strlen(b_encrypt);  
-   printf("strlen(%s) = %d\n",b_encrypt,i);
+ //  printf("strlen(%s) = %d\n",b_encrypt,i);
 
    /* THIS WORKS */
    gerr = gpgme_data_new_from_mem(&g_encrypt_send, b_encrypt, i, 1);
    if(gerr != GPG_ERR_NO_ERROR) return 24;
    
    /* THIS DOES NOT WORK */
+   tmp = gpgme_data_seek(g_test, 0, SEEK_SET);
+   if(tmp != 0) {
+      printf("seek failed\n");
+      return 44;
+   }
    tmp = gpgme_data_write(g_test, b_encrypt, i);
    printf("gpgmedatawrite: %d\n", tmp);
 
