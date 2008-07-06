@@ -65,7 +65,7 @@ gpgme_error_t
 passphrase_cb (void *opaque, const char *uid_hint, const char *passphrase_info,
 	       int last_was_bad, int fd)
 {
-  write (fd, "abc\n", 4);
+  write (fd, "123456\n", 7);
   return 0;
 }
 
