@@ -7,22 +7,28 @@ char *home="/home/nico/.ceof/gpg";
 
 #include "ceofhack.h"
 
+gpgme_error_t getpwd(void *HOOK, const char *UID_HINT,
+                     const char *PASSPHRASE_INFO,
+                     int PREV_WAS_BAD, int FD) {
+
+   printf("getpwd called, %d, %s\n", PREV_WAS_BAD, PASSPHRASE_INFO);
+
+   write(FD, "123456\n", 7);
+
+   return 0;
+}
+
 int main()
 {
    int fd;
 
    gpgme_ctx_t g_context;
-   gpgme_data_t data;
 
    gpgme_error_t gerr;
-   gpg_err_code_t gpg_err;
 
-   gpgme_data_t g_plain;
    gpgme_data_t g_plain_recv;
-   gpgme_data_t g_encrypt;
    gpgme_data_t g_encrypt_send;
 
-   gpgme_key_t g_recipient[MAX_RCP+1];
    char *p;
    char b_encrypt[BIGBUF+1];
 
@@ -56,12 +62,13 @@ int main()
    /* do not ascii armor data; use 1 for testing only */
    gpgme_set_armor(g_context, 1);
 
+   gpgme_set_passphrase_cb(g_context, getpwd, NULL);
+
    /* read crypted data */
    fd = open("testcrypt",O_RDONLY);
    if(fd == -1) return 40;
    if((tmp = read(fd, b_encrypt, BIGBUF)) == -1) return 41;
    close(fd);
-   printf("crypt-in: %s\n", b_encrypt);
 
 
    /* create buffers */
@@ -77,11 +84,8 @@ int main()
 
    i = strlen(b_encrypt);  
    printf("strlen(%s) = %d\n",b_encrypt,i);
-   i -= gpgme_data_write(g_encrypt_send, b_encrypt, i);
-   if(i) {
-      printf("size mismatch\n");
-      return 12;
-   }
+   gpgme_data_write(g_encrypt_send, b_encrypt, i);
+   gpgme_data_write(g_plain_recv, b_encrypt, i);
 
    /* decrypt */
    gerr = gpgme_op_decrypt(g_context, g_encrypt_send, g_plain_recv);
