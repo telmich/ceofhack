@@ -44,7 +44,7 @@ int main()
       return 1;
    }
    strncpy(buf, home, PATH_MAX);
-   strncat(buf, "/.ceof/transport-protocols/tcp", PATH_MAX - strlen(home));
+   strncat(buf, "/.ceof/transport-protocols/tcp/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
 
   // forkexecpipe(".ceof/
