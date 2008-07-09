@@ -22,48 +22,21 @@
  *
  */
 
+#include <poll.h>       /* guess what     */
+#include <errno.h>      /* guess what     */
+#include "ceofhack.h"  /* functions etc. */
+
 int main()
 {
+   struct pollfd fds[HP_LAST];
+   int cnt, i;
 
-   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listeren */
+   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
 
    if(!init_gui()) return -1;
 
 
-/***********************************************************************
- *
- *    2007 Nico Schottelius (nico-eof-1 at schottelius.org)
- *
- *    Copying: GPLv3 (see file "COPYING" in the top directory)
- *
- *    The main listener
- */
-
-#include <poll.h>       /* guess what     */
-#include <errno.h>      /* guess what     */
-#include "ceof.h"       /* functions etc. */
-
-/*
-enum {
-   FD_CLIENT=0,
-   FD_PMG,
-   FD_LAST
-}; */
-
-int listener(struct options *opts)
-{
-   /* listen to noise               */
-   /* listen to client input        */
-   /* listen to incoming packages   */
-
-   struct pollfd fds[HP_LAST];
-   int cnt, i;
-
    while(1) {
-      /* reinit helpers */
-      if(opts->status == EEC_CHILD_REINIT_HELPER) {
-         if(!init_ceof_helper(opts)) return 0;
-      }
       /* reinit fds, may habe changed */
       for(i=0; i < HP_LAST; i++) {
          fds[i].fd       =  opts->hp[i].fds[0];
