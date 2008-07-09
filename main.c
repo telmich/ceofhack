@@ -18,6 +18,15 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * purpose_of_this_file_is_also_there_behind_the_big_header
+ * The starting point
  *
  */
+
+int main()
+{
+
+   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listeren */
+
+   if(!init_gui()) return -1;
+
+}
