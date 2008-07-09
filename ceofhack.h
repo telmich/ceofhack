@@ -15,6 +15,7 @@
 #define MAX_RCP 1
 #define BIGBUF 65536
 
+/* Structures */
 struct peer {
    char name[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
@@ -24,5 +25,16 @@ struct peers {
    struct peer peer;
    struct peers *next;
 };
+
+/* further structs with external dependencies */
+#include <sys/types.h>           /* FIXME: posix correct header?) */
+struct helper {                  /* for the subprojects           */
+   pid_t pid;                    /* process id                    */
+   int fds[2];                   /* file deskriptors used by poll */
+   char *path;                   /* path relative to config dir   */
+   int (*handle)(int []);        /* pointer to the handler        */
+   int (*exit)(int []);          /* pointer to the exit function  */
+};
+
 
 #endif
