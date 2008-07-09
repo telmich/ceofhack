@@ -3,3 +3,5 @@ ceof_server
 testcrypt
 decrypt
 gpgmedecrypt
+ceofhack
+*.o
