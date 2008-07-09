@@ -15,6 +15,9 @@
 #define MAX_RCP 1
 #define BIGBUF 65536
 
+/* need to listen on stdin and ipv4 socket */
+#define HP_LAST 2
+
 /* Structures */
 struct peer {
    char name[EOF_L_NICKNAME+1];

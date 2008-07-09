@@ -23,41 +23,57 @@
  */
 
 #include <poll.h>       /* guess what     */
+#include <limits.h>     /* PATH_MAX       */
+#include <stdio.h>      /* printf()       */
+#include <string.h>     /* str()*         */
 #include <errno.h>      /* guess what     */
+#include <stdlib.h>     /* getenv         */
 #include "ceofhack.h"  /* functions etc. */
 
 int main()
 {
    struct pollfd fds[HP_LAST];
    int cnt, i;
+   struct helper ipv4l, user;
+   char *home, buf[PATH_MAX+1];
 
-   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
+   /* get homedir */
+   home = getenv("HOME");
+   if(!home) {
+      fprintf(stderr, "you don't have a home, poor guy!\n");
+      return 1;
+   }
+   strncpy(buf, home, PATH_MAX);
+   strncat(buf, "/.ceof/transport-protocols/tcp", PATH_MAX - strlen(home));
+   printf("using %s\n",buf);
 
-   if(!init_gui()) return -1;
+  // forkexecpipe(".ceof/
+
+//   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
+
+//   if(!init_gui()) return -1;
 
 
-   while(1) {
-      /* reinit fds, may habe changed */
+
+   while(0) {
+      /* reinit fds, may habe changed 
       for(i=0; i < HP_LAST; i++) {
          fds[i].fd       =  opts->hp[i].fds[0];
          fds[i].events   =  POLLIN;
-      }
+      } */
 
       cnt = poll(fds, HP_LAST, -1);
       if(cnt == -1 && errno != EINTR) return 0;
       
-      /* check client interaction */
+      /* check client interaction 
       for(i=0; i < HP_LAST; i++) {
          if(fds[i].revents & POLLIN) {
             opts->hp[i].handle(opts->hp[i].fds);
             --cnt;
          }
          if(!cnt) break;
-      }
+      } */
    }
 
    return 1;
-}
-
-
 }

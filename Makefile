@@ -2,7 +2,13 @@ LDFLAGS= $(shell gpgme-config --libs)
 
 CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall 
 
-all: decrypt
+CEOFHACK=main.c
+
+all: ceofhack decrypt
+
+ceofhack: $(CEOFHACK:.c=.o)
+	$(CC) -o $@ $^
+
 ceof_server_exec: ceof_server
 	./ceof_server
 
