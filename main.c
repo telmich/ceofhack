@@ -29,4 +29,62 @@ int main()
 
    if(!init_gui()) return -1;
 
+
+/***********************************************************************
+ *
+ *    2007 Nico Schottelius (nico-eof-1 at schottelius.org)
+ *
+ *    Copying: GPLv3 (see file "COPYING" in the top directory)
+ *
+ *    The main listener
+ */
+
+#include <poll.h>       /* guess what     */
+#include <errno.h>      /* guess what     */
+#include "ceof.h"       /* functions etc. */
+
+/*
+enum {
+   FD_CLIENT=0,
+   FD_PMG,
+   FD_LAST
+}; */
+
+int listener(struct options *opts)
+{
+   /* listen to noise               */
+   /* listen to client input        */
+   /* listen to incoming packages   */
+
+   struct pollfd fds[HP_LAST];
+   int cnt, i;
+
+   while(1) {
+      /* reinit helpers */
+      if(opts->status == EEC_CHILD_REINIT_HELPER) {
+         if(!init_ceof_helper(opts)) return 0;
+      }
+      /* reinit fds, may habe changed */
+      for(i=0; i < HP_LAST; i++) {
+         fds[i].fd       =  opts->hp[i].fds[0];
+         fds[i].events   =  POLLIN;
+      }
+
+      cnt = poll(fds, HP_LAST, -1);
+      if(cnt == -1 && errno != EINTR) return 0;
+      
+      /* check client interaction */
+      for(i=0; i < HP_LAST; i++) {
+         if(fds[i].revents & POLLIN) {
+            opts->hp[i].handle(opts->hp[i].fds);
+            --cnt;
+         }
+         if(!cnt) break;
+      }
+   }
+
+   return 1;
+}
+
+
 }
