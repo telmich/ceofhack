@@ -12,7 +12,7 @@
 #include <unistd.h>        /* exec*, pip     */
 #include <stdio.h>         /* perror()       */
 
-#include "ceof.h"          /* structures     */
+#include "ceofhack.h"          /* structures     */
 
 int forkexecpipe(char *path, struct helper *hp)
 {

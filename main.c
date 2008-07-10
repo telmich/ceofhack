@@ -47,7 +47,7 @@ int main()
    strncat(buf, "/.ceof/transport-protocols/tcp/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
 
-  // forkexecpipe(".ceof/
+   if(!forkexecpipe(buf, &ipv4l)) return 1;
 
 //   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
 

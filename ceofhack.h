@@ -39,5 +39,8 @@ struct helper {                  /* for the subprojects           */
    int (*exit)(int []);          /* pointer to the exit function  */
 };
 
+/* Functions */
+int forkexecpipe(char *path, struct helper *hp);
+
 
 #endif
