@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{article}
+% FIXME: UTF8
+\usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
+\usepackage{longtable}           % lange Tabellen
+%\usepackage[dvips]{epsfig}
+
+\begin{document}
+\title{EOF transport protocols}
+\date{2008-07-11 v0.1-schlori}
+\author{telmich}
+
+\maketitle
+\tableofcontents
+
+% -----------------------------------------------------------------------------
+\section{Introduction}
+This document describes how to integrate transport protocols into EOF,
+which protocols are supported and how to add support for new protocols.
+% -----------------------------------------------------------------------------
+\subsection{What are transport protocols?}
+Used to send and receive data.
+% -----------------------------------------------------------------------------
+\subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1-schlori}
+\begin{itemize}
+\item Initial document
+\end{itemize}
+% -----------------------------------------------------------------------------
+\section{Implementation}
+See ideas, stdin, stdout. stderr == logging
+% -----------------------------------------------------------------------------
+\subsection{Logging}
+Prefix with DEBUG, INFO, NOTICE, WARNING, ERR, CRIT, ALERT
+and EMERG.\footnote{See syslog(3) for more information.}
+% -----------------------------------------------------------------------------
+\subsection{Exit codes}
+% -----------------------------------------------------------------------------
+\subsection{Location}
+.ceof/../ see idaes
+% -----------------------------------------------------------------------------
+\subsection{Address syntax}
+tcp:host:port
+tcp6:[host]:port
+tcp4:host:port
+% -----------------------------------------------------------------------------
+\section{Available implementations}
+% -----------------------------------------------------------------------------
+\subsection{TCP4}
+Available since transport protocols version v0.1.
+
+% -----------------------------------------------------------------------------
+\end{document}
