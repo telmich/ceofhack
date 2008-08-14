@@ -43,13 +43,13 @@ int main()
       fprintf(stderr, "you don't have a home, poor guy!\n");
       return 1;
    }
+
+   /* create listener */
    strncpy(buf, home, PATH_MAX);
-   strncat(buf, "/.ceof/transport-protocols/tcp/get", PATH_MAX - strlen(home));
+   strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
 
    if(!forkexecpipe(buf, &ipv4l)) return 1;
-
-//   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
 
 //   if(!init_gui()) return -1;
 

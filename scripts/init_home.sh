@@ -28,14 +28,14 @@ __myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
 # create directories
 mkdir -p ~/.ceof/transport-protocols/available
-mkdir -p ~/.ceof/transport-protocols/enabled/tcp
+mkdir -p ~/.ceof/transport-protocols/enabled/tcp4
 
 # copy scripts
-cp -r $__abs_mydir/../transport-protocols/tcp-via-netcat \
-      ~/.ceof/transport-protocols/available/tcp-via-netcat
+cp -r $__abs_mydir/tcp4-via-netcat \
+      ~/.ceof/transport-protocols/available/tcp4-via-netcat
 
 # link them
-ln -s ~/.ceof/transport-protocols/available/tcp-via-netcat/get \
-      ~/.ceof/transport-protocols/enabled/tcp/get
-ln -s ~/.ceof/transport-protocols/available/tcp-via-netcat/send \
-      ~/.ceof/transport-protocols/enabled/tcp/send
+ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/get \
+       ~/.ceof/transport-protocols/enabled/tcp4/get
+ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
+       ~/.ceof/transport-protocols/enabled/tcp4/send
