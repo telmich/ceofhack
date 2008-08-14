@@ -15,6 +15,10 @@
 #define MAX_RCP 1
 #define BIGBUF 65536
 
+#define MAX_INPUT_C 64 /* maximum number of communication channels
+                          contains stdin, listen sockets
+                          and outgoing sockets */
+
 /* need to listen on stdin and ipv4 socket */
 #define HP_LAST 2
 
@@ -39,8 +43,14 @@ struct helper {                  /* for the subprojects           */
    int (*exit)(int []);          /* pointer to the exit function  */
 };
 
+/* Global variables  */
+//helper?
+//pollfds?
+
 /* Functions */
 int forkexecpipe(char *path, struct helper *hp);
+#include <poll.h>
+int fd_to_poll(int fd, struct pollfd fds[], int *in_use);
 
 
 #endif

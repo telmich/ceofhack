@@ -32,7 +32,8 @@
 
 int main()
 {
-   struct pollfd fds[HP_LAST];
+   struct pollfd fds[MAX_INPUT_C];
+   int comm_cnt = 0;
    int cnt, i;
    struct helper ipv4l, user;
    char *home, buf[PATH_MAX+1];
@@ -50,6 +51,8 @@ int main()
    printf("using %s\n",buf);
 
    if(!forkexecpipe(buf, &ipv4l)) return 1;
+
+   if(!fd_to_poll(ipv4l.fds[0], fds, &comm_cnt)) return 2;
 
 //   if(!init_gui()) return -1;
 
