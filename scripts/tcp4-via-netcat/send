@@ -36,6 +36,6 @@ addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print $2 }')"
 port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
 
 # debug on stderr
-echo $addr / $port 1>&2
+echo Connecting to $fulladdr 1>&2
 
 nc "$addr" "$port"

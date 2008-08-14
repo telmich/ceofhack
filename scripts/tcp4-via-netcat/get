@@ -35,8 +35,7 @@ fulladdr="$1"
 addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print $2 }')"
 port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
 
-echo $addr / $port 1>&2
+[ "$port" ] || port=4242
 
-# echo and ignore ;-)
-echo $fulladdr
-nc -l -p 4242
+echo Listening on: ${addr}:$port 1>&2
+nc -l -p "$port"
