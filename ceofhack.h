@@ -12,6 +12,7 @@
 #define EOF_L_NICKNAME 128
 #define EOF_L_MESSAGE  128
 #define EOF_L_ADDRESS  128
+/* FIXME: add len for maximum user input! command + ... */
 
 #define SIZE 1024
 #define MAX_RCP 1
@@ -59,6 +60,5 @@ void signal_child(int sig);
 
 int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
-
 
 #endif
