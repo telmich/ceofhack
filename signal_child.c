@@ -28,4 +28,11 @@
 
 void signal_child(int sig)
 {
+
+   /* 
+    * go through known children list
+    * and restart where necessary
+    */
+
+
 }

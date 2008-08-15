@@ -18,26 +18,25 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add references to functions
+ * Helper that does not need to be executed, but has on open
+ * fd already.
  *
  */
 
-#include <signal.h>     /* sigaction   */
-#include <stdio.h>      /* NULL  */
+#include <signal.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int signals_init()
+int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
 {
-   struct sigaction sa;
+   int num = helper_new();
 
-   sa.sa_handler = signal_child;
-   sa.sa_flags   = SA_NOCLDSTOP;
+   if(num == -1) return 0;
 
-   if(sigaction(SIGCHLD, &sa, NULL) == -1) {
-      perror("sigaction");
-      return 0;
-   }
+   chp[num].pid    = 0;
+   chp[num].fds[0] = fd;
+   chp[num].handle = handle;
+   chp[num].exit   = exit;
 
    return 1;
 }

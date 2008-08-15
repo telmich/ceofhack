@@ -18,26 +18,15 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add references to functions
+ * Return next usable helper index or -1 on maximum number.
  *
  */
 
-#include <signal.h>     /* sigaction   */
-#include <stdio.h>      /* NULL  */
+#include <signal.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int signals_init()
+int helper_new()
 {
-   struct sigaction sa;
-
-   sa.sa_handler = signal_child;
-   sa.sa_flags   = SA_NOCLDSTOP;
-
-   if(sigaction(SIGCHLD, &sa, NULL) == -1) {
-      perror("sigaction");
-      return 0;
-   }
-
-   return 1;
+   return (chp_cnt < MAX_COMM) ? chp_cnt++ : -1;
 }
