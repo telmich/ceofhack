@@ -41,5 +41,6 @@ int forkexecpipe(char *path, struct helper *hp)
    }
 
    execv(path,NULL);
+   perror("execv");
    _exit(1);
 }

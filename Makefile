@@ -3,10 +3,18 @@ LDFLAGS= $(shell gpgme-config --libs)
 CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall 
 
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c
+CEOFHACK_O=$(CEOFHACK:.c=.o)
+PROG=ceofhack decrypt
 
-all: ceofhack decrypt
+all: $(PROG)
 
-ceofhack: $(CEOFHACK:.c=.o)
+clean:
+	rm -f $(CEOFHACK_O) $(PROG)
+
+test: ceofhack
+	./ceofhack; echo $$?
+
+ceofhack: $(CEOFHACK_O)
 	$(CC) -o $@ $^
 
 ceof_server_exec: ceof_server

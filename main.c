@@ -45,7 +45,7 @@ int main()
       return 1;
    }
 
-   /* create listener */
+   /* create tcp4 listener */
    strncpy(buf, home, PATH_MAX);
    strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
@@ -55,8 +55,6 @@ int main()
    if(!fd_to_poll(ipv4l.fds[0], fds, &comm_cnt)) return 2;
 
 //   if(!init_gui()) return -1;
-
-
 
    while(0) {
       /* reinit fds, may habe changed 
@@ -78,5 +76,5 @@ int main()
       } */
    }
 
-   return 1;
+   return 0;
 }
