@@ -51,6 +51,8 @@ struct helper {                  /* for the subprojects           */
 int forkexecpipe(char *path, struct helper *hp);
 #include <poll.h>
 int fd_to_poll(int fd, struct pollfd fds[], int *in_use);
+int signals_init();
+void signal_child(int sig);
 
 
 #endif
