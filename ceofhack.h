@@ -7,12 +7,17 @@
 
 #define LIBEOF_VERSION "E.O.F"
 
-/* those values are from the current EOF specs */
+/*
+ * those values are from the current EOF specs
+ */
 
-#define EOF_L_NICKNAME 128
-#define EOF_L_MESSAGE  128
-#define EOF_L_ADDRESS  128
-/* FIXME: add len for maximum user input! command + ... */
+/* gui2user */
+#define EOF_L_GUI       256
+
+/* basics */
+#define EOF_L_NICKNAME  128
+#define EOF_L_MESSAGE   128
+#define EOF_L_ADDRESS   128
 
 #define SIZE 1024
 #define MAX_RCP 1
@@ -25,6 +30,8 @@
 /* need to listen on stdin and ipv4 socket */
 #define HP_LAST 2
 
+/* user commands */
+
 /* Structures */
 struct peer {
    char name[EOF_L_NICKNAME+1];
@@ -34,6 +41,12 @@ struct peer {
 struct peers {
    struct peer peer;
    struct peers *next;
+};
+
+struct cmd {
+   char *name;
+   int (*handle)(char *);
+   struct cmd *next;
 };
 
 /* further structs with external dependencies */
@@ -49,6 +62,7 @@ struct helper {                  /* for the subprojects           */
 /* Global variables  */
 extern struct helper chp[MAX_COMM];
 extern struct pollfd pfd[MAX_COMM];
+extern struct cmd    cmds;
 extern int chp_cnt;
 
 

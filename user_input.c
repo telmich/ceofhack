@@ -30,17 +30,16 @@ int user_input(int fd[])
 {
    ssize_t len;
 
-   /* FIXME: use different length */
-   char buf[EOF_L_MESSAGE+1];
+   char buf[EOF_L_GUI+1];
 
-   if((len = read(fd[0], buf, EOF_L_MESSAGE)) == -1) {
+   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
       perror("read/ui");
       return 0;
    }
 
    /* compare strings with commands */
-
    /* /peer commands    */
+   
    /* /key commands     */
    /* /msg command      */
    /* other: errors     */
