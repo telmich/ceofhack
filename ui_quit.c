@@ -24,7 +24,7 @@
 
 #include <unistd.h>
 
-int cmd_quit(char *args)
+int ui_quit(char *args)
 {
    _exit(0);
 }

@@ -22,7 +22,7 @@
  *
  */
 
-#include <unistd.h>
+#include <stdlib.h>
 
 #include "ceofhack.h"  /* functions etc. */
 

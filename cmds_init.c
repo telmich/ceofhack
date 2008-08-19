@@ -22,24 +22,19 @@
  *
  */
 
-#include <unistd.h>
+#include <stdlib.h>     /* NULL */
 
-#include "ceofhack.h"  /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
 struct cmd cmds;
 
 int cmds_init()
 {
-   char buf[EOF_L_GUI+1];
-
    cmds.name = NULL;
    cmds.next = NULL;
    cmds.handle = NULL;
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
+   if(!cmd_add(UI_QUIT, ui_quit)) return 0; 
 
-
+   return 1;
 }

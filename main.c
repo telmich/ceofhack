@@ -42,6 +42,7 @@ int main()
    char *home, buf[PATH_MAX+1];
 
    if(!signals_init()) return 1;
+   if(!cmds_init()) return 1;
 
    /* get homedir */
    home = getenv("HOME");

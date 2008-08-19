@@ -4,6 +4,8 @@ CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall
 
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=helper_fdonly.c helper_new.c
+CEOFHACK+=cmds_init.c cmd_add.c
+CEOFHACK+=ui_quit.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 
@@ -33,3 +35,4 @@ decrypt: decrypt.c
 decrypt-test:
 	gpg --homedir ~/.ceof/gpg/ --decrypt < ./testcrypt
 
+$(CEOFHACK_O): ceofhack.h

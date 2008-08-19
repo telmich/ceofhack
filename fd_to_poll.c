@@ -28,7 +28,7 @@
 
 int fd_to_poll(int fd, struct pollfd fds[], int *in_use)
 {
-   if((*in_use + 1) > MAX_INPUT_C) return 0;
+   if((*in_use + 1) > MAX_COMM) return 0;
 
    fds[*in_use].fd = fd;
    fds[*in_use].events = POLLIN | POLLPRI;

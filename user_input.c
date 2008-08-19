@@ -29,6 +29,7 @@
 int user_input(int fd[])
 {
    ssize_t len;
+   struct cmd *cp;
 
    char buf[EOF_L_GUI+1];
 
