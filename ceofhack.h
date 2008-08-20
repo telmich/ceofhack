@@ -71,7 +71,7 @@ extern int chp_cnt;
 
 /* Functions */
 int forkexecpipe(char *path, struct helper *hp);
-int fd_to_poll(int fd, struct pollfd fds[], int *in_use);
+void fd_to_poll();
 int signals_init();
 void signal_child(int sig);
 

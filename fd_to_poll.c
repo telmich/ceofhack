@@ -26,14 +26,21 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-int fd_to_poll(int fd, struct pollfd fds[], int *in_use)
+void fd_to_poll()
 {
-   if((*in_use + 1) > MAX_COMM) return 0;
+   int (*fp)(int);
+   int i;
 
-   fds[*in_use].fd = fd;
-   fds[*in_use].events = POLLIN | POLLPRI;
-
-   (*in_use)++;
+   for(i=0; i < MAX_COMM; i++) {
+      if(chp[i].handle) {
+         pfd[i].fd = chp[i].fds[0];
+         pfd[i].events = POLLIN | POLLPRI;
+      } else {
+         pfd[i].fd = -1;
+         pfd[i].events = 0;
+      }
+      pfd[i].revents = 0;
+   }
 
    return 1;
 }

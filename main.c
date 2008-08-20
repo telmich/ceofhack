@@ -60,19 +60,18 @@ int main()
 
    if(!forkexecpipe(buf, &ipv4l)) return 1;
 
-   //if(!fd_to_poll(ipv4l.fds[0], fds, &comm_cnt)) return 2;
+   /* add stdin to poll */
+   /* add tcp4 listener to stdin */
+
 
 //   if(!init_gui()) return -1;
 
    while(0) {
-      /* reinit fds, may habe changed 
-      for(i=0; i < HP_LAST; i++) {
-         fds[i].fd       =  opts->hp[i].fds[0];
-         fds[i].events   =  POLLIN;
-      } */
+      /* reinit, poll array may have changed */
+      fd_to_poll();
 
-  //    cnt = poll(fds, HP_LAST, -1);
-  //    if(cnt == -1 && errno != EINTR) return 0;
+      cnt = poll(fds, HP_LAST, -1);
+      if(cnt == -1 && errno != EINTR) return 1;
       
       /* check client interaction 
       for(i=0; i < HP_LAST; i++) {
