@@ -51,17 +51,14 @@ int main()
       return 1;
    }
 
-//   if(!helper_fdonly(STDIN_FILENO)) return 1;
+   /* add stdin to poll */
+   if(!helper_fdonly(STDIN_FILENO)) return 1;
 
-   /* create tcp4 listener */
+   /* add tcp4 listener to poll */
    strncpy(buf, home, PATH_MAX);
    strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
-
-   if(!forkexecpipe(buf, &ipv4l)) return 1;
-
-   /* add stdin to poll */
-   /* add tcp4 listener to stdin */
+   if(!helper_exec(buf)) return 1;
 
 
 //   if(!init_gui()) return -1;
