@@ -52,13 +52,13 @@ int main()
    }
 
    /* add stdin to poll */
-   if(!helper_fdonly(STDIN_FILENO)) return 1;
+   if(!helper_fdonly(STDIN_FILENO, user_input, NULL)) return 1;
 
    /* add tcp4 listener to poll */
    strncpy(buf, home, PATH_MAX);
    strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
-   if(!helper_exec(buf)) return 1;
+   if(!helper_exec(buf, NULL, NULL)) return 1;
 
 
 //   if(!init_gui()) return -1;
@@ -67,7 +67,7 @@ int main()
       /* reinit, poll array may have changed */
       fd_to_poll();
 
-      cnt = poll(fds, HP_LAST, -1);
+      cnt = poll(pfd, HP_LAST, -1);
       if(cnt == -1 && errno != EINTR) return 1;
       
       /* check client interaction 

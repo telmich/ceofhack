@@ -3,9 +3,9 @@ LDFLAGS= $(shell gpgme-config --libs)
 CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall 
 
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c signals_init.c signal_child.c
-CEOFHACK+=helper_fdonly.c helper_new.c
+CEOFHACK+=helper_fdonly.c helper_new.c helper_exec.c
 CEOFHACK+=cmds_init.c cmd_add.c
-CEOFHACK+=ui_quit.c
+CEOFHACK+=user_input.c ui_quit.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 

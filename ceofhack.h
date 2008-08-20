@@ -77,10 +77,13 @@ void signal_child(int sig);
 
 int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
+int helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 
 int cmds_init();
 int cmd_add(char *name, int (*handle)(char *));
 int ui_quit(char *args);
+
+int user_input(int fd[]);
 
 
 #endif

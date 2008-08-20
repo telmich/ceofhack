@@ -22,7 +22,8 @@
  *
  */
 
-#include <unistd.h>
+#include <unistd.h>     /* read */
+#include <stdio.h>      /* perror         */
 
 #include "ceofhack.h"  /* functions etc. */
 
@@ -45,5 +46,5 @@ int user_input(int fd[])
    /* /msg command      */
    /* other: errors     */
 
-
+   return 1;
 }
