@@ -39,6 +39,8 @@ int user_input(int fd[])
       return 0;
    }
 
+   printf("UI!\n");
+
    /* compare strings with commands */
    /* /peer commands    */
    

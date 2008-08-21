@@ -64,20 +64,16 @@ int main()
 //   if(!init_gui()) return -1;
 
    while(1) {
+      printf("polling\n");
       /* reinit, poll array may have changed */
       fd_to_poll();
 
       cnt = poll(pfd, HP_LAST, -1);
-      if(cnt == -1 && errno != EINTR) return 1;
-      
-      /* check client interaction 
-      for(i=0; i < HP_LAST; i++) {
-         if(fds[i].revents & POLLIN) {
-            opts->hp[i].handle(opts->hp[i].fds);
-            --cnt;
-         }
-         if(!cnt) break;
-      } */
+      if(cnt == -1) {
+         if(errno != EINTR) return 1;
+      } else {
+         check_input();
+      }
    }
 
    return 0;

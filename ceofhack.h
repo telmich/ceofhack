@@ -85,5 +85,7 @@ int ui_quit(char *args);
 
 int user_input(int fd[]);
 
+void check_input();
+
 
 #endif
