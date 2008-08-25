@@ -81,6 +81,8 @@ int helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 
 int cmds_init();
 int cmd_add(char *name, int (*handle)(char *));
+int cmd_check(char *string);
+
 int ui_quit(char *args);
 
 int user_input(int fd[]);

@@ -18,41 +18,27 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Check for a valid user command or return
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
+#include <stdio.h>      /* NULL */
+#include <string.h>     /* str* */
 
-#include "ceofhack.h"  /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
-int user_input(int fd[])
+int cmd_check(char *string)
 {
-   ssize_t len;
+   struct cmd *cp = &cmds;
+   size_t len;
 
-   char buf[EOF_L_GUI+1];
-
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
+   /* skip the first (entry block) */
+   for(cp = cp->next; cp != NULL; cp = cp->next) {
+      len = strlen(cp->name);
+      if(!strncmp(string, cp->name, len)) {
+         return cp->handle(string + len);
+      }
    }
-   printf("UI: %d\n", len);
-   buf[len] = 0;
-
-   /* compare strings with commands */
-   /* /peer commands    */
-   
-   /* /key commands     */
-   /* /msg command      */
-   /* /quit             */
-   if(!strncmp(UI_QUIT, buf, strlen(UI_QUIT))) {
-      printf("Exiting\n");
-   }
-   if(!cmd_check(buf)) {
-//      msg_send(buf); /* no command? send as text */
-   }
-   /* other: errors     */
 
    return 1;
 }
