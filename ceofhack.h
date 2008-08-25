@@ -32,6 +32,7 @@
 
 /* commands */
 #define UI_QUIT      "/quit"
+#define UI_PEER_ADD  "/peer add"
 
 /* user commands */
 
@@ -66,6 +67,7 @@ struct helper {                  /* for the subprojects           */
 extern struct helper chp[MAX_COMM];
 extern struct pollfd pfd[MAX_COMM];
 extern struct cmd    cmds;
+extern struct peers  plist;
 extern int chp_cnt;
 
 
@@ -88,6 +90,8 @@ int ui_quit(char *args);
 int user_input(int fd[]);
 
 void check_input();
+
+int peers_init();
 
 
 #endif

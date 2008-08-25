@@ -7,6 +7,7 @@ CEOFHACK+=helper_fdonly.c helper_new.c helper_exec.c
 CEOFHACK+=cmds_init.c cmd_add.c cmd_check.c
 CEOFHACK+=user_input.c ui_quit.c
 CEOFHACK+=check_input.c
+CEOFHACK+=peers_init.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 

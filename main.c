@@ -43,6 +43,7 @@ int main()
 
    if(!signals_init()) return 1;
    if(!cmds_init()) return 1;
+   if(!peers_init()) return 1;
 
    /* get homedir */
    home = getenv("HOME");
