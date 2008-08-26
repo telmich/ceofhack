@@ -92,6 +92,7 @@ int user_input(int fd[]);
 void check_input();
 
 int peers_init();
+int peer_add(char *);
 
 
 #endif
