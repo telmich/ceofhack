@@ -28,7 +28,6 @@
 
 void fd_to_poll()
 {
-   int (*fp)(int);
    int i;
 
    for(i=0; i < MAX_COMM; i++) {
@@ -41,6 +40,4 @@ void fd_to_poll()
       }
       pfd[i].revents = 0;
    }
-
-   return 1;
 }

@@ -42,8 +42,12 @@ int config_init()
    }
 
    strncpy(opt.home, p, PATH_MAX);
-   strncpy(opt.gpghome, "/usr/bin/gpg", PATH_MAX);
+   strncpy(opt.ceofhome, opt.home, PATH_MAX);
+   strncat(opt.ceofhome, "/.ceof", PATH_MAX - strlen(opt.ceofhome));
 
+   strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
+   strncpy(opt.gpghome, opt.ceofhome, PATH_MAX);
+   strncat(opt.gpghome, "/gpg", PATH_MAX - strlen(opt.gpghome));
 
    return 1;
 }

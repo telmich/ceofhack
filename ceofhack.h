@@ -59,9 +59,10 @@ struct cmd {
 /* further structs with external dependencies */
 #include <limits.h>              /* PATH_MAX                      */
 struct options {
-   char gpg[PATH_MAX+1];
    char home[PATH_MAX+1];
+   char ceofhome[PATH_MAX+1];
    char gpghome[PATH_MAX+1];
+   char gpg[PATH_MAX+1];
 };
 
 #include <sys/types.h>           /* FIXME: posix correct header?) */
