@@ -27,7 +27,9 @@
 #include <locale.h>     /* locales           */
 #include "ceofhack.h"   /* functions etc.    */
 
-gpgme_ctx_t gpg_context;
+gpgme_ctx_t    gpg_context;
+gpgme_data_t   gpg_encrypt;
+gpgme_data_t   gpg_decrypt;
 
 int gpg_init()
 {
@@ -56,6 +58,10 @@ int gpg_init()
                                     GPGME_PROTOCOL_OpenPGP,
                                     opt.gpg, opt.gpghome);
    if(gerr != GPG_ERR_NO_ERROR) return 0;
+   gpgme_set_armor(gpg_context, 0);
+
+//   write passwd retrieval!
+//   gpgme_set_passphrase_cb(gpg_context, gpg_getpwd, NULL);
 
    return 1;
 }
