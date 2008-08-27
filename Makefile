@@ -8,6 +8,7 @@ CEOFHACK+=cmds_init.c cmd_add.c cmd_check.c
 CEOFHACK+=user_input.c ui_quit.c ui_help.c
 CEOFHACK+=check_input.c
 CEOFHACK+=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
+CEOFHACK+=gpg_init.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 

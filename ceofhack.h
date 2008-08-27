@@ -101,4 +101,6 @@ int peer_list(char *);
 int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 
+int gpg_init();
+
 #endif
