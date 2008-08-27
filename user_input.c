@@ -39,18 +39,13 @@ int user_input(int fd[])
       perror("read/ui");
       return 0;
    }
-   printf("UI: %d\n", len);
-   buf[len] = 0;
-
-   /* compare strings with commands */
-   /* /peer commands    */
-   
-   /* /key commands     */
-   /* /msg command      */
-   /* /quit             */
-   if(!strncmp(UI_QUIT, buf, strlen(UI_QUIT))) {
-      printf("Exiting\n");
+   //printf("UI: %d\n", len);
+   if(buf[len-1] == '\n') {
+      buf[len-1] = 0;
+   } else {
+      buf[len] = 0;
    }
+
    cp = cmd_check(buf);
 
    if(cp) {

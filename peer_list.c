@@ -18,25 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init commands and handler
+ * list registered peers
  *
  */
 
-#include <stdlib.h>     /* NULL */
+#include <string.h>     /* memset, str*   */
+#include <stdlib.h>     /* calloc         */
+#include <stdio.h>     /* printf         */
+#include "ceofhack.h"  /* functions etc.  */
 
-#include "ceofhack.h"   /* functions etc. */
-
-struct cmd cmds;
-
-int cmds_init()
+int peer_list(char *str)
 {
-   cmds.name   = NULL;
-   cmds.next   = NULL;
-   cmds.handle = NULL;
+   struct peers *p;
 
-   if(!cmd_add(UI_QUIT, ui_quit)) return 0; 
-   if(!cmd_add(UI_PEER_ADD, peer_add)) return 0; 
-   if(!cmd_add(UI_PEER_LIST, peer_list)) return 0; 
+   for(p = plist.next; p != NULL; p = p->next) {
+      printf("Peer %s: %s\n", p->peer.name, p->peer.addr);
+   }
 
    return 1;
 }

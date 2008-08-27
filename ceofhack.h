@@ -33,6 +33,7 @@
 /* commands */
 #define UI_QUIT      "/quit"
 #define UI_PEER_ADD  "/peer add"
+#define UI_PEER_LIST "/peer list"
 
 /* user commands */
 
@@ -93,6 +94,7 @@ void check_input();
 
 int peers_init();
 int peer_add(char *);
+int peer_list(char *);
 
 
 #endif

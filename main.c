@@ -65,7 +65,7 @@ int main()
 //   if(!init_gui()) return -1;
 
    while(1) {
-      printf("polling\n");
+//      printf("polling\n");
       /* reinit, poll array may have changed */
       fd_to_poll();
 
