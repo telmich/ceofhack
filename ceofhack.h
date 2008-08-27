@@ -57,6 +57,11 @@ struct cmd {
 };
 
 /* further structs with external dependencies */
+struct options {
+   char gpg[PATH_MAX+1];
+   char gpghome[PATH_MAX+1];
+};
+
 #include <sys/types.h>           /* FIXME: posix correct header?) */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
@@ -67,11 +72,12 @@ struct helper {                  /* for the subprojects           */
 };
 
 /* Global variables  */
-extern struct helper chp[MAX_COMM];
-extern struct pollfd pfd[MAX_COMM];
-extern struct cmd    cmds;
-extern struct peers  plist;
-extern int chp_cnt;
+extern struct helper    chp[MAX_COMM];
+extern struct pollfd    pfd[MAX_COMM];
+extern struct cmd       cmds;
+extern struct peers     plist;
+extern struct options   opt;
+extern int              chp_cnt;
 
 
 /* Functions */

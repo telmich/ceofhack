@@ -40,17 +40,14 @@ int main()
    int cnt;
    char *home, buf[PATH_MAX+1];
 
-   if(!gpg_init())      return 1;
-   if(!signals_init())  return 1;
-   if(!cmds_init())     return 1;
-   if(!peers_init())    return 1;
+   if(!config_init())   return 1;   /* read config          */
+   if(!gpg_init())      return 1;   /* init gpgme           */
+   if(!signals_init())  return 1;   /* catch signals        */
+   if(!cmds_init())     return 1;   /* enable commands      */
+   if(!peers_init())    return 1;   /* empty peers          */
 
-   /* get homedir */
-   home = getenv("HOME");
-   if(!home) {
-      fprintf(stderr, "You don't have a home, poor guy!\n");
-      return 1;
-   }
+//   if(!tp_init())       return 1;   /* transport protocols  */
+//   if(!ui_init())       return 1;   /* enable user input    */
 
    /* add stdin to poll */
    if(!helper_fdonly(STDIN_FILENO, user_input, NULL)) return 1;
@@ -61,11 +58,7 @@ int main()
    printf("using %s\n",buf);
    if(!helper_exec(buf, NULL, NULL)) return 1;
 
-
-//   if(!init_gui()) return -1;
-
    while(1) {
-//      printf("polling\n");
       /* reinit, poll array may have changed */
       fd_to_poll();
 
