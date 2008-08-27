@@ -31,7 +31,7 @@ gpgme_ctx_t    gpg_context;
 gpgme_data_t   gpg_encrypt;
 gpgme_data_t   gpg_decrypt;
 
-int gpg_init()
+int cgpg_init()
 {
    char *p;
    gpgme_error_t gerr;

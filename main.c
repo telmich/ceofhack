@@ -41,7 +41,7 @@ int main()
    char *home, buf[PATH_MAX+1];
 
    if(!config_init())   return 1;   /* read config          */
-   if(!gpg_init())      return 1;   /* init gpgme           */
+   if(!cgpg_init())     return 1;   /* init gpgme           */
    if(!signals_init())  return 1;   /* catch signals        */
    if(!cmds_init())     return 1;   /* enable commands      */
    if(!peers_init())    return 1;   /* empty peers          */
