@@ -39,7 +39,7 @@ int user_input(int fd[])
       perror("read/ui");
       return 0;
    }
-   //printf("UI: %d\n", len);
+   /* strip \n, if present */
    if(buf[len-1] == '\n') {
       buf[len-1] = 0;
    } else {
@@ -49,7 +49,7 @@ int user_input(int fd[])
    cp = cmd_check(buf);
 
    if(cp) {
-      if(!cp->handle(buf + strlen(cp->name))) {
+      if(!cp->handle(buf + strlen(cp->name) + 1)) {
          printf("%s failed!\n", cp->name);
       }
    } else {

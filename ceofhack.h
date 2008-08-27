@@ -34,6 +34,7 @@
 #define UI_QUIT      "/quit"
 #define UI_PEER_ADD  "/peer add"
 #define UI_PEER_LIST "/peer list"
+#define UI_PEER_SEND "/peer send"
 #define UI_HELP      "/help"
 
 /* user commands */
@@ -97,6 +98,7 @@ void check_input();
 int peers_init();
 int peer_add(char *);
 int peer_list(char *);
+int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 
 #endif
