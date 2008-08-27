@@ -27,18 +27,20 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_check(char *string)
+//int cmd_check(char *string)       /* -1, 0, >0 version */
+//int (*cmd_check(char *string))(char *) /* returns handle */
+struct cmd *cmd_check(char *string) /* return handle + param */
 {
    struct cmd *cp = &cmds;
-   size_t len;
+   int tmp;
 
    /* skip the first (entry block) */
    for(cp = cp->next; cp != NULL; cp = cp->next) {
-      len = strlen(cp->name);
-      if(!strncmp(string, cp->name, len)) {
-         return cp->handle(string + len);
+      tmp = strlen(cp->name);
+      if(!strncmp(string, cp->name, tmp)) {
+         return cp;
       }
    }
 
-   return 1;
+   return NULL;
 }

@@ -31,6 +31,7 @@ int peer_add(char *str)
 {
    struct peers *p;
    char *n;
+   int len;
 
    p = calloc(1, sizeof(struct peers));
    if(!p) return 0;
@@ -40,9 +41,16 @@ int peer_add(char *str)
    str++; /* skip whitespace */
    n = str;
    n = strchr(n, ' ');
-   if(!n) return 0;
+   if(!n) { 
+      printf("Missing parameter!\n");
+      return 0;
+   }
 
    strncpy(p->peer.name, str, EOF_L_NICKNAME);
+   len = (n - str) <= EOF_L_NICKNAME ? (n - str) : EOF_L_NICKNAME;
+   p->peer.name[len] = 0;
+
+   n++; /* skip whitespace */
    strncpy(p->peer.addr, n, EOF_L_ADDRESS );
 
    p->next = plist.next;

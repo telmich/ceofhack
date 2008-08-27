@@ -24,12 +24,14 @@
 
 #include <unistd.h>     /* read */
 #include <stdio.h>      /* perror         */
+#include <string.h>     /* str*           */
 
 #include "ceofhack.h"  /* functions etc. */
 
 int user_input(int fd[])
 {
    ssize_t len;
+   struct cmd *cp;
 
    char buf[EOF_L_GUI+1];
 
@@ -49,10 +51,16 @@ int user_input(int fd[])
    if(!strncmp(UI_QUIT, buf, strlen(UI_QUIT))) {
       printf("Exiting\n");
    }
-   if(!cmd_check(buf)) {
+   cp = cmd_check(buf);
+
+   if(cp) {
+      if(!cp->handle(buf + strlen(cp->name))) {
+         printf("%s failed!\n", cp->name);
+      }
+   } else {
+      printf("Sending text %s\n", buf);
 //      msg_send(buf); /* no command? send as text */
    }
-   /* other: errors     */
 
    return 1;
 }
