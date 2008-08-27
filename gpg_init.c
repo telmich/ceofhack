@@ -27,9 +27,12 @@
 #include <locale.h>     /* locales           */
 #include "ceofhack.h"   /* functions etc.    */
 
+gpgme_ctx_t gpg_context;
+
 int gpg_init()
 {
    char *p;
+   gpgme_error_t gerr;
    
    setlocale (LC_ALL, "");
    p = (char *) gpgme_check_version(NULL);
@@ -39,6 +42,20 @@ int gpg_init()
 #endif
 
    printf("gpg: Using version %s\n", p);
+
+   gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
+   if(gerr != GPG_ERR_NO_ERROR) {
+      printf("Your gpgme library seems not to support OpenPGP!\n");
+      return 0;
+   }
+
+   gerr = gpgme_new(&gpg_context);
+   if(gerr != GPG_ERR_NO_ERROR) return 0;
+
+   gerr = gpgme_ctx_set_engine_info(gpg_context,
+                                    GPGME_PROTOCOL_OpenPGP,
+                                    opt.gpg, opt.gpghome);
+   if(gerr != GPG_ERR_NO_ERROR) return 0;
 
    return 1;
 }
