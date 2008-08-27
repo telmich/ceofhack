@@ -37,8 +37,7 @@ int chp_cnt = 0;
 
 int main()
 {
-   int cnt, i;
-   struct helper ipv4l, user;
+   int cnt;
    char *home, buf[PATH_MAX+1];
 
    if(!signals_init()) return 1;

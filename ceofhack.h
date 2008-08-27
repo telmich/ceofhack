@@ -34,6 +34,7 @@
 #define UI_QUIT      "/quit"
 #define UI_PEER_ADD  "/peer add"
 #define UI_PEER_LIST "/peer list"
+#define UI_HELP      "/help"
 
 /* user commands */
 
@@ -86,7 +87,8 @@ int cmds_init();
 int cmd_add(char *name, int (*handle)(char *));
 struct cmd *cmd_check(char *string);
 
-int ui_quit(char *args);
+int ui_help(char *);
+int ui_quit(char *);
 
 int user_input(int fd[]);
 
@@ -95,6 +97,5 @@ void check_input();
 int peers_init();
 int peer_add(char *);
 int peer_list(char *);
-
 
 #endif

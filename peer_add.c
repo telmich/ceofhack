@@ -42,7 +42,7 @@ int peer_add(char *str)
    n = str;
    n = strchr(n, ' ');
    if(!n) { 
-      printf("Missing parameter!\n");
+      printf("Usage: /peer add <name> <addr>\n");
       return 0;
    }
 
@@ -56,7 +56,7 @@ int peer_add(char *str)
    p->next = plist.next;
    plist.next = p;
 
-   printf("added %s, %s\n",p->peer.name, p->peer.addr);
+   printf("Peer %s added with address %s.\n",p->peer.name, p->peer.addr);
 
    return 1;
 }

@@ -18,28 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init commands and handler
+ * /help
  *
  */
 
-#include <stdlib.h>     /* NULL */
+#include <stdio.h>     /* printf         */
+#include "ceofhack.h"  /* functions etc.  */
 
-#include "ceofhack.h"   /* functions etc. */
-
-struct cmd cmds;
-
-int cmds_init()
+int ui_help(char *str)
 {
-   cmds.name   = NULL;
-   cmds.next   = NULL;
-   cmds.handle = NULL;
-
-   if(!cmd_add(UI_HELP, ui_help)) return 0; 
-   
-   if(!cmd_add(UI_PEER_ADD, peer_add)) return 0; 
-   if(!cmd_add(UI_PEER_LIST, peer_list)) return 0; 
-
-   if(!cmd_add(UI_QUIT, ui_quit)) return 0; 
+   printf("ceofhack:\n\n"
+          "Supported commands:\n\n"
+          "\t/help - this help\n"
+          "\t/peer add <name> <addr> - add a peer\n"
+          "\t/peer list - list available peers\n"
+          "\t/quit - quit ceofhack\n"
+          );
 
    return 1;
 }
