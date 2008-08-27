@@ -51,7 +51,10 @@ int peer_send(char *str)
    p = peer_findbyname(nick);
    if(!p) {
       printf("Unknown peer, %s!\n", nick);
+      return 0;
    }
+
+   printf("Sending %s to %s\n", msg, nick);
 
    return 1;
 }
