@@ -24,6 +24,7 @@
 
 #include <string.h>     /* memset, str*   */
 #include <stdio.h>      /* printf         */
+#include <stdlib.h>     /* getenv         */
 #include "ceofhack.h"   /* functions etc.  */
 
 struct options opt;
@@ -44,5 +45,5 @@ int config_init()
    strncpy(opt.gpghome, "/usr/bin/gpg", PATH_MAX);
 
 
-   return NULL;
+   return 1;
 }

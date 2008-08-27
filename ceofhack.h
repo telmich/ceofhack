@@ -57,8 +57,10 @@ struct cmd {
 };
 
 /* further structs with external dependencies */
+#include <limits.h>              /* PATH_MAX                      */
 struct options {
    char gpg[PATH_MAX+1];
+   char home[PATH_MAX+1];
    char gpghome[PATH_MAX+1];
 };
 
@@ -108,5 +110,7 @@ int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 
 int gpg_init();
+
+int config_init();
 
 #endif
