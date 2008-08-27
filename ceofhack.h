@@ -97,5 +97,6 @@ void check_input();
 int peers_init();
 int peer_add(char *);
 int peer_list(char *);
+struct peer *peer_findbyname(char *name);
 
 #endif

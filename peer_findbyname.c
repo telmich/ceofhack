@@ -18,23 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * /help
+ * Find peer by name
  *
  */
 
-#include <stdio.h>     /* printf         */
+#include <string.h>     /* memset, str*   */
 #include "ceofhack.h"  /* functions etc.  */
 
-int ui_help(char *str)
+struct peer *peer_findbyname(char *name)
 {
-   printf("ceofhack:\n\n"
-          "Supported commands:\n\n"
-          "\t/help - this help\n"
-          "\t/peer add <name> <addr> - add a peer\n"
-          "\t/peer list - list available peers\n"
-          "\t/peer send <name> <msg> - send message to peer\n"
-          "\t/quit - quit ceofhack\n"
-          );
+   struct peers *p;
 
-   return 1;
+   for(p = plist.next; p != NULL; p = p->next) {
+      if(!strncmp(p->peer.name, name, EOF_L_NICKNAME+1)) {
+         return &(p->peer);
+      }
+   }
+
+   return NULL;
 }
