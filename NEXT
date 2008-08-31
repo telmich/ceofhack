@@ -1,0 +1,10 @@
+- move transport protocols out of main!
+- send message
+   - encrypt message
+      - retrieve keyid for nick
+
+- create script to
+   - generate public & private keys for
+      - telmich
+      - !eof
+      - geof
