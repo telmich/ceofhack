@@ -54,10 +54,12 @@ int peer_send(char *str)
       return 0;
    }
 
+   printf("Encrypting message...\n");
    /* encrypt msg for $nick */
    //n = cgpg_encrypt(nick, msg);
-
+   
    printf("Sending %s to %s\n", msg, nick);
+   //return tp_send(nick, n);
 
    return 1;
 }
