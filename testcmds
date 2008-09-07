@@ -1,0 +1,3 @@
+/peer add telmich tcp://127.0.0.1
+/peer list
+/peer send telmich hallo, wie geht es?

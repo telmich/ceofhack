@@ -18,44 +18,31 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Init commands and handler
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <stdlib.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int user_input(int fd[])
+int cmd_add(char *name, int (*handle)(char *))
 {
-   ssize_t len;
-   struct cmd *cp;
+   struct cmd *new;
 
-   char buf[EOF_L_GUI+1];
+   new = malloc(sizeof(struct cmd));
+   if(!new) return 0;
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
+   new->name   = name;
+   new->handle = handle;
+   new->next   = cmds.next;
 
-   cp = cmd_check(buf);
+   cmds.next   = new;
 
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
-
+   //for(cur = cmds; cur->next != NULL; cur = cur->next) ;
+   //cur->next = new;
+   //cmds_last->next = new;
+   //cmds_last = new;
+   
    return 1;
 }

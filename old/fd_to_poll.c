@@ -18,44 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Add fd securely to poll list
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <poll.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int user_input(int fd[])
+int fd_to_poll(int fd, struct pollfd fds[], int *in_use)
 {
-   ssize_t len;
-   struct cmd *cp;
+   if((*in_use + 1) > MAX_COMM) return 0;
 
-   char buf[EOF_L_GUI+1];
+   fds[*in_use].fd = fd;
+   fds[*in_use].events = POLLIN | POLLPRI;
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
+   (*in_use)++;
 
    return 1;
 }

@@ -18,44 +18,25 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Helper that does not need to be executed, but has on open
+ * fd already.
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <signal.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int user_input(int fd[])
+int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
 {
-   ssize_t len;
-   struct cmd *cp;
+   int num = helper_new();
 
-   char buf[EOF_L_GUI+1];
+   if(num == -1) return 0;
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
+   chp[num].pid    = 0;
+   chp[num].fds[0] = fd;
+   chp[num].handle = handle;
+   chp[num].exit   = exit;
 
    return 1;
 }

@@ -18,44 +18,48 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Send message to a peer
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <string.h>     /* memset, str*   */
+#include <stdio.h>     /* printf         */
+#include "ceofhack.h"  /* functions etc.  */
 
-#include "ceofhack.h"  /* functions etc. */
-
-int user_input(int fd[])
+int peer_send(char *str)
 {
-   ssize_t len;
-   struct cmd *cp;
+   struct peer *p;
+   char nick[EOF_L_NICKNAME+1];
+   char msg[EOF_L_MESSAGE+1];
+   char *n;
+   size_t len;
 
-   char buf[EOF_L_GUI+1];
-
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
+   n = strchr(str, ' ');
+   if(!n) {
+      printf("Usage: /peer send <name> <msg>\n");
       return 0;
    }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
+
+   strncpy(nick, str, EOF_L_NICKNAME);
+   len = (n - str) <= EOF_L_NICKNAME ? (n - str) : EOF_L_NICKNAME;
+   nick[len] = 0;
+
+   n++; /* skip whitespace */
+   strncpy(msg, n, EOF_L_MESSAGE);
+   msg[EOF_L_MESSAGE] = 0;
+
+   p = peer_findbyname(nick);
+   if(!p) {
+      printf("Unknown peer, %s!\n", nick);
+      return 0;
    }
 
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
+   printf("Encrypting message...\n");
+   /* encrypt msg for $nick */
+   //n = cgpg_encrypt(nick, msg);
+   
+   printf("Sending %s to %s\n", msg, nick);
+   //return tp_send(nick, n);
 
    return 1;
 }

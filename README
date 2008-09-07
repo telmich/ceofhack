@@ -15,3 +15,5 @@ Bugs:
 
    Your port is currently ignored.
    You cannot connect to somebody behind NAT.
+   You need /usr/bin/gpg.
+   You need $HOME.

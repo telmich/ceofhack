@@ -17,25 +17,25 @@
 # You should have received a copy of the GNU General Public License
 # along with ceofhack. If not, see <http://www.gnu.org/licenses/>.
 #
+# Implement a tcp4 listener
+#
 
 #
-# Standard variables (stolen from cconf)
+# return codes:
+# 1: wrong number of arguments (must be one)
+# 2: unsupported protocol
 #
-__pwd="$(pwd -P)"
-__mydir="${0%/*}"; __abs_mydir="$(cd "$__mydir" && pwd -P)"
-__myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
+if [ "$#" -ne 1 ]; then
+   exit 1
+fi
 
-# create directories
-mkdir -p ~/.ceof/transport-protocols/available
-mkdir -p ~/.ceof/transport-protocols/enabled/tcp4
+fulladdr="$1"
+# address without protocol
+addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print $2 }')"
+port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
 
-# copy scripts
-cp -r $__abs_mydir/tcp4-via-netcat \
-      ~/.ceof/transport-protocols/available/tcp4-via-netcat
+# debug on stderr
+echo Connecting to $fulladdr 1>&2
 
-# link them
-ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/get \
-       ~/.ceof/transport-protocols/enabled/tcp4/get
-ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
-       ~/.ceof/transport-protocols/enabled/tcp4/send
+nc "$addr" "$port"

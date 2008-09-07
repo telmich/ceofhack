@@ -18,44 +18,36 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Initialise configuration system
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <string.h>     /* memset, str*   */
+#include <stdio.h>      /* printf         */
+#include <stdlib.h>     /* getenv         */
+#include "ceofhack.h"   /* functions etc.  */
 
-#include "ceofhack.h"  /* functions etc. */
+struct options opt;
 
-int user_input(int fd[])
+int config_init()
 {
-   ssize_t len;
-   struct cmd *cp;
+   /* FIXME: should read env and so on later */
 
-   char buf[EOF_L_GUI+1];
+   char *p; 
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
+   p = getenv("HOME");
+   if(!p) {
+      fprintf(stderr, "You don't have a home, poor $something!\n");
+      return 1;
    }
 
-   cp = cmd_check(buf);
+   strncpy(opt.home, p, PATH_MAX);
+   strncpy(opt.ceofhome, opt.home, PATH_MAX);
+   strncat(opt.ceofhome, "/.ceof", PATH_MAX - strlen(opt.ceofhome));
 
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
+   strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
+   strncpy(opt.gpghome, opt.ceofhome, PATH_MAX);
+   strncat(opt.gpghome, "/gpg", PATH_MAX - strlen(opt.gpghome));
 
    return 1;
 }

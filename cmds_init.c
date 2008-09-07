@@ -18,44 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Init commands and handler
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <stdlib.h>     /* NULL */
 
-#include "ceofhack.h"  /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
-int user_input(int fd[])
+struct cmd cmds;
+
+int cmds_init()
 {
-   ssize_t len;
-   struct cmd *cp;
+   cmds.name   = NULL;
+   cmds.next   = NULL;
+   cmds.handle = NULL;
 
-   char buf[EOF_L_GUI+1];
+   if(!cmd_add(UI_HELP, ui_help)) return 0; 
+   
+   if(!cmd_add(UI_PEER_ADD,  peer_add))  return 0; 
+   if(!cmd_add(UI_PEER_LIST, peer_list)) return 0; 
+   if(!cmd_add(UI_PEER_SEND, peer_send)) return 0; 
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
+   if(!cmd_add(UI_QUIT, ui_quit)) return 0; 
 
    return 1;
 }

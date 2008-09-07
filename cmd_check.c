@@ -18,44 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Check for a valid user command or return
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <stdio.h>      /* NULL */
+#include <string.h>     /* str* */
 
-#include "ceofhack.h"  /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
-int user_input(int fd[])
+//int cmd_check(char *string)       /* -1, 0, >0 version */
+//int (*cmd_check(char *string))(char *) /* returns handle */
+struct cmd *cmd_check(char *string) /* return handle + param */
 {
-   ssize_t len;
-   struct cmd *cp;
+   struct cmd *cp = &cmds;
+   int tmp;
 
-   char buf[EOF_L_GUI+1];
-
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
+   /* skip the first (entry block) */
+   for(cp = cp->next; cp != NULL; cp = cp->next) {
+      tmp = strlen(cp->name);
+      if(!strncmp(string, cp->name, tmp)) {
+         return cp;
       }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
    }
 
-   return 1;
+   return NULL;
 }

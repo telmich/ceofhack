@@ -18,43 +18,21 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * list registered peers
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <string.h>     /* memset, str*   */
+#include <stdlib.h>     /* calloc         */
+#include <stdio.h>     /* printf         */
+#include "ceofhack.h"  /* functions etc.  */
 
-#include "ceofhack.h"  /* functions etc. */
-
-int user_input(int fd[])
+int peer_list(char *str)
 {
-   ssize_t len;
-   struct cmd *cp;
+   struct peers *p;
 
-   char buf[EOF_L_GUI+1];
-
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
+   for(p = plist.next; p != NULL; p = p->next) {
+      printf("Peer %s: %s\n", p->peer.name, p->peer.addr);
    }
 
    return 1;

@@ -18,44 +18,21 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Handle SIGCHILD
  *
  */
 
-#include <unistd.h>     /* read */
-#include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
+#include <signal.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
-int user_input(int fd[])
+void signal_child(int sig)
 {
-   ssize_t len;
-   struct cmd *cp;
 
-   char buf[EOF_L_GUI+1];
+   /* 
+    * go through known children list
+    * and restart where necessary
+    */
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
 
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
-      }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
-   }
-
-   return 1;
 }

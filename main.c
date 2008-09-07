@@ -28,52 +28,47 @@
 #include <string.h>     /* str()*         */
 #include <errno.h>      /* guess what     */
 #include <stdlib.h>     /* getenv         */
+#include <unistd.h>     /* STDIN_FILENO   */
 #include "ceofhack.h"  /* functions etc. */
+
+struct helper chp[MAX_COMM];
+struct pollfd pfd[MAX_COMM];
+int chp_cnt = 0;
 
 int main()
 {
-   struct pollfd fds[HP_LAST];
-   int cnt, i;
-   struct helper ipv4l, user;
+   int cnt;
    char *home, buf[PATH_MAX+1];
 
-   /* get homedir */
-   home = getenv("HOME");
-   if(!home) {
-      fprintf(stderr, "you don't have a home, poor guy!\n");
-      return 1;
-   }
+   if(!config_init())   return 1;   /* read config          */
+   if(!cgpg_init())     return 1;   /* init gpgme           */
+   if(!signals_init())  return 1;   /* catch signals        */
+   if(!cmds_init())     return 1;   /* enable commands      */
+   if(!peers_init())    return 1;   /* empty peers          */
+
+//   if(!tp_init())       return 1;   /* transport protocols  */
+//   if(!ui_init())       return 1;   /* enable user input    */
+
+   /* add stdin to poll */
+   if(!helper_fdonly(STDIN_FILENO, user_input, NULL)) return 1;
+
+   /* add tcp4 listener to poll */
    strncpy(buf, home, PATH_MAX);
-   strncat(buf, "/.ceof/transport-protocols/tcp/get", PATH_MAX - strlen(home));
+   strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(home));
    printf("using %s\n",buf);
+   if(!helper_exec(buf, NULL, NULL)) return 1;
 
-   if(!forkexecpipe(buf, &ipv4l)) return 1;
+   while(1) {
+      /* reinit, poll array may have changed */
+      fd_to_poll();
 
-//   if(!listen_ipv4()) return -1; /* FIXME: post 0.1: replace with general listen */
-
-//   if(!init_gui()) return -1;
-
-
-
-   while(0) {
-      /* reinit fds, may habe changed 
-      for(i=0; i < HP_LAST; i++) {
-         fds[i].fd       =  opts->hp[i].fds[0];
-         fds[i].events   =  POLLIN;
-      } */
-
-      cnt = poll(fds, HP_LAST, -1);
-      if(cnt == -1 && errno != EINTR) return 0;
-      
-      /* check client interaction 
-      for(i=0; i < HP_LAST; i++) {
-         if(fds[i].revents & POLLIN) {
-            opts->hp[i].handle(opts->hp[i].fds);
-            --cnt;
-         }
-         if(!cnt) break;
-      } */
+      cnt = poll(pfd, HP_LAST, -1);
+      if(cnt == -1) {
+         if(errno != EINTR) return 1;
+      } else {
+         check_input();
+      }
    }
 
-   return 1;
+   return 0;
 }

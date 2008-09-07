@@ -18,44 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle user input
+ * Which handler/fd received input? -> Delegate to handler
  *
  */
 
 #include <unistd.h>     /* read */
 #include <stdio.h>      /* perror         */
-#include <string.h>     /* str*           */
 
 #include "ceofhack.h"  /* functions etc. */
 
-int user_input(int fd[])
+void check_input()
 {
-   ssize_t len;
-   struct cmd *cp;
+   int i;
 
-   char buf[EOF_L_GUI+1];
-
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
-      perror("read/ui");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   cp = cmd_check(buf);
-
-   if(cp) {
-      if(!cp->handle(buf + strlen(cp->name) + 1)) {
-         printf("%s failed!\n", cp->name);
+   for(i=0; i < MAX_COMM; i++) {
+      if(pfd[i].revents & (POLLIN | POLLPRI)) {
+         chp[i].handle(chp[i].fds);
       }
-   } else {
-      printf("Sending text %s\n", buf);
-//      msg_send(buf); /* no command? send as text */
    }
-
-   return 1;
 }
