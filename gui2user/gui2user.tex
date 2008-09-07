@@ -7,7 +7,7 @@
 
 \begin{document}
 \title{gui2user}
-\date{2007-11-12 v0.2-train}
+\date{2008-08-17 v0.3-triemli}
 \author{apic, ilo, telmich}
 
 \maketitle
@@ -43,6 +43,11 @@ way the user always has the familar commands available.
 \section{Commands}
 All commands begin with a "`/"' as first character.
 
+%---------------------------------------------------------------------
+\subsection{Command length}
+The shall only accept commands up to a langth of 256 Byte.
+If the user inputs longer commands, they must be truncated
+to 256 Bytes.
 %---------------------------------------------------------------------
 \subsection{Version 0.1 commands}
 Those commands may need to be reworked.
@@ -114,6 +119,9 @@ If the initial address is shorter it is padded with 0-bytes.
 %---------------------------------------------------------------------
 \subsubsection{/peer rename $<$oldname$>$ $<$newname$>$}
 Renames the peer.
+%---------------------------------------------------------------------
+\subsubsection{/peer list}
+List all known peers.
 %---------------------------------------------------------------------
 
 \subsection{Alias}
