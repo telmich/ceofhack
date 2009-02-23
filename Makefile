@@ -10,6 +10,7 @@ CEOFHACK+=check_input.c
 CEOFHACK+=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
 CEOFHACK+=cgpg_init.c
 CEOFHACK+=config_init.c
+CEOFHACK+=peer_input.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 
@@ -20,6 +21,7 @@ clean:
 
 test: ceofhack
 	./ceofhack; echo $$?
+	killall netcat
 
 ceofhack: $(CEOFHACK_O)
 	$(CC) -o $@ $^

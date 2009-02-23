@@ -7,6 +7,9 @@
 
 #define LIBEOF_VERSION "E.O.F"
 
+/* FIXME: HACKs */
+#define EOF_L_PEER_INPUT  256
+
 /*
  * those values are from the current EOF specs
  */
@@ -27,7 +30,7 @@
                           contains stdin, listen sockets
                           and outgoing sockets */
 
-/* need to listen on stdin and ipv4 socket */
+/* FIXME: need to listen on stdin and ipv4 socket  --> STATIC */
 #define HP_LAST 2
 
 /* commands */
@@ -101,6 +104,7 @@ int ui_help(char *);
 int ui_quit(char *);
 
 int user_input(int fd[]);
+int peer_input(int fd[]);
 
 void check_input();
 

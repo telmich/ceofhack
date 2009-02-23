@@ -57,7 +57,7 @@ int main()
    strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(opt.home));
    printf("using %s\n",buf);
 
-   if(!helper_exec(buf, NULL, NULL)) return 1;
+   if(!helper_exec(buf, peer_input, NULL)) return 1;
 
    while(1) {
       /* reinit, poll array may have changed */

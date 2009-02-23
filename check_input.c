@@ -33,6 +33,7 @@ void check_input()
 
    for(i=0; i < MAX_COMM; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
+         printf("data on channel %d\n",i);
          chp[i].handle(chp[i].fds);
       }
    }

@@ -23,6 +23,7 @@
  */
 
 #include <poll.h>
+#include <stdio.h>
 
 #include "ceofhack.h"  /* functions etc. */
 
@@ -32,6 +33,7 @@ void fd_to_poll()
 
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].handle) {
+         printf("adding handler %d to poll list\n", i);
          pfd[i].fd = chp[i].fds[0];
          pfd[i].events = POLLIN | POLLPRI;
       } else {

@@ -30,9 +30,10 @@ int forkexecpipe(char *path, struct helper *hp)
    /* parent */
    if(hp->pid > 0) { return 1; }
 
+   /* child */
    if(dup2(hp->fds[1], STDOUT_FILENO) == -1) {
       perror("dup2: stdout");
-      return 0;
+      _exit(1);
    }
 
    execv(path,NULL);
