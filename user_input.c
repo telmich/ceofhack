@@ -53,7 +53,7 @@ int user_input(int fd[])
          printf("%s failed!\n", cp->name);
       }
    } else {
-      printf("Sending text %s\n", buf);
+      printf("Sending text (%s) to all peers\n", buf);
 //      msg_send(buf); /* no command? send as text */
    }
 

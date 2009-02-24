@@ -1,9 +1,13 @@
 "Directly chat encrypted with someone"
 
 - init_home:
-   * create gpg-keys
    * add support for tcp4 via netcat
-      - connect triggered by /msg!
+      - connect triggered by /peer send!
+         - pipe to /.ceof/transport-protocols/enabled/tcp4/send
+           (without params for now!)
+            goes to ourself
+         - create send_to_prog()
+   * create gpg-keys
 
 
 - make it possible to add a peer with
