@@ -26,13 +26,17 @@
 #include <gpgme.h>      /* gpgme             */
 #include "ceofhack.h"   
 
-int cgpg_keyid_get(char *nick, gpgme_key_t keyid[])
+int cgpg_keyid_get(char *key, gpgme_key_t keyid[])
 {
- //  gpgme_error_t gerr;
+   gpgme_error_t gerr;
 
    /* retrieve keyid */
 
-//   gpgme_op_keylist_start(gpg_context, 
+   gerr =  gpgme_op_keylist_start(gpg_context, key, 0);
+   if(gerr != GPG_ERR_NO_ERROR) return 0;
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_start(gpg_context, key, 0)) return 0;
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_next(gpg_context, &keyid[0])) return 0;
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_end(gpg_context)) return 0;
    
    return 1;
 }

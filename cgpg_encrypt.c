@@ -29,10 +29,26 @@
 
 char *cgpg_encrypt(char *nick, char *msg)
 {
-   gpgme_error_t gerr;
+//   gpgme_error_t gerr;
+   gpgme_key_t keyid[2];
+   char *p;
 
    /* retrieve keyid    */
+   p = peer_keyid_get(nick);
+   if(!p) {
+      printf("No key-ID registered for peer %s\n", nick);
+      return 0;
+   }
+
+   keyid[1] = NULL;
+   if(!cgpg_keyid_get(p, keyid)) {
+      printf("No gpg-key found for peer %s\n", nick);
+      return 0;
+   }
+   printf("Using key %s <%s>\n", keyid[0]->uids->name,  keyid[0]->uids->email);
    /* allocate buffer   */
    /* encrypt  buffer   */
    /* return result     */
+
+   return NULL;
 }

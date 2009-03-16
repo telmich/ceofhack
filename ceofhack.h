@@ -87,6 +87,13 @@ extern struct peers     plist;
 extern struct options   opt;
 extern int              chp_cnt;
 
+/* gpgme */
+#include <gpgme.h>      /* gpgme             */
+extern gpgme_ctx_t    gpg_context;
+extern gpgme_data_t   gpg_encrypt;
+extern gpgme_data_t   gpg_decrypt;
+
+
 
 /* Functions */
 int forkexecpipe(char *path, struct helper *hp);
@@ -115,8 +122,11 @@ int peer_add(char *);
 int peer_list(char *);
 int peer_send(char *);
 struct peer *peer_findbyname(char *name);
+char *peer_keyid_get(char *nick);
 
 int cgpg_init();
+char *cgpg_encrypt(char *nick, char *msg);
+int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
 int config_init();
 

@@ -8,13 +8,16 @@ CEOFHACK+=cmds_init.c cmd_add.c cmd_check.c
 CEOFHACK+=user_input.c ui_quit.c ui_help.c
 CEOFHACK+=check_input.c
 CEOFHACK+=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
-CEOFHACK+=cgpg_init.c
+CEOFHACK+=peer_keyid_get.c
+CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
 CEOFHACK+=peer_input.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 
 all: $(PROG)
+	cat INPUT 
+	./$(PROG)
 
 clean:
 	rm -f $(CEOFHACK_O) $(PROG)
