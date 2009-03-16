@@ -1,3 +1,18 @@
+Currently: cgpg_encrypt (peer_send.c)
+   41D89B16B16596A84C0B78C1828D71E9CE33EB52
+      type keyid?
+      gpgme_key_t
+
+encrypt.c, cgpg_encrypt.c
+- encrypt message,
+   send, = listen + send function
+   decrypt message
+
+
+   => /peer add vorher!
+===>>>>>   /peer send <nick> <text>
+
+
 - move transport protocols out of main!
 - send message
    - encrypt message

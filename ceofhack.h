@@ -125,7 +125,7 @@ struct peer *peer_findbyname(char *name);
 char *peer_keyid_get(char *nick);
 
 int cgpg_init();
-char *cgpg_encrypt(char *nick, char *msg);
+int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
 int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
 int config_init();

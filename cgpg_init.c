@@ -60,6 +60,9 @@ int cgpg_init()
    if(gerr != GPG_ERR_NO_ERROR) return 0;
    gpgme_set_armor(gpg_context, 0);
 
+   /* FIXME: ascii armor only for testing */
+   gpgme_set_armor(gpg_context, 1);
+
 //   write passwd retrieval!
 //   gpgme_set_passphrase_cb(gpg_context, gpg_getpwd, NULL);
 

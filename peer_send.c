@@ -31,6 +31,7 @@ int peer_send(char *str)
    struct peer *p;
    char nick[EOF_L_NICKNAME+1];
    char msg[EOF_L_MESSAGE+1];
+   char buf[BIGBUF+1];
    char *n;
    size_t len;
 
@@ -56,7 +57,8 @@ int peer_send(char *str)
 
    printf("Encrypting message...\n");
    /* encrypt msg for $nick */
-   n = cgpg_encrypt(nick, msg);
+   if(!cgpg_encrypt(nick, msg, buf, BIGBUF)) return 0;
+   printf("Encrypted message: %s\n", buf);
    
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
    //return tp_send(nick, n);

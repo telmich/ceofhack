@@ -2,8 +2,10 @@ Features:
 - switch to the asynchronous gpgme functions
 - allow other encryption methods (like ssh!)
 - add support for more than one address for peer
-- add support to save (autosave) peers and keys
+- add support to save (autosave) peers and keys (cconfig)
+- configure gpg-binary in .ceof
 
 Code:
 - replace int[] for handler with int (check_input.c and dependend)
 - create a struct array for commands (user_input.c)
+- sanitise input (currently buffer overflow possible: peer_add.c)

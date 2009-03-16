@@ -22,15 +22,18 @@
  *
  */
 
+#include <string.h>     /* strlen            */
 #include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
 #include <locale.h>     /* locales           */
 #include "ceofhack.h"   /* functions etc.    */
 
-char *cgpg_encrypt(char *nick, char *msg)
+int cgpg_encrypt(char *nick, char *msg, char buf[], int len)
 {
 //   gpgme_error_t gerr;
    gpgme_key_t keyid[2];
+   gpgme_data_t plaintext;
+   gpgme_data_t encrypted;
    char *p;
 
    /* retrieve keyid    */
@@ -45,10 +48,24 @@ char *cgpg_encrypt(char *nick, char *msg)
       printf("No gpg-key found for peer %s\n", nick);
       return 0;
    }
-   printf("Using key %s <%s>\n", keyid[0]->uids->name,  keyid[0]->uids->email);
-   /* allocate buffer   */
-   /* encrypt  buffer   */
-   /* return result     */
+   printf("Key info: %s <%s>\n", keyid[0]->uids->name,  keyid[0]->uids->email);
 
-   return NULL;
+   /* allocate buffer: non copying!   */
+   if(GPG_ERR_NO_ERROR != gpgme_data_new_from_mem(&plaintext, msg, strlen(msg), 0))
+      return 0;
+   if(GPG_ERR_NO_ERROR != gpgme_data_new(&encrypted)) return 0;
+
+   /* encrypt  buffer   */
+   /* FIXME: remove GPGME_ENCRYPT_ALWAYS_TRUST and use trustlevels */
+   if(GPG_ERR_NO_ERROR != gpgme_op_encrypt(gpg_context, keyid,
+      GPGME_ENCRYPT_ALWAYS_TRUST, plaintext, encrypted)) {
+      printf("Encryption failed\n");
+   }
+   
+   /* return result     */
+   if(GPG_ERR_NO_ERROR != gpgme_data_seek(encrypted, 0, SEEK_SET)) return 0;
+   len = gpgme_data_read(encrypted, buf, len);
+   buf[len] = '\0';
+
+   return 1;
 }
