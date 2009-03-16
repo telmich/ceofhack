@@ -1,9 +1,7 @@
-Currently: cgpg_encrypt (peer_send.c)
-   41D89B16B16596A84C0B78C1828D71E9CE33EB52
-      type keyid?
-      gpgme_key_t
+Currently: peer_send.c
+   tp_send
+   "Send message"
 
-encrypt.c, cgpg_encrypt.c
 - encrypt message,
    send, = listen + send function
    decrypt message

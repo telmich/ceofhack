@@ -61,7 +61,7 @@ int peer_send(char *str)
    printf("Encrypted message: %s\n", buf);
    
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
-   //return tp_send(nick, n);
+   return tp_send(nick, buf);
 
-   return 1;
+   //return 1;
 }
