@@ -36,25 +36,39 @@ int peer_add(char *str)
    p = calloc(1, sizeof(struct peers));
    if(!p) return 0;
 
-   /* <empty> name <empty> addr */
+   /* <empty> name <empty> addr <empty> keyid */
 
    n = strchr(str, ' ');
    if(!n) { 
-      printf("Usage: /peer add <name> <addr>\n");
+      printf("Usage: /peer add <name> <addr> <keyid>\n");
       return 0;
    }
 
+   /* nick */
    strncpy(p->peer.name, str, EOF_L_NICKNAME);
    len = (n - str) <= EOF_L_NICKNAME ? (n - str) : EOF_L_NICKNAME;
    p->peer.name[len] = 0;
 
-   n++; /* skip whitespace */
-   strncpy(p->peer.addr, n, EOF_L_ADDRESS );
+   str = n+1; /* skip whitespace */
+
+   /* addr */
+   strncpy(p->peer.addr, str, EOF_L_ADDRESS);
+   n = strchr(str, ' '); /* seek to whitespace before keyid */
+   len = (n - str) <= EOF_L_ADDRESS ? (n - str) : EOF_L_ADDRESS;
+   p->peer.addr[len] = 0;
+
+   str = n+1; /* skip whitespace */
+
+   /* keyid: */
+   /* FIXME: fail, if not equal id */
+   strncpy(p->peer.keyid, str, EOF_L_KEYID);
+   len = strlen(str) <= EOF_L_KEYID ? strlen(str) : EOF_L_KEYID;
+   p->peer.keyid[len] = 0;
 
    p->next = plist.next;
    plist.next = p;
 
-   printf("Peer %s added with address %s.\n",p->peer.name, p->peer.addr);
+   printf("/peer add: Added <%s>@<%s>:<%s>\n",p->peer.name, p->peer.addr, p->peer.keyid);
 
    return 1;
 }

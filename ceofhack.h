@@ -21,6 +21,7 @@
 #define EOF_L_NICKNAME  128
 #define EOF_L_MESSAGE   128
 #define EOF_L_ADDRESS   128
+#define EOF_L_KEYID      40
 
 #define SIZE 1024
 #define MAX_RCP 1
@@ -46,6 +47,7 @@
 struct peer {
    char name[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
+   char keyid[EOF_L_KEYID+1];
 };
 
 struct peers {
