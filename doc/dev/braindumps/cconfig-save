@@ -1,0 +1,9 @@
+~/.ceof/
+   peers/
+      <name>/
+         keyid
+         addresses (\n seperated)
+
+   channels/
+      <name>/
+         peers (\n seperated)
