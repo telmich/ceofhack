@@ -1,0 +1,34 @@
+EOF Transport protocols
+--------------------------------------------------------------------------------
+
+One of the main aspects: Don't rely on any type of protocol, don't even
+implement it: Other did it good and can do it better than me.
+
+
+~/.ceof/transport-protocols/enabled/<name>/
+
+
+
+   get
+   send
+
+multiple implementations of one protocol
+/usr/share/ceofhack/transport-protocols/tcp/get/sh-nethack
+ln to ~/.ceof/transport-protocols/enabled/tcp/get
+put options no ~/.ceof/transport-protocols/enabled/tcp/sh-nethack
+
+
+--------------------------------------------------------------------------------
+~/.ceof/transport-protocols/send/<protocol>/
+
+   send
+
+~/.ceof/transport-protocols/listen/<identifier>/
+
+
+Examples of transport protocols
+--------------------------------------------------------------------------------
+email mediawiki forum website english text smtp-server dns bittorrent
+games irc jabber 
+
+   

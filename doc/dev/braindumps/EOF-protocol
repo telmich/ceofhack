@@ -1,0 +1,10 @@
+- stateless (udp)
+   -> no way to return a packet the same way it went back
+- get acks
+   -> resend, if not
+   -> ping if not reachable
+   -> mark text:
+      red: not reached
+      yellow: partial
+      green: all
+
