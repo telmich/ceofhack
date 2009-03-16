@@ -8,3 +8,21 @@
       yellow: partial
       green: all
 
+
+--------------------------------------------------------------------------------
+
+Message-types:
+
+- all with serial number?
+- join channel request
+- message
+   * with or without channel
+- ack
+- noise
+- forward packet (+ destination)
+- infopacket
+   * sends supported protocols:
+      - I'm listening on ...
+      - I can send via ...
+   * send supported bandwidth
+      - to calculate priority list

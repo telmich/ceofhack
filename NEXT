@@ -1,3 +1,7 @@
+DOC:
+   - maindoc: latex, putting everything together
+   - transport protocols
+
 Currently: peer_send.c
    tp_send
    "Send message"
