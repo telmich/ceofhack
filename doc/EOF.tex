@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{book}
 \usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
 \usepackage{longtable}           % lange Tabellen
 
@@ -12,6 +12,9 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 \tableofcontents
 \newpage
 
+% -----------------------------------------------------------------------------
+\chapter{Introduction}
+% -----------------------------------------------------------------------------
 \section{Abstract}
 EOF is chat protocol that supports secure chatting.
 Secure chatting consists of the following features:
@@ -57,8 +60,43 @@ carriers\cite{avian-1} are encouraged. The tunneling of EOF packets into
 those protocols (also know as obfuscation) makes it harder to detect
 and block EOF traffic.
 % -----------------------------------------------------------------------------
+\section{Copying, authors, ...}
+% -----------------------------------------------------------------------------
+\section{Introduction}
+missing :-)
+and further sections, too. Currently just documentating, what is important
+for now.
+% -----------------------------------------------------------------------------
+\chapter{The EOF protocol}
+% -----------------------------------------------------------------------------
+\chapter{Implementation}
+
+% -----------------------------------------------------------------------------
+\chapter{Transport protocols}
+% -----------------------------------------------------------------------------
+\section{Introduction}
+Length
+% -----------------------------------------------------------------------------
+\section{Implementations}
+The following sections cover existent protocol implementations.
+The name of the section is the name of the registered implementation.
+Every section must at least contain:
+\begin{itemize}
+\item Author contact information
+\item URL of website
+\item EOF-Version that introduces support for the protocol
+\end{itemize}
+
+If there are multiple implementations available, create two subsections
+covering both implementations.
+% -----------------------------------------------------------------------------
+\chapter{Unsorted}
+\section{Channels}
+Exist as long as somebody remembers it
+Channelname is signed by creator?
+% -----------------------------------------------------------------------------
 \appendix
-\section{Sources}
+\chapter{Sources}
 \begin{thebibliography}{42}
 \bibitem{pgp-1} http://en.wikipedia.org/wiki/Public-key\_cryptography
 \bibitem{onion-1} http://en.wikipedia.org/wiki/Onion\_routing
