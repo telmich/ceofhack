@@ -103,10 +103,27 @@ Commands are 4 Byte ASCII numbers.
 General: pipe'd:
 Data from the EOF implementation is received on stdin 
 
+The command is always the first part of a message.
+
 THE FOLLOWING DATA IS AN IMPORT FROM BASICS.TEX
 
 EOF-1\\Basic definitions
 2007-11-22 v0.2-train
+% -----------------------------------------------------------------------------
+\subsection{Command fields}
+The command field 0 indicates the direction.
+\begin{longtable}{|c|c|}
+\caption{Command field 0}\\
+\hline
+\textbf{Value} & \textbf{Description}\\
+\hline
+1 & Message is coming from EOF implementation \\
+\hline
+2 & Message is coming from outside\\
+\hline
+\end{longtable}
+
+
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
 This document specifies the basic datatypes and connection
