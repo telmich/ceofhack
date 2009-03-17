@@ -351,10 +351,20 @@ Message & Binary data & The message & BLOB\\
 Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
 \hline
 \end{longtable}
-
-\subsection{2000: Send packet}
-
-
+% -----------------------------------------------------------------------------
+\subsection{2000: Packet successfully sent}
+This code is returned by the transport protocol subsystem to the
+EOF implementation on success.
+\begin{itemize}
+\item Parameter: none
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{2001: Packet not sent}
+This code is returned by the transport protocol subsystem to the
+EOF implementation on failure.
+\begin{itemize}
+\item Parameter: none
+\end{itemize}
 % -----------------------------------------------------------------------------
 \section{The user interface (UI)}
 Maybe own section.
