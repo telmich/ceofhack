@@ -33,15 +33,18 @@ the message sender.
 
 The message packets are always send indirectly via onion routing\cite{onion-1}.
 The idea is taken from the Tor project\cite{tor-1}, though EOF uses an enhanced
-version: EOF does not know about entry or exit nodes. If you are the final
-receiver you may or may not continue to forward the message.
+version: EOF does not know about entry or exit nodes. If you are the intended
+receiver you may or may not continue to forward the message, which is defined
+by the sender of the message. That said, EOF must use source
+routing\cite{source-routing-1}.
 
 EOF knows about two different chat destinations:
 \begin{enumerate}
 \item Peers
 \item Groups of peers
 \end{enumerate}
-groups = channel, irc rfc
+A peer is just another person (direct chat), a group of peers is the EOF
+equivalent of the IRC channel\cite{irc-1}.
 % -----------------------------------------------------------------------------
 \appendix
 \section{Sources}
@@ -49,5 +52,7 @@ groups = channel, irc rfc
 \bibitem{pgp-1} http://en.wikipedia.org/wiki/Public-key\_cryptography
 \bibitem{onion-1} http://en.wikipedia.org/wiki/Onion\_routing
 \bibitem{tor-1} https://wiki.torproject.org/noreply/TheOnionRouter
+\bibitem{irc-1} RFC 1459: http://www.irchelp.org/irchelp/rfc/rfc.html
+\bibitem{source-routing-1} http://en.wikipedia.org/wiki/Source_routing
 \end{thebibliography}
 \end{document}
