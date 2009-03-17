@@ -295,13 +295,29 @@ encapsulated by the specific network protocol.
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
-\end{document}
 
 THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
 
 % -----------------------------------------------------------------------------
-\subsection{Transport protocols}
+\section{Transport protocols ("`ceof2tp"')}
 Environment variables: CWD for listener
+URLs are used as defined in RFC3986\cite{uri-1}.
+
+\subsection{1000: Send packet}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1000 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+\hline
+Message & Binary data & The message & BLOB\\
+\hline
+Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+\hline
+\end{longtable}
+
+
 
 % -----------------------------------------------------------------------------
 \section{The user interface (UI)}
@@ -419,5 +435,6 @@ Channelname is signed by creator?
 \bibitem{http-1} RFC 2616: http://www.faqs.org/rfcs/rfc2616.html
 \bibitem{smtp-1} RFC 2821: http://www.faqs.org/rfcs/rfc2821.html
 \bibitem{avian-1} RFC 1149: http://www.faqs.org/rfcs/rfc1149.html
+\bibitem{uri-1} RFC 3986: http://www.faqs.org/rfcs/rfc3986.html
 \end{thebibliography}
 \end{document}
