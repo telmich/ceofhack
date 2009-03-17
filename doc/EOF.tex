@@ -94,6 +94,11 @@ What's seen from outside
 \section{Packets}
 What's seen from inside (after stripping of the onion skin).
 % -----------------------------------------------------------------------------
+\section{Data types}
+% -----------------------------------------------------------------------------
+\subsection{Commands}
+Commands are 4 Byte ASCII numbers.
+% -----------------------------------------------------------------------------
 \section{Interface description}
 General: pipe'd:
 Data from the EOF implementation is received on stdin 
@@ -102,6 +107,7 @@ THE FOLLOWING DATA IS AN IMPORT FROM BASICS.TEX
 
 EOF-1\\Basic definitions
 2007-11-22 v0.2-train
+% -----------------------------------------------------------------------------
 \subsection{Introduction}
 This document specifies the basic datatypes and connection
 methods used in EOF-1. The aim is to stop repeatition of
@@ -231,9 +237,6 @@ The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
 % -----------------------------------------------------------------------------
-\subsubsection{Command type (cmd)}
-Commands are 4 Byte ASCII numbers.
-% -----------------------------------------------------------------------------
 \subsubsection{Peer name (peername)}
 The peer name is a 128 Byte fixed length string. It is only
 used internally to give a peer a rememberisable name ("`a nick'").
@@ -302,6 +305,7 @@ THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
 \section{Transport protocols ("`ceof2tp"')}
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
+Transport protocols use EOF command ID 0.
 
 \subsection{1000: Send packet}
 \begin{longtable}{|c|c|c|c|}
@@ -317,6 +321,7 @@ Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0
 \hline
 \end{longtable}
 
+\subsection{2000: Send packet}
 
 
 % -----------------------------------------------------------------------------
