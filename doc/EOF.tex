@@ -1,0 +1,28 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
+\usepackage{longtable}           % lange Tabellen
+
+\begin{document}
+\title{EOF\\Eris Onion Forwarding\\The secure, p2p, anonymous chat network}
+\date{2009-03-12}
+\author{Nico -telmich- Schottelius}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Abstract}
+EOF is chat protocol that supports secure chatting.
+Secure chatting consists of the following features:
+\begin{itemize}
+\item Nobody, but the intended receiver(s) know that you wrote a message.
+\item Nobody, but the intended receiver(s) can view the message content.
+\end{itemize}
+We don't think it's possible to hide that you are part of the chat network.
+Thus, every participant of an EOF network will constantly send packets
+(so called \emph{noise}) in a defined frequency (for instance every 250 ms).
+In case you are sending out a message, the message packet will be added to the
+queue and sent with the next free interval.
+
+% -----------------------------------------------------------------------------
+\end{document}
