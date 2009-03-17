@@ -1,0 +1,11 @@
+11:59 < ssc_> telmich akzeptabler draft. mir sind die funktionen von libikewin, libswatch und 
+              libtorchbearer noch unklar
+12:00 < ssc_> zudem sind einige <-> beziehungen nur als -> gemarked bzw. sollte libpost 
+              zwischen ceof und libikewin angesiedelt werden
+12:01 < ssc_> but besides that hat sich mein verstaendniss deiner idee schonmal etwas gebessert
+12:08 < telmich> ssc_: libpost ist im prinzip dazwischen, aber ceof koordiniert das ganze 
+                 noch. bei libikewin und libswatch arbeiten die libraries komplett autark, da 
+                 ist keine logik mehr noetig in ceof
+12:08 < telmich> ssc_: denn nur ceof weiss, wann echte daten reinkommen und wann noise 
+                 gesendet wird
+

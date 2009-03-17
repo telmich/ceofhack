@@ -5,3 +5,10 @@ decrypt
 gpgmedecrypt
 ceofhack
 *.o
+*.aux
+*.dvi
+*.log
+*.pdf
+*.toc
+dia/*.png
+dia/*.dia~

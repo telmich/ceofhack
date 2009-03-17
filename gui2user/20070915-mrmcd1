@@ -1,0 +1,62 @@
+- apic, ilo, telmich
+
+- inputzeile
+- Kommandoset fuers GUI:
+   o aehnlich wie irc oder bewusst anders?
+
+   "Text" => send to active channel / nick
+
+   /msg <"nick"> <message>
+
+   /join <marktschreier> <channel>
+   /list <marktschreier>
+
+   /mslist => anzeigen von marktschreiern
+   /mconnect => verbinden zum marktschreier
+
+   /whois <nick>
+      => returns pgp fingerprint, full name, e-mail
+   
+   /names als alias fuer /clist <channel>
+      => shows members of a channel
+
+   /plist => bekannte peers anzeigen
+   => kanaele => spezifisch ueber markschreier
+
+   /leave <channel>
+      => sends disconnect messages to other peers
+
+   /quit => close ceof, disconnect all clients, die.
+
+- GUI verbindet sich automatisch zum definierten Socket
+- ceof nimmt zur zeit alle Join Requests an => keine Interkation
+   
+--------------------------------------------------------------------------------
+Nicht sinnvoll:
+   /cconnect => connect to ceof
+   /cdisconnect => connect to ceof
+   => da automatisch verbinden
+
+--------------------------------------------------------------------------------
+Spaeter eventuell:
+   /padd???
+      => peerid + kontaktmoeglichkeiten
+
+--------------------------------------------------------------------------------
+   Kontaktmoeglichkeiten: 128 Byte, inklusie scheme:
+      mediawiki://de.wikipedia.org/wiki/EOF-1-misbraucht
+
+8 x 128 Byte Peers + 512 Byte Payload
+--------------------------------------------------------------------------------
+ceof:
+   - list of channels => with marktschreier!
+   - 0001: must return which markschreier connected or *NOT* connected to!
+   - 0003: auf welchen marktschreier angeben!
+   - /leave => send leave request => im client2ceof
+
+--------------------------------------------------------------------------------
+EOF-2:
+   Akzeptieren von Join Requests anhand vom Trustlevel des PGP-Schluessels
+
+- /ignore und co. spaeter
+- /set fuer einstellungen

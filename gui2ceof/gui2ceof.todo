@@ -1,0 +1,12 @@
+- Add \subsection{0007: retrieve list of "`friends"'}
+
+TODO: how client gets peer ids? necessary?
+retrieve list of channels,
+retrieve list of peers / peer-ids.
+
+mapping from peer-id to real id.
+channel list: known channels on marktschreier,
+joined channels;
+members of channel;
+add notification of join request;
+
