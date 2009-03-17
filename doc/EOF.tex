@@ -14,15 +14,40 @@
 \section{Abstract}
 EOF is chat protocol that supports secure chatting.
 Secure chatting consists of the following features:
-\begin{itemize}
-\item Nobody, but the intended receiver(s) know that you wrote a message.
-\item Nobody, but the intended receiver(s) can view the message content.
-\end{itemize}
+\begin{enumerate}
+\item Nobody, but the intended receiver(s) know \emph{that} you wrote a message.
+\item Nobody, but the intended receiver(s) can view the \emph{message content}.
+\item Nobody, but the intended receiver(s) can \emph{verify} the source of the message being you.
+\item Nobody, but the intended receiver(s) know \emph{who} you sent a message to.
+\end{enumerate}
 We don't think it's possible to hide that you are part of the chat network.
 Thus, every participant of an EOF network will constantly send packets
 (so called \emph{noise}) in a defined frequency (for instance every 250 ms).
+The noise is also used to defend against timing analysis.
 In case you are sending out a message, the message packet will be added to the
 queue and sent with the next free interval.
 
+We encrypt and sign every message via public-key cryptography\cite{pgp-1},
+so that only the receiver can decrypt, view the message content and verify
+the message sender.
+
+The message packets are always send indirectly via onion routing\cite{onion-1}.
+The idea is taken from the Tor project\cite{tor-1}, though EOF uses an enhanced
+version: EOF does not know about entry or exit nodes. If you are the final
+receiver you may or may not continue to forward the message.
+
+EOF knows about two different chat destinations:
+\begin{enumerate}
+\item Peers
+\item Groups of peers
+\end{enumerate}
+groups = channel, irc rfc
 % -----------------------------------------------------------------------------
+\appendix
+\section{Sources}
+\begin{thebibliography}{42}
+\bibitem{pgp-1} http://en.wikipedia.org/wiki/Public-key\_cryptography
+\bibitem{onion-1} http://en.wikipedia.org/wiki/Onion\_routing
+\bibitem{tor-1} https://wiki.torproject.org/noreply/TheOnionRouter
+\end{thebibliography}
 \end{document}
