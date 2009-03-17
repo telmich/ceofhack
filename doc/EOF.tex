@@ -3,7 +3,8 @@
 \usepackage{longtable}           % lange Tabellen
 
 \begin{document}
-\title{EOF\\Eris Onion Forwarding\\The secure, p2p, anonymous chat network}
+\title{EOF\\Eris Onion Forwarding\\
+The secure, peer-to-peer, decentralised anonymous chat network}
 \date{2009-03-12}
 \author{Nico -telmich- Schottelius}
 
@@ -44,7 +45,17 @@ EOF knows about two different chat destinations:
 \item Groups of peers
 \end{enumerate}
 A peer is just another person (direct chat), a group of peers is the EOF
-equivalent of the IRC channel\cite{irc-1}.
+equivalent of the IRC channel\cite{irc-1}. As there is no central server,
+groups of peers are managed by each client and may thus by differnt by
+different peers.
+
+EOF does not implement nor specify \emph{transport protocols} itself.
+The EOF community is urged to implement them in a creative way: Usage
+of well-known protocols like TCP\cite{tcp-1}, HTTP\cite{http-1},
+SMTP\cite{smtp-1} or even transmission of packets on avian
+carriers\cite{avian-1} are encouraged. The tunneling of EOF packets into
+those protocols (also know as obfuscation) makes it harder to detect
+and block EOF traffic.
 % -----------------------------------------------------------------------------
 \appendix
 \section{Sources}
@@ -53,6 +64,10 @@ equivalent of the IRC channel\cite{irc-1}.
 \bibitem{onion-1} http://en.wikipedia.org/wiki/Onion\_routing
 \bibitem{tor-1} https://wiki.torproject.org/noreply/TheOnionRouter
 \bibitem{irc-1} RFC 1459: http://www.irchelp.org/irchelp/rfc/rfc.html
-\bibitem{source-routing-1} http://en.wikipedia.org/wiki/Source_routing
+\bibitem{source-routing-1} http://en.wikipedia.org/wiki/Source\_routing
+\bibitem{tcp-1} RFC 793: http://www.faqs.org/rfcs/rfc793.html
+\bibitem{http-1} RFC 2616: http://www.faqs.org/rfcs/rfc2616.html
+\bibitem{smtp-1} RFC 2821: http://www.faqs.org/rfcs/rfc2821.html
+\bibitem{avian-1} RFC 1149: http://www.faqs.org/rfcs/rfc1149.html
 \end{thebibliography}
 \end{document}
