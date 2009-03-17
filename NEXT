@@ -1,6 +1,10 @@
+Implement one transport protocol!
+
+
+
 DOC:
    - maindoc: latex, putting everything together
-   - transport protocols
+   - transport protocols + create tcp!
 
 Currently: peer_send.c
    tp_send
