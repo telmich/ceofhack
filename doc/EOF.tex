@@ -117,13 +117,27 @@ The command field 0 indicates the direction.
 \hline
 \textbf{Value} & \textbf{Description}\\
 \hline
-1 & Message is coming from EOF implementation \\
+1 & Message is coming from EOF implementation\\
 \hline
-2 & Message is coming from outside\\
+2 & Message is coming from EOF subsystem (internally)\\
+\hline
+3 & Message is coming from outside (received packet))\\
 \hline
 \end{longtable}
 
+The command field 1 indicates the EOF subsystem.
+\begin{longtable}{|c|c|}
+\caption{Command field 1}\\
+\hline
+\textbf{Value} & \textbf{Description}\\
+\hline
+0 & \textbf{eofi2tp}: Transport protocols\\
+\hline
+1 & \textfbf{eofi2ui}: User interface\\
+\hline
+\end{longtable}
 
+The command fields 2 and 3 are defined by the respective subsystem.
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
 This document specifies the basic datatypes and connection
@@ -319,7 +333,7 @@ encapsulated by the specific network protocol.
 THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
 
 % -----------------------------------------------------------------------------
-\section{Transport protocols ("`ceof2tp"')}
+\section{Transport protocols ("`eofi2tp"')}
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
