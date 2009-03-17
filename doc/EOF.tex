@@ -60,7 +60,19 @@ carriers\cite{avian-1} are encouraged. The tunneling of EOF packets into
 those protocols (also know as obfuscation) makes it harder to detect
 and block EOF traffic.
 % -----------------------------------------------------------------------------
+\section{Motivation}
+Must have been written somewhere else already
+% -----------------------------------------------------------------------------
 \section{Copying, authors, ...}
+% -----------------------------------------------------------------------------
+\section{Further directions}
+Analyse security
+enhance performance
+port to other systems
+spread the word
+% -----------------------------------------------------------------------------
+\section{Conventions}
+\$NAME = variable
 % -----------------------------------------------------------------------------
 \section{Introduction}
 missing :-)
@@ -69,13 +81,109 @@ for now.
 % -----------------------------------------------------------------------------
 \chapter{The EOF protocol}
 % -----------------------------------------------------------------------------
+\section{Version}
+This will be version \textbf{1} of the protocol. It is the first definition.
+Further changes will be documentated in this section.
+% -----------------------------------------------------------------------------
+\section{Introduction}
+Stateless: source routing, usage of acks.
+% -----------------------------------------------------------------------------
+\section{Onion-Packets}
+What's seen from outside
+% -----------------------------------------------------------------------------
+\section{Packets}
+What's seen from inside (after stripping of the onion skin).
+% -----------------------------------------------------------------------------
+\section{Interfaces}
+General: pipe'd
+% -----------------------------------------------------------------------------
+\subsection{Transport protocols}
+Environment variables: CWD for listener
+% -----------------------------------------------------------------------------
+\section{The user interface (UI)}
+Maybe own section.
+List and describe commands.
+Command = subsection
+% -----------------------------------------------------------------------------
+\section{Configuration}
+cconfig
+
+% -----------------------------------------------------------------------------
 \chapter{Implementation}
+Sample implementation for POSIX.
 
 % -----------------------------------------------------------------------------
 \chapter{Transport protocols}
 % -----------------------------------------------------------------------------
 \section{Introduction}
-Length
+Only lower-case allowed (to prevent problems with broken filesystems).
+% -----------------------------------------------------------------------------
+\section{Examples}
+This sections shows some theoretic (theoretic because nobody implemented
+them yet) transport protocols.
+% -----------------------------------------------------------------------------
+\subsection{tcp}
+% -----------------------------------------------------------------------------
+\subsection{tcps}
+% -----------------------------------------------------------------------------
+\subsection{udp}
+% -----------------------------------------------------------------------------
+\subsection{http}
+% -----------------------------------------------------------------------------
+\subsection{https}
+% -----------------------------------------------------------------------------
+\subsection{smtp}
+connect to smtp server
+% -----------------------------------------------------------------------------
+\subsection{smtps}
+% -----------------------------------------------------------------------------
+\subsection{mediawiki}
+url, user, password
+% -----------------------------------------------------------------------------
+\subsection{smb}
+write on windows shares
+% -----------------------------------------------------------------------------
+\subsection{email}
+Write an email to some address. Needs smtp-server set in configuration.
+% -----------------------------------------------------------------------------
+\subsection{dns}
+Use dns traffic to transport EOF protocols.
+
+% -----------------------------------------------------------------------------
+\section{Embedding into EOF}
+This section explains how to integrate a transport protocol into EOF.
+% -----------------------------------------------------------------------------
+\subsection{Adding a transport protocol}
+If you want to add the transport protocol \emph{tptest}:
+\begin{itemize}
+\item Create the directories
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/transport-protocols/available/\emph{tptest}}.
+\end{itemize}
+\item Create (link or copy) the executables to the filenames \textbf{listen}
+and \textbf{send}.
+\end{itemize}
+The EOF implementation will register the transport protocol automatically
+at the next start. You may register only the \textbf{listen} or
+\textbf{send} part of a protocol.
+% -----------------------------------------------------------------------------
+\subsection{Using a transport protocol}
+So far the EOF implementation knows about the implementation, may also already
+use for \emph{sending} packets. But there is no listener configured yet.
+To enable a listener for the protocol \emph{tptest} at the URL
+\emph{tptest:somewhere@protocol-specific}
+\begin{itemize}
+\item create a directory below
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/transport-protocols/enabled/}
+\end{itemize}
+\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
+\item Then add the URL to the file named $<\textbf{url}>$.
+\item If the transport protocol needs or allows additional configuration files,
+you need to create them in that directory.
+\end{itemize}
+The EOF implementation will parse the URL and check whether a supporting
+listener application is available.
 % -----------------------------------------------------------------------------
 \section{Implementations}
 The following sections cover existent protocol implementations.
