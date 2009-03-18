@@ -45,3 +45,9 @@ decrypt-test:
 	gpg --homedir ~/.ceof/gpg/ --decrypt < ./testcrypt
 
 $(CEOFHACK_O): ceofhack.h Makefile
+
+documentation: doc/EOF.tex
+	( cd doc && pdflatex EOF.tex && pdflatex EOF.tex && pdflatex EOF.tex )
+
+viewdoc: documentation
+	evince doc/EOF.pdf
