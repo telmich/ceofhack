@@ -33,6 +33,7 @@ games irc jabber
 
    
 Integration of them
+--------------------------------------------------------------------------------
 
 
 This draft describes the communication between ceof and the transport protocols.

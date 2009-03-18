@@ -21,14 +21,20 @@
 #
 
 #
-# return codes:
-# 1: wrong number of arguments (must be one)
-# 2: unsupported protocol
+# codes: see EOF.tex
 #
 
-if [ "$#" -ne 1 ]; then
-   exit 1
-fi
+while : ; do
+   read command
+
+   case "$command" in
+      1000)
+         echo -n 2001
+         ;;
+   esac
+done
+
+exit
 
 fulladdr="$1"
 # address without protocol
