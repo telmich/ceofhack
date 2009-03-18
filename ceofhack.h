@@ -68,6 +68,7 @@ struct options {
    char ceofhome[PATH_MAX+1];
    char gpghome[PATH_MAX+1];
    char gpg[PATH_MAX+1];
+   char tphome[PATH_MAX+1];
 };
 
 #include <sys/types.h>           /* FIXME: posix correct header?) */

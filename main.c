@@ -43,10 +43,10 @@ int main()
    if(!config_init())   return 1;   /* read config          */
    if(!cgpg_init())     return 1;   /* init gpgme           */
    if(!signals_init())  return 1;   /* catch signals        */
+   if(!tp_init())       return 1;   /* transport protocols  */
    if(!cmds_init())     return 1;   /* enable commands      */
    if(!peers_init())    return 1;   /* empty peers          */
 
-//   if(!tp_init())       return 1;   /* transport protocols  */
 //   if(!ui_init())       return 1;   /* enable user input    */
 
    /* add stdin to poll */

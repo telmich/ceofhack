@@ -49,5 +49,8 @@ int config_init()
    strncpy(opt.gpghome, opt.ceofhome, PATH_MAX);
    strncat(opt.gpghome, "/gpg", PATH_MAX - strlen(opt.gpghome));
 
+   strncpy(opt.tphome, opt.ceofhome, PATH_MAX);
+   strncat(opt.tphome, "/transport-protocols", PATH_MAX - strlen(opt.ceofhome));
+
    return 1;
 }
