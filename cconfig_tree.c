@@ -29,10 +29,7 @@
 #include <dirent.h>              /* opendir                       */
 #include <sys/stat.h>            /* stat()                        */
 
-
-#include "ceofhack.h"   /* functions etc. */
-
-struct tp tps;
+#include "ceofhack.h"            /* cconfig structure             */
 
 int cconfig_tree(char *path, struct cconfig *cg)
 {
@@ -62,15 +59,23 @@ int cconfig_tree(char *path, struct cconfig *cg)
          while((de = readdir(dp)) != NULL) {
             if(de->d_name[0] == '.') continue; /* skip .* */
             cg->noe++;
-            printf("%s [%d]: %s\n", path, cg->noe, de->d_name);
+
+            // printf("%s [%d]: %s\n", path, cg->noe, de->d_name);
 
             cg->entries = realloc(cg->entries, cg->noe * sizeof(*cg));
             if(!cg->entries) return 0;
 
-            p = cg->entries[cg->noe-1].name;
+            p = cg->entries[cg->noe-1].path;
             strcpy (p, path);
             strncat(p, "/", PATH_MAX);
+
+            cg->entries[cg->noe-1].fn = p + strlen(p); /* begin of filename */
+
             strncat(p, de->d_name, PATH_MAX);
+
+            /* DEBUG *//
+            printf("%s: %s (%s) [%d]\n", path, cg->entries[cg->noe-1].path,
+                                         cg->entries[cg->noe-1].fn, cg->noe);
 
             /* call us recursive */
             if(!cconfig_tree(p, &cg->entries[cg->noe-1])) return 0;

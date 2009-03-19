@@ -13,6 +13,7 @@ CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
 CEOFHACK+=peer_input.c
 CEOFHACK+=tp_init.c
+CEOFHACK+=cconfig_tree.c
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 

@@ -1,5 +1,6 @@
 Implement one transport protocol!
-
+   -> tp_init
+      -> cconfig_*
 
 
 DOC:

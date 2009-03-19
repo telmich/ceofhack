@@ -34,6 +34,7 @@
 struct helper chp[MAX_COMM];
 struct pollfd pfd[MAX_COMM];
 int chp_cnt = 0;
+struct cconfig hometree;
 
 int main()
 {

@@ -80,6 +80,30 @@ struct helper {                  /* for the subprojects           */
    int (*exit)(int []);          /* pointer to the exit function  */
 };
 
+struct tp {                      /* transport protocols           */
+   char *scheme;                 /* tcp, http, ...                */
+   int type;                     /* listen or send                */
+   struct tp *next;              /* guess                         */
+};
+
+struct ltp {                     /* listening transport protocols */
+   char *url;                    /* tcp, http, ...                */
+   struct tp *handler;           /* who can decode stuff          */
+};
+
+enum {
+   TP_LISTEN = 1,
+   TP_SENT   = 2
+};
+
+/* hacking cconfig lib into ceofhack */
+struct cconfig {
+   char path[PATH_MAX+1];     /* full path         */
+   char *fn;                  /* filename only     */
+   int noe;                   /* number of entries */
+   struct cconfig *entries;   /* directory entries */
+};
+
 /* Global variables  */
 extern struct helper    chp[MAX_COMM];
 extern struct pollfd    pfd[MAX_COMM];
@@ -130,5 +154,7 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
 int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
 int config_init();
+int cconfig_tree(char *path, struct cconfig *cg);
+int tp_init();
 
 #endif
