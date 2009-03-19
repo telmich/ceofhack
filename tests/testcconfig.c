@@ -1,9 +1,10 @@
 #include "ceofhack.h"
 
 
-main()
+int main(int argc, char **argv)
 {
    struct cconfig cg;
-   cconfig_tree("/home/user/nico/.ceof/transport-protocols/available", &cg);
+   cconfig_tree(argv[1], &cg);
 
+   return 0;
 }

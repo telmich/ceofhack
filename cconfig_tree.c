@@ -62,7 +62,7 @@ int cconfig_tree(char *path, struct cconfig *cg)
          while((de = readdir(dp)) != NULL) {
             if(de->d_name[0] == '.') continue; /* skip .* */
             cg->noe++;
-            printf("%s: adding %d: %s\n", path, cg->noe, de->d_name);
+            printf("%s [%d]: %s\n", path, cg->noe, de->d_name);
 
             cg->entries = realloc(cg->entries, cg->noe * sizeof(*cg));
             if(!cg->entries) return 0;
