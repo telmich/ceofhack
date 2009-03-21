@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init transport protocols
+ * Init a cconfig tree
  *
  */
 
@@ -31,56 +31,58 @@
 
 #include "ceofhack.h"            /* cconfig structure             */
 
-int cconfig_tree(char *path, struct cconfig *cg)
+int cconfig_tree(struct cconfig *cg)
 {
    DIR *dp;
    struct dirent *de;
    char buf[PATH_MAX+1];
    buf[PATH_MAX] = 0;
-   char *p;
    struct stat sb;
+
+   /* add filename, if existent */
+   cg->fn = strrchr(cg->path, '/');
+   if(cg->fn) cg->fn++;
+   printf("ct: %s (%s)\n", cg->path, cg->fn);
 
    /* if path is file: return */
    /* if path is a directory:
     * - add all files to the entry list
     * - call cconfig_tree on all entries
     */
-   if(stat(path, &sb) == 0) {
+   if(stat(cg->path, &sb) == 0) {
       if(S_ISDIR(sb.st_mode)) { /* get entries */
          cg->noe = 0;
          cg->entries = NULL;
 
-         dp = opendir(path);
+         dp = opendir(cg->path);
          if(!dp) {
-            perror(path);
+            perror(cg->path);
             return 0;
          }
 
          while((de = readdir(dp)) != NULL) {
             if(de->d_name[0] == '.') continue; /* skip .* */
-            cg->noe++;
 
-            // printf("%s [%d]: %s\n", path, cg->noe, de->d_name);
-
-            cg->entries = realloc(cg->entries, cg->noe * sizeof(*cg));
+            cg->entries = realloc(cg->entries, (cg->noe + 1) * sizeof(*cg));
             if(!cg->entries) return 0;
 
-            p = cg->entries[cg->noe-1].path;
-            strcpy (p, path);
-            strncat(p, "/", PATH_MAX);
+            /* copy path into new node */
+            strcpy (cg->entries[cg->noe].path, cg->path);
+            strncat(cg->entries[cg->noe].path, "/", PATH_MAX);
+            strncat(cg->entries[cg->noe].path, de->d_name, PATH_MAX);
 
-            cg->entries[cg->noe-1].fn = p + strlen(p); /* begin of filename */
-
-            strncat(p, de->d_name, PATH_MAX);
-
-            /* DEBUG *//
-            printf("%s: %s (%s) [%d]\n", path, cg->entries[cg->noe-1].path,
-                                         cg->entries[cg->noe-1].fn, cg->noe);
+            /* DEBUG */
+            printf("ctt: %s (%s/%p) [%d] -> %s\n", cg->path, cg->fn, cg->fn,
+                                          cg->noe,
+                                          cg->entries[cg->noe].path);
 
             /* call us recursive */
-            if(!cconfig_tree(p, &cg->entries[cg->noe-1])) return 0;
+            if(!cconfig_tree(&cg->entries[cg->noe])) return 0;
+            cg->noe++;
         }
+        closedir(dp);
       } else { /* no directory */
+         printf("NO DIR: %s (%s)\n", cg->path, cg->fn);
          cg->noe = -1;
          cg->entries = NULL;
       }

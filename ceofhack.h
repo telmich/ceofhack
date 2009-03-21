@@ -154,7 +154,10 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
 int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
 int config_init();
-int cconfig_tree(char *path, struct cconfig *cg);
 int tp_init();
 
+//int cconfig_tree(char *path, struct cconfig *cg);
+int cconfig_tree(struct cconfig *cg);
+int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
+int cconfig_tree_dump(struct cconfig tree, int level);
 #endif

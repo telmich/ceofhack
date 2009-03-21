@@ -37,14 +37,21 @@ int tp_init()
    char buf[PATH_MAX+1];
    buf[PATH_MAX] = 0;
    struct cconfig cg;
+   struct cconfig tmp;
 //   struct cconfig *cgp, tmp, tmp2;
 
    /* build cconfig tree */
-   if(!cconfig_tree(opt.tphome, &cg)) return 0;
+   //if(!cconfig_tree(opt.tphome, &cg)) return 0;
+   strcpy(cg.path, opt.tphome);
+   if(!cconfig_tree(&cg)) return 0;
 
-   /* search for available protocols */
-   strncpy(buf, opt.tphome, PATH_MAX);
-   strncat(buf, "/available", PATH_MAX);
+   cconfig_tree_dump(cg, 1);
+
+   if(!cconfig_find_fn("available", cg, &tmp)) {
+      printf("No transport protocols available!\n");
+      return 0;
+   }
+
 /*
    cgp = cconfig_find(buf);
    if(!cconfig_find(buf, &cgt)) return 0;
