@@ -5,6 +5,9 @@ A very minimalistic EOF-2 client.
 Compile:
    $ make
 
+Configure:
+   $ ./scripts/init_home.sh
+
 Usage:
    $ ./ceofhack
    /peer add <name> tcp://<ip>:<port> (use from user2ceof)

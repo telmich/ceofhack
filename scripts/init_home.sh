@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -35,7 +35,7 @@ cp -r $__abs_mydir/tcp4-via-netcat \
       ~/.ceof/transport-protocols/available/tcp4-via-netcat
 
 # link them
-ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/get \
-       ~/.ceof/transport-protocols/enabled/tcp4/get
+ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/listen \
+       ~/.ceof/transport-protocols/enabled/tcp4/listen
 ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
        ~/.ceof/transport-protocols/enabled/tcp4/send
