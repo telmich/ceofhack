@@ -23,7 +23,6 @@
  */
 
 #include <stdlib.h>              /* NULL                          */
-#include <stdio.h>               /* printf                        */
 #include <string.h>              /* str*                          */
 #include <limits.h>              /* PATH_MAX                      */
 #include <dirent.h>              /* opendir                       */
@@ -38,11 +37,6 @@ int cconfig_tree(struct cconfig *cg)
    char buf[PATH_MAX+1];
    buf[PATH_MAX] = 0;
    struct stat sb;
-
-   /* add filename, if existent */
-   cg->fn = strrchr(cg->path, '/');
-   if(cg->fn) cg->fn++;
-   printf("ct: %s (%s)\n", cg->path, cg->fn);
 
    /* if path is file: return */
    /* if path is a directory:
@@ -71,18 +65,13 @@ int cconfig_tree(struct cconfig *cg)
             strncat(cg->entries[cg->noe].path, "/", PATH_MAX);
             strncat(cg->entries[cg->noe].path, de->d_name, PATH_MAX);
 
-            /* DEBUG */
-            printf("ctt: %s (%s/%p) [%d] -> %s\n", cg->path, cg->fn, cg->fn,
-                                          cg->noe,
-                                          cg->entries[cg->noe].path);
-
             /* call us recursive */
             if(!cconfig_tree(&cg->entries[cg->noe])) return 0;
+
             cg->noe++;
         }
         closedir(dp);
       } else { /* no directory */
-         printf("NO DIR: %s (%s)\n", cg->path, cg->fn);
          cg->noe = -1;
          cg->entries = NULL;
       }

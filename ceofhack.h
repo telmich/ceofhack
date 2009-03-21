@@ -99,7 +99,6 @@ enum {
 /* hacking cconfig lib into ceofhack */
 struct cconfig {
    char path[PATH_MAX+1];     /* full path         */
-   char *fn;                  /* filename only     */
    int noe;                   /* number of entries */
    struct cconfig *entries;   /* directory entries */
 };

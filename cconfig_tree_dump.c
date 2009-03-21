@@ -37,11 +37,10 @@ int cconfig_tree_dump(struct cconfig tree, int level)
    for(i=0; i < level; i++) {
       printf("-");
    }
-   printf("> %s (%s/%p)\n", tree.path, tree.fn,tree.fn);
+   printf("> %s\n", tree.path);
 
    for(i=0; i < tree.noe; i++) {
       cconfig_tree_dump(tree.entries[i], level + 1);
-
    }
 
    return 0;

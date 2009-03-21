@@ -32,13 +32,20 @@
 int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst)
 {
    int i;
+   char *p;
 
    for(i=0; i < src.noe; i++) {
-      printf("%d - %s - %s - %s\n", i, fn, src.entries[i].fn, src.entries[i].path);
-      if(!strcmp(fn, src.entries[i].fn)) {      /* found it!               */
+      
+      /* set to the last directory, if existent */
+      p = strrchr(src.entries[i].path, '/');
+      if(p) p++;
+      else p = src.entries[i].path;
+
+      printf("%d - %s - %s - %s\n", i, fn, src.entries[i].path, p);
+      if(!strcmp(fn, p)) {      /* found it!               */
          printf("Found %s in %s\n", fn, src.path);
          if(dst != NULL) {                      /* only copy if dst given  */
-            printf("And copying %s\n", src.entries[i].fn);
+            printf("And copying struct\n");
             memcpy(dst, &src.entries[i], sizeof(src.entries[i]));
          }
 
