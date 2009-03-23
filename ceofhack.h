@@ -160,5 +160,6 @@ int cconfig_tree(struct cconfig *cg);
 int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
 int cconfig_tree_dump(struct cconfig tree, int level);
 int cconfig_entries_get(struct cconfig tree, struct cconfig *next);
+char *cconfig_entry_fn(struct cconfig *tree);
 
 #endif
