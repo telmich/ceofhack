@@ -134,7 +134,7 @@ The command field 1 indicates the EOF subsystem.
 \hline
 0 & \textbf{eofi2tp}: Transport protocols\\
 \hline
-1 & \textfbf{eofi2ui}: User interface\\
+1 & \textbf{eofi2ui}: User interface\\
 \hline
 \end{longtable}
 
@@ -452,7 +452,18 @@ you need to create them in that directory.
 \end{itemize}
 The EOF implementation will parse the URL and check whether a supporting
 listener application is available.
+
+Will do chdir() to the directory! tp can open config files in current dir.
+what about url?
+   url = argv1?
+
+same for listen and send?
+   listenurl, sendurl, config in curdir
+Yes!
+
+IMPORTANT!
 % -----------------------------------------------------------------------------
+
 \section{Implementations}
 The following sections cover existent protocol implementations.
 The name of the section is the name of the registered implementation.

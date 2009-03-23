@@ -32,10 +32,8 @@ mkdir -p ~/.ceof/transport-protocols/enabled/tcp4
 
 # copy scripts
 cp -r $__abs_mydir/tcp4-via-netcat \
-      ~/.ceof/transport-protocols/available/tcp4-via-netcat
+      ~/.ceof/transport-protocols/available/tcp
 
-# link them
+# link the listener
 ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/listen \
        ~/.ceof/transport-protocols/enabled/tcp4/listen
-ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
-       ~/.ceof/transport-protocols/enabled/tcp4/send

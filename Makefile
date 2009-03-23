@@ -5,6 +5,8 @@ CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall -Werror -I.
 CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get.c
 CCONFIG+=cconfig_entry_fn.c
 
+TRANSPORT_PROTO=tp_init.c tp_add_available.c
+
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=helper_fdonly.c helper_new.c helper_exec.c
 CEOFHACK+=cmds_init.c cmd_add.c cmd_check.c
@@ -15,8 +17,7 @@ CEOFHACK+=peer_keyid_get.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
 CEOFHACK+=peer_input.c
-CEOFHACK+=tp_init.c
-CEOFHACK+=$(CCONFIG)
+CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 

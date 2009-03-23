@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init transport protocols
+ * Add an available protocol
  *
  */
 
@@ -30,53 +30,38 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-struct tp tps;
-struct cconfig tp_tree;
-
-int tp_init()
+int tp_add_available(char *name, struct cconfig entry)
 {
-   char *p;
-   struct cconfig tp_tree;
-   struct cconfig tmp, entry;
+   int has_handler = TP_NOTHING, len;
+   struct tp *tpnew;
 
-   /* init data list */
-   memset(&tps, '\0', sizeof(tps));
+   /* check for handler */
+   if(cconfig_find_fn("listen", entry, NULL)) has_handler |= TP_LISTEN;
+   if(cconfig_find_fn("send", entry, NULL))   has_handler |= TP_SEND;
 
-   /* build cconfig tree */
-   strcpy(tp_tree.path, opt.tphome);
-   if(!cconfig_tree(&tp_tree)) return 0;
-
-   cconfig_tree_dump(tp_tree, 1);
-
-   /* search for all available protocols */
-   if(!cconfig_find_fn("available", tp_tree, &tmp)) {
-      printf("No transport protocols available!\n");
+   /* none there? that's a boo boo! */
+   if(has_handler == TP_NOTHING) {
+      printf("TP: Error: dummy transport protocol %s!\n", name);
       return 0;
    }
 
-   memset(&entry, '\0', sizeof(entry));
-   while(cconfig_entries_get(tmp, &entry)) {
-      p = cconfig_entry_fn(&entry);
-      printf("Received %s (%s)\n", entry.path, p);
+   /* fillup list */
+   tpnew = malloc(sizeof(struct tp));
+   if(!tpnew) return 0;
 
-      if(!tp_add_available(p, entry)) return 0;
-   }
-
-   /* search for enabled (listener) protocols */
-   if(!cconfig_find_fn("enabled", tp_tree, &tmp)) {
-      printf("No transport protocols enabled!\n");
+   len = strlen(name);
+   if(len > EOF_L_ADDRESS) {
+      printf("TP: Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
       return 0;
    }
-
-   memset(&entry, '\0', sizeof(entry));
-   while(cconfig_entries_get(tmp, &entry)) {
-      p = cconfig_entry_fn(&entry);
-      printf("Received enab %s (%s)\n", entry.path, p);
-
-      if(!tp_add_enabled(p, entry)) return 0;
-   }
- 
-   /* enable listener protocols */
+   
+   /* fillup & add to list */
+   strcpy(tpnew->scheme, name);
+   tpnew->type = has_handler;
+   tpnew->next = tps.next;
+   tps.next = tpnew;
+   
+   printf("TP %s successfully added (%d)\n", name, tpnew->type);
 
    return 1;
 }

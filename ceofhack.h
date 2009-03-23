@@ -81,19 +81,22 @@ struct helper {                  /* for the subprojects           */
 };
 
 struct tp {                      /* transport protocols           */
-   char *scheme;                 /* tcp, http, ...                */
-   int type;                     /* listen or send                */
+   char scheme[EOF_L_ADDRESS+1]; /* tcp, http, ...                */
+   int type;                     /* listen OR send (not XOR)      */
+   struct cconfig *handler;      /* contains the full path??      */
+      -> maybe add *listen, *send, NULL if not existent!
    struct tp *next;              /* guess                         */
 };
 
 struct ltp {                     /* listening transport protocols */
-   char *url;                    /* tcp, http, ...                */
+   char url[EOF_L_ADDRESS+1];    /* tcp://where-are-you           */
    struct tp *handler;           /* who can decode stuff          */
 };
 
 enum {
+   TP_NOTHING = 0,
    TP_LISTEN = 1,
-   TP_SENT   = 2
+   TP_SEND   = 2
 };
 
 /* hacking cconfig lib into ceofhack */
@@ -103,7 +106,7 @@ struct cconfig {
    struct cconfig *entries;   /* directory entries */
 };
 
-/* Global variables  */
+/****************** Global variables  */
 extern struct helper    chp[MAX_COMM];
 extern struct pollfd    pfd[MAX_COMM];
 extern struct cmd       cmds;
@@ -111,13 +114,15 @@ extern struct peers     plist;
 extern struct options   opt;
 extern int              chp_cnt;
 
+/* transport */
+extern struct tp        tps;
+extern struct cconfig   tp_tree;
+
 /* gpgme */
 #include <gpgme.h>      /* gpgme             */
 extern gpgme_ctx_t    gpg_context;
 extern gpgme_data_t   gpg_encrypt;
 extern gpgme_data_t   gpg_decrypt;
-
-
 
 /* Functions */
 int forkexecpipe(char *path, struct helper *hp);
@@ -153,13 +158,16 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
 int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
 int config_init();
+
 int tp_init();
+int tp_add_available(char *name, struct cconfig entry);
+int tp_add_listener(char *name, struct cconfig entry);
 
 //int cconfig_tree(char *path, struct cconfig *cg);
 int cconfig_tree(struct cconfig *cg);
 int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
 int cconfig_tree_dump(struct cconfig tree, int level);
 int cconfig_entries_get(struct cconfig tree, struct cconfig *next);
-char *cconfig_entry_fn(struct cconfig *tree);
+char *cconfig_entry_fn(struct cconfig *entry);
 
 #endif

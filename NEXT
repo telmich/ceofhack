@@ -1,7 +1,18 @@
+tp_start.c
+   ceofhack.h
+
 Implement one transport protocol!
    -> tp_init
-      -> cconfig_*
+      -> add handler to each tp
+         -> maybe via cconfig pointer
+      -> for listener:
+         -> read url (openreadclose!)
+         -> decode url
+            -> read until :
+         -> look for listener in tplist
+         -> start listener in correct dir
 
+   
 
 DOC:
    - maindoc: latex, putting everything together
