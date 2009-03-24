@@ -32,22 +32,18 @@
 
 int tp_add_available(char *name, struct cconfig entry)
 {
-   int has_handler = TP_NOTHING, len;
-   struct tp *tpnew;
+   int len;
+   struct tp tpnew;
 
    /* check for handler */
-   if(cconfig_find_fn("listen", entry, NULL)) has_handler |= TP_LISTEN;
-   if(cconfig_find_fn("send", entry, NULL))   has_handler |= TP_SEND;
+   tpnew.listen = cconfig_find_fn("listen", entry, NULL);
+   tpnew.send   = cconfig_find_fn("send", entry, NULL);
 
    /* none there? that's a boo boo! */
-   if(has_handler == TP_NOTHING) {
+   if(!tpnew.listen && !tpnew.send) {
       printf("TP: Error: dummy transport protocol %s!\n", name);
       return 0;
    }
-
-   /* fillup list */
-   tpnew = malloc(sizeof(struct tp));
-   if(!tpnew) return 0;
 
    len = strlen(name);
    if(len > EOF_L_ADDRESS) {
@@ -55,13 +51,13 @@ int tp_add_available(char *name, struct cconfig entry)
       return 0;
    }
    
-   /* fillup & add to list */
-   strcpy(tpnew->scheme, name);
-   tpnew->type = has_handler;
-   tpnew->next = tps.next;
-   tps.next = tpnew;
-   
-   printf("TP %s successfully added (%d)\n", name, tpnew->type);
+   if( (tps_cnt+1) < EOF_L_TP_AVAIL) {
+      strncpy(tpnew.scheme, name, len);
+      memcpy(&tps[tps_cnt], &tpnew, sizeof(tps[tps_cnt]));
+
+      ++tps_cnt;
+   }
+   printf("TP %d %s successfully added\n", tps_cnt, name);
 
    return 1;
 }

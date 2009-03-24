@@ -23,6 +23,9 @@
 #define EOF_L_ADDRESS   128
 #define EOF_L_KEYID      40
 
+#define EOF_L_TP_AVAIL  256      /* max available tp              */
+#define EOF_L_LTP       256      /* max available tp listener     */
+
 #define SIZE 1024
 #define MAX_RCP 1
 #define BIGBUF 65536
@@ -81,10 +84,9 @@ struct helper {                  /* for the subprojects           */
 };
 
 struct tp {                      /* transport protocols           */
-   char addr[EOF_L_ADDRESS+1];   /* tcp, http, ...                */
+   char scheme[EOF_L_ADDRESS+1]; /* type of protocol: tcp, ...    */
    struct cconfig *listen;       /* non-NULL if available         */
    struct cconfig *send;         /* non-NUll if available         */
-   struct tp *next;              /* guess                         */
 };
 
 struct ltp {                     /* listening transport protocols */
@@ -114,7 +116,8 @@ extern struct options   opt;
 extern int              chp_cnt;
 
 /* transport */
-extern struct tp        tps;
+extern struct tp        tps[EOF_L_TP_AVAIL];
+extern int              tps_cnt;
 extern struct cconfig   tp_tree;
 
 /* gpgme */
