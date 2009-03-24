@@ -18,7 +18,17 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find by filename
+ * Find by filename and copy if valid memory block is available
+ *
+ * Arguments:
+ *
+ *    fn: filename to search for
+ *    src: where to search in
+ *    dst: buffer to copy to (if non-NULL), if found
+ *
+ * Returns:
+ *    NULL if not found
+ *    Pointer into original tree, if found
  *
  */
 
@@ -29,7 +39,7 @@
 
 #include "ceofhack.h"            /* cconfig structure             */
 
-int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst)
+struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst)
 {
    int i;
    char *p;
@@ -49,9 +59,9 @@ int cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst)
             memcpy(dst, &src.entries[i], sizeof(src.entries[i]));
          }
 
-         return 1;
+         return &src.entries[i];
       }
    }
 
-   return 0;
+   return NULL;
 }
