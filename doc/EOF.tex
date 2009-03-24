@@ -461,6 +461,9 @@ same for listen and send?
    listenurl, sendurl, config in curdir
 Yes!
 
+The maximum length of the URL is defined in ceofhack.h (EOF\_L\_ADDRESS).
+If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
+
 IMPORTANT!
 % -----------------------------------------------------------------------------
 
