@@ -26,9 +26,9 @@
 #define EOF_L_TP_AVAIL  256      /* max available tp              */
 #define EOF_L_LTP       256      /* max available tp listener     */
 
-#define SIZE 1024
-#define MAX_RCP 1
-#define BIGBUF 65536
+#define SIZE            1024
+#define MAX_RCP         1
+#define BIGBUF          65536
 
 #define MAX_COMM 64 /* maximum number of communication channels
                           contains stdin, listen sockets
@@ -91,7 +91,7 @@ struct tp {                      /* transport protocols           */
 
 struct ltp {                     /* listening transport protocols */
    char url[EOF_L_ADDRESS+1];    /* tcp://where-are-you           */
-   struct tp *handler;           /* who can decode stuff          */
+   struct cconfig *listen;       /* program that can decode stuff */
 };
 
 enum {
@@ -118,6 +118,8 @@ extern int              chp_cnt;
 /* transport */
 extern struct tp        tps[EOF_L_TP_AVAIL];
 extern int              tps_cnt;
+extern struct ltp       ltps[EOF_L_LTP];
+extern int              ltps_cnt;
 extern struct cconfig   tp_tree;
 
 /* gpgme */
@@ -163,6 +165,7 @@ int config_init();
 
 int tp_init();
 int tp_add_available(char *name, struct cconfig entry);
+int tp_add_enabled(char *name, struct cconfig entry);
 int tp_add_listener(char *name, struct cconfig entry);
 
 //int cconfig_tree(char *path, struct cconfig *cg);

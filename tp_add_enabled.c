@@ -32,35 +32,30 @@
 
 int tp_add_enabled(char *name, struct cconfig entry)
 {
-   int has_handler = TP_NOTHING, len;
-   struct tp *tpnew;
+   struct ltp ltpnew;
+   struct cconfig *url;
+
+   memset(ltpnew.url, '\0', sizeof(ltpnew.url));
 
    /* check for handler */
-   if(cconfig_find_fn("listen", entry, NULL)) has_handler |= TP_LISTEN;
+   ltpnew.listen  = cconfig_find_fn("listen", entry, NULL);
+   url            = cconfig_find_fn("url", entry, NULL);
 
-   /* none there? that's a boo boo! */
-   if(has_handler == TP_NOTHING) {
-      printf("TP: Error: dummy transport protocol %s!\n", name);
+   /* something missing? */
+   if(!ltpnew.listen || !url) {
+      printf("TP: Error: dummy listening transport protocol %s!\n", name);
       return 0;
    }
 
-   /* fillup list */
-   tpnew = malloc(sizeof(struct tp));
-   if(!tpnew) return 0;
+   /* read url */
+   if(!openreadclosestati(ltpnew.url, ltpnew.listen->path, EOF_L_ADDRESS)) return 0;
 
-   len = strlen(name);
-   if(len > EOF_L_ADDRESS) {
-      printf("TP: Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
-      return 0;
+   if( (ltps_cnt+1) < EOF_L_LTP) {
+      memcpy(&ltps[ltps_cnt], &ltpnew, sizeof(ltps[ltps_cnt]));
+
+      ++tps_cnt;
    }
-   
-   /* fillup & add to list */
-   strcpy(tpnew->scheme, name);
-   tpnew->type = has_handler;
-   tpnew->next = tps.next;
-   tps.next = tpnew;
-   
-   printf("TP %s successfully added (%d)\n", name, tpnew->type);
+   printf("LTP %d %s successfully added\n", tps_cnt, name);
 
    return 1;
 }

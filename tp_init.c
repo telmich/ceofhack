@@ -32,6 +32,10 @@
 
 struct tp tps[EOF_L_TP_AVAIL];
 int    tps_cnt;
+
+struct ltp ltps[EOF_L_LTP];
+int    ltps_cnt;
+
 struct cconfig tp_tree;
 
 int tp_init()
@@ -75,7 +79,7 @@ int tp_init()
       p = cconfig_entry_fn(&entry);
       printf("Received enab %s (%s)\n", entry.path, p);
 
-//      if(!tp_add_enabled(p, entry)) return 0;
+      if(!tp_add_enabled(p, entry)) return 0;
    }
  
    /* enable listener protocols */
