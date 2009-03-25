@@ -1,8 +1,8 @@
-!tp_enable_listener
-   -> check for handler!
+tp_listen_init
+   tp_listen_available
 
-ltp_start().c -> single!
-   ceofhack.h
+   ltp_start().c -> single!
+      ceofhack.h
 
 Implement one transport protocol!
    -> tp_init

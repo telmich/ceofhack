@@ -8,7 +8,7 @@ CCONFIG+=cconfig_entry_fn.c
 # Small helper c library
 SHCL=openreadclosestatic.c
 
-TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_add_enabled.c
+TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_add_enabled.c tp_listen_init.c
 
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=helper_fdonly.c helper_new.c helper_exec.c

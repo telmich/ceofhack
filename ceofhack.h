@@ -164,11 +164,11 @@ int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 int config_init();
 
 int tp_init();
+int tp_listen_init();
 int tp_add_available(char *name, struct cconfig entry);
 int tp_add_enabled(char *name, struct cconfig entry);
 int tp_add_listener(char *name, struct cconfig entry);
 
-//int cconfig_tree(char *path, struct cconfig *cg);
 int cconfig_tree(struct cconfig *cg);
 struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
 int cconfig_tree_dump(struct cconfig tree, int level);
