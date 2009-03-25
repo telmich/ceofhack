@@ -20,3 +20,15 @@ Bugs:
    You cannot connect to somebody behind NAT.
    You need /usr/bin/gpg.
    You need $HOME.
+
+Development:
+
+   http://git.schottelius.org/?p=EOF/ceofhack;a=summary
+
+   git clone git://git.schottelius.org/EOF/ceofhack
+
+   Branches:
+
+      master: "stable" (should compile and run, not work)
+
+      hacking: "latest" (things I'm hacking on)
