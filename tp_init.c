@@ -83,7 +83,10 @@ int tp_init()
       if(!tp_add_enabled(p, entry)) return 0;
    }
  
+   /* enable listener protocols/check handler */
+
    /* enable listener protocols */
+//   if(!tp_enable_listener()) return 0;
 
    return 1;
 }

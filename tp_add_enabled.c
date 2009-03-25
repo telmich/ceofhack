@@ -39,25 +39,27 @@ int tp_add_enabled(char *name, struct cconfig entry)
 
    memset(ltpnew.url, '\0', sizeof(ltpnew.url));
 
-   /* check for handler */
-   ltpnew.listen  = cconfig_find_fn("listen", entry, NULL);
-   url            = cconfig_find_fn("url", entry, NULL);
+   /* check for url */
+   url = cconfig_find_fn("url", entry, NULL);
 
    /* something missing? */
-   if(!ltpnew.listen || !url) {
-      printf("TP: Error: dummy listening transport protocol %s!\n", name);
+   if(!url) {
+      printf("LTP: Error: url missing for listening transport protocol %s!\n", name);
       return 0;
    }
 
    /* read url */
-   if(!openreadclosestatic(ltpnew.url, ltpnew.listen->path, EOF_L_ADDRESS)) return 0;
+   if(!openreadclosestatic(ltpnew.url, url->path, EOF_L_ADDRESS)) return 0;
 
    if( (ltps_cnt+1) < EOF_L_LTP) {
       memcpy(&ltps[ltps_cnt], &ltpnew, sizeof(ltps[ltps_cnt]));
 
-      ++tps_cnt;
+      ++ltps_cnt;
+      printf("LTP %d %s listening at %s\n", ltps_cnt, name, ltpnew.url);
+   } else {
+      printf("LTP: Error: Maximum number of listening TPs!\n");
+      return 0;
    }
-   printf("LTP %d %s successfully added\n", tps_cnt, name);
 
    return 1;
 }

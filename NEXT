@@ -1,6 +1,7 @@
-openreadclosestatic()
+!tp_enable_listener
+   -> check for handler!
 
-tp_start.c
+ltp_start().c -> single!
    ceofhack.h
 
 Implement one transport protocol!
