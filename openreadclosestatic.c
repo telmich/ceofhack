@@ -1,11 +1,26 @@
+/*******************************************************************************
+ *
+ * 2006-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ *
+ * This file is part of ceofhack.
 
-/***********************************************************************
+ * ceofhack is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *    2006 Nico Schottelius (nico-cinit at schottelius.org)
+ * ceofhack is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *    part of cLinux/cinit
+ * You should have received a copy of the GNU General Public License
+ * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
+
  *
- *    read a file
+ * Read specific block from file
+ * based openreadclose() from cinit
+ * cinit: http://unix.schottelius.org/cinit/
  *
  */
 
@@ -15,63 +30,33 @@
 #include <errno.h>              /* errno */
 #include <stdio.h>              /* NULL */
 #include <fcntl.h>              /* open */
-#include "intern.h"             /* ORC_* */
 
-int openreadclose(char *filename, char **where)
+int openreadclosestatic(char buf[], char *fn, int len)
 {
 
    int tmp;
-   int cnt;
    int fd;
-   char buf[512];
 
-   *where = NULL;
-
-   /*
-    * what a wonderful loop 
-    */
-   while((fd = open(filename, O_RDONLY)) == -1) {
-      if(errno == ENOENT)
-         return ORC_ERR_NONEXISTENT;
-      if(errno != EINTR)
-         return ORC_ERR_OPEN;
+   while((fd = open(fn, O_RDONLY)) == -1) {
+      if(errno != EINTR) {
+         perror(fn);
+         return 0;
+      }
    }
 
-   cnt = 0;
    while(1) {
-      tmp = read(fd, buf, 512);
+      tmp = read(fd, buf, len);
 
-      if(tmp == -1) {
-         if(errno == EINTR)
-            continue;
-         else
-            return ORC_ERR_READ;
-      } else if(tmp == 0) {
-         break;
-      }
-
-      cnt += tmp;
-      *where = realloc(*where, cnt + 1);
-      if(*where == NULL)
-         return ORC_ERR_MEM;
-
-      /*
-       * FIXME check correctness of copied buffer... and get some sleep..soon,
-       * very soon! 
-       */
-      strncpy(&(*where)[cnt - tmp], buf, tmp);
+      if(tmp == -1 && errno == EINTR) continue;
    }
 
    while((fd = close(fd)) == -1) {
       if(errno == EINTR)
          continue;
-      return ORC_ERR_CLOSE;
+      return 0;
    }
 
-   /*
-    * terminate string! 
-    */
-   (*where)[cnt] = '\0';
+   buf[len] = '\0';
 
-   return ORC_OK;
+   return 1;
 }

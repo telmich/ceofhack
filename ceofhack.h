@@ -175,4 +175,7 @@ int cconfig_tree_dump(struct cconfig tree, int level);
 int cconfig_entries_get(struct cconfig tree, struct cconfig *next);
 char *cconfig_entry_fn(struct cconfig *entry);
 
+/* shcl */
+int openreadclosestatic(char buf[], char *fn, int len);
+
 #endif

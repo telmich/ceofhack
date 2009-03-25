@@ -48,7 +48,7 @@ int tp_add_enabled(char *name, struct cconfig entry)
    }
 
    /* read url */
-   if(!openreadclosestati(ltpnew.url, ltpnew.listen->path, EOF_L_ADDRESS)) return 0;
+   if(!openreadclosestatic(ltpnew.url, ltpnew.listen->path, EOF_L_ADDRESS)) return 0;
 
    if( (ltps_cnt+1) < EOF_L_LTP) {
       memcpy(&ltps[ltps_cnt], &ltpnew, sizeof(ltps[ltps_cnt]));
