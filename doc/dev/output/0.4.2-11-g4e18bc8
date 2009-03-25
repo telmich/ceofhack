@@ -1,0 +1,51 @@
+./ceofhack decrypt
+gpg: Using version 1.1.8
+|-> /home/user/nico/.ceof/transport-protocols
+|--> /home/user/nico/.ceof/transport-protocols/a2
+|--> /home/user/nico/.ceof/transport-protocols/a3
+|--> /home/user/nico/.ceof/transport-protocols/available
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/send
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send
+|--> /home/user/nico/.ceof/transport-protocols/b3
+|--> /home/user/nico/.ceof/transport-protocols/enabled
+|---> /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/get
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/send
+0 - available - /home/user/nico/.ceof/transport-protocols/a2 - a2
+1 - available - /home/user/nico/.ceof/transport-protocols/a3 - a3
+2 - available - /home/user/nico/.ceof/transport-protocols/available - available
+Found available in /home/user/nico/.ceof/transport-protocols
+And copying struct
+Copying entry 0 of /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp (tcp)
+0 - listen - /home/user/nico/.ceof/transport-protocols/available/tcp/listen - listen
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp
+0 - send - /home/user/nico/.ceof/transport-protocols/available/tcp/listen - listen
+TP 1 tcp successfully added
+Copying entry 1 of /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat (tcp4-via-netcat)
+0 - listen - /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen - listen
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+0 - send - /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen - listen
+1 - send - /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send - send
+Found send in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+TP 2 tcp4-via-netcat successfully added
+0 - enabled - /home/user/nico/.ceof/transport-protocols/a2 - a2
+1 - enabled - /home/user/nico/.ceof/transport-protocols/a3 - a3
+2 - enabled - /home/user/nico/.ceof/transport-protocols/available - available
+3 - enabled - /home/user/nico/.ceof/transport-protocols/b3 - b3
+4 - enabled - /home/user/nico/.ceof/transport-protocols/enabled - enabled
+Found enabled in /home/user/nico/.ceof/transport-protocols
+And copying struct
+Copying entry 0 of /home/user/nico/.ceof/transport-protocols/enabled
+Received enab /home/user/nico/.ceof/transport-protocols/enabled/tcp4 (tcp4)
+0 - listen - /home/user/nico/.ceof/transport-protocols/enabled/tcp4/get - get
+0 - url - /home/user/nico/.ceof/transport-protocols/enabled/tcp4/get - get
+TP: Error: dummy listening transport protocol tcp4!
+make: *** [all] Fehler 1
+
