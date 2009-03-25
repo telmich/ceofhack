@@ -29,15 +29,13 @@
 
 #include "ceofhack.h"            /* cconfig structure             */
 
-int cconfig_entries_get(struct cconfig tree, struct cconfig *next)
+int cconfig_entries_get(struct cconfig tree, struct cconfig *next, int *state)
 {
-   int tmp = next->noe;
-
-   if(tmp < tree.noe) {
-      printf("Copying entry %d of %s\n", tmp, tree.path);
+   if(*state < tree.noe) {
+      printf("Copying entry %d of %d, %s\n", *state, tree.noe, tree.path);
       
-      memcpy(next, &tree.entries[tmp], sizeof(tree.entries[tmp]));
-      next->noe = tmp + 1;
+      memcpy(next, &tree.entries[*state], sizeof(tree.entries[*state]));
+      (*state)++;
       
       return 1;
    }

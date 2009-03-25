@@ -35,6 +35,8 @@ int tp_add_enabled(char *name, struct cconfig entry)
    struct ltp ltpnew;
    struct cconfig *url;
 
+   printf("Debug: %d in %s\n", entry.noe, entry.path);
+
    memset(ltpnew.url, '\0', sizeof(ltpnew.url));
 
    /* check for handler */

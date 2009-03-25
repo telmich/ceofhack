@@ -172,7 +172,7 @@ int tp_add_listener(char *name, struct cconfig entry);
 int cconfig_tree(struct cconfig *cg);
 struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
 int cconfig_tree_dump(struct cconfig tree, int level);
-int cconfig_entries_get(struct cconfig tree, struct cconfig *next);
+int cconfig_entries_get(struct cconfig tree, struct cconfig *next, int *state);
 char *cconfig_entry_fn(struct cconfig *entry);
 
 /* shcl */

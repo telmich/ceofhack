@@ -22,11 +22,13 @@
  * based openreadclose() from cinit
  * cinit: http://unix.schottelius.org/cinit/
  *
+ *
+ * Reads at most len bytes, but needs len+1 (for \0 at the end)
+ *
  */
 
 #include <unistd.h>             /* open, read, close */
 #include <string.h>             /* strncpy */
-#include <stdlib.h>             /* realloc */
 #include <errno.h>              /* errno */
 #include <stdio.h>              /* NULL */
 #include <fcntl.h>              /* open */
@@ -47,16 +49,26 @@ int openreadclosestatic(char buf[], char *fn, int len)
    while(1) {
       tmp = read(fd, buf, len);
 
-      if(tmp == -1 && errno == EINTR) continue;
+      if(tmp == -1) {
+         if(errno == EINTR) {
+            continue;
+         } else {
+            perror(fn);
+            return 0;
+         }
+      }
+      break;
    }
+   buf[len] = '\0';
 
    while((fd = close(fd)) == -1) {
-      if(errno == EINTR)
+      if(errno == EINTR) {
          continue;
-      return 0;
+      } else {
+         perror(fn);
+         return 0;
+      }
    }
-
-   buf[len] = '\0';
 
    return 1;
 }

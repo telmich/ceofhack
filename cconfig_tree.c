@@ -69,6 +69,7 @@ int cconfig_tree(struct cconfig *cg)
             if(!cconfig_tree(&cg->entries[cg->noe])) return 0;
 
             cg->noe++;
+            printf("Read %d %s from %s\n", cg->noe, de->d_name, cg->path);
         }
         closedir(dp);
       } else { /* no directory */

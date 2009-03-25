@@ -43,3 +43,8 @@ Currently: peer_send.c
       - telmich
       - !eof
       - geof
+
+- check:
+
+valgrind -v --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes --leak-resolution=high --track-origins=yes  ./ceofhack
+

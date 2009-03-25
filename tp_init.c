@@ -43,6 +43,7 @@ int tp_init()
    char *p;
    struct cconfig tp_tree;
    struct cconfig tmp, entry;
+   int state;
 
    /* init data list */
    memset(&tps, '\0', sizeof(tps));
@@ -60,8 +61,8 @@ int tp_init()
       return 0;
    }
 
-   memset(&entry, '\0', sizeof(entry));
-   while(cconfig_entries_get(tmp, &entry)) {
+   state = 0;
+   while(cconfig_entries_get(tmp, &entry, &state)) {
       p = cconfig_entry_fn(&entry);
       printf("Received %s (%s)\n", entry.path, p);
 
@@ -74,10 +75,10 @@ int tp_init()
       return 0;
    }
 
-   memset(&entry, '\0', sizeof(entry));
-   while(cconfig_entries_get(tmp, &entry)) {
+   state = 0;
+   while(cconfig_entries_get(tmp, &entry, &state)) {
       p = cconfig_entry_fn(&entry);
-      printf("Received enab %s (%s)\n", entry.path, p);
+      printf("Received enab %s (%s/%d)\n", entry.path, p, entry.noe);
 
       if(!tp_add_enabled(p, entry)) return 0;
    }

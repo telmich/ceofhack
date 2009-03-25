@@ -43,7 +43,9 @@ struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *ds
 {
    int i;
    char *p;
+   struct cconfig *ret = NULL;
 
+   printf("Searching for fn=%s in %s\n", fn, src.path);
    for(i=0; i < src.noe; i++) {
       
       /* set to the last directory, if existent */
@@ -51,7 +53,7 @@ struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *ds
       if(p) p++;
       else p = src.entries[i].path;
 
-      printf("%d - %s - %s - %s\n", i, fn, src.entries[i].path, p);
+      printf("%d/%d - %s<->%s (%s)\n", i+1, src.noe,  fn, p, src.entries[i].path);
       if(!strcmp(fn, p)) {      /* found it!               */
          printf("Found %s in %s\n", fn, src.path);
          if(dst != NULL) {                      /* only copy if dst given  */
@@ -59,9 +61,11 @@ struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *ds
             memcpy(dst, &src.entries[i], sizeof(src.entries[i]));
          }
 
-         return &src.entries[i];
+         ret = &src.entries[i];
+         break;
       }
    }
 
-   return NULL;
+   printf("%d/%d: %s->%p\n", i, src.noe, fn, ret);
+   return ret;
 }
