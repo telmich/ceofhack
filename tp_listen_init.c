@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add an available protocol
+ * Check and init listening protocols
  *
  */
 
@@ -30,35 +30,23 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-int tp_add_available(char *name, struct cconfig entry)
+int tp_listen_init()
 {
-   int len;
-   struct tp tpnew;
+   int i;
+//   struct cconfig *listen;
+ 
+   for(i=0; i < ltps_cnt; i++) {
+      /* has handler? */
+      
+      if(!(ltps[i].listen = tp_listen_available(ltps[i]))) return 0;
 
-   /* check for handler */
-   tpnew.listen = cconfig_find_fn("listen", entry, NULL);
-   tpnew.send   = cconfig_find_fn("send", entry, NULL);
+      /* start it:
+       * cwd to dir
+       * argv1 = url
+      */
+//      if(!tp_listen_start(listen))) return 0;
 
-   /* none there? that's a boo boo! */
-   if(!tpnew.listen && !tpnew.send) {
-      printf("TP: Error: dummy transport protocol %s!\n", name);
-      return 0;
    }
-
-   len = strlen(name);
-   if(len > EOF_L_ADDRESS) {
-      printf("TP: Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
-      return 0;
-   }
-   
-   if( (tps_cnt+1) < EOF_L_TP_AVAIL) {
-      strncpy(tpnew.scheme, name, len);
-      tpnew.scheme[len] = '\0';
-      memcpy(&tps[tps_cnt], &tpnew, sizeof(tps[tps_cnt]));
-
-      ++tps_cnt;
-   }
-   printf("TP %d %s successfully added\n", tps_cnt, name);
 
    return 1;
 }

@@ -18,47 +18,32 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add an available protocol
+ * Check whether we have a handler for the url
  *
  */
 
 #include <stdlib.h>              /* NULL                          */
 #include <stdio.h>               /* printf                        */
 #include <string.h>              /* str*                          */
-#include <limits.h>              /* PATH_MAX                      */
 
 
 #include "ceofhack.h"   /* functions etc. */
 
-int tp_add_available(char *name, struct cconfig entry)
+struct cconfig *tp_listen_available(struct ltp proto)
 {
-   int len;
-   struct tp tpnew;
+   int i;
+//   struct cconfig *listen;
 
-   /* check for handler */
-   tpnew.listen = cconfig_find_fn("listen", entry, NULL);
-   tpnew.send   = cconfig_find_fn("send", entry, NULL);
-
-   /* none there? that's a boo boo! */
-   if(!tpnew.listen && !tpnew.send) {
-      printf("TP: Error: dummy transport protocol %s!\n", name);
-      return 0;
+   for(i=0; i < tps_cnt; i++) {
+      printf("LTP/TP: %s / %s [%lu]\n", proto.url, tps[i].scheme, strlen(tps[i].scheme));
+      if(!strncmp(proto.url, tps[i].scheme, strlen(tps[i].scheme))) {
+         if(tps[i].listen) {
+            printf("Found TP %s for LTP %s\n", tps[i].listen->path, proto.url);
+            return tps[i].listen;
+         }
+      }
    }
 
-   len = strlen(name);
-   if(len > EOF_L_ADDRESS) {
-      printf("TP: Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
-      return 0;
-   }
-   
-   if( (tps_cnt+1) < EOF_L_TP_AVAIL) {
-      strncpy(tpnew.scheme, name, len);
-      tpnew.scheme[len] = '\0';
-      memcpy(&tps[tps_cnt], &tpnew, sizeof(tps[tps_cnt]));
-
-      ++tps_cnt;
-   }
-   printf("TP %d %s successfully added\n", tps_cnt, name);
-
-   return 1;
+   printf("NO TP found for LTP %s!\n", proto.url);
+   return NULL;
 }

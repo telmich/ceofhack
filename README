@@ -23,6 +23,8 @@ Bugs:
 
 Development:
 
+   Have a look at doc/coding_style.
+
    http://git.schottelius.org/?p=EOF/ceofhack;a=summary
 
    git clone git://git.schottelius.org/EOF/ceofhack
