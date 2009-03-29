@@ -1,0 +1,96 @@
+./ceofhack decrypt
+gpg: Using version 1.1.8
+Read 1 a2 from /home/user/nico/.ceof/transport-protocols
+Read 2 a3 from /home/user/nico/.ceof/transport-protocols
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/available/tcp
+Read 2 send from /home/user/nico/.ceof/transport-protocols/available/tcp
+Read 1 tcp from /home/user/nico/.ceof/transport-protocols/available
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+Read 2 send from /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+Read 2 tcp4-via-netcat from /home/user/nico/.ceof/transport-protocols/available
+Read 3 available from /home/user/nico/.ceof/transport-protocols
+Read 4 b3 from /home/user/nico/.ceof/transport-protocols
+Read 5 d4 from /home/user/nico/.ceof/transport-protocols
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Read 2 url from /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Read 1 tcp4 from /home/user/nico/.ceof/transport-protocols/enabled
+Read 6 enabled from /home/user/nico/.ceof/transport-protocols
+Read 7 z5 from /home/user/nico/.ceof/transport-protocols
+|-> /home/user/nico/.ceof/transport-protocols
+|--> /home/user/nico/.ceof/transport-protocols/a2
+|--> /home/user/nico/.ceof/transport-protocols/a3
+|--> /home/user/nico/.ceof/transport-protocols/available
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/send
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send
+|--> /home/user/nico/.ceof/transport-protocols/b3
+|--> /home/user/nico/.ceof/transport-protocols/d4
+|--> /home/user/nico/.ceof/transport-protocols/enabled
+|---> /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/url
+|--> /home/user/nico/.ceof/transport-protocols/z5
+Searching for fn=available in /home/user/nico/.ceof/transport-protocols
+1/7 - available<->a2 (/home/user/nico/.ceof/transport-protocols/a2)
+2/7 - available<->a3 (/home/user/nico/.ceof/transport-protocols/a3)
+3/7 - available<->available (/home/user/nico/.ceof/transport-protocols/available)
+Found available in /home/user/nico/.ceof/transport-protocols
+And copying struct
+2/7: available->0x149f5b0
+Copying entry 0 of 2, /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp (tcp)
+Searching for fn=listen in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2 - listen<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp/listen)
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp
+0/2: listen->0x1490460
+Searching for fn=send in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2 - send<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp/listen)
+2/2 - send<->send (/home/user/nico/.ceof/transport-protocols/available/tcp/send)
+Found send in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2: send->0x1491470
+TP 1 tcp successfully added
+Copying entry 1 of 2, /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat (tcp4-via-netcat)
+Searching for fn=listen in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2 - listen<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen)
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+0/2: listen->0x14934c0
+Searching for fn=send in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2 - send<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen)
+2/2 - send<->send (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send)
+Found send in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2: send->0x14944d0
+TP 2 tcp4-via-netcat successfully added
+Searching for fn=enabled in /home/user/nico/.ceof/transport-protocols
+1/7 - enabled<->a2 (/home/user/nico/.ceof/transport-protocols/a2)
+2/7 - enabled<->a3 (/home/user/nico/.ceof/transport-protocols/a3)
+3/7 - enabled<->available (/home/user/nico/.ceof/transport-protocols/available)
+4/7 - enabled<->b3 (/home/user/nico/.ceof/transport-protocols/b3)
+5/7 - enabled<->d4 (/home/user/nico/.ceof/transport-protocols/d4)
+6/7 - enabled<->enabled (/home/user/nico/.ceof/transport-protocols/enabled)
+Found enabled in /home/user/nico/.ceof/transport-protocols
+And copying struct
+5/7: enabled->0x14a25e0
+Copying entry 0 of 1, /home/user/nico/.ceof/transport-protocols/enabled
+Received enab /home/user/nico/.ceof/transport-protocols/enabled/tcp4 (tcp4/2)
+Debug: 2 in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Searching for fn=listen in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+1/2 - listen<->listen (/home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen)
+Found listen in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+0/2: listen->0x149b560
+Searching for fn=url in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+1/2 - url<->listen (/home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen)
+2/2 - url<->url (/home/user/nico/.ceof/transport-protocols/enabled/tcp4/url)
+Found url in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+1/2: url->0x149c570
+LTP 3 tcp4 successfully added
+using /home/user/nico/.ceof/transport-protocols/enabled/tcp4/get
+adding handler 0 to poll list
+adding handler 1 to poll list
+execv: Datei oder Verzeichnis nicht gefunden
+adding handler 0 to poll list
+adding handler 1 to poll list
+
