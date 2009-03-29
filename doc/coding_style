@@ -1,0 +1,156 @@
+Coding style
+============
+Nico Schottelius <nico-ceofhack]at[schottelius.org>
+0.1, stolen (2009-03-29) from cinit, Initial version from 2006-11-13
+:Author Initials: NS
+
+
+This document describes the coding style used in ceofhack.
+
+
+Indent
+------
+Indent the code by 3 spaces for each level.
+Indent variable names, so the names begin all at the same position.
+Use three spaces to place them.
+
+
+Whitespaces
+-----------
+Where to put or avoid whitespaces (space or linefeed (lf)).
+
+
+Spaces
+~~~~~~
+- After closing brace "if(test) return 0;"
+- Spaces before and after '=', '>', '<', '==', '!='', '>=', '<=', '>>', '<<', '&', '&&', '|', '||'
+- After start of comment and before end of comment: '/* text */'
+
+
+   After ')', ','
+
+No spaces
+~~~~~~~~~
+- Within braces and code "(!test)", 
+- Before braces "if(code)"
+- No space before ), so if '))', do not put a space after the first ')'
+
+
+Linebreaks
+~~~~~~~~~~
+This somehow includes the setting of braces (indirectly through (not) setting
+spaces.
+
+If
+^^
+
+Put the if, the braces and the opening curly brace on one line,
+put the closing one together with `else` and the new opening
+curly brace on one line:
+
+------------------------------------------------------------------------------
+if(...) {
+   /* code */
+} else {
+   /* else: code */
+}
+------------------------------------------------------------------------------
+
+While
+^^^^^
+------------------------------------------------------------------------------
+while(condition) {
+   /* repeat */
+}
+------------------------------------------------------------------------------
+
+Do-While
+^^^^^^^^
+------------------------------------------------------------------------------
+do {
+   /* something */
+} while(running);
+------------------------------------------------------------------------------
+
+Switch
+^^^^^^
+
+------------------------------------------------------------------------------
+switch(value) {
+   case DO_SOMETHING:
+      /* code */
+   break;
+
+   case SOMETHING_ELSE:
+      /* code */
+   break;
+
+   default:
+      /* code */
+   break;
+}
+------------------------------------------------------------------------------
+
+
+
+Where to put curly braces
+-------------------------
+
+Functions
+~~~~~~~~~
+Opening and closing curly braces are placed on a seperate row:
+
+------------------------------------------------------------------------------
+int func(int params)
+{
+   body
+}
+------------------------------------------------------------------------------
+
+
+If, else, while, do-while
+~~~~~~~~~~~~~~~~~~~~~~~~~
+See above.
+
+
+Comments
+---------
+where necessery, do not state the obvious in comments:
+
+      /* this code increments tmp */
+      ++tmp;
+
+If there is more than one line containing a comment, try to adjust them
+so they look the same in width and position:
+
+------------------------------------------------------------------------------
+   int illuminati                = 23; /* do not want to comment that   */
+   int the_answer_to_everything  = 42; /* 42.                           */ 
+
+   [...]
+
+   while(illuminati < the_answer_to_everything) {  /* only try before them  */
+      overtake_world(&self);                       /* overtake is complex   */ 
+   }
+------------------------------------------------------------------------------
+
+
+Header
+-------
+Put a header into each file, containing:
+
+   - Date of file being put into existence (year is enough)
+   - Name and e-mail (obfuscated if you want) of the author(s)
+   - Description of the function
+   - Copyright statement (if not included GPLv3 or later is assumed)
+
+
+Includes
+~~~~~~~~
+Include system headers first, then place own headers. Comment the includes,
+wherefore you added them. Example:
+
+------------------------------------------------------------------------------
+#include <unistd.h>     /* write          */
+#include "ceofhack.h"   /* ceof internal  */
+------------------------------------------------------------------------------
