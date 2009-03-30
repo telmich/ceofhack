@@ -31,9 +31,9 @@
 #include <unistd.h>     /* STDIN_FILENO   */
 #include "ceofhack.h"  /* functions etc. */
 
-struct helper chp[MAX_COMM];
-struct pollfd pfd[MAX_COMM];
-int chp_cnt = 0;
+struct helper  chp[MAX_COMM];
+struct pollfd  pfd[MAX_COMM];
+int            chp_cnt = 0;
 struct cconfig hometree;
 
 int main()
@@ -64,7 +64,7 @@ int main()
       /* reinit, poll array may have changed */
       fd_to_poll();
 
-      cnt = poll(pfd, HP_LAST, -1);
+      cnt = poll(pfd, chp_cnt, -1);
       if(cnt == -1) {
          if(errno != EINTR) return 1;
       } else {
