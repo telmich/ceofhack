@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -24,24 +24,32 @@
 # codes: see EOF.tex
 #
 
-while : ; do
-   read command
+read -n 5 command
 
-   case "$command" in
-      1000)
-         echo -n 2001
-         ;;
-   esac
-done
-
-exit
+if [ "$command" != "1000" ]; then
+	echo "Unknown command." 1>&2
+	echo -n 2001
+	exit 1
+fi
 
 fulladdr="$1"
-# address without protocol
-addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print $2 }')"
-port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
+# address without protocol://
+addr="$(echo $fulladdr | awk -F: '/^tcp:\/\// { print substr($2,3) }')"
+port="$(echo $fulladdr | awk -F: '/^tcp:\/\// { print $3 }')"
+
+if [ -z "$addr" -o -z "$port" ]; then
+	echo "Invalid protocol or no address or no port." 1>&2
+	exit 1
+fi
 
 # debug on stderr
-echo Connecting to $fulladdr 1>&2
+echo "Connecting to $fulladdr" 1>&2
 
-nc "$addr" "$port"
+if nc -q 0 "$addr" "$port" > /dev/null; then
+	echo -n 2000
+	exit 0
+else
+	echo -n 2001
+	exit 1
+fi
+
