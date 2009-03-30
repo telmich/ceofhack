@@ -29,7 +29,7 @@
 #include <errno.h>      /* guess what     */
 #include <stdlib.h>     /* getenv         */
 #include <unistd.h>     /* STDIN_FILENO   */
-#include "ceofhack.h"  /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
 struct helper  chp[MAX_COMM];
 struct pollfd  pfd[MAX_COMM];
@@ -39,7 +39,6 @@ struct cconfig hometree;
 int main()
 {
    int cnt;
-   char buf[PATH_MAX+1];
 
    if(!config_init())   return 1;   /* read config          */
    if(!cgpg_init())     return 1;   /* init gpgme           */
@@ -48,17 +47,10 @@ int main()
    if(!cmds_init())     return 1;   /* enable commands      */
    if(!peers_init())    return 1;   /* empty peers          */
 
-//   if(!ui_init())       return 1;   /* enable user input    */
-
-   /* add stdin to poll */
+   /* add stdin to poll: replace this later with a UI socket*/
    if(!helper_fdonly(STDIN_FILENO, user_input, NULL)) return 1;
 
-   /* HACK: add tcp4 listener to poll */
-   strncpy(buf, opt.home, PATH_MAX);
-   strncat(buf, "/.ceof/transport-protocols/enabled/tcp4/get", PATH_MAX - strlen(opt.home));
-   printf("using %s\n",buf);
-
-   if(!helper_exec(buf, peer_input, NULL)) return 1;
+// if(!ui_init())       return 1;   /* enable user input    */
 
    while(1) {
       /* reinit, poll array may have changed */
