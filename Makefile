@@ -1,6 +1,6 @@
 LDFLAGS= $(shell gpgme-config --libs)
 
-CC=gcc -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall -Werror -I.
+CC=gcc -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall -Werror -I.
 
 CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get.c
 CCONFIG+=cconfig_entry_fn.c
