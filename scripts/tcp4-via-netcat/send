@@ -34,8 +34,8 @@ fi
 
 fulladdr="$1"
 # address without protocol://
-addr="$(echo $fulladdr | awk -F: '/^tcp:\/\// { print substr($2,3) }')"
-port="$(echo $fulladdr | awk -F: '/^tcp:\/\// { print $3 }')"
+addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print substr($2,1,2)=="//" ? substr($2,3) : $2 }')"
+port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
 
 if [ -z "$addr" -o -z "$port" ]; then
 	echo "Invalid protocol or no address or no port." 1>&2
