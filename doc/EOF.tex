@@ -338,6 +338,10 @@ THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
+
+The destination URL is passed as argument to the protocol's
+"`send"' program. E.g. for tcp: \textbf{tcp://127.0.0.3:42}
+
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \begin{longtable}{|c|c|c|c|}
@@ -348,8 +352,6 @@ Transport protocols use EOF command ID 0.
 Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
 \hline
 Message & Binary data & The message & BLOB\\
-\hline
-Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
