@@ -24,7 +24,7 @@
 # codes: see EOF.tex
 #
 
-read -n 5 command
+read -n 4 command
 
 if [ "$command" != "1000" ]; then
 	echo "Unknown command." 1>&2
