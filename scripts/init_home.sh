@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -25,6 +25,10 @@ __pwd="$(pwd -P)"
 __mydir="${0%/*}"; __abs_mydir="$(cd "$__mydir" && pwd -P)"
 __myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
+if ! $__abs_mydir/gen_key.sh; then
+	echo "key generation failed" 1>&2
+	exit 1
+fi
 
 # create directories
 mkdir -p ~/.ceof/transport-protocols/available
@@ -37,3 +41,10 @@ cp -r $__abs_mydir/tcp4-via-netcat \
 # link the listener
 ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/listen \
        ~/.ceof/transport-protocols/enabled/tcp4/listen
+
+# link the sender
+ln -sf ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
+       ~/.ceof/transport-protocols/enabled/tcp4/send
+
+echo "done."
+
