@@ -61,7 +61,23 @@ those protocols (also know as obfuscation) makes it harder to detect
 and block EOF traffic.
 % -----------------------------------------------------------------------------
 \section{Motivation}
-Must have been written somewhere else already
+Available and in use: jabber, irc, ICQ.
+Plain text protocols\footnote{Yes, they can be enhanced to use TLS/SSL,
+but this is not enforced.}. Having central server.
+
+Also available: silc.  Problem only partly solved.
+
+want something that has
+\begin{itemize}
+\item no central server
+\item uses onion routing
+\item uses well know crypto engine (so we do not have to care about this)
+\end{itemize}
+
+Also want to convey usage of pgp: currently pgp is not used very often.
+Thus if you use pgp, you are conspicuous. We try to make pgp part of the
+normal webtraffic (like HTTP packets).
+% FIXME: cleanup.
 % -----------------------------------------------------------------------------
 \section{Copying, authors, ...}
 % -----------------------------------------------------------------------------
