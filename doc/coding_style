@@ -8,6 +8,14 @@ Nico Schottelius <nico-ceofhack]at[schottelius.org>
 This document describes the coding style used in ceofhack.
 
 
+Functions
+---------
+Create small and simple functions. If a function could use a simple
+data type (char*, int, ...) or a self defined structure
+(struct cconfig ...), use the simple data type: Thus the function
+can be used in a different project again.
+
+
 Indent
 ------
 Indent the code by 3 spaces for each level.
