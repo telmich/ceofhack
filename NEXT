@@ -1,3 +1,10 @@
+documentation:
+- adding url as argv adds additional work
+   - move url to command / stdin
+            - notify apic
+   doc/EOF.tex
+
+tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 tp_send.c
    how to handle send / trasport protocol?
       - pipe data to it, add pipe to handler array, leave function
@@ -22,9 +29,7 @@ tp_send.c
             }
          - parse queue every $interval
             - to trigger resend
-      - adding url as argv adds additional work
-         - move url to command / stdin
-            - notify apic
+            - post-0.1 version
 
 doc/EOF.tex:
    create readable document, so adding new stuff is possible
