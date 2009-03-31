@@ -1,0 +1,131 @@
+[21:39] ikn:ceofhack% make
+gcc -Wall -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.    -c -o tp_send.o tp_send.c
+gcc -Wall -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I. -o ceofhack main.o forkexecpipe.o fd_to_poll.o signals_init.o signal_child.o helper_fdonly.o helper_new.o helper_exec.o cmds_init.o cmd_add.o cmd_check.o user_input.o ui_quit.o ui_help.o check_input.o cgpg_init.o cgpg_keyid_get.o cgpg_encrypt.o config_init.o cconfig_tree.o cconfig_find_fn.o cconfig_tree_dump.o cconfig_entries_get.o cconfig_entry_fn.o tp_init.o tp_add_available.o tp_add_enabled.o tp_listen_init.o tp_scheme_len.o tp_listen_available.o tp_listen_start.o tp_listen_read.o tp_send.o openreadclosestatic.o peers_init.o peer_add.o peer_list.o peer_findbyname.o peer_send.o peer_keyid_get.o peer_addr_get.o peer_input.o
+cat doc/dev/braindumps/sample-commands
+/peer add telmich tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer list
+/peer send telmich hallo, wie geht es?
+./ceofhack decrypt
+gpg: Using version 1.1.8
+Read 1 a2 from /home/user/nico/.ceof/transport-protocols
+Read 2 a3 from /home/user/nico/.ceof/transport-protocols
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/available/tcp
+Read 2 send from /home/user/nico/.ceof/transport-protocols/available/tcp
+Read 1 tcp from /home/user/nico/.ceof/transport-protocols/available
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+Read 2 send from /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+Read 2 tcp4-via-netcat from /home/user/nico/.ceof/transport-protocols/available
+Read 3 available from /home/user/nico/.ceof/transport-protocols
+Read 4 b3 from /home/user/nico/.ceof/transport-protocols
+Read 5 d4 from /home/user/nico/.ceof/transport-protocols
+Read 1 listen from /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Read 2 url from /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Read 1 tcp4 from /home/user/nico/.ceof/transport-protocols/enabled
+Read 6 enabled from /home/user/nico/.ceof/transport-protocols
+Read 7 z5 from /home/user/nico/.ceof/transport-protocols
+|-> /home/user/nico/.ceof/transport-protocols
+|--> /home/user/nico/.ceof/transport-protocols/a2
+|--> /home/user/nico/.ceof/transport-protocols/a3
+|--> /home/user/nico/.ceof/transport-protocols/available
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp/send
+|---> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen
+|----> /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send
+|--> /home/user/nico/.ceof/transport-protocols/b3
+|--> /home/user/nico/.ceof/transport-protocols/d4
+|--> /home/user/nico/.ceof/transport-protocols/enabled
+|---> /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen
+|----> /home/user/nico/.ceof/transport-protocols/enabled/tcp4/url
+|--> /home/user/nico/.ceof/transport-protocols/z5
+Searching for fn=available in /home/user/nico/.ceof/transport-protocols
+1/7 - available<->a2 (/home/user/nico/.ceof/transport-protocols/a2)
+2/7 - available<->a3 (/home/user/nico/.ceof/transport-protocols/a3)
+3/7 - available<->available (/home/user/nico/.ceof/transport-protocols/available)
+Found available in /home/user/nico/.ceof/transport-protocols
+And copying struct
+2/7: available->0x6395b0
+Copying entry 0 of 2, /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp (tcp)
+Searching for fn=listen in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2 - listen<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp/listen)
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp
+0/2: listen->0x62a460
+Searching for fn=send in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2 - send<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp/listen)
+2/2 - send<->send (/home/user/nico/.ceof/transport-protocols/available/tcp/send)
+Found send in /home/user/nico/.ceof/transport-protocols/available/tcp
+1/2: send->0x62b470
+TP 1 tcp successfully added
+Copying entry 1 of 2, /home/user/nico/.ceof/transport-protocols/available
+Received /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat (tcp4-via-netcat)
+Searching for fn=listen in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2 - listen<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen)
+Found listen in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+0/2: listen->0x62d4c0
+Searching for fn=send in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2 - send<->listen (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/listen)
+2/2 - send<->send (/home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat/send)
+Found send in /home/user/nico/.ceof/transport-protocols/available/tcp4-via-netcat
+1/2: send->0x62e4d0
+TP 2 tcp4-via-netcat successfully added
+Searching for fn=enabled in /home/user/nico/.ceof/transport-protocols
+1/7 - enabled<->a2 (/home/user/nico/.ceof/transport-protocols/a2)
+2/7 - enabled<->a3 (/home/user/nico/.ceof/transport-protocols/a3)
+3/7 - enabled<->available (/home/user/nico/.ceof/transport-protocols/available)
+4/7 - enabled<->b3 (/home/user/nico/.ceof/transport-protocols/b3)
+5/7 - enabled<->d4 (/home/user/nico/.ceof/transport-protocols/d4)
+6/7 - enabled<->enabled (/home/user/nico/.ceof/transport-protocols/enabled)
+Found enabled in /home/user/nico/.ceof/transport-protocols
+And copying struct
+5/7: enabled->0x63c5e0
+Copying entry 0 of 1, /home/user/nico/.ceof/transport-protocols/enabled
+Received enab /home/user/nico/.ceof/transport-protocols/enabled/tcp4 (tcp4/2)
+Debug: 2 in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+Searching for fn=url in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+1/2 - url<->listen (/home/user/nico/.ceof/transport-protocols/enabled/tcp4/listen)
+2/2 - url<->url (/home/user/nico/.ceof/transport-protocols/enabled/tcp4/url)
+Found url in /home/user/nico/.ceof/transport-protocols/enabled/tcp4
+1/2: url->0x636570
+LTP 1 tcp4 listening at tcp:0.0.0.0:6667
+LTP/TP: tcp:0.0.0.0:6667 / tcp [3]
+adding handler 0 to poll list
+/peer add telmich tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer list
+/peer send telmich hallo, wie geht es?
+data on channel 0
+/peer add: Added <telmich>@<tcp:localhost:4242>:<41D89B16B16596A84C0B78C1828D71E9CE33EB52>
+adding handler 0 to poll list
+data on channel 0
+Peer telmich: tcp:localhost:4242
+adding handler 0 to poll list
+data on channel 0
+Encrypting message...
+Keyid (41D89B16B16596A84C0B78C1828D71E9CE33EB52) for peer telmich found!
+Key info: Nico Schottelius <telmich@eof-2>
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQIOAzz6ltMxvh7UEAf9Gs5oWSt7cilo00HsupdmRDIWSxYlJByEgEcIxMjJ0l30
+CNXXmg+wxLKtrQHzKhGIsAM4SiYdIAQdLyrMDijBNJ6f55lbaNcJ6F02Q3qSbd8t
+zC7fOsuhFFu6A9pBcgsZHcqbQ/ng7vT/ZTksGFfQHHVGc7O0l2MNmq7NwMUdvwF3
+qX+uSxl52FWdpvgZ3RndXOW2WtV+q8sidpd9dvrdSCcgj8PtiqrFwrtmLFt3pKDe
+jXidmrJVDtrEtmNtCM23etHdKLlBwz8DY02pF4t9Ij4SpTVimNWzTqHJu5h64DQb
+sWSnqTeBgbyuaUJhWewcNb/OvVgme3dSM4KnK5sNWwf/UBy59EzwJOw8U38ADRyS
+DdxNeWea2SCIQS9Bb36eSG3vTE7R3g+GMnzad9H/sCMaW+d8fjkI1/uieQnwaCmo
+reNRMFtZIEemCPPq9uJCdaCoJYyUcyKzE6+1IaRCFnAl+4LRuaBWWDUwCvAok1px
+GRON1i+xfy4EA8zL0WZ+TAC2fSymo03T0dJBD2GojhGXc1MzbPhOGidgCC1S1hY5
+wnDTZJkIKZHOuFaiY6OOkKGlVl6D5/Kj8qXJiHd3dY8qafgP8+QndmP3Ei2Me3B+
+v/MqR/NRU1jpxh77snrAFcvwoAIlyge5zZ1RIX/Z+0oXgxeOrehH74WLMv4Lh7rr
+w9JRAcneZINsxnhwI2Ompb0O/4KrLrznN45KD2ihOHqM02BrSAUqM7B3VkE8/y45
+oc2XbJW+KUhLWrxUR/b4Z0mS5LEGYSKGtc3DQPfNGlTHDezD
+=WNQo
+-----END PGP MESSAGE-----
+
+/peer send: Sending hallo, wie geht es?->telmich ...
+Using address tcp:localhost:4242 for telmich
+LTP/TP: tcp:localhost:4242 / tcp [3]
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:localhost:4242
+adding handler 0 to poll list
