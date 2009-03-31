@@ -1,6 +1,10 @@
 LDFLAGS= $(shell gpgme-config --libs)
 
-CC=gcc -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -Wall -Werror -I.
+CC=gcc -std=c99 -Wall -Wextra -Werror -pedantic -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
+CC=gcc -std=c99 -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
+CC=gcc -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
+# above are too strict right now :-/
+CC=gcc -Wall -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 
 CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get.c
 CCONFIG+=cconfig_entry_fn.c
