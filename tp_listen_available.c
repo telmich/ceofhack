@@ -36,10 +36,10 @@ struct cconfig *tp_available(char *url, int type)
    for(i=0; i < tps_cnt; i++) {
       printf("LTP/TP: %s / %s [%lu]\n", url, tps[i].scheme, strlen(tps[i].scheme));
       if(!strncmp(url, tps[i].scheme, strlen(tps[i].scheme))) {
-         if((type & TP_LISTEN && tps[i].listen) ||
-            (type & TP_SEND   && tps[i].send)) {
-            printf("Found TP %s for URL %s\n", tps[i].listen->path, url);
+         if(type & TP_LISTEN && tps[i].listen) {
             return tps[i].listen;
+         } else if(type & TP_SEND && tps[i].send) {
+            return tps[i].send;
          }
       }
    }
