@@ -38,7 +38,7 @@ int tp_listen_init()
    for(i=0; i < ltps_cnt; i++) {
 
       /* has handler? */
-      if(!(ltps[i].listen = tp_listen_available(ltps[i]))) return 0;
+      if(!(ltps[i].listen = tp_available(ltps[i].url, TP_LISTEN))) return 0;
 
       /* start it:
        * cwd to dir

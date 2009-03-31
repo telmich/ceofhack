@@ -28,11 +28,14 @@
 int tp_send(char *nick, char *msg)
 {
    char *url;
+//   struct cconfig *send;
 
    url = peer_addr_get(nick);
    printf("Using address %s for %s\n", url, nick);
 
-   /* get an address (URL) */
+   /* search for transport protocol */
+
+   /* pass data to transport protocol */
 
    //if(!helper_exec(tp->path, tp_listen_read, NULL)) return 0;
 

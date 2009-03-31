@@ -29,21 +29,22 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-struct cconfig *tp_listen_available(struct ltp proto)
+struct cconfig *tp_available(char *url, int type)
 {
    int i;
-//   struct cconfig *listen;
 
    for(i=0; i < tps_cnt; i++) {
-      printf("LTP/TP: %s / %s [%lu]\n", proto.url, tps[i].scheme, strlen(tps[i].scheme));
-      if(!strncmp(proto.url, tps[i].scheme, strlen(tps[i].scheme))) {
-         if(tps[i].listen) {
-            printf("Found TP %s for LTP %s\n", tps[i].listen->path, proto.url);
+      printf("LTP/TP: %s / %s [%lu]\n", url, tps[i].scheme, strlen(tps[i].scheme));
+      if(!strncmp(url, tps[i].scheme, strlen(tps[i].scheme))) {
+         if((type & TP_LISTEN && tps[i].listen) ||
+            (type & TP_SEND   && tps[i].send)) {
+            printf("Found TP %s for URL %s\n", tps[i].listen->path, url);
             return tps[i].listen;
          }
       }
    }
 
-   printf("NO TP found for LTP %s!\n", proto.url);
+   printf("NO TP found for URL %s!\n", url);
+
    return NULL;
 }

@@ -171,7 +171,7 @@ int tp_add_listener(char *name, struct cconfig entry);
 int tp_listen_init();
 int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
-struct cconfig *tp_listen_available(struct ltp proto);
+struct cconfig *tp_available(char *url, int type);
 int tp_send(char *nick, char *msg);
 
 
