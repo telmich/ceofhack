@@ -22,20 +22,15 @@
  *
  */
 
-#include <stdlib.h>              /* NULL                          */
-#include <stdio.h>               /* printf                        */
-#include <string.h>              /* str*                          */
-#include <limits.h>              /* PATH_MAX                      */
-
-
-#include "ceofhack.h"   /* functions etc. */
+#include <stdlib.h>        /* NULL              */
+#include "ceofhack.h"      /* functions etc.    */
 
 int tp_listen_start(struct cconfig *tp)
 {
-   int i;
-
-   
    if(!helper_exec(tp->path, tp_listen_read, NULL)) return 0;
+
+   //   if(!helper_exec(buf, peer_input, NULL)) return 1;
+
 
    return 1;
 }

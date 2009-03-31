@@ -1,8 +1,7 @@
+tp_listen_start.c
+   helper_exec
+      create handler for listener
 tp_listen_init
-   tp_listen_available
-
-   ltp_start().c -> single!
-      ceofhack.h
 
 Implement one transport protocol!
    -> tp_init

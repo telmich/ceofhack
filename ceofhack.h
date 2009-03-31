@@ -30,9 +30,9 @@
 #define MAX_RCP         1
 #define BIGBUF          65536
 
-#define MAX_COMM 64 /* maximum number of communication channels
-                          contains stdin, listen sockets
-                          and outgoing sockets */
+#define MAX_COMM        256 /* maximum number of communication channels
+                               contains stdin, listen sockets
+                               and outgoing sockets */
 
 /* FIXME: need to listen on stdin and ipv4 socket  --> STATIC */
 #define HP_LAST 2
@@ -164,10 +164,12 @@ int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 int config_init();
 
 int tp_init();
-int tp_listen_init();
 int tp_add_available(char *name, struct cconfig entry);
 int tp_add_enabled(char *name, struct cconfig entry);
 int tp_add_listener(char *name, struct cconfig entry);
+
+int tp_listen_init();
+int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
 struct cconfig *tp_listen_available(struct ltp proto);
 
