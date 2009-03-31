@@ -50,9 +50,9 @@ int tp_send(char *nick, char *msg)
     * pipe into transport protocol
     * add pipe to poll list
     * return to work
-    *
-    *
-    *
+    * on incoming message, read result of send
+    * - resend if failed
+    * - remove from queue, if successful!
     */
 
 

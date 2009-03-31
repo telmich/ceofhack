@@ -4,6 +4,9 @@ documentation:
             - notify apic
    doc/EOF.tex
 
+   EOF packet -> on the network
+   EOF onion packet -> with shell, may contain more EOF onion packets
+
 tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 tp_send.c
    how to handle send / trasport protocol?
