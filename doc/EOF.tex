@@ -120,14 +120,12 @@ definitions.
 This will be version \textbf{1} of the standard. It is the first definition.
 Further changes will be documented in this section.
 % -----------------------------------------------------------------------------
-\section{Introduction}
-Stateless: source routing, usage of acks.
-% -----------------------------------------------------------------------------
-\section{Onion-Packets}
-What's seen from outside
-% -----------------------------------------------------------------------------
 \section{Packets}
 What's seen from inside (after stripping of the onion skin).
+% -----------------------------------------------------------------------------
+\subsection{Onion-Packets}
+What's seen from outside: A (multiple) times encrypted packet including
+transport protocol shell.
 % -----------------------------------------------------------------------------
 \section{Data types}
 % -----------------------------------------------------------------------------
@@ -360,6 +358,31 @@ THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
+
+Stateless: source routing, usage of acks.
+
+Unterscheiden zwischen listener und send.
+% -----------------------------------------------------------------------------
+\subsection{Initialisation}
+When a transport protocol is started by EOFi, the following
+information is available:
+
+\begin{longtable}{|c|c|c|c|}
+\caption{Command line arguments for transport protocols}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ARGV[1]: Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+\hline
+\end{longtable}
+
+% -----------------------------------------------------------------------------
+\subsubsection{Listening transport protocol (LTP)}
+The listening transport protocol uses the destination parameter as the
+address to listen to.
+% -----------------------------------------------------------------------------
+\subsubsection{Transport protocol (TP)}
+The transport protocol uses the destination parameter as the address to send to.
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \begin{longtable}{|c|c|c|c|}
@@ -371,26 +394,51 @@ Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header
 \hline
 Message & Binary data & The message & BLOB\\
 \hline
-Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
-\hline
 \end{longtable}
 % -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+100010
+HEREISDATA
+\end{verbatim}
+% -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
-This code is returned by the transport protocol subsystem to the
-EOF implementation on success.
-\begin{itemize}
-\item Parameter: none
-\end{itemize}
+This code is returned by the transport protocol subsystem to EOFi on success.
+After this return code, the transport protocol exits.
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+2000
+\end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{2001: Packet not sent}
 This code is returned by the transport protocol subsystem to the
 EOF implementation on failure.
-\begin{itemize}
-\item Parameter: none
-\end{itemize}
+After this return code, the transport protocol exits.
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+2001
+\end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{2002: Received packet}
 The listening transport protocol received a packet and notifies EOFi.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2002 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+\hline
+Message & Binary data & The message & BLOB\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+200212
+RECEIVEDDATA
+\end{verbatim}
 % -----------------------------------------------------------------------------
 \section{The user interface ("`ui2user"')}
 This section specifies the appereance of a user interface to the user.
