@@ -22,12 +22,28 @@
  *
  */
 
-#include <stdlib.h>     /* NULL           */
+#include <unistd.h>     /* read           */
+#include <stdio.h>      /* perror         */
 #include "ceofhack.h"   /* functions etc. */
 
 int tp_listen_read(int fd[])
 {
+   ssize_t len;
+   char buf[BIGBUF+1];
+
    /* read data into buffer until eof */
+   if((len = read(fd[0], buf, BIGBUF)) == -1) {
+      perror("read/tp_listen");
+      return 0;
+   }
+   /* strip \n, if present */
+   if(buf[len-1] == '\n') {
+      buf[len-1] = 0;
+   } else {
+      buf[len] = 0;
+   }
+
+   printf("data received: %s\n", buf);
 
    /* decrypt data, read command, choose function to use */
 
