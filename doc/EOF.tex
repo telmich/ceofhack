@@ -129,31 +129,27 @@ EOF-1\\Basic definitions
 % -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
+The command field 1 indicates the EOF subsystem.
 \begin{longtable}{|c|c|}
 \caption{Command field 0}\\
 \hline
-\textbf{Value} & \textbf{Description}\\
+\textbf{Value} & \textbf{Subsystem} / \textbf{Description}\\
 \hline
-1 & Message is coming from EOF implementation\\
+1*** & Message is coming from the EOF implementation\\
 \hline
-2 & Message is coming from EOF subsystem (internally)\\
+10** & \textbf{eofi2tp}: Transport protocols\\
 \hline
-3 & Message is coming from outside (received packet))\\
+11** & \textbf{eofi2ui}: User interface\\
 \hline
-\end{longtable}
-
-The command field 1 indicates the EOF subsystem.
-\begin{longtable}{|c|c|}
-\caption{Command field 1}\\
+2*** & Message is coming from EOF subsystem (internally)\\
 \hline
-\textbf{Value} & \textbf{Description}\\
+20** & \textbf{eofi2tp}: Transport protocols\\
 \hline
-0 & \textbf{eofi2tp}: Transport protocols\\
+21** & \textbf{eofi2ui}: User interface\\
 \hline
-1 & \textbf{eofi2ui}: User interface\\
+3*** & Message is coming from outside (received packet))\\
 \hline
 \end{longtable}
-
 The command fields 2 and 3 are defined by the respective subsystem.
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
@@ -161,17 +157,6 @@ This document specifies the basic datatypes and connection
 methods used in EOF-1. The aim is to stop repetition of
 datatype definition in other documents.
 
-\subsection{Changelog}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1 to v0.2}
-\begin{itemize}
-\item Add versions specification
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1}
-\begin{itemize}
-\item Initial release
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{Versions}
 This section clearifies the use of versions in the programs and protocols.
@@ -944,8 +929,6 @@ Must contain which channel, who send it and what is in the message.
 \subsubsection{Recieved a private message}
 UNFINISHED
 This messages was send only to us, not to a channel.
-% -----------------------------------------------------------------------------
-eof
 % -----------------------------------------------------------------------------
 \chapter{pmg2ceof import}
 
