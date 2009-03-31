@@ -127,39 +127,57 @@ What's seen from inside (after stripping of the onion skin).
 What's seen from outside: A (multiple) times encrypted packet including
 transport protocol shell.
 % -----------------------------------------------------------------------------
-\section{Data types}
+\section{Basic data types}
 % -----------------------------------------------------------------------------
-\subsection{Basic data types}
-% -----------------------------------------------------------------------------
-\subsubsection{Binary numbers}
+\subsection{Binary numbers}
 Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
 are exchanged. -- IS THIS TRUE?
+Remove all binary data, except for the EOF packages used by eofi2tp.
 % -----------------------------------------------------------------------------
-\subsubsection{The zero byte}
+\subsection{The zero byte}
 The zero byte is a byte with the value 0.
 % -----------------------------------------------------------------------------
-\subsubsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte).
+\subsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte),
+but are padded with zero bytes, if shorter than...
 % -----------------------------------------------------------------------------
-\subsubsection{ASCII numbers}
+\subsection{ASCII numbers}
 ASCII numbers use the decimal string representation of a number.
 % -----------------------------------------------------------------------------
-\subsubsection{Variable length strings}
+\subsection{Variable length strings}
 Before variable length strings the length is submitted in a fixed size
-datatype.
+datatype. WE DON'T use variable length strings, but varialbe length data!
 % -----------------------------------------------------------------------------
-\subsubsection{Fixed length strings}
+\subsection{Fixed length strings}
 Fixed length strings contain exactly the specified number of bytes:
 A 128-byte fixed length string consists of at most 128 bytes of text,
 which is then not zero terminated!
 If the text it contains is shorter than the specified length,
 it must be padded with zero bytes (see above).
 % -----------------------------------------------------------------------------
-\subsubsection{Padding data}
-Should be random data.
-% --------------------------------------------------------------------------
----
-\subsection{Commands}
+\section{EOF simple data types}
+The following sections define the datatypes used in EOF related
+applications. The recommened name for use in source
+code is added in parentheses after the human understandable name.
+% -----------------------------------------------------------------------------
+\subsection{Peer name (peername)}
+The peer name is a 128-byte fixed length string. It is only
+used internally to give a peer a rememberable name ("`a nick'").
+It is never transmitted over the network.
+% -----------------------------------------------------------------------------
+\subsection{Channel name (channel)}
+The channel name is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Message text (msgtext)}
+The message text is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Peer fingerprint (pfpr)}
+The peer fingerprint is a 40-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Padding data}
+Should be random data. NOT NEEDED, remove.
+% -----------------------------------------------------------------------------
+\subsection{EOF Commands}
 Commands are 4 ASCII numbers long.
 % -----------------------------------------------------------------------------
 \section{Interface description}
@@ -282,48 +300,30 @@ to the configuration directory.
 \subsubsection{CEOF\_CLIENT\_SOCKET is set}
 If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
+% #############################################################################
+
 % -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
-\subsection{EOF simple data types}
-The following sections define the datatypes used in EOF related
-applications. The recommened name for use in source
-code is added in parentheses after the human understandable name.
-% -----------------------------------------------------------------------------
-\subsubsection{Peer name (peername)}
-The peer name is a 128-byte fixed length string. It is only
-used internally to give a peer a rememberable name ("`a nick'").
-It is never transmitted over the network.
-% -----------------------------------------------------------------------------
-\subsubsection{Channel name (channel)}
-The channel name is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsubsection{Message text (msgtext)}
-The message text is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsubsection{Peer fingerprint (pfpr)}
-The peer fingerprint is a 40-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{EOF packet data types}
+\section{EOF packet data types ("`pkg2eofi"')}
 All packets must be signed by the sender and encrypted for the receiver.
-The different datatypes are just concatenated in the order
-described.
-An EOF packet always contains 512 bytes.
+The different datatypes are just concatenated in the order described.
+The following description of the content describes the pakckets
+in their unencrypted form.
 % -----------------------------------------------------------------------------
-\subsubsection{Message packet}
+\subsection{Message packet}
 \begin{itemize}
 \item Command type "`8000"'
 \item Channel name
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsubsection{Retrieve peer address}
+\subsection{Retrieve peer address}
 \begin{itemize}
 \item Command type "`8001"'
 \item Peer fingerprint
 \item Padding
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsubsection{Submit peer address}
+\subsection{Submit peer address}
 \begin{itemize}
 \item Command type "`8002"'
 \item Peer fingerprint
@@ -331,7 +331,7 @@ An EOF packet always contains 512 bytes.
 \item Padding
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsubsection{Forward packet}
+\subsection{Forward packet}
 \begin{itemize}
 \item Command type "`8003"'
 \item Peer fingerprint
@@ -389,6 +389,8 @@ The transport protocol uses the destination parameter as the address to send to.
 \caption{Command 1000 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
 \hline
 Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
 \hline
