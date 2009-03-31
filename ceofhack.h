@@ -156,6 +156,7 @@ int peer_list(char *);
 int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 char *peer_keyid_get(char *nick);
+char *peer_addr_get(char *name);
 
 int cgpg_init();
 int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
@@ -167,11 +168,12 @@ int tp_init();
 int tp_add_available(char *name, struct cconfig entry);
 int tp_add_enabled(char *name, struct cconfig entry);
 int tp_add_listener(char *name, struct cconfig entry);
-
 int tp_listen_init();
 int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
 struct cconfig *tp_listen_available(struct ltp proto);
+int tp_send(char *nick, char *msg);
+
 
 int cconfig_tree(struct cconfig *cg);
 struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);

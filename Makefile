@@ -14,19 +14,19 @@ SHCL=openreadclosestatic.c
 
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_add_enabled.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_listen_available.c tp_listen_start.c
-TRANSPORT_PROTO+=tp_listen_read.c
+TRANSPORT_PROTO+=tp_listen_read.c tp_send.c
+
+PEER=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
+PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
 
 CEOFHACK=main.c forkexecpipe.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=helper_fdonly.c helper_new.c helper_exec.c
 CEOFHACK+=cmds_init.c cmd_add.c cmd_check.c
 CEOFHACK+=user_input.c ui_quit.c ui_help.c
 CEOFHACK+=check_input.c
-CEOFHACK+=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
-CEOFHACK+=peer_keyid_get.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
-CEOFHACK+=peer_input.c
-CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL)
+CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 PROG=ceofhack decrypt

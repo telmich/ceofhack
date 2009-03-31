@@ -22,9 +22,9 @@
  *
  */
 
-#include <string.h>     /* memset, str*   */
-#include <stdio.h>     /* printf         */
-#include "ceofhack.h"  /* functions etc.  */
+#include <string.h>     /* memset, str*      */
+#include <stdio.h>      /* printf            */
+#include "ceofhack.h"   /* functions etc.    */
 
 int peer_send(char *str)
 {
@@ -61,7 +61,5 @@ int peer_send(char *str)
    printf("Encrypted message: %s\n", buf);
    
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
-  // return tp_send(nick, buf);
-
-   return 1;
+   return tp_send(nick, buf);
 }
