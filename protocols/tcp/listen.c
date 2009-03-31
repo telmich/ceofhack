@@ -54,6 +54,20 @@ int tcp_listen(const char *host, const char *serv)
 	return(listenfd);
 }
 
+ssize_t write_all(int fd, const void *buf, size_t count)
+{
+	size_t written=0;
+	while(written < count) {
+		ssize_t n = write(fd, buf+written, count-written);
+		if(n<0 && errno == EINTR)
+			continue;
+		if(n<=0)
+			return n;
+		written += n;
+	}
+	return written;
+}
+
 int main(int argc, char **argv)
 {
 	int listenfd, connfd;
@@ -103,28 +117,29 @@ int main(int argc, char **argv)
 				} while (n < 0 && errno == EINTR);
 			} while(n == 1);
 
-			if(c != '\n' || siz < 0) {
+			if(c != '\n' || siz < 0 || siz > 65536) {  //64k ought to be enough for anybody [tm]
 				close(connfd);
 				continue;
 			}
 
-			int sizlen = snprintf(0, 0, "%zd\n", siz);
-			char sizbuf[sizlen+1];
-			snprintf(sizbuf, sizlen+1, "%zd\n", siz);
-			write(1, sizbuf, sizlen);
-
-			char buf[4096];
-			ssize_t left = siz;
-			while(left > 0) {
-				n = read(connfd, buf, left < 4096 ? left : 4096);
+			char buf[siz];
+			size_t got=0;
+			while(got<siz) {
+				n = read(connfd, buf, siz-got);
 				if(n < 0 && errno == EINTR)
 					continue;
 				if(n <= 0)
 					break;
-				left -= n;
-				write(1, buf, n);
+				got += n;
 			}
 			close(connfd);
+			
+			int sizlen = snprintf(0, 0, "%zd\n", siz);
+			char sizbuf[sizlen+1];
+			snprintf(sizbuf, sizlen+1, "%zd\n", siz);
+			write_all(1, sizbuf, sizlen);
+
+			write_all(1, buf, siz);
 		}
 	}
 }
