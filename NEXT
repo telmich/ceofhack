@@ -1,3 +1,6 @@
+doc/EOF.tex:
+   create readable document, so adding new stuff is possible
+
 Currently: peer_send.c
    tp_send
    "Send message"
