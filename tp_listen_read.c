@@ -43,6 +43,8 @@ int tp_listen_read(int fd[])
       buf[len] = 0;
    }
 
+   /* send ACK to transport protocol */
+
    printf("data received: %s\n", buf);
 
    /* decrypt data, read command, choose function to use */

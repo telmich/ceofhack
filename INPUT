@@ -1,2 +1,0 @@
-/peer add telmich tcp://localhost:6667 41D89B16B16596A84C0B78C1828D71E9CE33EB52
-/peer send telmich test

@@ -5,10 +5,12 @@ Features:
 - add support to save (autosave) peers and keys (cconfig)
 - add support for cconfig-load (store cconfig directly into a structure)
 - configure gpg-binary in .ceof
+- implement topic for channels
 
 Code:
 - replace int[] for handler with int (check_input.c and dependend)
 - create a struct array for commands (user_input.c)
 - sanitise input (currently buffer overflow possible: peer_add.c)
 - add function to delete cconfig_tree (cconfig_tree_burn.c)
-- implement topic
+- add support for multiple addresses of a peer!
+   => gui, pmg: needs to save last used address & mark unreachable address

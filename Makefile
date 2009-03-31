@@ -27,7 +27,7 @@ CEOFHACK_O=$(CEOFHACK:.c=.o)
 PROG=ceofhack decrypt
 
 all: $(PROG)
-	cat INPUT 
+	cat doc/dev/braindumps/sample-commands
 	./$(PROG)
 
 clean:

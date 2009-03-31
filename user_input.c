@@ -22,7 +22,7 @@
  *
  */
 
-#include <unistd.h>     /* read */
+#include <unistd.h>     /* read           */
 #include <stdio.h>      /* perror         */
 #include <string.h>     /* str*           */
 
