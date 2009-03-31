@@ -89,16 +89,13 @@ spread the word
 % -----------------------------------------------------------------------------
 \section{Conventions}
 \$NAME = variable
-% -----------------------------------------------------------------------------
-\section{Introduction}
-missing :-)
-and further sections, too. Currently just documenting what is important
-for now.
 % ----------------------------------------------------------------------------
-\chapter{The EOF protocol}
+\chapter{The EOF standard}
+Contains protocol specifications, paths, interfaces and environment
+definitions.
 % -----------------------------------------------------------------------------
 \section{Version}
-This will be version \textbf{1} of the protocol. It is the first definition.
+This will be version \textbf{1} of the standard. It is the first definition.
 Further changes will be documented in this section.
 % -----------------------------------------------------------------------------
 \section{Introduction}
@@ -111,10 +108,39 @@ What's seen from outside
 What's seen from inside (after stripping of the onion skin).
 % -----------------------------------------------------------------------------
 \section{Data types}
+% -----------------------------------------------------------------------------
+\subsection{Basic data types}
+% -----------------------------------------------------------------------------
+\subsubsection{Binary numbers}
+Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
+are exchanged. -- IS THIS TRUE?
+% -----------------------------------------------------------------------------
+\subsubsection{The zero byte}
+The zero byte is a byte with the value 0.
+% -----------------------------------------------------------------------------
+\subsubsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte).
+% -----------------------------------------------------------------------------
+\subsubsection{ASCII numbers}
+ASCII numbers use the decimal string representation of a number.
+% -----------------------------------------------------------------------------
+\subsubsection{Variable length strings}
+Before variable length strings the length is submitted in a fixed size
+datatype.
+% -----------------------------------------------------------------------------
+\subsubsection{Fixed length strings}
+Fixed length strings contain exactly the specified number of bytes:
+A 128-byte fixed length string consists of at most 128 bytes of text,
+which is then not zero terminated!
+If the text it contains is shorter than the specified length,
+it must be padded with zero bytes (see above).
+% -----------------------------------------------------------------------------
+\subsubsection{Padding data}
+Should be random data.
 % --------------------------------------------------------------------------
 ---
 \subsection{Commands}
-Commands are 4 bytes long and consist of a 4-digit decimal number with one ASCII digit per byte.
+Commands are 4 ASCII numbers long.
 % -----------------------------------------------------------------------------
 \section{Interface description}
 General: piped:
@@ -190,13 +216,13 @@ All protocol definitions (includings drafts) that are released after
 \subsection{Programs}
 % -----------------------------------------------------------------------------
 \subsection{Connections}
-\subsection{Sockets}
-Sockets are named Unix sockets.
+Connections to ceofhack can be done via Unix-sockets (named Unix sockets) to
+~/.ceof/
 \subsection{Stdin  and stdout}
 To make programming easier, communication between some parts in EOF-1 is realised
 using stdin and stdout. 
 % -----------------------------------------------------------------------------
-\subsection{Environment}
+\section{Environment}
 Environment variable are set from the operating system or from the user.
 The following environment variables are used with EOF-1:
 % -----------------------------------------------------------------------------
@@ -210,7 +236,10 @@ Ceof configuration directory.
 The socket that the clients (GUIs) should use.
 Relative to the directory specified by CEOF\_DIR.
 % -----------------------------------------------------------------------------
-\subsection{Paths}
+\section{Configuration}
+Format is cconfig
+% -----------------------------------------------------------------------------
+\section{Paths}
 % -----------------------------------------------------------------------------
 \subsection{Ceof configuration directory}
 % -----------------------------------------------------------------------------
@@ -234,36 +263,6 @@ to the configuration directory.
 If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
 % -----------------------------------------------------------------------------
-\subsection{Datatypes and dataspecification}
-% -----------------------------------------------------------------------------
-\subsection{Basic data types}
-% -----------------------------------------------------------------------------
-\subsubsection{Binary numbers}
-Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
-are exchanged. -- IS THIS TRUE?
-% -----------------------------------------------------------------------------
-\subsubsection{The zero byte}
-The zero byte is a byte with the value 0.
-% -----------------------------------------------------------------------------
-\subsubsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte).
-% -----------------------------------------------------------------------------
-\subsubsection{ASCII numbers}
-ASCII numbers use the decimal string representation of a number.
-% -----------------------------------------------------------------------------
-\subsubsection{Variable length strings}
-Before variable length strings the length is submitted in a fixed size
-datatype.
-% -----------------------------------------------------------------------------
-\subsubsection{Fixed length strings}
-Fixed length strings contain exactly the specified number of bytes:
-A 128-byte fixed length string consists of at most 128 bytes of text,
-which is then not zero terminated!
-If the text it contains is shorter than the specified length,
-it must be padded with zero bytes (see above).
-% -----------------------------------------------------------------------------
-\subsubsection{Padding data}
-Should be random data.
 % -----------------------------------------------------------------------------
 \subsection{EOF simple data types}
 The following sections define the datatypes used in EOF related
@@ -508,9 +507,6 @@ Display nicks in the currently active channel.
 Make alias recommendation, not to be implemented directly.
 
 POST ceofhack-0.1
-% -----------------------------------------------------------------------------
-\section{Configuration}
-cconfig
 % -----------------------------------------------------------------------------
 \chapter{Implementation}
 Sample implementation for POSIX.
