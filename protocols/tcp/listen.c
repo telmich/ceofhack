@@ -137,8 +137,8 @@ int main(int argc, char **argv)
 			int sizlen = snprintf(0, 0, "%zd\n", siz);
 			char sizbuf[sizlen+1];
 			snprintf(sizbuf, sizlen+1, "%zd\n", siz);
+			write_all(1, "2002", 4);
 			write_all(1, sizbuf, sizlen);
-
 			write_all(1, buf, siz);
 		}
 	}
