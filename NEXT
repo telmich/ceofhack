@@ -1,4 +1,10 @@
 tp_send.c
+   how to handle send / trasport protocol?
+      - pipe data to it, add pipe to handler array, leave function
+      - when ack is replied, re-draw message?
+         - would need to track outgoing packages
+         - is needed for later versions anyway (think of resend)
+
 
 doc/EOF.tex:
    create readable document, so adding new stuff is possible
