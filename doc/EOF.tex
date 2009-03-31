@@ -1,6 +1,8 @@
 \documentclass[12pt,a4paper]{book}
 \usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
 \usepackage{longtable}           % lange Tabellen
+\usepackage{makeidx}             % indexing
+\makeindex
 
 \begin{document}
 \title{EOF\\Eris Onion Forwarding\\
@@ -10,7 +12,7 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 
 \maketitle
 \tableofcontents
-\newpage
+%\newpage
 
 % -----------------------------------------------------------------------------
 \chapter{Introduction}
@@ -89,6 +91,26 @@ spread the word
 % -----------------------------------------------------------------------------
 \section{Conventions}
 \$NAME = variable
+% -----------------------------------------------------------------------------
+\subsection{Writing convention}
+Parameters enclosed in $<$ and $>$ must be specified to the command.
+Parameters enclosed in $[$ and $]$ can be specified optionally.
+% -----------------------------------------------------------------------------
+\subsection{Abbreviations}
+As some terms are quite often used, we created some abbreviations:
+\index{abbreviations}%
+\index{EOF}
+\index{EOFi}
+\begin{longtable}{|c|c|}
+\caption{List of abbreviations}\\
+\hline
+\textbf{Abbreviation} & \textbf{Meaning}\\
+\hline
+EOF & Eris onion forwarding, name of this project\\
+\hline
+EOFi & An EOF implementation\\
+\hline
+\end{longtable}
 % ----------------------------------------------------------------------------
 \chapter{The EOF standard}
 Contains protocol specifications, paths, interfaces and environment
@@ -367,19 +389,15 @@ EOF implementation on failure.
 \item Parameter: none
 \end{itemize}
 % -----------------------------------------------------------------------------
+\subsection{2002: Received packet}
+The listening transport protocol received a packet and notifies EOFi.
+% -----------------------------------------------------------------------------
 \section{The user interface ("`ui2user"')}
-Maybe own section.
-List and describe commands.
-Command = subsection
-
-2008-08-17 v0.3-triemli / apic, ilo, telmich
-
-This specification lists Commands to be supported by all GUIs. It
-specifies, how the GUI presents itself to the user (ui2user).
-
-\subsection{Writing convention}
-Parameters enclosed in $<$ and $>$ must be specified to the command.
-Parameters enclosed in $[$ and $]$ can be specified optionally .
+This section specifies the appereance of a user interface to the user.
+All EOF compliant user interfaces must support the named commands, so the
+user can change the UI, but can be sure that this minimal amount of
+commands is always available.  This section is based on the specification
+written by apic, ilo, telmich on 2008-08-17 (Version v0.3-triemli).
 
 \subsection{Minimal philosophy}
 This specifications describes all the commands that \textbf{must} be
@@ -1263,4 +1281,6 @@ Channel name is signed by creator?
 \bibitem{avian-1} RFC 1149: http://www.faqs.org/rfcs/rfc1149.html
 \bibitem{uri-1} RFC 3986: http://www.faqs.org/rfcs/rfc3986.html
 \end{thebibliography}
+
+\printindex
 \end{document}

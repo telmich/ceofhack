@@ -28,7 +28,10 @@ CEOFHACK+=config_init.c
 CEOFHACK+=peer_input.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
+
 PROG=ceofhack decrypt
+
+DOC=doc/EOF
 
 all: $(PROG)
 	cat doc/dev/braindumps/sample-commands
@@ -66,7 +69,7 @@ decrypt-test:
 $(CEOFHACK_O): ceofhack.h Makefile
 
 documentation: doc/EOF.tex
-	( cd doc && pdflatex EOF.tex && pdflatex EOF.tex && pdflatex EOF.tex )
+	make -C doc all
 
 viewdoc: documentation
 	evince doc/EOF.pdf
