@@ -5,12 +5,26 @@ tp_send.c
          - would need to track outgoing packages
          - is needed for later versions anyway (think of resend)
       - create a queue of un-ack-ed packages?
-         - not acked by next peer
+         - not acked by transport protocol =>
+            - same as not acked by next peer
          - not acked by final peer
             struct package {
-               int id;        /* internal identifier */
-               int state;
+               int id;        /* internal identifier        */
+               int state;     /* NO_ACK, TP_ACK, FINAL_ACK  */
+               char *dest;    /* who to send to             */
+               char *msg;     /* plaintext message          */
+            };
+         - dest is the nick currently, but should be updated to a list later,
+           to support groups:
+            struct destination {
+               struct peer *who;
+               struct destination next;
+            }
          - parse queue every $interval
+            - to trigger resend
+      - adding url as argv adds additional work
+         - move url to command / stdin
+            - notify apic
 
 doc/EOF.tex:
    create readable document, so adding new stuff is possible

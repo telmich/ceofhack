@@ -42,7 +42,19 @@ int tp_send(char *nick, char *msg)
    }
    printf("Using %s to send to %s\n", send->path, url);
 
-   /* pass data to transport protocol */
+   /* create (onion) packet: post-0.1 release! */
+
+   /* pass final packet to transport protocol:
+    *
+    * add packet to outgoing queue
+    * pipe into transport protocol
+    * add pipe to poll list
+    * return to work
+    *
+    *
+    *
+    */
+
 
    //if(!helper_exec(tp->path, tp_listen_read, NULL)) return 0;
 
