@@ -507,117 +507,10 @@ Display nicks in the currently active channel.
 Make alias recommendation, not to be implemented directly.
 
 POST ceofhack-0.1
-% -----------------------------------------------------------------------------
-\chapter{Implementation}
-Sample implementation for POSIX.
-
-% -----------------------------------------------------------------------------
-\chapter{Transport protocols}
-% -----------------------------------------------------------------------------
-\section{Introduction}
-Only lower-case allowed (to prevent problems with broken filesystems).
-% -----------------------------------------------------------------------------
-\section{Examples}
-This sections shows some theoretic (theoretic because nobody implemented
-them yet) transport protocols.
-% -----------------------------------------------------------------------------
-\subsection{tcp}
-% -----------------------------------------------------------------------------
-\subsection{tcps}
-% -----------------------------------------------------------------------------
-\subsection{udp}
-% -----------------------------------------------------------------------------
-\subsection{http}
-% -----------------------------------------------------------------------------
-\subsection{https}
-% -----------------------------------------------------------------------------
-\subsection{smtp}
-connect to smtp server
-% -----------------------------------------------------------------------------
-\subsection{smtps}
-% -----------------------------------------------------------------------------
-\subsection{mediawiki}
-url, user, password
-% -----------------------------------------------------------------------------
-\subsection{smb}
-write on windows shares
-% -----------------------------------------------------------------------------
-\subsection{email}
-Write an email to some address. Needs smtp-server set in configuration.
-% -----------------------------------------------------------------------------
-\subsection{dns}
-Use dns traffic to transport EOF protocols.
-
-% -----------------------------------------------------------------------------
-\section{Embedding into EOF}
-This section explains how to integrate a transport protocol into EOF.
-% -----------------------------------------------------------------------------
-\subsection{Adding a transport protocol}
-If you want to add the transport protocol \emph{tptest}:
-\begin{itemize}
-\item Create the directories
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/transport-protocols/available/\emph{tptest}}.
-\end{itemize}
-\item Create (link or copy) the executables to the filenames \textbf{listen}
-and \textbf{send}.
-\end{itemize}
-The EOF implementation will register the transport protocol automatically
-at the next start. You may register only the \textbf{listen} or
-\textbf{send} part of a protocol.
-% -----------------------------------------------------------------------------
-\subsection{Using a transport protocol}
-So far the EOF implementation knows about the implementation, and may also
-already use it for \emph{sending} packets. But there is no listener configured
-yet.
-To enable a listener for the protocol \emph{tptest} at the URL
-\emph{tptest:somewhere@protocol-specific}
-\begin{itemize}
-\item create a directory below
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/transport-protocols/enabled/}
-\end{itemize}
-\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
-\item Then add the URL to the file named $<\textbf{url}>$.
-\item If the transport protocol needs or allows additional configuration files,
-you need to create them in that directory.
-\end{itemize}
-The EOF implementation will parse the URL and check whether a supporting
-listener application is available.
-
-Will do chdir() to the directory! tp can open config files in current dir.
-what about url?
-   url = argv1?
-
-same for listen and send?
-   listenurl, sendurl, config in curdir
-Yes!
-
-The maximum length of the URL is defined in ceofhack.h (EOF\_L\_ADDRESS).
-If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
-
-IMPORTANT!
-% -----------------------------------------------------------------------------
-
-\section{Implementations}
-The following sections cover existent protocol implementations.
-The name of the section is the name of the registered implementation.
-Every section must at least contain:
-\begin{itemize}
-\item Author contact information
-\item URL of website
-\item EOF-Version that introduces support for the protocol
-\end{itemize}
-
-If there are multiple implementations available, create two subsections
-covering both implementations.
-% -----------------------------------------------------------------------------
-\chapter{gui2ceof import}
+%---------------------------------------------------------------------
+\section{Interface to the user interface ("`gui2ceof"')}
 
 Version: 2007-11-16 v0.3-bed / telmich
-
-% -----------------------------------------------------------------------------
-\section{Introduction}
 This document specifies the commands send from GUI to and from
 ceof\footnote{the central EOF-1 application} to the GUIs.
 % -----------------------------------------------------------------------------
@@ -641,10 +534,10 @@ ceof\footnote{the central EOF-1 application} to the GUIs.
 \item Link to the basic documentation
 \end{itemize}
 % -----------------------------------------------------------------------------
-\section{Connection}
+\subsection{Connection}
 Use the ceof client socket, as specified in the basic documentation.
 % -----------------------------------------------------------------------------
-\section{Commands}
+\subsection{Command overview}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
 All answers and all numbers are ASCII-numbers. We
 \textbf{never} transmit binary numbers.
@@ -841,7 +734,7 @@ Shutdown yourself, too.
 After that message ceof will exit and you should do the same.
 No answer possible, ceof already decided to vanish.
 % -----------------------------------------------------------------------------
-\section{The way it works}
+\subsection{The way it works}
 This section explains how the commands relate together and which commands to use
 in which order.
 
@@ -925,7 +818,112 @@ Must contain which channel, who send it and what is in the message.
 \subsubsection{Recieved a private message}
 UNFINISHED
 This messages was send only to us, not to a channel.
+%% -----------------------------------------------------------------------------
+\chapter{Implementation}
+Sample implementation for POSIX.
+
 % -----------------------------------------------------------------------------
+\chapter{Transport protocols}
+% -----------------------------------------------------------------------------
+\section{Introduction}
+Only lower-case allowed (to prevent problems with broken filesystems).
+% -----------------------------------------------------------------------------
+\section{Examples}
+This sections shows some theoretic (theoretic because nobody implemented
+them yet) transport protocols.
+% -----------------------------------------------------------------------------
+\subsection{tcp}
+% -----------------------------------------------------------------------------
+\subsection{tcps}
+% -----------------------------------------------------------------------------
+\subsection{udp}
+% -----------------------------------------------------------------------------
+\subsection{http}
+% -----------------------------------------------------------------------------
+\subsection{https}
+% -----------------------------------------------------------------------------
+\subsection{smtp}
+connect to smtp server
+% -----------------------------------------------------------------------------
+\subsection{smtps}
+% -----------------------------------------------------------------------------
+\subsection{mediawiki}
+url, user, password
+% -----------------------------------------------------------------------------
+\subsection{smb}
+write on windows shares
+% -----------------------------------------------------------------------------
+\subsection{email}
+Write an email to some address. Needs smtp-server set in configuration.
+% -----------------------------------------------------------------------------
+\subsection{dns}
+Use dns traffic to transport EOF protocols.
+
+% -----------------------------------------------------------------------------
+\section{Embedding into EOF}
+This section explains how to integrate a transport protocol into EOF.
+% -----------------------------------------------------------------------------
+\subsection{Adding a transport protocol}
+If you want to add the transport protocol \emph{tptest}:
+\begin{itemize}
+\item Create the directories
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/transport-protocols/available/\emph{tptest}}.
+\end{itemize}
+\item Create (link or copy) the executables to the filenames \textbf{listen}
+and \textbf{send}.
+\end{itemize}
+The EOF implementation will register the transport protocol automatically
+at the next start. You may register only the \textbf{listen} or
+\textbf{send} part of a protocol.
+% -----------------------------------------------------------------------------
+\subsection{Using a transport protocol}
+So far the EOF implementation knows about the implementation, and may also
+already use it for \emph{sending} packets. But there is no listener configured
+yet.
+To enable a listener for the protocol \emph{tptest} at the URL
+\emph{tptest:somewhere@protocol-specific}
+\begin{itemize}
+\item create a directory below
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/transport-protocols/enabled/}
+\end{itemize}
+\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
+\item Then add the URL to the file named $<\textbf{url}>$.
+\item If the transport protocol needs or allows additional configuration files,
+you need to create them in that directory.
+\end{itemize}
+The EOF implementation will parse the URL and check whether a supporting
+listener application is available.
+
+Will do chdir() to the directory! tp can open config files in current dir.
+what about url?
+   url = argv1?
+
+same for listen and send?
+   listenurl, sendurl, config in curdir
+Yes!
+
+The maximum length of the URL is defined in ceofhack.h (EOF\_L\_ADDRESS).
+If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
+
+IMPORTANT!
+% -----------------------------------------------------------------------------
+
+\section{Implementations}
+The following sections cover existent protocol implementations.
+The name of the section is the name of the registered implementation.
+Every section must at least contain:
+\begin{itemize}
+\item Author contact information
+\item URL of website
+\item EOF-Version that introduces support for the protocol
+\end{itemize}
+
+If there are multiple implementations available, create two subsections
+covering both implementations.
+% -----------------------------------------------------------------------------
+ -----------------------------------------------------------------------------
 \chapter{pmg2ceof import}
 
 2007-12-03 v0.1.3-bed / adi, telmich
