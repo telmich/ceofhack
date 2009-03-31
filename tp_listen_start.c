@@ -18,35 +18,19 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Check and init listening protocols
+ * Start listening protocol
  *
  */
 
-#include <stdlib.h>              /* NULL                          */
-#include <stdio.h>               /* printf                        */
-#include <string.h>              /* str*                          */
-#include <limits.h>              /* PATH_MAX                      */
+#include <stdlib.h>        /* NULL              */
+#include "ceofhack.h"      /* functions etc.    */
 
-
-#include "ceofhack.h"   /* functions etc. */
-
-int tp_listen_init()
+int tp_listen_start(struct cconfig *tp)
 {
-   int i;
-//   struct cconfig *listen;
- 
-   for(i=0; i < ltps_cnt; i++) {
+   if(!helper_exec(tp->path, tp_listen_read, NULL)) return 0;
 
-      /* has handler? */
-      if(!(ltps[i].listen = tp_listen_available(ltps[i]))) return 0;
+   //   if(!helper_exec(buf, peer_input, NULL)) return 1;
 
-      /* start it:
-       * cwd to dir
-       * argv1 = url
-      */
-//      if(!tp_listen_start(listen))) return 0;
-
-   }
 
    return 1;
 }

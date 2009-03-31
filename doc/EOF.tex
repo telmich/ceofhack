@@ -1,6 +1,8 @@
 \documentclass[12pt,a4paper]{book}
 \usepackage[latin1]{inputenc}    % Ascii-Format dieses Dokuments
 \usepackage{longtable}           % lange Tabellen
+\usepackage{makeidx}             % indexing
+\makeindex
 
 \begin{document}
 \title{EOF\\Eris Onion Forwarding\\
@@ -10,7 +12,7 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 
 \maketitle
 \tableofcontents
-\newpage
+%\newpage
 
 % -----------------------------------------------------------------------------
 \chapter{Introduction}
@@ -61,7 +63,23 @@ those protocols (also know as obfuscation) makes it harder to detect
 and block EOF traffic.
 % -----------------------------------------------------------------------------
 \section{Motivation}
-Must have been written somewhere else already
+Available and in use: jabber, irc, ICQ.
+Plain text protocols\footnote{Yes, they can be enhanced to use TLS/SSL,
+but this is not enforced.}. Having central server.
+
+Also available: silc.  Problem only partly solved.
+
+want something that has
+\begin{itemize}
+\item no central server
+\item uses onion routing
+\item uses well know crypto engine (so we do not have to care about this)
+\end{itemize}
+
+Also want to convey usage of pgp: currently pgp is not used very often.
+Thus if you use pgp, you are conspicuous. We try to make pgp part of the
+normal webtraffic (like HTTP packets).
+% FIXME: cleanup.
 % -----------------------------------------------------------------------------
 \section{Copying, authors, ...}
 % -----------------------------------------------------------------------------
@@ -74,31 +92,75 @@ spread the word
 \section{Conventions}
 \$NAME = variable
 % -----------------------------------------------------------------------------
-\section{Introduction}
-missing :-)
-and further sections, too. Currently just documenting what is important
-for now.
+\subsection{Writing convention}
+Parameters enclosed in $<$ and $>$ must be specified to the command.
+Parameters enclosed in $[$ and $]$ can be specified optionally.
 % -----------------------------------------------------------------------------
-\chapter{The EOF protocol}
+\subsection{Abbreviations}
+As some terms are quite often used, we created some abbreviations:
+\index{abbreviations}%
+\index{EOF}
+\index{EOFi}
+\begin{longtable}{|c|c|}
+\caption{List of abbreviations}\\
+\hline
+\textbf{Abbreviation} & \textbf{Meaning}\\
+\hline
+EOF & Eris onion forwarding, name of this project\\
+\hline
+EOFi & An EOF implementation\\
+\hline
+\end{longtable}
+% ----------------------------------------------------------------------------
+\chapter{The EOF standard}
+Contains protocol specifications, paths, interfaces and environment
+definitions.
 % -----------------------------------------------------------------------------
 \section{Version}
-This will be version \textbf{1} of the protocol. It is the first definition.
+This will be version \textbf{1} of the standard. It is the first definition.
 Further changes will be documented in this section.
-% -----------------------------------------------------------------------------
-\section{Introduction}
-Stateless: source routing, usage of acks.
-% -----------------------------------------------------------------------------
-\section{Onion-Packets}
-What's seen from outside
 % -----------------------------------------------------------------------------
 \section{Packets}
 What's seen from inside (after stripping of the onion skin).
 % -----------------------------------------------------------------------------
+\subsection{Onion-Packets}
+What's seen from outside: A (multiple) times encrypted packet including
+transport protocol shell.
+% -----------------------------------------------------------------------------
 \section{Data types}
+% -----------------------------------------------------------------------------
+\subsection{Basic data types}
+% -----------------------------------------------------------------------------
+\subsubsection{Binary numbers}
+Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
+are exchanged. -- IS THIS TRUE?
+% -----------------------------------------------------------------------------
+\subsubsection{The zero byte}
+The zero byte is a byte with the value 0.
+% -----------------------------------------------------------------------------
+\subsubsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte).
+% -----------------------------------------------------------------------------
+\subsubsection{ASCII numbers}
+ASCII numbers use the decimal string representation of a number.
+% -----------------------------------------------------------------------------
+\subsubsection{Variable length strings}
+Before variable length strings the length is submitted in a fixed size
+datatype.
+% -----------------------------------------------------------------------------
+\subsubsection{Fixed length strings}
+Fixed length strings contain exactly the specified number of bytes:
+A 128-byte fixed length string consists of at most 128 bytes of text,
+which is then not zero terminated!
+If the text it contains is shorter than the specified length,
+it must be padded with zero bytes (see above).
+% -----------------------------------------------------------------------------
+\subsubsection{Padding data}
+Should be random data.
 % --------------------------------------------------------------------------
 ---
 \subsection{Commands}
-Commands are 4 bytes long and consist of a 4-digit decimal number with one ASCII digit per byte.
+Commands are 4 ASCII numbers long.
 % -----------------------------------------------------------------------------
 \section{Interface description}
 General: piped:
@@ -113,31 +175,27 @@ EOF-1\\Basic definitions
 % -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
+The command field 1 indicates the EOF subsystem.
 \begin{longtable}{|c|c|}
 \caption{Command field 0}\\
 \hline
-\textbf{Value} & \textbf{Description}\\
+\textbf{Value} & \textbf{Subsystem} / \textbf{Description}\\
 \hline
-1 & Message is coming from EOF implementation\\
+1*** & Message is coming from the EOF implementation\\
 \hline
-2 & Message is coming from EOF subsystem (internally)\\
+10** & \textbf{eofi2tp}: Transport protocols\\
 \hline
-3 & Message is coming from outside (received packet))\\
+11** & \textbf{eofi2ui}: User interface\\
 \hline
-\end{longtable}
-
-The command field 1 indicates the EOF subsystem.
-\begin{longtable}{|c|c|}
-\caption{Command field 1}\\
+2*** & Message is coming from EOF subsystem (internally)\\
 \hline
-\textbf{Value} & \textbf{Description}\\
+20** & \textbf{eofi2tp}: Transport protocols\\
 \hline
-0 & \textbf{eofi2tp}: Transport protocols\\
+21** & \textbf{eofi2ui}: User interface\\
 \hline
-1 & \textbf{eofi2ui}: User interface\\
+3*** & Message is coming from outside (received packet))\\
 \hline
 \end{longtable}
-
 The command fields 2 and 3 are defined by the respective subsystem.
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
@@ -145,17 +203,6 @@ This document specifies the basic datatypes and connection
 methods used in EOF-1. The aim is to stop repetition of
 datatype definition in other documents.
 
-\subsection{Changelog}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1 to v0.2}
-\begin{itemize}
-\item Add versions specification
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1}
-\begin{itemize}
-\item Initial release
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{Versions}
 This section clearifies the use of versions in the programs and protocols.
@@ -189,13 +236,13 @@ All protocol definitions (includings drafts) that are released after
 \subsection{Programs}
 % -----------------------------------------------------------------------------
 \subsection{Connections}
-\subsection{Sockets}
-Sockets are named Unix sockets.
+Connections to EOFi can be done via Unix-sockets (named Unix sockets) to
+~/.ceof/
 \subsection{Stdin  and stdout}
 To make programming easier, communication between some parts in EOF-1 is realised
 using stdin and stdout. 
 % -----------------------------------------------------------------------------
-\subsection{Environment}
+\section{Environment}
 Environment variable are set from the operating system or from the user.
 The following environment variables are used with EOF-1:
 % -----------------------------------------------------------------------------
@@ -209,7 +256,10 @@ Ceof configuration directory.
 The socket that the clients (GUIs) should use.
 Relative to the directory specified by CEOF\_DIR.
 % -----------------------------------------------------------------------------
-\subsection{Paths}
+\section{Configuration}
+Format is cconfig
+% -----------------------------------------------------------------------------
+\section{Paths}
 % -----------------------------------------------------------------------------
 \subsection{Ceof configuration directory}
 % -----------------------------------------------------------------------------
@@ -233,36 +283,6 @@ to the configuration directory.
 If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
 "`\textit{clients/socket}"` should be replaced by its content.
 % -----------------------------------------------------------------------------
-\subsection{Datatypes and dataspecification}
-% -----------------------------------------------------------------------------
-\subsection{Basic data types}
-% -----------------------------------------------------------------------------
-\subsubsection{Binary numbers}
-Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
-are exchanged. -- IS THIS TRUE?
-% -----------------------------------------------------------------------------
-\subsubsection{The zero byte}
-The zero byte is a byte with the value 0.
-% -----------------------------------------------------------------------------
-\subsubsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte).
-% -----------------------------------------------------------------------------
-\subsubsection{ASCII numbers}
-ASCII numbers use the decimal string representation of a number.
-% -----------------------------------------------------------------------------
-\subsubsection{Variable length strings}
-Before variable length strings the length is submitted in a fixed size
-datatype.
-% -----------------------------------------------------------------------------
-\subsubsection{Fixed length strings}
-Fixed length strings contain exactly the specified number of bytes:
-A 128-byte fixed length string consists of at most 128 bytes of text,
-which is then not zero terminated!
-If the text it contains is shorter than the specified length,
-it must be padded with zero bytes (see above).
-% -----------------------------------------------------------------------------
-\subsubsection{Padding data}
-Should be random data.
 % -----------------------------------------------------------------------------
 \subsection{EOF simple data types}
 The following sections define the datatypes used in EOF related
@@ -339,11 +359,30 @@ Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
 
-The destination URL is passed as argument to the protocol's
-"`send"' program. E.g. for tcp: \textbf{tcp://127.0.0.3:42}
+Stateless: source routing, usage of acks.
 
-Note that the double slash (\textbf{//}) is optional.
+Unterscheiden zwischen listener und send.
+% -----------------------------------------------------------------------------
+\subsection{Initialisation}
+When a transport protocol is started by EOFi, the following
+information is available:
 
+\begin{longtable}{|c|c|c|c|}
+\caption{Command line arguments for transport protocols}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ARGV[1]: Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+\hline
+\end{longtable}
+
+% -----------------------------------------------------------------------------
+\subsubsection{Listening transport protocol (LTP)}
+The listening transport protocol uses the destination parameter as the
+address to listen to.
+% -----------------------------------------------------------------------------
+\subsubsection{Transport protocol (TP)}
+The transport protocol uses the destination parameter as the address to send to.
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \begin{longtable}{|c|c|c|c|}
@@ -357,31 +396,512 @@ Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+100010
+HEREISDATA
+\end{verbatim}
+% -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
-This code is returned by the transport protocol subsystem to the
-EOF implementation on success.
-\begin{itemize}
-\item Parameter: none
-\end{itemize}
+This code is returned by the transport protocol subsystem to EOFi on success.
+After this return code, the transport protocol exits.
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+2000
+\end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{2001: Packet not sent}
+\index{Command!2001}
 This code is returned by the transport protocol subsystem to the
 EOF implementation on failure.
+After this return code, the transport protocol exits.
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+2001
+\end{verbatim}
+% -----------------------------------------------------------------------------
+\subsection{2002: Received packet}
+\index{Command!2002}
+The listening transport protocol received a packet and notifies EOFi.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2002 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+\hline
+Message & Binary data & The message & BLOB\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+200212
+RECEIVEDDATA
+\end{verbatim}
+% -----------------------------------------------------------------------------
+\section{The user interface ("`ui2user"')}
+This section specifies the appereance of a user interface to the user.
+All EOF compliant user interfaces must support the named commands, so the
+user can change the UI, but can be sure that this minimal amount of
+commands is always available.  This section is based on the specification
+written by apic, ilo, telmich on 2008-08-17 (Version v0.3-triemli).
+
+\subsection{Minimal philosophy}
+This specifications describes all the commands that \textbf{must} be
+supported by every client. This means clients may have additional possibilities
+to send commands via different methdos (like clicking on a button or via
+voice input), but they must support all of the commands listed, because this
+way the user always has the familar commands available.
+
+\subsection{Changelog}
+\subsubsection{v0.1-mrmcd110b to v0.2-train}
+   \begin{itemize}
+      \item Renamed \textbf{mslist} to \textbf{mlist}, so it is consequently the prefix
+      "`m"' for marktschreier.
+      \item Some minor language cleanup 
+      \item Added "`minimal philosophy"'
+      \item Added minimal writing convention
+      \item Added /peer commands
+      \item Gave the document some structure
+      \item \textbf{Change by}: telmich
+   \end{itemize}
+
+\subsection{Commands in general}
+All commands begin with a "`/"' as first character (adopted from IRC).
+%---------------------------------------------------------------------
+\subsection{Command length}
+The user intertace shall only accept commands up to a langth of 256 Byte.
+If the user inputs longer commands, they must be truncated
+to 256 Bytes.
+%---------------------------------------------------------------------
+\subsubsection{Send text}
+If there is no /, it should be assumed that it is a message.
+The text will be send to the currently selected channel or nick.
+
+%---------------------------------------------------------------------
+\subsubsection{/join $<marktschreier>$ $<channel>$}
+Join the specific channel on the specified marktschreier.
+TO BE REWORKED
+POST ceofhack-0.1
+%---------------------------------------------------------------------
+\subsubsection{/list $<markschreier>$}
+List available channels on specified marktschreier.
+TO BE REWORKED
+POST ceofhack-0.1
+
+%---------------------------------------------------------------------
+\subsection{/mlist}
+List connected marktschreier.
+TO BE REWORKED
+POST ceofhack-0.1
+
+%---------------------------------------------------------------------
+\subsection{/mconnect $<marktschreier>$}
+Connect to marktschreier.
+TO BE REWORKED
+POST ceofhack-0.1
+
+%---------------------------------------------------------------------
+\subsection{/whois $<nick>$}
+Display detailled information about a nick:
 \begin{itemize}
-\item Parameter: none
+\item PGP details
+\begin{itemize}
+\item Fingerprint
+\item Full name
+\item E-Mail
+\end{itemize}
+\item List of transport protocols with status
+\end{itemize}
+
+Implement in ceofhack-0.1!
+%---------------------------------------------------------------------
+\subsection{/clist $<channel>$}
+Display nicks in the specified channel.
+TO BE REWORKED
+POST ceofhack-0.1
+
+%---------------------------------------------------------------------
+\subsection{/leave $<channel>$}
+Leave a channel.
+
+POST ceofhack-0.1
+
+
+%---------------------------------------------------------------------
+\subsection{/peer add $<$name$>$ $<$initial address$>$ $<$fingerprint$>$}
+Add the peer as \textit{name} to the list of known peers
+and connect to it, to retrieve other addresses.
+\begin{itemize}
+\item \textit{name} is 128 Bytes, including 0-byte termination.
+If the name is shorter it is padded with 0-bytes.
+\item \textit{initial address} is 128 Bytes, including 0-byte termination.
+If the initial address is shorter it is padded with 0-bytes.
+\end{itemize}
+
+TO BE REWORKED
+
+Implement in ceofhack-0.1!
+
+Length: as in ceofhack.h
+%---------------------------------------------------------------------
+\subsection{/peer rename $<$oldname$>$ $<$newname$>$}
+Renames the peer.
+%---------------------------------------------------------------------
+\subsection{/peer send $<$name$>$ $<$msg$>$}
+Send message \textit{msg} to peer \textit{name}.
+%---------------------------------------------------------------------
+\subsection{/peer list}
+List currently known peers.
+
+Implement in ceofhack-0.1!
+%---------------------------------------------------------------------
+\subsection{/quit}
+Tell ceof to quit, ceof tells all GUIs and subcomponents to quit and quits.
+%---------------------------------------------------------------------
+
+\subsection{Aliases}
+Those commands are recommended for easier integration of new people using EOF.
+%---------------------------------------------------------------------
+\subsection{/msg $<nick>$ $<message>$}
+Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
+%---------------------------------------------------------------------
+\subsection{/names}
+Display nicks in the currently active channel.
+
+Make alias recommendation, not to be implemented directly.
+
+POST ceofhack-0.1
+%---------------------------------------------------------------------
+\section{Interface to the user interface ("`eofi2ui"')}
+
+Version: 2007-11-16 v0.3-bed / telmich
+This document specifies the commands send from GUI to and from
+ceof\footnote{the central EOF-1 application} to the GUIs.
+% -----------------------------------------------------------------------------
+\subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{draft-1 to v0.2-bed}
+\begin{itemize}
+\item Many cleanups
+\item Changed socket location
+\item Clearified what todo without \textit{CEOF\_DIR} and \textit{HOME} set
+\item Added exit command.
+\item Changed number of bytes for marktschreier from 512 Bytes to 128 Bytes
+\item Changed number of bytes for channel name  from 512 Bytes to 128 Bytes
+\item Added ranges (001-00x)
 \end{itemize}
 % -----------------------------------------------------------------------------
-\section{The user interface (UI)}
-Maybe own section.
-List and describe commands.
-Command = subsection
+\subsubsection{v0.2-bed to v0.3-bed}
+\begin{itemize}
+\item Add fingerprint to \textbf{0021}
+\item Add command \textbf{0023}: Retrieve peer fingerprint
+\item Link to the basic documentation
+\end{itemize}
 % -----------------------------------------------------------------------------
-\section{Configuration}
-cconfig
+\subsection{Connection}
+Use the ceof client socket, as specified in the basic documentation.
+% -----------------------------------------------------------------------------
+\subsection{Command overview}
+All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+All answers and all numbers are ASCII-numbers. We
+\textbf{never} transmit binary numbers.
+\textbf{Client commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item \textbf{00}: client meta command (something that does not affect the user)
+\begin{itemize}
+\item \textbf{000}: (De-)Initialisation
+\item \textbf{001}: Marktschreier related
+\item \textbf{002}: Peer related
+\item \textbf{003}: Channel related
+\end{itemize}
+\item \textbf{01}: messages
+\item \textbf{11}: sucess answers from ceof
+\item \textbf{12}: error answers from ceof
+\item \textbf{13}: messages / notifications initiated by ceof
+\end{itemize}
 
 % -----------------------------------------------------------------------------
+\subsection{0000: Register client}
+After the "`0000"' the client directly appends two ASCII digits containing the
+version of the client to ceof protocol it speaks. This specification uses version
+"`04"'.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1100}: success, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0001: Deregister client}
+This client derigesters from ceof. Ceof will keep on running, even if this
+was the last client.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1101}: sucess, you are disconnected
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0009: Request for exit}
+Tells ceof to exit and to notify all guis to exit.
+It will not reply anything to you, but issue an exit notify to all clients,
+including the requesting one.
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{0010: List connected markschreiers}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1102}: list follows
+\begin{itemize}
+\item four ASCII-digits containing number of peers ("`num\_peer"')
+\item after that follow \textit{num\_peer} peer ids:
+\begin{itemize}
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
+\item 40 Byte containing the fingerprint of the
+key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+% ok
+% -----------------------------------------------------------------------------
+\subsection{0011: Connect to markschreier}
+After the "`0011"' follow 128 Bytes describing how to connect
+to the marktschreier ("`tcp://62.65.138.66:42'" for instance).
+If the URI is shorter than 128 bytes, the remain should be filled with 0 bytes
+(also known as \verb='\0'=).
+
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1103}: success
+\item \textbf{1210}: protocol (like "`tcp://"') not supported
+\item \textbf{1211}: connection could not be established
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0020: Retrieve list of known peers}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1120}: list follows
+\begin{itemize}
+\item four ASCII-digits containing number of peers ("`num\_peer"')
+\item after that follow \textit{num\_peer} peer ids:
+\begin{itemize}
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
+\item 40 Byte containing the fingerprint of the
+key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0021: Add peer}
+Aftere the "`0021"' follow
+
+\begin{itemize}
+\item 128 bytes for the name of the peer
+\item 128 bytes describing how to connect to the peer.
+\item 40 bytes  containing the pgp-fingerprint of the key
+\end{itemize}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1121}: success, registered peer
+\item \textbf{1220}: unknown peer
+\item \textbf{1222}: peer name already used
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0022: Send message to peer}
+Aftere the "`0022"' follow 128 bytes for the peer name
+and after that 128 Bytes for the message.
+Both 0-terminated, 0 padded.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1122}: success
+\item \textbf{1221}: unknown peer
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0023: Retrieve peer fingerprint}
+Aftere the "`0023"' follows a 128 bytes fixed length string for the peer name.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1123}: success
+\begin{itemize}
+\item follows 40 bytes fixed length string containing the fingerprint
+\end{itemize}
+\item \textbf{1221}: unknown peer
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0030: Get list of channels}
+After the "`0030"' follow 128 Bytes containing the 
+name of the peer.
+
+Answers from ceof:
+
+\begin{itemize}
+\item \textbf{1130}: got list; following four ASCII-digits containing
+number of channels ("`num\_chan"'); after that  num\_chan 128 Bytes packets
+follow containing the channel name, padded with 0-bytes
+\item \textbf{1230}: connection could not be established
+\end{itemize}
+% OK
+% -----------------------------------------------------------------------------
+\subsection{0031: Ask to join a channel via marktschreier}
+After the "0031" follow
+
+\begin{enumerate}
+\item 128 Bytes containing the peer name
+\item 128 Bytes describing the channel name.
+\end{enumerate}
+
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1131}: success (means: markschreier asked known peers to
+connect to us)
+\item \textbf{1231}: connection could not be established
+\item \textbf{1232}: access denied by markschreier: you are not allowed to join
+\end{itemize}
+% Ok
+% -----------------------------------------------------------------------------
+\subsection{0032: Send message to channel}
+Aftere the "0032" follow 128 bytes for the channel name and after
+that 128 Bytes for the message.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1132}: success
+\item \textbf{1233}: unknown channel
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0033: Create channel}
+Aftere the "`0033"' follow 128 bytes containing the name of the channel.
+\begin{itemize}
+\item \textbf{1133}: success
+\item \textbf{1234}: Channel already exists
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{0034: Submit channel to marktschreier}
+Aftere the "`0034"' follow 128 bytes containing the channel channel.
+\begin{itemize}
+\item \textbf{1134}: success
+\item \textbf{1235}: Channel already exists
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1300: Recieved message}
+After the "1300" follows:
+\begin{itemize}
+\item "`C"' for recieved in channel or "`P"' for recieved by a peer
+\item 128 byte containing either the channel or the peer name
+\item 128 byte containing either the channelname, if the first byte was a "`C"'
+\item 128 Byte message
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1399: Exit notify}
+ceof is being shutdown.
+Shutdown yourself, too.
+After that message ceof will exit and you should do the same.
+No answer possible, ceof already decided to vanish.
+% -----------------------------------------------------------------------------
+\subsection{The way it works}
+This section explains how the commands relate together and which commands to use
+in which order.
+
+% -----------------------------------------------------------------------------
+\subsection{GUI initiated commands}
+This section and all subsections are not yet finished. They
+are in this draft to show the interested reader a preview of the
+content of the next draft.
+% -----------------------------------------------------------------------------
+\subsubsection{GUI startup}
+What todo, when the GUI starts.
+Connect to ceof. Find out about
+\begin{itemize}
+\item joined channels,
+\item connected marktscheier
+\item and open queries.
+\end{itemize}
+It thus issues the following commands:
+register, list joined channels, list open queries, list marktschreier.
+% -----------------------------------------------------------------------------
+\subsubsection{Creating a channel}
+When you want to create a channel, you simply have to give it a name.
+Ceof will use that name and sign it with your pgp key. The result is the
+global unique channel identifier. For testing, you can build your channels
+easily on the commandline:
+\begin{verbatim}
+% echo -n '!eof' > CHANNELNAME
+% cat CHANNELNAME 124byteszero > CHANNELNAME.padded
+% gpg -s CHANNELNAME 
+
+You need a passphrase to unlock the secret key for
+user: "Nico Schottelius (telmich) <nico-public@schottelius.org>"
+1024-bit DSA key, ID 9885188C, created 2006-09-27
+
+% ls -l CHANNELNAME*
+-rw------- 1 nico nico   4 2007-09-17 21:32 CHANNELNAME
+-rw------- 1 nico nico 128 2007-09-17 21:32 CHANNELNAME.padded
+-rw------- 1 nico nico 113 2007-09-17 21:32 CHANNELNAME.padded.gpg
+
+% gpg -d CHANNELNAME.padded.gpg 2>/dev/null
+!eof
+\end{verbatim}
+% -----------------------------------------------------------------------------
+\subsubsection{Finding a channel}
+UNFINISHED
+replace internal id with signature!
+
+The GUI asks ceof, which channels are known. After that the GUI
+can use the internal ID (which is "`unique"', as in: it is a 32 bit integer
+that is increased as long as ceof is running) to join it.
+% -----------------------------------------------------------------------------
+\subsubsection{Joining a channel}
+UNFINISHED
+The channel must be known through 
+% -----------------------------------------------------------------------------
+\subsubsection{Leaving a channel}
+UNFINISHED
+Sends a message to all known participants that we leave the channel now.
+% -----------------------------------------------------------------------------
+\subsubsection{Invite to channel}
+UNFINISHED
+If you create a new channel, you may want to invite people to it.
+% -----------------------------------------------------------------------------
+\subsubsection{Listing friends}
+% -----------------------------------------------------------------------------
+\subsection{ceof initiated commands / messages}
+UNFINISHED
+% -----------------------------------------------------------------------------
+\subsubsection{Recieved a join request}
+UNFINISHED
+Somebody wants to join in a channel, in which you are a member.
+% -----------------------------------------------------------------------------
+\subsubsection{Recieved a join notification request}
+UNFINISHED
+Somebody wants us to tell all members of the channel that she wants to join us.
+% -----------------------------------------------------------------------------
+\subsubsection{Recieved a channel message}
+UNFINISHED
+Must contain which channel, who send it and what is in the message.
+% -----------------------------------------------------------------------------
+\subsubsection{Recieved a private message}
+UNFINISHED
+This messages was send only to us, not to a channel.
+%% -----------------------------------------------------------------------------
 \chapter{Implementation}
-Sample implementation for POSIX.
+Sample implementation for POSIX systems.
+% -----------------------------------------------------------------------------
+\section{Status}
+Supported items of the current version are at least:
+\begin{longtable}{|c|c|c|}
+\caption{Implemented items in the sample implementation}\\
+\hline
+\textbf{Feature} & \textbf{Description} & \textbf{Since version/commit} \\
+\hline
+/quit & ui2user command & d372b38a2da99703066a1b9aa63cce9a84f72709\\
+\hline
+/peer add & ui2user command & 8dab67c01aa78d8b6ff0cea311d924d7215d187d\\
+\hline
+\end{longtable}
 
 % -----------------------------------------------------------------------------
 \chapter{Transport protocols}
@@ -484,6 +1004,327 @@ Every section must at least contain:
 If there are multiple implementations available, create two subsections
 covering both implementations.
 % -----------------------------------------------------------------------------
+ -----------------------------------------------------------------------------
+\chapter{pmg2ceof import}
+
+2007-12-03 v0.1.3-bed / adi, telmich
+
+\section{Introduction}
+This document specifies the commands send from \textbf{pmg} to and from
+\textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
+
+\subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.2 to v0.1.3}
+\begin{itemize}
+\item Added name of peer to "`\textbf{1304}"', "`\textbf{1305}"' and "`\textbf{1306}"'
+\item Changed protocol version to "`03"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.1 to v0.1.2}
+\begin{itemize}
+\item "`\textbf{1300}"' expanded: Now also passing the fingerprint
+\item "`\textbf{1303}"' expanded: Return the next address
+\item Added commands "`\textbf{1304}"' to "`\textbf{1307}"'
+\item Changed protocol version to "`02"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1 to v0.1.1}
+\begin{itemize}
+\item Removed support for "`\textbf{0001}"'
+\begin{itemize}
+\item No need to deregister on crash, \textbf{ceof} will restart you anyway.
+\end{itemize}
+\item Changed protocol version to "`01"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1}
+\begin{itemize}
+\item Initial release
+\end{itemize}
+% -----------------------------------------------------------------------------
+\section{Commands}
+All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+There is no transfer of binary numbers between \textbf{ceof} and \textbf{pmg}.
+All answers and all numbers are ASCII-numbers. We
+\textbf{pmg commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item \textbf{0}: \textbf{pmg} messages
+\begin{itemize}
+\item \textbf{00}: \textbf{pmg} (de-)initialisation
+\item \textbf{01}: \textbf{pmg} success messages
+\item \textbf{02}: \textbf{pmg} error messages
+\end{itemize}
+\item \textbf{1}: \textbf{ceof} messages
+\begin{itemize}
+\item \textbf{10}: \textbf{ceof} (de-)initialisation
+\item \textbf{11}: \textbf{ceof} success messages
+\item \textbf{12}: \textbf{ceof} error messages
+\item \textbf{13}: \textbf{ceof} peer messages
+\end{itemize}
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Pmg commands}
+% -----------------------------------------------------------------------------
+\subsubsection{0000: Register pmg}
+After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
+version of the client to ceof protocol it speaks. This specification
+uses version "`\textbf{03}"'.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1100}: success, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{Ceof commands}
+% -----------------------------------------------------------------------------
+\subsubsection{1099: Exit}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0199}: Exiting
+\item \textbf{0223}: strange error (results in being killed -9)
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1300: Add peer}
+After the \textbf{1300} follows
+\begin{itemize}
+\item a 128 byte "`fixed length string"' containing the peer name
+\item a 128 byte "`fixed length string"' containing the peer address
+\item a 40 byte  "`fixed length string"' containing the peer fingerprint
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: peer added
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1301: Get peer fingerprint}
+After the \textbf{1301} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: success: fingerprint follows
+\begin{itemize}
+\item 40 byte "`fixed length string"' containing the fingerprint
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1302: Rename peer}
+After the \textbf{1302} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the old name of the peer
+\item 128 byte "`fixed length string"' containing the new name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0101}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1303: Get address of peer}
+After the \textbf{1303} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0102}: success
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the address
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+\textbf{Pmg} MUST keep state of the last sent address.
+\textbf{Pmg} MUST return the next address it knows of the peer.
+If there is only one address, it is the next address.
+% -----------------------------------------------------------------------------
+\subsubsection{1304: Add address to peer}
+After the \textbf{1304} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 128 byte "`fixed length string"' containing an address to add
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0104}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1305: Remove address from peer}
+After the command follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 128 byte "`fixed length string"' containing the address to remove
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0105}: success
+\item \textbf{0205}: Cannot remove, because it is the last known address
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1306: Update peer fingerprint}
+After the command follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 40  byte "`fixed length string"' containing the new peer fingerprint
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0106}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1307: Remove peer}
+After the \textbf{1307} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0107}: success, peer removed
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\chapter{politiker2ceof import}
+
+2007-11-12 v0.1-train / telmich
+
+\section{Introduction}
+This document specifies the commands send from politiker to and from
+ceof\footnote{the central EOF-1 application} to the politiker.
+
+\subsection{Changelog}
+\subsubsection{none}
+\begin{itemize}
+\item -
+\end{itemize}
+% -----------------------------------------------------------------------------
+\section{Connection}
+The politiker is started by ceof at startup and communicates through stdin
+and stdout.
+% -----------------------------------------------------------------------------
+\section{Commands}
+All commands are send as uint32\_t types.
+\textbf{Politiker commands} always begin with
+\textbf{3} ("`3042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+ceof begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item \textbf{30}: politiker messages
+\begin{itemize}
+\item \textbf{300}: (De-)Initialisation
+\item \textbf{301}: Peer related messages
+\item \textbf{302}: Message related messages
+\end{itemize}
+\item \textbf{10}: ceof messages
+\begin{itemize}
+\item \textbf{100}: (De-)Initialisation
+\item \textbf{101}: Peer related messages
+\item \textbf{102}: Message related messages
+\item \textbf{103}: Message related answers
+\end{itemize}
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{30: Politiker messages}
+% -----------------------------------------------------------------------------
+\subsection{3000: Register politker}
+After the "`3000"' the politker directly appends an
+\textit{uint32\_t} containing the version of the politker to ceof protocol
+it speaks. This specification uses version number "`0"'.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1100}: sucess, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{3001: Deregister politiker}
+The politker has some problem and has to exit. Ceof will restart a new
+instance of it.
+Answers from ceof:
+\begin{itemize}
+\item none
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{3010: Retrieve random peer address and fingerprint}
+The politker needs some peer information to be used as a hop.
+Ceof forwards that request to \textbf{pmg}\footnote{peer manager} and returns
+the answer to the politiker.
+Answers from ceof:
+\begin{itemize}
+\item 1010: Data follows
+\begin{itemize}
+\item \textit{peer\_address}: 128 Bytes, 0 padded, 0 terminated
+\item \textit{peer\_fingerprint}: 40 Bytes char array
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{3011: Retrieve number of available peers}
+The politker needs to know how much "`unique"' peers are available,
+so it can match the required minimum.
+Ceof forwards that request to \textbf{pmg} and returns the answer to the
+politiker.
+Answers from ceof:
+\begin{itemize}
+\item 1010: Data follows
+\begin{itemize}
+\item \textit{number\_of\_peers}: uint32\_t
+\end{itemize}
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{3020: Created an encrypted packet}
+Passes the following information to ceof:
+\begin{itemize}
+\item The length of the packet (uint32\_t) (\textit{pck\_len})
+\item The packet (\textit{pck})
+\end{itemize}
+
+After the \textbf{politiker} send \textit{pck\_len},
+\textbf{ceof} must respond with either
+\begin{itemize}
+\item \textbf{1030}: pagket length is accepted
+\item \textbf{1031}: pagket length is too long
+\end{itemize}
+
+If the response is \textit{1030}, \textbf{politiker} should send the
+pcaket, otherwise this session is finished and \textbf{politiker}
+should drop the packet.
+% -----------------------------------------------------------------------------
+\subsection{10: Ceof messages}
+% -----------------------------------------------------------------------------
+\subsection{1020: Create encrypted packet}
+Passes the following information to the politiker:
+\begin{itemize}
+\item GPG-Fingerprint of the peer (40 Bytes char array) (\textit{fpr})
+\item Adress of the peer (128 Bytes, 0 padded, 0 terminated) (\textit{address})
+\item The length of the message (uint32\_t) (\textit{msg\_len})
+\item The message (\textit{msg})
+\end{itemize}
+
+After \textbf{ceof} send \textit{msg\_len}, politiker must respond with
+either
+\begin{itemize}
+\item \textbf{3020}: message length is accepted
+\item \textbf{3021}: message length is too long
+\end{itemize}
+
+If the response is \textit{3020}, \textbf{ceof} should send the messsage,
+otherwise this session is finished and the next thing the politiker expects
+is a command.
+
+% -----------------------------------------------------------------------------
 \chapter{Unsorted}
 \section{Channels}
 Exist as long as somebody remembers it
@@ -503,4 +1344,6 @@ Channel name is signed by creator?
 \bibitem{avian-1} RFC 1149: http://www.faqs.org/rfcs/rfc1149.html
 \bibitem{uri-1} RFC 3986: http://www.faqs.org/rfcs/rfc3986.html
 \end{thebibliography}
+
+\printindex
 \end{document}

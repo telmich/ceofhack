@@ -1,25 +1,5 @@
-tp_listen_init
-   tp_listen_available
-
-   ltp_start().c -> single!
-      ceofhack.h
-
-Implement one transport protocol!
-   -> tp_init
-      -> add handler to each tp
-         -> maybe via cconfig pointer
-      -> for listener:
-         -> read url (openreadclose!)
-         -> decode url
-            -> read until :
-         -> look for listener in tplist
-         -> start listener in correct dir
-
-   
-
-DOC:
-   - maindoc: latex, putting everything together
-   - transport protocols + create tcp!
+doc/EOF.tex:
+   create readable document, so adding new stuff is possible
 
 Currently: peer_send.c
    tp_send

@@ -18,35 +18,36 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Check and init listening protocols
+ * Read incoming data from a listening transport protocol
  *
  */
 
-#include <stdlib.h>              /* NULL                          */
-#include <stdio.h>               /* printf                        */
-#include <string.h>              /* str*                          */
-#include <limits.h>              /* PATH_MAX                      */
-
-
+#include <unistd.h>     /* read           */
+#include <stdio.h>      /* perror         */
 #include "ceofhack.h"   /* functions etc. */
 
-int tp_listen_init()
+int tp_listen_read(int fd[])
 {
-   int i;
-//   struct cconfig *listen;
- 
-   for(i=0; i < ltps_cnt; i++) {
+   ssize_t len;
+   char buf[BIGBUF+1];
 
-      /* has handler? */
-      if(!(ltps[i].listen = tp_listen_available(ltps[i]))) return 0;
-
-      /* start it:
-       * cwd to dir
-       * argv1 = url
-      */
-//      if(!tp_listen_start(listen))) return 0;
-
+   /* read data into buffer until eof */
+   if((len = read(fd[0], buf, BIGBUF)) == -1) {
+      perror("read/tp_listen");
+      return 0;
    }
+   /* strip \n, if present */
+   if(buf[len-1] == '\n') {
+      buf[len-1] = 0;
+   } else {
+      buf[len] = 0;
+   }
+
+   /* send ACK to transport protocol */
+
+   printf("data received: %s\n", buf);
+
+   /* decrypt data, read command, choose function to use */
 
    return 1;
 }

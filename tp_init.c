@@ -86,8 +86,5 @@ int tp_init()
    /* enable listener protocols/check handler */
    if(!tp_listen_init()) return 0;
 
-   /* enable listener protocols */
-//   if(!tp_enable_listener()) return 0;
-
    return 1;
 }
