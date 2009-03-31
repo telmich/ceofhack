@@ -794,7 +794,6 @@ Must contain which channel, who send it and what is in the message.
 UNFINISHED
 This messages was send only to us, not to a channel.
 % -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
 \chapter{gui2user import}
 
 2008-08-17 v0.3-triemli / apic, ilo, telmich
@@ -917,7 +916,197 @@ new people using EOF.
 %---------------------------------------------------------------------
 \subsection{/msg $<nick>$ $<message>$}
 Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
-%---------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\chapter{pmg2ceof import}
+
+2007-12-03 v0.1.3-bed / adi, telmich
+
+\section{Introduction}
+This document specifies the commands send from \textbf{pmg} to and from
+\textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
+
+\subsection{Changelog}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.2 to v0.1.3}
+\begin{itemize}
+\item Added name of peer to "`\textbf{1304}"', "`\textbf{1305}"' and "`\textbf{1306}"'
+\item Changed protocol version to "`03"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1.1 to v0.1.2}
+\begin{itemize}
+\item "`\textbf{1300}"' expanded: Now also passing the fingerprint
+\item "`\textbf{1303}"' expanded: Return the next address
+\item Added commands "`\textbf{1304}"' to "`\textbf{1307}"'
+\item Changed protocol version to "`02"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1 to v0.1.1}
+\begin{itemize}
+\item Removed support for "`\textbf{0001}"'
+\begin{itemize}
+\item No need to deregister on crash, \textbf{ceof} will restart you anyway.
+\end{itemize}
+\item Changed protocol version to "`01"'
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{v0.1}
+\begin{itemize}
+\item Initial release
+\end{itemize}
+% -----------------------------------------------------------------------------
+\section{Commands}
+All commands are send as 4-Byte ASCII digits (for instance "`0012"').
+There is no transfer of binary numbers between \textbf{ceof} and \textbf{pmg}.
+All answers and all numbers are ASCII-numbers. We
+\textbf{pmg commands} always begin with \textbf{0} ("`0042"' for instance),
+\textbf{answers} or \textbf{notifications} from
+\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
+After each command follows individual data. The second byte indicates the type of message:
+\begin{itemize}
+\item \textbf{0}: \textbf{pmg} messages
+\begin{itemize}
+\item \textbf{00}: \textbf{pmg} (de-)initialisation
+\item \textbf{01}: \textbf{pmg} success messages
+\item \textbf{02}: \textbf{pmg} error messages
+\end{itemize}
+\item \textbf{1}: \textbf{ceof} messages
+\begin{itemize}
+\item \textbf{10}: \textbf{ceof} (de-)initialisation
+\item \textbf{11}: \textbf{ceof} success messages
+\item \textbf{12}: \textbf{ceof} error messages
+\item \textbf{13}: \textbf{ceof} peer messages
+\end{itemize}
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Pmg commands}
+% -----------------------------------------------------------------------------
+\subsubsection{0000: Register pmg}
+After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
+version of the client to ceof protocol it speaks. This specification
+uses version "`\textbf{03}"'.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1100}: success, you are connected
+\item \textbf{1200}: version not supported
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{Ceof commands}
+% -----------------------------------------------------------------------------
+\subsubsection{1099: Exit}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0199}: Exiting
+\item \textbf{0223}: strange error (results in being killed -9)
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1300: Add peer}
+After the \textbf{1300} follows
+\begin{itemize}
+\item a 128 byte "`fixed length string"' containing the peer name
+\item a 128 byte "`fixed length string"' containing the peer address
+\item a 40 byte  "`fixed length string"' containing the peer fingerprint
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: peer added
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1301: Get peer fingerprint}
+After the \textbf{1301} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0100}: success: fingerprint follows
+\begin{itemize}
+\item 40 byte "`fixed length string"' containing the fingerprint
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1302: Rename peer}
+After the \textbf{1302} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the old name of the peer
+\item 128 byte "`fixed length string"' containing the new name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0101}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1303: Get address of peer}
+After the \textbf{1303} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0102}: success
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the address
+\end{itemize}
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
+\textbf{Pmg} MUST keep state of the last sent address.
+\textbf{Pmg} MUST return the next address it knows of the peer.
+If there is only one address, it is the next address.
+% -----------------------------------------------------------------------------
+\subsubsection{1304: Add address to peer}
+After the \textbf{1304} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 128 byte "`fixed length string"' containing an address to add
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0104}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1305: Remove address from peer}
+After the command follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 128 byte "`fixed length string"' containing the address to remove
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0105}: success
+\item \textbf{0205}: Cannot remove, because it is the last known address
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1306: Update peer fingerprint}
+After the command follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\item 40  byte "`fixed length string"' containing the new peer fingerprint
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0106}: success
+\item \textbf{0223}: strange error
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsubsection{1307: Remove peer}
+After the \textbf{1307} follows
+\begin{itemize}
+\item 128 byte "`fixed length string"' containing the name of the peer
+\end{itemize}
+Answers from \textbf{pmg}:
+\begin{itemize}
+\item \textbf{0107}: success, peer removed
+\item \textbf{0200}: unknown peer
+\item \textbf{0223}: strange error
+\end{itemize}
 % -----------------------------------------------------------------------------
 \chapter{Unsorted}
 \section{Channels}
