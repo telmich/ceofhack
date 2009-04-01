@@ -391,6 +391,23 @@ Note that \textbf{.} in this example stands for a zero byte.
 APRILFOOLS
 \end{verbatim}
 % -----------------------------------------------------------------------------
+\subsection{1001: Set listen address}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Listen Address & URL without scheme as zero-padded 128-byte fixed-length string & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+Note that \textbf{.} in this example stands for a zero byte.
+\begin{verbatim}
+1000127.0.0.3:42....................................................................................................................
+\end{verbatim}
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
 This code is returned by the transport protocol subsystem to EOFi on success.
 After this return code, the transport protocol exits.
