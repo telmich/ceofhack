@@ -363,20 +363,6 @@ Stateless: source routing, usage of acks.
 
 Unterscheiden zwischen listener und send.
 % -----------------------------------------------------------------------------
-\subsection{Initialisation}
-When a transport protocol is started by EOFi, the following
-information is available:
-
-\begin{longtable}{|c|c|c|c|}
-\caption{Command line arguments for transport protocols}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-ARGV[1]: Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
-\hline
-\end{longtable}
-
-% -----------------------------------------------------------------------------
 \subsubsection{Listening transport protocol (LTP)}
 The listening transport protocol uses the destination parameter as the
 address to listen to.
@@ -390,7 +376,7 @@ The transport protocol uses the destination parameter as the address to send to.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+Destination & URL without scheme as zero-padded 128-byte fixed-length string & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
 \hline
 Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
 \hline
@@ -399,9 +385,10 @@ Message & Binary data & The message & BLOB\\
 \end{longtable}
 % -----------------------------------------------------------------------------
 \subsubsection{Example}
+Note that \textbf{.} in this example stands for a zero byte.
 \begin{verbatim}
-100010
-HEREISDATA
+1000127.0.0.3:42....................................................................................................................10
+APRILFOOLS
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
@@ -700,7 +687,7 @@ key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0021: Add peer}
-Aftere the "`0021"' follow
+After the "`0021"' follow
 
 \begin{itemize}
 \item 128 bytes for the name of the peer
@@ -715,7 +702,7 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0022: Send message to peer}
-Aftere the "`0022"' follow 128 bytes for the peer name
+After the "`0022"' follow 128 bytes for the peer name
 and after that 128 Bytes for the message.
 Both 0-terminated, 0 padded.
 Answers from ceof:
@@ -725,7 +712,7 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0023: Retrieve peer fingerprint}
-Aftere the "`0023"' follows a 128 bytes fixed length string for the peer name.
+After the "`0023"' follows a 128 bytes fixed length string for the peer name.
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1123}: success
@@ -767,7 +754,7 @@ connect to us)
 % Ok
 % -----------------------------------------------------------------------------
 \subsection{0032: Send message to channel}
-Aftere the "0032" follow 128 bytes for the channel name and after
+After the "0032" follow 128 bytes for the channel name and after
 that 128 Bytes for the message.
 Answers from ceof:
 \begin{itemize}
@@ -776,14 +763,14 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0033: Create channel}
-Aftere the "`0033"' follow 128 bytes containing the name of the channel.
+After the "`0033"' follow 128 bytes containing the name of the channel.
 \begin{itemize}
 \item \textbf{1133}: success
 \item \textbf{1234}: Channel already exists
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0034: Submit channel to marktschreier}
-Aftere the "`0034"' follow 128 bytes containing the channel channel.
+After the "`0034"' follow 128 bytes containing the channel channel.
 \begin{itemize}
 \item \textbf{1134}: success
 \item \textbf{1235}: Channel already exists
