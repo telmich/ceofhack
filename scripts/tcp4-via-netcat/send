@@ -32,13 +32,14 @@ if [ "$command" != "1000" ]; then
 	exit 1
 fi
 
-fulladdr="$1"
-# address without protocol://
-addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print substr($2,1,2)=="//" ? substr($2,3) : $2 }')"
-port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
+read -n 128 fulladdr
+
+# split addr and port
+addr="$(echo $fulladdr | awk -F: '{ print $1 }')"
+port="$(echo $fulladdr | awk -F: '{ print $2 }')"
 
 if [ -z "$addr" -o -z "$port" ]; then
-	echo "Invalid protocol or no address or no port." 1>&2
+	echo "No address or no port." 1>&2
 	exit 1
 fi
 
