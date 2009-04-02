@@ -1,10 +1,13 @@
-documentation:
-   1001!
+init_ltp:
+   - add handler for ltp, which waits for 2003 ack
+      - check exec_helper: return struct *helper?
+         - caller needs to access the process (to send data)
+            - bidirectional pipes?
+         - read 4 bytes in tp_listen_read?
+            - already coded that elsewhere!
+   - helper->path: use as absolut path?
+      - for re-init, on exit
 
-   EOF packet -> on the network
-   EOF onion packet -> with shell, may contain more EOF onion packets
-
-tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 tp_send.c
    how to handle send / trasport protocol?
       - pipe data to it, add pipe to handler array, leave function

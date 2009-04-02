@@ -31,6 +31,7 @@ void fd_to_poll()
 {
    int i;
 
+   /* FIXME: use chp_cnt? handle should never by NULL ... */
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].handle) {
          printf("adding handler %d to poll list\n", i);
