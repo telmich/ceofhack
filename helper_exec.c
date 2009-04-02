@@ -22,17 +22,18 @@
  *
  */
 
-#include "ceofhack.h"  /* functions etc. */
+#include <stdlib.h>     /* NULL           */
+#include "ceofhack.h"   /* functions etc. */
 
-int helper_exec(char *path, int (*handle)(int []), int (*exit)(int []))
+struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []))
 {
    int num = helper_new();
 
-   if(num == -1) return 0;
+   if(num == -1) return NULL;
 
-   if(!forkexecpipe(path, &chp[num])) return 0;
+   if(!forkexecpipe(path, &chp[num])) return NULL;
    chp[num].handle = handle;
    chp[num].exit   = exit;
 
-   return 1;
+   return &chp[num];
 }

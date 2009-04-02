@@ -33,18 +33,28 @@
 int tp_listen_init()
 {
    int i;
-//   struct cconfig *listen;
+   struct helper *hp;
  
    for(i=0; i < ltps_cnt; i++) {
-
       /* has handler? */
       if(!(ltps[i].listen = tp_available(ltps[i].url, TP_LISTEN))) return 0;
 
       /* start it:
-       * cwd to dir
-       * argv1 = url
-      */
-//      if(!tp_listen_start(listen))) return 0;
+       * - FIXME: cwd to dir before!
+       * - add handler for LTP (generic?): tp_listen_read
+       * - send 1001<url> cmd
+       * 
+       */
+
+      /* FIXME: cwd into configdir */
+
+       if(!(hp = helper_exec(ltps[i].listen->path, tp_listen_read, NULL))) return 0;
+
+      /* FIXME: cwd back */
+
+      /* FIXME: write start command including URL */
+
+
 
    }
 

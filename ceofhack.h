@@ -18,6 +18,7 @@
 #define EOF_L_GUI       256
 
 /* basics */
+#define EOF_L_CMD         4
 #define EOF_L_NICKNAME  128
 #define EOF_L_MESSAGE   128
 #define EOF_L_ADDRESS   128
@@ -26,16 +27,12 @@
 #define EOF_L_TP_AVAIL  256      /* max available tp              */
 #define EOF_L_LTP       256      /* max available tp listener     */
 
-#define SIZE            1024
-#define MAX_RCP         1
+#define MAX_RCP         1        /* gpgme recipients              */
 #define BIGBUF          65536
 
 #define MAX_COMM        256 /* maximum number of communication channels
                                contains stdin, listen sockets
                                and outgoing sockets */
-
-/* FIXME: need to listen on stdin and ipv4 socket  --> STATIC */
-#define HP_LAST 2
 
 /* commands */
 #define UI_QUIT      "/quit"
@@ -136,7 +133,7 @@ void signal_child(int sig);
 
 int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
-int helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
+struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 
 int cmds_init();
 int cmd_add(char *name, int (*handle)(char *));
