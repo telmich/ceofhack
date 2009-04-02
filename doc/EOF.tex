@@ -366,6 +366,7 @@ Stateless: source routing, usage of acks.
 Unterscheiden zwischen listener und send.
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
+\index{Command!1000}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1000 parameters}\\
 \hline
@@ -391,6 +392,7 @@ HEREISDATA
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{1001: Enable listening}
+\index{Command!1001}%
 When the listening transport protocol starts up, EOFi sends this command and
 waits for an acknowledge, before it marks the listening transport protocol
 as enabled.
@@ -449,6 +451,17 @@ Message & Binary data & The message & BLOB\\
 \begin{verbatim}
 200212
 RECEIVEDDATA
+\end{verbatim}
+% -----------------------------------------------------------------------------
+\subsection{2003: Listening}
+\index{Command!2003}
+This code is returned by the listening transport protocol, as soon as the
+listening process is ready to receive data. After that, EOFi can announce
+the listening URL to other EOFi.
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
+\begin{verbatim}
+2003
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \section{The user interface ("`ui2user"')}
