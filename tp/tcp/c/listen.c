@@ -68,26 +68,29 @@ ssize_t write_all(int fd, const void *buf, size_t count)
 	return written;
 }
 
-int main(int argc, char **argv)
+int main()
 {
 	int listenfd, connfd;
 	socklen_t len;
 	struct sockaddr_storage cliaddr;
+	
+	ssize_t n, siz=4+128;
+	char cmd[siz];
+	size_t got=0;
 
-	if(argc != 2) {
-		fprintf(stderr, "No URL.\n");
+	while(got < (size_t)siz) {
+		n = read(0, cmd+got, siz-got);
+		if(n < 0 && errno == EINTR)
+			continue;
+		if(n <= 0)
+			break;
+		got += n;
+	}
+
+	if(memcmp(cmd, "1001", 4)) 
 		exit(1);
-	}
 
-	if(memcmp(argv[1], "tcp:", strlen("tcp:"))) {
-		fprintf(stderr, "Invalid protocol.\n");
-		exit(2);
-	}
-
-	char *addr = argv[1] + strlen("tcp:");
-	while(*addr == '/')
-		addr++;
-
+	char *addr = cmd + 4;
 	char *port = addr;
 	while(*port && *port != ':')
 		port++;
@@ -102,7 +105,7 @@ int main(int argc, char **argv)
 		len = sizeof(cliaddr);
 		connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &len);
 		if(connfd >= 0) {
-			ssize_t n, siz = 0;
+			siz = 0;
 			char c = '0';
 			do {
 				if(c < '0' || c > '9')
@@ -123,9 +126,9 @@ int main(int argc, char **argv)
 			}
 
 			char buf[siz];
-			size_t got=0;
-			while(got<(size_t)siz) {
-				n = read(connfd, buf, siz-got);
+			got=0;
+			while(got < (size_t)siz) {
+				n = read(connfd, buf+got, siz-got);
 				if(n < 0 && errno == EINTR)
 					continue;
 				if(n <= 0)
