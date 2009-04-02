@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -19,6 +19,7 @@
 #
 # Implement a tcp4 listener
 #
+# NOTE: Currently broken. Use C listener instead.
 
 #
 # return codes:
