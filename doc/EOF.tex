@@ -401,6 +401,33 @@ Message & Binary data & The message & BLOB\\
 \end{longtable}
 % -----------------------------------------------------------------------------
 \subsubsection{Example}
+Added linebreak after some \\0 for readability, which are \textbf{not} in
+the real packet!
+\begin{verbatim}
+1000127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\010
+HEREISDATA
+\end{verbatim}
+% -----------------------------------------------------------------------------
+\subsection{1001: Enable listening}
+When the listening transport protocol starts up, EOFi sends this command and
+waits for an acknowledge, before it is marked as enabled.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Destination & 128 Byte FLS &URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
+\hline
+Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+\hline
+Message & Binary data & The message & BLOB\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{Example}
 \begin{verbatim}
 100010
 HEREISDATA
