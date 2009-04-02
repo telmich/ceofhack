@@ -1,3 +1,5 @@
+helper_write: write data TO a helper
+
 init_ltp:
    - add handler for ltp, which waits for 2003 ack
       - check exec_helper: return struct *helper?
