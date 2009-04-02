@@ -34,6 +34,8 @@ PROG=ceofhack decrypt
 DOC=doc/EOF
 
 all: $(PROG)
+
+run: $(PROG)
 	cat doc/dev/braindumps/sample-commands
 	./$(PROG)
 
