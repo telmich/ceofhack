@@ -101,6 +101,8 @@ int main()
 
 	listenfd = tcp_listen(addr, *port ? port : "4242");
 
+	write_all(1, "2003", 4);
+
 	for (;;) {
 		len = sizeof(cliaddr);
 		connfd = accept(listenfd, (struct sockaddr *) &cliaddr, &len);
