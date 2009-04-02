@@ -113,6 +113,22 @@ EOFi & An EOF implementation\\
 FLS & Fixed length string\\
 \hline
 \end{longtable}
+% -----------------------------------------------------------------------------
+\section{Authors}
+The list of persons who contributed to EOF, in chronical order.
+Add yourself to the list, when you coded something for EOF.
+% -----------------------------------------------------------------------------
+\subsection{Nico -telmich- Schottelius}
+Nico is the initiator and main coder of EOF. Parts done by him are:
+\begin{itemize}
+\item Organise meetings
+\item Project coordination
+\item First EOFi (ceofhack)
+\end{itemize}
+More information about Nico can be retrieved from
+\begin{itemize}
+\item http://nico.schottelius.org/
+\end{itemize}
 % ----------------------------------------------------------------------------
 \chapter{The EOF standard}
 Contains protocol specifications, paths, interfaces and environment
@@ -394,8 +410,8 @@ HEREISDATA
 \subsection{1001: Enable listening}
 \index{Command!1001}%
 When the listening transport protocol starts up, EOFi sends this command and
-waits for an acknowledge, before it marks the listening transport protocol
-as enabled.
+waits for an acknowledge (\emph{2003}, before it marks the
+listening transport protocol as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
@@ -956,8 +972,15 @@ url, user, password
 \subsection{smb}
 write on windows shares
 % -----------------------------------------------------------------------------
-\subsection{email}
+\subsection{mailto}
 Write an email to some address. Needs smtp-server set in configuration.
+May have different methods for retrieval (like connecting to imap,pop,
+read from mbox/maildir directly).
+% -----------------------------------------------------------------------------
+\subsubsection{Example URLs}
+\begin{verbatim}
+mailto:nico-eof@eof.eof.name
+\end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{dns}
 Use dns traffic to transport EOF protocols.
