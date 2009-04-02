@@ -1,8 +1,5 @@
 documentation:
-- adding url as argv adds additional work
-   - move url to command / stdin
-            - notify apic
-   doc/EOF.tex
+   1001!
 
    EOF packet -> on the network
    EOF onion packet -> with shell, may contain more EOF onion packets

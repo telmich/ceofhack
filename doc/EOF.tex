@@ -379,7 +379,7 @@ Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
-\subsubsection{Example}
+\subsubsection{1000: Example}
 Added linebreak after some \\0 for readability, which are \textbf{not} in
 the real packet!
 \begin{verbatim}
@@ -403,10 +403,12 @@ Destination & 128 Byte FLS & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
-\subsubsection{Example}
+\subsubsection{1001: Example}
 \begin{verbatim}
-100010
-HEREISDATA
+1001127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
