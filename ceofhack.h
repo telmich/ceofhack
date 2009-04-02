@@ -34,14 +34,15 @@
                                contains stdin, listen sockets
                                and outgoing sockets */
 
-/* commands */
+/* UI commands */
 #define UI_QUIT      "/quit"
 #define UI_PEER_ADD  "/peer add"
 #define UI_PEER_LIST "/peer list"
 #define UI_PEER_SEND "/peer send"
 #define UI_HELP      "/help"
 
-/* user commands */
+/* TP commands */
+#define EOF_TPCMD_INIT_LTP     "1001"
 
 /* Structures */
 struct peer {

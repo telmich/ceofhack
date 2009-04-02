@@ -32,8 +32,12 @@
 
 int tp_listen_init()
 {
-   int i;
+   int i, len;
    struct helper *hp;
+   char cmd[EOF_L_CMD+EOF_L_ADDRESS+1]; /* FIXME: +1 is only for testing */
+
+   strncpy(cmd, EOF_TPCMD_INIT_LTP, EOF_L_CMD);
+   cmd[EOF_L_CMD+EOF_L_ADDRESS] = '\0';
  
    for(i=0; i < ltps_cnt; i++) {
       /* has handler? */
@@ -48,13 +52,16 @@ int tp_listen_init()
 
       /* FIXME: cwd into configdir */
 
-       if(!(hp = helper_exec(ltps[i].listen->path, tp_listen_read, NULL))) return 0;
+      if(!(hp = helper_exec(ltps[i].listen->path, tp_listen_read, NULL))) return 0;
 
       /* FIXME: cwd back */
 
-      /* FIXME: write start command including URL */
+      /* FIXME: write start command including URL (excluding scheme) */
+      len = tp_scheme_len(ltps[i].url);
+      strncpy(cmd+EOF_L_CMD, ltps[i].url + len, EOF_L_ADDRESS);
+      printf("LTP write: %s\n", cmd);
 
-
+//      if(!helper_write(hp, cmd, EOF_L_CMD+EOF_L_ADDRESS)) return 0;
 
    }
 
