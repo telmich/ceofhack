@@ -31,6 +31,16 @@ int tp_listen_read(int fd[])
    ssize_t len;
    char buf[BIGBUF+1];
 
+   /* FIXME: always read  4 bytes (cmd) */
+   if((len = read(fd[0], buf, EOF_L_CMD)) == -1) {
+      perror("read/tp_listen");
+      return 0;
+   }
+   buf[EOF_L_CMD] = '\0';
+   printf("cmd received & ignored: %s\n", buf);
+   return 1;
+
+
    /* read data into buffer until eof */
    if((len = read(fd[0], buf, BIGBUF)) == -1) {
       perror("read/tp_listen");
