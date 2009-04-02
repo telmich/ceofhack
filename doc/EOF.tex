@@ -110,6 +110,8 @@ EOF & Eris onion forwarding, name of this project\\
 \hline
 EOFi & An EOF implementation\\
 \hline
+FLS & Fixed length string\\
+\hline
 \end{longtable}
 % ----------------------------------------------------------------------------
 \chapter{The EOF standard}
@@ -137,23 +139,23 @@ Remove all binary data, except for the EOF packages used by eofi2tp.
 \subsection{The zero byte}
 The zero byte is a byte with the value 0.
 % -----------------------------------------------------------------------------
-\subsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte),
-but are padded with zero bytes, if shorter than...
-% -----------------------------------------------------------------------------
 \subsection{ASCII numbers}
 ASCII numbers use the decimal string representation of a number.
-% -----------------------------------------------------------------------------
-\subsection{Variable length strings}
-Before variable length strings the length is submitted in a fixed size
 datatype. WE DON'T use variable length strings, but varialbe length data!
+% -----------------------------------------------------------------------------
+\subsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte),
+but are padded with zero bytes, if shorter than the specified length.
 % -----------------------------------------------------------------------------
 \subsection{Fixed length strings}
 Fixed length strings contain exactly the specified number of bytes:
 A 128-byte fixed length string consists of at most 128 bytes of text,
 which is then not zero terminated!
 If the text it contains is shorter than the specified length,
-it must be padded with zero bytes (see above).
+it must be padded with zero bytes.
+% -----------------------------------------------------------------------------
+\subsection{Variable length strings}
+Before variable length strings the length is submitted in a fixed size
 % -----------------------------------------------------------------------------
 \section{EOF simple data types}
 The following sections define the datatypes used in EOF related
@@ -390,7 +392,7 @@ The transport protocol uses the destination parameter as the address to send to.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
+Destination & 128 Byte FLS &URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
 \hline
