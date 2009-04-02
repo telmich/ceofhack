@@ -365,27 +365,6 @@ Stateless: source routing, usage of acks.
 
 Unterscheiden zwischen listener und send.
 % -----------------------------------------------------------------------------
-\subsection{Initialisation}
-When a transport protocol is started by EOFi, the following
-information is available:
-
-\begin{longtable}{|c|c|c|c|}
-\caption{Command line arguments for transport protocols}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-ARGV[1]: Destination & URL without scheme & The \emph{proto:} part is stripped of & 127.0.0.3:42\\
-\hline
-\end{longtable}
-
-% -----------------------------------------------------------------------------
-\subsubsection{Listening transport protocol (LTP)}
-The listening transport protocol uses the destination parameter as the
-address to listen to.
-% -----------------------------------------------------------------------------
-\subsubsection{Transport protocol (TP)}
-The transport protocol uses the destination parameter as the address to send to.
-% -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1000 parameters}\\
@@ -413,17 +392,14 @@ HEREISDATA
 % -----------------------------------------------------------------------------
 \subsection{1001: Enable listening}
 When the listening transport protocol starts up, EOFi sends this command and
-waits for an acknowledge, before it is marked as enabled.
+waits for an acknowledge, before it marks the listening transport protocol
+as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Destination & 128 Byte FLS &URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
-\hline
-Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
-\hline
-Message & Binary data & The message & BLOB\\
+Destination & 128 Byte FLS & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
