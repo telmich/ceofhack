@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 
 			char buf[siz];
 			size_t got=0;
-			while(got<siz) {
+			while(got<(size_t)siz) {
 				n = read(connfd, buf, siz-got);
 				if(n < 0 && errno == EINTR)
 					continue;
