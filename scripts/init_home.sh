@@ -30,20 +30,21 @@ if ! $__abs_mydir/gen_key.sh; then
 	exit 1
 fi
 
-# create directories
-mkdir -p ~/.ceof/transport-protocols/available
+# install available scripts 
+install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
+        ~/.ceof/transport-protocols/available/tcp/c/listen
+install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
+      ~/.ceof/transport-protocols/available/tcp/bash-netcat/send
+
+# make directory
 mkdir -p ~/.ceof/transport-protocols/enabled/tcp4
 
-# copy scripts
-cp -r $__abs_mydir/tcp4-via-netcat \
-      ~/.ceof/transport-protocols/available/tcp
-
 # link the listener
-ln -fs ~/.ceof/transport-protocols/available/tcp4-via-netcat/listen \
+ln -fs ~/.ceof/transport-protocols/available/tcp/c/listen \
        ~/.ceof/transport-protocols/enabled/tcp4/listen
 
 # link the sender
-ln -sf ~/.ceof/transport-protocols/available/tcp4-via-netcat/send \
+ln -sf ~/.ceof/transport-protocols/available/tcp/bash-netcat/send \
        ~/.ceof/transport-protocols/enabled/tcp4/send
 
 echo "done."
