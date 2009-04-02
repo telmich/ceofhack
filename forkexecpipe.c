@@ -16,6 +16,8 @@
 
 int forkexecpipe(char *path, struct helper *hp)
 {
+   printf("forkexecpipe: %s\n", path);
+
    if(pipe(hp->fds) == -1) {
       perror("pipe");
       return 0;
