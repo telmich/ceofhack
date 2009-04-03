@@ -1,6 +1,6 @@
 CC=gcc -Wall -W -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -I..
 
-DUMMY_C=dummy/nico/listen.c dummy/nico/send.c
+DUMMY_C=dummy/c/listen.c dummy/c/send.c
 TCP_C=tcp/c/listen.c
 
 TPS=

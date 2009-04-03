@@ -30,11 +30,16 @@ if ! $__abs_mydir/gen_key.sh; then
 	exit 1
 fi
 
-# install available scripts 
+# install available transport protocols 
 install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
         ~/.ceof/transport-protocols/available/tcp/c/listen
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/bash-netcat/send
+
+install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
+install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
+                $__abs_mydir/../tp/dummy/c/listen  \
+         ~/.ceof/transport-protocols/available/dummy
 
 # make directory
 mkdir -p ~/.ceof/transport-protocols/enabled/tcp4
