@@ -10,6 +10,5 @@ ceofhack
 *.log
 *.pdf
 *.toc
-tp/tcp/c/listen
 dia/*.png
 dia/*.dia~
