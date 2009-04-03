@@ -1,7 +1,3 @@
-helper_write: write data TO a helper
-   maybe add new set of fds?
-      bidirectional communication!
-
 init_ltp:
    - add handler for ltp, which waits for 2003 ack
       - check exec_helper: return struct *helper?

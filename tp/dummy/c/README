@@ -1,0 +1,3 @@
+Nicos implementation of a dummy transport protocol for testing purposes.
+
+It may also be used as a template for new transport protocol implementations.

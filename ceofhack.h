@@ -3,6 +3,8 @@
 
 #include <poll.h>    /* pollfd */
 
+#include "eof.h"     /* the clean library header */
+
 /* the library version is not yet used */
 
 #define LIBEOF_VERSION "E.O.F"
@@ -17,12 +19,6 @@
 /* gui2user */
 #define EOF_L_GUI       256
 
-/* basics */
-#define EOF_L_CMD         4
-#define EOF_L_NICKNAME  128
-#define EOF_L_MESSAGE   128
-#define EOF_L_ADDRESS   128
-#define EOF_L_KEYID      40
 
 #define EOF_L_TP_AVAIL  256      /* max available tp              */
 #define EOF_L_LTP       256      /* max available tp listener     */

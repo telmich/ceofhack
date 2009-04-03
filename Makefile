@@ -70,7 +70,7 @@ decrypt: decrypt.c
 decrypt-test:
 	gpg --homedir ~/.ceof/gpg/ --decrypt < ./testcrypt
 
-$(CEOFHACK_O): ceofhack.h Makefile
+$(CEOFHACK_O): ceofhack.h eof.h Makefile
 
 documentation: doc/EOF.tex
 	make -C doc all
