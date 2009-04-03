@@ -22,18 +22,10 @@
  *
  */
 
-#include <stdlib.h>     /* NULL           */
-#include "ceofhack.h"   /* functions etc. */
+#include <unistd.h>     /* write          */
+#include "ceofhack.h"   /* structs        */
 
-int *helper_write(struct helper *hp, char *buf, int len)
+int helper_write(struct helper *hp, char *buf, int len)
 {
-   int num = helper_new();
-
-   if(num == -1) return NULL;
-
-   if(!forkexecpipe(path, &chp[num])) return NULL;
-   chp[num].handle = handle;
-   chp[num].exit   = exit;
-
-   return &chp[num];
+   return write(hp->fds[1], buf, len);
 }

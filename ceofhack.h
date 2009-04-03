@@ -135,6 +135,7 @@ void signal_child(int sig);
 int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
+int helper_write(struct helper *hp, char *buf, int len);
 
 int cmds_init();
 int cmd_add(char *name, int (*handle)(char *));
