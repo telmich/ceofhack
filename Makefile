@@ -11,7 +11,7 @@ CCONFIG+=cconfig_entry_fn.c
 SHCL=openreadclosestatic.c
 
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_add_enabled.c tp_listen_init.c
-TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c tp_listen_start.c
+TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c
 TRANSPORT_PROTO+=tp_listen_read.c tp_send.c
 
 PEER=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
