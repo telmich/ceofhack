@@ -18,13 +18,13 @@ int forkexecpipe(char *path, struct helper *hp)
 {
    printf("forkexecpipe: %s\n", path);
 
-   /* read from EOFi, write from TP */
+   /* read from EOFi [0], write from TP [1] */
    if(pipe(&hp->fds[0]) == -1) {
       perror("pipe");
       return 0;
    }
 
-   /* read from TP, write from EOFi */
+   /* write from EOFi [3], read from TP [2] */
    if(pipe(&hp->fds[2]) == -1) {
       perror("pipe2");
       return 0;
@@ -39,7 +39,12 @@ int forkexecpipe(char *path, struct helper *hp)
    /* parent */
    if(hp->pid > 0) { return 1; }
 
-   /* child */
+   /* child: connect stdin and stdout */
+   if(dup2(hp->fds[2], STDIN_FILENO) == -1) {
+      perror("dup2: stdin");
+      _exit(1);
+   }
+
    if(dup2(hp->fds[1], STDOUT_FILENO) == -1) {
       perror("dup2: stdout");
       _exit(1);

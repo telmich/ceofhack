@@ -27,5 +27,5 @@
 
 int helper_write(struct helper *hp, char *buf, int len)
 {
-   return write(hp->fds[1], buf, len);
+   return write(hp->fds[HP_WRITE], buf, len);
 }

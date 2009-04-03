@@ -34,6 +34,11 @@
                                contains stdin, listen sockets
                                and outgoing sockets */
 
+
+/* parts of the pipe array _we_ use */
+#define HP_READ            0
+#define HP_WRITE           3
+
 /* UI commands */
 #define UI_QUIT      "/quit"
 #define UI_PEER_ADD  "/peer add"
