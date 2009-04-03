@@ -26,7 +26,7 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-void signal_child(int sig)
+void signal_child(int UNUSED(sig))
 {
 
    /* 

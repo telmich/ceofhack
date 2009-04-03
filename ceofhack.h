@@ -1,6 +1,13 @@
 #ifndef THIS_IS_AN_UGLY_CEOF_HACK
 #define THIS_IS_AN_UGLY_CEOF_HACK
 
+#ifdef UNUSED
+#elif defined(__GNUC__)
+# define UNUSED(x) UNUSED_ ## x __attribute__((unused))
+#else
+# define UNUSED(x) x
+#endif
+
 #include <poll.h>    /* pollfd */
 
 #include "eof.h"     /* the clean library header */

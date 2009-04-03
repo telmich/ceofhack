@@ -7,7 +7,7 @@ char *home="/home/nico/.ceof/gpg";
 
 #include "ceofhack.h"
 
-gpgme_error_t getpwd(void *HOOK, const char *UID_HINT,
+gpgme_error_t getpwd(void *UNUSED(HOOK), const char *UNUSED(UID_HINT),
                      const char *PASSPHRASE_INFO,
                      int PREV_WAS_BAD, int FD) {
 

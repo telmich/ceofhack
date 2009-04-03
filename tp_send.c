@@ -25,7 +25,7 @@
 #include <stdio.h>        /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
 
-int tp_send(char *nick, char *msg)
+int tp_send(char *nick, char *UNUSED(msg))
 {
    char *url;
    struct cconfig *send;

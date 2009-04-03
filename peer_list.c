@@ -27,7 +27,7 @@
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
 
-int peer_list(char *str)
+int peer_list(char *UNUSED(str))
 {
    struct peers *p;
 

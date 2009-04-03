@@ -23,8 +23,9 @@
  */
 
 #include <unistd.h>
+#include "ceofhack.h"
 
-int ui_quit(char *args)
+int ui_quit(char *UNUSED(args))
 {
    _exit(0);
 }

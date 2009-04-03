@@ -25,7 +25,7 @@
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
 
-int ui_help(char *str)
+int ui_help(char *UNUSED(str))
 {
    printf("ceofhack:\n\n"
           "Supported commands:\n\n"
