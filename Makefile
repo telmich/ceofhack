@@ -35,11 +35,13 @@ PROG=ceofhack decrypt
 
 DOC=doc/EOF
 
-all: $(PROG)
+all: $(PROG) tp-all
+
+run: $(PROG)
 	cat doc/dev/braindumps/sample-commands
 	./$(PROG)
 
-clean:
+clean: tp-clean
 	rm -f $(CEOFHACK_O) $(PROG)
 
 test: tests/testcconfig ceofhack
@@ -75,3 +77,9 @@ documentation: doc/EOF.tex
 
 viewdoc: documentation
 	evince doc/EOF.pdf
+
+tp-all:
+	make -C tp all
+
+tp-clean:
+	make -C tp clean

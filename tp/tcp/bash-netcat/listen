@@ -19,37 +19,24 @@
 #
 # Implement a tcp4 listener
 #
+# NOTE: Currently broken. Use C listener instead.
 
 #
-# codes: see EOF.tex
+# return codes:
+# 1: wrong number of arguments (must be one)
+# 2: unsupported protocol
 #
 
-read -n 4 command
-
-if [ "$command" != "1000" ]; then
-	echo "Unknown command." 1>&2
-	echo -n 2001
-	exit 1
+if [ "$#" -ne 1 ]; then
+   exit 1
 fi
 
 fulladdr="$1"
-# address without protocol://
-addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print substr($2,1,2)=="//" ? substr($2,3) : $2 }')"
+# address without protocol
+addr="$(echo $fulladdr | awk -F: '/^tcp:/ { print $2 }')"
 port="$(echo $fulladdr | awk -F: '/^tcp:/ { print $3 }')"
 
-if [ -z "$addr" -o -z "$port" ]; then
-	echo "Invalid protocol or no address or no port." 1>&2
-	exit 1
-fi
+[ "$port" ] || port=4242
 
-# debug on stderr
-echo "Connecting to $fulladdr" 1>&2
-
-if nc -q 0 "$addr" "$port" > /dev/null; then
-	echo -n 2000
-	exit 0
-else
-	echo -n 2001
-	exit 1
-fi
-
+echo Listening on: ${addr}:$port 1>&2
+nc -l -p "$port"
