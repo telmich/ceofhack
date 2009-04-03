@@ -18,8 +18,15 @@ int forkexecpipe(char *path, struct helper *hp)
 {
    printf("forkexecpipe: %s\n", path);
 
-   if(pipe(hp->fds) == -1) {
+   /* read from EOFi, write from TP */
+   if(pipe(&hp->fds[0]) == -1) {
       perror("pipe");
+      return 0;
+   }
+
+   /* read from TP, write from EOFi */
+   if(pipe(&hp->fds[2]) == -1) {
+      perror("pipe2");
       return 0;
    }
 

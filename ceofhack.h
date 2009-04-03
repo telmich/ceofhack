@@ -75,7 +75,7 @@ struct options {
 #include <sys/types.h>           /* FIXME: posix correct header?) */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
-   int fds[2];                   /* file deskriptors used by poll */
+   int fds[4];                   /* file deskriptors used by poll */
    char *path;                   /* path relative to config dir   */
    int (*handle)(int []);        /* pointer to the handler        */
    int (*exit)(int []);          /* pointer to the exit function  */
