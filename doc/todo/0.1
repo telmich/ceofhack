@@ -2,13 +2,11 @@ Aim: "Directly chat encrypted with someone"
 
 
 - init_ceofhack.sh:
-   - create configuration directory
    - create pgp configuration:
-      - create gpg-keys without password  below ~/.ceof/pgp (the pgp home of ceof)
-      - documentate that in doc/EOF.tex
+      - documentate that in doc/EOF.tex [apic]
    - copy and enable transport protocol tcp (via netcat)
-      - listen on tcp:0.0.0.0:6667
-   - print hint on how to start ceofhack and add peers
+      - listen on tcp:0.0.0.0:6667 [apic]
+   - print hint on how to start ceofhack and add peers [nico]
 
 - create commands in ceofhack (use existing structure):
    - check current doc, whether the following is right:
@@ -22,7 +20,7 @@ Aim: "Directly chat encrypted with someone"
       - commands for transport protocols
       - how to use stdin/stdout/stderr
 
-- check all structures and functions for programming errors
+- check all structures and functions for programming errors [apic]
    - valgrind
    - electric fence
 
