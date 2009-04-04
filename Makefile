@@ -3,6 +3,8 @@ LDFLAGS= $(shell gpgme-config --libs)
 CC=gcc -std=c99 -Wall -Wextra -Werror -pedantic -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 CC=gcc -std=c99 -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 CC=gcc -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
+# above are too strict right now :-/
+#CC=gcc -Wall -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 
 CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get.c
 CCONFIG+=cconfig_entry_fn.c
@@ -10,7 +12,7 @@ CCONFIG+=cconfig_entry_fn.c
 # Small helper c library
 SHCL=openreadclosestatic.c
 
-TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_add_enabled.c tp_listen_init.c
+TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_listen_add.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c
 TRANSPORT_PROTO+=tp_listen_read.c tp_send.c
 
@@ -40,7 +42,7 @@ run: $(PROG)
 	./$(PROG)
 
 clean: tp-clean
-	rm -f $(CEOFHACK_O) $(PROG)
+	rm -f $(CEOFHACK_O) $(PROG) *.o
 
 test: tests/testcconfig ceofhack
 	./tests/testcconfig .
