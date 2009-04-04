@@ -69,21 +69,21 @@ int tp_init()
       if(!tp_add_available(p, entry)) return 0;
    }
 
-   /* search for enabled (listener) protocols */
-   if(!cconfig_find_fn("enabled", tp_tree, &tmp)) {
-      printf("No transport protocols enabled!\n");
+   /* search for listening protocols */
+   if(!cconfig_find_fn("listen", tp_tree, &tmp)) {
+      printf("No listening transport protocols!\n");
       return 0;
    }
 
    state = 0;
    while(cconfig_entries_get(tmp, &entry, &state)) {
       p = cconfig_entry_fn(&entry);
-      printf("Received enab %s (%s/%d)\n", entry.path, p, entry.noe);
+      printf("Received listen %s (%s/%d)\n", entry.path, p, entry.noe);
 
-      if(!tp_add_enabled(p, entry)) return 0;
+      if(!tp_listen_add(p, entry)) return 0;
    }
  
-   /* enable listener protocols/check handler */
+   /* enable listener protocols */
    if(!tp_listen_init()) return 0;
 
    return 1;

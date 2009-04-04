@@ -30,7 +30,7 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-int tp_add_enabled(char *name, struct cconfig entry)
+int tp_listen_add(char *name, struct cconfig entry)
 {
    struct ltp ltpnew;
    struct cconfig *url;

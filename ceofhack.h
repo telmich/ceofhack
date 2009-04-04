@@ -173,8 +173,7 @@ int config_init();
 
 int tp_init();
 int tp_add_available(char *name, struct cconfig entry);
-int tp_add_enabled(char *name, struct cconfig entry);
-int tp_add_listener(char *name, struct cconfig entry);
+int tp_listen_add(char *name, struct cconfig entry);
 int tp_listen_init();
 int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
