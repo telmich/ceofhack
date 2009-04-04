@@ -24,27 +24,47 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include "eof.h"   /* EOF */
 
+#define BIGBUF 65536
 
 int main()
 {
-   char input[EOF_L_CMD+EOF_L_ADDRESS+1];
+   char input[BIGBUF+1];
+   char *eos;              /* end of size */
+   int len;
 
    /* read init sequence: 1000 */
    read(STDIN_FILENO, input, EOF_L_CMD);
    input[EOF_L_CMD] = '\0';
-   fprintf(stderr, "LTP cmd: %s\n", input);
+   fprintf(stderr, "TP cmd: %s\n", input);
    
    /* read the url */
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, "LTP url: %s\n", input);
+   fprintf(stderr, "TP url: %s\n", input);
 
-   /* read the url */
-   read(STDIN_FILENO, input, EOF_L_ADDRESS);
-   input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, "LTP url: %s\n", input);
+   /* read the rest...
+    * FIXME: this is big buggy, should only read until
+    * \n and then determine how much to read later on
+    */
+   len = read(STDIN_FILENO, input, BIGBUF);
+   input[len] = '\0';
+
+   eos = strchr(input, '\n');
+   if(!eos) {
+      printf("2001");
+      return 1;
+   } else {
+      *eos = '\0';
+   }
+
+   fprintf(stderr, "TP size: %s\n", input);
+   /* in theory, read the encrypted onion packet here */
+
+   /* in this is indeed also buggy, though input is zero terminated..*/
+   fprintf(stderr, "TP packet: %s\n", eos+1);
 
    return 0;
 }
