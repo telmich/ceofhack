@@ -58,7 +58,7 @@ int tp_listen_init()
 
       /* FIXME: write start command including URL (excluding scheme) */
       len = tp_scheme_len(ltps[i].url);
-      strncpy(cmd+EOF_L_CMD, ltps[i].url + len, EOF_L_ADDRESS);
+      strncpy(cmd+EOF_L_CMD, ltps[i].url + len +1, EOF_L_ADDRESS); /* +1: skip ":" */
       printf("LTP write: %s\n", cmd);
 
       if(!helper_write(hp, cmd, EOF_L_CMD+EOF_L_ADDRESS)) return 0;
