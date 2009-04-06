@@ -1,0 +1,21 @@
+Once again a braindump of the EOF-3 applications:
+
+
+   politiker (mixes noise and real data)
+          \
+           \ 
+            \
+             \
+              \  
+               ceof (central EOF instance)
+               /  | \
+              /   |  \
+             /    |   \
+            /     |    \
+           /   indianer (calculate routes)
+          /              \
+      postbote (takes care about outgoing packets)
+                           \
+                            \
+                      briefkasten
+                      (takes care about incoming packets)
