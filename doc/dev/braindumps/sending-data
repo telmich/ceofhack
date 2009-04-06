@@ -1,0 +1,25 @@
+tp_send.c
+   how to handle send / trasport protocol?
+      - pipe data to it, add pipe to handler array, leave function
+      - when ack is replied, re-draw message?
+         - would need to track outgoing packages
+         - is needed for later versions anyway (think of resend)
+      - create a queue of un-ack-ed packages?
+         - not acked by transport protocol =>
+            - same as not acked by next peer
+         - not acked by final peer
+            struct package {
+               int id;        /* internal identifier        */
+               int state;     /* NO_ACK, TP_ACK, FINAL_ACK  */
+               char *dest;    /* who to send to             */
+               char *msg;     /* plaintext message          */
+            };
+         - dest is the nick currently, but should be updated to a list later,
+           to support groups:
+            struct destination {
+               struct peer *who;
+               struct destination next;
+            }
+         - parse queue every $interval
+            - to trigger resend
+            - post-0.1 version
