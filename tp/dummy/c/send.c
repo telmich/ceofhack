@@ -38,12 +38,12 @@ int main()
    /* read init sequence: 1000 */
    read(STDIN_FILENO, input, EOF_L_CMD);
    input[EOF_L_CMD] = '\0';
-   fprintf(stderr, "TP cmd: %s\n", input);
+   fprintf(stderr, "dummy-TP cmd: %s\n", input);
    
    /* read the url */
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, "TP url: %s\n", input);
+   fprintf(stderr, "dummy-TP url: %s\n", input);
 
    /* read the rest...
     * FIXME: this is big buggy, should only read until
@@ -60,11 +60,11 @@ int main()
       *eos = '\0';
    }
 
-   fprintf(stderr, "TP size: %s\n", input);
+   fprintf(stderr, "dummy-TP size: %s\n", input);
    /* in theory, read the encrypted onion packet here */
 
    /* in this is indeed also buggy, though input is zero terminated..*/
-   fprintf(stderr, "TP packet: %s\n", eos+1);
+   fprintf(stderr, "dummy-TP packet: %s\n", eos+1);
 
    return 0;
 }

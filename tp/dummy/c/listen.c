@@ -34,12 +34,12 @@ int main()
    /* read init sequence: 1001 */
    read(STDIN_FILENO, input, EOF_L_CMD);
    input[EOF_L_CMD] = '\0';
-   fprintf(stderr, "LTP cmd: %s\n", input);
+   fprintf(stderr, "dummy-LTP cmd: %s\n", input);
    
    /* read the url */
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, "LTP url: %s\n", input);
+   fprintf(stderr, "dummy-LTP listens to url: %s\n", input);
 
    return 0;
 }
