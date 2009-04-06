@@ -20,22 +20,17 @@
 #define EOF_L_PEER_INPUT  256
 
 /*
- * those values are from the current EOF specs
+ * internal limits
  */
 
-/* gui2user */
 #define EOF_L_GUI       256
-
-
 #define EOF_L_TP_AVAIL  256      /* max available tp              */
 #define EOF_L_LTP       256      /* max available tp listener     */
-
 #define MAX_RCP         1        /* gpgme recipients              */
 #define BIGBUF          65536
-
-#define MAX_COMM        256 /* maximum number of communication channels
-                               contains stdin, listen sockets
-                               and outgoing sockets */
+#define MAX_COMM        256      /* maximum number of communication
+                                    channels contains stdin, listen
+                                    sockets and outgoing sockets  */
 
 
 /* parts of the pipe array _we_ use */
@@ -179,6 +174,7 @@ int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
 struct cconfig *tp_available(char *url, int type);
 int tp_send(char *nick, char *msg);
+int tp_send_wait(int fds[]);
 
 
 int cconfig_tree(struct cconfig *cg);

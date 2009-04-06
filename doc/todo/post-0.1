@@ -17,3 +17,6 @@ Code:
 - sending and receiving packets is blocking the whole implementation:
    => do not block while waiting for ack on send
    => receive should be as fast as possible, only get datablock
+- Fix helper list: currently we add outgoing packet handlers, but never
+  remove them (helper_exec.c, tp_send.c)
+- 

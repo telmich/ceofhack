@@ -22,13 +22,16 @@
  *
  */
 
-#include <stdio.h>        /* NULL              */
+#include <string.h>        /* strlen()          */
+#include <unistd.h>        /* write()           */
+#include <stdio.h>         /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
 
-int tp_send(char *nick, char *UNUSED(msg))
+int tp_send(char *nick, char *msg)
 {
-   char *url;
+   char           *url;
    struct cconfig *send;
+   struct helper  *hp;
 
    url = peer_addr_get(nick);
    printf("Using address %s for %s\n", url, nick);
@@ -46,7 +49,10 @@ int tp_send(char *nick, char *UNUSED(msg))
 
    /* pass final packet to transport protocol:
     *
-    * add packet to outgoing queue
+    * add packet to outgoing queue!
+    *    --> verry important, because same happens in EOF-3!
+    *    --> noise queue and real data are mixed
+    * tp_insert_queue(pkg, peer / addr);
     * pipe into transport protocol
     * add pipe to poll list
     * return to work
@@ -55,11 +61,10 @@ int tp_send(char *nick, char *UNUSED(msg))
     * - remove from queue, if successful!
     */
 
+   if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) return 0;
 
-   //if(!helper_exec(tp->path, tp_listen_read, NULL)) return 0;
-
-   //   if(!helper_exec(buf, peer_input, NULL)) return 1;
-
+   /* HACK: pass packet to send */
+   write(hp->fds[HP_WRITE], msg, strlen(msg));
 
    return 1;
 }
