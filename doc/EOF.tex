@@ -368,10 +368,6 @@ encapsulated by the specific network protocol.
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
-
-THE DATA BEFORE IS AN IMPORT FROM BASICS.TEX
-
-% -----------------------------------------------------------------------------
 \section{Transport protocols ("`eofi2tp"')}
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
@@ -1024,7 +1020,6 @@ listener application is available.
 
 Will do chdir() to the directory! tp can open config files in current dir.
 what about url?
-   url = argv1?
 
 same for listen and send?
    listenurl, sendurl, config in curdir
@@ -1049,6 +1044,18 @@ Every section must at least contain:
 You should add your implementation to the directory "`tp"' within the
 repository.
 Sort sections by alphabet.
+
+% FIXME: maybe create a longtable containing all protocols
+% FIXME: only add further information to subsections
+% -----------------------------------------------------------------------------
+\subsection{dummy/c}
+\begin{itemize}
+\item dummy
+\item Nico Schottelius [nico-eof-tp-dummy-c =at= schottelius.org]
+\item https://www.eof.name
+\item C
+\item Version: 1
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{tcp-apic}
 \begin{itemize}
@@ -1058,6 +1065,7 @@ Sort sections by alphabet.
 \item C
 \item Version: 1
 \end{itemize}
+
 
 % -----------------------------------------------------------------------------
 \chapter{pmg2ceof import}
