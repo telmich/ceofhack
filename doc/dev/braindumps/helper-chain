@@ -3,10 +3,10 @@ Once again a braindump of the EOF-3 applications:
 
    politiker (mixes noise and real data)
           \
-           \ 
-            \
-             \
-              \  
+           \  oninon (encapsulates packets)
+            \   |
+             \  |
+              \ | 
                ceof (central EOF instance)
                /  | \
               /   |  \
