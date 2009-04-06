@@ -1,6 +1,5 @@
 tp_send:
-   send packet, without confirmation
-   (later: see doc/dev/braindumps/sending-data)
+   add command, \n
 
 doc/EOF.tex:
    create readable document, so adding new stuff is possible

@@ -64,6 +64,7 @@ int tp_send(char *nick, char *msg)
    if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) return 0;
 
    /* HACK: pass packet to send */
+   /* FIXME: add command, \n" */
    write(hp->fds[HP_WRITE], msg, strlen(msg));
 
    return 1;
