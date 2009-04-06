@@ -1,3 +1,4 @@
-/peer add telmich tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer add apic tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer add telmich dummy:it-really-has-no-sense 41D89B16B16596A84C0B78C1828D71E9CE33EB52
 /peer list
 /peer send telmich hallo, wie geht es?
