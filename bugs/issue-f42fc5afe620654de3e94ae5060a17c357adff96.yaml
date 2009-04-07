@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Create listener for user interfaces
+desc: |-
+  Use ui_init() (see main.c):
+  
+  * create socket
+  * add helper to accept new connection
+  * new connections get a new entry in the helper list and a different handler
+type: :feature
+component: ui
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 22:06:00.599393 Z
+references: []
+
+id: f42fc5afe620654de3e94ae5060a17c357adff96
+log_events: 
+- - 2009-04-07 22:06:02.364053 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""

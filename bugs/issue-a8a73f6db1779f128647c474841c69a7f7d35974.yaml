@@ -1,0 +1,25 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Cleanup description of eofi2ui
+desc: |-
+  Describe, how a UI can connect to ceof.
+  
+  Add commands
+  
+  Cleanup section
+type: :feature
+component: doc
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 22:08:34.518300 Z
+references: []
+
+id: a8a73f6db1779f128647c474841c69a7f7d35974
+log_events: 
+- - 2009-04-07 22:09:10.945218 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - |-
+    If I remember correctly, all the information has been written, but not
+    cleanly merged into the current documentation.
