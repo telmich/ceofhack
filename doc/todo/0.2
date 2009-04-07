@@ -1,0 +1,20 @@
+Could also fit into 0.2, but would be nice for 0.1:
+
+- create macros:
+   - maybe reuse report.c from gpm (license is ok)
+
+   - error(char *str, ...); 
+   - warn(char *str, ...); 
+   - info(char *str, ...); 
+   - debug(char *str, ...);
+   
+   - which use the function report(int level, char *str, ...)
+   - using __FILE__ and __LINE__ in output
+   - error/warn print to stderr
+   - info to stdout
+   - debug only if debug=1 (command line switch or compile option)
+   - currently no other differences, but framework for later
+      - may use different prefixes
+
+- replace all printf()s with macros
+
