@@ -28,7 +28,7 @@
 
 int tp_send(char *nick, char *msg)
 {
-   char           *url;
+   char           *url, *p;
    struct cconfig *send;
    struct helper  *hp;
    size_t         len;
@@ -65,15 +65,25 @@ int tp_send(char *nick, char *msg)
 
    if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) return 0;
 
+   /* FIXME: always check bounds!!! */
+   p = buf;
+   strncpy(p, EOF_CMD_TP_SEND, EOF_L_CMD);
+   p += EOF_L_CMD;
+   strncpy(p, url, EOF_L_ADDRESS);
+   p += EOF_L_ADDRESS;
+   printf("debug: %p, %p: %ld\n", buf, p, (p-buf));
+
    len = strlen(msg);
-   strncpy(buf, EOF_CMD_TP_SEND, EOF_L_CMD);
-   tmp = ultostr(len, 10, buf + EOF_L_CMD, BIGBUF - EOF_L_CMD);
-   printf("ultostr: %d, %s (%lu)\n", tmp, buf, len);
-   strncat(buf, msg, BIGBUF);
-   printf("pkg: %s\n", buf);
+   tmp = ultostr(len, 10, p, BIGBUF - (p-buf));
+   printf("ultostr: %d, (%lu)\n", tmp, len);
+   len = EOF_L_CMD + EOF_L_ADDRESS + strlen(p) + 1 + strlen(msg);
+   strncat(p, "\n", BIGBUF);
+   strncat(p, msg, BIGBUF);
+   printf("pkg: %ld: %s - %s\n", len, buf, p);
+
 
    /* FIXME: HACK: pass packet to send        */
-   if(write_all(hp->fds[HP_WRITE], buf, strlen(buf)) <= 0) return 0;
+   if(write_all(hp->fds[HP_WRITE], buf, len) <= 0) return 0;
 
    return 1;
 }
