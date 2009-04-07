@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: implement handling of incoming data from LTPs
+desc: |-
+  Take care of data that is sent by the listening transport protocols.
+  
+  Ack their commands and display error if something unexpected happens.
+type: :feature
+component: ceofhack
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 21:42:12.927190 Z
+references: []
+
+id: 8ccf96f42f9bb58a6289ca5288ae8e233367b44d
+log_events: 
+- - 2009-04-07 21:42:23.602699 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
