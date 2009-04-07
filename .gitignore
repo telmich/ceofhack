@@ -12,3 +12,4 @@ ceofhack
 *.toc
 dia/*.png
 dia/*.dia~
+/.ditz-config
