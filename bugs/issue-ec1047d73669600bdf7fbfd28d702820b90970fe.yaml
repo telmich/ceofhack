@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Refactor helper_write()
+desc: |-
+  The current function is ceofhack specific and could be written without that:
+  
+  Instead of struct helper *hp, pass an int array[4].
+  
+  Rename it to fd1write(int fd[], char *, int);
+type: :task
+component: ceofhack
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 22:33:58.387291 Z
+references: []
+
+id: ec1047d73669600bdf7fbfd28d702820b90970fe
+log_events: 
+- - 2009-04-07 22:34:19.306760 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - Usable in shcl later :-)
