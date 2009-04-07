@@ -19,10 +19,6 @@
 
 #include <unistd.h>
 
-#ifdef DEBUG
-#include <string.h>
-#endif
-
 #define EOUTOFRANGE     (1 << 1);
 #define EBUFFERTOOSMALL (1 << 2);
 
@@ -102,27 +98,3 @@ int ltostr(long value, unsigned int base, char* converted, size_t size) {
 
     return 0;
 }
-
-#ifdef DEBUG
-int main() {
-    unsigned long a = 123456;
-    long b = -423;
-    unsigned int bases[] = {10, 16, 2, 8};
-    char buf[(sizeof(long)*8)+1];
-    int i;
-
-    for(i = 0; i < sizeof(bases); ++i) {
-        if(!ultostr(a, bases[i], buf, sizeof(buf))) {
-            write_all(2, buf, strlen(buf));
-            write_all(2, "\n", 1);
-        }
-        if(!ltostr(b, bases[i], buf, sizeof(buf))) {
-            write_all(2, buf, strlen(buf));
-            write_all(2, "\n", 1);
-        }
-    }
-
-    return 0;
-}
-#endif
-
