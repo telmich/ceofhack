@@ -83,7 +83,7 @@ int tp_send(char *nick, char *msg)
 
 
    /* FIXME: HACK: pass packet to send        */
-   if(write_all(hp->fds[HP_WRITE], buf, len) <= 0) return 0;
+   if(helper_write(hp, buf, len) <= 0) return 0;
 
    return 1;
 }

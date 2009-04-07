@@ -1,9 +1,8 @@
-tp_send:
-   add command, \n
-
 Currently: peer_send.c
    tp_send
    "Send message"
+
+tp_listen: handler for incoming messages usable?
 
 - encrypt message,
    send, = listen + send function
@@ -12,7 +11,6 @@ Currently: peer_send.c
 
    => /peer add vorher!
 ===>>>>>   /peer send <nick> <text>
-
 
 - send message
    - encrypt message
