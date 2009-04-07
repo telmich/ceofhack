@@ -1,0 +1,28 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add queue for outgoing packets
+desc: |-
+  Whenever we send an packet, it needs to stay in the queue until the peer
+  acked that she received it.
+  
+  Status of a packet can be:
+  
+  * IN_TP: packet transmitted to TP
+  * AT_PEER: TP transmitted it to the next peer
+  * ACKNOWLEDGED: final peer received it
+  
+  This queue should later be splitted of ceof and migrated to the postbote.
+type: :feature
+component: ceof
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 21:59:47.002941 Z
+references: []
+
+id: 6a6c498b89da0c49929cf0253210b6579261442e
+log_events: 
+- - 2009-04-07 21:59:48.999610 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
