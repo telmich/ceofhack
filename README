@@ -14,7 +14,14 @@ Usage:
    /peer send <peer> <msg>
 
 Bugs:
-   Many. This is just a hack.
+   Besides there are many and this is just a hack, you can lookup
+   them using ditz (http://ditz.rubyforge.org/README.txt):
+
+      ditz todo
+      ditz status
+
+   If you want to work on a bug, use "ditz help" to get
+   familar with it.
 
    Your port is currently ignored.
    You cannot connect to somebody behind NAT.
