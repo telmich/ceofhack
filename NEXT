@@ -1,11 +1,4 @@
-tp_listen_read.c:
-   read & decode data
-
-Currently: peer_send.c
-   tp_send
-   "Send message"
-
-tp_listen: handler for incoming messages usable?
+ditz:ceofhack-1
 
 - encrypt message,
    send, = listen + send function
