@@ -62,7 +62,7 @@ static void convert(unsigned long value, unsigned int base, char* converted, siz
     reverse(converted);
 }
 
-static int boundary(unsigned int base, size_t size, int typesize) {
+static int boundary(unsigned int base, size_t size, size_t typesize) {
     if(base < 2 || base > sizeof(mapping))
         return -EOUTOFRANGE;
 
