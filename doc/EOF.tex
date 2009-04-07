@@ -391,6 +391,8 @@ Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header
 Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
+The ASCII number may not exceed the value 999999. Thus if there is no
+\emph{\\n} after 6 bytes, the package is damaged or malformed.
 % -----------------------------------------------------------------------------
 \subsubsection{1000: Example}
 Added linebreak after some \\0 for readability, which are \textbf{not} in
