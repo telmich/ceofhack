@@ -1,6 +1,5 @@
 Aim: "Directly chat encrypted with someone"
 
-
 - init_ceofhack.sh:
    - create pgp configuration:
       - documentate that in doc/EOF.tex [apic]
@@ -14,7 +13,7 @@ Aim: "Directly chat encrypted with someone"
       - /key add <name> <fingerprint> (make it possible to add a key fingerprint)
       - /msg <name> <message> (make it possible to send messages)
 
-- transport protocol:
+- transport protocol: [apic]
    - create & check: listen & send for tcp
    - cleanly documentate in EOF.tex
       - commands for transport protocols
@@ -24,16 +23,13 @@ Aim: "Directly chat encrypted with someone"
    - valgrind
    - electric fence
 
-- add minimal usage doc in EOF.tex:
+- add minimal usage doc in EOF.tex: [nico]
    - cleanup the imported documents, check if everything is up-to-date (basic.tex)
    - TP: tcp: syntax, available implementations
    - how to create keys (with script and manually)
    - usable to promote EOF-2
       - doc matches code
       - add implemented and planned
-
-- general: implement all commands tagged
-   "Implement in ceofhack-0.1!" in doc/EOF.tex
 
 --------------------------------------------------------------------------------
 

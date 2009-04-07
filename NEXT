@@ -17,7 +17,6 @@ Currently: peer_send.c
 ===>>>>>   /peer send <nick> <text>
 
 
-- move transport protocols out of main!
 - send message
    - encrypt message
       - retrieve keyid for nick
