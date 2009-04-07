@@ -5,7 +5,7 @@ desc: |-
   
   Instead of struct helper *hp, pass an int array[4].
   
-  Rename it to fd1write(int fd[], char *, int);
+  Rename it to fd1pipewrite(int fd[], char *, int);
 type: :task
 component: ceofhack
 release: 
@@ -21,3 +21,7 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - Usable in shcl later :-)
+- - 2009-04-07 22:36:24.241394 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - edited description
+  - Include pipe into the name
