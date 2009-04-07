@@ -38,6 +38,7 @@ int openreadclosestatic(char buf[], char *fn, int len)
 
    int tmp;
    int fd;
+   int got=0;
 
    while((fd = open(fn, O_RDONLY)) == -1) {
       if(errno != EINTR) {
@@ -46,8 +47,8 @@ int openreadclosestatic(char buf[], char *fn, int len)
       }
    }
 
-   while(1) {
-      tmp = read(fd, buf, len);
+   while(got < len) {
+      tmp = read(fd, buf+got, len-got);
 
       if(tmp == -1) {
          if(errno == EINTR) {
@@ -57,9 +58,10 @@ int openreadclosestatic(char buf[], char *fn, int len)
             return 0;
          }
       }
-      break;
+      if(!tmp) break;
+      got += tmp;
    }
-   buf[len] = '\0';
+   buf[got] = '\0';
 
    while((fd = close(fd)) == -1) {
       if(errno == EINTR) {

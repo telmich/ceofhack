@@ -160,7 +160,7 @@ int main()
    printf("crypt:\n%s\n", b_encrypt);
    fd = open("testcrypt",O_RDWR|O_CREAT);
    if(fd == -1) return 40;
-   if(write(fd, b_encrypt, BIGBUF) == -1) return 41;
+   if(write_all(fd, b_encrypt, BIGBUF) <= 0) return 41;
    close(fd);
 
    /* until here it works, testcrypt contains

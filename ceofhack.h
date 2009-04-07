@@ -185,5 +185,6 @@ char *cconfig_entry_fn(struct cconfig *entry);
 
 /* shcl */
 int openreadclosestatic(char buf[], char *fn, int len);
+ssize_t write_all(int fd, const void *buf, size_t count);
 
 #endif

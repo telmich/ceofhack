@@ -13,7 +13,7 @@ gpgme_error_t getpwd(void *HOOK, const char *UID_HINT,
 
    printf("getpwd called, %d, %s\n", PREV_WAS_BAD, PASSPHRASE_INFO);
 
-   write(FD, "123456\n", 7);
+   write_all(FD, "123456\n", 7);
 
    return 0;
 }
@@ -106,7 +106,7 @@ int main()
 
    fd = open("text.encrypted",O_WRONLY | O_CREAT);
    if(fd == -1) return 57;
-   if((tmp = write(fd, b_output, tmp)) == -1) return 41;
+   if((tmp = write_all(fd, b_output, tmp)) == -1) return 41;
    close(fd);
    printf("geschrieben (datei): %d\n", tmp);
 

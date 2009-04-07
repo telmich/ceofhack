@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009     A. Pic. (eofdev at apic.name)
  *
  * This file is part of ceofhack.
 
@@ -18,13 +18,24 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Write data to a helper
+ * Wrapper for write() that continues on EINTR / incomplete write
  *
  */
 
-#include "ceofhack.h"   /* structs, funcs */
+#include <unistd.h>     /* write          */
+#include <errno.h>      /* EINTR          */
 
-int helper_write(struct helper *hp, char *buf, int len)
+ssize_t write_all(int fd, const void *buf, size_t count)
 {
-   return write_all(hp->fds[HP_WRITE], buf, len);
+        size_t written=0;
+        while(written < count) {
+                ssize_t n = write(fd, buf+written, count-written);
+                if(n<0 && errno == EINTR)
+                        continue;
+                if(n<=0)
+                        return n;
+                written += n;
+        }
+        return written;
 }
+
