@@ -32,6 +32,7 @@ int tp_send(char *nick, char *msg)
    char           *url;
    struct cconfig *send;
    struct helper  *hp;
+   int            len;
 
    url = peer_addr_get(nick);
    printf("Using address %s for %s\n", url, nick);
@@ -65,6 +66,7 @@ int tp_send(char *nick, char *msg)
 
    /* HACK: pass packet to send */
    /* FIXME: add command, \n" */
+   /* FIXME: add functions from shcl */
    write(hp->fds[HP_WRITE], msg, strlen(msg));
 
    return 1;
