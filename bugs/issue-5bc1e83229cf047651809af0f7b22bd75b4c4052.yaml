@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add sample user interface
+desc: |-
+  * in console
+  * just stdin/stdout
+  * no ncurses, nothing fancy
+  * implements all commands specified in ui2user
+  * nothing more
+type: :feature
+component: ui
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 22:11:21.292716 Z
+references: []
+
+id: 5bc1e83229cf047651809af0f7b22bd75b4c4052
+log_events: 
+- - 2009-04-07 22:11:22.609072 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
