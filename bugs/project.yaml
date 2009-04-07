@@ -10,6 +10,8 @@ components:
   name: tp
 - !ditz.rubyforge.org,2008-03-06/component 
   name: doc
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: postbote
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "1.0"
