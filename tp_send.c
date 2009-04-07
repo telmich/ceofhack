@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -67,13 +67,13 @@ int tp_send(char *nick, char *msg)
 
    len = strlen(msg);
    strncpy(buf, EOF_CMD_TP_SEND, EOF_L_CMD);
-   tmp = ultostr(len, 10, buf + EOF_L_CMD, sizeof(BIGBUF) - EOF_L_CMD);
+   tmp = ultostr(len, 10, buf + EOF_L_CMD, BIGBUF - EOF_L_CMD);
    printf("ultostr: %d, %s (%lu)\n", tmp, buf, len);
+   strncat(buf, msg, BIGBUF);
+   printf("pkg: %s\n", buf);
 
-   /* HACK: pass packet to send */
-   /* FIXME: add command, \n" */
-   /* FIXME: add functions from shcl */
-   if(write_all(hp->fds[HP_WRITE], msg, strlen(msg)) <= 0) return 0;
+   /* FIXME: HACK: pass packet to send        */
+   if(write_all(hp->fds[HP_WRITE], buf, strlen(buf)) <= 0) return 0;
 
    return 1;
 }
