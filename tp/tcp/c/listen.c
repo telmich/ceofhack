@@ -115,14 +115,14 @@ int main()
 					
 				siz *= 10;
 				siz += c-'0';
-				if(siz < 0) //overflow
+				if(siz > 999999)
 					break;
 				do {
 					n = read(connfd, &c, 1);
 				} while (n < 0 && errno == EINTR);
 			} while(n == 1);
 
-			if(c != '\n' || siz < 0 || siz > 65536) {  //64k ought to be enough for anybody [tm]
+			if(c != '\n' || siz < 0 || siz > 999999) {
 				close(connfd);
 				continue;
 			}
