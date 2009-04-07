@@ -61,7 +61,7 @@ int tp_listen_init()
       strncpy(cmd+EOF_L_CMD, ltps[i].url + len +1, EOF_L_ADDRESS); /* +1: skip ":" */
       printf("LTP write: %s\n", cmd);
 
-      if(!helper_write(hp, cmd, EOF_L_CMD+EOF_L_ADDRESS)) return 0;
+      if(helper_write(hp, cmd, EOF_L_CMD+EOF_L_ADDRESS) <= 0) return 0;
    }
 
    return 1;

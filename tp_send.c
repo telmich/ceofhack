@@ -23,7 +23,6 @@
  */
 
 #include <string.h>        /* strlen()          */
-#include <unistd.h>        /* write()           */
 #include <stdio.h>         /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
 
@@ -65,7 +64,7 @@ int tp_send(char *nick, char *msg)
 
    /* HACK: pass packet to send */
    /* FIXME: add command, \n" */
-   write(hp->fds[HP_WRITE], msg, strlen(msg));
+   if(write_all(hp->fds[HP_WRITE], msg, strlen(msg)) <= 0) return 0;
 
    return 1;
 }

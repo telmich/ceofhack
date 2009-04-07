@@ -113,12 +113,12 @@ int main() {
 
     for(i = 0; i < sizeof(bases); ++i) {
         if(!ultostr(a, bases[i], buf, sizeof(buf))) {
-            write(2, buf, strlen(buf));
-            write(2, "\n", 1);
+            write_all(2, buf, strlen(buf));
+            write_all(2, "\n", 1);
         }
         if(!ltostr(b, bases[i], buf, sizeof(buf))) {
-            write(2, buf, strlen(buf));
-            write(2, "\n", 1);
+            write_all(2, buf, strlen(buf));
+            write_all(2, "\n", 1);
         }
     }
 

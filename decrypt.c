@@ -13,7 +13,7 @@ gpgme_error_t getpwd(void *UNUSED(HOOK), const char *UNUSED(UID_HINT),
 
    printf("getpwd called, %d, %s\n", PREV_WAS_BAD, PASSPHRASE_INFO);
 
-   write(FD, "123456\n", 7);
+   write_all(FD, "123456\n", 7);
 
    return 0;
 }
