@@ -8,4 +8,8 @@
 #define EOF_L_ADDRESS   128
 #define EOF_L_KEYID      40
 
+/* commands */
+#define EOF_CMD_TP_SEND       "1000"
+
+
 #endif
