@@ -31,7 +31,9 @@ int tp_send(char *nick, char *msg)
    char           *url;
    struct cconfig *send;
    struct helper  *hp;
-   int            len;
+   size_t         len;
+   char           buf[BIGBUF+1];
+   int            tmp;
 
    url = peer_addr_get(nick);
    printf("Using address %s for %s\n", url, nick);
@@ -62,6 +64,11 @@ int tp_send(char *nick, char *msg)
     */
 
    if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) return 0;
+
+   len = strlen(msg);
+   strncpy(buf, EOF_CMD_TP_SEND, EOF_L_CMD);
+   tmp = ultostr(len, 10, buf + EOF_L_CMD, sizeof(BIGBUF) - EOF_L_CMD);
+   printf("ultostr: %d, %s (%lu)\n", tmp, buf, len);
 
    /* HACK: pass packet to send */
    /* FIXME: add command, \n" */

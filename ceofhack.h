@@ -10,7 +10,8 @@
 
 #include <poll.h>    /* pollfd */
 
-#include "eof.h"     /* the clean library header */
+#include "eof.h"     /* the clean library header   */
+#include "shcl.h"    /* small helper c library     */
 
 /* the library version is not yet used */
 
