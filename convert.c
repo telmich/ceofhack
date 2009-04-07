@@ -24,7 +24,7 @@
 
 static const char mapping[] = "0123456789abcdef";
 
-static void reverse(char* s) {
+void reverse(char* s) {
     char *start, *end;
     char buf[2];
 
@@ -46,7 +46,7 @@ static void reverse(char* s) {
     }
 }
 
-static void convert(unsigned long value, unsigned int base, char* converted, size_t size) {
+void convert(unsigned long value, unsigned int base, char* converted, size_t size) {
     unsigned int i = 0;
 
     for(i = 0; i < size; ++i)
@@ -62,7 +62,7 @@ static void convert(unsigned long value, unsigned int base, char* converted, siz
     reverse(converted);
 }
 
-static int boundary(unsigned int base, size_t size, size_t typesize) {
+int boundary(unsigned int base, size_t size, size_t typesize) {
     if(base < 2 || base > sizeof(mapping))
         return -EOUTOFRANGE;
 
