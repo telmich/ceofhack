@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: add fd1piperead()
+desc: Add the "left" side of the full duplex pipe communication read function
+type: :feature
+component: ceofhack
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-07 22:37:45.874476 Z
+references: []
+
+id: 90e9eb87c32debff931c280fd8f05843ced476d7
+log_events: 
+- - 2009-04-07 22:37:47.167470 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
