@@ -13,8 +13,8 @@ type: :bugfix
 component: ceofhack
 release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-04-08 14:18:38.862354 Z
 references: []
 
@@ -44,5 +44,9 @@ log_events:
   - |-
     renamed most things, still digging around to see whether there's more
     to make clean
+- - 2009-04-08 20:56:45.953691 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - closed with disposition fixed
+  - Yes, the first fixed bug ;-)
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
