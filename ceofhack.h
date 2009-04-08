@@ -162,7 +162,7 @@ struct ui_cmd *ui_cmd_check(char *string);
 int ui_help(char *);
 int ui_quit(char *);
 
-int user_input(int fd[]);
+int ui_cmd_read(int fd[]);
 int peer_input(int fd[]);
 
 void check_input();

@@ -48,7 +48,7 @@ int main()
    if(!peers_init())    return 1;   /* empty peers          */
 
    /* add stdin to poll: replace this later with a UI socket*/
-   if(!helper_fdonly(STDIN_FILENO, user_input, NULL)) return 1;
+   if(!helper_fdonly(STDIN_FILENO, ui_cmd_read, NULL)) return 1;
 
 // if(!ui_init())       return 1;   /* enable user input    */
 
