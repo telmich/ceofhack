@@ -37,5 +37,13 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - commented
   - have to add new structure for it...
+- - 2009-04-08 21:00:29.012805 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - |-
+    Create cmds_init() to create tree with command handlers:
+    
+    struct rcmd_cat {
+    ^^ array
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
