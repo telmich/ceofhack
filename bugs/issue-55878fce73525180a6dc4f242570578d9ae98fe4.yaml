@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Implement read_all() like write_all()
+desc: |-
+  We use read() many times without checking for EINTR, which would be useful :-)
+  
+  Later on, we should migrate read_all() and write_all() to shcl, but maybe
+  after the first EOF release...
+type: :feature
+component: ceofhack
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-08 05:56:50.268862 Z
+references: []
+
+id: 55878fce73525180a6dc4f242570578d9ae98fe4
+log_events: 
+- - 2009-04-08 05:56:51.489132 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
