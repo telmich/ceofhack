@@ -1,0 +1,28 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Refactor: cmds_init() and friends"
+desc: |-
+  cmds_init() and all related functions are user interface functions!
+  
+  The react on "/<cmd>" and are entered by the user.
+  
+  As this data will later never be delivered to ceof directly AND
+  it conflicts with the name of "cmd_handle" and friends, it should
+  be renamed to ui_cmd_init() or moved to ui/cmd (where "cmd" now
+  stands for "commandline").
+type: :bugfix
+component: ceofhack
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-08 14:18:38.862354 Z
+references: []
+
+id: a3187cd17d6112a24e0b0c294be481d38fb7601d
+log_events: 
+- - 2009-04-08 14:18:55.489363 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - Just drop telmich a note in case this bug confuses you.
+git_branch: 
+claimer: 
