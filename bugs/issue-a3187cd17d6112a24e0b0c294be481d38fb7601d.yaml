@@ -24,5 +24,15 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - Just drop telmich a note in case this bug confuses you.
+- - 2009-04-08 14:25:17.866610 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - |-
+    Further functions:
+    cmd_add()
+    cmd_check()
+    cmd_init()
+    
+    and *NOT* cmd_handle ;-)
 git_branch: 
 claimer: 
