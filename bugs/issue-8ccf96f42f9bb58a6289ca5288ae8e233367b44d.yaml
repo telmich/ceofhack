@@ -23,3 +23,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - changed status from unstarted to in_progress
   - "Working on tp_listen_read.c: read commands and decode data"
+- - 2009-04-08 10:10:23.701820 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - |-
+    Add generic handling in cmd_handle(), but also add a category,
+    so spoofing cmd from wrong source does not work.
