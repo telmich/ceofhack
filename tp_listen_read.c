@@ -31,33 +31,13 @@ int tp_listen_read(int fd[])
    ssize_t len;
    char buf[BIGBUF+1];
 
-   /* FIXME: always read  4 bytes (cmd) */
+   /* FIXME: always read 4 bytes (cmd) */
    if((len = read(fd[0], buf, EOF_L_CMD)) == -1) {
       perror("read/tp_listen");
       return 0;
    }
    buf[EOF_L_CMD] = '\0';
-   printf("cmd received & ignored: %s\n", buf);
-   return 1;
+   printf("cmd received: %s\n", buf);
 
-
-   /* read data into buffer until eof */
-   if((len = read(fd[0], buf, BIGBUF)) == -1) {
-      perror("read/tp_listen");
-      return 0;
-   }
-   /* strip \n, if present */
-   if(buf[len-1] == '\n') {
-      buf[len-1] = 0;
-   } else {
-      buf[len] = 0;
-   }
-
-   /* send ACK to transport protocol */
-
-   printf("data received: %s\n", buf);
-
-   /* decrypt data, read command, choose function to use */
-
-   return 1;
+   return cmd_handle(CMD_TP, buf, fd);
 }
