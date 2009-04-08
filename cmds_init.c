@@ -23,24 +23,23 @@
  */
 
 #include <stdlib.h>     /* NULL */
-
 #include "ceofhack.h"   /* functions etc. */
 
-struct cmd cmds;
+struct ui_cmd ui_cmds;
 
-int cmds_init()
+int ui_cmds_init()
 {
-   cmds.name   = NULL;
-   cmds.next   = NULL;
-   cmds.handle = NULL;
+   ui_cmds.name   = NULL;
+   ui_cmds.next   = NULL;
+   ui_cmds.handle = NULL;
 
-   if(!cmd_add(UI_HELP, ui_help)) return 0; 
+   if(!ui_cmd_add(UI_HELP, ui_help)) return 0; 
    
-   if(!cmd_add(UI_PEER_ADD,  peer_add))  return 0; 
-   if(!cmd_add(UI_PEER_LIST, peer_list)) return 0; 
-   if(!cmd_add(UI_PEER_SEND, peer_send)) return 0; 
+   if(!ui_cmd_add(UI_PEER_ADD,  peer_add))  return 0; 
+   if(!ui_cmd_add(UI_PEER_LIST, peer_list)) return 0; 
+   if(!ui_cmd_add(UI_PEER_SEND, peer_send)) return 0; 
 
-   if(!cmd_add(UI_QUIT, ui_quit)) return 0; 
+   if(!ui_cmd_add(UI_QUIT, ui_quit)) return 0; 
 
    return 1;
 }

@@ -44,7 +44,7 @@ int main()
    if(!cgpg_init())     return 1;   /* init gpgme           */
    if(!signals_init())  return 1;   /* catch signals        */
    if(!tp_init())       return 1;   /* transport protocols  */
-   if(!cmds_init())     return 1;   /* enable commands      */
+   if(!ui_cmds_init())  return 1;   /* enable ui commands   */
    if(!peers_init())    return 1;   /* empty peers          */
 
    /* add stdin to poll: replace this later with a UI socket*/

@@ -60,10 +60,24 @@ struct peers {
    struct peers *next;
 };
 
-struct cmd {
+/* user commands, not EOF commands.. see BUG ceofhack-7. */
+struct ui_cmd {
    char *name;
    int (*handle)(char *);
-   struct cmd *next;
+   struct ui_cmd *next;
+};
+
+/* real commands: rename after bug ceofhack-7 is solved. */
+struct rcmd {
+   char cmd[EOF_L_CMD+1];
+   int (*handle)(int []);
+   struct rmcd *next;
+};
+
+/* category */
+struct rcmd_cat {
+   int cat;
+   struct rcmd *first;
 };
 
 /* further structs with external dependencies */
@@ -112,7 +126,7 @@ struct cconfig {
 /****************** Global variables  */
 extern struct helper    chp[MAX_COMM];
 extern struct pollfd    pfd[MAX_COMM];
-extern struct cmd       cmds;
+extern struct ui_cmd    ui_cmds;
 extern struct peers     plist;
 extern struct options   opt;
 extern int              chp_cnt;
@@ -141,10 +155,10 @@ int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 int helper_write(struct helper *hp, char *buf, int len);
 
-int cmds_init();
-int cmd_add(char *name, int (*handle)(char *));
-struct cmd *cmd_check(char *string);
-
+/* sample user interface, hardcoded into ceofhack for now */
+int ui_cmds_init();
+int ui_cmd_add(char *name, int (*handle)(char *));
+struct ui_cmd *ui_cmd_check(char *string);
 int ui_help(char *);
 int ui_quit(char *);
 
@@ -189,6 +203,6 @@ int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 
 /* commands */
-int cmd_handle(unsigned long type, char data[], int fd[]);
+int cmd_handle(int type, char data[], int fd[]);
 
 #endif

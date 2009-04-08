@@ -31,7 +31,7 @@
 int user_input(int fd[])
 {
    ssize_t len;
-   struct cmd *cp;
+   struct ui_cmd *cp;
 
    char buf[EOF_L_GUI+1];
 
@@ -46,7 +46,7 @@ int user_input(int fd[])
       buf[len] = 0;
    }
 
-   cp = cmd_check(buf);
+   cp = ui_cmd_check(buf);
 
    if(cp) {
       if(!cp->handle(buf + strlen(cp->name) + 1)) {

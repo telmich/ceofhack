@@ -26,23 +26,18 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-int cmd_add(char *name, int (*handle)(char *))
+int ui_cmd_add(char *name, int (*handle)(char *))
 {
-   struct cmd *new;
+   struct ui_cmd *new;
 
-   new = malloc(sizeof(struct cmd));
+   new = malloc(sizeof(struct ui_cmd));
    if(!new) return 0;
 
    new->name   = name;
    new->handle = handle;
-   new->next   = cmds.next;
+   new->next   = ui_cmds.next;
 
-   cmds.next   = new;
+   ui_cmds.next   = new;
 
-   //for(cur = cmds; cur->next != NULL; cur = cur->next) ;
-   //cur->next = new;
-   //cmds_last->next = new;
-   //cmds_last = new;
-   
    return 1;
 }

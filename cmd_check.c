@@ -27,11 +27,9 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-//int cmd_check(char *string)       /* -1, 0, >0 version */
-//int (*cmd_check(char *string))(char *) /* returns handle */
-struct cmd *cmd_check(char *string) /* return handle + param */
+struct ui_cmd *ui_cmd_check(char *string) /* return handle + param */
 {
-   struct cmd *cp = &cmds;
+   struct ui_cmd *cp = &ui_cmds;
    int tmp;
 
    /* skip the first (entry block) */
