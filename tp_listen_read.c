@@ -39,5 +39,5 @@ int tp_listen_read(int fd[])
    buf[EOF_L_CMD] = '\0';
    printf("cmd received: %s\n", buf);
 
-   return cmd_handle(CMD_TP, buf, fd);
+   return cmd_handle(EOF_C_TP, buf, fd);
 }

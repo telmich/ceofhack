@@ -8,6 +8,10 @@
 #define EOF_L_ADDRESS   128
 #define EOF_L_KEYID      40
 
+/* areas / categories / components */
+#define EOF_C_TP         0x01       /* transport protocols */
+
+
 /* commands */
 #define EOF_CMD_TP_SEND       "1000"
 

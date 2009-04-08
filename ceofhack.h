@@ -188,4 +188,7 @@ char *cconfig_entry_fn(struct cconfig *entry);
 int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 
+/* commands */
+int cmd_handle(unsigned long type, char data[], int fd[]);
+
 #endif
