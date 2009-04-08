@@ -27,12 +27,12 @@ HELPER+=helper_write.c
 
 # command line user interface
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
-UI_CMD+=ui_quit.c ui_help.c check_input.c
+UI_CMD+=ui_quit.c ui_help.c
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
-CEOFHACK+=config_init.c cmd_handle.c
+CEOFHACK+=config_init.c cmd_handle.c check_input.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD)
 CEOFHACK_O=$(CEOFHACK:.c=.o)

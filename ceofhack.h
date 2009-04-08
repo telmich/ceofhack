@@ -60,24 +60,24 @@ struct peers {
    struct peers *next;
 };
 
-/* user commands, not EOF commands.. see BUG ceofhack-7. */
+/* user interface commands */
 struct ui_cmd {
    char *name;
    int (*handle)(char *);
    struct ui_cmd *next;
 };
 
-/* real commands: rename after bug ceofhack-7 is solved. */
-struct rcmd {
-   char cmd[EOF_L_CMD+1];
+/* EOF commands */
+struct cmd {
+   char num[EOF_L_CMD+1];
    int (*handle)(int []);
-   struct rmcd *next;
+   struct cmd *next;
 };
 
-/* category */
-struct rcmd_cat {
+/* EOF commands categories */
+struct cmd_cat {
    int cat;
-   struct rcmd *first;
+   struct cmd *first;
 };
 
 /* further structs with external dependencies */
