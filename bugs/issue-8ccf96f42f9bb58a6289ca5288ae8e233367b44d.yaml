@@ -29,3 +29,9 @@ log_events:
   - |-
     Add generic handling in cmd_handle(), but also add a category,
     so spoofing cmd from wrong source does not work.
+- - 2009-04-08 11:55:03.389127 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - issue claimed
+  - I'm working on it...
+git_branch: 
+claimer: Nico Schottelius <nico@ikn.schottelius.org>
