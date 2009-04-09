@@ -21,3 +21,11 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - ""
+- - 2009-04-09 06:31:00.901984 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - |-
+    We can use the already existing ui_* commands and just create main() for them
+    and add a connection to ceof(hack).
+git_branch: 
+claimer: 
