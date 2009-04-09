@@ -97,7 +97,7 @@ struct options {
    char tphome[PATH_MAX+1];
 };
 
-#include <sys/types.h>           /* FIXME: posix correct header?) */
+#include <sys/types.h>           /* POSIX for pid_t               */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
    int fds[4];                   /* file deskriptors used by poll */
@@ -171,6 +171,7 @@ int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 int helper_write(struct helper *hp, char *buf, int len);
+struct helper *helper_find_by_pid(pid_t pid);
 
 /* sample user interface, hardcoded into ceofhack for now */
 int ui_cmds_init();
