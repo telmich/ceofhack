@@ -26,7 +26,6 @@
 #include <stdio.h>
 #include "eof.h"   /* EOF */
 
-
 int main()
 {
    char input[EOF_L_CMD+EOF_L_ADDRESS+1];
@@ -40,6 +39,11 @@ int main()
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
    fprintf(stderr, "dummy-LTP listens to url: %s\n", input);
+
+   /* read command */
+   read(STDIN_FILENO, input, EOF_L_CMD);
+   input[EOF_L_CMD] = '\0';
+   fprintf(stderr, "dummy-LTP received command and exits: %s\n", input);
 
    return 0;
 }
