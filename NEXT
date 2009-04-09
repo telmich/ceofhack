@@ -5,8 +5,6 @@ tp_listen_read
          -> cmd_create
             -> cmd2000
                -> check: signal*c
-               -> signal_child
-                  -> tp/dummy/c/listen (which exits!)
          -> cmd_cat_add
 
 - encrypt message,

@@ -30,18 +30,18 @@ int cmdlist_cnt;
 
 int cmd_init()
 {
-//   struct cmd *newcmd;
+   struct cmd *newcmd;
    cmdlist_cnt = 0; /* no categories available */
 
    /* create categories */
    if(!cmd_cat_create(TPL)) return 0;
 
    /* create command and add it to a category  */
+   if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
 
    /*
-   if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
    if(!cmd_cat_add(TPL, newcmd)) return 0;
    */
 
-   return 0;
+   return 1;
 }

@@ -22,17 +22,21 @@
  *
  */
 
+#include <stdio.h>      /* printf()       */
 #include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
 int cmd_cat_create(unsigned long cat)
 {
-   if(cmdlist_cnt >= HACK_CMD_CAT) return 0;
+   if(cmdlist_cnt >= HACK_CMD_CAT) {
+      printf("Too many commands\n");
+      return 0;
+   }
 
    cmdlist[cmdlist_cnt].cat = cat;
    cmdlist[cmdlist_cnt].first = NULL;
 
    ++cmdlist_cnt;
 
-   return 0;
+   return 1;
 }

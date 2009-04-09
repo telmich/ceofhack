@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>      /* printf            */
 #include <stdlib.h>     /* malloc, NULL      */
 #include "ceofhack.h"   /* functions etc.    */
 
@@ -34,6 +35,8 @@ struct cmd *cmd_create(char num[], int (*handle)(int []))
 
    new->num    = num;
    new->handle = handle;
+
+   printf("Created cmd %s\n", num);
 
    return new;
 }

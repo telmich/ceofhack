@@ -25,7 +25,7 @@
 #include <stdlib.h>     /* malloc, NULL      */
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_2000(int [])
+int cmd_2000(int UNUSED(fd[]))
 {
    /* FIXME: mark packet as sent to next peer in queue (no queue implemented yet) */
 
@@ -35,4 +35,5 @@ int cmd_2000(int [])
    /* remove from poll() list */
 
 
+   return 0;
 }

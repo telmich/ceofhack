@@ -29,14 +29,17 @@ HELPER+=helper_write.c helper_find_by_pid.c
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
 UI_CMD+=ui_quit.c ui_help.c
 
+# command handling (ceofhack internal)
+CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
+CMD+=cmd_create.c
+CMD+=cmd_2000.c
+
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
-CEOFHACK+=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
-CEOFHACK+=cmd_create.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
-CEOFHACK+=$(UI_CMD)
+CEOFHACK+=$(UI_CMD) $(CMD)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 PROG=ceofhack decrypt
