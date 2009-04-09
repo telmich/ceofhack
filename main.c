@@ -31,9 +31,7 @@
 #include <unistd.h>     /* STDIN_FILENO   */
 #include "ceofhack.h"   /* functions etc. */
 
-struct helper  chp[MAX_COMM];
 struct pollfd  pfd[MAX_COMM];
-int            chp_cnt = 0;
 struct cconfig hometree;
 
 int main()
@@ -41,6 +39,7 @@ int main()
    int cnt;
 
    if(!config_init())   return 1;   /* read config          */
+   if(!helper_init())   return 1;   /* init helper structs  */
    if(!cgpg_init())     return 1;   /* init gpgme           */
    if(!signals_init())  return 1;   /* catch signals        */
    if(!tp_init())       return 1;   /* transport protocols  */

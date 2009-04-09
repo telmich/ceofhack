@@ -21,7 +21,7 @@ PEER=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
 
 # help to execute external stuff
-HELPER=helper_fdonly.c helper_new.c helper_exec.c
+HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c
 #HELPER+=helper_write.c helper_read.c
 

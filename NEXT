@@ -7,6 +7,8 @@ tp_listen_read
                -> check: signal*c
                -> signal_child
                   -> helper_find_pid()
+                     -> main
+                        -> helper_init()
          -> cmd_cat_add
 
 - encrypt message,

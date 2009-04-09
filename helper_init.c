@@ -18,29 +18,18 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle SIGCHILD
+ * Return next usable helper index or -1 on maximum number.
  *
  */
 
-#include <sys/wait.h>   /* waitpid()         */
-#include "ceofhack.h"   /* functions etc.    */
+#include "ceofhack.h"  /* functions etc. */
 
-void signal_child(int tmp)
+struct helper  chp[MAX_COMM];
+int            chp_cnt;
+
+int helper_init()
 {
-   /* 
-    * go through known children list
-    * and restart where necessary or remove from helper
-    * list!
-    */
-   pid_t pid;
+   chp_cnt = 0; /* explicit reset, just for reading */
 
-   while((pid = waitpid(-1, &tmp, WNOHANG)) > 0) {
-      printf("Child %d died...\n", pid);
-
-      /* hp = helper_find_by_pid(pid);
-      if(!hp) {
-         printf("Something useless exited\n", pid);
-      } */
-
-   }
+   return 1;
 }

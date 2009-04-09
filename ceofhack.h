@@ -1,6 +1,14 @@
 #ifndef THIS_IS_AN_UGLY_CEOF_HACK
 #define THIS_IS_AN_UGLY_CEOF_HACK
 
+/****************** Includes  */
+#include <poll.h>    /* pollfd */
+
+#include "eof.h"     /* the clean library header   */
+#include "shcl.h"    /* small helper c library     */
+
+/****************** Defines  */
+/* ugly hack to satisfy -Wextra */
 #ifdef UNUSED
 #elif defined(__GNUC__)
 # define UNUSED(x) UNUSED_ ## x __attribute__((unused))
@@ -8,17 +16,9 @@
 # define UNUSED(x) x
 #endif
 
-#include <poll.h>    /* pollfd */
-
-#include "eof.h"     /* the clean library header   */
-#include "shcl.h"    /* small helper c library     */
-
 /* the library version is not yet used */
-
 #define LIBEOF_VERSION "E.O.F"
 
-/* FIXME: HACKs */
-#define EOF_L_PEER_INPUT  256
 
 /*
  * internal limits
@@ -39,7 +39,7 @@
                                   * - user interfaces (UI)
                                   * uses an unsigned long it -> 32 is maximum!
                                   */
-
+#define EOF_L_PEER_INPUT  256    /* FIXME: HACKs */
 
 /* parts of the pipe array _we_ use */
 #define HP_READ            0
@@ -55,7 +55,7 @@
 /* TP commands */
 #define EOF_TPCMD_INIT_LTP     "1001"
 
-/* Structures */
+/****************** Structures  */
 struct peer {
    char name[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
@@ -113,7 +113,7 @@ struct tp {                      /* transport protocols           */
 };
 
 struct tpl {                     /* listening transport protocols */
-   char url[EOF_L_ADDRESS+1];    /* tcp://where-are-you           */
+   char url[EOF_L_ADDRESS+1];    /* tcp:where-are-you             */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
@@ -132,12 +132,16 @@ struct cconfig {
 };
 
 /****************** Global variables  */
-extern struct helper    chp[MAX_COMM];
 extern struct pollfd    pfd[MAX_COMM];
-extern struct ui_cmd    ui_cmds;
 extern struct peers     plist;
 extern struct options   opt;
+
+/* helper subsystem */
+extern struct helper    chp[MAX_COMM];
 extern int              chp_cnt;
+
+/* builtin user interface */
+extern struct ui_cmd    ui_cmds;
 
 /* transport */
 extern struct tp        tpa[EOF_L_TPA];
@@ -156,12 +160,13 @@ extern gpgme_ctx_t    gpg_context;
 extern gpgme_data_t   gpg_encrypt;
 extern gpgme_data_t   gpg_decrypt;
 
-/* Functions */
+/****************** Functions  */
 int forkexecpipe(char *path, struct helper *hp);
 void fd_to_poll();
 int signals_init();
 void signal_child(int sig);
 
+int helper_init();
 int helper_new();
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
