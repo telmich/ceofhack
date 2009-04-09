@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>      /* printf         */
 #include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
@@ -30,15 +31,12 @@ int cmd_cat_add(unsigned long cat, struct cmd *cmd)
    struct cmd_cat *has_cat;
 
    has_cat = cmd_cat_find(cat);
-   if(!has_cat> return 0;
-/*   if(cmdlist_cnt >= HACK_CMD_CAT) return 0;
+   if(!has_cat) return 0;
 
-   cmdlist[cmdlist_cnt].cat = cat;
-   cmdlist[cmdlist_cnt].first = NULL;
+   cmd->next = has_cat->next;
+   has_cat->next = cmd;
 
-   ++cmdlist_cnt;
+   printf("Added cmd %s to category %lu\n", cmd->num, cat);
 
-   */
-
-   return 0;
+   return 1;
 }

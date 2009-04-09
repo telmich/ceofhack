@@ -33,8 +33,8 @@ int cmd_cat_create(unsigned long cat)
       return 0;
    }
 
-   cmdlist[cmdlist_cnt].cat = cat;
-   cmdlist[cmdlist_cnt].first = NULL;
+   cmdlist[cmdlist_cnt].cat  = cat;
+   cmdlist[cmdlist_cnt].next = NULL;
 
    ++cmdlist_cnt;
 

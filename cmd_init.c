@@ -36,12 +36,9 @@ int cmd_init()
    /* create categories */
    if(!cmd_cat_create(TPL)) return 0;
 
-   /* create command and add it to a category  */
+   /* create commands and add them to a category  */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
-
-   /*
    if(!cmd_cat_add(TPL, newcmd)) return 0;
-   */
 
    return 1;
 }

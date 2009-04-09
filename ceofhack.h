@@ -84,7 +84,7 @@ struct cmd {
 /* EOF commands categories */
 struct cmd_cat {
    unsigned long cat;         /* no more than 32 categories */
-   struct cmd *first;         /* pointer to first cmd       */
+   struct cmd *next;          /* pointer to first cmd       */
 };
 
 /* further structs with external dependencies */
@@ -226,6 +226,7 @@ int cmd_init();
 int cmd_cat_create(unsigned long);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
-//int cmd_cat_add(unsigned long, );
+int cmd_cat_add(unsigned long, struct cmd *cmd);
+struct cmd_cat *cmd_cat_find(unsigned long cat);
 
 #endif

@@ -31,7 +31,7 @@ UI_CMD+=ui_quit.c ui_help.c
 
 # command handling (ceofhack internal)
 CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
-CMD+=cmd_create.c
+CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c
 CMD+=cmd_2000.c
 
 # ceofhack internal
