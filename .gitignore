@@ -13,3 +13,5 @@ ceofhack
 dia/*.png
 dia/*.dia~
 /.ditz-config
+# ditz generated
+/html
