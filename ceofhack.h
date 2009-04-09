@@ -30,8 +30,15 @@
 #define MAX_RCP         1        /* gpgme recipients              */
 #define BIGBUF          65536
 #define MAX_COMM        256      /* maximum number of communication
-                                    channels contains stdin, listen
-                                    sockets and outgoing sockets  */
+                                  * channels contains stdin, listen
+                                  * sockets and outgoing sockets
+                                  */
+#define HACK_CMD_CAT    3        /* number of command categories:
+                                  * - Sending transport protocols (TPS)
+                                  * - Listening transport protocols (TPL)
+                                  * - user interfaces (UI)
+                                  *
+                                  */
 
 
 /* parts of the pipe array _we_ use */
@@ -204,5 +211,6 @@ ssize_t write_all(int fd, const void *buf, size_t count);
 
 /* commands */
 int cmd_handle(int type, char data[], int fd[]);
+int cmd_init();
 
 #endif
