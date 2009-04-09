@@ -14,9 +14,9 @@
 
 #include "ceofhack.h"          /* structures     */
 
-int forkexecpipe(char *path, struct helper *hp)
+int forkexecpipe(struct helper *hp)
 {
-   printf("forkexecpipe: %s\n", path);
+   printf("forkexecpipe: %s\n", hp->path);
 
    /* read from EOFi [0], write from TP [1] */
    if(pipe(&hp->fds[0]) == -1) {
@@ -50,7 +50,7 @@ int forkexecpipe(char *path, struct helper *hp)
       _exit(1);
    }
 
-   execv(path,NULL);
+   execv(hp->path, NULL);
    perror("execv");
    _exit(1);
 }

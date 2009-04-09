@@ -101,7 +101,7 @@ struct options {
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
    int fds[4];                   /* file deskriptors used by poll */
-   char *path;                   /* path relative to config dir   */
+   char path[PATH_MAX+1];        /* absolute path                 */
    int (*handle)(int []);        /* pointer to the handler        */
    int (*exit)(int []);          /* pointer to the exit function  */
 };
@@ -161,7 +161,7 @@ extern gpgme_data_t   gpg_encrypt;
 extern gpgme_data_t   gpg_decrypt;
 
 /****************** Functions  */
-int forkexecpipe(char *path, struct helper *hp);
+int forkexecpipe(struct helper *hp);
 void fd_to_poll();
 int signals_init();
 void signal_child(int sig);

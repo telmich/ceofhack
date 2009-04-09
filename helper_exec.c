@@ -22,7 +22,9 @@
  *
  */
 
+#include <limits.h>     /* PATH_MAX       */
 #include <stdlib.h>     /* NULL           */
+#include <string.h>     /* str*           */
 #include "ceofhack.h"   /* functions etc. */
 
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []))
@@ -31,9 +33,11 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
 
    if(num == -1) return NULL;
 
-   if(!forkexecpipe(path, &chp[num])) return NULL;
-   chp[num].handle = handle;
-   chp[num].exit   = exit;
+   strncpy(chp[num].path, path, PATH_MAX);
+   chp[num].handle   = handle;
+   chp[num].exit     = exit;
+
+   if(!forkexecpipe(&chp[num])) return NULL;
 
    return &chp[num];
 }
