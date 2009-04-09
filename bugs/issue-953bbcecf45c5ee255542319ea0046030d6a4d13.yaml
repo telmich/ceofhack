@@ -1,0 +1,37 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Implement classes of helpers
+desc: |-
+  If a helper exits, this may be good or not.
+  
+  To be able to differentiate, implement classes (or categories, as you like ;-) to
+  distinguish them:
+  
+  Add field to struct helper (class/cat(egory))
+  Extend helper_* functions to request category.
+  Extend signal_child() to do the right thing if something exited.
+  
+  Possible categories:
+  
+  * once: start once, be happy if it exited 0 (otherwise warn user)
+  * once_failok: start once, be happy when the child is dead
+  * respawn: restart, if it fails (for listening transport protocols)
+  
+  Also implement helper_cat_change() to be able to change category later
+  (if listening transport protocol should be stopped for instance)
+type: :feature
+component: ceofhack
+release: 
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-09 09:13:35.969385 Z
+references: []
+
+id: 953bbcecf45c5ee255542319ea0046030d6a4d13
+log_events: 
+- - 2009-04-09 09:13:37.181545 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
