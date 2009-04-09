@@ -39,7 +39,7 @@ int tp_send(char *nick, char *msg)
    printf("Using address %s for %s\n", url, nick);
 
    /* search for transport protocol */
-   send = tp_available(url, TP_SEND);
+   send = tp_available(url, TPS);
 
    if(!send) {
       printf("No transport protocol available to send data to %s(%s)!\n", nick, url);
@@ -67,7 +67,7 @@ int tp_send(char *nick, char *msg)
 
    /* FIXME: always check bounds!!! */
    p = buf;
-   strncpy(p, EOF_CMD_TP_SEND, EOF_L_CMD);
+   strncpy(p, EOF_CMD_TPS, EOF_L_CMD);
    p += EOF_L_CMD;
    strncpy(p, url, EOF_L_ADDRESS);
    p += EOF_L_ADDRESS;

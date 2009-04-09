@@ -13,7 +13,7 @@
 
 
 /* commands */
-#define EOF_CMD_TP_SEND       "1000"
+#define EOF_CMD_TPS       "1000"
 
 
 #endif

@@ -118,9 +118,9 @@ struct tpl {                     /* listening transport protocols */
 };
 
 enum {
-   TP_NOTHING = 0,
-   TP_LISTEN = 1,
-   TP_SEND   = 2
+   TPN = 0x0,     /* nothing / none    */
+   TPL = 0x1,     /* listen            */
+   TPS = 0x2      /* sending           */
 };
 
 /* hacking cconfig lib into ceofhack */

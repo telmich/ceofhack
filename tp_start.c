@@ -33,12 +33,12 @@ int tp_start(struct tp *name, char *url, int type)
 {
    struct cconfig *run;
 
-   if(type & TP_LISTEN) run = name->listen;
+   if(type & TPL) run = name->listen;
    else run = name->send;
 
    if(!run) {
       printf("Sorry %s protocol not available for %s!\n",
-               type & TP_LISTEN ? "listen" : "send",
+               type & TPL ? "listen" : "send",
                cconfig_...fn(name));
       return 0;
    }

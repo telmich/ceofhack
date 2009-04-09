@@ -41,7 +41,7 @@ int tp_listen_init()
  
    for(i=0; i < tpls_cnt; i++) {
       /* has handler? */
-      if(!(tpls[i].listen = tp_available(tpls[i].url, TP_LISTEN))) return 0;
+      if(!(tpls[i].listen = tp_available(tpls[i].url, TPL))) return 0;
 
       /* start it:
        * - FIXME: cwd to dir before!
