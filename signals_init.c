@@ -22,10 +22,9 @@
  *
  */
 
-#include <signal.h>     /* sigaction   */
-#include <stdio.h>      /* NULL  */
-
-#include "ceofhack.h"  /* functions etc. */
+#include <signal.h>     /* sigaction         */
+#include <stdio.h>      /* NULL              */
+#include "ceofhack.h"   /* functions etc.    */
 
 int signals_init()
 {

@@ -30,7 +30,7 @@ int cmdlist_cnt;
 
 int cmd_init()
 {
-   struct cmd *newcmd;
+//   struct cmd *newcmd;
    cmdlist_cnt = 0; /* no categories available */
 
    /* create categories */

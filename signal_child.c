@@ -22,14 +22,20 @@
  *
  */
 
-#include <signal.h>
-#include "ceofhack.h"  /* functions etc. */
+#include <sys/wait.h>   /* waitpid()         */
+#include "ceofhack.h"   /* functions etc.    */
 
-void signal_child(int UNUSED(sig))
+void signal_child(int tmp)
 {
    /* 
     * go through known children list
     * and restart where necessary or remove from helper
     * list!
     */
+   pid_t pid;
+
+   while((pid = waitpid(-1, &tmp, WNOHANG)) > 0) {
+      printf("Child %d died...\n", pid);
+
+   }
 }
