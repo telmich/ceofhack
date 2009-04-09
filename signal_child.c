@@ -33,14 +33,17 @@ void signal_child(int tmp)
     * list!
     */
    pid_t pid;
+   struct helper *hp;
 
    while((pid = waitpid(-1, &tmp, WNOHANG)) > 0) {
       printf("Child %d died...\n", pid);
 
-      /* hp = helper_find_by_pid(pid);
+      hp = helper_find_by_pid(pid);
       if(!hp) {
-         printf("Something useless exited\n", pid);
-      } */
+         printf("Something useless exited\n");
+         continue;
+      }
 
+      printf("Child %s exited!\n", hp->path);
    }
 }
