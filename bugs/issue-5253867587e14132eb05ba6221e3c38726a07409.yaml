@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Prefix error messages in tp/c/listen.c
+desc: |-
+  Every component of EOF-3 should print its component path before printing
+  error messages.
+  
+  In this case, the prefix should be "tp/c/listen:".
+  
+  Documentate this into doc/EOF.tex, so new components use this automatically.
+type: :bugfix
+component: tp
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-09 10:15:58.205708 Z
+references: []
+
+id: 5253867587e14132eb05ba6221e3c38726a07409
+log_events: 
+- - 2009-04-09 10:15:59.265106 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
