@@ -39,7 +39,7 @@ int cmd_init()
    /* create command and add it to a category  */
 
    /*
-   if(!(newcmd = cmd_create(EOF_CMD_TPS, cmd_1000))) return 0;
+   if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
    if(!cmd_cat_add(TPL, newcmd)) return 0;
    */
 

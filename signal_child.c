@@ -23,16 +23,13 @@
  */
 
 #include <signal.h>
-
 #include "ceofhack.h"  /* functions etc. */
 
 void signal_child(int UNUSED(sig))
 {
-
    /* 
     * go through known children list
-    * and restart where necessary
+    * and restart where necessary or remove from helper
+    * list!
     */
-
-
 }

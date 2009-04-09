@@ -18,13 +18,21 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read incoming data from a listening transport protocol
+ * Packet was sent successfully
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <stdlib.h>     /* malloc, NULL      */
+#include "ceofhack.h"   /* functions etc.    */
 
-int cmd_handle(int UNUSED(type), char UNUSED(data[]), int UNUSED(fd[]))
+int cmd_2000(int [])
 {
-   return 0;
+   /* FIXME: mark packet as sent to next peer in queue (no queue implemented yet) */
+
+   /******** disable helper *******/
+   /* close fds */
+
+   /* remove from poll() list */
+
+
 }

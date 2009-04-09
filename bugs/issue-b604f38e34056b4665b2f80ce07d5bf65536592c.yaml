@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add signal handler for exiting helpers
+desc: |-
+  So file descriptors are closed, the programm removed (or restarted in case
+  it needs to be restarted).
+type: :feature
+component: ceofhack
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-09 07:49:10.409089 Z
+references: []
+
+id: b604f38e34056b4665b2f80ce07d5bf65536592c
+log_events: 
+- - 2009-04-09 07:49:12.885278 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+- - 2009-04-09 07:49:46.654347 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - issue claimed
+  - Working on it, because of {issue a3187cd17d6112a24e0b0c294be481d38fb7601d}...
+git_branch: 
+claimer: Nico Schottelius <nico@ikn.schottelius.org>
