@@ -8,7 +8,7 @@ desc: |-
   * new connections get a new entry in the helper list and a different handler
 type: :feature
 component: ui
-release: 
+release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -21,3 +21,11 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - ""
+- - 2009-04-09 10:18:57.431409 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release 1.0 from unassigned
+  - |-
+    We should have the socket up and running, so others can begin to
+    implement beautiful UIs after the first EOF-2 release :-)
+git_branch: 
+claimer: 
