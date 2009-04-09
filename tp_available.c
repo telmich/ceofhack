@@ -33,13 +33,13 @@ struct cconfig *tp_available(char *url, int type)
 {
    int i;
 
-   for(i=0; i < tps_cnt; i++) {
-      printf("LTP/TP: %s / %s [%lu]\n", url, tps[i].scheme, strlen(tps[i].scheme));
-      if(!strncmp(url, tps[i].scheme, strlen(tps[i].scheme))) {
-         if(type & TP_LISTEN && tps[i].listen) {
-            return tps[i].listen;
-         } else if(type & TP_SEND && tps[i].send) {
-            return tps[i].send;
+   for(i=0; i < tpa_cnt; i++) {
+      printf("LTP/TP: %s / %s [%lu]\n", url, tpa[i].scheme, strlen(tpa[i].scheme));
+      if(!strncmp(url, tpa[i].scheme, strlen(tpa[i].scheme))) {
+         if(type & TP_LISTEN && tpa[i].listen) {
+            return tpa[i].listen;
+         } else if(type & TP_SEND && tpa[i].send) {
+            return tpa[i].send;
          }
       }
    }

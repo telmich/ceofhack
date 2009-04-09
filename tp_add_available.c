@@ -51,14 +51,14 @@ int tp_add_available(char *name, struct cconfig entry)
       return 0;
    }
    
-   if( (tps_cnt+1) < EOF_L_TPA) {
+   if( (tpa_cnt+1) < EOF_L_TPA) {
       strncpy(tpnew.scheme, name, len);
       tpnew.scheme[len] = '\0';
-      memcpy(&tps[tps_cnt], &tpnew, sizeof(tps[tps_cnt]));
+      memcpy(&tpa[tpa_cnt], &tpnew, sizeof(tpa[tpa_cnt]));
 
-      ++tps_cnt;
+      ++tpa_cnt;
    }
-   printf("TP %d %s successfully added\n", tps_cnt, name);
+   printf("TP %d %s successfully added\n", tpa_cnt, name);
 
    return 1;
 }

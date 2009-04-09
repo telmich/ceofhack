@@ -139,8 +139,8 @@ extern struct options   opt;
 extern int              chp_cnt;
 
 /* transport */
-extern struct tp        tps[EOF_L_TPA];
-extern int              tps_cnt;
+extern struct tp        tpa[EOF_L_TPA];
+extern int              tpa_cnt;
 extern struct tpl       tpls[EOF_L_TPL];
 extern int              tpls_cnt;
 extern struct cconfig   tp_tree;

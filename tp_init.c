@@ -30,8 +30,8 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-struct tp tps[EOF_L_TPA];
-int    tps_cnt;
+struct tp tpa[EOF_L_TPA];
+int    tpa_cnt;
 
 struct tpl tpls[EOF_L_TPL];
 int    tpls_cnt;
@@ -46,8 +46,8 @@ int tp_init()
    int state;
 
    /* init data list */
-   memset(&tps, '\0', sizeof(tps));
-   tps_cnt = 0;
+   memset(&tpa, '\0', sizeof(tpa));
+   tpa_cnt = 0;
 
    /* build cconfig tree */
    strcpy(tp_tree.path, opt.tphome);
