@@ -33,11 +33,11 @@
                                   * channels contains stdin, listen
                                   * sockets and outgoing sockets
                                   */
-#define HACK_CMD_CAT    3        /* number of command categories:
+#define HACK_CMD_CAT    32       /* number of command categories:
                                   * - Sending transport protocols (TPS)
                                   * - Listening transport protocols (TPL)
                                   * - user interfaces (UI)
-                                  *
+                                  * uses an unsigned long it -> 32 is maximum!
                                   */
 
 
@@ -83,8 +83,8 @@ struct cmd {
 
 /* EOF commands categories */
 struct cmd_cat {
-   int cat;
-   struct cmd *first;
+   unsigned long cat;         /* no more than 32 categories */
+   struct cmd *first;         /* pointer to first cmd       */
 };
 
 /* further structs with external dependencies */
@@ -117,10 +117,11 @@ struct tpl {                     /* listening transport protocols */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
+/* cmd categories, use in other places as well, need to be '&'-able  */
 enum {
-   TPN = 0x0,     /* nothing / none    */
-   TPL = 0x1,     /* listen            */
-   TPS = 0x2      /* sending           */
+   TPN = 0x0,     /* TP nothing / none    */
+   TPL = 0x1,     /* TP listen            */
+   TPS = 0x2      /* TP sending           */
 };
 
 /* hacking cconfig lib into ceofhack */
@@ -144,6 +145,10 @@ extern int              tpa_cnt;
 extern struct tpl       tpls[EOF_L_TPL];
 extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
+
+/* commands */
+extern struct cmd_cat   cmdlist[HACK_CMD_CAT];
+extern int              cmdlist_cnt;
 
 /* gpgme */
 #include <gpgme.h>      /* gpgme             */
@@ -212,5 +217,7 @@ ssize_t write_all(int fd, const void *buf, size_t count);
 /* commands */
 int cmd_handle(int type, char data[], int fd[]);
 int cmd_init();
+int cmd_cat_create(unsigned long);
+//int cmd_cat_add(unsigned long, );
 
 #endif

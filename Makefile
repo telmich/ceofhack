@@ -32,7 +32,8 @@ UI_CMD+=ui_quit.c ui_help.c
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
-CEOFHACK+=config_init.c cmd_handle.c check_input.c cmd_init.c
+CEOFHACK+=config_init.c
+CEOFHACK+=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
