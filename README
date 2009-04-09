@@ -32,7 +32,13 @@ Development:
 
    Have a look at doc/coding_style.
 
-   Get latest tree using "git clone <url>":
+   Get latest tree using "git clone <url>" (see below).
+
+   Claim the bug you're working on: "ditz claim <bugid>".
+
+   Work & hack & commit & publish & announce url to fetch.
+
+   We're in #cLinux on freenode, as long as EOF-3 is not ready to use ;-)
 
    Nico's tree:
       http://git.schottelius.org/?p=EOF/ceofhack;a=summary (webview)
