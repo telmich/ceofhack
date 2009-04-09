@@ -22,5 +22,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - issue claimed
   - Working on it, because of {issue a3187cd17d6112a24e0b0c294be481d38fb7601d}...
+- - 2009-04-09 09:57:59.760380 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - Catching of children added -- though without any functionality.
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
