@@ -30,11 +30,11 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-struct tp tps[EOF_L_TP_AVAIL];
+struct tp tps[EOF_L_TPA];
 int    tps_cnt;
 
-struct ltp ltps[EOF_L_LTP];
-int    ltps_cnt;
+struct tpl tpls[EOF_L_TPL];
+int    tpls_cnt;
 
 struct cconfig tp_tree;
 

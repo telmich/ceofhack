@@ -51,7 +51,7 @@ int tp_add_available(char *name, struct cconfig entry)
       return 0;
    }
    
-   if( (tps_cnt+1) < EOF_L_TP_AVAIL) {
+   if( (tps_cnt+1) < EOF_L_TPA) {
       strncpy(tpnew.scheme, name, len);
       tpnew.scheme[len] = '\0';
       memcpy(&tps[tps_cnt], &tpnew, sizeof(tps[tps_cnt]));

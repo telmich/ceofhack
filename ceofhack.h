@@ -25,8 +25,8 @@
  */
 
 #define EOF_L_GUI       256
-#define EOF_L_TP_AVAIL  256      /* max available tp              */
-#define EOF_L_LTP       256      /* max available tp listener     */
+#define EOF_L_TPA       256      /* max available tp (all)        */
+#define EOF_L_TPL       256      /* max available tp listener     */
 #define MAX_RCP         1        /* gpgme recipients              */
 #define BIGBUF          65536
 #define MAX_COMM        256      /* maximum number of communication
@@ -112,7 +112,7 @@ struct tp {                      /* transport protocols           */
    struct cconfig *send;         /* non-NUll if available         */
 };
 
-struct ltp {                     /* listening transport protocols */
+struct tpl {                     /* listening transport protocols */
    char url[EOF_L_ADDRESS+1];    /* tcp://where-are-you           */
    struct cconfig *listen;       /* program that can decode stuff */
 };
@@ -139,10 +139,10 @@ extern struct options   opt;
 extern int              chp_cnt;
 
 /* transport */
-extern struct tp        tps[EOF_L_TP_AVAIL];
+extern struct tp        tps[EOF_L_TPA];
 extern int              tps_cnt;
-extern struct ltp       ltps[EOF_L_LTP];
-extern int              ltps_cnt;
+extern struct tpl       tpls[EOF_L_TPL];
+extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
 
 /* gpgme */

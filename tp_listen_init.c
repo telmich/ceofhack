@@ -39,9 +39,9 @@ int tp_listen_init()
    strncpy(cmd, EOF_TPCMD_INIT_LTP, EOF_L_CMD);
    cmd[EOF_L_CMD+EOF_L_ADDRESS] = '\0';
  
-   for(i=0; i < ltps_cnt; i++) {
+   for(i=0; i < tpls_cnt; i++) {
       /* has handler? */
-      if(!(ltps[i].listen = tp_available(ltps[i].url, TP_LISTEN))) return 0;
+      if(!(tpls[i].listen = tp_available(tpls[i].url, TP_LISTEN))) return 0;
 
       /* start it:
        * - FIXME: cwd to dir before!
@@ -52,13 +52,13 @@ int tp_listen_init()
 
       /* FIXME: cwd into configdir */
 
-      if(!(hp = helper_exec(ltps[i].listen->path, tp_listen_read, NULL))) return 0;
+      if(!(hp = helper_exec(tpls[i].listen->path, tp_listen_read, NULL))) return 0;
 
       /* FIXME: cwd back */
 
       /* FIXME: write start command including URL (excluding scheme) */
-      len = tp_scheme_len(ltps[i].url);
-      strncpy(cmd+EOF_L_CMD, ltps[i].url + len +1, EOF_L_ADDRESS); /* +1: skip ":" */
+      len = tp_scheme_len(tpls[i].url);
+      strncpy(cmd+EOF_L_CMD, tpls[i].url + len +1, EOF_L_ADDRESS); /* +1: skip ":" */
       printf("LTP write: %s\n", cmd);
 
       if(helper_write(hp, cmd, EOF_L_CMD+EOF_L_ADDRESS) <= 0) return 0;

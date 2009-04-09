@@ -32,12 +32,12 @@
 
 int tp_listen_add(char *name, struct cconfig entry)
 {
-   struct ltp ltpnew;
+   struct tpl tplnew;
    struct cconfig *url;
 
    printf("Debug: %d in %s\n", entry.noe, entry.path);
 
-   memset(ltpnew.url, '\0', sizeof(ltpnew.url));
+   memset(tplnew.url, '\0', sizeof(tplnew.url));
 
    /* check for url */
    url = cconfig_find_fn("url", entry, NULL);
@@ -49,13 +49,13 @@ int tp_listen_add(char *name, struct cconfig entry)
    }
 
    /* read url */
-   if(!openreadclosestatic(ltpnew.url, url->path, EOF_L_ADDRESS)) return 0;
+   if(!openreadclosestatic(tplnew.url, url->path, EOF_L_ADDRESS)) return 0;
 
-   if( (ltps_cnt+1) < EOF_L_LTP) {
-      memcpy(&ltps[ltps_cnt], &ltpnew, sizeof(ltps[ltps_cnt]));
+   if( (tpls_cnt+1) < EOF_L_TPL) {
+      memcpy(&tpls[tpls_cnt], &tplnew, sizeof(tpls[tpls_cnt]));
 
-      ++ltps_cnt;
-      printf("LTP %d %s listening at %s\n", ltps_cnt, name, ltpnew.url);
+      ++tpls_cnt;
+      printf("LTP %d %s listening at %s\n", tpls_cnt, name, tplnew.url);
    } else {
       printf("LTP: Error: Maximum number of listening TPs!\n");
       return 0;
