@@ -32,12 +32,22 @@ Development:
 
    Have a look at doc/coding_style.
 
-   http://git.schottelius.org/?p=EOF/ceofhack;a=summary
+   Get latest tree using "git clone <url>":
 
-   git clone git://git.schottelius.org/EOF/ceofhack
+   Nico's tree:
+      http://git.schottelius.org/?p=EOF/ceofhack;a=summary (webview)
+      git://git.schottelius.org/EOF/ceofhack
 
-   Branches:
+      Branches:
+         master: "stable" (should compile and run, not work)
+         hacking: "latest" (things I'm hacking on)
 
-      master: "stable" (should compile and run, not work)
+      Mirrors:
+         http://github.com/telmich/ceofhack/tree/master (webview)
+         git://github.com/telmich/ceofhack.git
 
-      hacking: "latest" (things I'm hacking on)
+         http://gitorious.org/projects/ceofhack (webview)
+         git://gitorious.org/ceofhack/mainline.git
+
+   Apic's tree:
+      http://brezn.muc.ccc.de/~apic/git/ceofhack
