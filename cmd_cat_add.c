@@ -18,21 +18,27 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Create a command category
+ * Add a command to a category
  *
  */
 
 #include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_cat_create(unsigned long cat)
+int cmd_cat_add(unsigned long cat, struct cmd *cmd)
 {
-   if(cmdlist_cnt >= HACK_CMD_CAT) return 0;
+   struct cmd_cat *has_cat;
+
+   has_cat = cmd_cat_find(cat);
+   if(!has_cat> return 0;
+/*   if(cmdlist_cnt >= HACK_CMD_CAT) return 0;
 
    cmdlist[cmdlist_cnt].cat = cat;
    cmdlist[cmdlist_cnt].first = NULL;
 
    ++cmdlist_cnt;
+
+   */
 
    return 0;
 }

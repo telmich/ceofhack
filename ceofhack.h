@@ -76,7 +76,7 @@ struct ui_cmd {
 
 /* EOF commands */
 struct cmd {
-   char num[EOF_L_CMD+1];
+   char *num;
    int (*handle)(int []);
    struct cmd *next;
 };
@@ -218,6 +218,7 @@ ssize_t write_all(int fd, const void *buf, size_t count);
 int cmd_handle(int type, char data[], int fd[]);
 int cmd_init();
 int cmd_cat_create(unsigned long);
+struct cmd *cmd_create(char num[], int (*handle)(int []));
 //int cmd_cat_add(unsigned long, );
 
 #endif

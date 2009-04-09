@@ -18,30 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Initialise command handler tree (similar to ui_cmd_init)
+ * Create a new command
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <stdlib.h>     /* malloc, NULL      */
+#include "ceofhack.h"   /* functions etc.    */
 
-/* global array */
-struct cmd_cat cmdlist[HACK_CMD_CAT];
-int cmdlist_cnt;
-
-int cmd_init()
+struct cmd *cmd_create(char num[], int (*handle)(int []))
 {
-   struct cmd *newcmd;
-   cmdlist_cnt = 0; /* no categories available */
+   struct cmd *new;
 
-   /* create categories */
-   if(!cmd_cat_create(TPL)) return 0;
+   new = malloc(sizeof(struct cmd));
+   if(!new) return NULL;
 
-   /* create command and add it to a category  */
+   new->num    = num;
+   new->handle = handle;
 
-   /*
-   if(!(newcmd = cmd_create(EOF_CMD_TPS, cmd_1000))) return 0;
-   if(!cmd_cat_add(TPL, newcmd)) return 0;
-   */
-
-   return 0;
+   return new;
 }
