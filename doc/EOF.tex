@@ -431,6 +431,25 @@ Destination & 128 Byte FLS & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \end{verbatim}
 % -----------------------------------------------------------------------------
+\subsection{1002: Stop listening}
+\index{Command!1002}%
+This command requests a listening transport protocol to 
+shutdown. It should free all ressources and exit.
+After a grace time (maybe seconds, not yet defined), EOFi will kill the badly
+behaving transport protocol.
+listening transport protocol as enabled.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{1002: Example}
+\begin{verbatim}
+1002
+\end{verbatim}
+% -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
 This code is returned by the transport protocol subsystem to EOFi on success.
 After this return code, the transport protocol exits.
