@@ -24,3 +24,22 @@ releases:
     - Nico Schottelius <nico@ikn.schottelius.org>
     - created
     - The first usable release of EOF-2
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "1.1"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2009-04-10 11:27:17.751007 Z
+    - Nico Schottelius <nico@ikn.schottelius.org>
+    - created
+    - |-
+      Cleanup of 1.0, which allows others to contribute to EOF-2:
+      
+      * Create sample transport protocols
+      * handling all commands
+      * implementation at least in C
+      * sample implementation in other languages (perl, python, ruby) would be helpful
+      * Add user interface
+      * So other UIs can be created
+      * Cleanup ui_cmd, so it can be used as a reference
+      * Fix bugs of 1.0 ;-)
