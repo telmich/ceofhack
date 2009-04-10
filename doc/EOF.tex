@@ -141,6 +141,10 @@ Further changes will be documented in this section.
 \section{Packets}
 What's seen from inside (after stripping of the onion skin).
 % -----------------------------------------------------------------------------
+\subsection{Maximum packet size}
+No packet (including everything) may exceed the size of
+\emph{EOF\_L\_PKG\_MAX}.
+% -----------------------------------------------------------------------------
 \subsection{Onion-Packets}
 What's seen from outside: A (multiple) times encrypted packet including
 transport protocol shell.
