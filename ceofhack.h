@@ -45,13 +45,6 @@
 #define HP_READ            0
 #define HP_WRITE           3
 
-/* UI commands */
-#define UI_QUIT      "/quit"
-#define UI_PEER_ADD  "/peer add"
-#define UI_PEER_LIST "/peer list"
-#define UI_PEER_SEND "/peer send"
-#define UI_HELP      "/help"
-
 /****************** Structures  */
 struct peer {
    char name[EOF_L_NICKNAME+1];

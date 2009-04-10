@@ -20,5 +20,13 @@
 #define EOF_CMD_TPS_SENT         "2000"
 #define EOF_CMD_TPL_LISTENING    "2003"
 
+/* UI commands */
+#define EOF_UI_QUIT      "/quit"
+#define EOF_UI_PEER_ADD  "/peer add"
+#define EOF_UI_PEER_LIST "/peer list"
+#define EOF_UI_PEER_SEND "/peer send"
+#define EOF_UI_HELP      "/help"
+
+
 
 #endif
