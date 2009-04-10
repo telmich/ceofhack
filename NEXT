@@ -3,7 +3,6 @@ tp_listen_read
    -> cmd_handle
       -> cmd_init
          -> cmd_create
-            -> cmd2000
 
 - encrypt message,
    send, = listen + send function

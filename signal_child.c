@@ -44,7 +44,7 @@ void signal_child(int tmp)
          continue;
       }
 
-      printf("Child %s exited!\n", hp->path);
+      printf("Child %s exited (removing from poll list)!\n", hp->path);
       
       helper_disable(hp);
    }

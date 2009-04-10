@@ -29,9 +29,11 @@ void helper_disable(struct helper *hp)
 {
    int i;
 
-   hp->pid = 0;
+   hp->pid     = 0;
    for(i=0; i<4; i++) close(hp->fds[i]);
    hp->path[0] = '\0';
-   hp->handle = NULL;
-   hp->exit = NULL;
+   hp->handle  = NULL;
+   hp->exit    = NULL;
+
+   --chp_cnt; /* one less to search */
 }
