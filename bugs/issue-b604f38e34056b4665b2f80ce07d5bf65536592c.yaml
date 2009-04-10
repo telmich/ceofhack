@@ -7,8 +7,8 @@ type: :feature
 component: ceofhack
 release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-04-09 07:49:10.409089 Z
 references: []
 
@@ -30,5 +30,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - changed status from unstarted to in_progress
   - Also working on it
+- - 2009-04-10 09:23:14.525350 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - closed with disposition fixed
+  - Done in signal_child()
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
