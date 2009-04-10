@@ -161,11 +161,15 @@ extern gpgme_data_t   gpg_encrypt;
 extern gpgme_data_t   gpg_decrypt;
 
 /****************** Functions  */
+/* generic */
+void check_input(int possible, int *have_data);
+int config_init();
 int forkexecpipe(struct helper *hp);
 void fd_to_poll(int *);
 int signals_init();
 void signal_child(int sig);
 
+/* helper */
 int helper_init();
 int helper_new();
 void helper_disable(struct helper *hp);
@@ -182,10 +186,8 @@ int ui_help(char *);
 int ui_quit(char *);
 int ui_cmd_read(int fd[]);
 
-int peer_input(int fd[]);
 
-void check_input(int possible, int *have_data);
-
+/* peers */
 int peers_init();
 int peer_add(char *);
 int peer_list(char *);
@@ -193,13 +195,14 @@ int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 char *peer_keyid_get(char *nick);
 char *peer_addr_get(char *name);
+int peer_input(int fd[]);
 
+/* crypto via gpg(me) */
 int cgpg_init();
 int cgpg_encrypt(char *nick, char *msg, char buf[], int len);
 int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
 
-int config_init();
-
+/* transport protocols */
 int tp_init();
 int tp_add_available(char *name, struct cconfig entry);
 int tp_listen_add(char *name, struct cconfig entry);
@@ -210,7 +213,7 @@ struct cconfig *tp_available(char *url, int type);
 int tp_send(char *nick, char *msg);
 int tp_send_wait(int fds[]);
 
-
+/* cconfig */
 int cconfig_tree(struct cconfig *cg);
 struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
 int cconfig_tree_dump(struct cconfig tree, int level);
