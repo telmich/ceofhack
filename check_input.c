@@ -22,19 +22,20 @@
  *
  */
 
-#include <unistd.h>     /* read */
+#include <unistd.h>     /* read           */
 #include <stdio.h>      /* perror         */
 
 #include "ceofhack.h"  /* functions etc. */
 
-void check_input()
+void check_input(int possible, int have_data)
 {
    int i;
 
-   for(i=0; i < MAX_COMM; i++) {
+   for(i=0; i < possible && have_data > 0; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
          printf("data on channel %d\n",i);
          chp[i].handle(chp[i].fds);
+         --have_data;
       }
    }
 }
