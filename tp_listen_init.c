@@ -36,7 +36,7 @@ int tp_listen_init()
    struct helper *hp;
    char cmd[EOF_L_CMD+EOF_L_ADDRESS+1]; /* FIXME: +1 is only for testing */
 
-   strncpy(cmd, EOF_TPCMD_INIT_LTP, EOF_L_CMD);
+   strncpy(cmd, EOF_CMD_TPL_START, EOF_L_CMD);
    cmd[EOF_L_CMD+EOF_L_ADDRESS] = '\0';
  
    for(i=0; i < tpls_cnt; i++) {

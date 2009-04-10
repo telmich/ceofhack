@@ -52,9 +52,6 @@
 #define UI_PEER_SEND "/peer send"
 #define UI_HELP      "/help"
 
-/* TP commands */
-#define EOF_TPCMD_INIT_LTP     "1001"
-
 /****************** Structures  */
 struct peer {
    char name[EOF_L_NICKNAME+1];
