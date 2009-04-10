@@ -1,0 +1,34 @@
+Aim: "Directly chat encrypted with someone"
+
+- init_ceofhack.sh:
+   - create pgp configuration:
+      - documentate that in doc/EOF.tex [apic]
+   - copy and enable transport protocol tcp (via netcat)
+      - listen on tcp:0.0.0.0:6667 [apic]
+   - print hint on how to start ceofhack and add peers [nico]
+
+- create commands in ceofhack (use existing structure):
+   - check current doc, whether the following is right:
+      - /peer add <name> <address> (make it possible to add a peer with an initial address)
+      - /key add <name> <fingerprint> (make it possible to add a key fingerprint)
+      - /msg <name> <message> (make it possible to send messages)
+
+- transport protocol: [apic]
+   - create & check: listen & send for tcp
+   - cleanly documentate in EOF.tex
+      - commands for transport protocols
+      - how to use stdin/stdout/stderr
+
+- check all structures and functions for programming errors [apic]
+   - valgrind
+   - electric fence
+
+- add minimal usage doc in EOF.tex: [nico]
+   - cleanup the imported documents, check if everything is up-to-date (basic.tex)
+   - TP: tcp: syntax, available implementations
+   - how to create keys (with script and manually)
+   - usable to promote EOF-2
+      - doc matches code
+      - add implemented and planned
+
+--------------------------------------------------------------------------------
