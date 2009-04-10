@@ -38,5 +38,6 @@ int helper_new()
       }
    }
 
-   return -1;
+   /* this should never happen and means there's a bug in the helper system  */
+   return -2;
 }
