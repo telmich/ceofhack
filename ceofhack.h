@@ -180,8 +180,8 @@ int ui_cmd_add(char *name, int (*handle)(char *));
 struct ui_cmd *ui_cmd_check(char *string);
 int ui_help(char *);
 int ui_quit(char *);
-
 int ui_cmd_read(int fd[]);
+
 int peer_input(int fd[]);
 
 void check_input(int possible, int *have_data);
@@ -222,12 +222,13 @@ int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 
 /* commands */
-int cmd_handle(int type, char data[], int fd[]);
+int cmd_handle(unsigned long cat, int fd[], char data[], ssize_t len);
 int cmd_init();
 int cmd_cat_create(unsigned long);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);
 struct cmd_cat *cmd_cat_find(unsigned long cat);
+struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 
 #endif

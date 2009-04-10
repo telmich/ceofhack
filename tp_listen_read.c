@@ -29,15 +29,18 @@
 int tp_listen_read(int fd[])
 {
    ssize_t len;
-   char buf[BIGBUF+1];
+   char buf[EOF_L_PKG_MAX+1];
 
-   /* FIXME: always read 4 bytes (cmd) */
-   if((len = read(fd[0], buf, EOF_L_CMD)) == -1) {
+   /* read full packet */
+   if((len = read(fd[HP_READ], buf, EOF_L_PKG_MAX+1)) == -1) {
       perror("read/tp_listen");
       return 0;
    }
-   buf[EOF_L_CMD] = '\0';
-   printf("cmd received: %s\n", buf);
+   if(len > EOF_L_PKG_MAX) {
+      printf("Packet too long (%lu)", len);
+      return 0;
+   }
+   printf("tpl cmd received: %c %c %c %c\n", buf[0], buf[1], buf[2], buf[3]);
 
-   return cmd_handle(EOF_C_TP, buf, fd);
+   return cmd_handle(EOF_C_TP, fd, buf, len);
 }

@@ -24,7 +24,18 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_handle(int UNUSED(type), char UNUSED(data[]), int UNUSED(fd[]))
+int cmd_handle(unsigned long cat, int fds[], char data[], ssize_t len)
 {
-   return 0;
+   struct cmd *cmd;
+
+   printf("category %lu: handling cmd (%lu) %c%c%c%c\n", cat, len,
+            data[0], data[1], data[2], data[3]);
+
+   cmd = cmd_find_in_cat(cat, data);
+   if(!cmd) {
+      printf("No handler found for command!\n");
+      return 0;
+   }
+
+   return cmd->handle(fds);
 }
