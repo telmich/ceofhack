@@ -8,7 +8,7 @@ desc: |-
   * nothing more
 type: :feature
 component: ui
-release: 
+release: "1.1"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -27,5 +27,9 @@ log_events:
   - |-
     We can use the already existing ui_* commands and just create main() for them
     and add a connection to ceof(hack).
+- - 2009-04-10 11:29:38.345059 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release 1.1 from unassigned
+  - ""
 git_branch: 
 claimer: 

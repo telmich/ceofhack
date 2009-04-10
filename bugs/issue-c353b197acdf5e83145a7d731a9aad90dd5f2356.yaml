@@ -6,7 +6,7 @@ desc: |-
   Flag all other commands as "implemented later".
 type: :bugfix
 component: doc
-release: 
+release: "1.1"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -19,3 +19,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - ""
+- - 2009-04-10 11:29:19.014221 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release 1.1 from unassigned
+  - ""
+git_branch: 
+claimer: 
