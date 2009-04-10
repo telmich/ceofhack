@@ -32,10 +32,15 @@ void fd_to_poll()
    int i;
 
    /* FIXME: use chp_cnt? handle should never by NULL ... */
+
+   /*
+    * cycle through all possible connections
+    * if the handler is NULL, it's either disabled
+    * or has never been initialised */
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].handle) {
          printf("adding handler %d to poll list\n", i);
-         pfd[i].fd = chp[i].fds[0];
+         pfd[i].fd = chp[i].fds[HP_READ];
          pfd[i].events = POLLIN | POLLPRI;
       } else {
          pfd[i].fd = -1;
