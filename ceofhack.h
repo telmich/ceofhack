@@ -133,6 +133,7 @@ struct cconfig {
 
 /****************** Global variables  */
 extern struct pollfd    pfd[MAX_COMM];
+extern int              pfd_cnt;
 extern struct peers     plist;
 extern struct options   opt;
 
@@ -162,7 +163,7 @@ extern gpgme_data_t   gpg_decrypt;
 
 /****************** Functions  */
 int forkexecpipe(struct helper *hp);
-void fd_to_poll();
+void fd_to_poll(int *);
 int signals_init();
 void signal_child(int sig);
 

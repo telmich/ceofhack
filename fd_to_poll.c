@@ -27,25 +27,24 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-void fd_to_poll()
+void fd_to_poll(int *used)
 {
    int i;
 
-   /* FIXME: use chp_cnt? handle should never by NULL ... */
+   *used = 0; /* no poll entries */
 
    /*
     * cycle through all possible connections
     * if the handler is NULL, it's either disabled
-    * or has never been initialised */
+    * or has never been initialised
+    */
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].handle) {
-         printf("adding handler %d to poll list\n", i);
-         pfd[i].fd = chp[i].fds[HP_READ];
-         pfd[i].events = POLLIN | POLLPRI;
-      } else {
-         pfd[i].fd = -1;
-         pfd[i].events = 0;
+         printf("Added poll item %d (helper %d)\n", *used, i);
+         pfd[*used].fd = chp[i].fds[HP_READ];
+         pfd[*used].events = POLLIN | POLLPRI;
+         pfd[*used].revents = 0;
+         (*used)++;
       }
-      pfd[i].revents = 0;
    }
 }

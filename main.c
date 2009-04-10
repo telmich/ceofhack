@@ -32,6 +32,7 @@
 #include "ceofhack.h"   /* functions etc. */
 
 struct pollfd  pfd[MAX_COMM];
+int            pfd_cnt;
 struct cconfig hometree;
 
 int main()
@@ -54,9 +55,9 @@ int main()
 
    while(1) {
       /* reinit, poll array may have changed */
-      fd_to_poll();
+      fd_to_poll(&pfd_cnt);
 
-      cnt = poll(pfd, chp_cnt, -1);
+      cnt = poll(pfd, pfd_cnt, -1);
       if(cnt == -1) {
          if(errno != EINTR) return 1;
       } else {
