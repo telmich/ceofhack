@@ -8,8 +8,8 @@ type: :feature
 component: ceofhack
 release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-04-07 21:42:12.927190 Z
 references: []
 
@@ -45,5 +45,9 @@ log_events:
     
     struct rcmd_cat {
     ^^ array
+- - 2009-04-10 09:21:21.929416 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - closed with disposition fixed
+  - General framework finished in cmd_handle().
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
