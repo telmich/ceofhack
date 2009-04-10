@@ -40,5 +40,8 @@ int cmd_init()
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
    if(!cmd_cat_add(TPL, newcmd)) return 0;
 
+   if(!(newcmd = cmd_create(EOF_CMD_TPL_LISTENING, cmd_2003))) return 0;
+   if(!cmd_cat_add(TPL, newcmd)) return 0;
+
    return 1;
 }

@@ -14,8 +14,9 @@
 
 
 /* commands */
-#define EOF_CMD_TPS       "1000"
-#define EOF_CMD_TPS_SENT  "2000"
+#define EOF_CMD_TPS              "1000"
+#define EOF_CMD_TPS_SENT         "2000"
+#define EOF_CMD_TPL_LISTENING    "2003"
 
 
 #endif

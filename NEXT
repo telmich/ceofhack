@@ -1,8 +1,4 @@
 ditz:ceofhack-1:Current working tree:
-tp_listen_read
-   -> cmd_handle
-      -> cmd_init
-         -> cmd_create
 
 - encrypt message,
    send, = listen + send function
