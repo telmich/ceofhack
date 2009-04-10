@@ -133,7 +133,6 @@ struct cconfig {
 
 /****************** Global variables  */
 extern struct pollfd    pfd[MAX_COMM];
-extern int              pfd_cnt;
 extern struct peers     plist;
 extern struct options   opt;
 
@@ -185,7 +184,7 @@ int ui_quit(char *);
 int ui_cmd_read(int fd[]);
 int peer_input(int fd[]);
 
-void check_input();
+void check_input(int possible, int *have_data);
 
 int peers_init();
 int peer_add(char *);

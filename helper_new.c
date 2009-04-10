@@ -22,11 +22,21 @@
  *
  */
 
-#include <signal.h>
-
 #include "ceofhack.h"  /* functions etc. */
 
 int helper_new()
 {
-   return (chp_cnt < MAX_COMM) ? chp_cnt++ : -1;
+   int i;
+
+   if(chp_cnt >= MAX_COMM) return -1;
+
+   for(i=0; i < MAX_COMM; i++) {
+      /* no handler? free for use */
+      if(!chp[i].handle) {
+         ++chp_cnt;
+         return i;
+      }
+   }
+
+   return -1;
 }

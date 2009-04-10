@@ -38,7 +38,7 @@ void fd_to_poll(int *used)
     * if the handler is NULL, it's either disabled
     * or has never been initialised
     */
-   for(i=0; i < MAX_COMM; i++) {
+   for(i=0; i < MAX_COMM && *used <= chp_cnt; i++) {
       if(chp[i].handle) {
          printf("Added poll item %d (helper %d)\n", *used, i);
          pfd[*used].fd = chp[i].fds[HP_READ];

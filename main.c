@@ -32,12 +32,12 @@
 #include "ceofhack.h"   /* functions etc. */
 
 struct pollfd  pfd[MAX_COMM];
-int            pfd_cnt;
 struct cconfig hometree;
 
 int main()
 {
    int cnt;
+   int pfd_cnt;
 
    if(!config_init())   return 1;   /* read config          */
    if(!helper_init())   return 1;   /* init helper structs  */
@@ -61,7 +61,7 @@ int main()
       if(cnt == -1) {
          if(errno != EINTR) return 1;
       } else {
-         check_input();
+         check_input(pfd_cnt, &cnt);
       }
    }
 
