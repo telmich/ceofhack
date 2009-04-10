@@ -7,7 +7,7 @@ type: :feature
 component: ceofhack
 release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2009-04-09 07:49:10.409089 Z
 references: []
@@ -26,5 +26,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - commented
   - Catching of children added -- though without any functionality.
+- - 2009-04-10 05:56:09.175217 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - changed status from unstarted to in_progress
+  - Also working on it
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>

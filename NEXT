@@ -4,7 +4,6 @@ tp_listen_read
       -> cmd_init
          -> cmd_create
             -> cmd2000
-               -> check: signal*c
 
 - encrypt message,
    send, = listen + send function

@@ -13,7 +13,7 @@ desc: |-
   This queue should later be splitted of ceof and migrated to the postbote.
 type: :feature
 component: ceof
-release: 
+release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -30,5 +30,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - issue claimed
   - Taking care about that issue...
+- - 2009-04-10 05:51:41.044847 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release 1.0 from unassigned
+  - Makes sense to have at least some kind of queue in the first release.
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>

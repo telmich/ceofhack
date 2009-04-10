@@ -22,7 +22,7 @@ type: :feature
 component: ceofhack
 release: 
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2009-04-09 09:13:35.969385 Z
 references: []
@@ -37,5 +37,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - issue claimed
   - Status makes sense already now..
+- - 2009-04-10 05:54:35.883109 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - changed status from unstarted to in_progress
+  - On it
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
