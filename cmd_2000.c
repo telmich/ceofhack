@@ -29,11 +29,5 @@ int cmd_2000(int UNUSED(fd[]))
 {
    /* FIXME: mark packet as sent to next peer in queue (no queue implemented yet) */
 
-   /******** disable helper *******/
-   /* close fds */
-
-   /* remove from poll() list */
-
-
-   return 0;
+   return 1;
 }
