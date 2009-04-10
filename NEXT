@@ -1,16 +1,9 @@
 ditz:ceofhack-1:Current working tree:
 
-- encrypt message,
-   send, = listen + send function
-   decrypt message
-
+- decrypt message
 
    => /peer add vorher!
 ===>>>>>   /peer send <nick> <text>
-
-- send message
-   - encrypt message
-      - retrieve keyid for nick
 
 - create script to
    - generate public & private keys for
@@ -19,6 +12,4 @@ ditz:ceofhack-1:Current working tree:
       - geof
 
 - check:
-
 valgrind -v --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes --leak-resolution=high --track-origins=yes  ./ceofhack
-
