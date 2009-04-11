@@ -19,6 +19,8 @@
 
  *
  * Leave ceofhack
+ * FIXME: this should be cmd_XXXX, not ui_quit
+ * -> fix after 0.1!
  *
  */
 
