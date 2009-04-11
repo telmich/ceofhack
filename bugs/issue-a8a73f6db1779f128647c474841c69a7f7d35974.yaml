@@ -27,5 +27,12 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - assigned to release 1.1 from unassigned
   - ""
+- - 2009-04-11 16:29:03.452415 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - commented
+  - |-
+    Also define, where the UI implementations have to be placed:
+    ~/.ceof/ui/<name>/run
+    for instance.
 git_branch: 
 claimer: 
