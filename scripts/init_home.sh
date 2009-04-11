@@ -37,6 +37,11 @@ install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/send
 
+# listen to tcp:0.0.0.0:4242 (name: tcp-for-dev)
+install -d -m 0755 ~/.ceof/transport-protocols/listen/tcp-for-dev
+install -m 0644 $__abs_mydir/../tp/tcp/example_url    \
+         ~/.ceof/transport-protocols/listen/tcp-for-dev/url
+
 # install dummy transport protocol
 install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
 install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
