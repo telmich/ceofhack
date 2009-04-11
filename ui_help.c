@@ -27,13 +27,13 @@
 
 int ui_help(char *UNUSED(str))
 {
-   printf("ceofhack:\n\n"
-          "Supported commands:\n\n"
+   printf("Your EOF lifesaver:\n\n"
+          "Currently supported commands:\n\n"
           "\t/help - this help\n"
-          "\t/peer add <name> <addr> - add a peer\n"
+          "\t/peer add <name> <addr> <fingerprint> - add a peer\n"
           "\t/peer list - list available peers\n"
           "\t/peer send <name> <msg> - send message to peer\n"
-          "\t/quit - quit ceofhack\n"
+          "\t/quit - quit ceofhack\n\n"
           );
 
    return 1;
