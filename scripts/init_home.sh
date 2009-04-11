@@ -30,25 +30,24 @@ if ! $__abs_mydir/gen_key.sh; then
 	exit 1
 fi
 
-# install tcp transport protocol
+######### transport protocols
+###### tcp
 install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
         ~/.ceof/transport-protocols/available/tcp/listen
-# install the tcp sender
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/send
-
-# listen to tcp:0.0.0.0:4242 (name: tcp-for-dev)
-install -d -m 0755 ~/.ceof/transport-protocols/listen/tcp-for-dev
+###### tcp-listening: 0.0.0.0:4242
+install -d -m 0755 ~/.ceof/transport-protocols/listen/tcpv4-any-4242
 install -m 0644 $__abs_mydir/../tp/tcp/example_url    \
-         ~/.ceof/transport-protocols/listen/tcp-for-dev/url
+         ~/.ceof/transport-protocols/listen/tcpv4-any-4242/url
 
-# install dummy transport protocol
+###### dummy
 install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
 install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
                 $__abs_mydir/../tp/dummy/c/listen  \
          ~/.ceof/transport-protocols/available/dummy
 
-# listen to dummy :-)
+###### dummy: listening
 install -d -m 0755 ~/.ceof/transport-protocols/listen/dummy-for-dev
 install -m 0644 $__abs_mydir/../tp/dummy/example_url    \
          ~/.ceof/transport-protocols/listen/dummy-for-dev/url
