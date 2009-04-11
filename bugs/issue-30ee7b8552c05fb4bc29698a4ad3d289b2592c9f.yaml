@@ -1,0 +1,27 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Check whether splittoff of MAX_COMM makes sense
+desc: |-
+  We're using MAX_COMM for helper and poll's fd list.
+  Does it make sense to have bigger/smaller list or MUST both
+  be same size?
+type: :task
+component: ceofhack
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-11 13:48:44.870043 Z
+references: []
+
+id: 30ee7b8552c05fb4bc29698a4ad3d289b2592c9f
+log_events: 
+- - 2009-04-11 13:48:47.802610 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+- - 2009-04-11 13:49:07.827300 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - issue claimed
+  - Will do this weekend...
+git_branch: 
+claimer: Nico Schottelius <nico@ikn.schottelius.org>
