@@ -35,7 +35,7 @@ void check_input(int possible, int *have_data)
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
          printf("data on channel %d\n",i);
          if(!chp[i].handle) {
-            printf("BUG: calling zero handler, channel with bugs data\n");
+            printf("BUG: %d: calling zero handler, channel with bogus data\n", i);
          } else {
             chp[i].handle(chp[i].fds);
             --(*have_data);
