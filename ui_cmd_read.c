@@ -35,7 +35,7 @@ int ui_cmd_read(int fd[])
 
    char buf[EOF_L_GUI+1];
 
-   if((len = read(fd[0], buf, EOF_L_GUI)) == -1) {
+   if((len = read(fd[HP_READ], buf, EOF_L_GUI)) == -1) {
       perror("read/ui");
       return 0;
    }

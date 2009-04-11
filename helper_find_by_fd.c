@@ -18,27 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Helper that does not need to be executed, but has on open
- * fd already.
+ * Find *fd* on pipe-part *num*
  *
  */
 
-#include <signal.h>
+#include "ceofhack.h"            /* functions etc.                */
 
-#include "ceofhack.h"  /* functions etc. */
-
-int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
+struct helper *helper_find_by_fd(int num, int fd)
 {
-   int num = helper_new();
+   int i;
 
-   if(num < 0) return 0;
+   printf("Searching for %d at %d\n", fd, num);
 
-   chp[num].pid            = 0;
-   chp[num].fds[HP_READ]   = fd;
-   chp[num].handle         = handle;
-   chp[num].exit           = exit;
+   /* FIXME: chp_cnt == total number, not highest index number
+    * looping through more helper than necessary in worst case, because
+    * after we found chp_cnt, we can stop search...
+    */
+   for(i=0; i < MAX_COMM; i++) {
+      if(chp[i].fds[num] == fd) {
+         printf("Found helper at %d\n", i);
+         return &chp[i];
+      }
+   }
 
-   printf("Added fdonly: %d, %p\n", fd, handle);
-
-   return 1;
+   printf("BUG: No helper found for fd=%d\n", fd);
+   return NULL;
 }

@@ -30,14 +30,22 @@
 void check_input(int possible, int *have_data)
 {
    int i;
+   struct helper *hp;
 
    for(i=0; i < possible && *have_data > 0; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
          printf("data on channel %d\n",i);
-         if(!chp[i].handle) {
-            printf("BUG: %d: calling zero handler, channel with bogus data\n", i);
+         hp = helper_find_by_fd(HP_READ, pfd[i].fd);
+         if(!hp) {
+            printf("BUG: Check input on %d (fd=%d): no handler\n", i, pfd[i].fd);
          } else {
-            chp[i].handle(chp[i].fds);
+            /*
+             * found fd in set of hp, submit the whole set, that is
+             * save in the helper structure!
+             */
+            if(!hp->handle(hp->fds)) {
+               printf("Handler for fd %d failed!\n", pfd[i].fd);
+            }
             --(*have_data);
          }
       }

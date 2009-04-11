@@ -30,7 +30,10 @@ void helper_disable(struct helper *hp)
    int i;
 
    hp->pid     = 0;
-   for(i=0; i<4; i++) close(hp->fds[i]);
+   for(i=0; i<4; i++) {
+      close(hp->fds[i]);
+      hp->fds[i] = -1;  /* does not match, if searchd by fd */
+   }
    hp->path[0] = '\0';
    hp->handle  = NULL;
    hp->exit    = NULL;
