@@ -24,11 +24,13 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include "eof.h"   /* EOF */
 
 int main()
 {
-   char input[EOF_L_CMD+EOF_L_ADDRESS+1];
+   char input[EOF_L_PKG_MAX+1];
+   ssize_t len;
 
    /* read init sequence: 1001 */
    read(STDIN_FILENO, input, EOF_L_CMD);
@@ -40,10 +42,21 @@ int main()
    input[EOF_L_ADDRESS] = '\0';
    fprintf(stderr, "dummy-LTP listens to url: %s\n", input);
 
-   /* read command */
-   read(STDIN_FILENO, input, EOF_L_CMD);
-   input[EOF_L_CMD] = '\0';
-   fprintf(stderr, "dummy-LTP received command and exits: %s\n", input);
+   /* read commands */
+   while(1) {
+      len = read(STDIN_FILENO, input, EOF_L_PKG_MAX+1);
+      if(len > EOF_L_PKG_MAX) {
+         fprintf(stderr, "Packet too big (%lu)!\n", len);
+         continue;
+      }
+      input[len] = '\0';
+      fprintf(stderr, "dummy-LTP received command: %s (until first \\0)\n", input);
+
+      if(!strncmp(input, EOF_CMD_TPL_STOP, EOF_L_CMD)) {
+         fprintf(stderr, "dummy/c: Time to say goodbye...\n");
+         return 0;
+      }
+   }
 
    return 0;
 }
