@@ -28,9 +28,7 @@
 
 int ui_quit(char *UNUSED(args))
 {
-   int i;
-
-   ceof_exit(i);
+   ceof_exit(1);
 
    return 1;
 }
