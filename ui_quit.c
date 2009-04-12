@@ -24,10 +24,13 @@
  *
  */
 
-#include <unistd.h>
 #include "ceofhack.h"
 
 int ui_quit(char *UNUSED(args))
 {
-   _exit(0);
+   int i;
+
+   ceof_exit(i);
+
+   return 1;
 }
