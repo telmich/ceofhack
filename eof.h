@@ -18,6 +18,8 @@
 #define EOF_CMD_TPL_START        "1001"
 #define EOF_CMD_TPL_STOP         "1002"
 #define EOF_CMD_TPS_SENT         "2000"
+#define EOF_CMD_TPS_NOT_SENT     "2001"
+#define EOF_CMD_TPL_RECV         "2002"
 #define EOF_CMD_TPL_LISTENING    "2003"
 
 /* UI commands */
