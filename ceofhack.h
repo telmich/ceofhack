@@ -158,6 +158,7 @@ int forkexecpipe(struct helper *hp);
 void fd_to_poll(int *);
 int signals_init();
 void signal_child(int sig);
+void ceof_exit(int tmp);
 
 /* helper */
 int helper_init();

@@ -34,13 +34,17 @@ CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
 CMD+=cmd_2000.c cmd_2003.c
 
+# ceof: the next generation EOFi ;-)
+CEOF=ceof_exit.c
+
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c
 CEOFHACK+=config_init.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
-CEOFHACK+=$(UI_CMD) $(CMD)
+CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
+
 
 PROG=ceofhack decrypt
 

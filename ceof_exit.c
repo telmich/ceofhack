@@ -18,41 +18,25 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add references to functions
+ * Leave ceofhack
+ * - Shutdown helper: transport protocols, user interfaces
+ * - [Send exit command to all and] send SIGINT
  *
  */
 
-#include <signal.h>     /* sigaction         */
-#include <stdio.h>      /* NULL              */
-#include "ceofhack.h"   /* functions etc.    */
+#include <signal.h>     /* kill()         */
+#include <unistd.h>     /* _exit()        */
+#include "ceofhack.h"
 
-int signals_init()
+void ceof_exit(int i)
 {
-   struct sigaction sa;
-
-   sa.sa_handler = signal_child;
-   sa.sa_flags   = SA_NOCLDSTOP;
-
-   if(sigaction(SIGCHLD, &sa, NULL) == -1) {
-      perror("sigchld");
-      return 0;
+   /* cycle through all helper, notify them */
+   for(i=0; i < MAX_COMM; i++) {
+      if(chp[i].pid) {
+         if(kill(chp[i].pid, SIGINT) == -1) {
+            perror("kill");
+         }
+      }
    }
-
-   sa.sa_handler = ceof_exit;
-   sa.sa_flags   = 0;
-   sigemptyset(&sa.sa_mask);
-   sigaddset(&sa.sa_mask,SIGQUIT);
-   sigaddset(&sa.sa_mask,SIGINT);
-
-   if(sigaction(SIGQUIT, &sa, NULL) == -1) {
-      perror("sigquit");
-      return 0;
-   }
-
-   if(sigaction(SIGINT, &sa, NULL) == -1) {
-      perror("sigquit");
-      return 0;
-   }
-
-   return 1;
+   _exit(0);
 }
