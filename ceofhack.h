@@ -222,6 +222,7 @@ int cmd_init();
 int cmd_cat_create(unsigned long);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
+int cmd_2002(int []);
 int cmd_2003(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);
 struct cmd_cat *cmd_cat_find(unsigned long cat);

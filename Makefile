@@ -32,7 +32,7 @@ UI_CMD+=ui_quit.c ui_help.c
 # command handling (ceofhack internal)
 CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
-CMD+=cmd_2000.c cmd_2003.c
+CMD+=cmd_2000.c cmd_2002.c cmd_2003.c
 
 # ceof: the next generation EOFi ;-)
 CEOF=ceof_exit.c
