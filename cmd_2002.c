@@ -30,9 +30,9 @@
 int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
+   char plaintext[EOF_L_PKG_MAX+1];
    char *p;
-   ssize_t len;
-   int pkglen;
+   ssize_t len, pkglen;
 
    printf("Received a packet!!!\n");
 
@@ -46,6 +46,7 @@ int cmd_2002(int fd[])
       printf("cmd2002: packet too big\n");
       return 0;
    }
+   buf[len] = '\0'; /* terminate for print / debugging */
 
    p = strchr(buf, '\n');
 
@@ -55,10 +56,11 @@ int cmd_2002(int fd[])
       return 0;
    }
 
-   *p = '\0';
+   *p = '\0'; /* end of header reached */
+   p++;
    pkglen = strtol(buf, NULL, 10);
 
-   if(pkglen <= 0 || pkglen > EOF_L_PKG_MAX || pkglen > (len - (p-buf))) {
+   if(pkglen != (len - (p - buf))) { /* position after \n -> end */
       /* FIXME: tell tp to drop the packet */
       printf("cmd2002: bogus size information in packet!\n");
       return 0;
@@ -70,5 +72,11 @@ int cmd_2002(int fd[])
     * - debug for now: print to stdout
     */
 
-   return write_all(STDOUT_FILENO, p+1, pkglen) > 0 ? 1 :0;
+   printf("Incoming packet: %s\n", p);
+   len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
+
+   printf("Incoming plaintext [%lu]: %s\n", len, plaintext);
+
+   return 1;
+//   return write_all(STDOUT_FILENO, p+1, pkglen) > 0 ? 1 :0;
 }
