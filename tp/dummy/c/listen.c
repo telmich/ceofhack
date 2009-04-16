@@ -74,6 +74,11 @@ UQQpdMJCi/N7fhdVK2Rgws+fYN3qbX1XKG2jrxD1Yj0QbOU/KA==\n\
    /* read commands */
    while(1) {
       len = read(STDIN_FILENO, input, EOF_L_PKG_MAX+1);
+      if(len < 0) {
+         perror("tp/dummy/listen: read");
+         return 1;
+      }
+
       if(len > EOF_L_PKG_MAX) {
          fprintf(stderr, "Packet too big (%lu)!\n", len);
          continue;
