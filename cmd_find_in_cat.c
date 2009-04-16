@@ -38,5 +38,5 @@ struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[])
       }
    }
 
-   return NULL;
+   return c;
 }

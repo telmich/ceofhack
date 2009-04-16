@@ -35,6 +35,8 @@ int cmd_handle(unsigned long cat, int fds[], char data[], ssize_t len)
    if(!cmd) {
       printf("No handler found for command!\n");
       return 0;
+   } else {
+      printf("Handler %s found...\n", cmd->num);
    }
 
    return cmd->handle(fds);
