@@ -1,0 +1,31 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Define how to pass error messages from transport protocols
+desc: |-
+  Currently transport protcocols can write their diagnostics and stuff
+  to stderr. As there's no real UI yet, this is not a problem *now*.
+  
+  But it looks ugly and we introduce bugs like {issue 5253867587e14132eb05ba6221e3c38726a07409} to differentiate between
+  transport protocols.
+  
+  The real fix would be:
+  
+  - connect stderr of tp to ceof
+  - expand helper, forkexecpipe to also read stderr
+  - then print text prefixed by tp/<name>/<listen|send>:
+type: :feature
+component: tp
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-16 20:58:39.680107 Z
+references: []
+
+id: 47dd5b9164859bb9c1766abac8e4c6dd8ff2b85a
+log_events: 
+- - 2009-04-16 20:58:40.916214 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
