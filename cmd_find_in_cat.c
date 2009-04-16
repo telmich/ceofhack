@@ -31,11 +31,12 @@ struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[])
    struct cmd *c = NULL;
 
    if(!cc) return NULL;
-   while((c = cc->next) != NULL) {
+   
+   for(c = cc->next; c != NULL; c = c->next) {
       if(!strncmp(cmd, c->num, EOF_L_CMD)) {
          break;
       }
    }
 
-   return c;
+   return NULL;
 }
