@@ -33,7 +33,7 @@ int main()
    char input[EOF_L_PKG_MAX+1];
    ssize_t len;
    struct timespec ts;
-   char *crypt = "-----BEGIN PGP MESSAGE-----\n\
+   char *crypt = "2002928-----BEGIN PGP MESSAGE-----\n\
 Version: GnuPG v1.4.9 (GNU/Linux)\n\
 \n\
 hQIOAzz6ltMxvh7UEAf/Xy60gF+WHzgZNyflPb8seVn7KjSdA5ojkIpUjnsf4Xhc\n\
