@@ -8,8 +8,8 @@ type: :task
 component: ceofhack
 release: "1.0"
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-04-11 13:48:44.870043 Z
 references: []
 
@@ -23,5 +23,12 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - issue claimed
   - Will do this weekend...
+- - 2009-04-16 20:35:46.841914 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - closed with disposition fixed
+  - |-
+    It does *NOT* make sense to use different limits: every helper needs to be
+    poll()ed. The only difference is that helpers may exit and that there may be
+    holes in the list of helpers, but not in the fd list, so being asynchron.
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
