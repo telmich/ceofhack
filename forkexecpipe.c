@@ -11,6 +11,7 @@
 #include <sys/wait.h>      /* waitpid        */
 #include <unistd.h>        /* exec*, pip     */
 #include <stdio.h>         /* perror()       */
+#include <fcntl.h>         /* fcntl          */
 
 #include "ceofhack.h"          /* structures     */
 
@@ -37,7 +38,13 @@ int forkexecpipe(struct helper *hp)
    }
 
    /* parent */
-   if(hp->pid > 0) { return 1; }
+   if(hp->pid > 0) { 
+      /* Don't block reads in ceof */
+      if(fcntl(hp->fds[HP_READ], F_SETFL, O_NONBLOCK) < 0) {
+         perror("fcntl");
+      }
+      return 1;
+   }
 
    /* child: connect stdin and stdout */
    if(dup2(hp->fds[2], STDIN_FILENO) == -1) {
