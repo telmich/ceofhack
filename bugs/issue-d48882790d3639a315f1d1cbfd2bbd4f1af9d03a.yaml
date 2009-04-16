@@ -1,0 +1,34 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add support for debugging messages of TP in UI
+desc: |-
+  When the bug {issue 47dd5b9164859bb9c1766abac8e4c6dd8ff2b85a} is fixed, ceofhack knows about errors and where they come
+  from.
+  
+  ceofhack should pass the debugging messages to the UI, which can decide
+  whether to show it to the user or not.
+  
+  Todo:
+  
+  - create commands
+  - define what an UI should be able to do with those messages, like:
+  
+  - hide per default
+  - show errors on "debugging console"
+  - or ...
+type: :feature
+component: ui
+release: "1.1"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-16 21:04:03.577462 Z
+references: []
+
+id: d48882790d3639a315f1d1cbfd2bbd4f1af9d03a
+log_events: 
+- - 2009-04-16 21:04:04.605818 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
