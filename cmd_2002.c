@@ -81,9 +81,14 @@ int cmd_2002(int fd[])
     */
 
    printf("Incoming packet: %s\n", p);
+   plaintext[0] = '\0';
    len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
 
-   printf("Incoming plaintext [%lu]: %s\n", len, plaintext);
+   if(len > 0) {
+      printf("Incoming plaintext [%lu]: %s\n", len, plaintext);
+   } else {
+      printf("decryption failed with %ld\n", len);
+   }
 
    return 1;
 //   return write_all(STDOUT_FILENO, p+1, pkglen) > 0 ? 1 :0;
