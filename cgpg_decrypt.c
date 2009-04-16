@@ -22,10 +22,7 @@
  *
  */
 
-#include <string.h>     /* strlen            */
-#include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
-#include <locale.h>     /* locales           */
 #include "ceofhack.h"   /* functions etc.    */
 
 ssize_t cgpg_decrypt(char *msg, ssize_t msglen, char buf[], ssize_t bufsize)
