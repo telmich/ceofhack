@@ -1,0 +1,25 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add gpgme error codes to cpgp_*
+desc: |-
+  gpgme must have something like errno, though it's not errno, iirc.
+  
+  We really have to add those perror()-alike functionality, so we can
+  understand what happens, if user report problems with
+  de/encryption.
+type: :feature
+component: crypto
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-16 20:45:47.128356 Z
+references: []
+
+id: ab72b5b6d8110a772df1f8eaed80fd1b8115aa0f
+log_events: 
+- - 2009-04-16 20:45:50.468272 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
