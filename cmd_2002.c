@@ -31,7 +31,7 @@ int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
    char plaintext[EOF_L_PKG_MAX+1];
-   char *p;
+   char *p, *endnum;
    ssize_t len, pkglen;
 
    printf("Received a packet!!!\n");
@@ -41,6 +41,8 @@ int cmd_2002(int fd[])
       perror("cmd2002/read");
       return 0;
    }
+   printf("cmd2002 read %lu bytes in total\n", len);
+
    if(len > EOF_L_PKG_MAX) {
       /* FIXME: tell tp to drop the packet */
       printf("cmd2002: packet too big\n");
@@ -57,12 +59,18 @@ int cmd_2002(int fd[])
    }
 
    *p = '\0'; /* end of header reached */
-   p++;
-   pkglen = strtol(buf, NULL, 10);
+   pkglen = strtol(buf, &endnum, 10);
+
+   if(endnum != p) {
+      printf("cmd2002: Broken packet: number of bytes is not directly followed by a line new\n");
+      return 0;
+   }
+
+   p++; /* begin of real packet */
 
    if(pkglen != (len - (p - buf))) { /* position after \n -> end */
       /* FIXME: tell tp to drop the packet */
-      printf("cmd2002: bogus size information in packet!\n");
+      printf("cmd2002: bogus size information in packet: %lu vs %lu!\n", pkglen,  (len - (p - buf)));
       return 0;
    }
 
