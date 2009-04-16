@@ -1,0 +1,22 @@
+Test ceofhack on a MPI cluster:
+
+Job has to...
+
+- init new keys (maybe before)
+- find other peers
+
+- ceofhack is not MPI capable (and should not be)
+
+
+== Transport protocol ==
+
+=== listen ===
+
+ * MPI_Recv()
+
+
+=== send ===
+
+ * MPI_Send()
+
+
