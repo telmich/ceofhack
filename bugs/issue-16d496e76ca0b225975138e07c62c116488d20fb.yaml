@@ -18,7 +18,7 @@ desc: |-
   Maybe use different numbers, as it makes sense...
 type: :feature
 component: ceofhack
-release: 
+release: future
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -31,3 +31,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - Also for inclusion into shcl.
+- - 2009-04-17 16:06:57.867067 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release future from unassigned
+  - ""
+git_branch: 
+claimer: 

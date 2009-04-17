@@ -3,7 +3,7 @@ title: add fd1piperead()
 desc: Add the "left" side of the full duplex pipe communication read function
 type: :feature
 component: ceofhack
-release: 
+release: future
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -16,3 +16,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - created
   - ""
+- - 2009-04-17 16:06:49.300270 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release future from unassigned
+  - ""
+git_branch: 
+claimer: 

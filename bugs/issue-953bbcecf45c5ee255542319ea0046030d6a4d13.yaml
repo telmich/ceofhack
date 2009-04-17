@@ -20,7 +20,7 @@ desc: |-
   (if listening transport protocol should be stopped for instance)
 type: :feature
 component: ceofhack
-release: 
+release: future
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :in_progress
 disposition: 
@@ -41,5 +41,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - changed status from unstarted to in_progress
   - On it
+- - 2009-04-17 16:06:13.812958 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release future from unassigned
+  - Not now ;-)
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>

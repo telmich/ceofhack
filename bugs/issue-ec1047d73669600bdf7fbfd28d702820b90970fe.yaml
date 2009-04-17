@@ -8,7 +8,7 @@ desc: |-
   Rename it to fd1pipewrite(int fd[], char *, int);
 type: :task
 component: ceofhack
-release: 
+release: future
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
 status: :unstarted
 disposition: 
@@ -25,3 +25,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - edited description
   - Include pipe into the name
+- - 2009-04-17 16:06:40.264171 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release future from unassigned
+  - not now...
+git_branch: 
+claimer: 
