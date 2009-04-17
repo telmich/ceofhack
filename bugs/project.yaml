@@ -45,3 +45,12 @@ releases:
       * So other UIs can be created
       * Cleanup ui_cmd, so it can be used as a reference
       * Fix bugs of 1.0 ;-)
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "1.2"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2009-04-17 07:58:33.590637 Z
+    - Nico Schottelius <nico@ikn.schottelius.org>
+    - created
+    - This release will contain new features after the bugfix release 1.1.

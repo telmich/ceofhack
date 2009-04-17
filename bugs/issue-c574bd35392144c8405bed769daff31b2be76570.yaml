@@ -1,0 +1,37 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add support for secret keys with password
+desc: |-
+  Normally gpg / pgp secret keys are password protected.
+  
+  Currently no part of ceof has support for this, which should be fixed ;-)
+  
+  Implementation:
+  
+  - add a passphrase callback function for gpgme
+  - add a commands to eofi2ui:
+  - eofi asks all connected uis to enter passphrase
+  - ui sends passphrase to eofi
+  - ui should provide a function to cache the passhprase
+  - this will never be supported in ceof directly, because a new UI should
+  not automatically have access to the secret key
+type: :feature
+component: ui
+release: "1.2"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-17 07:57:53.179780 Z
+references: []
+
+id: c574bd35392144c8405bed769daff31b2be76570
+log_events: 
+- - 2009-04-17 07:57:54.503524 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+- - 2009-04-17 07:58:55.461369 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - assigned to release 1.2 from 1.0
+  - Had to create the right release first :-)
+git_branch: 
+claimer: 
