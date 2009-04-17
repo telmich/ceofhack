@@ -16,6 +16,9 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 
 % -----------------------------------------------------------------------------
 \chapter{Introduction}
+% ----------------------------------------------------------------------------
+\section{Copying}
+% FIXME: Free, see creative commons!
 % -----------------------------------------------------------------------------
 \section{Abstract}
 EOF is a chat protocol that supports secure chatting.
@@ -81,9 +84,18 @@ Thus if you use pgp, you are conspicuous. We try to make pgp part of the
 normal webtraffic (like HTTP packets).
 % FIXME: cleanup.
 % -----------------------------------------------------------------------------
-\section{Copying, authors, ...}
+\section{Project plan}
+was wie geplant ist, jetziger status, woran wir sind
 % -----------------------------------------------------------------------------
-\section{Further directions}
+\subsection{3 phases}
+Bigger project, was clear at beginning.
+Thus dividided into three phases:
+EOF-1, EOF-2, EOF-3
+% -----------------------------------------------------------------------------
+\subsection{Current status}
+Working on prototype EOF-2.
+% -----------------------------------------------------------------------------
+\subsection{Further directions}
 Analyse security
 enhance performance
 port to other systems
@@ -95,6 +107,7 @@ spread the word
 \subsection{Writing convention}
 Parameters enclosed in $<$ and $>$ must be specified to the command.
 Parameters enclosed in $[$ and $]$ can be specified optionally.
+% FIXME: is this used anywhere?
 % -----------------------------------------------------------------------------
 \subsection{Abbreviations}
 As some terms are quite often used, we created some abbreviations:
@@ -114,22 +127,6 @@ FLS & Fixed length string\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
-\section{Authors}
-The list of persons who contributed to EOF, in chronical order.
-Add yourself to the list, when you coded something for EOF.
-% -----------------------------------------------------------------------------
-\subsection{Nico -telmich- Schottelius}
-Nico is the initiator and main coder of EOF. Parts done by him are:
-\begin{itemize}
-\item Organise meetings
-\item Project coordination
-\item First EOFi (ceofhack)
-\end{itemize}
-More information about Nico can be retrieved from
-\begin{itemize}
-\item http://nico.schottelius.org/
-\end{itemize}
-% ----------------------------------------------------------------------------
 \chapter{The EOF standard}
 Contains protocol specifications, paths, interfaces and environment
 definitions.
@@ -138,80 +135,21 @@ definitions.
 This will be version \textbf{1} of the standard. It is the first definition.
 Further changes will be documented in this section.
 % -----------------------------------------------------------------------------
-\section{Packets}
-What's seen from inside (after stripping of the onion skin).
+\section{Interface description ("`eofi2any"')}
+This section defines which interfaces EOFi offers to communicate with
+subsystems in general. Each subsystem may use a subset or the full set
+of interfaces, which is defined in their respective sections.
 % -----------------------------------------------------------------------------
-\subsection{Maximum packet size}
-No packet (including everything) may exceed the size of
-\emph{EOF\_L\_PKG\_MAX}.
-% -----------------------------------------------------------------------------
-\subsection{Onion-Packets}
-What's seen from outside: A (multiple) times encrypted packet including
-transport protocol shell.
-% -----------------------------------------------------------------------------
-\section{Basic data types}
-% -----------------------------------------------------------------------------
-\subsection{Binary numbers}
-Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
-are exchanged. -- IS THIS TRUE?
-Remove all binary data, except for the EOF packages used by eofi2tp.
-% -----------------------------------------------------------------------------
-\subsection{The zero byte}
-The zero byte is a byte with the value 0.
-% -----------------------------------------------------------------------------
-\subsection{ASCII numbers}
-ASCII numbers use the decimal string representation of a number.
-datatype. WE DON'T use variable length strings, but varialbe length data!
-% -----------------------------------------------------------------------------
-\subsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte),
-but are padded with zero bytes, if shorter than the specified length.
-% -----------------------------------------------------------------------------
-\subsection{Fixed length strings}
-Fixed length strings contain exactly the specified number of bytes:
-A 128-byte fixed length string consists of at most 128 bytes of text,
-which is then not zero terminated!
-If the text it contains is shorter than the specified length,
-it must be padded with zero bytes.
-% -----------------------------------------------------------------------------
-\subsection{Variable length strings}
-Before variable length strings the length is submitted in a fixed size
-% -----------------------------------------------------------------------------
-\section{EOF simple data types}
-The following sections define the datatypes used in EOF related
-applications. The recommened name for use in source
-code is added in parentheses after the human understandable name.
-% -----------------------------------------------------------------------------
-\subsection{Peer name (peername)}
-The peer name is a 128-byte fixed length string. It is only
-used internally to give a peer a rememberable name ("`a nick'").
-It is never transmitted over the network.
-% -----------------------------------------------------------------------------
-\subsection{Channel name (channel)}
-The channel name is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Message text (msgtext)}
-The message text is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Peer fingerprint (pfpr)}
-The peer fingerprint is a 40-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Padding data}
-Should be random data. NOT NEEDED, remove.
-% -----------------------------------------------------------------------------
-\subsection{EOF Commands}
-Commands are 4 ASCII numbers long.
-% -----------------------------------------------------------------------------
-\section{Interface description}
+\subsection{
+
 General: piped:
 Data from the EOF implementation is received on stdin 
 
 The command is always the first part of a message.
 
-THE FOLLOWING DATA IS AN IMPORT FROM BASICS.TEX
-
 EOF-1\\Basic definitions
 2007-11-22 v0.2-train
+
 % -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
@@ -299,31 +237,69 @@ Relative to the directory specified by CEOF\_DIR.
 \section{Configuration}
 Format is cconfig
 % -----------------------------------------------------------------------------
-\section{Paths}
+\section{Packets}
+What's seen from inside (after stripping of the onion skin).
 % -----------------------------------------------------------------------------
-\subsection{Ceof configuration directory}
+\subsection{Maximum packet size}
+No packet (including everything) may exceed the size of
+\emph{EOF\_L\_PKG\_MAX}.
 % -----------------------------------------------------------------------------
-\subsubsection{Default case}
-Normally, \$HOME is set and \$CEOF\_DIR is not set. In that case
-the configuration directory defaults to \textit{\$HOME/.ceof}.
+\subsection{Onion-Packets}
+What's seen from outside: A (multiple) times encrypted packet including
+transport protocol shell.
 % -----------------------------------------------------------------------------
-\subsubsection{HOME is unset}
-If the environment variable "`\textit{HOME}`" is not set,
-the directory named \textit{.ceof} in the current directory will be used.
+\section{Basic data types}
 % -----------------------------------------------------------------------------
-\subsubsection{CEOF\_DIR is set}
-If the environment variable "`\textit{CEOF\_DIR}`" is set,
-its content will be used to refer to the configuration directory.
+\subsection{Binary numbers}
+Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
+are exchanged. -- IS THIS TRUE?
+Remove all binary data, except for the EOF packages used by eofi2tp.
 % -----------------------------------------------------------------------------
-\subsection{Ceof client socket}
-The client connects to a socket named \textit{clients/socket}, relative
-to the configuration directory.
+\subsection{The zero byte}
+The zero byte is a byte with the value 0.
 % -----------------------------------------------------------------------------
-\subsubsection{CEOF\_CLIENT\_SOCKET is set}
-If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
-"`\textit{clients/socket}"` should be replaced by its content.
-% #############################################################################
-
+\subsection{ASCII numbers}
+ASCII numbers use the decimal string representation of a number.
+datatype. WE DON'T use variable length strings, but varialbe length data!
+% -----------------------------------------------------------------------------
+\subsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte),
+but are padded with zero bytes, if shorter than the specified length.
+% -----------------------------------------------------------------------------
+\subsection{Fixed length strings}
+Fixed length strings contain exactly the specified number of bytes:
+A 128-byte fixed length string consists of at most 128 bytes of text,
+which is then not zero terminated!
+If the text it contains is shorter than the specified length,
+it must be padded with zero bytes.
+% -----------------------------------------------------------------------------
+\subsection{Variable length strings}
+Before variable length strings the length is submitted in a fixed size
+% -----------------------------------------------------------------------------
+\section{EOF simple data types}
+The following sections define the datatypes used in EOF related
+applications. The recommened name for use in source
+code is added in parentheses after the human understandable name.
+% -----------------------------------------------------------------------------
+\subsection{Peer name (peername)}
+The peer name is a 128-byte fixed length string. It is only
+used internally to give a peer a rememberable name ("`a nick'").
+It is never transmitted over the network.
+% -----------------------------------------------------------------------------
+\subsection{Channel name (channel)}
+The channel name is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Message text (msgtext)}
+The message text is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Peer fingerprint (pfpr)}
+The peer fingerprint is a 40-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Padding data}
+Should be random data. NOT NEEDED, remove.
+% -----------------------------------------------------------------------------
+\subsection{EOF Commands}
+Commands are 4 ASCII numbers long.
 % -----------------------------------------------------------------------------
 \section{EOF packet data types ("`pkg2eofi"')}
 All packets must be signed by the sender and encrypted for the receiver.
@@ -371,6 +347,32 @@ encapsulated by the specific network protocol.
 \item Next receiver: Peer address
 \item Message text
 \end{itemize}
+% -----------------------------------------------------------------------------
+\section{Paths}
+% -----------------------------------------------------------------------------
+\subsection{Ceof configuration directory}
+% -----------------------------------------------------------------------------
+\subsubsection{Default case}
+Normally, \$HOME is set and \$CEOF\_DIR is not set. In that case
+the configuration directory defaults to \textit{\$HOME/.ceof}.
+% -----------------------------------------------------------------------------
+\subsubsection{HOME is unset}
+If the environment variable "`\textit{HOME}`" is not set,
+the directory named \textit{.ceof} in the current directory will be used.
+% -----------------------------------------------------------------------------
+\subsubsection{CEOF\_DIR is set}
+If the environment variable "`\textit{CEOF\_DIR}`" is set,
+its content will be used to refer to the configuration directory.
+% -----------------------------------------------------------------------------
+\subsection{Ceof client socket}
+The client connects to a socket named \textit{clients/socket}, relative
+to the configuration directory.
+% -----------------------------------------------------------------------------
+\subsubsection{CEOF\_CLIENT\_SOCKET is set}
+If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
+"`\textit{clients/socket}"` should be replaced by its content.
+% #############################################################################
+
 % -----------------------------------------------------------------------------
 \section{Transport protocols ("`eofi2tp"')}
 Environment variables: CWD for listener
