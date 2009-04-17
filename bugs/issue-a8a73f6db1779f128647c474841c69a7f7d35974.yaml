@@ -34,5 +34,9 @@ log_events:
     Also define, where the UI implementations have to be placed:
     ~/.ceof/ui/<name>/run
     for instance.
+- - 2009-04-17 10:52:24.708351 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - issue claimed
+  - It's mine!
 git_branch: 
-claimer: 
+claimer: Nico Schottelius <nico@ikn.schottelius.org>
