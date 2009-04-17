@@ -54,3 +54,14 @@ releases:
     - Nico Schottelius <nico@ikn.schottelius.org>
     - created
     - This release will contain new features after the bugfix release 1.1.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: future
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2009-04-17 16:03:54.063875 Z
+    - Nico Schottelius <nico@ikn.schottelius.org>
+    - created
+    - |-
+      The future release should be used for bugs we *know* about,
+      but don't *care* to fix now :-)
