@@ -29,7 +29,7 @@ Secure chatting consists of the following features:
 \item Nobody, but the intended receiver(s) can view the \emph{message content}.
 \item Nobody, but the intended receiver(s) can \emph{verify} the source of the message being you.
 \item Nobody, but the intended receiver(s) know(s) \emph{who} you sent a message to.
-\item No dependency on a central system.
+\item The network must survive attacks of a single attacker.
 \item Hard (if not practilcally impossible) to block chatting.
 \end{enumerate}
 Additionally, for practical reasons, EOF must support the following
@@ -39,6 +39,7 @@ chat features:
 \item Group chat ("`message is sent to specific group, which may consist of
 more than one person"')
 \end{enumerate}
+% Nico: ok
 % -----------------------------------------------------------------------------
 \subsection{Hide message sending}
 We don't think it's possible to hide that you are part of the chat network,
@@ -54,14 +55,17 @@ queue and sent within the next free time slot.
 
 From outside it can easily be seen, that you are part of the network,
 but not, if you sent a message.
+% Nico: ok
 % -----------------------------------------------------------------------------
 \subsection{Hide message content}
 We encrypt every message via public-key cryptography\cite{pgp-1},
 so that only the receiver can decrypt and view the message content.
+% Nico: ok
 % -----------------------------------------------------------------------------
 \subsection{Verify sender}
 Before the encrypt the packet, it is signed via public-key
 cryptography\cite{pgp-1}. Thus only the receiver can verify the message sender.
+% Nico: ok
 % -----------------------------------------------------------------------------
 \subsection{Hide message receiver}
 The message packets are always sent indirectly via onion routing\cite{onion-1}.
@@ -83,10 +87,38 @@ as follows:
 \item Sent packet to first peer
 \end{enumerate}
 Thus every peer only knows the previous and the next peer.
+% Nico: ok
 % -----------------------------------------------------------------------------
-
-
-EOF knows about two different chat destinations:
+\subsection{Reliable against single user attacks}
+Traditional chat networks depend on one or more central organised servers.
+An attacker can stop all communication, if she runs a successful denial
+of service ("`DoS"') attack against the central systems.
+To protect against this, EOF uses a dynamic peer-to-peer network, which works
+as long as the minimun number of peers and the destination peer is available.
+It has no dependency on a central server.
+% Nico: ok
+% -----------------------------------------------------------------------------
+\subsection{Hide packets in network stream}
+As said before, we don't think it's possible to hide the participation in the
+chat network. To be able to send packets, although an attacker \emph{knows}
+about the participation, EOF embeds all chat packets into other (well known)
+protocols.
+EOF does not implement nor specify \emph{transport protocols} itself.
+The EOF community is urged to implement them in a creative way: Usage
+of well-known protocols like TCP\cite{tcp-1}, HTTP\cite{http-1},
+SMTP\cite{smtp-1} or even transmission of packets on avian
+carriers\cite{avian-1} are encouraged. The tunneling of EOF packets through
+those protocols (also know as obfuscation) makes it harder to detect
+and \emph{block} EOF traffic.
+If an attacker wants you to stop sending messages, she has to completly
+remove you from the network, because any open protocol may be (ab)used to
+encapsulate EOF packets into it.
+% Nico: ok
+% -----------------------------------------------------------------------------
+\subsection{Real world usability}
+To be able to be compete with other chat protocols, EOF needs
+to support \emph{direct} and \emph{group chat}, which is
+implemented by two different chat destinations:
 \begin{enumerate}
 \item \emph{Peers}
 \item \emph{Groups of peers}
@@ -95,14 +127,7 @@ A peer is just another person (direct chat), a group of peers is the EOF
 equivalent of the IRC channel\cite{irc-1}. As there is no central server,
 groups of peers are managed by each client, and thus the compositions of
 group members may be different on different peers.
-
-EOF does not implement nor specify \emph{transport protocols} itself.
-The EOF community is urged to implement them in a creative way: Usage
-of well-known protocols like TCP\cite{tcp-1}, HTTP\cite{http-1},
-SMTP\cite{smtp-1} or even transmission of packets on avian
-carriers\cite{avian-1} are encouraged. The tunneling of EOF packets through
-those protocols (also know as obfuscation) makes it harder to detect
-and block EOF traffic.
+% Nico: ok
 % -----------------------------------------------------------------------------
 \section{Motivation}
 There are many different chat protocols available like
@@ -156,6 +181,9 @@ spread the word
 Parameters enclosed in $<$ and $>$ must be specified to the command.
 Parameters enclosed in $[$ and $]$ can be specified optionally.
 % FIXME: is this used anywhere?
+% -----------------------------------------------------------------------------
+\subsection{Terms used}
+peer, person, group, 
 % -----------------------------------------------------------------------------
 \subsection{Abbreviations}
 As some terms are quite often used, we created some abbreviations:
