@@ -32,6 +32,13 @@ Secure chatting consists of the following features:
 \item No dependency on a central system.
 \item Hard (if not practilcally impossible) to block chatting.
 \end{enumerate}
+Additionally, for practical reasons, EOF must support the following
+chat features:
+\begin{enumerate}
+\item Direct chat ("`message is only seen by one person"')
+\item Group chat ("`message is sent to specific group, which may consist of
+more than one person"')
+\end{enumerate}
 % -----------------------------------------------------------------------------
 \subsection{Hide message sending}
 We don't think it's possible to hide that you are part of the chat network,
@@ -45,16 +52,39 @@ The noise is also used to defend against timing analysis.
 In case you are sending out a message, the message packet will be added to the
 queue and sent within the next free time slot.
 
-We encrypt and sign every message via public-key cryptography\cite{pgp-1},
-so that only the receiver can decrypt, view the message content and verify
-the message sender.
-
+From outside it can easily be seen, that you are part of the network,
+but not, if you sent a message.
+% -----------------------------------------------------------------------------
+\subsection{Hide message content}
+We encrypt every message via public-key cryptography\cite{pgp-1},
+so that only the receiver can decrypt and view the message content.
+% -----------------------------------------------------------------------------
+\subsection{Verify sender}
+Before the encrypt the packet, it is signed via public-key
+cryptography\cite{pgp-1}. Thus only the receiver can verify the message sender.
+% -----------------------------------------------------------------------------
+\subsection{Hide message receiver}
 The message packets are always sent indirectly via onion routing\cite{onion-1}.
 The idea is taken from the Tor project\cite{tor-1}, though EOF uses an enhanced
 version: EOF does not know about entry or exit nodes. If you are the intended
 receiver you may or may not continue to forward the message, which is defined
 by the sender of the message. That said, EOF must use source
 routing\cite{source-routing-1}.
+
+To support onion routing, the sender of a packet needs to encrypt the packet
+multiple times, once for each host that receives the packet. This may look
+as follows:
+\begin{enumerate}
+\item Create message (from noise or user input)
+\item Create source path
+\item Create packet for last peer ("`pkg-last"')
+\item Create packet for last-1 peer including \emph{pkg-last}
+\item Continue until first peer is reached
+\item Sent packet to first peer
+\end{enumerate}
+Thus every peer only knows the previous and the next peer.
+% -----------------------------------------------------------------------------
+
 
 EOF knows about two different chat destinations:
 \begin{enumerate}
@@ -82,6 +112,7 @@ There are many different chat protocols available like
 \item SILC
 \item Jabber
 \item ICQ
+\item Skype
 \end{itemize}
 Only one of those protocols contains mandority encryption (SILC), which
 still lacks many features for secure chatting.\footnote{Most of them can be
