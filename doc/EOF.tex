@@ -19,6 +19,7 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 % ----------------------------------------------------------------------------
 \section{Copying}
 Copy it as you like - send corrections to me.
+% Nico: 1.0
 % FIXME: Free, see creative commons!
 % -----------------------------------------------------------------------------
 \section{Abstract}
@@ -39,7 +40,7 @@ chat features:
 \item Group chat ("`message is sent to specific group, which may consist of
 more than one person"')
 \end{enumerate}
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Hide message sending}
 We don't think it's possible to hide that you are part of the chat network,
@@ -55,17 +56,17 @@ queue and sent within the next free time slot.
 
 From outside it can easily be seen, that you are part of the network,
 but not, if you sent a message.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Hide message content}
 We encrypt every message via public-key cryptography\cite{pgp-1},
 so that only the receiver can decrypt and view the message content.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Verify sender}
 Before the encrypt the packet, it is signed via public-key
 cryptography\cite{pgp-1}. Thus only the receiver can verify the message sender.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Hide message receiver}
 The message packets are always sent indirectly via onion routing\cite{onion-1}.
@@ -87,7 +88,7 @@ as follows:
 \item Sent packet to first peer
 \end{enumerate}
 Thus every peer only knows the previous and the next peer.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Reliable against single user attacks}
 Traditional chat networks depend on one or more central organised servers.
@@ -96,7 +97,7 @@ of service ("`DoS"') attack against the central systems.
 To protect against this, EOF uses a dynamic peer-to-peer network, which works
 as long as the minimun number of peers and the destination peer is available.
 It has no dependency on a central server.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Hide packets in network stream}
 As said before, we don't think it's possible to hide the participation in the
@@ -113,7 +114,7 @@ and \emph{block} EOF traffic.
 If an attacker wants you to stop sending messages, she has to completly
 remove you from the network, because any open protocol may be (ab)used to
 encapsulate EOF packets into it.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Real world usability}
 To be able to be compete with other chat protocols, EOF needs
@@ -127,10 +128,12 @@ A peer is just another person (direct chat), a group of peers is the EOF
 equivalent of the IRC channel\cite{irc-1}. As there is no central server,
 groups of peers are managed by each client, and thus the compositions of
 group members may be different on different peers.
-% Nico: ok
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Motivation}
-There are many different chat protocols available like
+% -----------------------------------------------------------------------------
+\subsection{Current implementations are not secure}
+There are already many different chat protocols available like
 \begin{itemize}
 \item talk
 \item IRC
@@ -139,23 +142,24 @@ There are many different chat protocols available like
 \item ICQ
 \item Skype
 \end{itemize}
-Only one of those protocols contains mandority encryption (SILC), which
+Only two of those protocols contains mandority encryption (SILC, Skype), which
 still lacks many features for secure chatting.\footnote{Most of them can be
-enhanced to use TLS/SSL, but this is not enforced.}
+enhanced to use TLS/SSL, but this is not enforced.} Skype and SILC still
+depend on a central server architecture. The Skype architecture is not
+publicly documentated, the executing binary is encrypted, and the system
+depends on a single company, which excluded it from being a secure chat
+system.
 
-Also available: silc.  Problem only partly solved.
-
-want something that has
-\begin{itemize}
-\item no central server
-\item uses onion routing
-\item uses well know crypto engine (so we do not have to care about this)
-\end{itemize}
-
-Also want to convey usage of pgp: currently pgp is not used very often.
-Thus if you use pgp, you are conspicuous. We try to make pgp part of the
-normal webtraffic (like HTTP packets).
-% FIXME: cleanup.
+Because SILC depends on a central server architecture, it was also excluded.
+% Nico: 1.0
+% FIXME: add references for protocols!
+% -----------------------------------------------------------------------------
+\subsection{Create more crypto traffic}
+We also want to convey usage of PGP: currently PGP is quite seldom.
+Thus if you use PGP, you may be conspicuous. We try to make PGP encrypted
+packets part of the regular internet traffic, like webtraffic is today.
+% Nico: 1.0
+% FIXME: add references for PGP
 % -----------------------------------------------------------------------------
 \section{Project plan}
 was wie geplant ist, jetziger status, woran wir sind
