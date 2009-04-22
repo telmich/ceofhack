@@ -8,7 +8,7 @@
 \title{EOF\\Eris Onion Forwarding\\
 The secure, peer-to-peer, decentralised anonymous chat network}
 \date{2009-03-12}
-\author{Nico -telmich- Schottelius}
+\author{Nico -telmich- Schottelius, !eof}
 
 \maketitle
 \tableofcontents
@@ -161,27 +161,58 @@ packets part of the regular internet traffic, like webtraffic is today.
 % Nico: 1.0
 % FIXME: add references for PGP
 % -----------------------------------------------------------------------------
-\section{Project plan}
-was wie geplant ist, jetziger status, woran wir sind
+\section{The project}
+The project started in 2007 as an idea of !eof\cite{!eof}
+(a friendly hacker community). After several meetings it was clear that
+we need to do some experiements and create phases to structure the
+development.
 % -----------------------------------------------------------------------------
-\subsection{3 phases}
-Bigger project, was clear at beginning.
-Thus dividided into three phases:
-EOF-1, EOF-2, EOF-3
+\subsection{The three phases}
+So we divided the project into the three phases
+\begin{enumerate}
+\item \emph{EOF-1},
+\item \emph{EOF-2},
+\item \emph{EOF-3}.
+\end{enumerate}
 % -----------------------------------------------------------------------------
-\subsection{Current status}
-Working on prototype EOF-2.
+\subsubsection{EOF-1: Finding ideas}
+The first phase was the so called "`finding ideas"' phase. We did some tests,
+measured packet sizes and did some theorethic calculations on intervals.
+There was also some discussion about implementing EOF in a ring structure,
+like token ring\cite{token-ring}.
+The first try to do the first implementation as a complet modularised
+version began and stalled after some months of decentral developemnt.
+% FIXME: cite
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{EOF-2: Proof of concept}
+We are currently working on a prototype in EOF-2. The idea is to get the
+basic features working and to attract testers and developers.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{EOF-3: The final destination}
+The idea of EOf-3 is to cleanup all parts of EOF-2 and create a
+"`ready to be used"' software package, that may be used by end users.
+This includes "`good documentation"' (this document).
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Further directions}
-Analyse security
-enhance performance
-port to other systems
-spread the word
+After the depoyment of EOF-3, there may be more work necessary, like
+\begin{itemize}
+\item Deep analysis of security (by us and foreigners),
+\item enhance performance,
+\item port to other systems,
+\item adapt to changed environment,
+\item \ldots{}
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Conventions}
-\$NAME = variable
 % -----------------------------------------------------------------------------
 \subsection{Writing convention}
+There are not many things to take care about, when reading this document:
+
+\$NAME = variable
 Parameters enclosed in $<$ and $>$ must be specified to the command.
 Parameters enclosed in $[$ and $]$ can be specified optionally.
 % FIXME: is this used anywhere?
@@ -1529,6 +1560,7 @@ Channel name is signed by creator?
 \bibitem{smtp-1} RFC 2821: http://www.faqs.org/rfcs/rfc2821.html
 \bibitem{avian-1} RFC 1149: http://www.faqs.org/rfcs/rfc1149.html
 \bibitem{uri-1} RFC 3986: http://www.faqs.org/rfcs/rfc3986.html
+\bibitem{!eof} https://www.eof.name
 \end{thebibliography}
 
 \printindex
