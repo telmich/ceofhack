@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Export defined environtment variables
+desc: |-
+  ceofhack must export the variables defined in section
+  "Environment variables" to all EOFs.
+type: :feature
+component: ceofhack
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-04-22 08:46:24.339594 Z
+references: []
+
+id: 7141e994f32bf49cb63547343fd79484f8328176
+log_events: 
+- - 2009-04-22 08:46:25.528443 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
