@@ -247,22 +247,28 @@ FLS & Fixed length string\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \chapter{The EOF standard}
-Contains protocol specifications, paths, interfaces and environment
-definitions.
+This section defines the complete EOF standard. All required operations,
+features, protocol specifications, paths, interfaces and environment definition,
+etc. are described.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Version}
-This will be version \textbf{1} of the standard. It is the first definition.
-Further changes will be documented in this section.
+As soon as this standard is usable and the first version of \emph{rEOFi}
+is released, it will version number \textbf{01} of the standard.
+Further changes will be documented in this section. All version numbers
+are two ASCII digits (see below).
+% Nico: FIXME for 1.0
 % -----------------------------------------------------------------------------
 \section{Interface description ("`eofi2any"')}
 This section defines which interfaces EOFi offers to communicate with
 subsystems in general. Each subsystem may use a subset or the full set
 of interfaces, which is defined in their respective sections.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Stdin, stdout and stderr (via pipes)}
 EOFi is capable of executing a program and connecting its STDIN, STDOUT and
 STDERR to EOFi. The rEOFi uses pipes, but other EOFis may use different
-methods.\footnote{See pipe(2), forkexecpipe() in rEOFi.}
+methods.\footnote{See pipe(2) and forkexecpipe() in rEOFi.}
 The three filehandles are used as follows:
 \begin{longtable}{|c|c|}
 \caption{Stdin, stdout, stderr}\\
@@ -276,7 +282,7 @@ stdout & Commands sent from EOFs\\
 stderr & Diagnostic messages sent from EOFs\\
 \hline
 \end{longtable}
-
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
