@@ -18,6 +18,7 @@ The secure, peer-to-peer, decentralised anonymous chat network}
 \chapter{Introduction}
 % ----------------------------------------------------------------------------
 \section{Copying}
+Copy it as you like - send corrections to me.
 % FIXME: Free, see creative commons!
 % -----------------------------------------------------------------------------
 \section{Abstract}
@@ -28,10 +29,18 @@ Secure chatting consists of the following features:
 \item Nobody, but the intended receiver(s) can view the \emph{message content}.
 \item Nobody, but the intended receiver(s) can \emph{verify} the source of the message being you.
 \item Nobody, but the intended receiver(s) know(s) \emph{who} you sent a message to.
+\item No dependency on a central system.
+\item Hard (if not practilcally impossible) to block chatting.
 \end{enumerate}
-We don't think it's possible to hide that you are part of the chat network.
-Thus, every participant of an EOF network will constantly send packets
-(so called \emph{noise}) with a defined frequency (for instance every 250 ms).
+% -----------------------------------------------------------------------------
+\subsection{Hide message sending}
+We don't think it's possible to hide that you are part of the chat network,
+because some heuristics will be developed to detect the chat packets.
+So we use a different idea:
+Every participant of an EOF network will constantly send chat packets
+with a pre-defined frequency (for instance every 250 ms).
+If you don't chat, \emph{noise} is sent.\footnote{Noise is just random
+data, see below for a more detailled description of noise.}
 The noise is also used to defend against timing analysis.
 In case you are sending out a message, the message packet will be added to the
 queue and sent within the next free time slot.
@@ -49,8 +58,8 @@ routing\cite{source-routing-1}.
 
 EOF knows about two different chat destinations:
 \begin{enumerate}
-\item Peers
-\item Groups of peers
+\item \emph{Peers}
+\item \emph{Groups of peers}
 \end{enumerate}
 A peer is just another person (direct chat), a group of peers is the EOF
 equivalent of the IRC channel\cite{irc-1}. As there is no central server,
@@ -66,9 +75,17 @@ those protocols (also know as obfuscation) makes it harder to detect
 and block EOF traffic.
 % -----------------------------------------------------------------------------
 \section{Motivation}
-Available and in use: jabber, irc, ICQ.
-Plain text protocols\footnote{Yes, they can be enhanced to use TLS/SSL,
-but this is not enforced.}. Having central server.
+There are many different chat protocols available like
+\begin{itemize}
+\item talk
+\item IRC
+\item SILC
+\item Jabber
+\item ICQ
+\end{itemize}
+Only one of those protocols contains mandority encryption (SILC), which
+still lacks many features for secure chatting.\footnote{Most of them can be
+enhanced to use TLS/SSL, but this is not enforced.}
 
 Also available: silc.  Problem only partly solved.
 
@@ -123,6 +140,10 @@ EOF & Eris onion forwarding, name of this project\\
 \hline
 EOFi & An EOF implementation\\
 \hline
+rEOFi & The reference EOF implementation (also called "`ceofhack"')\\
+\hline
+EOFs & An EOF subsystem\\
+\hline
 FLS & Fixed length string\\
 \hline
 \end{longtable}
@@ -140,15 +161,23 @@ This section defines which interfaces EOFi offers to communicate with
 subsystems in general. Each subsystem may use a subset or the full set
 of interfaces, which is defined in their respective sections.
 % -----------------------------------------------------------------------------
-\subsection{
-
-General: piped:
-Data from the EOF implementation is received on stdin 
-
-The command is always the first part of a message.
-
-EOF-1\\Basic definitions
-2007-11-22 v0.2-train
+\subsection{Stdin, stdout and stderr (via pipes)}
+EOFi is capable of executing a program and connecting its STDIN, STDOUT and
+STDERR to EOFi. The rEOFi uses pipes, but other EOFis may use different
+methods.\footnote{See pipe(2), forkexecpipe() in rEOFi.}
+The three filehandles are used as follows:
+\begin{longtable}{|c|c|}
+\caption{Stdin, stdout, stderr}\\
+\hline
+\textbf{Name} & \textbf{Used for}\\
+\hline
+stdin & Commands sent from EOFi\\
+\hline
+stdout & Commands sent from EOFs\\
+\hline
+stderr & Diagnostic messages sent from EOFs\\
+\hline
+\end{longtable}
 
 % -----------------------------------------------------------------------------
 \subsection{Command fields}
