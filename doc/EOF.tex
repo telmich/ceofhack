@@ -310,6 +310,30 @@ This variable contains the absolute path to the socket, which should be used
 by user interfaces (UIs).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\section{Paths}
+% -----------------------------------------------------------------------------
+\subsection{EOFi configuration directory}
+% -----------------------------------------------------------------------------
+\subsubsection{Default case}
+Normally, \$HOME is set and \$CEOF\_HOME is not set. In that case
+the configuration directory defaults to \textit{\$HOME/.ceof}.
+% -----------------------------------------------------------------------------
+\subsubsection{\$HOME is unset}
+If the environment variable "`\textit{\$HOME}`" is not set,
+the directory named \textit{.ceof} in the current directory will be used.
+% -----------------------------------------------------------------------------
+\subsubsection{\$CEOF\_HOME is set}
+If the environment variable "`\textit{\$CEOF\_DIR}`" is set,
+its content will be used to refer to the configuration directory.
+% -----------------------------------------------------------------------------
+\subsection{User interface socket}
+The user interfaces connect to a socket specified in
+\textit{\$CEOF\_UI\_SOCKET}.
+% -----------------------------------------------------------------------------
+\subsubsection{CEOF\_CLIENT\_SOCKET is set}
+If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
+"`\textit{clients/socket}"` should be replaced by its content.
+% -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
@@ -497,29 +521,6 @@ encapsulated by the specific network protocol.
 \item Message text
 \end{itemize}
 % -----------------------------------------------------------------------------
-\section{Paths}
-% -----------------------------------------------------------------------------
-\subsection{Ceof configuration directory}
-% -----------------------------------------------------------------------------
-\subsubsection{Default case}
-Normally, \$HOME is set and \$CEOF\_DIR is not set. In that case
-the configuration directory defaults to \textit{\$HOME/.ceof}.
-% -----------------------------------------------------------------------------
-\subsubsection{HOME is unset}
-If the environment variable "`\textit{HOME}`" is not set,
-the directory named \textit{.ceof} in the current directory will be used.
-% -----------------------------------------------------------------------------
-\subsubsection{CEOF\_DIR is set}
-If the environment variable "`\textit{CEOF\_DIR}`" is set,
-its content will be used to refer to the configuration directory.
-% -----------------------------------------------------------------------------
-\subsection{Ceof client socket}
-The client connects to a socket named \textit{clients/socket}, relative
-to the configuration directory.
-% -----------------------------------------------------------------------------
-\subsubsection{CEOF\_CLIENT\_SOCKET is set}
-If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
-"`\textit{clients/socket}"` should be replaced by its content.
 % #############################################################################
 
 % -----------------------------------------------------------------------------
