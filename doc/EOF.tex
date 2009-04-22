@@ -284,6 +284,32 @@ stderr & Diagnostic messages sent from EOFs\\
 \end{longtable}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{Unix Sockets}
+Unix sockets are provided by EOFi to allow external applications to
+connect to EOFi.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Environment variables}
+The following environment variable are either used or set by EOFi and are
+available for all EOFs.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{\$HOME}
+The home directory of the user. It is required by EOFi to locate the
+configuration directory.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{\$CEOF\_HOME}
+The ceof configuration directory. If set by before EOFi starts, it will
+skip the autodetection of the configuration directory.
+This variable is exported to all EOFs.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{\$CEOF\_UI\_SOCKET}
+This variable contains the absolute path to the socket, which should be used
+by user interfaces (UIs).
+% Nico: 1.0
+% -----------------------------------------------------------------------------
 \subsection{Command fields}
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
@@ -352,20 +378,6 @@ Connections to EOFi can be done via Unix-sockets (named Unix sockets) to
 \subsection{Stdin  and stdout}
 To make programming easier, communication between some parts in EOF-1 is realised
 using stdin and stdout. 
-% -----------------------------------------------------------------------------
-\section{Environment}
-Environment variable are set from the operating system or from the user.
-The following environment variables are used with EOF-1:
-% -----------------------------------------------------------------------------
-\subsection{HOME}
-Home directory of the user.
-% -----------------------------------------------------------------------------
-\subsection{CEOF\_DIR}
-Ceof configuration directory.
-% -----------------------------------------------------------------------------
-\subsection{CEOF\_CLIENT\_SOCKET}
-The socket that the clients (GUIs) should use.
-Relative to the directory specified by CEOF\_DIR.
 % -----------------------------------------------------------------------------
 \section{Configuration}
 Format is cconfig
