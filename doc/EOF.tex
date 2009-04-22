@@ -317,24 +317,28 @@ by user interfaces (UIs).
 \subsubsection{Default case}
 Normally, \$HOME is set and \$CEOF\_HOME is not set. In that case
 the configuration directory defaults to \textit{\$HOME/.ceof}.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsubsection{\$HOME is unset}
 If the environment variable "`\textit{\$HOME}`" is not set,
 the directory named \textit{.ceof} in the current directory will be used.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsubsection{\$CEOF\_HOME is set}
 If the environment variable "`\textit{\$CEOF\_DIR}`" is set,
 its content will be used to refer to the configuration directory.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{User interface socket}
 The user interfaces connect to a socket specified in
 \textit{\$CEOF\_UI\_SOCKET}.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsubsection{CEOF\_CLIENT\_SOCKET is set}
-If the environment variable \textit{CEOF\_CLIENT\_SOCKET} is set,
-"`\textit{clients/socket}"` should be replaced by its content.
+\section{Configuration}
+The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
+% Nico: FIXME for 1.0: cite
 % -----------------------------------------------------------------------------
-\subsection{Command fields}
+\section{Command fields}
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
 \begin{longtable}{|c|c|}
@@ -364,47 +368,6 @@ This document specifies the basic datatypes and connection
 methods used in EOF-1. The aim is to stop repetition of
 datatype definition in other documents.
 
-% -----------------------------------------------------------------------------
-\subsection{Versions}
-This section clearifies the use of versions in the programs and protocols.
-% -----------------------------------------------------------------------------
-\subsubsection{Protocol}
-The version of a protocol consists of 
-\begin{itemize}
-\item \textbf{major} number,
-\item \textbf{minor} number and
-\item the \textbf{patchlevel}
-\end{itemize}
-An increment of either number must be reflected with a protocol version change
-within the protocol definition.
-% -----------------------------------------------------------------------------
-\subsection{Major number}
-Within one major number the same aim should be followed. For instance
-version "`0.x.y"' could target the first release.
-% -----------------------------------------------------------------------------
-\subsection{Minor number}
-Within one minor number the same functionality should be kept.
-For instance "`0.1.y"' contains basic functionality, "`0.2.y"' could
-contain completely new functionality.
-% -----------------------------------------------------------------------------
-\subsection{Patchlevel}
-The patchlevels are used to correct mistakes, but do not change the API.
-% -----------------------------------------------------------------------------
-\subsection{Valid from...}
-All protocol definitions (includings drafts) that are released after
-\textbf{20071122} should follow this version numbering scheme.
-% -----------------------------------------------------------------------------
-\subsection{Programs}
-% -----------------------------------------------------------------------------
-\subsection{Connections}
-Connections to EOFi can be done via Unix-sockets (named Unix sockets) to
-~/.ceof/
-\subsection{Stdin  and stdout}
-To make programming easier, communication between some parts in EOF-1 is realised
-using stdin and stdout. 
-% -----------------------------------------------------------------------------
-\section{Configuration}
-Format is cconfig
 % -----------------------------------------------------------------------------
 \section{Packets}
 What's seen from inside (after stripping of the onion skin).
