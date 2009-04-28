@@ -389,17 +389,21 @@ Developers are advised to use the symbolic name in their programs.
 The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Peer name (peername)}
-The peer name is a 128-byte fixed length string. It is only
-used internally to give a peer a rememberable name ("`a nick'").
+\subsection{Nick name (nick)}
+The peer name is a \emph{EOF\_L\_NICKNAME} byte fixed length string.
+It is only used internally to give a peer a rememberable name ("`a nick'").
 It is never transmitted over the network.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Channel name (channel)}
-The channel name is a 128-byte fixed length string.
+The channel name is a \emph{EOF\_L\_CHANNEL} byte fixed length string.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Message text (msgtext)}
-The message text is a 128-byte fixed length string.
+The message text is a \emph{EOF\_L\_MESSAGE} byte fixed length string.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Peer fingerprint (pfpr)}
 The peer fingerprint is a 40-byte fixed length string.

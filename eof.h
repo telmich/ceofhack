@@ -29,6 +29,4 @@
 #define EOF_UI_PEER_SEND "/peer send"
 #define EOF_UI_HELP      "/help"
 
-
-
 #endif
