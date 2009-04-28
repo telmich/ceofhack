@@ -405,19 +405,23 @@ The channel name is a \emph{EOF\_L\_CHANNEL} byte fixed length string.
 The message text is a \emph{EOF\_L\_MESSAGE} byte fixed length string.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Peer fingerprint (pfpr)}
-The peer fingerprint is a 40-byte fixed length string.
+\subsection{Fingerprint (fpr)}
+A (PGP) fingerprint is a \emph{EOF\_L\_KEYID} byte fixed length string.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Padding data}
-Should be random data. NOT NEEDED, remove.
+\section{EOF Commands}
+An EOF command is exactly \emph{EOF\_L\_CMD} bytes long (fixed length string)
+and contains an ASCII number.
+
+EOF commands are the main method of telling for communication between
+EOFs and EOFi.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{EOF Commands}
-Commands are 4 ASCII numbers long.
-\section{Command fields}
+\subsection{Command fields}
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
 \begin{longtable}{|c|c|}
-\caption{Command field 0}\\
+\caption{Command fields 0 and 1}\\
 \hline
 \textbf{Value} & \textbf{Subsystem} / \textbf{Description}\\
 \hline
@@ -437,6 +441,7 @@ The command field 1 indicates the EOF subsystem.
 \hline
 \end{longtable}
 The command fields 2 and 3 are defined by the respective subsystem.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{EOF packet data types ("`pkg2eofi"')}
 EOF knows about encrypted and plaintext packets. 
