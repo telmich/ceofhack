@@ -215,6 +215,7 @@ There are not many things to take care about, when reading this document:
 \item We use \emph{\$NAME} to mark an environment variable.
 \item Parameters enclosed in $<$ and $>$ must be specified to the command.
 \item Parameters enclosed in $[$ and $]$ can be specified optionally.
+\item \emph{EOF\_L\_\textit{NAME}} is used to specify a certain length
 \end{itemize}
 % Nico: 1.0
 % FIXME: is this used anywhere?
@@ -338,6 +339,76 @@ The user interfaces connect to a socket specified in
 The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
 % Nico: FIXME for 1.0: cite
 % -----------------------------------------------------------------------------
+\section{Basic data types}
+This section specifies the basic datatypes used in EOF.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{The zero byte}
+The zero byte is a byte with the value 0.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Line feed}
+The line feed, "`\textbackslash{}n"', is often used to terminate data
+sections.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{ASCII numbers}
+ASCII numbers use the decimal string representation of a number (versus
+binary representation, which is \emph{never} used between EOFi and EOFs).
+ASCII numbers are often used in a packet header and terminated by a
+line feed. ASCII numbers are used to specify the length of the packet
+(excluding itself).
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Strings in general}
+Strings are transmitted without termination (i.e. no new line, no 0 byte),
+but are padded with zero bytes, if shorter than the specified length.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Fixed length strings}
+Fixed length strings contain exactly the specified number of bytes:
+A 128-byte fixed length string consists of at most 128 bytes of text,
+which is then not zero terminated!
+If the text it contains is shorter than the specified length,
+it must be padded with zero bytes.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Variable length strings}
+The EOF protocol currently does not specify any variable length strings.
+All strings are fixed length (see above).
+% Nico: 1.0
+% #############################################################################
+\section{Sizes}
+\index{eof.h (File)}%
+All sizes used in this document are "`symbolic sizes"': The real size
+is defined in the attached file "`\emph{eof.h}"'.
+Developers are advised to use the symbolic name in their programs.
+% Nico: 1.0
+% #############################################################################
+\section{EOF simple data types}
+The following sections define the datatypes used in EOF related
+applications. The recommened name for use in source
+code is added in parentheses after the human understandable name.
+% -----------------------------------------------------------------------------
+\subsection{Peer name (peername)}
+The peer name is a 128-byte fixed length string. It is only
+used internally to give a peer a rememberable name ("`a nick'").
+It is never transmitted over the network.
+% -----------------------------------------------------------------------------
+\subsection{Channel name (channel)}
+The channel name is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Message text (msgtext)}
+The message text is a 128-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Peer fingerprint (pfpr)}
+The peer fingerprint is a 40-byte fixed length string.
+% -----------------------------------------------------------------------------
+\subsection{Padding data}
+Should be random data. NOT NEEDED, remove.
+% -----------------------------------------------------------------------------
+\subsection{EOF Commands}
+Commands are 4 ASCII numbers long.
 \section{Command fields}
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
@@ -363,14 +434,8 @@ The command field 1 indicates the EOF subsystem.
 \end{longtable}
 The command fields 2 and 3 are defined by the respective subsystem.
 % -----------------------------------------------------------------------------
-\subsection{Introduction}
-This document specifies the basic datatypes and connection
-methods used in EOF-1. The aim is to stop repetition of
-datatype definition in other documents.
-
-% -----------------------------------------------------------------------------
-\section{Packets}
-What's seen from inside (after stripping of the onion skin).
+\section{EOF packet data types ("`pkg2eofi"')}
+EOF knows about encrypted and plaintext packets. 
 % -----------------------------------------------------------------------------
 \subsection{Maximum packet size}
 No packet (including everything) may exceed the size of
@@ -383,61 +448,6 @@ transport protocol shell.
 \subsection{Noise}
 Dictionary, old messages, random data,
 "`Lightweight random data"': Wordlists, E-Mails, ...
-% -----------------------------------------------------------------------------
-\section{Basic data types}
-% -----------------------------------------------------------------------------
-\subsection{Binary numbers}
-Between some parts of EOF-1, binary numbers (as in \textit{uint32\t})
-are exchanged. -- IS THIS TRUE?
-Remove all binary data, except for the EOF packages used by eofi2tp.
-% -----------------------------------------------------------------------------
-\subsection{The zero byte}
-The zero byte is a byte with the value 0.
-% -----------------------------------------------------------------------------
-\subsection{ASCII numbers}
-ASCII numbers use the decimal string representation of a number.
-datatype. WE DON'T use variable length strings, but varialbe length data!
-% -----------------------------------------------------------------------------
-\subsection{Strings in general}
-Strings are transmitted without termination (i.e. no new line, no 0 byte),
-but are padded with zero bytes, if shorter than the specified length.
-% -----------------------------------------------------------------------------
-\subsection{Fixed length strings}
-Fixed length strings contain exactly the specified number of bytes:
-A 128-byte fixed length string consists of at most 128 bytes of text,
-which is then not zero terminated!
-If the text it contains is shorter than the specified length,
-it must be padded with zero bytes.
-% -----------------------------------------------------------------------------
-\subsection{Variable length strings}
-Before variable length strings the length is submitted in a fixed size
-% -----------------------------------------------------------------------------
-\section{EOF simple data types}
-The following sections define the datatypes used in EOF related
-applications. The recommened name for use in source
-code is added in parentheses after the human understandable name.
-% -----------------------------------------------------------------------------
-\subsection{Peer name (peername)}
-The peer name is a 128-byte fixed length string. It is only
-used internally to give a peer a rememberable name ("`a nick'").
-It is never transmitted over the network.
-% -----------------------------------------------------------------------------
-\subsection{Channel name (channel)}
-The channel name is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Message text (msgtext)}
-The message text is a 128-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Peer fingerprint (pfpr)}
-The peer fingerprint is a 40-byte fixed length string.
-% -----------------------------------------------------------------------------
-\subsection{Padding data}
-Should be random data. NOT NEEDED, remove.
-% -----------------------------------------------------------------------------
-\subsection{EOF Commands}
-Commands are 4 ASCII numbers long.
-% -----------------------------------------------------------------------------
-\section{EOF packet data types ("`pkg2eofi"')}
 All packets must be signed by the sender and encrypted for the receiver.
 The different datatypes are just concatenated in the order described.
 The following description of the content describes the pakckets
