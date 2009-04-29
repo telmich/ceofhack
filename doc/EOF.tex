@@ -487,24 +487,6 @@ Only encrypted packets are sent out on the network.
 Plaintext packets are used for the communication Inside of EOFi and EOFs.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Onion packets}
-An onion packet is a (multiple times) encrypted packet.
-An onion packet contains at least one plaintext packet, but can also contain
-already encrypted packets. It may look like as follows:
-% -----------------------------------------------------------------------------
-\subsubsection{Example onion packet}
-\begin{itemize}
-\item 
-\end{itemize}
-% Nico: FIXME for 1.0
-% -----------------------------------------------------------------------------
-\subsection{Postcard packets}
-A postcard "`packet"' contains one onion packet plus the transport protocol
-shell.  Postcard packets are the only packet type that is seen by a possible
-attacker.  The name postcard was choosen to reflect the fact, that anyone
-passing the postcard can read what is written on it.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
 \subsection{Packet layout}
 All EOF packets begin with an EOF command. Packets that leave the internal
 flow of EOFi and EOFs are encrypted ("`Onion packets"') and encapsulated into
@@ -585,6 +567,30 @@ This version of EOF does not know how to create a route.
 All packages are transferred directly to the final peer (which is an
 incredible big huge bug) in this version of EOF. Source routing will be
 described and defined in future versions.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Onion packets}
+An onion packet is a (multiple times) encrypted packet.
+An onion packet contains at least one plaintext packet, but can also contain
+already encrypted packets. It may look like as follows:
+% -----------------------------------------------------------------------------
+\subsubsection{Example onion packet}
+\begin{itemize}
+\item 
+\end{itemize}
+% Nico: FIXME for 1.0
+% -----------------------------------------------------------------------------
+\subsection{Postcard packets}
+A postcard "`packet"' contains one onion packet plus the transport protocol
+shell.  Postcard packets are the only packet type that is seen by a possible
+attacker.  The name postcard was choosen to reflect the fact, that anyone
+passing the postcard can read what is written on it.
+
+All packets must be signed by the sender and encrypted for the receiver.
+The different datatypes are just concatenated in the order described.
+The following description of the content describes the pakckets
+in their unencrypted form.
+
 % Nico: 1.0
 % #############################################################################
 \section{Transport protocols ("`eofi2tp"')}
