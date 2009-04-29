@@ -6,6 +6,7 @@
 #define EOF_L_NICKNAME  128
 #define EOF_L_MESSAGE   128
 #define EOF_L_ADDRESS   128
+#define EOF_L_CHANNEL   128
 #define EOF_L_KEYID     40
 #define EOF_L_PKG_MAX   65536
 
