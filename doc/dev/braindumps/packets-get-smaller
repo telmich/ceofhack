@@ -1,0 +1,27 @@
+Currently we do not support re-encryption to the next peer, which
+would also included two onion shells. If there's for instance
+this source route:
+
+
+   A  -> B  -> [C]  -> D
+
+A is the sender, C is the receiver.
+The following happens at A:
+
+- Create noise packet to be dropped for D ("pkgD")
+- Create packet for C:
+   - Add command "has data" for C
+   - Add command "forward to D" for C
+   - Add message for C
+   - Add already created packet pkgD
+   - Encrypt packet for C
+- Create forward packet for B
+   - Add command forward to C
+   - Add already created packet pkgC
+- Submit to a transport protocol, which sends it to B
+
+--------------------------------------------------------------------------------
+
+The problem is, that with each host the packet gets smaller.
+In practise, peers should re-encrypt the packet.
+To be able to re-encrypt it, we must make sure
