@@ -511,15 +511,6 @@ flow of EOFi and EOFs are encrypted ("`Onion packets"') and encapsulated into
 a transport protocol specific packet ("`postcard packet"').
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Noise}
-Dictionary, old messages, random data,
-"`Lightweight random data"': Wordlists, E-Mails, ...
-All packets must be signed by the sender and encrypted for the receiver.
-The different datatypes are just concatenated in the order described.
-The following description of the content describes the pakckets
-in their unencrypted form.
-% FIXME: create type
-% -----------------------------------------------------------------------------
 \subsection{3000: Message}
 The command 3000 is placed in front of the message packet and is
 followed \emph{EOF\_L\_MESSAGE} bytes for the message.
@@ -554,39 +545,48 @@ be dropped.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-msgtext & \emph{EOF\_L\_MESSAGE} byte FLS & The main purpose of a chat  & Hallo, mein Freund!\\
+address & EOFsdt & Address of peer to forward packet to&\\
+\hline
+channel & EOFsdt & unused in cmd 3001\\
+\hline
+msgtext & EOFsdt & unused in cmd 3001\\
 \hline
 \end{longtable}
-
-\begin{itemize}
-\item Command type "`8003"'
-\item Peer fingerprint
-\item Peer address
-\item Padding
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{3002: Message and forward}
-The packet contains a message for you, the rest has to be forwarded.
+The command 3002 is a combination of command 3000 and 3001.
+\index{Command!3002}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3002 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+address & EOFsdt & Address of peer to forward packet to&\\
+\hline
+channel & EOFsdt & The destination channel & !eof\\
+\hline
+msgtext & EOFsdt & The message & Hallo, mein Freund!\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{3003: Drop packet}
 You are the last recipient and there's nothing interesting left.
 Just drop the packet and continue work.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{EOF network data types}
-These datatypes are transmitted over the network and are only
-encapsulated by the specific network protocol.
+\section{EOF network packets ("`net2eofi"')}
+All data that is transferred over the network must be encrypted.
+The EOF packets described in the previous section are multiple times
+encrypted and assembled according to the calculated source route.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{General network packet}
-\begin{itemize}
-\item Type of packet
-\item Next receiver: Peer address
-\item Message text
-\end{itemize}
-% -----------------------------------------------------------------------------
+\subsection{Routing}
+This version of EOF does not know how to create a route.
+All packages are transferred directly to the final peer (which is an
+incredible big huge bug) in this version of EOF. Source routing will be
+described and defined in future versions.
+% Nico: 1.0
 % #############################################################################
-
-% -----------------------------------------------------------------------------
 \section{Transport protocols ("`eofi2tp"')}
 \label{tp}
 Environment variables: CWD for listener
