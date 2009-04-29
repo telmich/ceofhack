@@ -23,10 +23,11 @@
 #define EOF_CMD_TPL_RECV         "2002"
 #define EOF_CMD_TPL_LISTENING    "2003"
 
+/* decoded packets from outside */
 #define EOF_CMD_EXT_MESSAGE      "3000"
 #define EOF_CMD_EXT_FORWARD      "3001"
-#define EOF_CMD_EXT_DROP         "3002"
-#define EOF_CMD_EXT_MSGFWD       "3003"
+#define EOF_CMD_EXT_MSGFWD       "3002"
+#define EOF_CMD_EXT_DROP         "3003"
 
 /* UI commands */
 #define EOF_UI_QUIT      "/quit"
