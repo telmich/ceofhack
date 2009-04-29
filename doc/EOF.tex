@@ -377,6 +377,24 @@ it must be padded with zero bytes.
 The EOF protocol currently does not specify any variable length strings.
 All strings are fixed length (see above).
 % Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Noise}
+There are many situations in which an EOFi sends out data to the network,
+although you did not write a message: In fact, as EOFi \textbf{always}
+sends packets in a fixed interval, it needs to have data to encrypt and send.
+
+Noise can be any type of random data. As the current random number generators
+are quite expensive, it is recommend to use a huge dictionary for noise
+input.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Unused}
+To make life harder for attackers we try to make packets always be more or
+less the same size. That results in fields being present in a packet, which
+are unsued.
+
+Unused fields should be filled up with noise.
+% Nico: 1.0
 % #############################################################################
 \section{Sizes}
 \index{eof.h (File)}%
