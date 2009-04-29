@@ -528,14 +528,18 @@ followed \emph{EOF\_L\_MESSAGE} bytes for the message.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-address & EOFsdt & unused in cmd 3000  &\\
+address & EOFsdt & unused in cmd 3000 &\\
 \hline
 channel & EOFsdt & The destination channel & !eof\\
-& Starts with a zero byte, if unused. &mein Freund!\\
 \hline
-msgtext & EOFsdt & The main purpose of a chat  & Hallo, mein Freund!\\
+msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
 \end{longtable}
+\begin{itemize}
+\item If the first byte of the channel is the zero byte, the message
+is a private message (i.e. only sent to you).
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{3001: Forward packet}
 If a peer receives a packet with the command 3001, it simply forwards
