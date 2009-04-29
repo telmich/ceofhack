@@ -242,6 +242,8 @@ rEOFi & The reference EOF implementation (also called "`ceofhack"')\\
 \hline
 EOFs & An EOF subsystem\\
 \hline
+EOFsdt & EOF simple data type\\
+\hline
 FLS & Fixed length string\\
 \hline
 \end{longtable}
@@ -403,7 +405,7 @@ is defined in the attached file "`\emph{eof.h}"'.
 Developers are advised to use the symbolic name in their programs.
 % Nico: 1.0
 % #############################################################################
-\section{EOF simple data types}
+\section{EOF simple data types ("`EOFsdt"')}
 The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
@@ -526,7 +528,12 @@ followed \emph{EOF\_L\_MESSAGE} bytes for the message.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-msgtext & \emph{EOF\_L\_MESSAGE} byte FLS & The main purpose of a chat  & Hallo, mein Freund!\\
+address & EOFsdt & unused in cmd 3000  &\\
+\hline
+channel & EOFsdt & The destination channel & !eof\\
+& Starts with a zero byte, if unused. &mein Freund!\\
+\hline
+msgtext & EOFsdt & The main purpose of a chat  & Hallo, mein Freund!\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
