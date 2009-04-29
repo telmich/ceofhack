@@ -443,16 +443,45 @@ The command field 1 indicates the EOF subsystem.
 The command fields 2 and 3 are defined by the respective subsystem.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\section{EOF packet data types ("`pkg2eofi"')}
-EOF knows about encrypted and plaintext packets. 
+\section{EOF packets ("`pkg2eofi"')}
 % -----------------------------------------------------------------------------
 \subsection{Maximum packet size}
-No packet (including everything) may exceed the size of
-\emph{EOF\_L\_PKG\_MAX}.
+No packet (including everything) may exceed the size of \emph{EOF\_L\_PKG\_MAX}.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Onion-Packets}
-What's seen from outside: A (multiple) times encrypted packet including
-transport protocol shell.
+\subsection{Types of packets}
+EOF knows about encrypted ("`Onion packets"') and
+unencrypted ("`plaintext packets"') packets.
+Only encrypted packets are sent out on the network.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Plaintext packets}
+Plaintext packets are used for the communication Inside of EOFi and EOFs.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Onion packets}
+An onion packet is a (multiple times) encrypted packet.
+An onion packet contains at least one plaintext packet, but can also contain
+already encrypted packets. It may look like as follows:
+% -----------------------------------------------------------------------------
+\subsubsection{Example onion packet}
+\begin{itemize}
+\item 
+\end{itemize}
+% Nico: FIXME for 1.0
+% -----------------------------------------------------------------------------
+\subsection{Postcard packets}
+A postcard "`packet"' contains one onion packet plus the transport protocol
+shell.  Postcard packets are the only packet type that is seen by a possible
+attacker.  The name postcard was choosen to reflect the fact, that anyone
+passing the postcard can read what is written on it.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Packet layout}
+All EOF packets begin with an EOF command. Packets that leave the internal
+flow of EOFi and EOFs are encrypted ("`Onion packets"') and encapsulated into
+a transport protocol specific packet ("`postcard packet"').
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Noise}
 Dictionary, old messages, random data,
