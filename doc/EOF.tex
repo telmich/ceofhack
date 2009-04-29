@@ -490,30 +490,37 @@ All packets must be signed by the sender and encrypted for the receiver.
 The different datatypes are just concatenated in the order described.
 The following description of the content describes the pakckets
 in their unencrypted form.
+% FIXME: create type
 % -----------------------------------------------------------------------------
-\subsection{Message packet}
-\begin{itemize}
-\item Command type "`8000"'
-\item Channel name
-\item Message text
-\end{itemize}
+\subsection{3000: Message}
+The command 3000 is placed in front of the message packet and is
+followed \emph{EOF\_L\_MESSAGE} bytes for the message.
+\index{Command!3000}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3000 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+msgtext & \emph{EOF\_L\_MESSAGE} byte FLS & The main purpose of a chat  & Hallo, mein Freund!\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
-\subsection{Retrieve peer address}
-\begin{itemize}
-\item Command type "`8001"'
-\item Peer fingerprint
-\item Padding
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{Submit peer address}
-\begin{itemize}
-\item Command type "`8002"'
-\item Peer fingerprint
-\item Peer address
-\item Padding
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{Forward packet}
+\subsection{3001: Forward packet}
+If a peer receives a packet with the command 3001, it simply forwards
+the message to the specified peer. All data contained in the message
+is noise. After the message has been forwarded to the next peer, it
+should be dropped. If the peer is unreachable, the message should also
+be dropped.
+\index{Command!3001}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+msgtext & \emph{EOF\_L\_MESSAGE} byte FLS & The main purpose of a chat  & Hallo, mein Freund!\\
+\hline
+\end{longtable}
+
 \begin{itemize}
 \item Command type "`8003"'
 \item Peer fingerprint
