@@ -407,7 +407,9 @@ The message text is a \emph{EOF\_L\_MESSAGE} byte fixed length string.
 % -----------------------------------------------------------------------------
 \subsection{Peer address (address)}
 The address of a peer, which is is a \emph{EOF\_L\_ADDRESS}
-byte fixed length string.
+byte fixed length string. Peer addresses are specified as
+URLs as defined in RFC3986\cite{uri-1}. For more information have
+a look at section \ref{tp} on page \pageref{tp}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Fingerprint (fpr)}
@@ -548,6 +550,7 @@ encapsulated by the specific network protocol.
 
 % -----------------------------------------------------------------------------
 \section{Transport protocols ("`eofi2tp"')}
+\label{tp}
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
