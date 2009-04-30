@@ -160,6 +160,7 @@ void fd_to_poll(int *);
 int signals_init();
 void signal_child(int sig);
 void ceof_exit(int tmp);
+void ceof_banner();
 
 /* helper */
 int helper_init();
@@ -226,7 +227,7 @@ struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
 int cmd_2002(int []);
 int cmd_2003(int []);
-int cmd_3000(int []);
+//int cmd_3000(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);
 struct cmd_cat *cmd_cat_find(unsigned long cat);
 struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);

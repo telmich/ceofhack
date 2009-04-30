@@ -39,7 +39,7 @@ CMD+=cmd_3000.c
 GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 
 # ceof: the next generation EOFi ;-)
-CEOF=ceof_exit.c
+CEOF=ceof_exit.c ceof_banner.c
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
@@ -88,7 +88,7 @@ decrypt: decrypt.c $(SHCL)
 decrypt-test:
 	gpg --homedir ~/.ceof/gpg/ --decrypt < ./testcrypt
 
-$(CEOFHACK_O): ceofhack.h eof.h Makefile
+$(CEOFHACK_O): ceofhack.h ceof.h eof.h Makefile
 
 documentation: doc/EOF.tex
 	make -C doc all

@@ -30,6 +30,7 @@
 #include <stdlib.h>     /* getenv         */
 #include <unistd.h>     /* STDIN_FILENO   */
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"       /* clean header   */
 
 struct pollfd  pfd[MAX_COMM];
 struct cconfig hometree;
@@ -38,6 +39,8 @@ int main()
 {
    int cnt;
    int pfd_cnt;
+
+   ceof_banner();                   /* finally, we're there */
 
    if(!config_init())   return 1;   /* read config          */
    if(!helper_init())   return 1;   /* init helper structs  */
