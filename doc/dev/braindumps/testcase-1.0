@@ -1,0 +1,24 @@
+First idea:
+
+- user can download ceofhack 1.0
+- user can build ceofhack
+- user can install ceofhack
+   - create private / public key
+   - add pubkey of sample peer
+   - provide commands to use
+- user can start ceofhack
+- user can connect to sample peer
+- user submits
+   - his public key
+   - his address
+- sample peer connects back to user
+   - writes message
+
+--------------------------------------------------------------------------------
+Second idea:
+ceofhack 1.0 testcase:
+
+- ceofhack running on tcp://eof-2.eof.name:4242
+- logs published at http://eof-2.eof.name
+- receives messages from YOU!
+   * which are displayed on http://eof-2.eof.name/logfile
