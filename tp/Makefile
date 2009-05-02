@@ -1,4 +1,6 @@
-CC=gcc -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -I..
+include ../Makefile.include
+
+CC+=-I..
 
 DUMMY_C=dummy/c/listen.c dummy/c/send.c
 TCP_C=tcp/c/listen.c
