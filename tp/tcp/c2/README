@@ -1,3 +1,8 @@
 This is the second implementation of the tcp transport protocol in C.
 
+- Create one listener
+- fork() for new connect
+- Pass complete packet to main listener
+- main listener passes on to ceof
+
    -- Nico Schottelius, 2009-04-30

@@ -13,11 +13,6 @@
 #include <errno.h>         /* errno    */
 #include <sys/socket.h>    /* accept   */
 
-#include "vsm-intern.h"
-
-extern struct options opts;
-extern struct commands cmds[];
-
 void sigio(int sock)
 {
    int nsock;
@@ -29,6 +24,6 @@ void sigio(int sock)
          }
          return;
       }
-      handle_conn(nsock, &opts, cmds);
+      handle_conn(nsock);
    }
 }
