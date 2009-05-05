@@ -11,7 +11,7 @@
 
 #include <poll.h>          /* poll        */
 
-#include "vsm-intern.h"    /* sigio       */
+#include "tp-tcp-c2.h"
 
 int do_socket(int sock)
 {

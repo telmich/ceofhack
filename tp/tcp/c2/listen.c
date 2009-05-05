@@ -31,6 +31,7 @@
 int main()
 {
    char input[EOF_L_PKG_MAX+1];
+   int sock;
    ssize_t len;
    struct timespec ts;
    char *crypt = "2002928\n-----BEGIN PGP MESSAGE-----\n\
@@ -71,7 +72,7 @@ UQQpdMJCi/N7fhdVK2Rgws+fYN3qbX1XKG2jrxD1Yj0QbOU/KA==\n\
    fprintf(stderr, "len=%lu\n", strlen(crypt));
 
 
-   /* read commands */
+   /* read commands, socket and children */
    while(1) {
       len = read(STDIN_FILENO, input, EOF_L_PKG_MAX+1);
       if(len < 0) {

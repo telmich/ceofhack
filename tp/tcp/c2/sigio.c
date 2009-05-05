@@ -12,6 +12,8 @@
 #include <stdio.h>         /* NULL     */
 #include <errno.h>         /* errno    */
 #include <sys/socket.h>    /* accept   */
+#include "tp-tcp-c2.h"
+
 
 void sigio(int sock)
 {

@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Dummy listener
+ * Read data from a tcp socket
  *
  */
 
