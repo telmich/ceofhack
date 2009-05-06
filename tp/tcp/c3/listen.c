@@ -28,14 +28,16 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <sys/types.h>
-#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>  /* htons       */
 #include <sys/poll.h>   /* poll        */
 #include <stdio.h>      /* perror()    */
+#include <errno.h>         /* errno    */
+#include <sys/socket.h>    /* accept   */
 
 
-#include "eof.h"   /* EOF */
+#include "eof.h"        /* EOF */
+#include "ceofhack.h"   /* read_all */
 
 #define WE "tcp/c3/ltp:"
 #define SOCK_QUEUE   32          /* maximum elements in queue */
@@ -46,10 +48,9 @@
  * FIXME: long term: create libEOFs
  */
 
-int eofi_ltp_read(int fd)
+ssize_t eofi_ltp_read(int fd, char input[])
 {
    ssize_t len;
-   char input[EOF_L_PKG_MAX+1];
 
    len = read(fd, input, EOF_L_PKG_MAX+1);
    if(len < 0) {
@@ -74,6 +75,32 @@ int eofi_ltp_read(int fd)
    }
 }
 
+/* accept _ONE_ connection, read data into buffer, return */
+ssize_t read_socket(int sock, char input[])
+{
+   int nsock;
+   ssize_t tmp;
+
+   do {
+      fprintf(stderr, WE "trying to accept someone\n");
+      nsock = accept(sock, NULL, NULL);
+      if(nsock == -1) {
+         if(errno == EAGAIN) {
+            continue;
+         } else {
+            perror("accept");
+            return -1;
+         }
+      }
+      fprintf(stderr, WE "result = %d\n",nsock);
+   } while(nsock == -1);
+
+   tmp = read_all(nsock, input, EOF_L_PKG_MAX);
+   close(nsock);
+
+   return tmp;
+}
+
 int main()
 {
    char input[EOF_L_PKG_MAX+1];
@@ -92,7 +119,7 @@ int main()
    /* read the url */
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, WE "ignoring url %s\n", input);
+   fprintf(stderr, WE "using url %s\n", input);
 
    /* get address and port */
    p1 = strchr(input, ':');
@@ -160,11 +187,11 @@ int main()
 
       if(poll(&plist[0], 2, -1) != -1) {
          if(plist[0].revents & (POLLIN | POLLPRI)) {
-            eofi_ltp_read(plist[0].fd);
+            eofi_ltp_read(plist[0].fd, &input[0]);
          }
 
          if(plist[1].revents & (POLLIN | POLLPRI)) {
-            //eofi_ltp_read(plist[1].fd);
+            read_socket(plist[1].fd, &input[0]);
          }
       } else {
          perror(WE "poll");
