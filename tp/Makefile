@@ -15,7 +15,7 @@ TCP_C3=tcp/c3/listen.c
 TPS=
 TPS+=$(DUMMY_C)
 TPS+=$(TCP_C)
-TPS+=$(TCP_C2)
+#TPS+=$(TCP_C2)
 TPS+=$(TCP_C3)
 
 TPS_OBJ=$(TPS:.c=.o)
@@ -30,4 +30,6 @@ clean:
 # Individual make rules
 
 tcp/c2/listen: tcp/c2/init_socket.o tcp/c2/do_socket.o tcp/c2/sigio.o tcp/c2/handle_conn.o
+	$(CC) $^ -o $@
+tcp/c3/listen: ../read_all.o $(TCP_C3)
 	$(CC) $^ -o $@
