@@ -187,12 +187,21 @@ int main()
 
       if(poll(&plist[0], 2, -1) != -1) {
          if(plist[0].revents & (POLLIN | POLLPRI)) {
-            eofi_ltp_read(plist[0].fd, &input[0]);
+            tmp = eofi_ltp_read(plist[0].fd, &input[0]);
          }
 
          if(plist[1].revents & (POLLIN | POLLPRI)) {
-            read_socket(plist[1].fd, &input[0]);
+            tmp = read_socket(plist[1].fd, &input[0]);
          }
+
+         if(tmp == -1) {
+            fprintf(stderr, WE "input read error\n");
+            continue;
+         }
+            
+         input[tmp] = '\0';
+
+         fprintf(stderr, WE "input=%s\n", input);
       } else {
          perror(WE "poll");
       }
