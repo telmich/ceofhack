@@ -9,8 +9,8 @@ type: :feature
 component: ceofhack
 release: future
 reporter: Nico Schottelius <nico@ikn.schottelius.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-04-08 05:56:50.268862 Z
 references: []
 
@@ -32,5 +32,9 @@ log_events:
   - Nico Schottelius <nico@ikn.schottelius.org>
   - changed status from unstarted to in_progress
   - Working on it
+- - 2009-05-06 16:59:41.785031 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - closed with disposition fixed
+  - See read_all.c
 git_branch: 
 claimer: Nico Schottelius <nico@ikn.schottelius.org>
