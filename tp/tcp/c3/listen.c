@@ -40,6 +40,40 @@
 #define WE "tcp/c3/ltp:"
 #define SOCK_QUEUE   32          /* maximum elements in queue */
 
+/* 
+ * FIXME: mid term: create somethink usable for all TP
+ * maybe using some kind of union structure
+ * FIXME: long term: create libEOFs
+ */
+
+int eofi_ltp_read(int fd)
+{
+   ssize_t len;
+   char input[EOF_L_PKG_MAX+1];
+
+   len = read(fd, input, EOF_L_PKG_MAX+1);
+   if(len < 0) {
+      perror(WE "EOFi read");
+      return -1;
+   }
+
+   if(len > EOF_L_PKG_MAX) {
+      fprintf(stderr, WE "Packet too big (%lu)!\n", len);
+      return -1;
+   }
+
+   input[EOF_L_CMD] = '\0';
+
+   fprintf(stderr, WE "Ignoring cmd %s (len=%lu)\n", input, len);
+
+   if(!strncmp(input, EOF_CMD_TPL_STOP, EOF_L_CMD)) {
+      fprintf(stderr, WE "Time to say goodbye...\n");
+      return 1;
+   } else {
+      return 0;
+   }
+}
+
 int main()
 {
    char input[EOF_L_PKG_MAX+1];
@@ -47,8 +81,8 @@ int main()
    char *p1, *p2;
    int tmp, sock;
    int16_t port;
-   ssize_t len;
    struct sockaddr_in ins;
+   struct pollfd plist[2];
 
    /* read init sequence: 1001 */
    read(STDIN_FILENO, input, EOF_L_CMD);
@@ -74,9 +108,9 @@ int main()
       return 1;
    }
 
-   len = p2 - p1;
-   strncpy(address, p1, len);
-   address[len] = '\0';
+   tmp = p2 - p1;
+   strncpy(address, p1, tmp);
+   address[tmp] = '\0';
    fprintf(stderr, WE "addr=%s\n", address);
 
    port = strtol(p2+1, NULL, 10);
@@ -116,24 +150,24 @@ int main()
       return 0;
    }
 
-   /* read commands, socket and children */
+   /* read commands from EOFi and data from socket and children */
    while(1) {
-      len = read(STDIN_FILENO, input, EOF_L_PKG_MAX+1);
-      if(len < 0) {
-         perror("tp/dummy/listen: read");
-         return 1;
-      }
+      memset(&plist, 0, sizeof(plist));
+      plist[0].fd       = STDIN_FILENO;
+      plist[0].events   = POLLIN | POLLPRI;
+      plist[1].fd       = sock;
+      plist[1].events   = POLLIN | POLLPRI;
 
-      if(len > EOF_L_PKG_MAX) {
-         fprintf(stderr, "Packet too big (%lu)!\n", len);
-         continue;
-      }
-      input[len] = '\0';
-      fprintf(stderr, "dummy-LTP received command: %s (until first \\0)\n", input);
+      if(poll(&plist[0], 2, -1) != -1) {
+         if(plist[0].revents & (POLLIN | POLLPRI)) {
+            eofi_ltp_read(plist[0].fd);
+         }
 
-      if(!strncmp(input, EOF_CMD_TPL_STOP, EOF_L_CMD)) {
-         fprintf(stderr, "dummy/c: Time to say goodbye...\n");
-         return 0;
+         if(plist[1].revents & (POLLIN | POLLPRI)) {
+            //eofi_ltp_read(plist[1].fd);
+         }
+      } else {
+         perror(WE "poll");
       }
    }
 
