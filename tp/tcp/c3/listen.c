@@ -24,26 +24,97 @@
 
 #include <time.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>  /* htons       */
+#include <sys/poll.h>   /* poll        */
+#include <stdio.h>      /* perror()    */
+
+
 #include "eof.h"   /* EOF */
+
+#define WE "tcp/c3/ltp:"
+#define SOCK_QUEUE   32          /* maximum elements in queue */
 
 int main()
 {
    char input[EOF_L_PKG_MAX+1];
-   int sock;
+   char address[EOF_L_ADDRESS+1];
+   char *p1, *p2;
+   int tmp, sock;
+   int16_t port;
    ssize_t len;
-   struct timespec ts;
+   struct sockaddr_in ins;
 
    /* read init sequence: 1001 */
    read(STDIN_FILENO, input, EOF_L_CMD);
    input[EOF_L_CMD] = '\0';
-   fprintf(stderr, "tcp/c3-LTP cmd: %s\n", input);
+   fprintf(stderr, WE "cmd %s\n", input);
    
    /* read the url */
    read(STDIN_FILENO, input, EOF_L_ADDRESS);
    input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, "tcp/c3-LTP ignores this url: %s\n", input);
+   fprintf(stderr, WE "ignoring url %s\n", input);
+
+   /* get address and port */
+   p1 = strchr(input, ':');
+   if(!p1) {
+      fprintf(stderr, WE "bad url %s\n", input);
+      return 1;
+   }
+   ++p1;
+
+   p2 = strchr(p1, ':');
+   if(!p2) {
+      fprintf(stderr, WE "port missing in %s\n", input);
+      return 1;
+   }
+
+   len = p2 - p1;
+   strncpy(address, p1, len);
+   address[len] = '\0';
+   fprintf(stderr, WE "addr=%s\n", address);
+
+   port = strtol(p2+1, NULL, 10);
+   fprintf(stderr, WE "port=%d\n", port);
+
+
+   /* listen to it */
+   memset(&ins, 0, sizeof(ins));
+   ins.sin_family = AF_INET;
+   ins.sin_port   = htons(port);
+   if(!inet_aton(address, &(ins.sin_addr) ) ) {
+      write(2,"broken ipn\n",11);
+      return 0;
+   }
+
+   sock = socket(PF_INET, SOCK_STREAM, 0);
+   if(sock == -1 ) {
+      perror("socket");
+      return 0;
+   }
+
+   tmp = 1;
+   // lose the pesky "Address already in use" error message
+   if(setsockopt(sock,SOL_SOCKET, SO_REUSEADDR, &tmp, sizeof(tmp)) == -1) {
+      perror("setsockopt");
+      return 0;
+    }
+
+   if(bind(sock,(struct sockaddr *)&ins,sizeof(ins)) == -1) {
+      perror("bind");
+      return 0;
+   }
+
+   /* start listening */
+   if(listen(sock, SOCK_QUEUE) == -1) {
+      perror("listen");
+      return 0;
+   }
 
    /* read commands, socket and children */
    while(1) {
