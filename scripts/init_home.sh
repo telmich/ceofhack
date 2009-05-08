@@ -36,7 +36,7 @@ install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
         ~/.ceof/transport-protocols/available/tcp/listen
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/send
-###### tcp-listening: 0.0.0.0:4242
+###### enable tcp listening: 0.0.0.0:4242
 install -d -m 0755 ~/.ceof/transport-protocols/listen/tcpv4-any-4242
 install -m 0644 $__abs_mydir/../tp/tcp/example_url    \
          ~/.ceof/transport-protocols/listen/tcpv4-any-4242/url

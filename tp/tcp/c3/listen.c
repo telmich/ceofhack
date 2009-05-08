@@ -38,6 +38,7 @@
 
 #include "eof.h"        /* EOF */
 #include "ceofhack.h"   /* read_all */
+#include "shcl.h"       /* use helpers */
 
 #define WE "tcp/c3/ltp:"
 #define SOCK_QUEUE   32          /* maximum elements in queue */
@@ -52,7 +53,7 @@ ssize_t eofi_ltp_read(int fd, char input[])
 {
    ssize_t len;
 
-   len = read(fd, input, EOF_L_PKG_MAX+1);
+   len = read_all(fd, input, EOF_L_PKG_MAX+1);
    if(len < 0) {
       perror(WE "EOFi read");
       return -1;
@@ -99,6 +100,21 @@ ssize_t read_socket(int sock, char input[])
    close(nsock);
 
    return tmp;
+}
+
+int eof_ltp_write(char *msg, int type)
+{
+   size_t len;
+   char buf[EOF_L_PKG_MAX+1];
+
+   type = 0; /* practically ignored currently */
+   
+   len = strlen(msg); /* FIXME: will not work for binary data!!! */
+
+   strncpy(buf, EOF_CMD_TPL_RECV, EOF_L_CMD);
+   ultostr(len, 10, &buf[EOF_L_CMD], EOF_L_PKG_MAX - EOF_L_CMD);
+
+   return write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
 }
 
 int main()
