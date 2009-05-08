@@ -32,7 +32,7 @@ fi
 
 ######### transport protocols
 ###### tcp
-install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
+install -D -m 0755 $__abs_mydir/../tp/tcp/c3/listen \
         ~/.ceof/transport-protocols/available/tcp/listen
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/send
