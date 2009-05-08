@@ -38,7 +38,7 @@ int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
    chp[num].handle         = handle;
    chp[num].exit           = exit;
 
-   printf("Added fdonly: %d, %p\n", fd, handle);
+//   printf("Added fdonly: %d, %p\n", fd, handle);
 
    return 1;
 }
