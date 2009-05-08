@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -e ~/.ceof/pgp/eof.sec ]; then
+if [ -e ~/.ceof/gpg/eof.sec ]; then
 	exit 0
 fi
 
@@ -9,8 +9,8 @@ if [ ! -x "`which gpg`" ]; then
 	exit 1
 fi
 
-mkdir -p ~/.ceof/pgp || exit 1
-cd ~/.ceof/pgp || exit 1
+mkdir -p ~/.ceof/gpg || exit 1
+cd ~/.ceof/gpg || exit 1
 
 cat > keygen.batch << EOF
 	%echo Generating a standard key
