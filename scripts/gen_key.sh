@@ -1,6 +1,8 @@
 #!/bin/sh
 
-if [ -e ~/.ceof/gpg/eof.sec ]; then
+gpgdir="$HOME/.ceof/gpg"
+
+if [ -e "$gpgdir/secring.sec" ]; then
 	exit 0
 fi
 
@@ -9,8 +11,8 @@ if [ ! -x "`which gpg`" ]; then
 	exit 1
 fi
 
-mkdir -p ~/.ceof/gpg || exit 1
-cd ~/.ceof/gpg || exit 1
+mkdir -p "$gpgdir" || exit 1
+cd "$gpgdir" || exit 1
 
 cat > keygen.batch << EOF
 	%echo Generating a standard key
@@ -21,13 +23,11 @@ cat > keygen.batch << EOF
 	Name-Real: $USER
 	Name-Comment: EOF
 	Expire-Date: 0
-        %pubring eof.pub
-        %secring eof.sec
 	%commit
 	%echo done
 EOF
 
-gpg --batch --gen-key keygen.batch || exit 1
+gpg --homedir "$gpgdir" --batch --gen-key keygen.batch || exit 1
 
 exit 0
 
