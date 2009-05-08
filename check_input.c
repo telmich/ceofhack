@@ -34,7 +34,7 @@ void check_input(int possible, int *have_data)
 
    for(i=0; i < possible && *have_data > 0; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
-         printf("data on channel %d\n",i);
+//         printf("data on channel %d\n",i);
          hp = helper_find_by_fd(HP_READ, pfd[i].fd);
          if(!hp) {
             printf("BUG: Check input on %d (fd=%d): no handler\n", i, pfd[i].fd);

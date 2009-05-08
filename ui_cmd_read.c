@@ -53,7 +53,8 @@ int ui_cmd_read(int fd[])
          printf("%s failed!\n", cp->name);
       }
    } else {
-      printf("Sending text (%s) to all peers\n", buf);
+      printf("Ignoring text (%s) (leter versions send this to all peers in channel)\n", buf);
+//      printf("Sending text (%s) to all peers\n", buf);
 //      msg_send(buf); /* no command? send as text */
    }
 
