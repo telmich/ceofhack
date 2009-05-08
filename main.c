@@ -40,7 +40,7 @@ int main()
    int cnt;
    int pfd_cnt;
 
-   ceof_banner();                   /* finally, we're there */
+   ceof_banner(MSG_CEOF_VERSION);                   /* finally, we're there */
 
    if(!config_init())   return 1;   /* read config          */
    if(!helper_init())   return 1;   /* init helper structs  */
@@ -56,6 +56,7 @@ int main()
 
 // if(!ui_init())       return 1;   /* enable user input    */
 
+   ceof_banner(MSG_CEOF_STARTED);                   /* finally, we're there */
    while(1) {
       /* reinit, poll array may have changed */
       fd_to_poll(&pfd_cnt);
