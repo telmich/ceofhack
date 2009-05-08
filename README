@@ -5,7 +5,7 @@ A very minimalistic EOF-2 implementation.
 Compile:
    $ make
 
-Configure:
+Create local configuration:
    $ ./scripts/init_home.sh
 
 Usage:
@@ -39,6 +39,8 @@ Development:
    Work & hack & commit & publish & announce url to fetch.
 
    We're in #cLinux on freenode, as long as EOF-3 is not ready to use ;-)
+
+Git trees:
 
    Nico's tree:
       http://git.schottelius.org/?p=EOF/ceofhack;a=summary (webview)
