@@ -1,0 +1,25 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: create write functions for each command
+desc: |-
+  Currently there's an experiemental version of eof_ltp_write.
+  
+  Create cmd_XXXX (maybe best) or eof_ltp_<type>_write
+  
+  Export eof_ltp_write to own file.
+type: :task
+component: tp
+release: "1.1"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-08 17:07:46.016938 Z
+references: []
+
+id: 7ac3d45dec28baf20c35b3754095b369f8bac71f
+log_events: 
+- - 2009-05-08 17:07:47.100745 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
