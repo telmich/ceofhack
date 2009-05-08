@@ -53,7 +53,7 @@ int tp_init()
    strcpy(tp_tree.path, opt.tphome);
    if(!cconfig_tree(&tp_tree)) return 0;
 
-   cconfig_tree_dump(tp_tree, 1);
+//   cconfig_tree_dump(tp_tree, 1);
 
    /* search for all available protocols */
    if(!cconfig_find_fn("available", tp_tree, &tmp)) {
@@ -64,7 +64,7 @@ int tp_init()
    state = 0;
    while(cconfig_entries_get(tmp, &entry, &state)) {
       p = cconfig_entry_fn(&entry);
-      printf("Received %s (%s)\n", entry.path, p);
+//      printf("Received %s (%s)\n", entry.path, p);
 
       if(!tp_add_available(p, entry)) return 0;
    }
@@ -78,7 +78,7 @@ int tp_init()
    state = 0;
    while(cconfig_entries_get(tmp, &entry, &state)) {
       p = cconfig_entry_fn(&entry);
-      printf("Received listen %s (%s/%d)\n", entry.path, p, entry.noe);
+//      printf("Received listen %s (%s/%d)\n", entry.path, p, entry.noe);
 
       if(!tp_listen_add(p, entry)) return 0;
    }

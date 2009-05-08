@@ -35,7 +35,7 @@ int tp_listen_add(char *name, struct cconfig entry)
    struct tpl tplnew;
    struct cconfig *url;
 
-   printf("Debug: %d in %s\n", entry.noe, entry.path);
+//   printf("Debug: %d in %s\n", entry.noe, entry.path);
 
    memset(tplnew.url, '\0', sizeof(tplnew.url));
 

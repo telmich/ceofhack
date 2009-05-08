@@ -26,7 +26,7 @@
 #define CEOF_H
 
 /* constants */
-#define CEOF_VERSION       "This is ceofhack-1.0-unreleased, thanks for using!\n"
+#define CEOF_VERSION       "ceofhack> Release 1\n"
 
 
 /* functions */

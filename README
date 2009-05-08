@@ -2,6 +2,9 @@ A very minimalistic EOF-2 implementation.
 
    -- Nico Schottelius, 2008-06-23
 
+Current requirements:
+   make, gcc, netcat
+
 Compile:
    $ make
 
