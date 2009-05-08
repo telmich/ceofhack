@@ -69,9 +69,9 @@ int tp_send(char *nick, char *msg)
    p = buf;
    strncpy(p, EOF_CMD_TPS, EOF_L_CMD);
    p += EOF_L_CMD;
-   strncpy(p, url, EOF_L_ADDRESS);
+   tmp = strlen(tp_getscheme(url));
+   strncpy(p, &url[tmp], EOF_L_ADDRESS);
    p += EOF_L_ADDRESS;
-   printf("debug: %p, %p: %ld\n", buf, p, (p-buf));
 
    len = strlen(msg);
    tmp = ultostr(len, 10, p, BIGBUF - (p-buf));
@@ -79,7 +79,7 @@ int tp_send(char *nick, char *msg)
    len = EOF_L_CMD + EOF_L_ADDRESS + strlen(p) + 1 + strlen(msg);
    strncat(p, "\n", BIGBUF);
    strncat(p, msg, BIGBUF);
-   printf("pkg: %ld: %s - %s\n", len, buf, p);
+//   printf("pkg: %ld: %s - %s\n", len, buf, p);
 
 
    /* FIXME: HACK: pass packet to send        */

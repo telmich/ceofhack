@@ -207,6 +207,7 @@ int tp_scheme_len(char *url);
 struct cconfig *tp_available(char *url, int type);
 int tp_send(char *nick, char *msg);
 int tp_send_wait(int fds[]);
+char *tp_getscheme(char *url);
 
 /* cconfig */
 int cconfig_tree(struct cconfig *cg);
