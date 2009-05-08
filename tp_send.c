@@ -69,7 +69,9 @@ int tp_send(char *nick, char *msg)
    p = buf;
    strncpy(p, EOF_CMD_TPS, EOF_L_CMD);
    p += EOF_L_CMD;
-   tmp = strlen(tp_getscheme(url));
+
+   /* position after scheme */
+   tmp = strlen(tp_getscheme(url)) + 1;
    strncpy(p, &url[tmp], EOF_L_ADDRESS);
    p += EOF_L_ADDRESS;
 

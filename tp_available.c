@@ -34,7 +34,7 @@ struct cconfig *tp_available(char *url, int type)
    int i;
 
    for(i=0; i < tpa_cnt; i++) {
-      printf("LTP/TP: %s / %s [%lu]\n", url, tpa[i].scheme, strlen(tpa[i].scheme));
+//      printf("LTP/TP: %s / %s [%lu]\n", url, tpa[i].scheme, strlen(tpa[i].scheme));
       if(!strncmp(url, tpa[i].scheme, strlen(tpa[i].scheme))) {
          if(type & TPL && tpa[i].listen) {
             return tpa[i].listen;
