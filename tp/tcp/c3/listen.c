@@ -113,7 +113,12 @@ int eof_ltp_write(char *msg, int type)
 
    strncpy(buf, EOF_CMD_TPL_RECV, EOF_L_CMD);
    ultostr(len, 10, &buf[EOF_L_CMD], EOF_L_PKG_MAX - EOF_L_CMD);
+   strncat(buf, "\n", EOF_L_PKG_MAX); /* FIXME: will not work for binary data */
+   strncat(buf, msg, EOF_L_PKG_MAX); /* FIXME: will not work for binary data */
 
+   len = strlen(buf); /* FIXME: will not work for binary data */
+
+   fprintf(stderr, WE "TO EOFi: len=%lu, pkg=\"%s\" ...\n", len, buf);
    return write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
 }
 
@@ -121,7 +126,7 @@ int main()
 {
    char input[EOF_L_PKG_MAX+1];
    char address[EOF_L_ADDRESS+1];
-   char *p1, *p2;
+   char *p1;
    int tmp, sock;
    int16_t port;
    struct sockaddr_in ins;
@@ -137,26 +142,19 @@ int main()
    input[EOF_L_ADDRESS] = '\0';
    fprintf(stderr, WE "using url %s\n", input);
 
-   /* get address and port */
+   /* find beginning of port */
    p1 = strchr(input, ':');
    if(!p1) {
       fprintf(stderr, WE "bad url %s\n", input);
       return 1;
    }
-   ++p1;
 
-   p2 = strchr(p1, ':');
-   if(!p2) {
-      fprintf(stderr, WE "port missing in %s\n", input);
-      return 1;
-   }
-
-   tmp = p2 - p1;
-   strncpy(address, p1, tmp);
+   tmp = p1 - input;
+   strncpy(address, input, tmp);
    address[tmp] = '\0';
    fprintf(stderr, WE "addr=%s\n", address);
 
-   port = strtol(p2+1, NULL, 10);
+   port = strtol(p1+1, NULL, 10);
    fprintf(stderr, WE "port=%d\n", port);
 
 
@@ -208,6 +206,7 @@ int main()
 
          if(plist[1].revents & (POLLIN | POLLPRI)) {
             tmp = read_socket(plist[1].fd, &input[0]);
+            eof_ltp_write(input, 0);
          }
 
          if(tmp == -1) {
