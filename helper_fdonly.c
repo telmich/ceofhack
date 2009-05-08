@@ -23,8 +23,6 @@
  *
  */
 
-#include <signal.h>
-
 #include "ceofhack.h"  /* functions etc. */
 
 int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
