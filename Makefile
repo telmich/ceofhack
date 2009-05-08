@@ -21,7 +21,7 @@ HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
 
 # command line user interface
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
-UI_CMD+=ui_quit.c ui_help.c
+UI_CMD+=ui_quit.c ui_help.c ui_cmd_argcnt.c ui_cmd_argncpy.c
 
 # command handling (ceofhack internal)
 CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c

@@ -24,16 +24,18 @@
 
 #include <string.h>     /* str* */
 
-#include "ceofhack.h"   /* functions etc. */
-
-int ui_cmd_syntaxcheck(char *string, int num)
+int ui_cmd_argcnt(char *str, int num)
 {
-   char *p = string;
 
-   do {
-      p = strchr(p, ' ');
-      --num;
-   } while(p && num);
+   while(1) {
+      str = strchr(str, ' ');
+      if(str) {
+         ++str;
+         --num;
+      } else {
+         break;
+      }
+   }
 
-   return num ? 0 : 1;
+   return num == 1 ? 1 : 0;
 }
