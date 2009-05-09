@@ -46,6 +46,9 @@ Chatting with others:
    C9F593529F096B83A60FA9270B2DFDACC876D4D1
    [...]
 
+   # Or use the following version to display names and co. as well:
+   # gpg --homedir ~/.ceof/gpg/ --fingerprint | sed -e 's/.*= //' -e 's/ //g'
+
    # then add them with /peer add and send message via /peer send
 
 
