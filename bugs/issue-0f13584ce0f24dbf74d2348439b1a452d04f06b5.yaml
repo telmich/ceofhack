@@ -1,0 +1,33 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Implement report() function like the one found in gpm
+desc: |-
+  The gpm report function (http://unix.schottelius.org/gpm) is pretty smart:
+  
+  It has va_arg support and knows about different message levels (similar to
+  syslog).
+  
+  The syslog part can be skipped, but ceof_report() should be exportable into
+  a lib.
+  
+  It shoul also support prefixes like:
+  
+  ceof_report("gpg", int level, char *msg, ...);
+  
+  The possible prefixes should be defined in eof.h.
+type: :feature
+component: ceof
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-09 10:08:38.452911 Z
+references: []
+
+id: 0f13584ce0f24dbf74d2348439b1a452d04f06b5
+log_events: 
+- - 2009-05-09 10:08:40.255161 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
