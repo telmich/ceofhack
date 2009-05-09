@@ -43,7 +43,7 @@ int cgpg_init()
    gpgme_set_locale (NULL, LC_MESSAGES, setlocale (LC_MESSAGES, NULL));
 #endif
 
-   printf("gpg: Using version %s\n", p);
+   printf("gpg> Version %s\n", p);
 
    gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
    if(gerr != GPG_ERR_NO_ERROR) {
