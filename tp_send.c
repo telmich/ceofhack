@@ -77,7 +77,7 @@ int tp_send(char *nick, char *msg)
 
    len = strlen(msg);
    tmp = ultostr(len, 10, p, BIGBUF - (p-buf));
-   printf("ultostr: %d, (%lu)\n", tmp, len);
+//   printf("ultostr: %d, (%d)\n", tmp, len);
    len = EOF_L_CMD + EOF_L_ADDRESS + strlen(p) + 1 + strlen(msg);
    strncat(p, "\n", BIGBUF);
    strncat(p, msg, BIGBUF);
