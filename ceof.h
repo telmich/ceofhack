@@ -26,7 +26,7 @@
 #define CEOF_H
 
 /* constants */
-#define MSG_CEOF_VERSION       "ceofhack> Release 1\n"
+#define MSG_CEOF_VERSION       "ceofhack> Version 0.5\n"
 #define MSG_CEOF_STARTED       "ceofhack> Started. Please enter commands.\n"
 
 
