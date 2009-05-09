@@ -38,8 +38,13 @@ Chatting with others:
    gpg --homedir ~/.ceof/gpg --armor --export > ~/public-keys
    # send it to someone else
 
-   # retrieve their pgp key and import it
+   # retrieve the pgp key of someone else and import it:
    $ gpg --homedir ~/.ceof/gpg/ --import <file>
+   
+   # list all fingerprints (as above
+   $ gpg --homedir ~/.ceof/gpg/ --fingerprint | grep fingerprint | sed -e 's/.*= //' -e 's/ //g'
+   C9F593529F096B83A60FA9270B2DFDACC876D4D1
+   [...]
 
    # then add them with /peer add and send message via /peer send
 
