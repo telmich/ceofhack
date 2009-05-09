@@ -26,12 +26,22 @@
 
 #include <signal.h>     /* kill()         */
 #include <unistd.h>     /* _exit()        */
+#include <time.h>       /* nanosleep()    */
 #include "ceofhack.h"
 
 void ceof_exit(int i)
 {
+   struct timespec ts;
+   ts.tv_sec = 2;
+   ts.tv_nsec =0;
+
    printf("Shutting down EOF subsystems (SIGINT)...\n");
    helper_signal_all(SIGINT);
+   printf("Waiting %d seconds...\n", (short) ts.tv_sec);
+   nanosleep(&ts, NULL);
+   printf("Shutting down EOF subsystems (SIGKILL)...\n");
+   helper_signal_all(SIGKILL);
+
 
    _exit(i);
 }
