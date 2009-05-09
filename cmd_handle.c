@@ -28,7 +28,7 @@ int cmd_handle(unsigned long cat, int fds[], char data[], ssize_t len)
 {
    struct cmd *cmd;
 
-   printf("category %lu: handling cmd (%lu) %c%c%c%c\n", cat, len,
+   printf("category %lu: handling cmd (%ld) %c%c%c%c\n", cat, len,
             data[0], data[1], data[2], data[3]);
 
    cmd = cmd_find_in_cat(cat, data);
