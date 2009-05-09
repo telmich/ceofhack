@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -37,6 +37,7 @@ read -n 128 fulladdr
 # split addr and port
 addr="$(echo $fulladdr | awk -F: '{ print $1 }')"
 port="$(echo $fulladdr | awk -F: '{ print $2 }')"
+echo "Address: $fulladdr." 1>&2
 
 if [ -z "$addr" -o -z "$port" ]; then
 	echo "No address or no port." 1>&2

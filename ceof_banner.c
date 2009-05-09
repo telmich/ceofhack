@@ -27,7 +27,7 @@
 
 #include "ceof.h"       /* functions etc. */
 
-void ceof_banner()
+void ceof_banner(char *banner)
 {
-   write(STDOUT_FILENO, CEOF_VERSION, strlen(CEOF_VERSION));
+   write(STDOUT_FILENO, banner, strlen(banner));
 }

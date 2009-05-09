@@ -18,30 +18,26 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find *fd* on pipe-part *num*
+ * Loop through all helpers
  *
  */
 
-#include "ceofhack.h"            /* functions etc.                */
+#include "ceofhack.h"  /* functions etc. */
 
-struct helper *helper_find_by_fd(int num, int fd)
+/* save offset && count!!!!!! */
+
+int helper_loop(int *offset)
 {
    int i;
 
-//   printf("Searching for %d at %d\n", fd, num);
-
-   /* FIXME: chp_cnt == total number, not highest index number
-    * looping through more helper than necessary in worst case, because
-    * after we found chp_cnt, we can stop search...
-    */
    for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].fds[num] == fd) {
-//         printf("Found helper at %d\n", i);
-         return &chp[i];
+      /* no handler? free for use */
+      if(!chp[i].handle) {
+         ++chp_cnt;
+         return i;
       }
    }
 
-/* is valid, when child exited and poll list still contains fd */
-//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
-   return NULL;
+   /* this should never happen and means there's a bug in the helper system  */
+   return -2;
 }

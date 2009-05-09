@@ -1,3 +1,22 @@
+# 
+# 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+# 
+# This file is part of ceofhack.
+#
+# ceofhack is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# ceofhack is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with ceofhack. If not, see <http://www.gnu.org/licenses/>.
+#
+
 include Makefile.include
 
 # cconfig modules
@@ -5,11 +24,11 @@ CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get
 CCONFIG+=cconfig_entry_fn.c
 
 # Small helper c library
-SHCL=openreadclosestatic.c convert.c write_all.c forkexecpipe.c
+SHCL=openreadclosestatic.c convert.c read_all.c write_all.c forkexecpipe.c
 
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_listen_add.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c
-TRANSPORT_PROTO+=tp_listen_read.c tp_send.c tp_send_wait.c
+TRANSPORT_PROTO+=tp_listen_read.c tp_send.c tp_send_wait.c tp_getscheme.c
 
 PEER=peers_init.c peer_add.c peer_list.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
@@ -17,11 +36,10 @@ PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
-#HELPER+=helper_write.c helper_read.c
 
-# command line user interface
+# user interface (command line, currently built-in)
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
-UI_CMD+=ui_quit.c ui_help.c
+UI_CMD+=ui_quit.c ui_help.c ui_cmd_argcnt.c ui_cmd_argncpy.c
 
 # command handling (ceofhack internal)
 CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
@@ -29,10 +47,10 @@ CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
 CMD+=cmd_2000.c cmd_2002.c cmd_2003.c
 CMD+=cmd_3000.c
 
-# gpg crypto
+# gpg (crypto)
 GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 
-# ceof: the next generation EOFi ;-)
+# ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c
 
 # ceofhack internal
@@ -43,7 +61,7 @@ CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 
-PROG=ceofhack decrypt
+PROG=ceofhack
 
 DOC=doc/EOF
 
@@ -56,33 +74,14 @@ run: $(PROG)
 clean: tp-clean
 	rm -f $(CEOFHACK_O) $(PROG) *.o
 
-test: tests/testcconfig ceofhack
-	./tests/testcconfig .
-	./ceofhack; echo $$?
-	killall netcat
-
 tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 	$(CC) -o $@ $^
 
+
+$(CEOFHACK_O): ceofhack.h ceof.h eof.h Makefile Makefile.include
 ceofhack: $(CEOFHACK_O)
 	$(CC) -o $@ $^
 
-ceof_server_exec: ceof_server
-	./ceof_server
-
-ceof_server: ceof_server.c
-	$(CC) -o $@ $^
-
-gpgmedecrypt: fromgpgmestolen/t-decrypt.c
-	$(CC) -o $@ $^
-
-decrypt: decrypt.c $(SHCL)
-	$(CC) -o $@ $^
-
-decrypt-test:
-	gpg --homedir ~/.ceof/gpg/ --decrypt < ./testcrypt
-
-$(CEOFHACK_O): ceofhack.h ceof.h eof.h Makefile Makefile.include
 
 documentation: doc/EOF.tex
 	make -C doc all

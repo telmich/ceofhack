@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh
 # 
 # 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
@@ -30,27 +30,33 @@ if ! $__abs_mydir/gen_key.sh; then
 	exit 1
 fi
 
+set -e
+
 ######### transport protocols
 ###### tcp
-install -D -m 0755 $__abs_mydir/../tp/tcp/c/listen \
+echo "Adding transport protocol tcp"
+install -D -m 0755 $__abs_mydir/../tp/tcp/c3/listen \
         ~/.ceof/transport-protocols/available/tcp/listen
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
       ~/.ceof/transport-protocols/available/tcp/send
-###### tcp-listening: 0.0.0.0:4242
+###### enable tcp listening: 0.0.0.0:4242
+echo "Enabling listing on $(cat $__abs_mydir/../tp/tcp/example_url)"
 install -d -m 0755 ~/.ceof/transport-protocols/listen/tcpv4-any-4242
 install -m 0644 $__abs_mydir/../tp/tcp/example_url    \
          ~/.ceof/transport-protocols/listen/tcpv4-any-4242/url
 
-###### dummy
-install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
-install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
-                $__abs_mydir/../tp/dummy/c/listen  \
-         ~/.ceof/transport-protocols/available/dummy
+###### dummy: only for development
+if [ "$1" = "dev" ]; then
 
-###### dummy: listening
-install -d -m 0755 ~/.ceof/transport-protocols/listen/dummy-for-dev
-install -m 0644 $__abs_mydir/../tp/dummy/example_url    \
-         ~/.ceof/transport-protocols/listen/dummy-for-dev/url
+   install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
+   install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
+                   $__abs_mydir/../tp/dummy/c/listen  \
+            ~/.ceof/transport-protocols/available/dummy
+
+   install -d -m 0755 ~/.ceof/transport-protocols/listen/dummy-for-dev
+   install -m 0644 $__abs_mydir/../tp/dummy/example_url    \
+            ~/.ceof/transport-protocols/listen/dummy-for-dev/url
+fi
 
 echo "done."
 

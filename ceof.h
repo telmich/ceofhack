@@ -26,10 +26,11 @@
 #define CEOF_H
 
 /* constants */
-#define CEOF_VERSION       "This is ceofhack-1.0-unreleased, thanks for using!\n"
+#define MSG_CEOF_VERSION       "ceofhack> Version 0.5\n"
+#define MSG_CEOF_STARTED       "ceofhack> Started. Please enter commands.\n"
 
 
 /* functions */
-void ceof_banner();
+void ceof_banner(char *);
 
 #endif

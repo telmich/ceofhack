@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,30 +18,24 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find *fd* on pipe-part *num*
+ * Check for valid syntax: If enough arguments are present
  *
  */
 
-#include "ceofhack.h"            /* functions etc.                */
+#include <string.h>     /* str* */
 
-struct helper *helper_find_by_fd(int num, int fd)
+int ui_cmd_argcnt(char *str, int num)
 {
-   int i;
 
-//   printf("Searching for %d at %d\n", fd, num);
-
-   /* FIXME: chp_cnt == total number, not highest index number
-    * looping through more helper than necessary in worst case, because
-    * after we found chp_cnt, we can stop search...
-    */
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].fds[num] == fd) {
-//         printf("Found helper at %d\n", i);
-         return &chp[i];
+   while(1) {
+      str = strchr(str, ' ');
+      if(str) {
+         ++str;
+         --num;
+      } else {
+         break;
       }
    }
 
-/* is valid, when child exited and poll list still contains fd */
-//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
-   return NULL;
+   return num == 1 ? 1 : 0;
 }

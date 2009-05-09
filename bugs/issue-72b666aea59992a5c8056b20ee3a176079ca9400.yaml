@@ -1,0 +1,45 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: clearify where double -----END PGP MESSAGE----- comes from
+desc: |-
+  10:58 <downhill> cmd2002 read 668 bytes in total
+  10:58 <downhill> Incoming packet: 603
+  10:58 <downhill> -----BEGIN PGP MESSAGE-----
+  10:58 <downhill> Version: GnuPG v1.4.9 (GNU/Linux)
+  10:58 <downhill> hQEOA/NG7m0FiM7PEAQAk/DjivMH+tNppesAFCq9Kft0FxqoJ4xIqqRvFjvkUrNo
+  10:59 <downhill> 8dKG6MTB24ieiSwy0UNylhW9O3XReg1a6wvlsV7m7KUcoQ1VGxBrKQwWkQ4jSrp3
+  10:59 <downhill> FV7x2OvBeoG2XTRFSZ+sBr1epc2giFuDrG7Kk9g/qqgRrCIxa6WxXVPZ68N46XoD
+  10:59 <downhill> /1vevFPqTjCRJ66VTbzR7SIS9bxAmJU/oZehFRgGcKKAhsd1+nDQzwHckhDb5IBD
+  10:59 <downhill> L6PWDbIYaiF0+I/lNMgBc/Iwf0lemi74J+hRXtynjg1LlVlhbk7Fr5nejqnHrZEz
+  10:59 <downhill> B3hyJ805pQ6Q8jQqRsyMfpWDLGFrZn7Hiy/LPCjQyBVe0mQBmHaHlE0xAFlOewaL
+  10:59 <downhill> RdeU0E1PHQF0Cq7+zLyhQmn+odLRCJQKYlpt6OowZPExMCEnrsVDMqhshMrncqbX
+  10:59 <downhill> 9BwCHlKe1dF10qX5J9On4GOAQ41snKaqH+/ZyRe39abHE0qPBBDy
+  10:59 <downhill> =2bj1
+  10:59 <downhill> -----END PGP MESSAGE-----
+  10:59 <downhill> ofqpF6XO0d+Xrie7Ft5TIeg=
+  10:59 <downhill> =I05y
+  10:59 <downhill> -----END PGP MESSAGE-----
+  10:59 <downhill> doppeltes "END PGP MESSAGE"?
+  10:59 <telmich> uhh
+  11:00 <downhill> Child 878 died...
+  11:00 <downhill> Something useless exited
+  11:00 <downhill> ceofhack> Incoming plaintext [37]: ack, aber die ist jetzt recht einfach
+  11:00 <downhill> Ist der Rest
+  11:00 <downhill> Kam ja an, aber sieht trotzdem komisch aus
+  11:00 <telmich> vielleicht ein durcheinander vom debug von tcp/c3/listen und ceofhack
+type: :bugfix
+component: ceofhack
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-09 09:00:44.817064 Z
+references: []
+
+id: 72b666aea59992a5c8056b20ee3a176079ca9400
+log_events: 
+- - 2009-05-09 09:00:45.981053 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

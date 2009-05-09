@@ -18,30 +18,28 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find *fd* on pipe-part *num*
+ * Check whether we have a handler for the url
  *
  */
 
-#include "ceofhack.h"            /* functions etc.                */
+#include <stdlib.h>              /* NULL                          */
+#include <stdio.h>               /* printf                        */
+#include <string.h>              /* str*                          */
 
-struct helper *helper_find_by_fd(int num, int fd)
+
+#include "ceofhack.h"   /* functions etc. */
+
+char *tp_getscheme(char *url)
 {
    int i;
 
-//   printf("Searching for %d at %d\n", fd, num);
-
-   /* FIXME: chp_cnt == total number, not highest index number
-    * looping through more helper than necessary in worst case, because
-    * after we found chp_cnt, we can stop search...
-    */
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].fds[num] == fd) {
-//         printf("Found helper at %d\n", i);
-         return &chp[i];
+   for(i=0; i < tpa_cnt; i++) {
+      if(!strncmp(url, tpa[i].scheme, strlen(tpa[i].scheme))) {
+         return tpa[i].scheme;
       }
    }
 
-/* is valid, when child exited and poll list still contains fd */
-//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
+   printf("NO scheme found for URL %s!\n", url);
+
    return NULL;
 }

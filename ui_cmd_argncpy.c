@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,30 +18,35 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find *fd* on pipe-part *num*
+ * Copy this argument (similar to strncpy, copies at most max+1 characters)
  *
  */
 
-#include "ceofhack.h"            /* functions etc.                */
+#include <string.h>     /* str* */
 
-struct helper *helper_find_by_fd(int num, int fd)
+#include "ceofhack.h"   /* functions etc. */
+
+char *ui_cmd_argncpy(char *arglist, char dst[], size_t max)
 {
-   int i;
+   char *p;
+   size_t len;
 
-//   printf("Searching for %d at %d\n", fd, num);
-
-   /* FIXME: chp_cnt == total number, not highest index number
-    * looping through more helper than necessary in worst case, because
-    * after we found chp_cnt, we can stop search...
-    */
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].fds[num] == fd) {
-//         printf("Found helper at %d\n", i);
-         return &chp[i];
+   p = strchr(arglist, ' ');
+   if(!p) {
+      p = arglist;
+      len = 0;
+      while(*p++) {
+         ++len;
       }
+   } else {
+      len = (p - arglist);
+      len = len > max ? max : len;
    }
 
-/* is valid, when child exited and poll list still contains fd */
-//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
-   return NULL;
+   if(len) {
+      strncpy(dst, arglist, len);
+      return ++p;
+   } else {
+      return NULL;
+   }
 }

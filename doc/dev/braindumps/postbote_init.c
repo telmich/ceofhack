@@ -18,30 +18,20 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find *fd* on pipe-part *num*
+ * Initialise the postbote (outgoing packets)
  *
  */
 
-#include "ceofhack.h"            /* functions etc.                */
+#include <string.h>     /* memset, str*   */
+#include <stdio.h>      /* printf         */
+#include <stdlib.h>     /* getenv         */
+#include "ceofhack.h"   /* functions etc.  */
 
-struct helper *helper_find_by_fd(int num, int fd)
+int postbote_init()
 {
-   int i;
 
-//   printf("Searching for %d at %d\n", fd, num);
+   /* setup queue */
 
-   /* FIXME: chp_cnt == total number, not highest index number
-    * looping through more helper than necessary in worst case, because
-    * after we found chp_cnt, we can stop search...
-    */
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].fds[num] == fd) {
-//         printf("Found helper at %d\n", i);
-         return &chp[i];
-      }
-   }
+   /* add to */
 
-/* is valid, when child exited and poll list still contains fd */
-//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
-   return NULL;
 }

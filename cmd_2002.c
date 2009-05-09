@@ -36,7 +36,7 @@ int cmd_2002(int fd[])
 
    printf("Received a packet!!!\n");
 
-   len = read(fd[HP_READ], buf, EOF_L_PKG_MAX+1);
+   len = read_all(fd[HP_READ], buf, EOF_L_PKG_MAX+1);
    if(len == -1) {
       perror("cmd2002/read");
       return 0;
@@ -62,7 +62,7 @@ int cmd_2002(int fd[])
    pkglen = strtol(buf, &endnum, 10);
 
    if(endnum != p) {
-      printf("cmd2002: Broken packet: number of bytes is not directly followed by a line new\n");
+      printf("cmd2002: Broken packet: number of bytes is not directly followed by a newline\n");
       return 0;
    }
 
@@ -85,7 +85,7 @@ int cmd_2002(int fd[])
    len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
 
    if(len > 0) {
-      printf("Incoming plaintext [%lu]: %s\n", len, plaintext);
+      printf("ceofhack> Incoming plaintext [%lu]: %s\n", len, plaintext);
    } else {
       printf("decryption failed with %ld\n", len);
    }

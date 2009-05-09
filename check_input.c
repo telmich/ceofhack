@@ -34,10 +34,14 @@ void check_input(int possible, int *have_data)
 
    for(i=0; i < possible && *have_data > 0; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
-         printf("data on channel %d\n",i);
+//         printf("data on channel %d\n",i);
          hp = helper_find_by_fd(HP_READ, pfd[i].fd);
          if(!hp) {
-            printf("BUG: Check input on %d (fd=%d): no handler\n", i, pfd[i].fd);
+            /* there is i race condition when the child is cleared, but
+               the poll list still contains the item. thus just ignore 
+               this case.
+            printf("BUG: Check input on %d/%d (fd=%d): no handler\n", i, possible, pfd[i].fd);
+            */
          } else {
             /*
              * found fd in set of hp, submit the whole set, that is

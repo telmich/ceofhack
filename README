@@ -2,16 +2,55 @@ A very minimalistic EOF-2 implementation.
 
    -- Nico Schottelius, 2008-06-23
 
+Current requirements:
+   make, gcc, netcat, gpgme
+
+
 Compile:
    $ make
 
-Configure:
+
+Create local configuration:
    $ ./scripts/init_home.sh
+   # this will add a tcp listener to 0.0.0.0:4242, when ceofhack is started
+
 
 Usage:
    $ ./ceofhack
-   /peer add <name> tcp:<ip>:<port>
+   /peer add <name> tcp:<ip>:<port> <keyid>
    /peer send <peer> <msg>
+
+
+Example:
+   # get our fingerprint
+   $ gpg --homedir ~/.ceof/gpg/ --fingerprint | grep fingerprint | sed -e 's/.*= //' -e 's/ //g'
+   C9F593529F096B83A60FA9270B2DFDACC876D4D1
+   $ ./ceofhack
+   # use tcp:127.0.0.1:4242 to connect to yourself:
+   
+/peer add telmich tcp:127.0.0.1:4242 C9F593529F096B83A60FA9270B2DFDACC876D4D1
+/peer send telmich I can send a message for myself!
+
+   # now you should have received your first EOF message!
+
+Chatting with others:
+   # export your key(s) (you can also specify your keyid, to not export others)
+   gpg --homedir ~/.ceof/gpg --armor --export > ~/public-keys
+   # send it to someone else
+
+   # retrieve the pgp key of someone else and import it:
+   $ gpg --homedir ~/.ceof/gpg/ --import <file>
+   
+   # list all fingerprints (as above
+   $ gpg --homedir ~/.ceof/gpg/ --fingerprint | grep fingerprint | sed -e 's/.*= //' -e 's/ //g'
+   C9F593529F096B83A60FA9270B2DFDACC876D4D1
+   [...]
+
+   # Or use the following version to display names and co. as well:
+   # gpg --homedir ~/.ceof/gpg/ --fingerprint | sed -e 's/.*= //' -e 's/ //g'
+
+   # then add them with /peer add and send message via /peer send
+
 
 Bugs:
    Besides there are many and this is just a hack, you can lookup
@@ -39,6 +78,8 @@ Development:
    Work & hack & commit & publish & announce url to fetch.
 
    We're in #cLinux on freenode, as long as EOF-3 is not ready to use ;-)
+
+Git trees:
 
    Nico's tree:
       http://git.schottelius.org/?p=EOF/ceofhack;a=summary (webview)

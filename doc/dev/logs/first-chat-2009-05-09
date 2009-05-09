@@ -1,0 +1,837 @@
+./ceofhack decrypt
+ceofhack> Release 1
+gpg: Using version 1.1.8
+TP 1 tcp successfully added
+LTP 1 tcpv4-any-4242 listening at tcp:0.0.0.0:4242
+Init LTP /home/user/nico/.ceof/transport-protocols/available/tcp/listen: 10010.0.0.0:4242
+Created cmd 2000
+Added cmd 2000 to category 1
+Created cmd 2002
+Added cmd 2002 to category 1
+Created cmd 2003
+Added cmd 2003 to category 1
+ceofhack> Started. Please enter commands.
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 0.0.0.0:4242
+tcp/c3/ltp:addr=0.0.0.0
+tcp/c3/ltp:port=4242
+/peer add downhill tcp:88.198.38.85:4242 tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=575, pkg="2002567
+563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/aM/me3+YHe2C5xjSmwlq6eGOq2MInBPYei8B7Besq6iT
+duk3ffku5s/CxcvedKaUhlgXk+TvMM+mRfVuXBbFK+Pfg/4BnZBqh2hhHplYDhZ+
+DNY4ViI0qC9P6+KFOLobSng0XHSZlyyZCFYZruWbmr9LIHzQXMepGN5/1ZwVwSYE
+AJtvOYtPF0+3fyVkiiHrgnCXph3/EPXmeFGu4Q/lCJYpGEtb6iwAQIK2fq2BHVMh
+k/CxWBD6KpoJqfedCpSbhxET06VNMHAaGfdYC8BnVfSFkvDoFDfzv3vqb+CZ8hYf
+XIX1ojKkD8v9OMTB2ohzUj1qs9uC0zKnRnV5p2d1ca1t0kQBu9X/J0PU1SXk7hTz
+YgWKigyAQxFt5TMYG35Tl5CIsIZtG6iKdNQNPJD8k7P0ISgzbZWQDtQjnHrpBbg5
+NJLJ4ZCFgQ==
+=u5uD
+-----END PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/aM/me3+YHe2C5xjSmwlq6eGOq2MInBPYei8B7Besq6iT
+duk3ffku5s/CxcvedKaUhlgXk+TvMM+mRfVuXBbFK+Pfg/4BnZBqh2hhHplYDhZ+
+DNY4ViI0qC9P6+KFOLobSng0XHSZlyyZCFYZruWbmr9LIHzQXMepGN5/1ZwVwSYE
+AJtvOYtPF0+3fyVkiiHrgnCXph3/EPXmeFGu4Q/lCJYpGEtb6iwAQIK2fq2BHVMh
+k/CxWBD6KpoJqfedCpSbhxET06VNMHAaGfdYC8BnVfSFkvDoFDfzv3vqb+CZ8hYf
+XIX1ojKkD8v9OMTB2ohzUj1qs9uC0zKnRnV5p2d1ca1t0kQBu9X/J0PU1SXk7hTz
+YgWKigyAQxFt5TMYG35Tl5CIsIZtG6iKdNQNPJD8k7P0ISgzbZWQDtQjnHrpBbg5
+NJLJ4ZCFgQ==
+=u5uD
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 571 bytes in total
+Incoming packet: 563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/aM/me3+YHe2C5xjSmwlq6eGOq2MInBPYei8B7Besq6iT
+duk3ffku5s/CxcvedKaUhlgXk+TvMM+mRfVuXBbFK+Pfg/4BnZBqh2hhHplYDhZ+
+DNY4ViI0qC9P6+KFOLobSng0XHSZlyyZCFYZruWbmr9LIHzQXMepGN5/1ZwVwSYE
+AJtvOYtPF0+3fyVkiiHrgnCXph3/EPXmeFGu4Q/lCJYpGEtb6iwAQIK2fq2BHVMh
+k/CxWBD6KpoJqfedCpSbhxET06VNMHAaGfdYC8BnVfSFkvDoFDfzv3vqb+CZ8hYf
+XIX1ojKkD8v9OMTB2ohzUj1qs9uC0zKnRnV5p2d1ca1t0kQBu9X/J0PU1SXk7hTz
+YgWKigyAQxFt5TMYG35Tl5CIsIZtG6iKdNQNPJD8k7P0ISgzbZWQDtQjnHrpBbg5
+NJLJ4ZCFgQ==
+=u5uD
+-----END PGP MESSAGE-----
+
+Child 12199 died...
+Something useless exited
+ceofhack> Incoming plaintext [9]: Testtoast
+tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=583, pkg="2002575
+571
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+Pwj7amivq0GYUf5Au7f/kj2urkwr5QTKEYwhgF0vgFp8
+5oU3KrBt7BGU6hR9mxj4LPKBSyocWBe0ZFAHCkEG6x+yNFn/IutcuVpWO3zaMa24
+x7ih2BNImMvbBoW9EZ8RNgmOpTxiaGBfOF/m3nmNXKt5HCgyQ/dkrzpDbBJwVmYE
+AIkmLlNQHcBLTxZuxb+3xgbRTvcDVe80NAGZdJe8LOZ6hMTDPa/Ljyz6J3vvrlkF
+/afRnhRVV7hDqY4HSCwhfqoFAxdhae5NKde1VmmDi7d0BJng1oiRMm85XR0Om3PI
+sJQwD9DHf8k2ysecRifE7WkgxoDN8UQBg589NXnJNZ+g0kwB+63VlZYpqzMPUBbs
+HdMKjpS7xgvOBwO0ETOOSSQNQo0fjl8zjYm7MCsVxOTAPsLv7+XMquRV21BFqGy9
+/biyEfKIVNPM5/pER++i
+=H4CW
+-----END PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=571
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+Pwj7amivq0GYUf5Au7f/kj2urkwr5QTKEYwhgF0vgFp8
+5oU3KrBt7BGU6hR9mxj4LPKBSyocWBe0ZFAHCkEG6x+yNFn/IutcuVpWO3zaMa24
+x7ih2BNImMvbBoW9EZ8RNgmOpTxiaGBfOF/m3nmNXKt5HCgyQ/dkrzpDbBJwVmYE
+AIkmLlNQHcBLTxZuxb+3xgbRTvcDVe80NAGZdJe8LOZ6hMTDPa/Ljyz6J3vvrlkF
+/afRnhRVV7hDqY4HSCwhfqoFAxdhae5NKde1VmmDi7d0BJng1oiRMm85XR0Om3PI
+sJQwD9DHf8k2ysecRifE7WkgxoDN8UQBg589NXnJNZ+g0kwB+63VlZYpqzMPUBbs
+HdMKjpS7xgvOBwO0ETOOSSQNQo0fjl8zjYm7MCsVxOTAPsLv7+XMquRV21BFqGy9
+/biyEfKIVNPM5/pER++i
+=H4CW
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 579 bytes in total
+Incoming packet: 571
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+Pwj7amivq0GYUf5Au7f/kj2urkwr5QTKEYwhgF0vgFp8
+5oU3KrBt7BGU6hR9mxj4LPKBSyocWBe0ZFAHCkEG6x+yNFn/IutcuVpWO3zaMa24
+x7ih2BNImMvbBoW9EZ8RNgmOpTxiaGBfOF/m3nmNXKt5HCgyQ/dkrzpDbBJwVmYE
+AIkmLlNQHcBLTxZuxb+3xgbRTvcDVe80NAGZdJe8LOZ6hMTDPa/Ljyz6J3vvrlkF
+/afRnhRVV7hDqY4HSCwhfqoFAxdhae5NKde1VmmDi7d0BJng1oiRMm85XR0Om3PI
+sJQwD9DHf8k2ysecRifE7WkgxoDN8UQBg589NXnJNZ+g0kwB+63VlZYpqzMPUBbs
+HdMKjpS7xgvOBwO0ETOOSSQNQo0fjl8zjYm7MCsVxOTAPsLv7+XMquRV21BFqGy9
+/biyEfKIVNPM5/pER++i
+=H4CW
+-----END PGP MESSAGE-----
+
+Child 13027 died...
+Something useless exited
+ceofhack> Incoming plaintext [17]: "neuer testtoast"
+
+/peer add: Added <downhill>@<tcp:88.198.38.85:4242>:<>
+/peer add downhill tcp:88.198.38.85:4242 424428BF526D0D7F762E7550EE77E2257EA125D4
+/peer add: Added <downhill>@<tcp:88.198.38.85:4242>:<424428BF526D0D7F762E7550EE77E2257EA125D4>
+/peer send downhill test
+Encrypting message...
+Keyid (424428BF526D0D7F762E7550EE77E2257EA125D4) for peer downhill found!
+Child 13135 died...
+Something useless exited
+Child 13137 died...
+Something useless exited
+Key info: Marcus Przyklink <downhill@burningchaos.org>
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQIOA77tuYskaatsEAf/RCG/KsohzVxEUB1WYkmEq5rkizlLraQZ2tr6qtIKlBVU
+Qou1pd3BBChz4Dnn7XImyRdpKJfnh9Wflx4IhZlsklHDVMt1ESWSABD++/dGcD+g
+rERO527T4NJ2wFHf8UHU5UBrJdX/ZWIwiaPyrIYT1q8MuCMhmuw9rHr9wZEIbfm3
+TjPwIygsM/4hGrcSSqSyfWwVt58CqSgUs2o8loXgfsjIkS8+C3XWHTPtcQJdcREQ
+/1iEWBj7pnj5rnDNROPS0eFbdnRQEh4vKcgy0t3WX2zia2gRalOVvMOoY9+Icxsa
+KEotshIfIvDxrWpFIrPystzYvSGYoAzT3syBTtZgJAf+MOjPBf90VBf1/lPnjqtc
+GKQQ6CeIqILohF1K7C1G5zEUuGyXpSaxZRs0URr06fbwuGrzkHJqcg/egKqQAsZa
+5YpE+24TJaEwmFI0/Fy8/QMCaETMRWs4zhTWCByzxcMI3lpqq5hPW/Ux+Pqmaepi
+tKOcXNIoTlrE2vi9w1xtS7ow1+GAI1UdBdwhDNIp9OnY0PGiqnrRfQfsiAi1L1Rk
+nPwZOkKUuciqNHibkOzksrCth63Yb5Gq0y6dtKg9OKeOKbhj4OMmDw3tCNe+ULDp
+m5o+OsCPSf0QMoEIjNilBfuimMTaSLK5WdpIYCp1V4RzitzwD6at3JZd/aWaPiDo
+etJDAfD4F4VAGv3icUrQ+8fwaBKzEGpHTeInXqlMyhX6b/1o+79EgDeX3b9wY74O
+T8urS0AQlQm5t9e8WKqlemIdtm8qEQ==
+=BbmA
+-----END PGP MESSAGE-----
+
+/peer send: Sending test->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+ultostr: 0, (908)
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+(UNKNOWN) [88.198.38.85] 4242 (?) : Connection refused
+Reply from a TP: 2001
+Child 13141 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=583, pkg="2002575
+555
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+P+DPxREP3TPVaFblchKMZNVuNy7TY/vqyT0FT19W49jf
+7OZoFRRQ8HC8tKzHfJapaHd1XKGqBFv59mKbLfDB7KRB3llEv/8QqxN5gU3i011p
+SPOtkpuv0TP8PEjJPePmxIKxnoRsEie/smfJpKhEJxA7vtDhF1h3Hq4+ZZhgcDYD
+/RPz3MS+gLgf3Z8b+nX6spnmx8BeIaE0KG7jjP+lCdvsNAohFg+KaP7K9GvxSq7Y
+tPpn0d+wVjOIxwKdg4YoNM7DxDotWxv/bv307X+7a9SOR2aiGem5FGHgnRRxHv+v
+BDpe5W5wM0gua0HvLWgFWrc00F4dCeP8qSwr4r7ucHm60kABbcGOIPoplw89s1/4
+B19XniAyKRJXsH6FdUacXhQpgF5T05s7UdYveuin6GKSteI7BUTKZW8odb4X2pzN
+VXkg
+=bSFD
+-----END PGP MESSAGE-----
+GP MESSAGE-----
+" ...
+tcp/c3/ltp:input=555
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+P+DPxREP3TPVaFblchKMZNVuNy7TY/vqyT0FT19W49jf
+7OZoFRRQ8HC8tKzHfJapaHd1XKGqBFv59mKbLfDB7KRB3llEv/8QqxN5gU3i011p
+SPOtkpuv0TP8PEjJPePmxIKxnoRsEie/smfJpKhEJxA7vtDhF1h3Hq4+ZZhgcDYD
+/RPz3MS+gLgf3Z8b+nX6spnmx8BeIaE0KG7jjP+lCdvsNAohFg+KaP7K9GvxSq7Y
+tPpn0d+wVjOIxwKdg4YoNM7DxDotWxv/bv307X+7a9SOR2aiGem5FGHgnRRxHv+v
+BDpe5W5wM0gua0HvLWgFWrc00F4dCeP8qSwr4r7ucHm60kABbcGOIPoplw89s1/4
+B19XniAyKRJXsH6FdUacXhQpgF5T05s7UdYveuin6GKSteI7BUTKZW8odb4X2pzN
+VXkg
+=bSFD
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 579 bytes in total
+Incoming packet: 555
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+P+DPxREP3TPVaFblchKMZNVuNy7TY/vqyT0FT19W49jf
+7OZoFRRQ8HC8tKzHfJapaHd1XKGqBFv59mKbLfDB7KRB3llEv/8QqxN5gU3i011p
+SPOtkpuv0TP8PEjJPePmxIKxnoRsEie/smfJpKhEJxA7vtDhF1h3Hq4+ZZhgcDYD
+/RPz3MS+gLgf3Z8b+nX6spnmx8BeIaE0KG7jjP+lCdvsNAohFg+KaP7K9GvxSq7Y
+tPpn0d+wVjOIxwKdg4YoNM7DxDotWxv/bv307X+7a9SOR2aiGem5FGHgnRRxHv+v
+BDpe5W5wM0gua0HvLWgFWrc00F4dCeP8qSwr4r7ucHm60kABbcGOIPoplw89s1/4
+B19XniAyKRJXsH6FdUacXhQpgF5T05s7UdYveuin6GKSteI7BUTKZW8odb4X2pzN
+VXkg
+=bSFD
+-----END PGP MESSAGE-----
+GP MESSAGE-----
+
+Child 13358 died...
+Something useless exited
+ceofhack> Incoming plaintext [5]: test3
+/peer send downhill test2
+Encrypting message...
+Keyid (424428BF526D0D7F762E7550EE77E2257EA125D4) for peer downhill found!
+Child 13459 died...
+Something useless exited
+Key info: Marcus Przyklink <downhill@burningchaos.org>
+Child 13461 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQIOA77tuYskaatsEAgAkdgh5nzMwSdfgAnZN2bo1+9p+vfZTZ6Sl/rTRw/5dfuo
+T7YmhdrpOt6Yhx9Jq9m9m6SIM+zi0IGq7i11XgHhVzl6ma9WkkT58xopfbJUUlpW
+YgVYucHPASEriO2PcFQhg9PviltDWpExXsHE5RggFDipKWK80xu0/azorn+SmqE6
+fBir4pcepH9fFgCcNmVELx8dDKI0oHNngBkV1iH7+i96fQMoRtk7SjmniL9ITljV
+P+RxNM5PxdVBcVawJk6/94WRLD4bigSevKVG+PqbA4r1+zqwXY3nxQeEgCXK2XzO
+4mh8nYClSNcT3nkctoS8aK1dBZ6PCQU5PvLl+cApJwf+Pn9MjgfXzWuHHea70kAL
+5aF8KyvTCNbz/XrSeK95F1fFoJF6F/Biv2vWg+ESUTvAbcpcc7TSo83B1lgRxZMU
+SF+bABf/hDlzpFOgkH76ui/CyvJfp6vfdsoyeTtZyLF5FdL0amWYvmumaSaFOd1R
+7gNExASQY+CDOEVSPlLpVPz8tqmSR187iZ7y+hWIFM278A3BsAl+Q5KBhlFwB2xV
+QBjn0JqSdmiF82DClfKppngZVh7xuOVNPtiUkqv9lcwgIyW8/36Jd+/Ov6c93ikX
+QzrpD0yrW8xIyyZl869pEtd83n16TCEz+nG2phH8MKQIWKHaQEaa77PZyhtsfCtF
+vdJEAfZ18X3XF4Z/F49Mm4Or40+5svGUR1ZotNFHx7NveTE6y0E4Kk1tGtR0x9nW
+vtkMNwAoCUJ5O7brX6fVssV8AwdwZYM=
+=5+Aa
+-----END PGP MESSAGE-----
+
+/peer send: Sending test2->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+ultostr: 0, (908)
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+(UNKNOWN) [88.198.38.85] 4242 (?) : Connection refused
+Reply from a TP: 2001
+Child 13463 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+/peer send downhill test2
+Encrypting message...
+Keyid (424428BF526D0D7F762E7550EE77E2257EA125D4) for peer downhill found!
+Child 13649 died...
+Something useless exited
+Child 13648 died...
+Something useless exited
+Key info: Marcus Przyklink <downhill@burningchaos.org>
+Child 13652 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQIOA77tuYskaatsEAf/SlHtIe6gYDIGJgnW7dx3iORwt3Wbwr6P1cBPJBA/42Jv
+N6V/oIEu5VOy2e86WQKPsRsnw30EpV3V0j8NYQewCPpLsqtA6tlQeANptYT3qKnE
+rNH3oFSOoKqfN786NP1heqXEsBbT/oxcaAIdHJqrK6q3d57x7Xc22Nd+bNJaYm9f
+tToXgVNYNzxoP1MEk5k4uOLdg/jk4kQanKapMj5KeQ7hEfu4WA5IMKsffnHt1JyU
+oB56Mbyr0ibkdIrO5rZ2rd3AjlIV5P/zdI/dly4nvuGAlR7kb5sOGL3H/dzZtF77
+Lx5j5wQJYwRhWVkcObNK05FgjiFxf//3vTAbK+b0Gwf+NUr9QpZr+W0Z6ohDpr1o
+3k93XUuap9SqGDraQpprnXuu7Ob7DSmim9ZxK+/ybnrawxFNGcijTxwVza6qBBs+
+E4tcVww5C9LAAjQf/pCxUOgOyOyPGt6ObZ9/iEo3SabLNNenkcAdXkFDjiw00iXB
+Njlhq1/Thico4sp/6XVrL0UWnEY95J/49cs04y7bXjWKvJuhKGvqKBBurPTe/9Is
+3CLoxK6uN/rJXHdhfYaKY/iB3AuHqOlqfl8fZxYXTMaU8R5g3JZVhlJPGztQprJY
+1ImJFCtRn6iecIhCwJcLsFdFDwiKWvxk7uT5MBscGKXt8H6wZN77PowHfrMUZjsS
+TNJEAXGpPZZPC/Gum3EvosVdKiunIQxVo5hTpOy7PIJJq/O6vUI0jbpPxAATsHiF
+H6p8YRuIRrU1VsGqZnVcgdqf6xwOm4E=
+=+ERf
+-----END PGP MESSAGE-----
+
+/peer send: Sending test2->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+ultostr: 0, (908)
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Child 13654 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+/peer list
+Peer downhill: tcp:88.198.38.85:4242
+Peer downhill: tcp:88.198.38.85:4242
+--------------------------------------------------------------------------------
+[10:46] ikn:ceofhack% make run
+gcc -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.    -c -o tp_send.o tp_send.c
+gcc -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I. -o ceofhack main.o fd_to_poll.o signals_init.o signal_child.o config_init.o cconfig_tree.o cconfig_find_fn.o cconfig_tree_dump.o cconfig_entries_get.o cconfig_entry_fn.o tp_init.o tp_add_available.o tp_listen_add.o tp_listen_init.o tp_scheme_len.o tp_available.o tp_listen_read.o tp_send.o tp_send_wait.o tp_getscheme.o openreadclosestatic.o convert.o read_all.o write_all.o forkexecpipe.o peers_init.o peer_add.o peer_list.o peer_findbyname.o peer_send.o peer_keyid_get.o peer_addr_get.o peer_input.o helper_init.o helper_fdonly.o helper_new.o helper_exec.o helper_write.o helper_find_by_pid.o helper_disable.o helper_find_by_fd.o ui_cmds_init.o ui_cmd_add.o ui_cmd_check.o ui_cmd_read.o ui_quit.o ui_help.o ui_cmd_argcnt.o ui_cmd_argncpy.o cmd_handle.o check_input.o cmd_init.o cmd_cat_create.o cmd_create.o cmd_cat_add.o cmd_cat_find.o cmd_find_in_cat.o cmd_2000.o cmd_2002.o cmd_2003.o cmd_3000.o ceof_exit.o ceof_banner.o cgpg_init.o cgpg_keyid_get.o cgpg_encrypt.o cgpg_decrypt.o
+cat doc/dev/braindumps/sample-commands
+/peer add apic tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer add telmich dummy:it-really-has-no-sense 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer list
+/peer send telmich hallo, wie geht es?
+./ceofhack decrypt
+ceofhack> Release 1
+gpg: Using version 1.1.8
+TP 1 tcp successfully added
+LTP 1 tcpv4-any-4242 listening at tcp:0.0.0.0:4242
+Init LTP /home/user/nico/.ceof/transport-protocols/available/tcp/listen: 10010.0.0.0:4242
+Created cmd 2000
+Added cmd 2000 to category 1
+Created cmd 2002
+Added cmd 2002 to category 1
+Created cmd 2003
+Added cmd 2003 to category 1
+ceofhack> Started. Please enter commands.
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 0.0.0.0:4242
+tcp/c3/ltp:addr=0.0.0.0
+tcp/c3/ltp:port=4242
+/peer add downhill tcp:88.198.38.85:4242 424428BF526D0D7F762E7550EE77E2257EA125D4
+/peer add: Added <downhill>@<tcp:88.198.38.85:4242>:<424428BF526D0D7F762E7550EE77E2257EA125D4>
+/peer send downhill und nocheinmal :-)
+Encrypting message...
+Keyid (424428BF526D0D7F762E7550EE77E2257EA125D4) for peer downhill found!
+Child 13854 died...
+Something useless exited
+Child 13855 died...
+Something useless exited
+Key info: Marcus Przyklink <downhill@burningchaos.org>
+Child 13858 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQIOA77tuYskaatsEAgAoSrfBF54nAb4i3kIgHMJK9IYVuVg5b7PLWAzvu0Highr
+VicsBD432yCvIJwp2m1sJ6WOJ/eEh4xTEfkjFGJ9jC8fn/5QeNiAxkabGQqKC9X+
+s7afKdT/dR1LANNhHWXiBgIyynSX+j9NRSfIqreDHzJuzLBSkjrZGcC6OarG3srK
+8BSjN9QpGfT/McPP3jcAhGf3SQxY6XPj/ukAfhoTH8pY7rCR6PsLbzAfZ22y4cg1
+tIXWemByGG4YGSpAFyvX2ubhwruhFIJdtTMGtHV6Na1yizw/fN+9ICeOzItG22lU
+MLNQvY8VYib7tXlovyfOtiEXNBJG14KWONZrXHBvdQf9FW4sySDYo09AIWp66qfi
+n0VC36nD1k7W5+0ML9NLfDiHteFBkrcDAn4SdEWL26mYG9WQlXyD2eDC1UdBSlkO
+WdDB8hdH7c92WaPRYh/z5AqLlhEeLsI9q/v8BRoxPQ+ryfjuhezN1g7uwqmngNCJ
+aytEb8MHhJ/6U/bYZqNZB7QhR60k8TJBD3yCK77G5Gde0PMHIdZRtZoKxBORuO+b
+ji0V/aysUEoZgLyKkjmlIyppRYX22+iTMOLcQm2RfNB+cYY3NKrKqABistaZBc21
+mqqgGHxak2SOAbuF60yHkWuqOoGEmHVDiV8/R/BKSCvIr0e2Lo3byZ4x91kHZSLm
+vdJRAaHEkU0/mrJMvGNonHrr95+ffgpyO/NLbI9vu/EESBVNcBf9aDTskHd96DpO
+SKx91Eb1zgFIecWZnXlKt97S+m6PS9uAnNUuVOpONtK+lCkg
+=2GWX
+-----END PGP MESSAGE-----
+
+/peer send: Sending und nocheinmal :-)->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Reply from a TP: 2000
+Child 13860 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+--------------------------------------------------------------------------------
+
+After some wrong pgp-keys, wrong keyids and firewall problems:
+
+./ceofhack decrypt
+ceofhack> Release 1
+gpg: Using version 1.1.8
+TP 1 tcp successfully added
+LTP 1 tcpv4-any-4242 listening at tcp:0.0.0.0:4242
+Init LTP /home/user/nico/.ceof/transport-protocols/available/tcp/listen: 10010.0.0.0:4242
+Created cmd 2000
+Added cmd 2000 to category 1
+Created cmd 2002
+Added cmd 2002 to category 1
+Created cmd 2003
+Added cmd 2003 to category 1
+ceofhack> Started. Please enter commands.
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 0.0.0.0:4242
+tcp/c3/ltp:addr=0.0.0.0
+tcp/c3/ltp:port=4242
+/peer add downhill tcp:88.198.38.85:4242 2018A03CA2DDB17F9344A567560A2AA3C881E446
+/peer add: Added <downhill>@<tcp:88.198.38.85:4242>:<2018A03CA2DDB17F9344A567560A2AA3C881E446>
+/peer send downhill und noch ein test...
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Key info: downhill <>
+Child 14476 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAP/ai80949mmdmSks7wPmrZZKPFmipfPome7kxJKlzSQqLH
+H1NCHSxs+jMUX6/r1L2h7e7eWC2fJQzn0huxk5j5v5HWkBFbNIZXTzS6TgP/lowB
+PU5KHWFUHuY5h5tjZoFEM6Zzxojea8nkfllg1Ipyl0vLk+E4l3AevelaE2GZMPID
++gJFM7HCMycjFN8s8WlqvfCB3Z49fM+d0iyQQf/2DN2ikB6y8fDF3pL/pKbm5f+P
+OPmyeApz0plTSHhfa3OdPWEd049L2B29s7wd6GxGcUXCG5skcGsuuORI7c2Tu8/n
+EmvoKmnH4xdAm1MObCam2F9W3bo422sP9GTPDdNXEXXc0lMBmznPpZZi3ji6dJlq
+NbRxA+LDjlI+zPxsBx26s6aMR09J8YUvJgysCgDtRDic+l07qVBoUlQ5KO0PfbjI
+madBMokYm+rGPlLUe/jhqwVpEbCk8A==
+=SEL9
+-----END PGP MESSAGE-----
+
+/peer send: Sending und noch ein test...->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Child 14478 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+
+--------------------------------------------------------------------------------
+cat doc/dev/braindumps/sample-commands
+/peer add apic tcp:localhost:4242 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer add telmich dummy:it-really-has-no-sense 41D89B16B16596A84C0B78C1828D71E9CE33EB52
+/peer list
+/peer send telmich hallo, wie geht es?
+./ceofhack decrypt
+ceofhack> Release 1
+gpg: Using version 1.1.8
+TP 1 tcp successfully added
+LTP 1 tcpv4-any-4242 listening at tcp:0.0.0.0:4242
+Init LTP /home/user/nico/.ceof/transport-protocols/available/tcp/listen: 10010.0.0.0:4242
+Created cmd 2000
+Added cmd 2000 to category 1
+Created cmd 2002
+Added cmd 2002 to category 1
+Created cmd 2003
+Added cmd 2003 to category 1
+ceofhack> Started. Please enter commands.
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 0.0.0.0:4242
+tcp/c3/ltp:addr=0.0.0.0
+tcp/c3/ltp:port=4242
+/peer add downhill tcp:88.198.38.85:4242 2018A03CA2DDB17F9344A567560A2AA3C881E446
+/peer add: Added <downhill>@<tcp:88.198.38.85:4242>:<2018A03CA2DDB17F9344A567560A2AA3C881E446>
+/peer send downhill und noch ein test...
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Key info: downhill <>
+Child 14476 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAP/ai80949mmdmSks7wPmrZZKPFmipfPome7kxJKlzSQqLH
+H1NCHSxs+jMUX6/r1L2h7e7eWC2fJQzn0huxk5j5v5HWkBFbNIZXTzS6TgP/lowB
+PU5KHWFUHuY5h5tjZoFEM6Zzxojea8nkfllg1Ipyl0vLk+E4l3AevelaE2GZMPID
++gJFM7HCMycjFN8s8WlqvfCB3Z49fM+d0iyQQf/2DN2ikB6y8fDF3pL/pKbm5f+P
+OPmyeApz0plTSHhfa3OdPWEd049L2B29s7wd6GxGcUXCG5skcGsuuORI7c2Tu8/n
+EmvoKmnH4xdAm1MObCam2F9W3bo422sP9GTPDdNXEXXc0lMBmznPpZZi3ji6dJlq
+NbRxA+LDjlI+zPxsBx26s6aMR09J8YUvJgysCgDtRDic+l07qVBoUlQ5KO0PfbjI
+madBMokYm+rGPlLUe/jhqwVpEbCk8A==
+=SEL9
+-----END PGP MESSAGE-----
+
+/peer send: Sending und noch ein test...->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Child 14478 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+/peer send downhill tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=575, pkg="2002567
+563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+MPUXeFVk3Y9qarK/ydXoIKntv8QZ0kaiBXvJSbLVtFxI
+jzrXoZGnyfMVDwwVnjMNjHwojCwPnvibozhlfvkMEbmLUVMLrZK+Nu41PDdH4bLW
+vqvPGqbVEL6fFz7zwP501QAbcHb5mj8aGVAOO8/QOLCNY+GTdeM67H0cDc5HbmAD
+/jX3fUeJ5zUO9P4KXyGHZ9/o/sUtekG+rMeR6YQ9bL/SEHK/TbARAGEbo2RD9iWt
+Ev2G6zxP3D2rVzar8Kz1jSmHVUbyhOMsOl/xvq8SZAboFDsyakiCk0U7pdXftJNj
+Rwxs0wbU+doHJjumnUYiOZFne5auYz6Za84MMT3bqsXn0kQBjqiBdp4f+5mfCu08
+0rcgGirOlA1xJLv4K7sq+Ddx4YilpmlERVACiOTdPycCoDafRBCPIExsxOGl1qwt
+VSdSyDipuA==
+=7X0/
+-----END PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+MPUXeFVk3Y9qarK/ydXoIKntv8QZ0kaiBXvJSbLVtFxI
+jzrXoZGnyfMVDwwVnjMNjHwojCwPnvibozhlfvkMEbmLUVMLrZK+Nu41PDdH4bLW
+vqvPGqbVEL6fFz7zwP501QAbcHb5mj8aGVAOO8/QOLCNY+GTdeM67H0cDc5HbmAD
+/jX3fUeJ5zUO9P4KXyGHZ9/o/sUtekG+rMeR6YQ9bL/SEHK/TbARAGEbo2RD9iWt
+Ev2G6zxP3D2rVzar8Kz1jSmHVUbyhOMsOl/xvq8SZAboFDsyakiCk0U7pdXftJNj
+Rwxs0wbU+doHJjumnUYiOZFne5auYz6Za84MMT3bqsXn0kQBjqiBdp4f+5mfCu08
+0rcgGirOlA1xJLv4K7sq+Ddx4YilpmlERVACiOTdPycCoDafRBCPIExsxOGl1qwt
+VSdSyDipuA==
+=7X0/
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 571 bytes in total
+Incoming packet: 563
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP+MPUXeFVk3Y9qarK/ydXoIKntv8QZ0kaiBXvJSbLVtFxI
+jzrXoZGnyfMVDwwVnjMNjHwojCwPnvibozhlfvkMEbmLUVMLrZK+Nu41PDdH4bLW
+vqvPGqbVEL6fFz7zwP501QAbcHb5mj8aGVAOO8/QOLCNY+GTdeM67H0cDc5HbmAD
+/jX3fUeJ5zUO9P4KXyGHZ9/o/sUtekG+rMeR6YQ9bL/SEHK/TbARAGEbo2RD9iWt
+Ev2G6zxP3D2rVzar8Kz1jSmHVUbyhOMsOl/xvq8SZAboFDsyakiCk0U7pdXftJNj
+Rwxs0wbU+doHJjumnUYiOZFne5auYz6Za84MMT3bqsXn0kQBjqiBdp4f+5mfCu08
+0rcgGirOlA1xJLv4K7sq+Ddx4YilpmlERVACiOTdPycCoDafRBCPIExsxOGl1qwt
+VSdSyDipuA==
+=7X0/
+-----END PGP MESSAGE-----
+
+ceofhack> Incoming plaintext [9]: Gut so :)
+genial, nicht?
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Child 14577 died...
+Something useless exited
+Child 14578 died...
+Something useless exited
+Key info: downhill <>
+Child 14580 died...
+Something useless exited
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAP/S49hP1rPnMTitjfBrymYd9cxmuETdIElJJAoJlt8aVJc
+DbG0aJ0RUtpA0vdYIKfhqSiOilw71XMH8LTIozV5zrj0RO3GuLbBPUxZ+x5jA5jL
+AtP/HkYTgDGhACNtZeiGkvm+A8iUjHb4WRX4NWcwKH0DbviY1SoIhlVLuDoEWJoD
+/0lKufU6FWBIPbCPRFjffGQ+Eg8GhHLC6Zmg4xgtHH2yh24UgsmObYkvps04QSao
+5w6TK0imWn3lenNhPTgYfnfDadmChvl9H5v/5yMbtSj+XjXRPs6vzaibrJ7kUutn
+cSgFA3pntbokWwZAP2v4Avw6gjq7VJmABLxvSq2xCwft0k0BHsrYafB2MKwNeUyW
+cq+D3hSuwP6f+/QTuKy7ohxY/uXKRyW04JJ9dnmYcfIgTugjkzlMLAP3DtHTSyT2
+nFw3y+F4PJAYWVV9yyZCxg==
+=Qxb/
+-----END PGP MESSAGE-----
+
+/peer send: Sending genial, nicht?->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Reply from a TP: 2000
+Child 14582 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=660, pkg="2002652
+648
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/ViQlfUzWoT/G112kzeQGbZMAKtlrQQG/d/rVrESVDCEv
+Z4DYgDKDx5I0S8qMvUiHCaZIDVstaqmqc2POSmTAbbZxlD/1u0qnAT8hCykLFavF
+aRS1EX5b2J4mAi/k3cEduw1MprmzM5yf0wXP/UUv6bmR5eZD5papDuHyVEMGUUcE
+AJLjf3msjwQDtBh3sHNmWjp8dEtyzMpzLWgT8U5nVKTkFvkIJI3UcDBUUyIEC4wr
+FiZOTv5px2Db+2JvPfXfhgPhL4x7QtJjocmJ3efP+xHaTdJLupLdIZsjfotnc4CX
+BbGFwU/u3qlOx1pBwlBa36EAM1RmrkBREAe5nAtIY4sQ0oMBLvH9WWddkzSYLMtL
+G4NND9moL7Lj2gM+mNd9QXjmSbBDo8V8cQJGDm+X/yebVl/pDQ2orKYn4AL9EQn8
+0kAP7Nozb+G+T+eKfnMr3qD91HDprQEgU53BfI4EeMWRkeaFBCkHteoQJgHmXUSl
+RTp9apJ5n9c0Hh+fEaPIj7xCcXKJ8A==
+=X//N
+-----END PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=648
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/ViQlfUzWoT/G112kzeQGbZMAKtlrQQG/d/rVrESVDCEv
+Z4DYgDKDx5I0S8qMvUiHCaZIDVstaqmqc2POSmTAbbZxlD/1u0qnAT8hCykLFavF
+aRS1EX5b2J4mAi/k3cEduw1MprmzM5yf0wXP/UUv6bmR5eZD5papDuHyVEMGUUcE
+AJLjf3msjwQDtBh3sHNmWjp8dEtyzMpzLWgT8U5nVKTkFvkIJI3UcDBUUyIEC4wr
+FiZOTv5px2Db+2JvPfXfhgPhL4x7QtJjocmJ3efP+xHaTdJLupLdIZsjfotnc4CX
+BbGFwU/u3qlOx1pBwlBa36EAM1RmrkBREAe5nAtIY4sQ0oMBLvH9WWddkzSYLMtL
+G4NND9moL7Lj2gM+mNd9QXjmSbBDo8V8cQJGDm+X/yebVl/pDQ2orKYn4AL9EQn8
+0kAP7Nozb+G+T+eKfnMr3qD91HDprQEgU53BfI4EeMWRkeaFBCkHteoQJgHmXUSl
+RTp9apJ5n9c0Hh+fEaPIj7xCcXKJ8A==
+=X//N
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 656 bytes in total
+Incoming packet: 648
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/ViQlfUzWoT/G112kzeQGbZMAKtlrQQG/d/rVrESVDCEv
+Z4DYgDKDx5I0S8qMvUiHCaZIDVstaqmqc2POSmTAbbZxlD/1u0qnAT8hCykLFavF
+aRS1EX5b2J4mAi/k3cEduw1MprmzM5yf0wXP/UUv6bmR5eZD5papDuHyVEMGUUcE
+AJLjf3msjwQDtBh3sHNmWjp8dEtyzMpzLWgT8U5nVKTkFvkIJI3UcDBUUyIEC4wr
+FiZOTv5px2Db+2JvPfXfhgPhL4x7QtJjocmJ3efP+xHaTdJLupLdIZsjfotnc4CX
+BbGFwU/u3qlOx1pBwlBa36EAM1RmrkBREAe5nAtIY4sQ0oMBLvH9WWddkzSYLMtL
+G4NND9moL7Lj2gM+mNd9QXjmSbBDo8V8cQJGDm+X/yebVl/pDQ2orKYn4AL9EQn8
+0kAP7Nozb+G+T+eKfnMr3qD91HDprQEgU53BfI4EeMWRkeaFBCkHteoQJgHmXUSl
+RTp9apJ5n9c0Hh+fEaPIj7xCcXKJ8A==
+=X//N
+-----END PGP MESSAGE-----
+
+ceofhack> Incoming plaintext [77]: sobald man die debugsachen ausstellt, hat man ja schon funktionierendes IM :)
+/peer send downhill genau, und vielleicht auch noch alias-unterstützung einführt
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Key info: downhill <>
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAP/Xbah1NdOJJzgwxBSm6MbTS2aGaDJLNGP3ZCGKtDYf2FL
+g+DgFL+Sp/T4ZnFJfSRodGn1ebZhzx//DL2cMdmN8KcmbFXyXFqVHUmn0DHst3JH
+vGqMlPhJ+w5Vl3cR2FY/WEfoHcNy3YmNU0uWZXim5O1ldlxFAT9GC6gKFSSRJXID
+/RAPVaQEELrc2bIxKyym3mZKZFemcnu/bBPZfsLmxT66IB5h1zuJnwa14fmcyfhU
+LA2ZyIDZejSM1Cg9igF00tdlo29j/tWCUyO42y686mTV2lp7X3tjftnzk4erEyhP
+W4ORGR8sHCxVBedfM6OHLc8cAIXbdlAYq1LnGACEm7Ad0nwBRh2kW//Y9RwD9UOg
+WpXBhamjOGBx4lVnS/aui7LwJH3nZ8YSkjhtX7Sh21VqNhPhgkh7/cwfzUA0tJGo
+nkKMWoftraVdwQAGEwQBM6p2OseeRpZNzSehUkuNPF8Qz3uAjI7JGv6Qk32KxiJ3
+k/xdbGDfmiN7KUyoWbHl
+=424l
+-----END PGP MESSAGE-----
+
+/peer send: Sending genau, und vielleicht auch noch alias-unterstützung einführt->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Child 14724 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=660, pkg="2002652
+628
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAQAkUoXE46kyDSGBVafouV4OwvPIbP14WRMXS1oe8gZPApA
+HmDIp27w11dWdXu7tj2QrfBFTnBhMVsRL4eqnEOGIl9lV425bWylirwGosqBvAOw
++hSBcj99k78F04mcHQAHbLxzv0znIKYDM6FTqCqPZR9kCI480/pQHqgxAylCab8D
+/1i2PNPSsPG3nro9I9iXtFIWu2yaIAXq4z13X6Cgp+nz/A7ZA0ZH5lv89mcNbpW6
+F3Pph0cLvoeLi69hqf6ckhI3wGXd7mNNTNK8Omg53UxW+/Iv9HcfM7+69gzvGNpV
+sEw6EXhO/h9TGYp/a2sbP9cTjkgrA85GckViQEYzI8XN0nYBV2+HUbynBDKtKzIt
+xaNmJfDr1p6EoEdLszD5/H2Qn3fj98cGLrdqmdTm4rmxUaDih+4UPRwmXm05RLMn
+N/aOIvlAwDy9dQlM6iZfutyw4lZOepfxOn+ylxS9FqFXERxlH+zrZLin9EpauoeL
+sdWXIi23KT77
+=AhVO
+-----END PGP MESSAGE-----
+ND PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=628
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAQAkUoXE46kyDSGBVafouV4OwvPIbP14WRMXS1oe8gZPApA
+HmDIp27w11dWdXu7tj2QrfBFTnBhMVsRL4eqnEOGIl9lV425bWylirwGosqBvAOw
++hSBcj99k78F04mcHQAHbLxzv0znIKYDM6FTqCqPZR9kCI480/pQHqgxAylCab8D
+/1i2PNPSsPG3nro9I9iXtFIWu2yaIAXq4z13X6Cgp+nz/A7ZA0ZH5lv89mcNbpW6
+F3Pph0cLvoeLi69hqf6ckhI3wGXd7mNNTNK8Omg53UxW+/Iv9HcfM7+69gzvGNpV
+sEw6EXhO/h9TGYp/a2sbP9cTjkgrA85GckViQEYzI8XN0nYBV2+HUbynBDKtKzIt
+xaNmJfDr1p6EoEdLszD5/H2Qn3fj98cGLrdqmdTm4rmxUaDih+4UPRwmXm05RLMn
+N/aOIvlAwDy9dQlM6iZfutyw4lZOepfxOn+ylxS9FqFXERxlH+zrZLin9EpauoeL
+sdWXIi23KT77
+=AhVO
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 656 bytes in total
+Incoming packet: 628
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAQAkUoXE46kyDSGBVafouV4OwvPIbP14WRMXS1oe8gZPApA
+HmDIp27w11dWdXu7tj2QrfBFTnBhMVsRL4eqnEOGIl9lV425bWylirwGosqBvAOw
++hSBcj99k78F04mcHQAHbLxzv0znIKYDM6FTqCqPZR9kCI480/pQHqgxAylCab8D
+/1i2PNPSsPG3nro9I9iXtFIWu2yaIAXq4z13X6Cgp+nz/A7ZA0ZH5lv89mcNbpW6
+F3Pph0cLvoeLi69hqf6ckhI3wGXd7mNNTNK8Omg53UxW+/Iv9HcfM7+69gzvGNpV
+sEw6EXhO/h9TGYp/a2sbP9cTjkgrA85GckViQEYzI8XN0nYBV2+HUbynBDKtKzIt
+xaNmJfDr1p6EoEdLszD5/H2Qn3fj98cGLrdqmdTm4rmxUaDih+4UPRwmXm05RLMn
+N/aOIvlAwDy9dQlM6iZfutyw4lZOepfxOn+ylxS9FqFXERxlH+zrZLin9EpauoeL
+sdWXIi23KT77
+=AhVO
+-----END PGP MESSAGE-----
+ND PGP MESSAGE-----
+
+Child 14780 died...
+Something useless exited
+ceofhack> Incoming plaintext [63]: also nur schoenheitskorrekturen, funktionalitaet ist ja gegeben
+/peer send downhill ja, wobei es zur zeit halt noch ohne onion routing ist, aber immerhin besser schon als irc
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Child 14831 died...
+Something useless exited
+Key info: downhill <>
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAQAji/amUVnPD4PyglEHwZUP1Ty62Yj1f9Q2znMGfOeMEKs
+DpO4vVrF9rEB46YHEULsxlFbtSD6TJCYDqN/xAHFgRidctUE77vICJlWFk488QBz
+WUJjQeKDaZPfys844R9VD6AmGygS/L+LP/QdLzCk7k40wSxYgqYhHYkubuMVDtAD
+/3xeS0gakRQYGVxrZnejWAnf2nuQbDxtc0/niYzL3TVOJhC50IPBLmI/2Bbx17va
+XxIk+jpscPNvmSefHbK+aQfHQw5fKW4sP89CuNO8NA/RIkH2WhkJcE6Nh70Iuqz/
+re300XaAKDxwPPYPLCYajnJ7YblF+nDzMmNtx5M8Dimu0o0BVG8g8SR1aBActF/p
+/WPYLE9Kr+4I790MSpEj2Fj920Ah2ZXOQ8A1smhd9ehse9LW8TIVoM1O2kFa/Pv5
+MvYs4707sWgUfH2qPRely6EMc7zGNIFMESBOqGbFpiZTXEAZv6IxRVVsQqPe0YOx
+EYkdV/XAGXpEs6uZgzyjofqpF6XO0d+Xrie7Ft5TIeg=
+=I05y
+-----END PGP MESSAGE-----
+
+/peer send: Sending ja, wobei es zur zeit halt noch ohne onion routing ist, aber immerhin besser schon als irc->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Child 14835 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+tcp/c3/ltp:trying to accept someone
+tcp/c3/ltp:result = 8
+reading all....
+tcp/c3/ltp:TO EOFi: len=640, pkg="2002632
+599
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/RM1brRH6bvzov41PkHigQQ3rNe/1e1D6DquQ7nvWIauX
+80FJLXgjGdv2RKMzuKZyhAInJhhnZhUKlM27HVrAgbNDVN2q4M5rg616gJhfKPdG
+B9vvv4uAclG+oLK7ctENsQCgw8H7kXxDb7WY8gLY4qn4G5Kp7kHyG5IKg+BIRAUD
+/1w0MGpXfmEx8aNFRs4V+pUVi4oLYiAWyrG+0RKEpcrKykjeTaVPzQJWriinTnFt
+p5L2scY+JItFKT56STNsCcUCopoNWKQrY10MNf25xithN+sklphZ+tBGcVGEI/gz
+53SItDg9vItoLB503xOclJ4spzLW7tGWetDUqWdLOcLw0mABGOGSL22kw1FpzOWS
+nx/O+e2dNzzvT/GILT6lGf1oOdRl97maILOvZD3iH1Qd/fOSqEW2ltgrGo5BXWFM
+EM9XTHRWcqt/pW2g1GqrJI26biUUimTEcDU4fTMFT1o9U6I=
+=aD13
+-----END PGP MESSAGE-----
+VO
+-----END PGP MESSAGE-----
+" ...
+tcp/c3/ltp:input=599
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/RM1brRH6bvzov41PkHigQQ3rNe/1e1D6DquQ7nvWIauX
+80FJLXgjGdv2RKMzuKZyhAInJhhnZhUKlM27HVrAgbNDVN2q4M5rg616gJhfKPdG
+B9vvv4uAclG+oLK7ctENsQCgw8H7kXxDb7WY8gLY4qn4G5Kp7kHyG5IKg+BIRAUD
+/1w0MGpXfmEx8aNFRs4V+pUVi4oLYiAWyrG+0RKEpcrKykjeTaVPzQJWriinTnFt
+p5L2scY+JItFKT56STNsCcUCopoNWKQrY10MNf25xithN+sklphZ+tBGcVGEI/gz
+53SItDg9vItoLB503xOclJ4spzLW7tGWetDUqWdLOcLw0mABGOGSL22kw1FpzOWS
+nx/O+e2dNzzvT/GILT6lGf1oOdRl97maILOvZD3iH1Qd/fOSqEW2ltgrGo5BXWFM
+EM9XTHRWcqt/pW2g1GqrJI26biUUimTEcDU4fTMFT1o9U6I=
+=aD13
+-----END PGP MESSAGE-----
+
+tpl cmd received: 2 0 0 2
+category 1: handling cmd (4) 2002
+Handler 2002 found...
+Received a packet!!!
+reading all....
+cmd2002 read 636 bytes in total
+Incoming packet: 599
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA+AJ55hwwPBuEAP/RM1brRH6bvzov41PkHigQQ3rNe/1e1D6DquQ7nvWIauX
+80FJLXgjGdv2RKMzuKZyhAInJhhnZhUKlM27HVrAgbNDVN2q4M5rg616gJhfKPdG
+B9vvv4uAclG+oLK7ctENsQCgw8H7kXxDb7WY8gLY4qn4G5Kp7kHyG5IKg+BIRAUD
+/1w0MGpXfmEx8aNFRs4V+pUVi4oLYiAWyrG+0RKEpcrKykjeTaVPzQJWriinTnFt
+p5L2scY+JItFKT56STNsCcUCopoNWKQrY10MNf25xithN+sklphZ+tBGcVGEI/gz
+53SItDg9vItoLB503xOclJ4spzLW7tGWetDUqWdLOcLw0mABGOGSL22kw1FpzOWS
+nx/O+e2dNzzvT/GILT6lGf1oOdRl97maILOvZD3iH1Qd/fOSqEW2ltgrGo5BXWFM
+EM9XTHRWcqt/pW2g1GqrJI26biUUimTEcDU4fTMFT1o9U6I=
+=aD13
+-----END PGP MESSAGE-----
+VO
+-----END PGP MESSAGE-----
+
+Child 14897 died...
+Something useless exited
+ceofhack> Incoming plaintext [37]: bis auf die channelfunktionalitaet ;)
+/peer send downhill ack, aber die ist jetzt recht einfach
+Encrypting message...
+Keyid (2018A03CA2DDB17F9344A567560A2AA3C881E446) for peer downhill found!
+Child 14942 died...
+Something useless exited
+Child 14941 died...
+Something useless exited
+Key info: downhill <>
+Encrypted message: -----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+hQEOA/NG7m0FiM7PEAQAk/DjivMH+tNppesAFCq9Kft0FxqoJ4xIqqRvFjvkUrNo
+8dKG6MTB24ieiSwy0UNylhW9O3XReg1a6wvlsV7m7KUcoQ1VGxBrKQwWkQ4jSrp3
+FV7x2OvBeoG2XTRFSZ+sBr1epc2giFuDrG7Kk9g/qqgRrCIxa6WxXVPZ68N46XoD
+/1vevFPqTjCRJ66VTbzR7SIS9bxAmJU/oZehFRgGcKKAhsd1+nDQzwHckhDb5IBD
+L6PWDbIYaiF0+I/lNMgBc/Iwf0lemi74J+hRXtynjg1LlVlhbk7Fr5nejqnHrZEz
+B3hyJ805pQ6Q8jQqRsyMfpWDLGFrZn7Hiy/LPCjQyBVe0mQBmHaHlE0xAFlOewaL
+RdeU0E1PHQF0Cq7+zLyhQmn+odLRCJQKYlpt6OowZPExMCEnrsVDMqhshMrncqbX
+9BwCHlKe1dF10qX5J9On4GOAQ41snKaqH+/ZyRe39abHE0qPBBDy
+=2bj1
+-----END PGP MESSAGE-----
+
+/peer send: Sending ack, aber die ist jetzt recht einfach->downhill ...
+Using address tcp:88.198.38.85:4242 for downhill
+Using /home/user/nico/.ceof/transport-protocols/available/tcp/send to send to tcp:88.198.38.85:4242
+Address: 88.198.38.85:4242.
+Connecting to 88.198.38.85:4242
+Reply from a TP: 2000
+Child 14945 died...
+Child /home/user/nico/.ceof/transport-protocols/available/tcp/send exited (removing from poll list)!
+/quit
+

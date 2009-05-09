@@ -32,7 +32,7 @@
 int cconfig_entries_get(struct cconfig tree, struct cconfig *next, int *state)
 {
    if(*state < tree.noe) {
-      printf("Copying entry %d of %d, %s\n", *state, tree.noe, tree.path);
+//      printf("Copying entry %d of %d, %s\n", *state, tree.noe, tree.path);
       
       memcpy(next, &tree.entries[*state], sizeof(tree.entries[*state]));
       (*state)++;
