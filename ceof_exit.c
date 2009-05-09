@@ -30,6 +30,8 @@
 
 void ceof_exit(int i)
 {
+   printf("Shutting down EOF subsystems (SIGINT)...\n");
+
    /* cycle through all helper, notify them */
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].pid) {
@@ -38,5 +40,6 @@ void ceof_exit(int i)
          }
       }
    }
+
    _exit(0);
 }
