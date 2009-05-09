@@ -5,26 +5,40 @@ A very minimalistic EOF-2 implementation.
 Current requirements:
    make, gcc, netcat, gpgme
 
+
 Compile:
    $ make
+
 
 Create local configuration:
    $ ./scripts/init_home.sh
    # this will add a tcp listener to 0.0.0.0:4242, when ceofhack is started
+
 
 Usage:
    $ ./ceofhack
    /peer add <name> tcp:<ip>:<port> <keyid>
    /peer send <peer> <msg>
 
+
 Example:
    # get our fingerprint
    $ gpg --homedir ~/.ceof/gpg/ --fingerprint | grep fingerprint | sed -e 's/.*= //' -e 's/ //g'
    C9F593529F096B83A60FA9270B2DFDACC876D4D1
    $ ./ceofhack
+   # use tcp:127.0.0.1:4242 to connect to yourself:
    
 /peer add telmich tcp:127.0.0.1:4242 C9F593529F096B83A60FA9270B2DFDACC876D4D1
 /peer send telmich I can send a message for myself!
+
+   # now you should have received your first EOF message!
+
+Chatting with others:
+   # retrieve their pgp key and import it
+   $ gpg --homedir ~/.ceof/gpg/ --import <file>
+
+   # then add them with /peer add and send message via /peer send
+
 
 Bugs:
    Besides there are many and this is just a hack, you can lookup
