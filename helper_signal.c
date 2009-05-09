@@ -25,12 +25,7 @@
 #include <signal.h>     /* kill()         */
 #include "ceofhack.h"
 
-int helper_signal(struct helper *hp, )
+int helper_signal(struct helper *hp, int sig)
 {
-   if(kill(chp[i].pid, SIGINT) == -1) {
-            perror("kill");
-         }
-      }
-   }
-   _exit(0);
+   return kill(hp->pid, sig);
 }

@@ -36,6 +36,7 @@ PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
+HELPER+=helper_signal_all.c helper_signal.c
 
 # user interface (command line, currently built-in)
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c

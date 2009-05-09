@@ -171,6 +171,8 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
 int helper_write(struct helper *hp, char *buf, int len);
 struct helper *helper_find_by_pid(pid_t pid);
 struct helper *helper_find_by_fd(int num, int fd);
+int helper_signal(struct helper *hp, int sig);
+int helper_signal_all(int sig);
 
 /* sample user interface, hardcoded into ceofhack for now */
 int ui_cmds_init();

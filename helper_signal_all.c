@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,20 +24,18 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-int helper_signal_all()
+int helper_signal_all(int sig)
 {
-   int i;
-
-   if(chp_cnt >= MAX_COMM) return -1;
+   int i, ret = 1;
 
    for(i=0; i < MAX_COMM; i++) {
-      /* no handler? free for use */
-      if(!chp[i].handle) {
-         ++chp_cnt;
-         return i;
+      if(chp[i].pid) {
+         if(helper_signal(&chp[i], sig) == -1) {
+            perror("helper_signal");
+            ret = 0;
+         }
       }
    }
 
-   /* this should never happen and means there's a bug in the helper system  */
-   return -2;
+   return ret;
 }
