@@ -18,24 +18,16 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Leave ceofhack
- * - Shutdown helper: transport protocols, user interfaces
- * - [Send exit command to all and] send SIGINT
+ * Send a signal to a helper
  *
  */
 
 #include <signal.h>     /* kill()         */
-#include <unistd.h>     /* _exit()        */
 #include "ceofhack.h"
 
-void ceof_exit(int i)
+int helper_signal(struct helper *hp, )
 {
-   printf("Shutting down EOF subsystems...\n");
-
-   /* cycle through all helper, notify them */
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].pid) {
-         if(kill(chp[i].pid, SIGINT) == -1) {
+   if(kill(chp[i].pid, SIGINT) == -1) {
             perror("kill");
          }
       }
