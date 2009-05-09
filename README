@@ -34,6 +34,10 @@ Example:
    # now you should have received your first EOF message!
 
 Chatting with others:
+   # export your key(s) (you can also specify your keyid, to not export others)
+   gpg --homedir ~/.ceof/gpg --armor --export > ~/public-keys
+   # send it to someone else
+
    # retrieve their pgp key and import it
    $ gpg --homedir ~/.ceof/gpg/ --import <file>
 
