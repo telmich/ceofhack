@@ -41,6 +41,7 @@ struct helper *helper_find_by_fd(int num, int fd)
       }
    }
 
-   printf("BUG: No helper found for fd=%d\n", fd);
+/* is valid, when child exited and poll list still contains fd */
+//   printf("No helper found for fd=%d (helper possibly exited)\n", fd);
    return NULL;
 }

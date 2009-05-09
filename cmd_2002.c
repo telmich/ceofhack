@@ -85,7 +85,7 @@ int cmd_2002(int fd[])
    len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
 
    if(len > 0) {
-      printf("Incoming plaintext [%lu]: %s\n", len, plaintext);
+      printf("ceofhack> Incoming plaintext [%lu]: %s\n", len, plaintext);
    } else {
       printf("decryption failed with %ld\n", len);
    }
