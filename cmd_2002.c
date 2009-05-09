@@ -41,7 +41,7 @@ int cmd_2002(int fd[])
       perror("cmd2002/read");
       return 0;
    }
-   printf("cmd2002 read %lu bytes in total\n", len);
+   printf("cmd2002 read %ld bytes in total\n", (long) len);
 
    if(len > EOF_L_PKG_MAX) {
       /* FIXME: tell tp to drop the packet */
@@ -70,7 +70,8 @@ int cmd_2002(int fd[])
 
    if(pkglen != (len - (p - buf))) { /* position after \n -> end */
       /* FIXME: tell tp to drop the packet */
-      printf("cmd2002: bogus size information in packet: %lu vs %lu!\n", pkglen,  (len - (p - buf)));
+      printf("cmd2002: bogus size information in packet: %ld vs %d!\n", 
+         (long) pkglen,  (len - (p - buf)));
       return 0;
    }
 
@@ -85,9 +86,9 @@ int cmd_2002(int fd[])
    len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
 
    if(len > 0) {
-      printf("ceofhack> Incoming plaintext [%lu]: %s\n", len, plaintext);
+      printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);
    } else {
-      printf("decryption failed with %ld\n", len);
+      printf("decryption failed with %ld\n", (long) len);
    }
 
    return 1;

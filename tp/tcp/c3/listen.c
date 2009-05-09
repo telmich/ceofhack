@@ -60,13 +60,13 @@ ssize_t eofi_ltp_read(int fd, char input[])
    }
 
    if(len > EOF_L_PKG_MAX) {
-      fprintf(stderr, WE "Packet too big (%lu)!\n", len);
+      fprintf(stderr, WE "Packet too big (%ld)!\n", (long) len);
       return -1;
    }
 
    input[EOF_L_CMD] = '\0';
 
-   fprintf(stderr, WE "Ignoring cmd %s (len=%lu)\n", input, len);
+   fprintf(stderr, WE "Ignoring cmd %s (len=%ld)\n", input, (long) len);
 
    if(!strncmp(input, EOF_CMD_TPL_STOP, EOF_L_CMD)) {
       fprintf(stderr, WE "Time to say goodbye...\n");
@@ -118,7 +118,7 @@ int eof_ltp_write(char *msg, int type)
 
    len = strlen(buf); /* FIXME: will not work for binary data */
 
-   fprintf(stderr, WE "TO EOFi: len=%lu, pkg=\"%s\" ...\n", len, buf);
+   fprintf(stderr, WE "TO EOFi: len=%ld, pkg=\"%s\" ...\n", (long) len, buf);
    return write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
 }
 

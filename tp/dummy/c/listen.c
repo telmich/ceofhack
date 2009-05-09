@@ -68,7 +68,7 @@ UQQpdMJCi/N7fhdVK2Rgws+fYN3qbX1XKG2jrxD1Yj0QbOU/KA==\n\
    nanosleep(&ts, NULL);
 
    len = write(STDOUT_FILENO, crypt, strlen(crypt));
-   fprintf(stderr, "len=%lu\n", strlen(crypt));
+   fprintf(stderr, "len=%ld\n", (long) strlen(crypt));
 
 
    /* read commands */
@@ -80,7 +80,7 @@ UQQpdMJCi/N7fhdVK2Rgws+fYN3qbX1XKG2jrxD1Yj0QbOU/KA==\n\
       }
 
       if(len > EOF_L_PKG_MAX) {
-         fprintf(stderr, "Packet too big (%lu)!\n", len);
+         fprintf(stderr, "Packet too big (%ld)!\n", (long) len);
          continue;
       }
       input[len] = '\0';
