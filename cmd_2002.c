@@ -70,8 +70,8 @@ int cmd_2002(int fd[])
 
    if(pkglen != (len - (p - buf))) { /* position after \n -> end */
       /* FIXME: tell tp to drop the packet */
-      printf("cmd2002: bogus size information in packet: %ld vs %d!\n", 
-         (long) pkglen,  (len - (p - buf)));
+      printf("cmd2002: bogus size information in packet: %ld vs %ld!\n", 
+         (long) pkglen,  (long) (len - (p - buf)));
       return 0;
    }
 
