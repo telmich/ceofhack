@@ -332,9 +332,12 @@ If the environment variable "`\textit{\$CEOF\_DIR}`" is set,
 its content will be used to refer to the configuration directory.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{User interface socket}
-The user interfaces connect to a socket specified in
-\textit{\$CEOF\_UI\_SOCKET}.
+\subsection{User interface (unix socket)}
+\label{ui-socket}
+If the environment variable \textit{\$CEOF\_UI\_SOCKET} is set, the user
+interface should connect to this unix socket. Otherwise it should connect
+to the socket "`ui/socket"' below the EOFi configuration directory
+(see above for rules how to locate that).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Configuration}
@@ -858,80 +861,46 @@ Make alias recommendation, not to be implemented directly.
 POST ceofhack-0.1
 %---------------------------------------------------------------------
 \section{Interface to the user interface ("`eofi2ui"')}
-
-Version: 2007-11-16 v0.3-bed / telmich
-This document specifies the commands send from GUI to and from
-ceof\footnote{the central EOF-1 application} to the GUIs.
-% -----------------------------------------------------------------------------
-\subsection{Changelog}
-% -----------------------------------------------------------------------------
-\subsubsection{draft-1 to v0.2-bed}
-\begin{itemize}
-\item Many cleanups
-\item Changed socket location
-\item Clearified what todo without \textit{CEOF\_DIR} and \textit{HOME} set
-\item Added exit command.
-\item Changed number of bytes for marktschreier from 512 Bytes to 128 Bytes
-\item Changed number of bytes for channel name  from 512 Bytes to 128 Bytes
-\item Added ranges (001-00x)
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.2-bed to v0.3-bed}
-\begin{itemize}
-\item Add fingerprint to \textbf{0021}
-\item Add command \textbf{0023}: Retrieve peer fingerprint
-\item Link to the basic documentation
-\end{itemize}
+This section specifies the commands used between the EOFs
+"`user interface"' and EOFi. As the user interface has to translate
+the user commands ("`ui2user"') to \emph{eofi2ui} commands, the
+section titles refer to the \emph{ui2user} and \emph{eofi2ui} commands.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Connection}
-Use the ceof client socket, as specified in the basic documentation.
+All user interfaces connect to the user interface socket, as specified
+on page \pageref{ui-socket}, section \ref{ui-socket}.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Command overview}
-All commands are send as 4-Byte ASCII digits (for instance "`0012"').
-All answers and all numbers are ASCII-numbers. We
-\textbf{never} transmit binary numbers.
-\textbf{Client commands} always begin with \textbf{0} ("`0042"' for instance),
-\textbf{answers} or \textbf{notifications} from
-\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
-After each command follows individual data. The second byte indicates the type of message:
-\begin{itemize}
-\item \textbf{00}: client meta command (something that does not affect the user)
-\begin{itemize}
-\item \textbf{000}: (De-)Initialisation
-\item \textbf{001}: Marktschreier related
-\item \textbf{002}: Peer related
-\item \textbf{003}: Channel related
-\end{itemize}
-\item \textbf{01}: messages
-\item \textbf{11}: sucess answers from ceof
-\item \textbf{12}: error answers from ceof
-\item \textbf{13}: messages / notifications initiated by ceof
-\end{itemize}
-
+\subsection{1100: User interface registered}
+This command does not have any further parameters.
+After the UI received it, it may begin to send other commands.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{0000: Register client}
-After the "`0000"' the client directly appends two ASCII digits containing the
-version of the client to ceof protocol it speaks. This specification uses version
-"`04"'.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1100}: success, you are connected
-\item \textbf{1200}: version not supported
-\end{itemize}
+\subsection{1101: User interface not registered}
+The EOFi cannot accept the connection request.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1101 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Reason & 128 Byte FLS & Why the connection was refused & Too many UIs connected.\\
+\hline
+\end{longtable}
+EOFi will close the socket afterwards.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{0001: Deregister client}
-This client derigesters from ceof. Ceof will keep on running, even if this
-was the last client.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1101}: sucess, you are disconnected
-\end{itemize}
+\subsection{1102: Exit requested}
+EOFi is being sh
 % -----------------------------------------------------------------------------
-\subsection{0009: Request for exit}
-Tells ceof to exit and to notify all guis to exit.
-It will not reply anything to you, but issue an exit notify to all clients,
-including the requesting one.
+\subsection{2100: Register user interface}
+This must be the \emph{first} message sent by the UI. If the answer is not
+\emph{1100}, but \emph{1101}, the UI should close the socket afterwards.
 % -----------------------------------------------------------------------------
+\subsection{2101: Deregister user interface}
+% -----------------------------------------------------------------------------
+\subsection{2102: /exit}
+The user interface requests EOFi and all other EOFs to exit.
 % -----------------------------------------------------------------------------
 \subsection{0010: List connected markschreiers}
 Answers from ceof:
