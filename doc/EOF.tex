@@ -891,6 +891,10 @@ EOFi will close the socket afterwards.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1102: Exit requested}
+ceof is being shutdown.
+Shutdown yourself, too.
+After that message ceof will exit and you should do the same.
+No answer possible, ceof already decided to vanish.
 EOFi is being sh
 % -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
@@ -901,36 +905,6 @@ This must be the \emph{first} message sent by the UI. If the answer is not
 % -----------------------------------------------------------------------------
 \subsection{2102: /exit}
 The user interface requests EOFi and all other EOFs to exit.
-% -----------------------------------------------------------------------------
-\subsection{0010: List connected markschreiers}
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1102}: list follows
-\begin{itemize}
-\item four ASCII-digits containing number of peers ("`num\_peer"')
-\item after that follow \textit{num\_peer} peer ids:
-\begin{itemize}
-\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
-\item 40 Byte containing the fingerprint of the
-key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
-\end{itemize}
-\end{itemize}
-\end{itemize}
-% -----------------------------------------------------------------------------
-% ok
-% -----------------------------------------------------------------------------
-\subsection{0011: Connect to markschreier}
-After the "`0011"' follow 128 Bytes describing how to connect
-to the marktschreier ("`tcp://62.65.138.66:42'" for instance).
-If the URI is shorter than 128 bytes, the remain should be filled with 0 bytes
-(also known as \verb='\0'=).
-
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1103}: success
-\item \textbf{1210}: protocol (like "`tcp://"') not supported
-\item \textbf{1211}: connection could not be established
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0020: Retrieve list of known peers}
 Answers from ceof:
@@ -997,23 +971,6 @@ follow containing the channel name, padded with 0-bytes
 \end{itemize}
 % OK
 % -----------------------------------------------------------------------------
-\subsection{0031: Ask to join a channel via marktschreier}
-After the "0031" follow
-
-\begin{enumerate}
-\item 128 Bytes containing the peer name
-\item 128 Bytes describing the channel name.
-\end{enumerate}
-
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1131}: success (means: markschreier asked known peers to
-connect to us)
-\item \textbf{1231}: connection could not be established
-\item \textbf{1232}: access denied by markschreier: you are not allowed to join
-\end{itemize}
-% Ok
-% -----------------------------------------------------------------------------
 \subsection{0032: Send message to channel}
 Aftere the "0032" follow 128 bytes for the channel name and after
 that 128 Bytes for the message.
@@ -1030,13 +987,6 @@ Aftere the "`0033"' follow 128 bytes containing the name of the channel.
 \item \textbf{1234}: Channel already exists
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0034: Submit channel to marktschreier}
-Aftere the "`0034"' follow 128 bytes containing the channel channel.
-\begin{itemize}
-\item \textbf{1134}: success
-\item \textbf{1235}: Channel already exists
-\end{itemize}
-% -----------------------------------------------------------------------------
 \subsection{1300: Recieved message}
 After the "1300" follows:
 \begin{itemize}
@@ -1045,12 +995,6 @@ After the "1300" follows:
 \item 128 byte containing either the channelname, if the first byte was a "`C"'
 \item 128 Byte message
 \end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{1399: Exit notify}
-ceof is being shutdown.
-Shutdown yourself, too.
-After that message ceof will exit and you should do the same.
-No answer possible, ceof already decided to vanish.
 % -----------------------------------------------------------------------------
 \subsection{The way it works}
 This section explains how the commands relate together and which commands to use
