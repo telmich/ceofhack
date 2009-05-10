@@ -218,8 +218,6 @@ There are not many things to take care about, when reading this document:
 \item \emph{EOF\_L\_\textit{NAME}} is used to specify a certain length
 \end{itemize}
 % Nico: 1.0
-% FIXME: is this used anywhere?
-% FIXME: Reference for env vars?
 % -----------------------------------------------------------------------------
 \subsection{Abbreviations}
 As some terms are quite often used, we created some abbreviations:
@@ -317,6 +315,7 @@ by user interfaces (UIs).
 Every connection between any EOFs and EOFi is a direct connection:
 The packet is read in one step. And after one packet is sent, the answer packet
 must be received, before the next packet may be sent.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Paths}
 % -----------------------------------------------------------------------------
@@ -699,7 +698,7 @@ After this return code, the transport protocol exits.
 \begin{verbatim}
 2001
 \end{verbatim}
-% #############################################################################
+% -----------------------------------------------------------------------------
 \subsection{2002: Received packet}
 \index{Command!2002}
 The listening transport protocol received a packet and notifies EOFi.
@@ -730,33 +729,35 @@ the listening URL to other EOFi.
 \begin{verbatim}
 2003
 \end{verbatim}
-% -----------------------------------------------------------------------------
+% #############################################################################
 \section{The user interface ("`ui2user"')}
 This section specifies the appereance of a user interface to the user.
+% Nico: 1.0
+%---------------------------------------------------------------------
+\subsection{Minimal philosophy}
 All EOF compliant user interfaces must support the named commands, so the
 user can change the UI, but can be sure that this minimal amount of
-commands is always available.  This section is based on the specification
-written by apic, ilo, telmich on 2008-08-17 (Version v0.3-triemli).
+commands is always available.
 
-\subsection{Minimal philosophy}
-This specifications describes all the commands that \textbf{must} be
-supported by every client. This means clients may have additional possibilities
-to send commands via different methods (like clicking on a button or via
-voice input), but they must support all of the commands listed, because this
-way the user always has the familiar commands available.
-
+Every user interface \emph{may} add additional input methods or commands.
+% Nico: 1.0
+%---------------------------------------------------------------------
 \subsection{Commands in general}
 All commands begin with a "`/"' as first character (adopted from IRC).
+% Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{Command length}
-The user intertace shall only accept commands up to a langth of 256 Byte.
-If the user inputs longer commands, they must be truncated
-to 256 Bytes.
+The user interfaces need only to accept commands up to a langth of
+\emph{EOF\_L\_UI\_INPUT}.
+If the user inputs longer commands, they should be truncated
+to \emph{EOF\_L\_UI\_INPUT} bytes.
+% Nico: 1.0
 %---------------------------------------------------------------------
-\subsubsection{Send text}
-If there is no /, it should be assumed that it is a message.
-The text will be send to the currently selected channel or nick.
-
+\subsection{Send text}
+If the entered text does not begin with a "`/"', it should be treated
+as a message to the current selected destination (either
+a \emph{peer} or \emph{group} of peers.
+% Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/whois $<nick>$}
 Display detailled information about a nick:
