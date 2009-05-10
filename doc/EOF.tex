@@ -313,6 +313,11 @@ This variable contains the absolute path to the socket, which should be used
 by user interfaces (UIs).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{Bufferless - no queuing}
+Every connection between any EOFs and EOFi is a direct connection:
+The packet is read in one step. And after one packet is sent, the answer packet
+must be received, before the next packet may be sent.
+% -----------------------------------------------------------------------------
 \section{Paths}
 % -----------------------------------------------------------------------------
 \subsection{EOFi configuration directory}
@@ -439,7 +444,7 @@ a look at section \ref{tp} on page \pageref{tp}.
 \subsection{Fingerprint (fpr)}
 A (PGP) fingerprint is a \emph{EOF\_L\_KEYID} byte fixed length string.
 % Nico: 1.0
-% -----------------------------------------------------------------------------
+% #############################################################################
 \section{EOF Commands}
 An EOF command is exactly \emph{EOF\_L\_CMD} bytes long (fixed length string)
 and contains an ASCII number.
@@ -694,7 +699,7 @@ After this return code, the transport protocol exits.
 \begin{verbatim}
 2001
 \end{verbatim}
-% -----------------------------------------------------------------------------
+% #############################################################################
 \subsection{2002: Received packet}
 \index{Command!2002}
 The listening transport protocol received a packet and notifies EOFi.
@@ -740,19 +745,6 @@ to send commands via different methods (like clicking on a button or via
 voice input), but they must support all of the commands listed, because this
 way the user always has the familiar commands available.
 
-\subsection{Changelog}
-\subsubsection{v0.1-mrmcd110b to v0.2-train}
-   \begin{itemize}
-      \item Renamed \textbf{mslist} to \textbf{mlist}, so it is consequently the prefix
-      "`m"' for marktschreier.
-      \item Some minor language cleanup 
-      \item Added "`minimal philosophy"'
-      \item Added minimal writing convention
-      \item Added /peer commands
-      \item Gave the document some structure
-      \item \textbf{Change by}: telmich
-   \end{itemize}
-
 \subsection{Commands in general}
 All commands begin with a "`/"' as first character (adopted from IRC).
 %---------------------------------------------------------------------
@@ -764,29 +756,6 @@ to 256 Bytes.
 \subsubsection{Send text}
 If there is no /, it should be assumed that it is a message.
 The text will be send to the currently selected channel or nick.
-
-%---------------------------------------------------------------------
-\subsubsection{/join $<marktschreier>$ $<channel>$}
-Join the specific channel on the specified marktschreier.
-TO BE REWORKED
-POST ceofhack-0.1
-%---------------------------------------------------------------------
-\subsubsection{/list $<markschreier>$}
-List available channels on specified marktschreier.
-TO BE REWORKED
-POST ceofhack-0.1
-
-%---------------------------------------------------------------------
-\subsection{/mlist}
-List connected marktschreier.
-TO BE REWORKED
-POST ceofhack-0.1
-
-%---------------------------------------------------------------------
-\subsection{/mconnect $<marktschreier>$}
-Connect to marktschreier.
-TO BE REWORKED
-POST ceofhack-0.1
 
 %---------------------------------------------------------------------
 \subsection{/whois $<nick>$}
