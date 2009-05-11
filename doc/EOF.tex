@@ -763,9 +763,8 @@ a \emph{peer} or \emph{group} of peers.
 Add the peer as \textit{name} to the list of known peers.
 
 \index{Command!/peer add}%
-The listening transport protocol received a packet and notifies EOFi.
 \begin{longtable}{|c|c|c|c|}
-\caption{Command 2002 parameters}\\
+\caption{/peer add parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
@@ -783,16 +782,55 @@ Fingerprint & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E6
 \end{verbatim}
 % Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer send $<$nick$>$ $<$msgtext$>$}
-Send message \textit{msg} to peer \textit{name}.
+\subsection{/peer send $<$nick$>$ $<$msgtext...$>$}
+Send message \textit{msgtext} to peer \textit{nick}.
+
+\index{Command!/peer send}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer send parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick & EOFsdt & Name you identify the peer with & telmich\\
+\hline
+Msgtext & EOFsdt & The message itself & Hallo, wie geht es Dir?\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer send telmich Hallo, wie geht es Dir?
+\end{verbatim}
+% Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/peer list}
-List currently known peers.
+List currently known peers. This command does not accept any parameters.
 
-Implement in ceofhack-0.1!
+\subsubsection{Example}
+\begin{verbatim}
+/peer list
+\end{verbatim}
+% Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer rename $<$oldname$>$ $<$newname$>$}
+\subsection{/peer rename $<$oldnick$>$ $<$newnick$>$}
 Renames the peer.
+\index{Command!/peer rename}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer rename parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Oldnick & EOFsdt & Old nick name & susi\\
+\hline
+Newnick & EOFsdt & New nick name & heinz\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer rename susi heinz
+\end{verbatim}
+% Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/whois $<nick>$}
 Display detailled information about a nick:
