@@ -889,6 +889,17 @@ the user commands ("`ui2user"') to \emph{eofi2ui} commands, the
 section titles refer to the \emph{ui2user} and \emph{eofi2ui} commands.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{UI startup}
+What todo, when the GUI starts.
+Connect to ceof. Find out about
+\begin{itemize}
+\item joined channels,
+\item connected marktscheier
+\item and open queries.
+\end{itemize}
+It thus issues the following commands:
+register, list joined channels, list open queries, list marktschreier.
+% -----------------------------------------------------------------------------
 \subsection{Connection}
 All user interfaces connect to the user interface socket, as specified
 on page \pageref{ui-socket}, section \ref{ui-socket}.
@@ -1050,70 +1061,14 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 \begin{verbatim}
 /peer show karl-otto
 \end{verbatim}
-
 % -----------------------------------------------------------------------------
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.
-% -----------------------------------------------------------------------------
-\subsection{The way it works}
-This section explains how the commands relate together and which commands to use
-in which order.
-
-% -----------------------------------------------------------------------------
-\subsection{GUI initiated commands}
-This section and all subsections are not yet finished. They
-are in this draft to show the interested reader a preview of the
-content of the next draft.
-% -----------------------------------------------------------------------------
-\subsubsection{GUI startup}
-What todo, when the GUI starts.
-Connect to ceof. Find out about
-\begin{itemize}
-\item joined channels,
-\item connected marktscheier
-\item and open queries.
-\end{itemize}
-It thus issues the following commands:
-register, list joined channels, list open queries, list marktschreier.
-% -----------------------------------------------------------------------------
-\subsubsection{Listing friends}
-% -----------------------------------------------------------------------------
-\subsection{ceof initiated commands / messages}
-UNFINISHED
-% -----------------------------------------------------------------------------
-\subsubsection{Recieved a join request}
-UNFINISHED
-Somebody wants to join in a channel, in which you are a member.
-% -----------------------------------------------------------------------------
-\subsubsection{Recieved a join notification request}
-UNFINISHED
-Somebody wants us to tell all members of the channel that she wants to join us.
-% -----------------------------------------------------------------------------
-\subsubsection{Recieved a private message}
-UNFINISHED
-This messages was send only to us, not to a channel.
-%% -----------------------------------------------------------------------------
-\chapter{Implementation}
-Sample implementation for POSIX systems.
-% -----------------------------------------------------------------------------
-\section{Status}
-Supported items of the current version are at least:
-\begin{longtable}{|c|c|c|}
-\caption{Implemented items in the sample implementation}\\
-\hline
-\textbf{Feature} & \textbf{Description} & \textbf{Since version/commit} \\
-\hline
-/quit & ui2user command & d372b38a2da99703066a1b9aa63cce9a84f72709\\
-\hline
-/peer add & ui2user command & 8dab67c01aa78d8b6ff0cea311d924d7215d187d\\
-\hline
-\end{longtable}
-
-% -----------------------------------------------------------------------------
+% #############################################################################
 \chapter{Transport protocols}
 % -----------------------------------------------------------------------------
 \section{Introduction}
-Only lower-case allowed (to prevent problems with broken filesystems).
+Only lower-case names are allowed (to prevent problems with broken filesystems).
 % -----------------------------------------------------------------------------
 \section{Examples}
 This sections shows some theoretic (theoretic because nobody implemented
@@ -1241,42 +1196,6 @@ Sort sections by alphabet.
 
 % -----------------------------------------------------------------------------
 \chapter{pmg2ceof import}
-
-2007-12-03 v0.1.3-bed / adi, telmich
-
-\section{Introduction}
-This document specifies the commands send from \textbf{pmg} to and from
-\textbf{ceof}\footnote{the central EOF-1 application} to the \textbf{pmg}.
-
-\subsection{Changelog}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1.2 to v0.1.3}
-\begin{itemize}
-\item Added name of peer to "`\textbf{1304}"', "`\textbf{1305}"' and "`\textbf{1306}"'
-\item Changed protocol version to "`03"'
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1.1 to v0.1.2}
-\begin{itemize}
-\item "`\textbf{1300}"' expanded: Now also passing the fingerprint
-\item "`\textbf{1303}"' expanded: Return the next address
-\item Added commands "`\textbf{1304}"' to "`\textbf{1307}"'
-\item Changed protocol version to "`02"'
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1 to v0.1.1}
-\begin{itemize}
-\item Removed support for "`\textbf{0001}"'
-\begin{itemize}
-\item No need to deregister on crash, \textbf{ceof} will restart you anyway.
-\end{itemize}
-\item Changed protocol version to "`01"'
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsubsection{v0.1}
-\begin{itemize}
-\item Initial release
-\end{itemize}
 % -----------------------------------------------------------------------------
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
@@ -1431,6 +1350,10 @@ Answers from \textbf{pmg}:
 \item \textbf{0223}: strange error
 \end{itemize}
 % -----------------------------------------------------------------------------
+
+
+
+
 \chapter{politiker2ceof import}
 
 2007-11-12 v0.1-train / telmich
