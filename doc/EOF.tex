@@ -925,10 +925,23 @@ This must be the \emph{first} message sent by the UI. If the answer is not
 % -----------------------------------------------------------------------------
 \subsection{2101: Deregister user interface}
 % -----------------------------------------------------------------------------
-\subsection{2102: /exit}
-The user interface requests EOFi and all other EOFs to exit.
+\subsection{2102: /peer add}
+
+\begin{itemize}
+\item 128 bytes for the name of the peer
+\item 128 bytes describing how to connect to the peer.
+\item 40 bytes  containing the pgp-fingerprint of the key
+\end{itemize}
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1121}: success, registered peer
+\item \textbf{1220}: unknown peer
+\item \textbf{1222}: peer name already used
+\end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0020: Retrieve list of known peers}
+\subsection{2103: /peer send}
+% -----------------------------------------------------------------------------
+\subsection{2104: /peer list}
 Answers from ceof:
 \begin{itemize}
 \item \textbf{1120}: list follows
@@ -944,7 +957,9 @@ key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 
 % -----------------------------------------------------------------------------
-\subsection{XXXX: Show information about peer}
+\subsection{2105: /peer rename}
+% -----------------------------------------------------------------------------
+\subsection{2106: /peer show}
 Display detailled information about a nick:
 \begin{itemize}
 \item Available PGP details like
@@ -955,21 +970,11 @@ Display detailled information about a nick:
 \end{itemize}
 \item List of address of transport protocols
 \end{itemize}
-%% -----------------------------------------------------------------------------
-\subsection{0021: Add peer}
-Aftere the "`0021"' follow
-
-\begin{itemize}
-\item 128 bytes for the name of the peer
-\item 128 bytes describing how to connect to the peer.
-\item 40 bytes  containing the pgp-fingerprint of the key
-\end{itemize}
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1121}: success, registered peer
-\item \textbf{1220}: unknown peer
-\item \textbf{1222}: peer name already used
-\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{2199: /quit}
+The user interface requests EOFi and all other EOFs to exit.
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
 % -----------------------------------------------------------------------------
 \subsection{0022: Send message to peer}
 Aftere the "`0022"' follow 128 bytes for the peer name
