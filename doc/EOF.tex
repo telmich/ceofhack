@@ -440,7 +440,7 @@ URLs as defined in RFC3986\cite{uri-1}. For more information have
 a look at section \ref{tp} on page \pageref{tp}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Fingerprint (fpr)}
+\subsection{Fingerprint (fingerprint)}
 A (PGP) fingerprint is a \emph{EOF\_L\_KEYID} byte fixed length string.
 % Nico: 1.0
 % #############################################################################
@@ -759,23 +759,31 @@ as a message to the current selected destination (either
 a \emph{peer} or \emph{group} of peers.
 % Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer add $<$name$>$ $<$initial address$>$ $<$fingerprint$>$}
-Add the peer as \textit{name} to the list of known peers
-and connect to it, to retrieve other addresses.
-\begin{itemize}
-\item \textit{name} is 128 Bytes, including 0-byte termination.
-If the name is shorter it is padded with 0-bytes.
-\item \textit{initial address} is 128 Bytes, including 0-byte termination.
-If the initial address is shorter it is padded with 0-bytes.
-\end{itemize}
+\subsection{/peer add $<$nick$>$ $<$initial address$>$ $<$fingerprint$>$}
+Add the peer as \textit{name} to the list of known peers.
 
-TO BE REWORKED
+\index{Command!/peer add}%
+The listening transport protocol received a packet and notifies EOFi.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2002 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick & EOFsdt & Name you identify the peer with & telmich\\
+\hline
+Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
+\hline
+Fingerprint & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
+\hline
+\end{longtable}
 
-Implement in ceofhack-0.1!
-
-Length: as in ceofhack.h
+\subsubsection{Example}
+\begin{verbatim}
+/peer add telmich tcp:10.0.42.42:4242 F27987E34E7866B2BA39C2FD793EB8FC325251FE
+\end{verbatim}
+% Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer send $<$name$>$ $<$msg$>$}
+\subsection{/peer send $<$nick$>$ $<$msgtext$>$}
 Send message \textit{msg} to peer \textit{name}.
 %---------------------------------------------------------------------
 \subsection{/peer list}
