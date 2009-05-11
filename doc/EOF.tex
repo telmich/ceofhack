@@ -930,6 +930,15 @@ Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
+\subsection{1103: Recieved message}
+After the "1300" follows:
+\begin{itemize}
+\item "`C"' for recieved in channel or "`P"' for recieved by a peer
+\item 128 byte containing either the channel or the peer name
+\item 128 byte containing either the channelname, if the first byte was a "`C"'
+\item 128 Byte message
+\end{itemize}
+% -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, but \emph{1101}, the UI should close the socket afterwards.
@@ -1045,15 +1054,6 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 % -----------------------------------------------------------------------------
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.
-% -----------------------------------------------------------------------------
-\subsection{1300: Recieved message}
-After the "1300" follows:
-\begin{itemize}
-\item "`C"' for recieved in channel or "`P"' for recieved by a peer
-\item 128 byte containing either the channel or the peer name
-\item 128 byte containing either the channelname, if the first byte was a "`C"'
-\item 128 Byte message
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{The way it works}
 This section explains how the commands relate together and which commands to use
