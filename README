@@ -17,12 +17,12 @@ Create local configuration:
 
 Usage:
    $ ./ceofhack
-   /peer add <name> tcp:<ip>:<port> <keyid>
-   /peer send <peer> <msg>
+   /peer add <nick>  tcp:<ip>:<port> <keyid>
+   /peer send <nick> <msg>
 
 
 Example:
-   # get our fingerprint
+   # get your fingerprint
    $ gpg --homedir ~/.ceof/gpg/ --fingerprint | grep fingerprint | sed -e 's/.*= //' -e 's/ //g'
    C9F593529F096B83A60FA9270B2DFDACC876D4D1
    $ ./ceofhack
