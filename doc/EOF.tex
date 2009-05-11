@@ -918,6 +918,17 @@ Shutdown yourself, too.
 After that message ceof will exit and you should do the same.
 No answer possible, ceof already decided to vanish.
 EOFi is being sh
+\index{Command!1102}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1102 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+\hline
+Message & Binary data & The message & BLOB\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
@@ -926,20 +937,48 @@ This must be the \emph{first} message sent by the UI. If the answer is not
 \subsection{2101: Deregister user interface}
 % -----------------------------------------------------------------------------
 \subsection{2102: /peer add}
-
-\begin{itemize}
-\item 128 bytes for the name of the peer
-\item 128 bytes describing how to connect to the peer.
-\item 40 bytes  containing the pgp-fingerprint of the key
-\end{itemize}
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1121}: success, registered peer
-\item \textbf{1220}: unknown peer
-\item \textbf{1222}: peer name already used
-\end{itemize}
+\index{Command!/peer add}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer add parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick & EOFsdt & Name you identify the peer with & telmich\\
+\hline
+Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
+\hline
+Fingerprint & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{2103: /peer send}
+\index{Command!/peer send}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer send parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick & EOFsdt & Name you identify the peer with & telmich\\
+\hline
+Msgtext & EOFsdt & The message itself & Hallo, wie geht es Dir?\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer send telmich Hallo, wie geht es Dir?
+\end{verbatim}
+
+
+Aftere the "`0022"' follow 128 bytes for the peer name
+and after that 128 Bytes for the message.
+Both 0-terminated, 0 padded.
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1122}: success
+\item \textbf{1221}: unknown peer
+\end{itemize}
+
 % -----------------------------------------------------------------------------
 \subsection{2104: /peer list}
 Answers from ceof:
@@ -958,6 +997,23 @@ key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 
 % -----------------------------------------------------------------------------
 \subsection{2105: /peer rename}
+\index{Command!/peer rename}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer rename parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Oldnick & EOFsdt & Old nick name & susi\\
+\hline
+Newnick & EOFsdt & New nick name & heinz\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer rename susi heinz
+\end{verbatim}
+
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer show}
 Display detailled information about a nick:
@@ -970,21 +1026,25 @@ Display detailled information about a nick:
 \end{itemize}
 \item List of address of transport protocols
 \end{itemize}
+
+\index{Command!/peer show}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer rename parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer show karl-otto
+\end{verbatim}
+
 % -----------------------------------------------------------------------------
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.
-% -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
-% -----------------------------------------------------------------------------
-\subsection{0022: Send message to peer}
-Aftere the "`0022"' follow 128 bytes for the peer name
-and after that 128 Bytes for the message.
-Both 0-terminated, 0 padded.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1122}: success
-\item \textbf{1221}: unknown peer
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{0023: Retrieve peer fingerprint}
 Aftere the "`0023"' follows a 128 bytes fixed length string for the peer name.
