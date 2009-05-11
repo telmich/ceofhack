@@ -1,0 +1,13 @@
+%---------------------------------------------------------------------
+\subsection{/group create $<group>$}
+Display peers in the specified channel.
+% Nico: 1.0
+%---------------------------------------------------------------------
+\subsection{/group list $<channel>$}
+Display peers in the specified channel.
+% Nico: 1.0
+%---------------------------------------------------------------------
+\subsection{/group leave $<channel>$}
+Leave a channel.
+% Nico: FIXME
+
