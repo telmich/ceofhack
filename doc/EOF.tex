@@ -859,10 +859,20 @@ Tells EOFi to quit. The EOFi will tell all EOFs to quit and quits.
 % Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{Aliases}
-Those commands are recommended for easier integration of new people using EOF.
+Aliases may optionally be provided by the UI. If an UI provides
+support for aliases, it must implement the "`\emph{/alias}"' command.
+
+The following aliases should be provided by default,
+to aid new users using EOF.
+% Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/msg $<nick>$ $<message>$}
+\subsection{/alias $<aliasname>$ $<command...>$}
+This command should be used to setup aliases.
+% Nico: 1.0
+%---------------------------------------------------------------------
+\subsection{/msg $<nick>$ $<msgtext>$}
 Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
+% Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/names}
 Display nicks in the currently active channel.
