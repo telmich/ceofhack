@@ -873,29 +873,15 @@ This command should be used to setup aliases.
 % Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/msg $<nick>$ $<msgtext>$}
-Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
+Should be an alias for \textit{/peer send $<$nick$>$ $<$msgtext$>$}
 % Nico: 1.0
-%---------------------------------------------------------------------
-\subsection{/names}
-Display nicks in the currently active channel.
-
-Make alias recommendation, not to be implemented directly.
 %---------------------------------------------------------------------
 \subsection{/whois $<nick>$}
-Display detailled information about a nick:
-\begin{itemize}
-\item Available PGP details like
-\begin{itemize}
-\item fingerprint,
-\item full name or
-\item e-mail.
-\end{itemize}
-\item List of address of transport protocols
-\end{itemize}
+Should be an alias for \textit{/peer show $<$nick$>$}
 % Nico: 1.0
 
-POST ceofhack-0.1
-%---------------------------------------------------------------------
+% #############################################################################
+
 \section{Interface to the user interface ("`eofi2ui"')}
 This section specifies the commands used between the EOFs
 "`user interface"' and EOFi. As the user interface has to translate
@@ -956,7 +942,20 @@ key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 \end{itemize}
 \end{itemize}
+
 % -----------------------------------------------------------------------------
+\subsection{XXXX: Show information about peer}
+Display detailled information about a nick:
+\begin{itemize}
+\item Available PGP details like
+\begin{itemize}
+\item fingerprint,
+\item full name or
+\item e-mail.
+\end{itemize}
+\item List of address of transport protocols
+\end{itemize}
+%% -----------------------------------------------------------------------------
 \subsection{0021: Add peer}
 Aftere the "`0021"' follow
 
