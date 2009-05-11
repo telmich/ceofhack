@@ -1046,17 +1046,6 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.
 % -----------------------------------------------------------------------------
-\subsection{0023: Retrieve peer fingerprint}
-Aftere the "`0023"' follows a 128 bytes fixed length string for the peer name.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1123}: success
-\begin{itemize}
-\item follows 40 bytes fixed length string containing the fingerprint
-\end{itemize}
-\item \textbf{1221}: unknown peer
-\end{itemize}
-% -----------------------------------------------------------------------------
 \subsection{1300: Recieved message}
 After the "1300" follows:
 \begin{itemize}
