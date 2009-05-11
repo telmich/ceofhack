@@ -1057,36 +1057,6 @@ Answers from ceof:
 \item \textbf{1221}: unknown peer
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{0030: Get list of channels}
-After the "`0030"' follow 128 Bytes containing the 
-name of the peer.
-
-Answers from ceof:
-
-\begin{itemize}
-\item \textbf{1130}: got list; following four ASCII-digits containing
-number of channels ("`num\_chan"'); after that  num\_chan 128 Bytes packets
-follow containing the channel name, padded with 0-bytes
-\item \textbf{1230}: connection could not be established
-\end{itemize}
-% OK
-% -----------------------------------------------------------------------------
-\subsection{0032: Send message to channel}
-Aftere the "0032" follow 128 bytes for the channel name and after
-that 128 Bytes for the message.
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1132}: success
-\item \textbf{1233}: unknown channel
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{0033: Create channel}
-Aftere the "`0033"' follow 128 bytes containing the name of the channel.
-\begin{itemize}
-\item \textbf{1133}: success
-\item \textbf{1234}: Channel already exists
-\end{itemize}
-% -----------------------------------------------------------------------------
 \subsection{1300: Recieved message}
 After the "1300" follows:
 \begin{itemize}
@@ -1117,49 +1087,6 @@ Connect to ceof. Find out about
 It thus issues the following commands:
 register, list joined channels, list open queries, list marktschreier.
 % -----------------------------------------------------------------------------
-\subsubsection{Creating a channel}
-When you want to create a channel, you simply have to give it a name.
-Ceof will use that name and sign it with your pgp key. The result is the
-global unique channel identifier. For testing, you can build your channels
-easily on the commandline:
-\begin{verbatim}
-% echo -n '!eof' > CHANNELNAME
-% cat CHANNELNAME 124byteszero > CHANNELNAME.padded
-% gpg -s CHANNELNAME 
-
-You need a passphrase to unlock the secret key for
-user: "Nico Schottelius (telmich) <nico-public@schottelius.org>"
-1024-bit DSA key, ID 9885188C, created 2006-09-27
-
-% ls -l CHANNELNAME*
--rw------- 1 nico nico   4 2007-09-17 21:32 CHANNELNAME
--rw------- 1 nico nico 128 2007-09-17 21:32 CHANNELNAME.padded
--rw------- 1 nico nico 113 2007-09-17 21:32 CHANNELNAME.padded.gpg
-
-% gpg -d CHANNELNAME.padded.gpg 2>/dev/null
-!eof
-\end{verbatim}
-% -----------------------------------------------------------------------------
-\subsubsection{Finding a channel}
-UNFINISHED
-replace internal id with signature!
-
-The GUI asks ceof, which channels are known. After that the GUI
-can use the internal ID (which is "`unique"', as in: it is a 32 bit integer
-that is increased as long as ceof is running) to join it.
-% -----------------------------------------------------------------------------
-\subsubsection{Joining a channel}
-UNFINISHED
-The channel must be known through 
-% -----------------------------------------------------------------------------
-\subsubsection{Leaving a channel}
-UNFINISHED
-Sends a message to all known participants that we leave the channel now.
-% -----------------------------------------------------------------------------
-\subsubsection{Invite to channel}
-UNFINISHED
-If you create a new channel, you may want to invite people to it.
-% -----------------------------------------------------------------------------
 \subsubsection{Listing friends}
 % -----------------------------------------------------------------------------
 \subsection{ceof initiated commands / messages}
@@ -1172,10 +1099,6 @@ Somebody wants to join in a channel, in which you are a member.
 \subsubsection{Recieved a join notification request}
 UNFINISHED
 Somebody wants us to tell all members of the channel that she wants to join us.
-% -----------------------------------------------------------------------------
-\subsubsection{Recieved a channel message}
-UNFINISHED
-Must contain which channel, who send it and what is in the message.
 % -----------------------------------------------------------------------------
 \subsubsection{Recieved a private message}
 UNFINISHED
