@@ -832,17 +832,22 @@ Newnick & EOFsdt & New nick name & heinz\\
 \end{verbatim}
 % Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/whois $<nick>$}
-Display detailled information about a nick:
-\begin{itemize}
-\item Available PGP details like
-\begin{itemize}
-\item fingerprint,
-\item full name or
-\item e-mail.
-\end{itemize}
-\item List of address of transport protocols
-\end{itemize}
+\subsection{/peer show $<$nick$>$}
+Display detailled information about peer.
+\index{Command!/peer show}%
+\begin{longtable}{|c|c|c|c|}
+\caption{/peer rename parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
+\hline
+\end{longtable}
+
+\subsubsection{Example}
+\begin{verbatim}
+/peer show karl-otto
+\end{verbatim}
 % Nico: 1.0
 %---------------------------------------------------------------------
 \subsection{/quit}
@@ -858,6 +863,19 @@ Is an alias for \textit{/peer send $<$name$>$ $<$message$>$}
 Display nicks in the currently active channel.
 
 Make alias recommendation, not to be implemented directly.
+%---------------------------------------------------------------------
+\subsection{/whois $<nick>$}
+Display detailled information about a nick:
+\begin{itemize}
+\item Available PGP details like
+\begin{itemize}
+\item fingerprint,
+\item full name or
+\item e-mail.
+\end{itemize}
+\item List of address of transport protocols
+\end{itemize}
+% Nico: 1.0
 
 POST ceofhack-0.1
 %---------------------------------------------------------------------
