@@ -2,17 +2,17 @@
 #define EOF_H
 
 /* Lengths */
-#define EOF_L_CMD       4
-#define EOF_L_KEYID     40
-#define EOF_L_NICKNAME  128
-#define EOF_L_MESSAGE   128
-#define EOF_L_ADDRESS   128
-#define EOF_L_CHANNEL   128
-#define EOF_L_UI_INPUT  256
-#define EOF_L_PKG_MAX   65536
+#define EOF_L_CMD                4
+#define EOF_L_KEYID              40
+#define EOF_L_NICKNAME           128
+#define EOF_L_MESSAGE            128
+#define EOF_L_ADDRESS            128
+#define EOF_L_CHANNEL            128
+#define EOF_L_UI_INPUT           256
+#define EOF_L_PKG_MAX            65536
 
 /* areas / categories / components */
-#define EOF_C_TP         0x01       /* transport protocols */
+#define EOF_C_TP                 0x01       /* transport protocols */
 
 
 /* commands */
@@ -31,10 +31,18 @@
 #define EOF_CMD_EXT_DROP         "3003"
 
 /* UI commands */
-#define EOF_UI_QUIT      "/quit"
-#define EOF_UI_PEER_ADD  "/peer add"
-#define EOF_UI_PEER_LIST "/peer list"
-#define EOF_UI_PEER_SEND "/peer send"
-#define EOF_UI_HELP      "/help"
+#define EOF_UI_QUIT              "/quit"
+#define EOF_UI_PEER_ADD          "/peer add"
+#define EOF_UI_PEER_LIST         "/peer list"
+#define EOF_UI_PEER_SEND         "/peer send"
+#define EOF_UI_HELP              "/help"
+
+/* paths */
+#define EOF_P_CONFIGDIR          ".ceof"
+
+/* library functions */
+int eof_ui_connect();
+void eof_get_configdir(char buf[]);
+
 
 #endif
