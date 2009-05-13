@@ -23,14 +23,37 @@
  */
 
 //#include <stdlib.h>              /* NULL                          */
-//#include <stdio.h>               /* printf                        */
+#include <stdio.h>               /* printf                        */
 //#include <string.h>              /* str*                          */
 //#include <limits.h>              /* PATH_MAX                      */
 
+#include <sys/socket.h> /* socket handling   */
+#include <sys/un.h>     /* Unix socket       */
 
-//#include "ceofhack.h"   /* functions etc. */
+#include "ceofhack.h"   /* functions etc. */
 
 int ui_init()
 {
+   int sock;
+   struct sockaddr_un una;
+
+   /* create socket */
+   sock = socket(AF_UNIX, SOCK_STREAM, 0);
+   if(sock == -1) {
+      perror(opt.uisocket);
+      return 0;
+   }
+
+   una.sun_family = AF_UNIX;
+   /* FIXME: add length of una.sun_path */
+   strcpy(una.sun_path, opt.uisocket);
+
+   if(bind(sock, (struct sockaddr *) &una, sizeof(una)) == -1) {
+      perror(opt.uisocket);
+      return 0;
+   }
+
+   /* add to helper list */
+
    return 1;
 }

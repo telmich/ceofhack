@@ -58,5 +58,8 @@ if [ "$1" = "dev" ]; then
             ~/.ceof/tp/listen/dummy-for-dev/url
 fi
 
+######### user interfaces
+mkdir -p ~/.ceof/ui
+
 echo "done."
 

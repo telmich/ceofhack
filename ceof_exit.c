@@ -37,11 +37,15 @@ void ceof_exit(int i)
 
    printf("Shutting down EOF subsystems (SIGINT)...\n");
    helper_signal_all(SIGINT);
+   
    printf("Waiting %d seconds...\n", (short) ts.tv_sec);
    nanosleep(&ts, NULL);
+
    printf("Shutting down EOF subsystems (SIGKILL)...\n");
    helper_signal_all(SIGKILL);
 
+   printf("Removing UI socket...\n");
+   unlink(opt.uisocket);
 
    _exit(i);
 }

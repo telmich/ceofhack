@@ -73,7 +73,7 @@ PROG=ceofhack
 
 DOC=doc/EOF
 
-all: $(PROG) tp-all
+all: $(PROG) tp-all ui-all
 
 run: $(PROG)
 	cat doc/dev/braindumps/sample-commands
