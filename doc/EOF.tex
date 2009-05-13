@@ -302,13 +302,13 @@ The home directory of the user. It is required by EOFi to locate the
 configuration directory.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsubsection{\$CEOF\_HOME}
+\subsubsection{\$EOF\_HOME}
 The ceof configuration directory. If set by before EOFi starts, it will
 skip the autodetection of the configuration directory.
 This variable is exported to all EOFs.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsubsection{\$CEOF\_UI\_SOCKET}
+\subsubsection{\$EOF\_UI\_SOCKET}
 This variable contains the absolute path to the socket, which should be used
 by user interfaces (UIs).
 % Nico: 1.0
@@ -324,7 +324,7 @@ must be received, before the next packet may be sent.
 \subsection{EOFi configuration directory}
 % -----------------------------------------------------------------------------
 \subsubsection{Default case}
-Normally, \$HOME is set and \$CEOF\_HOME is not set. In that case
+Normally, \$HOME is set and \$EOF\_HOME is not set. In that case
 the configuration directory defaults to \textit{\$HOME/.ceof}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
@@ -333,14 +333,14 @@ If the environment variable "`\textit{\$HOME}`" is not set,
 the directory named \textit{.ceof} in the current directory will be used.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsubsection{\$CEOF\_HOME is set}
-If the environment variable "`\textit{\$CEOF\_DIR}`" is set,
+\subsubsection{\$EOF\_HOME is set}
+If the environment variable "`\textit{\$EOF\_DIR}`" is set,
 its content will be used to refer to the configuration directory.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{User interface (unix socket)}
 \label{ui-socket}
-If the environment variable \textit{\$CEOF\_UI\_SOCKET} is set, the user
+If the environment variable \textit{\$EOF\_UI\_SOCKET} is set, the user
 interface should connect to this unix socket. Otherwise it should connect
 to the socket "`ui/socket"' below the EOFi configuration directory
 (see above for rules how to locate that).
@@ -891,7 +891,7 @@ section titles refer to the \emph{ui2user} and \emph{eofi2ui} commands.
 % -----------------------------------------------------------------------------
 \subsection{UI startup}
 What todo, when the GUI starts.
-Connect to ceof. Find out about
+Connect to EOFi. Find out about
 \begin{itemize}
 \item joined channels,
 \item connected marktscheier
@@ -924,10 +924,10 @@ EOFi will close the socket afterwards.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1102: Exit requested}
-ceof is being shutdown.
+EOFi is being shutdown.
 Shutdown yourself, too.
-After that message ceof will exit and you should do the same.
-No answer possible, ceof already decided to vanish.
+After that message EOFi will exit and you should do the same.
+No answer possible, EOFi already decided to vanish.
 EOFi is being sh
 \index{Command!1102}
 \begin{longtable}{|c|c|c|c|}
@@ -993,7 +993,7 @@ Msgtext & EOFsdt & The message itself & Hallo, wie geht es Dir?\\
 Aftere the "`0022"' follow 128 bytes for the peer name
 and after that 128 Bytes for the message.
 Both 0-terminated, 0 padded.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item \textbf{1122}: success
 \item \textbf{1221}: unknown peer
@@ -1199,11 +1199,11 @@ Sort sections by alphabet.
 % -----------------------------------------------------------------------------
 \section{Commands}
 All commands are send as 4-Byte ASCII digits (for instance "`0012"').
-There is no transfer of binary numbers between \textbf{ceof} and \textbf{pmg}.
+There is no transfer of binary numbers between \textbf{EOFi} and \textbf{pmg}.
 All answers and all numbers are ASCII-numbers. We
 \textbf{pmg commands} always begin with \textbf{0} ("`0042"' for instance),
 \textbf{answers} or \textbf{notifications} from
-\textbf{ceof} begin with \textbf{1} ("`1023"' for instance).
+\textbf{EOFi} begin with \textbf{1} ("`1023"' for instance).
 After each command follows individual data. The second byte indicates the type of message:
 \begin{itemize}
 \item \textbf{0}: \textbf{pmg} messages
@@ -1212,12 +1212,12 @@ After each command follows individual data. The second byte indicates the type o
 \item \textbf{01}: \textbf{pmg} success messages
 \item \textbf{02}: \textbf{pmg} error messages
 \end{itemize}
-\item \textbf{1}: \textbf{ceof} messages
+\item \textbf{1}: \textbf{EOFi} messages
 \begin{itemize}
-\item \textbf{10}: \textbf{ceof} (de-)initialisation
-\item \textbf{11}: \textbf{ceof} success messages
-\item \textbf{12}: \textbf{ceof} error messages
-\item \textbf{13}: \textbf{ceof} peer messages
+\item \textbf{10}: \textbf{EOFi} (de-)initialisation
+\item \textbf{11}: \textbf{EOFi} success messages
+\item \textbf{12}: \textbf{EOFi} error messages
+\item \textbf{13}: \textbf{EOFi} peer messages
 \end{itemize}
 \end{itemize}
 
@@ -1226,15 +1226,15 @@ After each command follows individual data. The second byte indicates the type o
 % -----------------------------------------------------------------------------
 \subsubsection{0000: Register pmg}
 After the "`0000"' \textbf{pmg} directly appends two ASCII digits containing the
-version of the client to ceof protocol it speaks. This specification
+version of the client to EOF protocol it speaks. This specification
 uses version "`\textbf{03}"'.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item \textbf{1100}: success, you are connected
 \item \textbf{1200}: version not supported
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{Ceof commands}
+\subsection{EOFi commands}
 % -----------------------------------------------------------------------------
 \subsubsection{1099: Exit}
 Answers from \textbf{pmg}:
@@ -1360,7 +1360,7 @@ Answers from \textbf{pmg}:
 
 \section{Introduction}
 This document specifies the commands send from politiker to and from
-ceof\footnote{the central EOF-1 application} to the politiker.
+EOFi\footnote{the central EOF-1 application} to the politiker.
 
 \subsection{Changelog}
 \subsubsection{none}
@@ -1369,7 +1369,7 @@ ceof\footnote{the central EOF-1 application} to the politiker.
 \end{itemize}
 % -----------------------------------------------------------------------------
 \section{Connection}
-The politiker is started by ceof at startup and communicates through stdin
+The politiker is started by EOFi at startup and communicates through stdin
 and stdout.
 % -----------------------------------------------------------------------------
 \section{Commands}
@@ -1377,7 +1377,7 @@ All commands are send as uint32\_t types.
 \textbf{Politiker commands} always begin with
 \textbf{3} ("`3042"' for instance),
 \textbf{answers} or \textbf{notifications} from
-ceof begin with \textbf{1} ("`1023"' for instance).
+EOFi begin with \textbf{1} ("`1023"' for instance).
 After each command follows individual data. The second byte indicates the type of message:
 \begin{itemize}
 \item \textbf{30}: politiker messages
@@ -1386,7 +1386,7 @@ After each command follows individual data. The second byte indicates the type o
 \item \textbf{301}: Peer related messages
 \item \textbf{302}: Message related messages
 \end{itemize}
-\item \textbf{10}: ceof messages
+\item \textbf{10}: EOFi messages
 \begin{itemize}
 \item \textbf{100}: (De-)Initialisation
 \item \textbf{101}: Peer related messages
@@ -1400,27 +1400,27 @@ After each command follows individual data. The second byte indicates the type o
 % -----------------------------------------------------------------------------
 \subsection{3000: Register politker}
 After the "`3000"' the politker directly appends an
-\textit{uint32\_t} containing the version of the politker to ceof protocol
+\textit{uint32\_t} containing the version of the politker to EOFi protocol
 it speaks. This specification uses version number "`0"'.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item \textbf{1100}: sucess, you are connected
 \item \textbf{1200}: version not supported
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{3001: Deregister politiker}
-The politker has some problem and has to exit. Ceof will restart a new
+The politker has some problem and has to exit. EOFi will restart a new
 instance of it.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item none
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{3010: Retrieve random peer address and fingerprint}
 The politker needs some peer information to be used as a hop.
-Ceof forwards that request to \textbf{pmg}\footnote{peer manager} and returns
+EOFi forwards that request to \textbf{pmg}\footnote{peer manager} and returns
 the answer to the politiker.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item 1010: Data follows
 \begin{itemize}
@@ -1432,9 +1432,9 @@ Answers from ceof:
 \subsection{3011: Retrieve number of available peers}
 The politker needs to know how much "`unique"' peers are available,
 so it can match the required minimum.
-Ceof forwards that request to \textbf{pmg} and returns the answer to the
+EOFi forwards that request to \textbf{pmg} and returns the answer to the
 politiker.
-Answers from ceof:
+Answers from EOFi:
 \begin{itemize}
 \item 1010: Data follows
 \begin{itemize}
@@ -1443,14 +1443,14 @@ Answers from ceof:
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{3020: Created an encrypted packet}
-Passes the following information to ceof:
+Passes the following information to EOFi:
 \begin{itemize}
 \item The length of the packet (uint32\_t) (\textit{pck\_len})
 \item The packet (\textit{pck})
 \end{itemize}
 
 After the \textbf{politiker} send \textit{pck\_len},
-\textbf{ceof} must respond with either
+\textbf{EOFi} must respond with either
 \begin{itemize}
 \item \textbf{1030}: pagket length is accepted
 \item \textbf{1031}: pagket length is too long
@@ -1460,7 +1460,7 @@ If the response is \textit{1030}, \textbf{politiker} should send the
 pcaket, otherwise this session is finished and \textbf{politiker}
 should drop the packet.
 % -----------------------------------------------------------------------------
-\subsection{10: Ceof messages}
+\subsection{10: EOFi messages}
 % -----------------------------------------------------------------------------
 \subsection{1020: Create encrypted packet}
 Passes the following information to the politiker:
@@ -1471,14 +1471,14 @@ Passes the following information to the politiker:
 \item The message (\textit{msg})
 \end{itemize}
 
-After \textbf{ceof} send \textit{msg\_len}, politiker must respond with
+After \textbf{EOFi} send \textit{msg\_len}, politiker must respond with
 either
 \begin{itemize}
 \item \textbf{3020}: message length is accepted
 \item \textbf{3021}: message length is too long
 \end{itemize}
 
-If the response is \textit{3020}, \textbf{ceof} should send the messsage,
+If the response is \textit{3020}, \textbf{EOFi} should send the messsage,
 otherwise this session is finished and the next thing the politiker expects
 is a command.
 
