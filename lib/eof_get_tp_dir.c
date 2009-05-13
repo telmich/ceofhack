@@ -18,26 +18,16 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Get configuration directory
+ * Get transport protocol directory
  *
  */
 
-#include <string.h>     /* memset, str*   */
-#include <stdlib.h>     /* getenv         */
-#include "ceofhack.h"   /* functions etc.  */
+#include <string.h>  /* memset, str*   */
+#include "eof.h"     /* eof            */
 
-void eof_get_ui_socketpath(char buf[], size_t len)
+void eof_get_tp_dir(char buf[], size_t len)
 {
-   char *p;
-
    memset(buf, '\0', len);
-
-   p = getenv(EOF_ENV_UI_SOCKET);
-   if(p) {
-      strncpy(buf, p, len-1);
-      return;
-   }
-
    eof_get_configdir(buf, len);
-   strncat(buf, EOF_P_UI_SOCKET, len-1);
+   strncat(buf, EOF_P_TP_DIR, len-1);
 }

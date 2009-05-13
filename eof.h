@@ -46,13 +46,17 @@
 #define EOF_P_SLASH              "/"
 #define EOF_P_CONFIGDIR          ".ceof"
 #define EOF_P_UI_SOCKET          EOF_P_SLASH "ui" EOF_P_SLASH "socket"
+#define EOF_P_GPG_DIR            EOF_P_SLASH "gpg"
+#define EOF_P_TP_DIR             EOF_P_SLASH "tp"
 
 /* library functions */
 int  eof_ui_connect();
 
-#include <sys/types.h>
+#include <sys/types.h>           /* size_t   */
 void eof_get_configdir(char buf[], size_t len);
 void eof_get_ui_socketpath(char buf[], size_t len);
+void eof_get_gpg_dir(char buf[], size_t len);
+void eof_get_tp_dir(char buf[], size_t len);
 
 
 #endif

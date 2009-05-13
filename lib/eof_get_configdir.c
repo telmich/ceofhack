@@ -32,7 +32,7 @@ void eof_get_configdir(char buf[], size_t len)
 {
    char *p; 
 
-   memset(buf, '\0', len+1);
+   memset(buf, '\0', len);
 
    p = getenv(EOF_ENV_EOF_HOME);
    if(p) {
@@ -44,7 +44,7 @@ void eof_get_configdir(char buf[], size_t len)
    if(p) {
       strncpy(buf, p, len);
    }
-   strncat(buf, EOF_P_SLASH, len);
-   strncat(buf, EOF_P_CONFIGDIR, len);
+   strncat(buf, EOF_P_SLASH, len-1);
+   strncat(buf, EOF_P_CONFIGDIR, len-1);
 
 }

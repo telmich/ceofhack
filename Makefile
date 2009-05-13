@@ -54,14 +54,18 @@ GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c
 
-# objects for the upcoming library
-LIB=eof_get_configdir.c
+# objects from the upcoming library for EOFi (=ceofhack)
+LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
+LIB+=lib/eof_get_ui_socketpath.c
+
+# interface for the user interfaces
+UI=ui_init.c
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=config_init.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
-CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG)
+CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 

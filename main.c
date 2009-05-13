@@ -50,11 +50,11 @@ int main()
    if(!cmd_init())      return 1;   /* enable EOF commands  */
    if(!ui_cmds_init())  return 1;   /* enable ui commands   */ /* FIXME: HACK */
    if(!peers_init())    return 1;   /* empty peers          */
+   if(!ui_init())       return 1;   /* enable user input    */
 
    /* add stdin to poll: replace this later with a UI socket*/
-   if(!helper_fdonly(STDIN_FILENO, ui_cmd_read, NULL)) return 1;
+   if(!helper_fdonly(STDIN_FILENO, ui_cmd_read, NULL)) return 1;/* FIXME: HACK*/
 
-// if(!ui_init())       return 1;   /* enable user input    */
 
    ceof_banner(MSG_CEOF_STARTED);                   /* finally, we're there */
    while(1) {

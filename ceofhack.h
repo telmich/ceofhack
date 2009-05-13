@@ -81,10 +81,11 @@ struct cmd_cat {
 #include <limits.h>              /* PATH_MAX                      */
 struct options {
    char home[PATH_MAX+1];
-   char ceofhome[PATH_MAX+1];
    char gpghome[PATH_MAX+1];
-   char gpg[PATH_MAX+1];
    char tphome[PATH_MAX+1];
+   char uisocket[PATH_MAX+1];
+
+   char gpg[PATH_MAX+1];
 };
 
 #include <sys/types.h>           /* POSIX for pid_t               */
@@ -235,5 +236,8 @@ int cmd_2003(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);
 struct cmd_cat *cmd_cat_find(unsigned long cat);
 struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
+
+/* user interfaces */
+int ui_init();
 
 #endif

@@ -31,26 +31,15 @@ struct options opt;
 
 int config_init()
 {
-   /* FIXME: should read env and so on later */
+   eof_get_configdir(opt.home, PATH_MAX+1);
 
-   char *p; 
+   eof_get_tp_dir(opt.tphome, PATH_MAX+1);
+   eof_get_gpg_dir(opt.gpghome, PATH_MAX+1);
+   eof_get_ui_socketpath(opt.uisocket, PATH_MAX+1);
+   eof_get_tp_dir(opt.tphome, PATH_MAX+1);
 
-   p = getenv("HOME");
-   if(!p) {
-      fprintf(stderr, "You don't have a home, poor $something!\n");
-      return 1;
-   }
-
-   strncpy(opt.home, p, PATH_MAX);
-   strncpy(opt.ceofhome, opt.home, PATH_MAX);
-   strncat(opt.ceofhome, "/.ceof", PATH_MAX - strlen(opt.ceofhome));
-
+   /* FIXME: use symlink in configuration directory */
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
-   strncpy(opt.gpghome, opt.ceofhome, PATH_MAX);
-   strncat(opt.gpghome, "/gpg", PATH_MAX - strlen(opt.gpghome));
-
-   strncpy(opt.tphome, opt.ceofhome, PATH_MAX);
-   strncat(opt.tphome, "/transport-protocols", PATH_MAX - strlen(opt.ceofhome));
 
    return 1;
 }
