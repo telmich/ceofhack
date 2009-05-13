@@ -54,6 +54,9 @@ GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c
 
+# objects for the upcoming library
+LIB=eof_get_configdir.c
+
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=config_init.c
