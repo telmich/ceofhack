@@ -95,3 +95,9 @@ tp-all:
 
 tp-clean:
 	make -C tp clean
+
+ui-all:
+	make -C ui all
+
+ui-clean:
+	make -C ui clean
