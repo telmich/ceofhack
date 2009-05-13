@@ -41,8 +41,8 @@ int eof_ui_connect()
    eof_get_ui_socketpath(una.sun_path, 108);
    printf("socket: %s\n", una.sun_path);
 
-   if(connect(sock, (struct sockaddr *) &una, 
-      sizeof(una.sun_family) + strlen(una.sun_path) + 1) == -1) {
+   if(connect(sock, (struct sockaddr *) &una, sizeof(una)) == -1) {
+      perror("connect");
       return -1;
    }
 

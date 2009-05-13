@@ -53,6 +53,11 @@ int ui_init()
       return 0;
    }
 
+   if(listen(sock, EOF_L_MAX_UI_WAIT) == -1) {
+      perror(opt.uisocket);
+      return 0;
+   }
+
    /* add to helper list */
 
    return 1;

@@ -40,6 +40,7 @@
                                   * uses an unsigned long it -> 32 is maximum!
                                   */
 #define EOF_L_PEER_INPUT  256    /* FIXME: HACKs */
+#define EOF_L_MAX_UI_WAIT  32    /* FIXME: HACKs */
 
 /* parts of the pipe array _we_ use */
 #define HP_READ            0
