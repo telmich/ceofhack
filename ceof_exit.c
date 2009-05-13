@@ -32,7 +32,7 @@
 void ceof_exit(int i)
 {
    struct timespec ts;
-   ts.tv_sec = 2;
+   ts.tv_sec = 1;
    ts.tv_nsec =0;
 
    printf("Shutting down EOF subsystems (SIGINT)...\n");
