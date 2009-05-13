@@ -37,12 +37,22 @@
 #define EOF_UI_PEER_SEND         "/peer send"
 #define EOF_UI_HELP              "/help"
 
+/* environment variables */
+#define EOF_ENV_UI_SOCKET        "EOF_UI_SOCKET"
+#define EOF_ENV_EOF_HOME         "EOF_HOME"
+#define EOF_ENV_HOME             "HOME"
+
 /* paths */
+#define EOF_P_SLASH              "/"
 #define EOF_P_CONFIGDIR          ".ceof"
+#define EOF_P_UI_SOCKET          EOF_P_SLASH "ui" EOF_P_SLASH "socket"
 
 /* library functions */
-int eof_ui_connect();
-void eof_get_configdir(char buf[]);
+int  eof_ui_connect();
+
+#include <sys/types.h>
+void eof_get_configdir(char buf[], size_t len);
+void eof_get_ui_socketpath(char buf[], size_t len);
 
 
 #endif

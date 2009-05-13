@@ -31,14 +31,15 @@
 
 int eof_ui_connect()
 {
-   char sockpath[PATH_MAX];
    int sock;
    struct sockaddr_un una;
 
    sock = socket(AF_UNIX, SOCK_STREAM, 0);
    if(sock == -1) { return -1; }
 
-   eof_ui_get_socket_path(una.sun_path);
+   /* FIXME: what does posix specify? 108 is stolen from linux/un.h */
+   eof_get_ui_socketpath(una.sun_path, 108);
+   printf("socket: %s\n", una.sun_path)
 
    if(connect(sock, (struct sockaddr *) &una, sizeof(una)) == -1) {
       return -1;

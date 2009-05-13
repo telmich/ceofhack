@@ -25,24 +25,26 @@
 
 #include <string.h>     /* memset, str*   */
 #include <stdlib.h>     /* getenv         */
-#include "ceofhack.h"   /* functions etc.  */
 
-void eof_get_configdir(char buf[])
+#include "eof.h"   /* functions etc.  */
+
+void eof_get_configdir(char buf[], size_t len)
 {
    char *p; 
 
-   memset(buf, '\0', PATH_MAX+1);
+   memset(buf, '\0', len+1);
 
-   p = getenv("EOF_HOME");
+   p = getenv(EOF_ENV_EOF_HOME);
    if(p) {
-      strncpy(buf, p, PATH_MAX);
+      strncpy(buf, p, len);
       return;
    }
 
-   p = getenv("HOME");
+   p = getenv(EOF_ENV_HOME);
    if(p) {
-      strncpy(buf, p, PATH_MAX);
+      strncpy(buf, p, len);
    }
-   strncat(buf, EOF_P_CONFIGDIR, PATH_MAX);
+   strncat(buf, EOF_P_SLASH, len);
+   strncat(buf, EOF_P_CONFIGDIR, len);
 
 }

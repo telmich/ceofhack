@@ -18,34 +18,28 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * The sample user interface -- main
+ * Get configuration directory; Buffer needs to be PATH_MAX+1
+ * 
  *
  */
 
-#include <limits.h>     /* PATH_MAX          */
-#include <stdio.h>      /* printf()          */
-#include "eof.h"        /* functions etc.    */
+#include <string.h>     /* memset, str*   */
+#include <stdlib.h>     /* getenv         */
+#include "ceofhack.h"   /* functions etc.  */
 
-int main()
+void eof_get_ui_socketpath(char buf[], size_t len)
 {
-   char buf[PATH_MAX+1];
-   /* create socket,
-      connect socket: ui_init.c */
+   char *p;
 
-   eof_get_configdir(buf, PATH_MAX+1);
-   printf("configdir: %s\n", buf);
+   memset(buf, '\0', len);
 
-   if(eof_ui_connect() == -1) {
-      perror("eof_ui_connect");
-      return 0;
+   p = getenv(EOF_ENV_UI_SOCKET);
+   if(p) {
+      strncpy(buf, p, len-1);
+      return;
    }
-   /* submit register command: cmd_2100.c */
-   /* peer add */
-   /* peer send */
-   /* peer list */
-   /* peer rename */
-   /* peer show */
-   /* quit */
 
-   return 1;
+   eof_get_configdir(buf, len);
+   strncat(buf, EOF_P_UI_SOCKET, len-1);
+
 }
