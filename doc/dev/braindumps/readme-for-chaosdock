@@ -1,0 +1,11 @@
+====================> READ the README!!! <================
+
+http://home.schottelius.org/~nico/temp/eof2-testkey
+git://git.schottelius.org/EOF/ceofhack
+/peer add telmich tcp:127.0.0.1:4242 C9F593529F096B83A60FA9270B2DFDACC876D4D1
+/peer add telmich tcp:192.168.1.59:4242 C9F593529F096B83A60FA9270B2DFDACC876D4D1
+/peer send telmich test
+
+128 zeichen:
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
