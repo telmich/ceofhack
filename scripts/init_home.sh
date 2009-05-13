@@ -36,26 +36,26 @@ set -e
 ###### tcp
 echo "Adding transport protocol tcp"
 install -D -m 0755 $__abs_mydir/../tp/tcp/c3/listen \
-        ~/.ceof/transport-protocols/available/tcp/listen
+        ~/.ceof/tp/available/tcp/listen
 install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
-      ~/.ceof/transport-protocols/available/tcp/send
+      ~/.ceof/tp/available/tcp/send
 ###### enable tcp listening: 0.0.0.0:4242
 echo "Enabling listing on $(cat $__abs_mydir/../tp/tcp/example_url)"
-install -d -m 0755 ~/.ceof/transport-protocols/listen/tcpv4-any-4242
+install -d -m 0755 ~/.ceof/tp/listen/tcpv4-any-4242
 install -m 0644 $__abs_mydir/../tp/tcp/example_url    \
-         ~/.ceof/transport-protocols/listen/tcpv4-any-4242/url
+         ~/.ceof/tp/listen/tcpv4-any-4242/url
 
 ###### dummy: only for development
 if [ "$1" = "dev" ]; then
 
-   install -d -m 0755 ~/.ceof/transport-protocols/available/dummy
+   install -d -m 0755 ~/.ceof/tp/available/dummy
    install -m 0755 $__abs_mydir/../tp/dummy/c/send    \
                    $__abs_mydir/../tp/dummy/c/listen  \
-            ~/.ceof/transport-protocols/available/dummy
+            ~/.ceof/tp/available/dummy
 
-   install -d -m 0755 ~/.ceof/transport-protocols/listen/dummy-for-dev
+   install -d -m 0755 ~/.ceof/tp/listen/dummy-for-dev
    install -m 0644 $__abs_mydir/../tp/dummy/example_url    \
-            ~/.ceof/transport-protocols/listen/dummy-for-dev/url
+            ~/.ceof/tp/listen/dummy-for-dev/url
 fi
 
 echo "done."
