@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add check, whether ceofhack already runs
+desc: |-
+  If /home/user/nico/.ceof/ui/socket and /home/user/nico/.ceof/pid exist,
+  try to signal pid and if it is not there, remove socket and create
+  own one.
+type: :feature
+component: ceof
+release: "1.0"
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-14 18:46:15.505238 Z
+references: []
+
+id: b285e66a03b22fa064ba139859b8e0a1dff2dcf7
+log_events: 
+- - 2009-05-14 18:46:16.845272 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
