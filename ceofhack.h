@@ -242,5 +242,6 @@ struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 /* user interfaces */
 int ui_init();
 int ui_handle(int []);
+int ui_read(int []);
 
 #endif

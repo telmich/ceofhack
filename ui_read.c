@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read incoming data from a listening transport protocol
+ * Read incoming data from a user interfaces
  *
  */
 
@@ -30,11 +30,25 @@ int ui_read(int fd[])
 {
    ssize_t len;
    char buf[EOF_L_CMD];
+   struct helper *hp;
 
    /* read command */
    if((len = read(fd[HP_READ], buf, EOF_L_CMD)) == -1) {
       perror("ui_read");
       return 0;
+   }
+
+   if(len == 0) {
+      printf("UI: Closing connection...\n");
+      hp = helper_find_by_fd(HP_READ, fd[HP_READ]);
+      if(!hp) {
+         printf("BUG: Strange, the UI is missing in the list...\n");
+         return 0;
+      }
+
+      helper_disable(hp);
+
+      return 1;
    }
 
    return cmd_handle(EOF_C_UI, fd, buf, len);

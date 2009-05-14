@@ -22,7 +22,7 @@
  *
  */
 
-//#include <stdlib.h>              /* NULL                          */
+#include <fcntl.h>               /* fcntl()                       */
 #include <stdio.h>               /* printf                        */
 //#include <string.h>              /* str*                          */
 //#include <limits.h>              /* PATH_MAX                      */
@@ -57,6 +57,9 @@ int ui_init()
       perror(opt.uisocket);
       return 0;
    }
+
+   /* set to non-blocking */
+   fcntl(sock, F_SETFL, O_NONBLOCK, 1);
 
    /* add to helper list */
    if(!helper_fdonly(sock, ui_handle, NULL)) return 0;

@@ -64,7 +64,10 @@ int main()
    //   printf("Polling on %d channels...\n", pfd_cnt);
       cnt = poll(pfd, pfd_cnt, -1);
       if(cnt == -1) {
-         if(errno != EINTR) return 1;
+         if(errno != EINTR) {
+            perror("poll");
+            return 1;
+         }
       } else {
          check_input(pfd_cnt, &cnt);
       }

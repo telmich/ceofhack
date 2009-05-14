@@ -18,12 +18,13 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read incoming data from a user interfaces
+ * Create new socket and register it
  *
  */
 
 #include <sys/socket.h> /* accept         */
 #include <errno.h>      /* guess          */
+#include <stdio.h>      /* printf()       */
 
 #include "ceofhack.h"   /* functions etc. */
 
@@ -33,12 +34,14 @@ int ui_handle(int fds[])
 
    while((nsock = accept(fds[HP_READ], NULL, NULL)) != -1) {
       /* accept socket and add to helper list */
+      printf("UI: got connection\n");
       if(!helper_fdonly(nsock, &ui_read, NULL)) {
          return 0;
       }
    }
 
-   if(errno == EAGAIN) {
+   /* FIXME: is EWOULDBLOCK posix? */
+   if(errno & (EAGAIN | EWOULDBLOCK)) {
       nsock = 1;
    } else {
       perror("accept");

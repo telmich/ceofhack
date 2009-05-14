@@ -37,7 +37,7 @@ int main()
 
    if(eof_ui_connect() == -1) {
       perror("eof_ui_connect");
-      return 0;
+      return 1;
    }
    /* submit register command: cmd_2100.c */
    /* peer add */
@@ -47,5 +47,5 @@ int main()
    /* peer show */
    /* quit */
 
-   return 1;
+   return 0;
 }

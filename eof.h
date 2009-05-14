@@ -13,6 +13,7 @@
 
 /* areas / categories / components */
 #define EOF_C_TP                 0x01       /* transport protocols */
+#define EOF_C_UI                 0x02       /* user interfaces     */
 
 
 /* commands */
