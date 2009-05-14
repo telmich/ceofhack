@@ -114,7 +114,8 @@ enum {
    TPN = 0x0,     /* TP nothing / none    */
    TPL = 0x1,     /* TP listen            */
    TPS = 0x2,     /* TP sending           */
-   EXR = 0x4      /* Externally received  */
+   EXR = 0x4,     /* Externally received  */
+   UIL = 0x8      /* UI listening         */
 };
 
 /* hacking cconfig lib into ceofhack */
@@ -240,5 +241,6 @@ struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 
 /* user interfaces */
 int ui_init();
+int ui_handle(int []);
 
 #endif

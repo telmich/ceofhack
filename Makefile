@@ -59,7 +59,7 @@ LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c
 
 # interface for the user interfaces
-UI=ui_init.c
+UI=ui_init.c ui_handle.c
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c

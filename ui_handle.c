@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,25 +18,32 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Helper that does not need to be executed, but has on open
- * fd already.
+ * Read incoming data from a user interfaces
  *
  */
 
-#include "ceofhack.h"  /* functions etc. */
+#include <sys/socket.h> /* accept         */
+#include <errno.h>      /* guess          */
 
-int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
+#include "ceofhack.h"   /* functions etc. */
+
+int ui_handle(int fds[])
 {
-   int num = helper_new();
+   int nsock;
 
-   if(num < 0) return 0;
+   while((nsock = accept(fds[HP_READ], NULL, NULL)) != -1) {
+      /* accept socket and add to helper list */
+      if(!helper_fdonly(nsock, &ui_read, NULL)) {
+         return 0;
+      }
+   }
 
-   chp[num].pid            = 0;
-   chp[num].fds[HP_READ]   = fd;
-   chp[num].handle         = handle;
-   chp[num].exit           = exit;
+   if(errno == EAGAIN) {
+      nsock = 1;
+   } else {
+      perror("accept");
+      nsock = 0;
+   }
 
-//   printf("Added fdonly: %d, %p\n", fd, handle);
-
-   return 1;
+   return nsock;
 }

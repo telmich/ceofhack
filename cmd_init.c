@@ -35,7 +35,7 @@ int cmd_init()
 
    /* create categories */
    if(!cmd_cat_create(TPL)) return 0;
-//   if(!cmd_cat_create(EXR)) return 0;
+   if(!cmd_cat_create(UIL)) return 0;
 
    /* create commands and add them to a category  */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;

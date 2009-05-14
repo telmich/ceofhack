@@ -59,6 +59,7 @@ int ui_init()
    }
 
    /* add to helper list */
+   if(!helper_fdonly(sock, ui_handle, NULL)) return 0;
 
    return 1;
 }

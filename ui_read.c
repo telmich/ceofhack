@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,25 +18,24 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Helper that does not need to be executed, but has on open
- * fd already.
+ * Read incoming data from a listening transport protocol
  *
  */
 
-#include "ceofhack.h"  /* functions etc. */
+#include <unistd.h>     /* read           */
+#include <stdio.h>      /* perror         */
+#include "ceofhack.h"   /* functions etc. */
 
-int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []))
+int ui_read(int fd[])
 {
-   int num = helper_new();
+   ssize_t len;
+   char buf[EOF_L_CMD];
 
-   if(num < 0) return 0;
+   /* read command */
+   if((len = read(fd[HP_READ], buf, EOF_L_CMD)) == -1) {
+      perror("ui_read");
+      return 0;
+   }
 
-   chp[num].pid            = 0;
-   chp[num].fds[HP_READ]   = fd;
-   chp[num].handle         = handle;
-   chp[num].exit           = exit;
-
-//   printf("Added fdonly: %d, %p\n", fd, handle);
-
-   return 1;
+   return cmd_handle(EOF_C_UI, fd, buf, len);
 }
