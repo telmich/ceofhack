@@ -11,19 +11,32 @@
 #define EOF_L_UI_INPUT           256
 #define EOF_L_PKG_MAX            65536
 
-/* areas / categories / components */
-#define EOF_C_TP                 0x01       /* transport protocols */
-#define EOF_C_UI                 0x02       /* user interfaces     */
-
-
 /* commands */
 #define EOF_CMD_TPS              "1000"
 #define EOF_CMD_TPL_START        "1001"
 #define EOF_CMD_TPL_STOP         "1002"
+
 #define EOF_CMD_TPS_SENT         "2000"
 #define EOF_CMD_TPS_NOT_SENT     "2001"
 #define EOF_CMD_TPL_RECV         "2002"
 #define EOF_CMD_TPL_LISTENING    "2003"
+
+/* user interfaces: already implemented */
+/* user interfaces */
+#define EOF_CMD_UI_ACK           "1100"
+#define EOF_CMD_UI_FAILURE       "1101"
+#define EOF_CMD_UI_EXITREQUEST   "1102"
+#define EOF_CMD_UI_MSGRECEIVED   "1103"
+
+#define EOF_CMD_UI_REGISTER      "2100"
+#define EOF_CMD_UI_DEREGISTER    "2101"
+#define EOF_CMD_UI_PEER_ADD      "2102"
+#define EOF_CMD_UI_PEER_SEND     "2103"
+#define EOF_CMD_UI_PEER_LIST     "2104"
+#define EOF_CMD_UI_PEER_RENAME   "2105"
+#define EOF_CMD_UI_PEER_SHOW     "2106"
+#define EOF_CMD_UI_QUIT          "2199"
+
 
 /* decoded packets from outside */
 #define EOF_CMD_EXT_MESSAGE      "3000"

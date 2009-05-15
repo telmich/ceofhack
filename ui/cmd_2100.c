@@ -29,6 +29,8 @@ int cmd_2100(int UNUSED(fd[]))
 {
    /* create socket,
       connect socket: ui_init.c */
+
+
    /* submit register command: cmd_2100.c */
    /* peer add */
    /* peer send */

@@ -109,6 +109,7 @@ struct tpl {                     /* listening transport protocols */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
+/* FIXME: needed? */
 /* cmd categories, use in other places as well, need to be '&'-able  */
 enum {
    TPN = 0x0,     /* TP nothing / none    */
@@ -117,6 +118,11 @@ enum {
    EXR = 0x4,     /* Externally received  */
    UIL = 0x8      /* UI listening         */
 };
+
+/* incoming data  categories */
+#define EOF_I_TP                 0x01       /* transport protocols */
+#define EOF_I_UI                 0x02       /* user interfaces     */
+
 
 /* hacking cconfig lib into ceofhack */
 struct cconfig {
@@ -232,6 +238,7 @@ int cmd_init();
 int cmd_cat_create(unsigned long);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
+int cmd_2100(int []);
 int cmd_2002(int []);
 int cmd_2003(int []);
 //int cmd_3000(int []);

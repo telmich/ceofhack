@@ -34,18 +34,21 @@ int cmd_init()
    cmdlist_cnt = 0; /* no categories available */
 
    /* create categories */
-   if(!cmd_cat_create(TPL)) return 0;
-   if(!cmd_cat_create(UIL)) return 0;
+   if(!cmd_cat_create(EOF_I_TP)) return 0;
+   if(!cmd_cat_create(EOF_I_UI)) return 0;
 
    /* create commands and add them to a category  */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
-   if(!cmd_cat_add(TPL, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_TPL_RECV, cmd_2002))) return 0;
-   if(!cmd_cat_add(TPL, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_TPL_LISTENING, cmd_2003))) return 0;
-   if(!cmd_cat_add(TPL, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
+
+   if(!(newcmd = cmd_create(EOF_CMD_UI_REGISTER, cmd_2100))) return 0;
+   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
 
 //   if(!(newcmd = cmd_create(EOF_CMD_EXT_MESSAGE, cmd_3000))) return 0;
 //   if(!cmd_cat_add(EXR, newcmd)) return 0;

@@ -905,13 +905,15 @@ All user interfaces connect to the user interface socket, as specified
 on page \pageref{ui-socket}, section \ref{ui-socket}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{1100: User interface registered}
-This command does not have any further parameters.
-After the UI received it, it may begin to send other commands.
+\subsection{1100: General acknowledge}
+EOFi acknowledged the last command.
+\begin{itemize}
+\item Parameters: none
+\end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{1101: User interface not registered}
-The EOFi cannot accept the connection request.
+\subsection{1101: Failure}
+The EOFi does not accept / understand the request.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1101 parameters}\\
 \hline
@@ -924,37 +926,48 @@ EOFi will close the socket afterwards.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1102: Exit requested}
-EOFi is being shutdown.
-Shutdown yourself, too.
-After that message EOFi will exit and you should do the same.
-No answer possible, EOFi already decided to vanish.
-EOFi is being sh
+This is a  shutdown request to the UI.
+After this message EOFi will exit and there is no communication possible,
+\begin{itemize}
+\item Parameters: none
+\end{itemize}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{1103: Recieved message}
 \index{Command!1102}
 \begin{longtable}{|c|c|c|c|}
-\caption{Command 1102 parameters}\\
+\caption{Command 1103 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+nick & EOFsdt & The sender  & telmich\\
 \hline
-Message & Binary data & The message & BLOB\\
+msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
 \end{longtable}
-% -----------------------------------------------------------------------------
-\subsection{1103: Recieved message}
-After the "1300" follows:
-\begin{itemize}
-\item "`C"' for recieved in channel or "`P"' for recieved by a peer
-\item 128 byte containing either the channel or the peer name
-\item 128 byte containing either the channelname, if the first byte was a "`C"'
-\item 128 Byte message
-\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
-\emph{1100}, but \emph{1101}, the UI should close the socket afterwards.
+\emph{1100}, the UI should close the socket afterwards.
+\begin{itemize}
+\item Parameters: none
+\end{itemize}
+Possible answers:
+\begin{itemize}
+\item 1100
+\item 1104
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2101: Deregister user interface}
+\begin{itemize}
+\item Parameters: none
+\end{itemize}
+\begin{itemize}
+\item Possible answers: none
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2102: /peer add}
 \index{Command!/peer add}%

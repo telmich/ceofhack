@@ -38,5 +38,5 @@ int tp_listen_read(int fd[])
    }
    printf("tpl cmd received: %c %c %c %c\n", buf[0], buf[1], buf[2], buf[3]);
 
-   return cmd_handle(EOF_C_TP, fd, buf, len);
+   return cmd_handle(EOF_I_TP, fd, buf, len);
 }
