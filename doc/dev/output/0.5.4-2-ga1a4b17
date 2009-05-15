@@ -1,0 +1,44 @@
+./ceofhack
+ceofhack> Version 0.5
+gpg> Version 1.1.8
+TP 1 tcp successfully added
+LTP 1 tcpv4-any-4242 listening at tcp:0.0.0.0:4242
+he: /home/user/nico/.ceof/tp/available/tcp/listen: 0, 3, 6
+Init LTP /home/user/nico/.ceof/tp/available/tcp/listen: 10010.0.0.0:4242
+Created cmd 2000
+Added cmd 2000 to category 1
+Created cmd 2002
+Added cmd 2002 to category 1
+Created cmd 2003
+Added cmd 2003 to category 1
+Created cmd 2100
+Added cmd 2100 to category 2
+hfdo: 1, 7, 7
+hfdo: 2, 0, 1
+ceofhack> Started. Please enter commands.
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 0.0.0.0:4242
+tcp/c3/ltp:addr=0.0.0.0
+tcp/c3/ltp:port=4242
+UI: got connection: 8
+hfdo: 3, 8, 8
+category 2: handling cmd (4) 2100
+Handler 2100 found...
+Successfully registered an UI
+UI: Closing connection...
+UI: got connection: 0
+hfdo: 3, 0, 0
+Ignoring text (2100) (later versions send this to all peers in channel)
+
+and the UI:
+
+[20:34] ikn:ui% ./ui_cmd
+configdir: /home/user/nico/.ceof
+socket: /home/user/nico/.ceof/ui/socket
+reading all....
+[20:34] ikn:ui% ./ui_cmd
+configdir: /home/user/nico/.ceof
+socket: /home/user/nico/.ceof/ui/socket
+reading all....
+
+   where it hangs, because of the wrong call of hfdo: 3, 0, 0
