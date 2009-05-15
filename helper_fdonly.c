@@ -31,14 +31,11 @@ int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []))
 
    if(num < 0) return 0;
 
-   /* FIXME: BUG!!!!! where is fds[HP_WRITE] setup??? --> forkexecpie! */
    chp[num].pid            = 0;
    chp[num].fds[HP_READ]   = in;
    chp[num].fds[HP_WRITE]  = out;
    chp[num].handle         = handle;
    chp[num].exit           = exit;
-
-//   printf("Added fdonly: %d, %p\n", fd, handle);
 
    return 1;
 }

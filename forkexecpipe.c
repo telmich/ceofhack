@@ -1,14 +1,30 @@
-/***********************************************************************
+/*******************************************************************************
  *
- *    2007 Nico Schottelius (nico-eof-1 //@\\ schottelius.org)
+ * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
- *    Was part of cLinux/vsm, now EOF-1
+ * This file is part of ceofhack.
+
+ * ceofhack is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *    Copying: GPLv3 (If you need another license: contact me)
+ * ceofhack is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
+ * You should have received a copy of the GNU General Public License
+ * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
+
+ *
+ * Fork and exec a programm, connect its stdin and stdout back
+ * to us. 
+ * 
+ * Was part of cLinux/vsm, now EOF-1
+ * 
  */
 
-#include <sys/wait.h>      /* waitpid        */
 #include <unistd.h>        /* exec*, pip     */
 #include <stdio.h>         /* perror()       */
 #include <fcntl.h>         /* fcntl          */
@@ -17,8 +33,6 @@
 
 int forkexecpipe(struct helper *hp)
 {
-//   printf("forkexecpipe: %s\n", hp->path);
-
    /* read from EOFi [0], write from TP [1] */
    if(pipe(&hp->fds[0]) == -1) {
       perror("pipe");
