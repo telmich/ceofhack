@@ -35,7 +35,7 @@ int ui_handle(int fds[])
    while((nsock = accept(fds[HP_READ], NULL, NULL)) != -1) {
       /* accept socket and add to helper list */
       printf("UI: got connection\n");
-      if(!helper_fdonly(nsock, &ui_read, NULL)) {
+      if(!helper_fdonly(nsock, nsock, &ui_read, NULL)) {
          return 0;
       }
    }

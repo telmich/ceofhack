@@ -29,7 +29,6 @@ int cmd_2100(int fd[])
 {
    printf("Successfully registered an UI\n");
 
-
    return (write_all(fd[HP_WRITE], EOF_CMD_UI_ACK, EOF_L_CMD) == EOF_L_CMD) ?
       1 : 0;
 }

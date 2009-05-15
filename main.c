@@ -53,7 +53,7 @@ int main()
    if(!ui_init())       return 1;   /* enable user input    */
 
    /* add stdin to poll: replace this later with a UI socket*/
-   if(!helper_fdonly(STDIN_FILENO, ui_cmd_read, NULL)) return 1;/* FIXME: HACK*/
+   if(!helper_fdonly(STDIN_FILENO, STDOUT_FILENO, ui_cmd_read, NULL)) return 1;/* FIXME: HACK*/
 
 
    ceof_banner(MSG_CEOF_STARTED);                   /* finally, we're there */

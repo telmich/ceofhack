@@ -62,7 +62,7 @@ int ui_init()
    fcntl(sock, F_SETFL, O_NONBLOCK, 1);
 
    /* add to helper list */
-   if(!helper_fdonly(sock, ui_handle, NULL)) return 0;
+   if(!helper_fdonly(sock, sock, ui_handle, NULL)) return 0;
 
    return 1;
 }

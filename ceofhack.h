@@ -175,7 +175,7 @@ void ceof_banner();
 int helper_init();
 int helper_new();
 void helper_disable(struct helper *hp);
-int helper_fdonly(int fd, int (*handle)(int []), int (*exit)(int []));
+int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));
 int helper_write(struct helper *hp, char *buf, int len);
 struct helper *helper_find_by_pid(pid_t pid);
