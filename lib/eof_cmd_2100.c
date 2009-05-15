@@ -18,26 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * UI->EOFi: Register UI
+ * UI->EOFi: Register UI at EOFi
  *
  */
 
-#include <stdio.h>      /* printf()          */
-#include "ceofhack.h"   /* functions etc.    */
+#include <stdio.h>      /* perror()          */
 
-int cmd_2100(int UNUSED(fd[]))
+#include "shcl.h"   /* functions etc.    */
+#include "eof.h"    /* defines           */
+
+int eof_cmd_2100(int sockfd)
 {
-   /* create socket,
-      connect socket: ui_init.c */
-
+   char buf[EOF_L_CMD];
 
    /* submit register command: cmd_2100.c */
-   /* peer add */
-   /* peer send */
-   /* peer list */
-   /* peer rename */
-   /* peer show */
-   /* quit */
+   if(write_all(sockfd, EOF_CMD_UI_REGISTER, EOF_L_CMD) != EOF_L_CMD) {
+      perror("write_all");
+      return 0;
+   }
 
-   return 1;
+   if(read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
+      perror("read_all");
+      return 0;
+   }
+
+    return 1;
 }

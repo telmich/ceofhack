@@ -29,17 +29,21 @@
 int main()
 {
    char buf[PATH_MAX+1];
+   int sockfd;
    /* create socket,
       connect socket: ui_init.c */
 
    eof_get_configdir(buf, PATH_MAX+1);
    printf("configdir: %s\n", buf);
 
-   if(eof_ui_connect() == -1) {
+   if((sockfd = eof_ui_connect()) == -1) {
       perror("eof_ui_connect");
       return 1;
    }
    /* submit register command: cmd_2100.c */
+
+   if(!eof_cmd_2100(sockfd)) return 1;
+
    /* peer add */
    /* peer send */
    /* peer list */

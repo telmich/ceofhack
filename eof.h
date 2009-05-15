@@ -22,13 +22,14 @@
 #define EOF_CMD_TPL_LISTENING    "2003"
 
 /* user interfaces: already implemented */
-/* user interfaces */
 #define EOF_CMD_UI_ACK           "1100"
+#define EOF_CMD_UI_REGISTER      "2100"
+
+/* user interfaces: not implemented */
 #define EOF_CMD_UI_FAILURE       "1101"
 #define EOF_CMD_UI_EXITREQUEST   "1102"
 #define EOF_CMD_UI_MSGRECEIVED   "1103"
 
-#define EOF_CMD_UI_REGISTER      "2100"
 #define EOF_CMD_UI_DEREGISTER    "2101"
 #define EOF_CMD_UI_PEER_ADD      "2102"
 #define EOF_CMD_UI_PEER_SEND     "2103"
@@ -71,6 +72,7 @@ void eof_get_configdir(char buf[], size_t len);
 void eof_get_ui_socketpath(char buf[], size_t len);
 void eof_get_gpg_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
+int eof_cmd_2100(int sockfd);
 
 
 #endif
