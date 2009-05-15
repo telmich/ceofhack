@@ -23,6 +23,7 @@
  *
  */
 
+#include <stdio.h> /* DEBUG */
 #include "ceofhack.h"  /* functions etc. */
 
 int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []))
@@ -30,6 +31,8 @@ int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []))
    int num = helper_new();
 
    if(num < 0) return 0;
+
+   printf("hfdo: %d, %d, %d\n", num, in, out);
 
    chp[num].pid            = 0;
    chp[num].fds[HP_READ]   = in;

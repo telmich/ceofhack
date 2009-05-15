@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>      /* DEBUG          */
 #include <limits.h>     /* PATH_MAX       */
 #include <stdlib.h>     /* NULL           */
 #include <string.h>     /* str*           */
@@ -38,6 +39,8 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
    chp[num].exit     = exit;
 
    if(!forkexecpipe(&chp[num])) return NULL;
+
+   printf("he: %s: %d, %d, %d\n", path, num, chp[num].fds[HP_READ], chp[num].fds[HP_WRITE]);
 
    return &chp[num];
 }
