@@ -69,7 +69,7 @@ int main()
             return 1;
          }
       } else {
-         check_input(pfd_cnt, &cnt);
+         helper_check_input(pfd_cnt, &cnt);
       }
    }
 

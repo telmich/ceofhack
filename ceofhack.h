@@ -45,6 +45,7 @@
 /* parts of the pipe array _we_ use */
 #define HP_READ            0
 #define HP_WRITE           3
+#define HP_FDCNT           4     /* number of fds used by helper structure */
 
 /****************** Structures  */
 struct peer {
@@ -92,7 +93,7 @@ struct options {
 #include <sys/types.h>           /* POSIX for pid_t               */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
-   int fds[4];                   /* file deskriptors used by poll */
+   int fds[HP_FDCNT];            /* file deskriptors used by poll */
    char path[PATH_MAX+1];        /* absolute path                 */
    int (*handle)(int []);        /* pointer to the handler        */
    int (*exit)(int []);          /* pointer to the exit function  */
@@ -162,7 +163,6 @@ extern gpgme_data_t   gpg_decrypt;
 
 /****************** Functions  */
 /* generic */
-void check_input(int possible, int *have_data);
 int config_init();
 int forkexecpipe(struct helper *hp);
 void fd_to_poll(int *);
@@ -174,6 +174,7 @@ void ceof_banner();
 /* helper */
 int helper_init();
 int helper_new();
+void helper_check_input(int possible, int *have_data);
 void helper_disable(struct helper *hp);
 int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []));
 struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []));

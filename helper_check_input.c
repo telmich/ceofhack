@@ -27,7 +27,7 @@
 
 #include "ceofhack.h"  /* functions etc. */
 
-void check_input(int possible, int *have_data)
+void helper_check_input(int possible, int *have_data)
 {
    int i;
    struct helper *hp;

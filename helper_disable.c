@@ -29,8 +29,8 @@ void helper_disable(struct helper *hp)
 {
    int i;
 
-   hp->pid     = 0;
-   for(i=0; i<4; i++) {
+   hp->pid = 0;
+   for(i=0; i<HP_FDCNT; i++) {
       close(hp->fds[i]);
       hp->fds[i] = -1;  /* does not match, if searchd by fd */
    }

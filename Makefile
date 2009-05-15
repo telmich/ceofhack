@@ -36,14 +36,14 @@ PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
-HELPER+=helper_signal_all.c helper_signal.c
+HELPER+=helper_signal_all.c helper_check_input.c helper_signal.c
 
 # user interface (command line, currently built-in)
 UI_CMD=ui_cmds_init.c ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
 UI_CMD+=ui_quit.c ui_help.c ui_cmd_argcnt.c ui_cmd_argncpy.c
 
 # command handling (ceofhack internal)
-CMD=cmd_handle.c check_input.c cmd_init.c cmd_cat_create.c
+CMD=cmd_handle.c cmd_init.c cmd_cat_create.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
 CMD+=cmd_2000.c cmd_2002.c cmd_2003.c
 CMD+=cmd_2100.c
