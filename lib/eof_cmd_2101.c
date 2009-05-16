@@ -18,40 +18,22 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * The sample user interface -- main
+ * UI->EOFi: Register UI at EOFi
  *
  */
 
-#include <limits.h>     /* PATH_MAX          */
-#include <stdio.h>      /* printf()          */
-#include "eof.h"        /* functions etc.    */
+#include <stdio.h>      /* perror()          */
 
-int main()
+#include "shcl.h"   /* functions etc.    */
+#include "eof.h"    /* defines           */
+
+int eof_cmd_2101(int sockfd)
 {
-   char buf[PATH_MAX+1];
-   int sockfd;
-   /* create socket,
-      connect socket: ui_init.c */
-
-   eof_get_configdir(buf, PATH_MAX+1);
-   printf("configdir: %s\n", buf);
-
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
+   /* submit deregister command: cmd_2101.c */
+   if(write_all(sockfd, EOF_CMD_UI_DEREGISTER, EOF_L_CMD) != EOF_L_CMD) {
+      perror("write_all");
+      return 0;
    }
-   /* submit register command: cmd_2100.c */
 
-   if(!eof_cmd_2100(sockfd)) return 1;
-
-   if(!eof_cmd_2101(sockfd)) return 2;
-
-   /* peer add */
-   /* peer send */
-   /* peer list */
-   /* peer rename */
-   /* peer show */
-   /* quit */
-
-   return 0;
+    return 1;
 }

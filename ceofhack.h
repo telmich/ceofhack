@@ -44,6 +44,8 @@
 
 /* parts of the pipe array _we_ use */
 #define HP_READ            0
+#define HP_EXT_WRITE       1
+#define HP_EXT_READ        2
 #define HP_WRITE           3
 #define HP_FDCNT           4     /* number of fds used by helper structure */
 
@@ -240,6 +242,7 @@ int cmd_cat_create(unsigned long);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 int cmd_2000(int []);
 int cmd_2100(int []);
+int cmd_2101(int []);
 int cmd_2002(int []);
 int cmd_2003(int []);
 //int cmd_3000(int []);
@@ -251,5 +254,6 @@ struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 int ui_init();
 int ui_handle(int []);
 int ui_read(int []);
+int ui_disable(int);
 
 #endif

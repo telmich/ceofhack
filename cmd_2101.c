@@ -18,40 +18,15 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * The sample user interface -- main
+ * De-Registering an UI
  *
  */
 
-#include <limits.h>     /* PATH_MAX          */
 #include <stdio.h>      /* printf()          */
-#include "eof.h"        /* functions etc.    */
+#include "ceofhack.h"   /* functions etc.    */
 
-int main()
+int cmd_2101(int fd[])
 {
-   char buf[PATH_MAX+1];
-   int sockfd;
-   /* create socket,
-      connect socket: ui_init.c */
-
-   eof_get_configdir(buf, PATH_MAX+1);
-   printf("configdir: %s\n", buf);
-
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
-   }
-   /* submit register command: cmd_2100.c */
-
-   if(!eof_cmd_2100(sockfd)) return 1;
-
-   if(!eof_cmd_2101(sockfd)) return 2;
-
-   /* peer add */
-   /* peer send */
-   /* peer list */
-   /* peer rename */
-   /* peer show */
-   /* quit */
-
-   return 0;
+   printf("Deregistering an UI\n");
+   return ui_disable(fd[HP_READ]);
 }

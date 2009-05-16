@@ -50,6 +50,9 @@ int cmd_init()
    if(!(newcmd = cmd_create(EOF_CMD_UI_REGISTER, cmd_2100))) return 0;
    if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
 
+   if(!(newcmd = cmd_create(EOF_CMD_UI_DEREGISTER, cmd_2101))) return 0;
+   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+
 //   if(!(newcmd = cmd_create(EOF_CMD_EXT_MESSAGE, cmd_3000))) return 0;
 //   if(!cmd_cat_add(EXR, newcmd)) return 0;
 

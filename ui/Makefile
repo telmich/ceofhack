@@ -7,7 +7,7 @@ CC+=-I..
 
 UI_MAIN=ui_cmd_main.c
 LIB=../lib/eof_ui_connect.c ../lib/eof_get_ui_socketpath.c ../lib/eof_get_configdir.c
-LIB+=../lib/eof_cmd_2100.c
+LIB+=../lib/eof_cmd_2100.c ../lib/eof_cmd_2101.c
 SHCL=../read_all.c ../write_all.c 
 UI=$(UI_MAIN) $(LIB) $(SHCL)
 UI_OBJ=$(UI:.c=.o)

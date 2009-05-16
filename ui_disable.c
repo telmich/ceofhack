@@ -18,40 +18,26 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * The sample user interface -- main
+ * Read incoming data from a user interfaces
  *
  */
 
-#include <limits.h>     /* PATH_MAX          */
-#include <stdio.h>      /* printf()          */
-#include "eof.h"        /* functions etc.    */
+#include <stdio.h>      /* printf         */
+#include "ceofhack.h"   /* functions etc. */
 
-int main()
+int ui_disable(int fd)
 {
-   char buf[PATH_MAX+1];
-   int sockfd;
-   /* create socket,
-      connect socket: ui_init.c */
+   struct helper *hp;
 
-   eof_get_configdir(buf, PATH_MAX+1);
-   printf("configdir: %s\n", buf);
+   printf("UI: Closing connection...\n");
 
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
+   hp = helper_find_by_fd(HP_READ, fd);
+   if(!hp) {
+      printf("BUG: Strange, the UI is missing in the list...\n");
+      return 0;
    }
-   /* submit register command: cmd_2100.c */
 
-   if(!eof_cmd_2100(sockfd)) return 1;
+   helper_disable(hp);
 
-   if(!eof_cmd_2101(sockfd)) return 2;
-
-   /* peer add */
-   /* peer send */
-   /* peer list */
-   /* peer rename */
-   /* peer show */
-   /* quit */
-
-   return 0;
+   return 1;
 }

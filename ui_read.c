@@ -30,7 +30,6 @@ int ui_read(int fd[])
 {
    ssize_t len;
    char buf[EOF_L_CMD];
-   struct helper *hp;
 
    /* read command */
    if((len = read(fd[HP_READ], buf, EOF_L_CMD)) == -1) {
@@ -39,16 +38,7 @@ int ui_read(int fd[])
    }
 
    if(len == 0) {
-      printf("UI: Closing connection...\n");
-      hp = helper_find_by_fd(HP_READ, fd[HP_READ]);
-      if(!hp) {
-         printf("BUG: Strange, the UI is missing in the list...\n");
-         return 0;
-      }
-
-      helper_disable(hp);
-
-      return 1;
+      return ui_disable(fd[HP_READ]);
    }
 
    return cmd_handle(EOF_I_UI, fd, buf, len);
