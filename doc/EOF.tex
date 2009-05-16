@@ -442,8 +442,15 @@ URLs as defined in RFC3986\cite{uri-1}. For more information have
 a look at section \ref{tp} on page \pageref{tp}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Fingerprint (fingerprint)}
+\subsection{Keyid, the fingerprint (keyid)}
 A (PGP) fingerprint is a \emph{EOF\_L\_KEYID} byte fixed length string.
+It does not contain any spaces.
+It can be retrieved by issuing the following gpg-command:
+\begin{verbatim}
+LC_ALL=C gpg --fingerprint  | \
+   grep "Key fingerprint =" | \
+   sed -e 's/.*=//' -e 's/ //g' 
+\end{verbatim}
 % Nico: 1.0
 % #############################################################################
 \section{EOF Commands}
@@ -761,7 +768,7 @@ as a message to the current selected destination (either
 a \emph{peer} or \emph{group} of peers.
 % Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer add $<$nick$>$ $<$initial address$>$ $<$fingerprint$>$}
+\subsection{/peer add $<$nick$>$ $<$initial address$>$ $<$keyid$>$}
 Add the peer as \textit{name} to the list of known peers.
 
 \index{Command!/peer add}%
@@ -774,7 +781,7 @@ Nick & EOFsdt & Name you identify the peer with & telmich\\
 \hline
 Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
 \hline
-Fingerprint & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
+Keyid & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
 \hline
 \end{longtable}
 
@@ -905,7 +912,7 @@ All user interfaces connect to the user interface socket, as specified
 on page \pageref{ui-socket}, section \ref{ui-socket}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{1100: General acknowledge}
+\subsection{1100: Acknowledge}
 EOFi acknowledged the last command.
 \begin{itemize}
 \item Parameters: none
@@ -980,9 +987,15 @@ Nick & EOFsdt & Name you identify the peer with & telmich\\
 \hline
 Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
 \hline
-Fingerprint & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
+Keyid & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
 \hline
 \end{longtable}
+Possible answers:
+\begin{itemize}
+\item 1100
+\item 1101
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2103: /peer send}
 \index{Command!/peer send}%
@@ -1022,7 +1035,7 @@ Answers from ceof:
 \item after that follow \textit{num\_peer} peer ids:
 \begin{itemize}
 \item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
-\item 40 Byte containing the fingerprint of the
+\item 40 Byte containing the keyid of the
 key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
 \end{itemize}
 \end{itemize}
