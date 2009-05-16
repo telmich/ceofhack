@@ -435,7 +435,7 @@ The channel name is a \emph{EOF\_L\_CHANNEL} byte fixed length string.
 The message text is a \emph{EOF\_L\_MESSAGE} byte fixed length string.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Peer address (address)}
+\subsection{Peer address (addr)}
 The address of a peer, which is is a \emph{EOF\_L\_ADDRESS}
 byte fixed length string. Peer addresses are specified as
 URLs as defined in RFC3986\cite{uri-1}. For more information have
@@ -518,7 +518,7 @@ followed \emph{EOF\_L\_MESSAGE} bytes for the message.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-address & EOFsdt & unused in cmd 3000 &\\
+addr & EOFsdt & unused in cmd 3000 &\\
 \hline
 channel & EOFsdt & The destination channel & !eof\\
 \hline
@@ -543,7 +543,7 @@ be dropped.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-address & EOFsdt & Address of peer to forward packet to&\\
+addr & EOFsdt & Address of peer to forward packet to&\\
 \hline
 channel & EOFsdt & unused in cmd 3001\\
 \hline
@@ -559,7 +559,7 @@ The command 3002 is a combination of command 3000 and 3001.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-address & EOFsdt & Address of peer to forward packet to&\\
+addr & EOFsdt & Address of peer to forward packet to&\\
 \hline
 channel & EOFsdt & The destination channel & !eof\\
 \hline
@@ -768,7 +768,7 @@ as a message to the current selected destination (either
 a \emph{peer} or \emph{group} of peers.
 % Nico: 1.0
 %---------------------------------------------------------------------
-\subsection{/peer add $<$nick$>$ $<$initial address$>$ $<$keyid$>$}
+\subsection{/peer add $<$nick$>$ $<$initial addr$>$ $<$keyid$>$}
 Add the peer as \textit{name} to the list of known peers.
 
 \index{Command!/peer add}%
@@ -779,7 +779,7 @@ Add the peer as \textit{name} to the list of known peers.
 \hline
 Nick & EOFsdt & Name you identify the peer with & telmich\\
 \hline
-Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
+Initial addr & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
 \hline
 Keyid & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
 \hline
@@ -985,9 +985,9 @@ Possible answers:
 \hline
 Nick & EOFsdt & Name you identify the peer with & telmich\\
 \hline
-Initial address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
+Address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
 \hline
-Keyid & EOFsdt & The PGP fingerprint of the peers public key & F27987E34E66...\\
+Keyid & EOFsdt & PGP fingerprint of the peers key & F27987E34E66...\\
 \hline
 \end{longtable}
 Possible answers:
