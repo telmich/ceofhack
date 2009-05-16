@@ -427,8 +427,8 @@ It is only used internally to give a peer a rememberable name ("`a nick'").
 It is never transmitted over the network.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Channel name (channel)}
-The channel name is a \emph{EOF\_L\_CHANNEL} byte fixed length string.
+\subsection{Group name (group)}
+The group name is a \emph{EOF\_L\_GROUP} byte fixed length string.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Message text (msgtext)}
@@ -520,13 +520,13 @@ followed \emph{EOF\_L\_MESSAGE} bytes for the message.
 \hline
 addr & EOFsdt & unused in cmd 3000 &\\
 \hline
-channel & EOFsdt & The destination channel & !eof\\
+group & EOFsdt & The destination group & !eof\\
 \hline
 msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
 \end{longtable}
 \begin{itemize}
-\item If the first byte of the channel is the zero byte, the message
+\item If the first byte of the group is the zero byte, the message
 is a private message (i.e. only sent to you).
 \end{itemize}
 % Nico: 1.0
@@ -545,7 +545,7 @@ be dropped.
 \hline
 addr & EOFsdt & Address of peer to forward packet to&\\
 \hline
-channel & EOFsdt & unused in cmd 3001\\
+group & EOFsdt & unused in cmd 3001\\
 \hline
 msgtext & EOFsdt & unused in cmd 3001\\
 \hline
@@ -561,7 +561,7 @@ The command 3002 is a combination of command 3000 and 3001.
 \hline
 addr & EOFsdt & Address of peer to forward packet to&\\
 \hline
-channel & EOFsdt & The destination channel & !eof\\
+group & EOFsdt & The destination group & !eof\\
 \hline
 msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
@@ -900,12 +900,12 @@ section titles refer to the \emph{ui2user} and \emph{eofi2ui} commands.
 What todo, when the GUI starts.
 Connect to EOFi. Find out about
 \begin{itemize}
-\item joined channels,
+\item joined group,
 \item connected marktscheier
 \item and open queries.
 \end{itemize}
 It thus issues the following commands:
-register, list joined channels, list open queries, list marktschreier.
+register, list joined groups, list open queries, list marktschreier.
 % -----------------------------------------------------------------------------
 \subsection{Connection}
 All user interfaces connect to the user interface socket, as specified
