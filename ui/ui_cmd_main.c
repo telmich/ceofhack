@@ -24,12 +24,20 @@
 
 #include <limits.h>     /* PATH_MAX          */
 #include <stdio.h>      /* printf()          */
+#include <string.h>     /* strncpy()         */
 #include "eof.h"        /* functions etc.    */
 
 int main()
 {
    char buf[PATH_MAX+1];
+   char nick[EOF_L_NICKNAME+1];
+   char keyid[EOF_L_KEYID+1];
+//   char msgtxt[EOF_L_MESSAGE+1];
+   char addr[EOF_L_ADDRESS+1];
+   char cmd[EOF_L_CMD+1];
+
    int sockfd;
+
    /* create socket,
       connect socket: ui_init.c */
 
@@ -44,14 +52,29 @@ int main()
 
    if(!eof_cmd_2100(sockfd)) return 1;
 
-   if(!eof_cmd_2101(sockfd)) return 2;
+
+
+   /*
+    * init stdin and EOFi listener like in EOFi, but vice versa
+    */
 
    /* peer add */
+   strncpy(cmd, EOF_CMD_UI_PEER_ADD, EOF_L_CMD);
+   strncpy(nick, "telmich", EOF_L_NICKNAME);
+   strncpy(addr, "tcp:127.0.0.1:4242", EOF_L_ADDRESS);
+   strncpy(keyid, "A310FB220BA776083559C8276A8817C51B70A5DF", EOF_L_KEYID);
+
+   if(!eof_va_write(sockfd, 4, EOF_L_CMD, cmd, EOF_L_NICKNAME, nick,
+                    EOF_L_ADDRESS, addr, EOF_L_KEYID, keyid)) return 2;
+
    /* peer send */
    /* peer list */
    /* peer rename */
    /* peer show */
    /* quit */
+
+   /* deregister */
+   if(!eof_cmd_2101(sockfd)) return 255;
 
    return 0;
 }
