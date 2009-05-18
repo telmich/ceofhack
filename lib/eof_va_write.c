@@ -26,6 +26,7 @@
  */
 
 #include <stdarg.h>  /* va_*)             */
+#include <stdio.h>  /* va_*)             */
 
 #include "shcl.h"    /* functions etc.    */
 #include "eof.h"     /* defines           */
@@ -37,13 +38,15 @@ int eof_va_write(int sockfd, int nof, ...) /* nof = number of fields */
    char *data;
 
    va_start(ap, nof);
+      printf("VA WRITE, %d\n", nof);
    
    while(nof > 0) {
       len =    va_arg(ap, int);
       data =   va_arg(ap, char *);
+      printf("writing: %s, %d\n", data, len);
 
       if(write_all(sockfd, data, len) != len) {
-         return -1;
+         return 0;
       }
 
       --nof;
