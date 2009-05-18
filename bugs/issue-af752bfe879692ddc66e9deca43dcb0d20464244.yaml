@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add some source code documentation
+desc: |-
+  Via what?
+  Where?
+  How?
+  Doxygen?
+type: :feature
+component: doc
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-18 19:52:04.716064 Z
+references: []
+
+id: af752bfe879692ddc66e9deca43dcb0d20464244
+log_events: 
+- - 2009-05-18 19:52:06.144416 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
