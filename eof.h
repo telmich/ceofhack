@@ -76,4 +76,14 @@ int eof_cmd_2100(int sockfd);
 int eof_cmd_2101(int sockfd);
 
 
+/* low level, normally not used directly */
+int eof_va_read(int sockfd, int nof, ...);
+int eof_va_write(int sockfd, int nof, ...);
+
+/* clean new functions */
+int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
+                    char add[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
+
+
+
 #endif
