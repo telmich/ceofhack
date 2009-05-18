@@ -626,7 +626,7 @@ Unterscheiden zwischen listener und send.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Destination & 128 Byte FLS &URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
+Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
 \hline
@@ -657,7 +657,7 @@ listening transport protocol as enabled.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Destination & 128 Byte FLS & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
+Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
@@ -926,7 +926,7 @@ The EOFi does not accept / understand the request.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Reason & 128 Byte FLS & Why the connection was refused & Too many UIs connected.\\
+Reason & EOFsdt: msgtxt & Why the connection was refused & Too many UIs connected.\\
 \hline
 \end{longtable}
 EOFi will close the socket afterwards.
