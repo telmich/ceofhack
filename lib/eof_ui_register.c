@@ -27,11 +27,16 @@
 #include "shcl.h"   /* functions etc.    */
 #include "eof.h"    /* defines           */
 
-int eof_cmd_2101(int sockfd)
+int eof_ui_register(int sockfd)
 {
-   /* submit deregister command: cmd_2101.c */
-   if(write_all(sockfd, EOF_CMD_UI_DEREGISTER, EOF_L_CMD) != EOF_L_CMD) {
-      perror("write_all");
+   char buf[EOF_L_CMD];
+
+   /* submit register command: cmd_2100.c */
+   if(write_all(sockfd, EOF_CMD_UI_REGISTER, EOF_L_CMD) != EOF_L_CMD) {
+      return 0;
+   }
+
+   if(read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
       return 0;
    }
 

@@ -40,9 +40,7 @@ int main()
 
    int sockfd;
 
-   /* create socket,
-      connect socket: ui_init.c */
-
+   /* just for fun */
    eof_get_configdir(buf, PATH_MAX+1);
    printf("configdir: %s\n", buf);
 
@@ -50,15 +48,11 @@ int main()
       perror("eof_ui_connect");
       return 1;
    }
-   /* submit register command: cmd_2100.c */
 
-   if(!eof_cmd_2100(sockfd)) return 1;
-
-
-
-   /*
-    * init stdin and EOFi listener like in EOFi, but vice versa
-    */
+   if(!eof_ui_register(sockfd)) {
+      perror("eof_ui_register");
+      return 1;
+   }
 
    /* peer add */
    strncpy(cmd, EOF_CMD_UI_PEER_ADD, EOF_L_CMD);
@@ -77,6 +71,10 @@ int main()
       }
    }
 
+   /*
+    * init stdin and EOFi listener like in EOFi, but vice versa
+    */
+
    /* peer send */
    /* peer list */
    /* peer rename */
@@ -84,7 +82,10 @@ int main()
    /* quit */
 
    /* deregister */
-   if(!eof_cmd_2101(sockfd)) return 255;
+   if(!eof_ui_deregister(sockfd)) {
+      perror("eof_ui_derigester");
+      return 255;
+   }
 
    return 0;
 }

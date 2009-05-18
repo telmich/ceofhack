@@ -72,8 +72,8 @@ void eof_get_configdir(char buf[], size_t len);
 void eof_get_ui_socketpath(char buf[], size_t len);
 void eof_get_gpg_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
-int eof_cmd_2100(int sockfd);
-int eof_cmd_2101(int sockfd);
+int eof_ui_register(int sockfd);
+int eof_ui_deregister(int sockfd);
 
 
 /* low level, normally not used directly */
