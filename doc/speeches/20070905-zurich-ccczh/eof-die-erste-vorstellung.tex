@@ -1,0 +1,844 @@
+% first presentation about cmtp
+\documentclass{beamer}
+\usepackage{german}
+\usepackage{beamerthemesplit}
+\setbeamercovered{dynamic}
+\usetheme{Malmoe}
+
+\title{EOF}
+\subtitle{Die erste Vorstellung}
+\author{Nico -telmich- Schottelius}
+%\date{\today}
+\date{5. September 2007}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%\section[Outline]{}
+\frame{\tableofcontents}
+
+% Inhalt:
+% - Vorstellung
+%  telmich
+%  !eof
+% - Motivation
+%  * !eof befindet ist zur Zeit im IRCNet
+%  * Etwas unangenehnem
+%  * abhoerbar an vielen Stellen
+% - Alternativen
+%  irc+ssl:
+%     alle links?
+%  - ssl-only kanaele
+%  - auf den servern abhoerbar
+% silc
+% jabber
+%  sympathische software
+% tor
+%
+% EOF
+%  in mehreren projektphasen
+% PGP
+% momentaner stand
+% Webseite: EOF-1, www.eof.name/projects/eof-1/
+% Libraries, client, client zum client
+%
+%
+
+\section{Einleitung}
+\subsection{Vorstellung}
+\frame
+{
+  \frametitle{Erste Vorstellung}
+
+  \begin{itemize}
+  \item Erste Pr\"asentation
+  \pause
+  \item Hier im CCCZH
+  \pause
+  \item Kreative K\"opfe
+  \pause
+  \item Kritik bekommen
+  \pause
+  \item Anregen zum Mitdenken und -machen
+  \end{itemize}
+}
+\frame
+{
+  \frametitle{!eof}
+
+  \begin{itemize}
+  \item Junge Hackergruppe
+  \pause
+  \item 2001 gegr\"undet
+  \pause
+  \item Fokus auf Freundlichkeit
+  \pause
+  \item Deutschland, Niederlande, Schweiz
+  \pause
+  \item IRCNet: !eof
+  \pause
+  \item https://www.eof.name/
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Nico Schottelius}
+
+  \begin{itemize}
+  \item Entwickelt freie, quelloffene Software (FOSS)
+  \pause
+  \item Philosophie: Machen statt meckern
+  \pause
+  \item aka telmich
+  \pause
+  \item https://nico.schottelius.org/
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{EOF}
+
+  \begin{itemize}
+  \item Alternatives Chatsystem
+  \pause
+  \item Projekt von !eof
+  \end{itemize}
+}
+
+\subsection{Motivation}
+\frame
+{
+  \frametitle{Warum dieser Vortrag?}
+
+  \begin{itemize}
+  \item Idee vorstellen
+  \pause
+  \item Kritik bekommen
+  \pause
+  \item Werben von
+  \pause
+  \begin{itemize}
+  \item Entwicklern
+  \pause
+  \item Testern
+  \pause
+  \item (noch) nicht Benutzern
+  \end{itemize}
+  \end{itemize}
+}
+\frame
+{
+  \frametitle{Warum das Rad neu erfinden?}
+
+  \begin{itemize}
+  \item IRC ist grunds\"atzlich unverschl\"usselt
+  \pause
+  \item Suchen eine generell nicht abh\"orbare Alternative
+  \pause
+  \item Existierende Alternativen erf\"ullen nicht alle Anforderungen
+  \end{itemize}
+}
+\frame
+{
+  \frametitle{Anforderungen}
+
+  \begin{itemize}
+  \item Dezentralit\"at
+  \pause
+  \begin{itemize}
+  \item Ohne zentralen Server
+  \pause
+  \end{itemize}
+  \item Nicht abh\"orbar
+  \pause
+  \begin{itemize}
+  \item \textbf{Wer} mit \textbf{wem} \textbf{wann} \textbf{was} redet
+  \pause
+  \end{itemize}
+  \item Verschl\"usselung und Signatur
+  \end{itemize}
+}
+
+\subsection{\"Uber diesen Vortrag}
+\frame
+{
+  \frametitle{Versionen dieses Vortrages}
+
+  \begin{itemize}
+  \item Nur Text (\LaTeX{} oder PDF)
+  \pause
+  \item Nur Ton (Aufnahme in Ogg)
+  \pause
+  \item Text und Ton (Theora-Video)
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Kopieren dieses Vortrages}
+
+  \begin{itemize}
+  \item Ist (hiermit) explizit gestattet
+  \pause
+  \item Creative Commons Attribution-Share Alike 2.0 Germany License
+  \pause
+  \item http://creativecommons.org/licenses/by-sa/2.0/de/
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Quellen dieses Vortrages}
+
+  \begin{itemize}
+  \item Unter folgenden Adressen zu finden:
+  \pause
+  \begin{itemize}
+  \item https://nico.schottelius.org/projects/eof-1/
+  \pause
+  \item https://www.eof.name/projects/eof-1/
+  \end{itemize}
+  \end{itemize}
+}
+
+\section{Alternativen}
+\subsection{IRC+SSL}
+\frame
+{
+  \frametitle{\"Ubersicht IRC+SSL}
+
+  \begin{itemize}
+  \item Standard IRC mit SSL
+  \pause
+  \item Verschl\"usselung
+  \begin{itemize}
+  \item Client zum Server
+  \pause
+  \item Server zum Server
+  \pause
+  \end{itemize}
+  \item "`Nur SSL"'-R\"aume
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Vorteile}
+
+  \begin{itemize}
+  \item Erprobtes Protokoll
+  \pause
+  \item Stabile Software vorhanden
+  \pause
+  \item Verschl\"usselung ist einfach hinzuf\"ugbar
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Nachteile}
+
+  \begin{itemize}
+  \item Innerhalb der Server ungesichert
+  \pause
+  \begin{itemize}
+  \item Kompromitierung durch \"Ubernahme eines Servers m\"oglich
+  \pause
+  \end{itemize}
+  \item Keine Ende-zu-Ende-Verschl\"usselung
+  \pause
+  \item Teile der Verbindung k\"onnen unverschl\"usselt sein
+  \pause
+  \item Statistische Analyse m\"oglich
+  \pause
+  \begin{itemize}
+  \item Wer sendet wann, wer empf\"angt wann?
+  \end{itemize}
+  \end{itemize}
+}
+
+\subsection{SILC}
+\frame
+{
+  \frametitle{\"Ubersicht SILC}
+
+  \begin{itemize}
+  \item \textbf{S}ecure \textbf{I}nternet \textbf{L}ive \textbf{C}hat
+  \pause
+  \item Geplanter Ersatz f\"ur IRC
+  \pause
+  \item Verschl\"usselung
+  \pause
+  \begin{itemize}
+  \item Server zum Server
+  \pause
+  \item Client zum Server
+  \pause
+  \item Client zum Client
+  \pause
+  \end{itemize}
+  \item http://www.silcnet.org/
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Vorteile}
+
+  \begin{itemize}
+  \item Verschl\"usselung von Anfang eingeplant
+  \pause
+  \item Integration in einen bekannten Chat-Client (irssi)
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Nachteile}
+
+  \begin{itemize}
+  \item Instabile Software
+  \pause
+  \begin{itemize}
+  \item Client st\"urzt ab
+  \pause
+  \item Server verliert Kanal-Parameter (z.B. +r)
+  \pause
+  \item Server verliert Kan\"ale
+  \pause
+  \end{itemize}
+  \item Eigenes (unerforschtes) Protokoll
+  \pause
+  \item Statistische Analyse m\"oglich
+  \end{itemize}
+}
+
+\subsection{Jabber}
+\frame
+{
+  \frametitle{\"Ubersicht Jabber}
+
+  \begin{itemize}
+  \item Instant messaging (IM) Protokoll
+  \pause
+  \item Transport via XML
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Vorteile}
+
+  \begin{itemize}
+  \item Viele Clients verf\"ugbar
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Nachteile}
+
+  \begin{itemize}
+  \item Kan\"ale sind eine Erweiterung
+  \pause
+  \item Verschl\"usselung optional
+  \pause
+  \item Statistische Analyse m\"oglich
+  \end{itemize}
+}
+
+\subsection{Tor}
+\frame
+{
+  \frametitle{\"Ubersicht Tor}
+
+  \begin{itemize}
+  \item Anonymisierungsdienst
+  \pause
+  \item Kein Chatprotokoll
+  \pause
+  \item Zwiebelprinzip
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Vorteile}
+
+  \begin{itemize}
+  \item Stabile Software vorhanden
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Nachteile}
+
+  \begin{itemize}
+  \item Client sendet nur wenn er wirklich sendet
+  \pause
+  \begin{itemize}
+  \item Statistische Analyse m\"oglich
+  \pause
+  \end{itemize}
+  \item Empf\"anger sendet Paket nicht weiter
+  \pause
+  \begin{itemize}
+  \item Endpunkte sind erkennbar
+  \end{itemize}
+  \end{itemize}
+}
+
+
+\section{EOF}
+\frame
+{
+  \frametitle{EOF}
+
+  \begin{itemize}
+  \item Projektaufbau
+  \pause
+  \item Grundideen
+  \pause
+  \item Beispiele
+  \pause
+  \item Stand
+  \end{itemize}
+}
+
+\subsection{Projektaufbau}
+\frame
+{
+  \frametitle{Evolution}
+
+  \begin{itemize}
+  \item Kleine Teile programmieren
+  \pause
+  \item Vorschl\"age f\"ur Protokolle entwerfen
+  \pause
+  \item Ausprobieren und aus Fehlern lernen
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{EOF-1}
+
+  \begin{itemize}
+  \item Erste Phase
+  \pause
+  \item Ideen dokumentieren
+  \pause
+  \item Ideen diskutieren
+  \pause
+  \item Viele Fehler machen
+  \pause
+  \item Juli 2007 bis Dezember 2007
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{EOF-1 Vorgehen}
+
+  \begin{itemize}
+  \item Spezifikationsentw\"urfe schreiben f\"ur
+  \pause
+  \begin{itemize}
+  \item Protokolle
+  \pause
+  \item Software
+  \pause
+  \end{itemize}
+  \item Freie Wahl der Programmiersprache
+  \pause
+  \begin{itemize}
+  \item Kommunikation \"uber klar definierte Schnittstellen
+  \end{itemize}
+  \pause
+  \item Modularer Aufbau
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{EOF-2}
+
+  \begin{itemize}
+  \item Fehler aus EOF-1 korrigieren
+  \pause
+  \item Dokumentation erstellen
+  \pause
+  \item Plan f\"ur finale Version erstellen
+  \pause
+  \item Januar 2008 bis Juni 2008
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{EOF-3}
+
+  \begin{itemize}
+  \item Spezifikation von EOF-2 implementieren
+  \pause
+  \item Unterst\"utzung mehrerer Betriebsysteme
+  \pause
+  \item Produktiv nutzbar
+  \pause
+  \item Juli 2008 bis Dezember 2008
+  \end{itemize}
+}
+
+\subsection{Grundideen}
+\frame
+{
+  \frametitle{Modularit\"at}
+
+  \begin{itemize}
+  \item Viele kleine Teile
+  \pause
+  \item Alles ist austauschbar
+  \pause
+  \item Klar definierte Schnittstellen
+  \pause
+  \item F\"ur anderes wiederverwendbar
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Das Zwiebelprinzip}
+
+  \begin{itemize}
+  \item Mehrfach verschl\"usselt
+  \pause
+  \item Nie direkt an den Empf\"anger senden
+  \pause
+  \item Auch der Empf\"anger sendet es weiter!
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Indirekte Kommunikation}
+
+  \begin{itemize}
+  \item \"Uber mehrere Stationen
+  \pause
+  \item Jede Station ent- und verschl\"usselt
+  \pause
+  \item Keine Station sendet direkt an den End-Empf\"anger
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Alles verschl\"usselt}
+
+  \begin{itemize}
+  \item Kein unverschl\"usseltes Paket
+  \pause
+  \item Initialer Schl\"usseltausch \"uber sichere Kan\"ale
+  \pause
+  \item Schl\"usseltausch sp\"ater \"uber etablierten Kanal
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Nachrichten signiert}
+
+  \begin{itemize}
+  \item Sicherstellen, dass ich mit dem richtigen kommuniziere
+  \pause
+  \item Signatur ist nur sichbar f\"ur den Empf\"anger
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Abstraktion vom Transportprotokoll}
+
+  \begin{itemize}
+  \item \"Ubertragung ist \textbf{nicht} Bestandteil von EOF
+  \pause
+  \item Das Paketformat wird unabh\"angig vom Transportprotkoll definiert
+  \pause
+  \item Beliebige Protokolle m\"oglich
+  \pause
+  \item Einfaches Tunneln von Firewalls
+  \pause
+  \begin{itemize}
+  \item z.B. direkte "`HTTP-Verbindung"' oder via Webforen
+  \end{itemize}
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Rauschen}
+
+  \begin{itemize}
+  \item Jeder Teilnehmer sendet "`immer"' (fixer Intervall)
+  \pause
+  \begin{itemize}
+  \item Fest definierter Sendeintervall
+  \pause
+  \item Wenn nichts zu senden ist werden Zufallsdaten gesendet
+  \pause
+  \item Zufallsdaten werden genauso wie richtige Pakete behandelt
+  \pause
+  \end{itemize}
+  \item Von ausen nicht zu erkennen, wann er wirklich sendet
+  \end{itemize}
+}
+
+
+% beispiele
+% - chatten mit wem direkt
+% - key exchange: nur ueber bekannte peers
+% - transport protokolle
+% - Vollstaendige Verschluesselung
+\subsection{Beispiele}
+\frame
+{
+  \frametitle{Beispiele}
+
+  \begin{itemize}
+  \item F\"ur
+  \pause
+  \begin{itemize}
+  \item Ausgew\"ahlte Teile von EOF
+  \pause
+  \item \"Ubliche Handlungen beim Chatten
+  \pause
+  \end{itemize}
+  \item Um abstrakte Informationen konkretisieren
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Wie man sich findet}
+
+  \begin{itemize}
+  \item \"Uber Marktschreier
+  \pause
+  \item Marktschreier verwalten Metaninformationen
+  \pause
+  \begin{itemize}
+  \item Liste von bekannten Kan\"alen
+  \pause
+  \item Liste von bekannten Partner
+  \pause
+  \end{itemize}
+  \item Jeder Client kann Marktschreier sein
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{\"Uber die Marktschreier}
+
+  \begin{itemize}
+  \item Besitzen und Verteilen \textbf{nur} \"offentliche Informationen
+  \pause
+  \item Verwalten Liste von \"offentlichen Kan\"alen
+  \pause
+  \item Vermitteln Partner zum Indirekten Senden
+  \pause
+  \item Sind ganz normale EOF-Clients
+  \pause
+  \begin{itemize}
+  \item Erlauben zus\"atzlich Abfragen und Speichern von Metainformationen
+  \end{itemize}
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Vollstaendige Verschl\"usselung}
+
+  \begin{itemize}
+  \item \"Offentlicher Schl\"ussel wird vorher per
+  \pause
+  \begin{itemize}
+  \item PGP verschl\"usselter E-Mail
+  \pause
+  \item Versiegelten Brief
+  \pause
+  \item Telefon
+  \end{itemize}
+  \item ausgetauscht
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Beitreten eines Kanals}
+
+  \begin{itemize}
+  \item Verbinden zum Marktschreier
+  \pause
+  \begin{itemize}
+  \item "`Was f\"ur Kan\"ale kennst Du?"'
+  \pause
+  \item Liste: "`blackhats"' ... "`antim\$"' ... "`EOF-1"' ...
+  \pause
+  \item "`Teile bitte den Leuten von Kanal EOF-1 mit, dass ich beitreten m\"ochte."'
+  \pause
+  \end{itemize}
+  \item Marktschreier verbindet sich zu einem Partner, der die anderen kennt
+  \pause
+  \item Der wiederrum schickt Pakete an alle anderen (indirekt) weiter
+  \pause
+  \item Die Kanalinsassen melden sich dann bei mir
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Woher wissen die, wie sie mich erreichen?}
+
+  \begin{itemize}
+  \item Zum Anfang \"ubermittelt man dem Marktschreier, wo man erreichbar ist
+  \pause
+  \item Diese Information leitet er weiter
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Transport-Protokolle}
+
+  \begin{itemize}
+  \item Etwas, mit dem man senden und/oder empfangen kann
+  \pause
+  \item Beliebige Protokolle
+  \pause
+  \begin{itemize}
+  \item Empfangen via SMTP HELO
+  \pause
+  \item Senden via Webdav
+  \pause
+  \item Empfangen via ICQ/Jabber/Skype/...
+  \end{itemize}
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Indirekte Kommunikation}
+
+  \begin{itemize}
+  \item Wenn ich mit Andre reden will, verschl\"ussele ich die Nachricht f\"ur ihn
+  \pause
+  \item Und f\"uge eine Liste von Empf\"angern zur Nachricht hinzu
+  \pause
+  \item Jeder der Empf\"anger kann (nur) die n\"achste Empfangsadresse sehen
+  \pause
+  \item Andre
+  \pause
+  \begin{itemize}
+  \item entschl\"usselt die Nachricht, 
+  \pause
+  \item schickt sie weiter, damit niemand weiss, das sie f\"ur ihn war
+  \end{itemize}
+  \end{itemize}
+}
+
+\subsection{Stand}
+\frame
+{
+  \frametitle{Stand}
+
+  \begin{itemize}
+  \item Was wurde bereits erledigt
+  \pause
+  \begin{itemize}
+  \item Spezifikationen
+  \pause
+  \item Programme
+  \pause
+  \item Dokumentation
+  \pause
+  \end{itemize}
+  \item Was ist zu tun?
+  \begin{itemize}
+  \pause
+  \item Meilensteine
+  \end{itemize}
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Spezifikationen}
+
+  \begin{itemize}
+  \item Einige Entw\"urfe auf https://www.eof.name/projects/eof-1/eof-1/ zu finden
+  \pause
+  \item W\"ochentlich neue
+  \pause
+  \item Teilweise schon \"uberarbeitet
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Implementation von EOF-1}
+
+  \begin{itemize}
+  \item Hauptprogramm ceof zu 20\% fertig
+  \pause
+  \item Erste Erfahrungen mit GPGME 
+  \pause
+  \item Bibliotheken zu 80\% fertig
+  \pause
+  \begin{itemize}
+  \item Quelltexts\"auberung steht noch an
+  \pause
+  \end{itemize}
+  \item Erste GUI fertiggestellt
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Von Dir}
+
+  \begin{itemize}
+  \item Verwirrt?
+  \pause
+  \item Ist etwas unklar?
+  \pause
+  \item Interessiert?
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Diese Vorstellung}
+
+  \begin{itemize}
+  \item ...endet hier
+  \pause
+  \item Vielen Dank f\"ur die Aufmerksamkeit
+  \pause
+  \item Projektseite: https://www.eof.name/eof-1/
+  \pause
+  \item Kontakt via "`telmich (bei) u.eof.name"'
+  \end{itemize}
+}
+
+
+\end{document}
