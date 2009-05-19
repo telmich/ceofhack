@@ -16,6 +16,7 @@
 #define EOF_CMD_TPL_START        "1001"
 #define EOF_CMD_TPL_STOP         "1002"
 
+#define EOF_CMD_TPS_DEFAULT      "20xx"
 #define EOF_CMD_TPS_SENT         "2000"
 #define EOF_CMD_TPS_NOT_SENT     "2001"
 #define EOF_CMD_TPL_RECV         "2002"
@@ -23,6 +24,7 @@
 
 /* user interfaces: already implemented */
 #define EOF_CMD_UI_ACK           "1100"
+#define EOF_CMD_UI_DEFAULT       "21xx"
 #define EOF_CMD_UI_REGISTER      "2100"
 
 /* user interfaces: not implemented */

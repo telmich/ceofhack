@@ -79,6 +79,7 @@ struct cmd {
 struct cmd_cat {
    unsigned long cat;         /* no more than 32 categories */
    struct cmd *next;          /* pointer to first cmd       */
+   struct cmd *def;           /* pointer to default handler */
 };
 
 /* further structs with external dependencies */
@@ -238,10 +239,13 @@ ssize_t read_all(int fd, void *buf, size_t count);
 /* commands */
 int cmd_handle(unsigned long cat, int fd[], char data[], ssize_t len);
 int cmd_init();
-int cmd_cat_create(unsigned long);
+int cmd_cat_create(unsigned long cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
+struct cmd *cmd_cat_default_cmd(unsigned long cat);
+
 
 int cmd_2000(int []);
+int cmd_20xx(int []);
 
 int cmd_2100(int []);
 int cmd_2101(int []);

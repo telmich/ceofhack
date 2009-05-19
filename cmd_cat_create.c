@@ -26,7 +26,7 @@
 #include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_cat_create(unsigned long cat)
+int cmd_cat_create(unsigned long cat, struct cmd *def)
 {
    if(cmdlist_cnt >= HACK_CMD_CAT) {
       printf("Too many commands\n");
@@ -35,6 +35,7 @@ int cmd_cat_create(unsigned long cat)
 
    cmdlist[cmdlist_cnt].cat  = cat;
    cmdlist[cmdlist_cnt].next = NULL;
+   cmdlist[cmdlist_cnt].def  = def;
 
    ++cmdlist_cnt;
 

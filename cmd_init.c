@@ -34,8 +34,10 @@ int cmd_init()
    cmdlist_cnt = 0; /* no categories available */
 
    /* create categories */
-   if(!cmd_cat_create(EOF_I_TP)) return 0;
-   if(!cmd_cat_create(EOF_I_UI)) return 0;
+   if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
+   if(!cmd_cat_create(EOF_I_TP, newcmd)) return 0;
+   if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
+   if(!cmd_cat_create(EOF_I_UI, newcmd)) return 0;
 
    /* create commands and add them to a category  */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;

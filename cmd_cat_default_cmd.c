@@ -18,26 +18,18 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read incoming data from a listening transport protocol
+ * Find a command in a category
  *
  */
 
+#include <string.h>     /* strncmp()      */
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_handle(unsigned long cat, int fds[], char data[], ssize_t len)
+struct cmd *cmd_cat_default_cmd(unsigned long cat)
 {
-   struct cmd *cmd;
+   struct cmd_cat *cc = cmd_cat_find(cat);
 
-   printf("category %lu: handling cmd (%ld) %c%c%c%c\n", cat, (unsigned long) len,
-            data[0], data[1], data[2], data[3]);
-
-   cmd = cmd_find_in_cat(cat, data);
-   if(!cmd) {
-      printf("No handler found for command, calling default handler!\n");
-      cmd = cmd_cat_default_cmd(cat);
-   } else {
-      printf("Handler %s found...\n", cmd->num);
-   }
-
-   return cmd->handle(fds);
+   if(!cc) return NULL;
+   
+   return cc->def;
 }
