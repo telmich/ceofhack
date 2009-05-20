@@ -30,7 +30,7 @@
 #include "shcl.h"    /* functions etc.    */
 #include "eof.h"     /* defines           */
 
-int eof_va_read(int sockfd, int nof, ...) /* nof = number of fields */
+int eof_va_read(int fd, int nof, ...) /* nof = number of fields */
 {
    va_list ap;
    int len;
@@ -42,8 +42,8 @@ int eof_va_read(int sockfd, int nof, ...) /* nof = number of fields */
       len =    va_arg(ap, int);
       data =   va_arg(ap, char *);
 
-      if(read_all(sockfd, data, len) != len) {
-         return -1;
+      if(read_all(fd, data, len) != len) {
+         return 0;
       }
 
       --nof;
