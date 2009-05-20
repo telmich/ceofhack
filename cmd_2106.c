@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * list registered peers
+ * Return peers to UI
  *
  */
 
@@ -27,13 +27,19 @@
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
 
-int peer_list(char *UNUSED(str))
+int cmd_2106(int [])
 {
-   struct peers *p;
+   struct peer *p = plist;
 
-   for(p = plist.next; p != NULL; p = p->next) {
+   /* get number of peers */
+
+   /* return 2106 packet */
+
+   /* return some 2105 packets */
+
+/*   for(p = plist.next; p != NULL; p = p->next) {
       printf("Peer %s: %s\n", p->peer.name, p->peer.addr);
-   }
+   } */
 
    return 1;
 }
