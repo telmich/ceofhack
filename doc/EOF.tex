@@ -1026,23 +1026,7 @@ Answers from EOFi:
 \end{itemize}
 
 % -----------------------------------------------------------------------------
-\subsection{2104: /peer list}
-Answers from ceof:
-\begin{itemize}
-\item \textbf{1120}: list follows
-\begin{itemize}
-\item four ASCII-digits containing number of peers ("`num\_peer"')
-\item after that follow \textit{num\_peer} peer ids:
-\begin{itemize}
-\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
-\item 40 Byte containing the keyid of the
-key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
-\end{itemize}
-\end{itemize}
-\end{itemize}
-
-% -----------------------------------------------------------------------------
-\subsection{2105: /peer rename}
+\subsection{2104: /peer rename}
 \index{Command!/peer rename}%
 \begin{longtable}{|c|c|c|c|}
 \caption{/peer rename parameters}\\
@@ -1061,7 +1045,7 @@ Newnick & EOFsdt & New nick name & heinz\\
 \end{verbatim}
 
 % -----------------------------------------------------------------------------
-\subsection{2106: /peer show}
+\subsection{2105: /peer show}
 Display detailled information about a nick:
 \begin{itemize}
 \item Available PGP details like
@@ -1087,6 +1071,27 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 \begin{verbatim}
 /peer show karl-otto
 \end{verbatim}
+% -----------------------------------------------------------------------------
+\subsection{2106: /peer list}
+
+\fooooooo{}
+
+list n-mal 2106!
+
+Answers from ceof:
+\begin{itemize}
+\item \textbf{1120}: list follows
+\begin{itemize}
+\item four ASCII-digits containing number of peers ("`num\_peer"')
+\item after that follow \textit{num\_peer} peer ids:
+\begin{itemize}
+\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
+\item 40 Byte containing the keyid of the
+key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
 % -----------------------------------------------------------------------------
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.

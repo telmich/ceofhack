@@ -35,9 +35,9 @@
 #define EOF_CMD_UI_DEREGISTER    "2101"
 #define EOF_CMD_UI_PEER_ADD      "2102"
 #define EOF_CMD_UI_PEER_SEND     "2103"
-#define EOF_CMD_UI_PEER_LIST     "2104"
-#define EOF_CMD_UI_PEER_RENAME   "2105"
-#define EOF_CMD_UI_PEER_SHOW     "2106"
+#define EOF_CMD_UI_PEER_RENAME   "2104"
+#define EOF_CMD_UI_PEER_SHOW     "2105"
+#define EOF_CMD_UI_PEER_LIST     "2106"
 #define EOF_CMD_UI_QUIT          "2199"
 
 
