@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Shorten lengths specs
+desc: |-
+  EOF_L_NICKNAME and EOF_L_ADDRESS for instance.
+  After it compiles again ;-)
+type: :task
+component: ceof
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-20 07:18:12.427043 Z
+references: []
+
+id: 45818bdb580140612b0af2d8520e9562c60a29cd
+log_events: 
+- - 2009-05-20 07:18:14.079279 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
