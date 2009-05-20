@@ -29,22 +29,15 @@
 #include "ceofhack.h"   /* functions etc.  */
 #include "ui.h"         /* functions etc.  */
 
-int peer_add(char *str)
+int peer_add(char nick[EOF_L_NICKNAME], addr[EOF_L_ADDRESS], keyid[EOF_L_KEYID])
 {
-   struct peers *p;
+   struct peer *p;
 
-   p = calloc(1, sizeof(struct peers));
+   p = peer_new();
    if(!p) return 0;
 
-   /* <empty> name <empty> addr <empty> keyid */
-
-   if(!ui_cmd_argcnt(str, 3)) {
-      printf("Usage: /peer add <name> <addr> <keyid>\n");
-      return 0;
-   }
-
    /* nick */
-   str = ui_cmd_argncpy(str, p->peer.name, EOF_L_NICKNAME);
+   str = stncpy(p->nick, EOF_L_NICKNAME);
    str = ui_cmd_argncpy(str, p->peer.addr, EOF_L_ADDRESS);
    str = ui_cmd_argncpy(str, p->peer.keyid, EOF_L_KEYID);
 
