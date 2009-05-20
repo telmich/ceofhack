@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,13 +23,13 @@
  */
 
 #include <string.h>     /* memset, str*   */
-#include <stdlib.h>     /* calloc         */
-#include <stdio.h>     /* printf         */
+#include <stdio.h>      /* printf         */
 
 #include "ceofhack.h"   /* functions etc.  */
-#include "ui.h"         /* functions etc.  */
+#include "eof.h"        /* EOF             */
 
-int peer_add(char nick[EOF_L_NICKNAME], addr[EOF_L_ADDRESS], keyid[EOF_L_KEYID])
+int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS],
+             char keyid[EOF_L_KEYID])
 {
    struct peer *p;
 
@@ -37,14 +37,14 @@ int peer_add(char nick[EOF_L_NICKNAME], addr[EOF_L_ADDRESS], keyid[EOF_L_KEYID])
    if(!p) return 0;
 
    /* nick */
-   str = stncpy(p->nick, EOF_L_NICKNAME);
-   str = ui_cmd_argncpy(str, p->peer.addr, EOF_L_ADDRESS);
-   str = ui_cmd_argncpy(str, p->peer.keyid, EOF_L_KEYID);
+   strncpy(p->name, nick, EOF_L_NICKNAME);
+   strncpy(p->addr, addr, EOF_L_ADDRESS);
+   strncpy(p->keyid, keyid, EOF_L_KEYID);
 
    p->next = plist.next;
    plist.next = p;
 
-   printf("/peer add: Added <%s>@<%s>:<%s>\n",p->peer.name, p->peer.addr, p->peer.keyid);
+   printf("/peer add: Added <%s>@<%s>:<%s>\n",p->name, p->addr, p->keyid);
 
    return 1;
 }
