@@ -54,11 +54,7 @@ struct peer {
    char name[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
    char keyid[EOF_L_KEYID+1];
-};
-
-struct peers {
-   struct peer peer;
-   struct peers *next;
+   struct peer *next;
 };
 
 /* user interface commands */
@@ -137,7 +133,7 @@ struct cconfig {
 
 /****************** Global variables  */
 extern struct pollfd    pfd[MAX_COMM];
-extern struct peers     plist;
+extern struct peer      plist;
 extern struct options   opt;
 
 /* helper subsystem */
@@ -197,8 +193,9 @@ int ui_cmd_read(int fd[]);
 
 
 /* peers */
-int peers_init();
-int peer_add(char *);
+int peer_init();
+int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
+struct peer *peer_new();
 int peer_list(char *);
 int peer_send(char *);
 struct peer *peer_findbyname(char *name);

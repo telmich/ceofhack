@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,22 +18,17 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init peer handling
+ * Init peer list
  *
  */
 
-#include <stdlib.h>              /* NULL                          */
-#include <stdio.h>               /* printf                        */
-#include <string.h>              /* str*                          */
-#include <limits.h>              /* PATH_MAX                      */
-
+#include <stdio.h>      /* NULL */
 #include "ceofhack.h"   /* functions etc. */
 
 struct peers plist;
 
 int peers_init()
 {
-   plist.peer = NULL;
    plist.next = NULL;
 
    return 1;
