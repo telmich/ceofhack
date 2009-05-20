@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,14 +22,14 @@
  *
  */
 
-#include <stdio.h>      /* NULL */
-#include "ceofhack.h"   /* functions etc. */
+#include <stdio.h>      /* NULL              */
+#include "ceofhack.h"   /* functions etc.    */
 
-struct peers plist;
+struct peer plist;
 
-int peers_init()
+int peer_init()
 {
-   plist.next = NULL;
+   plist.next = NULL; /* explicit */
 
    return 1;
 }
