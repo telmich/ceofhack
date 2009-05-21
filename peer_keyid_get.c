@@ -28,12 +28,12 @@
 
 char *peer_keyid_get(char *nick)
 {
-   struct peers *p;
+   struct peer *p;
 
    for(p = plist.next; p != NULL; p = p->next) {
-      if(!strcmp(nick, p->peer.name)) {
-         printf("Keyid (%s) for peer %s found!\n", p->peer.keyid, p->peer.name);
-         return p->peer.keyid;
+      if(!strncmp(nick, p->name, EOF_L_NICKNAME)) {
+         printf("Keyid (%s) for peer %s found!\n", p->keyid, p->name);
+         return p->keyid;
       }
    }
 
