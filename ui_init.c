@@ -25,17 +25,26 @@
 #include <fcntl.h>               /* fcntl()                       */
 #include <stdio.h>               /* printf                        */
 //#include <string.h>              /* str*                          */
-//#include <limits.h>              /* PATH_MAX                      */
+#include <unistd.h>      /* unlink           */
 
 #include <sys/socket.h> /* socket handling   */
 #include <sys/un.h>     /* Unix socket       */
 
-#include "ceofhack.h"   /* functions etc. */
+#include "ceofhack.h"   /* functions etc.    */
+#include "shcl.h"       /* helper            */
 
 int ui_init()
 {
    int sock;
    struct sockaddr_un una;
+
+   /* check for old socket */
+   if(fileexists(opt.uisocket) == 1) {
+      if(unlink(opt.uisocket) == -1) {
+         perror(opt.uisocket);
+         return 0;
+      }
+   }
 
    /* create socket */
    sock = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -45,7 +54,10 @@ int ui_init()
    }
 
    una.sun_family = AF_UNIX;
-   /* FIXME: add length of una.sun_path */
+   /*
+    * POSIX BUG: no length of sun_path defined:
+    * http://www.opengroup.org/onlinepubs/9699919799/basedefs/sys_un.h.html
+    */
    strcpy(una.sun_path, opt.uisocket);
 
    if(bind(sock, (struct sockaddr *) &una, sizeof(una)) == -1) {
