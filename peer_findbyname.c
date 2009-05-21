@@ -25,13 +25,13 @@
 #include <string.h>     /* memset, str*   */
 #include "ceofhack.h"  /* functions etc.  */
 
-struct peer *peer_findbyname(char *name)
+struct peer *peer_findbyname(char *nick)
 {
-   struct peers *p;
+   struct peer *p;
 
    for(p = plist.next; p != NULL; p = p->next) {
-      if(!strncmp(p->peer.name, name, EOF_L_NICKNAME+1)) {
-         return &(p->peer);
+      if(!strncmp(p->name, nick, EOF_L_NICKNAME)) {
+         return p;
       }
    }
 
