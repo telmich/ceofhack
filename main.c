@@ -40,25 +40,20 @@ int main()
    int cnt;
    int pfd_cnt;
 
-   ceof_banner(MSG_CEOF_VERSION);                   /* finally, we're there */
+   ceof_banner(MSG_CEOF_VERSION);                   /* up and starting..... */
 
    if(!config_init())   return 1;   /* read config          */
    if(!helper_init())   return 1;   /* init helper structs  */
    if(!cgpg_init())     return 1;   /* init gpgme           */
    if(!signals_init())  return 1;   /* catch signals        */
+   if(!cmd_init())      return 1;   /* enable EOF commands  */
    if(!tp_init())       return 1;   /* transport protocols  */
    if(!peer_init())     return 1;   /* handling of peers    */
-   if(!cmd_init())      return 1;   /* enable EOF commands  */
-   if(!ui_cmds_init())  return 1;   /* enable ui commands   */ /* FIXME: HACK */
-   if(!ui_init())       return 1;   /* enable user input    */
-
-   /* add stdin to poll: replace this later with a UI socket*/
-   if(!helper_fdonly(STDIN_FILENO, STDOUT_FILENO, ui_cmd_read, NULL)) return 1;/* FIXME: HACK*/
-
+   if(!ui_init())       return 1;   /* enable UI connector  */
 
    ceof_banner(MSG_CEOF_STARTED);                   /* finally, we're there */
    while(1) {
-      /* reinit, poll array may have changed */
+      /* always reinit, poll array may have changed */
       fd_to_poll(&pfd_cnt);
 
    //   printf("Polling on %d channels...\n", pfd_cnt);
