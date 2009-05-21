@@ -27,9 +27,9 @@
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
 
-int cmd_2106(int [])
+int cmd_2106(int UNUSED(fd[]))
 {
-   struct peer *p = plist;
+//   struct peer *p = plist;
 
    /* get number of peers */
 
