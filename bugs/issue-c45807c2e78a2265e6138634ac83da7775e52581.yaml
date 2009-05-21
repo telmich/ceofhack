@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: check memory stuff, whether everything is fine
+desc: |-
+  For instance with
+  
+  valgrind -v --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes --l    eak-resolution=high --track-origins=yes  ./ceofhack
+type: :task
+component: ceof
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-21 18:36:01.478769 Z
+references: []
+
+id: c45807c2e78a2265e6138634ac83da7775e52581
+log_events: 
+- - 2009-05-21 18:36:02.386926 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
