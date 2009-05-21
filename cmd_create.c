@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -36,7 +36,7 @@ struct cmd *cmd_create(char num[], int (*handle)(int []))
    new->num    = num;
    new->handle = handle;
 
-   printf("Created cmd %s\n", num);
+//   printf("Created cmd %s\n", num);
 
    return new;
 }

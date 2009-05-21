@@ -36,7 +36,7 @@ int cmd_cat_add(unsigned long cat, struct cmd *cmd)
    cmd->next = has_cat->next;
    has_cat->next = cmd;
 
-   printf("Added cmd %s to category %lu\n", cmd->num, cat);
+//   printf("Added cmd %s to category %lu\n", cmd->num, cat);
 
    return 1;
 }
