@@ -31,6 +31,7 @@
 
 enum {
    CEOF_EX_RUNS = 0,
+   CEOF_EX_RUNS_ERR,
    CEOF_EX_CONFIG,
    CEOF_EX_HELPER,
    CEOF_EX_GPG,

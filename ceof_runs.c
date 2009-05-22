@@ -37,28 +37,30 @@
 
 int ceof_runs()
 {
-   char pid_c[8];
+   char pid_c[EOF_L_PIDLEN];
    pid_t pid;
 
-   memset(pid_c, '\0', 8);
+   memset(pid_c, '\0', EOF_L_PIDLEN);
 
    if(fileexists(opt.pidfile)) {
-      if(!openreadclosestatic(pid_c, opt.pidfile, 7)) {
+      if(!openreadclosestatic(pid_c, opt.pidfile, EOF_L_PIDLEN)) {
          return -1;
       }
       pid = strtoul(pid_c, NULL, 10);
 
       if(kill(pid, 0) == 0)  {
-         return 1;
+         return pid;
       } else {
+         printf("Removing stale pidfile %s (%d).\n", opt.pidfile, pid);
          if(unlink(opt.pidfile) == -1) {
             return -1;
          }
       }
    }
 
-   pid = getpid();
-   ultostr(pid, 10, pid_c, 7);
+   /* BUUUUUUUUUUG */
+   snprintf(pid_c, EOF_L_PIDLEN, "%d\n", opt.pid);
+   printf("pid, pid_c: %d, %s", opt.pid, pid_c);
 
    if(!openwriteclose(opt.pidfile, pid_c, 7)) {
       return -1;

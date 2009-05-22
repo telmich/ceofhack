@@ -44,10 +44,22 @@ int main()
    ceof_banner(MSG_CEOF_VERSION);   /* up and starting..... */
 
    if(!config_init())   return CEOF_EX_CONFIG;     /* read config          */
-   if(ceof_runs()) {
-      printf("ceof already runs - exiting.\n");
-      return CEOF_EX_RUNS;                         /* no need to restart   */
+   switch((cnt = ceof_runs())) {
+      case -1:
+         perror("ceof_runs");
+         return CEOF_EX_RUNS_ERR;
+      break;
+
+      case 0: /* fine, we are alone */
+      break;
+
+      default: /* already running */
+         printf("ceof already runs as PID %d: exiting.\n", cnt);
+         return CEOF_EX_RUNS;                         /* no need to restart   */
+      break;
    }
+   printf("cnt = %d\n", cnt);
+
    if(!helper_init())   return CEOF_EX_HELPER;     /* init helper structs  */
    if(!cgpg_init())     return CEOF_EX_GPG;        /* init gpgme           */
    if(!signals_init())  return CEOF_EX_SIGNALS;    /* catch signals        */

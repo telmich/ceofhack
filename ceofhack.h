@@ -24,6 +24,7 @@
  * internal limits
  */
 
+#define EOF_L_PIDLEN    32       /* maximum length of a pid       */
 #define EOF_L_GUI       256
 #define EOF_L_TPA       256      /* max available tp (all)        */
 #define EOF_L_TPL       256      /* max available tp listener     */
@@ -86,6 +87,7 @@ struct options {
    char tphome[PATH_MAX+1];
    char uisocket[PATH_MAX+1];
    char pidfile[PATH_MAX+1];
+   pid_t pid;
 
    char gpg[PATH_MAX+1];
 };

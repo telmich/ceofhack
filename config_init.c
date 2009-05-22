@@ -25,6 +25,7 @@
 #include <string.h>     /* memset, str*   */
 #include <stdio.h>      /* printf         */
 #include <stdlib.h>     /* getenv         */
+#include <unistd.h>     /* getpid()       */
 #include "ceofhack.h"   /* functions etc.  */
 
 struct options opt;
@@ -38,6 +39,8 @@ int config_init()
    eof_get_ui_socketpath(opt.uisocket, PATH_MAX+1);
    eof_get_tp_dir(opt.tphome, PATH_MAX+1);
    eof_get_pidfile(opt.pidfile, PATH_MAX+1);
+
+   opt.pid = getpid();
 
    /* FIXME: use symlink in configuration directory */
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
