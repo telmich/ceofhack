@@ -18,37 +18,21 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Leave ceofhack
- * - Shutdown helper: transport protocols, user interfaces
- * - [Send exit command to all and] send SIGINT
+ * Remove all ui stuff
  *
  */
 
-#include <signal.h>     /* kill()         */
-#include <unistd.h>     /* _exit()        */
-#include <time.h>       /* nanosleep()    */
-#include "ceofhack.h"
+#include <unistd.h>     /* unlink()       */
+#include "ceofhack.h"   /* functions etc. */
 
-void ceof_exit(int i)
+void ui_exit()
 {
-   struct timespec ts;
-   ts.tv_sec = 1;
-   ts.tv_nsec =0;
+   printf("UI: Disabling all...\n");
+   ui_disable_all();
 
-   printf("Shutting down EOF subsystems (SIGINT)...\n");
-   helper_signal_all(SIGINT);
-   
-   printf("Waiting %d seconds...\n", (short) ts.tv_sec);
-   nanosleep(&ts, NULL);
-
-   printf("Shutting down EOF subsystems (SIGKILL)...\n");
-   helper_signal_all(SIGKILL);
-
-   if(unlink(opt.pidfile) == -1) {
-      perror("ceof_exit/pidfile");
+   printf("UI: Removing socket...\n");
+   if(unlink(opt.uisocket) == -1) {
+      perror("ui_exit");
    }
 
-   ui_exit();
-
-   _exit(i);
 }

@@ -18,37 +18,19 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Leave ceofhack
- * - Shutdown helper: transport protocols, user interfaces
- * - [Send exit command to all and] send SIGINT
+ * Disable all UIs
  *
  */
 
-#include <signal.h>     /* kill()         */
-#include <unistd.h>     /* _exit()        */
-#include <time.h>       /* nanosleep()    */
-#include "ceofhack.h"
+//#include <stdio.h>      /* printf         */
+#include "ceofhack.h"   /* functions etc. */
 
-void ceof_exit(int i)
+void ui_disable_all()
 {
-   struct timespec ts;
-   ts.tv_sec = 1;
-   ts.tv_nsec =0;
+   struct helper *hp;
 
-   printf("Shutting down EOF subsystems (SIGINT)...\n");
-   helper_signal_all(SIGINT);
-   
-   printf("Waiting %d seconds...\n", (short) ts.tv_sec);
-   nanosleep(&ts, NULL);
-
-   printf("Shutting down EOF subsystems (SIGKILL)...\n");
-   helper_signal_all(SIGKILL);
-
-   if(unlink(opt.pidfile) == -1) {
-      perror("ceof_exit/pidfile");
+   /* find UIs: every helper that has ui_read() registered */
+   while((hp = helper_find_by_handle(ui_read))) {
+      ui_disable(hp->fds[HP_READ]);
    }
-
-   ui_exit();
-
-   _exit(i);
 }

@@ -39,6 +39,7 @@ PEER+=peer_new.c
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
 HELPER+=helper_signal_all.c helper_check_input.c helper_signal.c
+HELPER+=helper_find_by_handle.c
 
 # command handling (ceofhack internal)
 CMD=cmd_handle.c cmd_init.c cmd_cat_create.c cmd_cat_default_cmd.c
@@ -58,7 +59,7 @@ LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c lib/eof_va_write.c lib/eof_get_pidfile.c
 
 # interface for the user interfaces
-UI=ui_init.c ui_handle.c ui_read.c ui_disable.c
+UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c

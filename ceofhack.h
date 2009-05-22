@@ -184,6 +184,7 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
 int helper_write(struct helper *hp, char *buf, int len);
 struct helper *helper_find_by_pid(pid_t pid);
 struct helper *helper_find_by_fd(int num, int fd);
+struct helper *helper_find_by_handle(int (*handle)(int []));
 int helper_signal(struct helper *hp, int sig);
 int helper_signal_all(int sig);
 
@@ -267,5 +268,7 @@ int ui_init();
 int ui_handle(int []);
 int ui_read(int []);
 int ui_disable(int);
+void ui_disable_all();
+void ui_exit();
 
 #endif
