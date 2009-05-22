@@ -26,9 +26,22 @@
 #define CEOF_H
 
 /* constants */
-#define MSG_CEOF_VERSION       "ceofhack> Version 0.5\n"
-#define MSG_CEOF_STARTED       "ceofhack> Started. Please enter commands.\n"
+#define MSG_CEOF_VERSION         "ceofhack> Version 0.5\n"
+#define MSG_CEOF_STARTED         "ceofhack> Started. Please enter commands.\n"
 
+enum {
+   CEOF_EX_RUNS = 0,
+   CEOF_EX_CONFIG,
+   CEOF_EX_HELPER,
+   CEOF_EX_GPG,
+   CEOF_EX_SIGNALS,
+   CEOF_EX_CMD,
+   CEOF_EX_TP,
+   CEOF_EX_PEER,
+   CEOF_EX_UI,
+   CEOF_EX_POLL,
+   CEOF_EX_NOWAY
+};
 
 /* functions */
 void ceof_banner(char *);
