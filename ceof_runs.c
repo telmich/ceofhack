@@ -25,6 +25,7 @@
 #include <sys/types.h>     /* types          */
 #include <sys/stat.h>      /* stat           */
 #include <stdlib.h>        /* stat           */
+#include <string.h>        /* memset()       */
 #include <errno.h>         /* errno          */
 #include <signal.h>        /* kill()         */
 #include <unistd.h>        /* unlink()       */
@@ -34,8 +35,10 @@
 
 int ceof_runs()
 {
-   char pid_c[7];
+   char pid_c[8];
    pid_t pid;
+
+   memset(pid_c, '\0', 8);
 
    if(fileexists(opt.pidfile)) {
       if(!openreadclosestatic(pid_c, opt.pidfile, 7)) {
