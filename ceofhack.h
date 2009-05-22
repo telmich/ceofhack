@@ -85,6 +85,7 @@ struct options {
    char gpghome[PATH_MAX+1];
    char tphome[PATH_MAX+1];
    char uisocket[PATH_MAX+1];
+   char pidfile[PATH_MAX+1];
 
    char gpg[PATH_MAX+1];
 };
@@ -169,6 +170,7 @@ int signals_init();
 void signal_child(int sig);
 void ceof_exit(int tmp);
 void ceof_banner();
+int ceof_runs();
 
 /* helper */
 int helper_init();

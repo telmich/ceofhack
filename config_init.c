@@ -37,6 +37,7 @@ int config_init()
    eof_get_gpg_dir(opt.gpghome, PATH_MAX+1);
    eof_get_ui_socketpath(opt.uisocket, PATH_MAX+1);
    eof_get_tp_dir(opt.tphome, PATH_MAX+1);
+   eof_get_pidfile(opt.pidfile, PATH_MAX+1);
 
    /* FIXME: use symlink in configuration directory */
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
