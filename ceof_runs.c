@@ -30,6 +30,8 @@
 #include <signal.h>        /* kill()         */
 #include <unistd.h>        /* unlink()       */
 
+#include <stdio.h>         /* debug          */
+
 #include "shcl.h"          /* helper         */
 #include "ceofhack.h"      /* internals      */
 
@@ -52,13 +54,14 @@ int ceof_runs()
          if(unlink(opt.pidfile) == -1) {
             return -1;
          }
-         pid = getpid();
-         ultostr(pid, 10, pid_c, 7);
-
-         if(!openwriteclose(opt.pidfile, pid_c, 7)) {
-            return -1;
-         }
       }
+   }
+
+   pid = getpid();
+   ultostr(pid, 10, pid_c, 7);
+
+   if(!openwriteclose(opt.pidfile, pid_c, 7)) {
+      return -1;
    }
 
    return 0;

@@ -25,6 +25,7 @@ CCONFIG+=cconfig_entry_fn.c
 
 # Small helper c library
 SHCL=openreadclosestatic.c convert.c read_all.c write_all.c forkexecpipe.c
+SHCL+=fileexists.c openwriteclose.c
 
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_listen_add.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c
@@ -39,10 +40,6 @@ HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
 HELPER+=helper_signal_all.c helper_check_input.c helper_signal.c
 
-# user interface (command line, currently built-in)
-#UI_CMD=ui_cmd_add.c ui_cmd_check.c ui_cmd_read.c
-#UI_CMD+=ui_quit.c ui_help.c ui_cmd_argcnt.c ui_cmd_argncpy.c
-
 # command handling (ceofhack internal)
 CMD=cmd_handle.c cmd_init.c cmd_cat_create.c cmd_cat_default_cmd.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
@@ -54,11 +51,11 @@ CMD+=cmd_3000.c
 GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 
 # ceof (the next generation EOFi ;-))
-CEOF=ceof_exit.c ceof_banner.c
+CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 
 # objects from the upcoming library for EOFi (=ceofhack)
 LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
-LIB+=lib/eof_get_ui_socketpath.c lib/eof_va_write.c
+LIB+=lib/eof_get_ui_socketpath.c lib/eof_va_write.c lib/eof_get_pidfile.c
 
 # interface for the user interfaces
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c

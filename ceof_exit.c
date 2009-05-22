@@ -44,6 +44,7 @@ void ceof_exit(int i)
    printf("Shutting down EOF subsystems (SIGKILL)...\n");
    helper_signal_all(SIGKILL);
 
+   /* FIXME: replace with ui_disable_all() */
    printf("Removing UI socket...\n");
    unlink(opt.uisocket);
 

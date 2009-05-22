@@ -26,7 +26,10 @@
 #include <string.h>             /* strncpy */
 #include <errno.h>              /* errno */
 #include <stdio.h>              /* NULL */
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>              /* open */
+
 
 int openwriteclose(char *fn, char buf[], int len)
 {
@@ -34,7 +37,7 @@ int openwriteclose(char *fn, char buf[], int len)
    int fd;
    int got=0;
 
-   while((fd = open(fn, O_WRONLY)) == -1) {
+   while((fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) == -1) {
       if(errno != EINTR) {
          perror(fn);
          return 0;
