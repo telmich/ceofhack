@@ -24,12 +24,12 @@
 
 /* user interfaces: already implemented */
 #define EOF_CMD_UI_ACK           "1100"
+#define EOF_CMD_UI_EXITREQUEST   "1102"
 #define EOF_CMD_UI_DEFAULT       "21xx"
 #define EOF_CMD_UI_REGISTER      "2100"
 
 /* user interfaces: not implemented */
 #define EOF_CMD_UI_FAILURE       "1101"
-#define EOF_CMD_UI_EXITREQUEST   "1102"
 #define EOF_CMD_UI_MSGRECEIVED   "1103"
 
 #define EOF_CMD_UI_DEREGISTER    "2101"

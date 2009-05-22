@@ -37,7 +37,7 @@ int ui_disable(int fd)
       printf("BUG: Strange, the UI is missing in the list...\n");
       return 0;
    }
-
+   helper_write(hp, EOF_CMD_UI_EXITREQUEST, EOF_L_CMD);
    helper_disable(hp);
 
    return 1;
