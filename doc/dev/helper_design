@@ -1,0 +1,22 @@
+Helper are used to create a uniform layout for handling input.
+
+
+Each helper has
+
+   * pid (possibly 0, if no child assosiated)
+   * a fd for reading,
+   * a fd for writing (may be the same)
+   * a function that handles the input
+   * an associated class
+
+   "fd input to function"
+
+For each fd there may be patterns, on which to call
+a different set of functions.
+
+   * type of pattern (int, char, float)
+   * pattern (union)
+
+unix input = libunixinput = libui -> -lui
+
+
