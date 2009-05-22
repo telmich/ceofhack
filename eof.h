@@ -65,6 +65,7 @@
 #define EOF_P_UI_SOCKET          EOF_P_SLASH "ui" EOF_P_SLASH "socket"
 #define EOF_P_GPG_DIR            EOF_P_SLASH "gpg"
 #define EOF_P_TP_DIR             EOF_P_SLASH "tp"
+#define EOF_P_PIDFILE            EOF_P_SLASH "pid"
 
 /* library functions */
 int  eof_ui_connect();
@@ -74,6 +75,7 @@ void eof_get_configdir(char buf[], size_t len);
 void eof_get_ui_socketpath(char buf[], size_t len);
 void eof_get_gpg_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
+void eof_get_pidfile(char buf[], size_t len);
 int eof_ui_register(int sockfd);
 int eof_ui_deregister(int sockfd);
 
