@@ -359,8 +359,8 @@ The zero byte is a byte with the value 0.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Line feed}
-The line feed, "`\textbackslash{}n"', is often used to terminate data
-sections.
+The line feed, "`\textbackslash{}n"', is/was often used to terminate data
+sections, but is \emph{DEPRECATED} now (though still in use).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{ASCII numbers}
@@ -408,17 +408,20 @@ are unsued.
 Unused fields should be filled up with noise.
 % Nico: 1.0
 % #############################################################################
-\section{Sizes}
-\index{eof.h (File)}%
-All sizes used in this document are "`symbolic sizes"': The real size
-is defined in the attached file "`\emph{eof.h}"'.
-Developers are advised to use the symbolic name in their programs.
-% Nico: 1.0
-% #############################################################################
 \section{EOF simple data types ("`EOFsdt"')}
 The following sections define the datatypes used in EOF related
 applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Size (size)}
+\index{eof.h (File)}%
+All sizes used in this document are "`symbolic sizes"': The real size
+is defined in the attached file "`\emph{eof.h}"'.
+Developers are advised to use the symbolic name in their programs.
+
+A size is is always represented as an ASCII number found in a
+fixed length string of \emph{EOF\_L\_SIZE} bytes.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Nick name (nick)}
@@ -443,7 +446,8 @@ a look at section \ref{tp} on page \pageref{tp}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Keyid, the fingerprint (keyid)}
-A (PGP) fingerprint is a \emph{EOF\_L\_KEYID} byte fixed length string.
+A (PGP) fingerprint\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+is a \emph{EOF\_L\_KEYID} byte fixed length string.
 It does not contain any spaces.
 It can be retrieved by issuing the following gpg-command:
 \begin{verbatim}
@@ -954,6 +958,21 @@ msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \end{longtable}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{1104: List of peers}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1104 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Number of peers & EOFsdt: size & How many peers follow & 20\\
+\hline
+Peer & EOFsdt: nick & The nickname & telmich\\
+\hline
+\end{longtable}
+The last field is repeated as many times as specified in number of
+peers.
+% Nico: 1.0
+%% -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, the UI should close the socket afterwards.
@@ -1074,20 +1093,11 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer list}
 
-\fooooooo{}
-
-list n-mal 2106!
-
-Answers from ceof:
+Possible answers:
 \begin{itemize}
-\item \textbf{1120}: list follows
-\begin{itemize}
-\item four ASCII-digits containing number of peers ("`num\_peer"')
-\item after that follow \textit{num\_peer} peer ids:
-\begin{itemize}
-\item 128 Byte containing the peer name (if shorter it is padded with 0-bytes), 0 terminated
-\item 40 Byte containing the keyid of the
-key\footnote{See RFC 2440, 11.2. Key IDs and Fingerprints}
+\item 1101
+\item 1104
+\end{itemize}
 \end{itemize}
 \end{itemize}
 \end{itemize}
