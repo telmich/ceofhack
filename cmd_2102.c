@@ -18,15 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * De-Registering an UI
+ * Handle /peer add request
  *
  */
 
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_2101(int fd[])
+int cmd_2102(int fd[])
 {
-   printf("UI: Deregistering an UI\n");
-   return ui_disable(fd[HP_READ]);
+   char nick[EOF_L_NICKNAME+1];
+   char addr[EOF_L_ADDRESS+1];
+   char keyid[EOF_L_KEYID+1];
+
+   printf("UI: /peer add request\n");
+   
+   if(!eof_va_read(fd[HP_READ], 3,
+                   EOF_L_NICKNAME, nick,
+                   EOF_L_ADDRESS, addr,
+                   EOF_L_KEYID, keyid)) {
+      perror("!eof_va_read");
+      return 0;
+   }
+   printf("UI: /peer add details: %s, %s, %s\n", nick, addr, keyid);
+
+   return peer_add(nick, addr, keyid) ? 1 : 0;
 }

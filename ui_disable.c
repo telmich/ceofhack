@@ -31,12 +31,12 @@ int ui_disable(int fd)
 
    printf("UI: Closing connection...\n");
 
-   /* FIXME: write exit request to UI */
    hp = helper_find_by_fd(HP_READ, fd);
    if(!hp) {
-      printf("BUG: Strange, the UI is missing in the list...\n");
+      printf("UI: BUG: Strange, the UI is missing in the list...\n");
       return 0;
    }
+
    helper_write(hp, EOF_CMD_UI_EXITREQUEST, EOF_L_CMD);
    helper_disable(hp);
 

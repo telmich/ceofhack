@@ -45,7 +45,7 @@ HELPER+=helper_find_by_handle.c
 CMD=cmd_handle.c cmd_init.c cmd_cat_create.c cmd_cat_default_cmd.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
 CMD+=cmd_2000.c cmd_2002.c cmd_2003.c cmd_20xx.c
-CMD+=cmd_2100.c cmd_2101.c cmd_2106.c cmd_21xx.c
+CMD+=cmd_2100.c cmd_2101.c cmd_2102.c cmd_2106.c cmd_21xx.c
 CMD+=cmd_3000.c
 
 # gpg (crypto)
@@ -56,7 +56,8 @@ CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 
 # objects from the upcoming library for EOFi (=ceofhack)
 LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
-LIB+=lib/eof_get_ui_socketpath.c lib/eof_va_write.c lib/eof_get_pidfile.c
+LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c
+LIB+=lib/eof_va_read.c lib/eof_va_write.c
 
 # interface for the user interfaces
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
