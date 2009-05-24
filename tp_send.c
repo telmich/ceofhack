@@ -63,7 +63,10 @@ int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
     * - remove from queue, if successful!
     */
 
-   if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) return 0;
+   if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) {
+      eof_errmsg("Transport protocol failed!");
+      return 0;
+   }
 
    /* FIXME: always check bounds!!! */
    p = buf;
@@ -77,15 +80,16 @@ int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
 
    len = strlen(msg);
    tmp = ultostr(len, 10, p, BIGBUF - (p-buf));
-//   printf("ultostr: %d, (%d)\n", tmp, len);
+
    len = EOF_L_CMD + EOF_L_ADDRESS + strlen(p) + 1 + strlen(msg);
    strncat(p, "\n", BIGBUF);
    strncat(p, msg, BIGBUF);
-//   printf("pkg: %ld: %s - %s\n", len, buf, p);
-
 
    /* FIXME: HACK: pass packet to send        */
-   if(helper_write(hp, buf, len) <= 0) return 0;
+   if(helper_write(hp, buf, len) <= 0) {
+      eof_errmsg("Data copy to transport protocol failed!");
+      return 0;
+   }
 
    return 1;
 }
