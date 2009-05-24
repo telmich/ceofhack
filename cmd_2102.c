@@ -50,14 +50,21 @@ int cmd_2102(int fd[])
    }
    printf("UI: /peer add details: %s, %s, %s\n", nick, addr, keyid);
 
-   ret = peer_add(nick, addr, keyid);
-
-   if(ret) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
-   } else {
+   if(peer_findbyname(nick)) {
       eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      strncpy(errmsg, "Hmm, /peer list failed!", EOF_L_MESSAGE);
+      strncpy(errmsg, "Peer already known", EOF_L_MESSAGE);
       eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
+      ret = 1;
+   } else {
+      ret = peer_add(nick, addr, keyid);
+
+      if(ret) {
+         eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
+      } else {
+         eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
+         strncpy(errmsg, "Hmm, /peer list failed!", EOF_L_MESSAGE);
+         eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
+      }
    }
 
    return ret;
