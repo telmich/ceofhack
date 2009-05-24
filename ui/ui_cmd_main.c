@@ -26,6 +26,7 @@
 #include <stdio.h>      /* printf()          */
 #include <string.h>     /* strncpy()         */
 #include <errno.h>      /*                   */
+#include <stdlib.h>     /* free()            */
 
 #include "eof.h"        /* functions etc.    */
 
@@ -37,8 +38,9 @@ int main()
    char addr[EOF_L_ADDRESS+1];
    char cmd[EOF_L_CMD+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char *p;
 
-   int sockfd;
+   int sockfd, i, nop;
 
    /* just for fun */
    eof_get_configdir(buf, PATH_MAX+1);
@@ -54,14 +56,23 @@ int main()
       return 1;
    }
 
+   /* terminate, so there is at least one \0 */
+   buf[PATH_MAX] = 0;
+   nick[EOF_L_NICKNAME] = 0;
+   keyid[EOF_L_KEYID] = 0;
+   addr[EOF_L_ADDRESS] = 0;
+   errmsg[EOF_L_MESSAGE] = 0;
+
+   /* eof_va_write is a low level function used by the library 
+   if(!eof_va_write(sockfd, 4, EOF_L_CMD, cmd, EOF_L_NICKNAME, nick,
+                    EOF_L_ADDRESS, addr, EOF_L_KEYID, keyid)) return 2;
+    */
+
    /* peer add */
    strncpy(cmd, EOF_CMD_UI_PEER_ADD, EOF_L_CMD);
    strncpy(nick, "telmich", EOF_L_NICKNAME);
    strncpy(addr, "tcp:127.0.0.1:4242", EOF_L_ADDRESS);
    strncpy(keyid, "A310FB220BA776083559C8276A8817C51B70A5DF", EOF_L_KEYID);
-
-   //if(!eof_va_write(sockfd, 4, EOF_L_CMD, cmd, EOF_L_NICKNAME, nick,
-   //                 EOF_L_ADDRESS, addr, EOF_L_KEYID, keyid)) return 2;
 
    if(!eof_ui_peer_add(sockfd, errmsg, nick, addr, keyid)) {
       if(errno) {
@@ -69,6 +80,21 @@ int main()
       } else {
          printf("EOFi error: %s\n", errmsg);
       }
+   }
+
+   /* peer list */
+   if((nop = eof_ui_peer_list(sockfd, errmsg, &p)) == -1) {
+      if(errno) {
+         perror("eof_ui_peer_list");
+      } else {
+         printf("/peer list EOFi error: %s\n", errmsg);
+      }
+   } else {
+      printf("Peers:\n");
+      for(i=0; i < nop; i++) {
+         printf("   [%d]: %s\n", i, (p+ (i*(EOF_L_NICKNAME+1))));
+      }
+      free(p);
    }
 
    /*
