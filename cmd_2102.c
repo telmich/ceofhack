@@ -30,12 +30,14 @@ int cmd_2102(int fd[])
 {
    char nick[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
+   char errmsg[EOF_L_MESSAGE+1];
    char keyid[EOF_L_KEYID+1];
    int ret;
 
    memset(nick, 0, EOF_L_NICKNAME+1);
    memset(addr, 0, EOF_L_ADDRESS+1);
    memset(keyid, 0, EOF_L_KEYID+1);
+   memset(errmsg, 0, EOF_L_MESSAGE+1);
 
    printf("UI: /peer add request\n");
    
@@ -54,6 +56,8 @@ int cmd_2102(int fd[])
       eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
    } else {
       eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
+      strncpy(errmsg, "Hmm, /peer list failed!", EOF_L_MESSAGE);
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
    }
 
    return ret;

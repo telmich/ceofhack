@@ -201,7 +201,7 @@ int ui_cmd_read(int fd[]);
 int peer_init();
 int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
 struct peer *peer_new();
-int peer_list(char *);
+int peer_list(int fd);
 int peer_send(char *);
 struct peer *peer_findbyname(char *name);
 char *peer_keyid_get(char *nick);
