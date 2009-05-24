@@ -26,7 +26,7 @@
 #include <stdio.h>         /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
 
-int tp_send(char *nick, char *msg)
+int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
 {
    char           *url, *p;
    struct cconfig *send;
@@ -42,7 +42,7 @@ int tp_send(char *nick, char *msg)
    send = tp_available(url, TPS);
 
    if(!send) {
-      printf("No transport protocol available to send data to %s(%s)!\n", nick, url);
+      snprintf(errmsg, EOF_L_MESSAGE, "No transport protocol available!");
       return 0;
    }
    printf("Using %s to send to %s\n", send->path, url);

@@ -44,5 +44,5 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    printf("Encrypted message: %s\n", buf);
    
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
-   return tp_send(nick, buf);
+   return tp_send(nick, buf, errmsg);
 }
