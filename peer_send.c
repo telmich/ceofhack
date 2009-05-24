@@ -34,13 +34,13 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
 
    p = peer_findbyname(nick);
    if(!p) {
-      snprintf(errmsg, EOF_L_MESSAGE, "Unknown peer");
+      eof_errmsg("Unknown peer");
       return 0;
    }
 
    printf("Encrypting message...\n");
    /* encrypt msg for $nick */
-   if(!cgpg_encrypt(nick, msg, buf, BIGBUF)) return 0;
+   if(!cgpg_encrypt(nick, msg, buf, BIGBUF, errmsg)) return 0;
    printf("Encrypted message: %s\n", buf);
    
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
