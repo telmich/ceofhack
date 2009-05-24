@@ -29,43 +29,34 @@
 int cmd_2103(int fd[])
 {
    char nick[EOF_L_NICKNAME+1];
-   char addr[EOF_L_ADDRESS+1];
+   char msgtxt[EOF_L_MESSAGE+1];
    char errmsg[EOF_L_MESSAGE+1];
    char keyid[EOF_L_KEYID+1];
    int ret;
 
    memset(nick, 0, EOF_L_NICKNAME+1);
-   memset(addr, 0, EOF_L_ADDRESS+1);
+   memset(msgtxt, 0, EOF_L_MESSAGE+1);
    memset(keyid, 0, EOF_L_KEYID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
 
-   printf("UI: /peer add request\n");
+   printf("UI: /peer send request\n");
    
    if(!eof_va_read(fd[HP_READ], 3,
                    EOF_L_NICKNAME, nick,
-                   EOF_L_ADDRESS, addr,
-                   EOF_L_KEYID, keyid)) {
+                   EOF_L_MESSAGE, msgtxt)) {
       perror("eof_va_read");
       return 0;
    }
-   printf("UI: /peer add details: %s, %s, %s\n", nick, addr, keyid);
+   printf("UI: /peer send details: %s, %s\n", nick, msgtxt);
 
-   if(peer_findbyname(nick)) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      strncpy(errmsg, "Peer already known", EOF_L_MESSAGE);
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
-      ret = 1;
+   ret = peer_send(nick, msgtxt, errmsg);
+
+   if(ret) {
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
    } else {
-      ret = peer_add(nick, addr, keyid);
-
-      if(ret) {
-         eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
-      } else {
-         eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-         strncpy(errmsg, "Hmm, /peer list failed!", EOF_L_MESSAGE);
-         eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
-      }
-   }
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
+   }   
 
    return ret;
 }

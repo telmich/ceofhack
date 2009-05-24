@@ -26,32 +26,15 @@
 #include <stdio.h>      /* printf            */
 #include "ceofhack.h"   /* functions etc.    */
 
-int peer_send(char *str)
+int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
+              char errmsg[EOF_L_MESSAGE])
 {
    struct peer *p;
-   char nick[EOF_L_NICKNAME+1];
-   char msg[EOF_L_MESSAGE+1];
    char buf[BIGBUF+1];
-   char *n;
-   size_t len;
-
-   n = strchr(str, ' ');
-   if(!n) {
-      printf("Usage: /peer send <name> <msg>\n");
-      return 0;
-   }
-
-   strncpy(nick, str, EOF_L_NICKNAME);
-   len = (n - str) <= EOF_L_NICKNAME ? (n - str) : EOF_L_NICKNAME;
-   nick[len] = 0;
-
-   n++; /* skip whitespace */
-   strncpy(msg, n, EOF_L_MESSAGE);
-   msg[EOF_L_MESSAGE] = 0;
 
    p = peer_findbyname(nick);
    if(!p) {
-      printf("Unknown peer, %s!\n", nick);
+      snprintf(errmsg, EOF_L_MESSAGE, "Unknown peer");
       return 0;
    }
 
