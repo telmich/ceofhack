@@ -69,6 +69,9 @@
 #define EOF_P_TP_DIR             EOF_P_SLASH "tp"
 #define EOF_P_PIDFILE            EOF_P_SLASH "pid"
 
+/* macros */
+#define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
+
 /* library functions */
 int  eof_ui_connect();
 

@@ -42,7 +42,7 @@ int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
    send = tp_available(url, TPS);
 
    if(!send) {
-      snprintf(errmsg, EOF_L_MESSAGE, "No transport protocol available!");
+      eof_errmsg("No transport protocol available!");
       return 0;
    }
    printf("Using %s to send to %s\n", send->path, url);
