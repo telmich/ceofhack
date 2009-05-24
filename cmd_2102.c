@@ -22,6 +22,7 @@
  *
  */
 
+#include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
 
@@ -30,6 +31,11 @@ int cmd_2102(int fd[])
    char nick[EOF_L_NICKNAME+1];
    char addr[EOF_L_ADDRESS+1];
    char keyid[EOF_L_KEYID+1];
+   int ret;
+
+   memset(nick, 0, EOF_L_NICKNAME+1);
+   memset(addr, 0, EOF_L_ADDRESS+1);
+   memset(keyid, 0, EOF_L_KEYID+1);
 
    printf("UI: /peer add request\n");
    
@@ -37,10 +43,18 @@ int cmd_2102(int fd[])
                    EOF_L_NICKNAME, nick,
                    EOF_L_ADDRESS, addr,
                    EOF_L_KEYID, keyid)) {
-      perror("!eof_va_read");
+      perror("eof_va_read");
       return 0;
    }
    printf("UI: /peer add details: %s, %s, %s\n", nick, addr, keyid);
 
-   return peer_add(nick, addr, keyid) ? 1 : 0;
+   ret = peer_add(nick, addr, keyid);
+
+   if(ret) {
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
+   } else {
+      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
+   }
+
+   return ret;
 }

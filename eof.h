@@ -25,7 +25,9 @@
 
 /* user interfaces: already implemented */
 #define EOF_CMD_UI_ACK           "1100"
+#define EOF_CMD_UI_FAIL          "1101"
 #define EOF_CMD_UI_EXITREQUEST   "1102"
+#define EOF_CMD_UI_PEER_LISTING  "1104"
 
 #define EOF_CMD_UI_DEFAULT       "21xx"
 #define EOF_CMD_UI_REGISTER      "2100"
@@ -34,9 +36,7 @@
 #define EOF_CMD_UI_PEER_LIST     "2106"
 
 /* user interfaces: not implemented */
-#define EOF_CMD_UI_FAILURE       "1101"
 #define EOF_CMD_UI_MSGRECEIVED   "1103"
-#define EOF_CMD_UI_PEER_LISTING  "1104"
 
 #define EOF_CMD_UI_PEER_SEND     "2103"
 #define EOF_CMD_UI_PEER_RENAME   "2104"
@@ -90,7 +90,7 @@ int eof_va_write(int sockfd, int nof, ...);
 /* clean new functions */
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char add[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
-
+int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res);
 
 
 #endif
