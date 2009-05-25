@@ -34,6 +34,7 @@ int main()
 {
    char buf[PATH_MAX+1];
    char nick[EOF_L_NICKNAME+1];
+   char newnick[EOF_L_NICKNAME+1];
    char keyid[EOF_L_KEYID+1];
    char addr[EOF_L_ADDRESS+1];
    char cmd[EOF_L_CMD+1];
@@ -60,6 +61,7 @@ int main()
    /* terminate, so there is at least one \0 */
    buf[PATH_MAX] = 0;
    nick[EOF_L_NICKNAME] = 0;
+   newnick[EOF_L_NICKNAME] = 0;
    keyid[EOF_L_KEYID] = 0;
    addr[EOF_L_ADDRESS] = 0;
    msgtxt[EOF_L_MESSAGE] = 0;
@@ -106,6 +108,16 @@ int main()
          perror("eof_ui_peer_send");
       } else {
          printf("/peer send EOFi error: %s\n", errmsg);
+      }
+   }
+
+   /* peer rename */
+   strncpy(newnick, "telmich_new", EOF_L_NICKNAME);
+   if(!eof_ui_peer_rename(sockfd, errmsg, nick, newnick)) {
+      if(errno) {
+         perror("eof_ui_peer_rename");
+      } else {
+         printf("/peer rename EOFi error: %s\n", errmsg);
       }
    }
 
