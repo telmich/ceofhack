@@ -39,7 +39,7 @@ int cmd_2104(int fd[])
 
    printf("UI: /peer rename request\n");
    
-   if(!eof_va_read(fd[HP_READ], 3,
+   if(!eof_va_read(fd[HP_READ], 2,
                    EOF_L_NICKNAME, oldnick,
                    EOF_L_NICKNAME, newnick)) {
       perror("eof_va_read");

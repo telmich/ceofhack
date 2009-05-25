@@ -41,7 +41,7 @@ int cmd_2103(int fd[])
 
    printf("UI: /peer send request\n");
    
-   if(!eof_va_read(fd[HP_READ], 3,
+   if(!eof_va_read(fd[HP_READ], 2,
                    EOF_L_NICKNAME, nick,
                    EOF_L_MESSAGE, msgtxt)) {
       perror("eof_va_read");
