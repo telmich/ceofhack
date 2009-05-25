@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Read about Chaffing and winnowing
+desc: For instance http://en.wikipedia.org/wiki/Chaffing_and_winnowing
+type: :task
+component: doc
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-25 15:00:14.682115 Z
+references: []
+
+id: 08322cdd404d71480983ba96fa2d929896917910
+log_events: 
+- - 2009-05-25 15:00:15.326326 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
