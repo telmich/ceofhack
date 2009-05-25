@@ -93,6 +93,9 @@ int eof_va_write(int sockfd, int nof, ...);
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char add[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
 int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res);
+int eof_ui_peer_send(int sockfd, char errmsg[EOF_L_MESSAGE],
+                     char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE]);
+
 
 
 #endif

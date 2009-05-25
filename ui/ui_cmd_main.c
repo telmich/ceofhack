@@ -37,6 +37,7 @@ int main()
    char keyid[EOF_L_KEYID+1];
    char addr[EOF_L_ADDRESS+1];
    char cmd[EOF_L_CMD+1];
+   char msgtxt[EOF_L_MESSAGE+1];
    char errmsg[EOF_L_MESSAGE+1];
    char *p;
 
@@ -61,6 +62,7 @@ int main()
    nick[EOF_L_NICKNAME] = 0;
    keyid[EOF_L_KEYID] = 0;
    addr[EOF_L_ADDRESS] = 0;
+   msgtxt[EOF_L_MESSAGE] = 0;
    errmsg[EOF_L_MESSAGE] = 0;
 
    /* eof_va_write is a low level function used by the library 
@@ -95,6 +97,16 @@ int main()
          printf("   [%d]: %s\n", i, (p+ (i*(EOF_L_NICKNAME+1))));
       }
       free(p);
+   }
+
+   /* peer send */
+   strncpy(msgtxt, "Hallo, wie geht es?", EOF_L_MESSAGE);
+   if(!eof_ui_peer_send(sockfd, errmsg, nick, msgtxt)) {
+      if(errno) {
+         perror("eof_ui_peer_send");
+      } else {
+         printf("/peer send EOFi error: %s\n", errmsg);
+      }
    }
 
    /*

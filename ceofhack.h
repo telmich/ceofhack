@@ -253,6 +253,7 @@ int cmd_20xx(int []);
 int cmd_2100(int []);
 int cmd_2101(int []);
 int cmd_2102(int []);
+int cmd_2103(int []);
 int cmd_2106(int []);
 int cmd_21xx(int []);
 
