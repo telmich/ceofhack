@@ -28,6 +28,7 @@
 #define EOF_CMD_UI_FAIL          "1101"
 #define EOF_CMD_UI_EXITREQUEST   "1102"
 #define EOF_CMD_UI_PEER_LISTING  "1104"
+#define EOF_CMD_UI_PEER_INFO     "1105"
 
 #define EOF_CMD_UI_DEFAULT       "21xx"
 #define EOF_CMD_UI_REGISTER      "2100"
@@ -95,7 +96,8 @@ int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICK
 int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res);
 int eof_ui_peer_send(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE]);
-
+int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
+                     char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME]);
 
 
 #endif
