@@ -200,6 +200,8 @@ int ui_cmd_read(int fd[]);
 /* peers */
 int peer_init();
 int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
+int peer_rename(char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME],
+                char errmsg[EOF_L_MESSAGE]);
 struct peer *peer_new();
 int peer_list(int fd);
 int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
@@ -248,17 +250,19 @@ struct cmd *cmd_cat_default_cmd(unsigned long cat);
 
 
 int cmd_2000(int []);
+int cmd_2002(int []);
+int cmd_2003(int []);
 int cmd_20xx(int []);
 
+/* UI */
 int cmd_2100(int []);
 int cmd_2101(int []);
 int cmd_2102(int []);
 int cmd_2103(int []);
+int cmd_2104(int []);
+int cmd_2105(int []);
 int cmd_2106(int []);
 int cmd_21xx(int []);
-
-int cmd_2002(int []);
-int cmd_2003(int []);
 
 //int cmd_3000(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);

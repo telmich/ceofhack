@@ -33,7 +33,7 @@ TRANSPORT_PROTO+=tp_listen_read.c tp_send.c tp_send_wait.c tp_getscheme.c
 
 PEER=peer_init.c peer_add.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
-PEER+=peer_new.c peer_list.c
+PEER+=peer_new.c peer_list.c peer_rename.c
 
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
@@ -45,7 +45,7 @@ HELPER+=helper_find_by_handle.c
 CMD=cmd_handle.c cmd_init.c cmd_cat_create.c cmd_cat_default_cmd.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
 CMD+=cmd_2000.c cmd_2002.c cmd_2003.c cmd_20xx.c
-CMD+=cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2106.c cmd_21xx.c
+CMD+=cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c cmd_2106.c cmd_21xx.c
 CMD+=cmd_3000.c
 
 # gpg (crypto)
