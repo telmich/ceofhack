@@ -37,9 +37,9 @@ int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS],
    if(!p) return 0;
 
    /* nick */
-   strncpy(p->name, nick, EOF_L_NICKNAME+1);
-   strncpy(p->addr, addr, EOF_L_ADDRESS+1);
-   strncpy(p->keyid, keyid, EOF_L_KEYID+1);
+   strncpy(p->name, nick, EOF_L_NICKNAME);
+   strncpy(p->addr, addr, EOF_L_ADDRESS);
+   strncpy(p->keyid, keyid, EOF_L_KEYID);
 
    p->next = plist.next;
    plist.next = p;
