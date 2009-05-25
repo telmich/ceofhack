@@ -44,8 +44,9 @@ HELPER+=helper_find_by_handle.c
 # command handling (ceof internal)
 CMD=cmd_handle.c cmd_init.c cmd_cat_create.c cmd_cat_default_cmd.c
 CMD+=cmd_create.c cmd_cat_add.c cmd_cat_find.c cmd_find_in_cat.c
-CMD+=cmd_2000.c cmd_2002.c cmd_2003.c cmd_20xx.c
-CMD+=cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c cmd_2106.c cmd_21xx.c
+CMD+=cmd_20xx.c cmd_2000.c cmd_2002.c cmd_2003.c
+CMD+=cmd_21xx.c cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c
+CMD+=cmd_2105.c cmd_2106.c
 CMD+=cmd_3000.c
 
 # gpg (crypto)

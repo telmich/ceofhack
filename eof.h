@@ -34,13 +34,13 @@
 #define EOF_CMD_UI_REGISTER      "2100"
 #define EOF_CMD_UI_DEREGISTER    "2101"
 #define EOF_CMD_UI_PEER_ADD      "2102"
-#define EOF_CMD_UI_PEER_RENAME   "2104"
 #define EOF_CMD_UI_PEER_SEND     "2103"
+#define EOF_CMD_UI_PEER_RENAME   "2104"
+#define EOF_CMD_UI_PEER_SHOW     "2105"
 #define EOF_CMD_UI_PEER_LIST     "2106"
 
 /* user interfaces: not implemented */
 #define EOF_CMD_UI_MSGRECEIVED   "1103"
-#define EOF_CMD_UI_PEER_SHOW     "2105"
 #define EOF_CMD_UI_QUIT          "2199"
 
 
