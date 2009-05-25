@@ -78,6 +78,7 @@ int main()
    strncpy(addr, "tcp:127.0.0.1:4242", EOF_L_ADDRESS);
    strncpy(keyid, "A310FB220BA776083559C8276A8817C51B70A5DF", EOF_L_KEYID);
 
+   printf("Adding peer telmich \n");
    if(!eof_ui_peer_add(sockfd, errmsg, nick, addr, keyid)) {
       if(errno) {
          perror("eof_ui_peer_add");
@@ -87,6 +88,7 @@ int main()
    }
 
    /* peer list */
+   printf("First list of known peers\n");
    if((nop = eof_ui_peer_list(sockfd, errmsg, &p)) == -1) {
       if(errno) {
          perror("eof_ui_peer_list");
@@ -102,6 +104,7 @@ int main()
    }
 
    /* peer send */
+   printf("Send message to telmich\n");
    strncpy(msgtxt, "Hallo, wie geht es?", EOF_L_MESSAGE);
    if(!eof_ui_peer_send(sockfd, errmsg, nick, msgtxt)) {
       if(errno) {
@@ -112,6 +115,7 @@ int main()
    }
 
    /* peer rename */
+   printf("Rename telmich -> telmich_new\n");
    strncpy(newnick, "telmich_new", EOF_L_NICKNAME);
    if(!eof_ui_peer_rename(sockfd, errmsg, nick, newnick)) {
       if(errno) {
@@ -120,6 +124,23 @@ int main()
          printf("/peer rename EOFi error: %s\n", errmsg);
       }
    }
+
+   /* peer list, again */
+   printf("Second /peer list\n");
+   if((nop = eof_ui_peer_list(sockfd, errmsg, &p)) == -1) {
+      if(errno) {
+         perror("eof_ui_peer_list");
+      } else {
+         printf("/peer list EOFi error: %s\n", errmsg);
+      }
+   } else {
+      printf("Peers:\n");
+      for(i=0; i < nop; i++) {
+         printf("   [%d]: %s\n", i, (p+ (i*(EOF_L_NICKNAME+1))));
+      }
+      free(p);
+   }
+
 
    /*
     * init stdin and EOFi listener like in EOFi, but vice versa
