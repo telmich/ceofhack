@@ -37,9 +37,9 @@ int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
 
    memset(buf, 0, EOF_L_CMD+1);
 
-   if(!eof_va_write(sockfd, 3, EOF_L_CMD, EOF_CMD_UI_PEER_SEND,
-                               EOF_L_NICKNAME, nick,
-                               EOF_L_MESSAGE, msgtxt)) {
+   if(!eof_va_write(sockfd, 3, EOF_L_CMD, EOF_CMD_UI_PEER_RENAME,
+                               EOF_L_NICKNAME, oldnick,
+                               EOF_L_NICKNAME, newnick)) {
       return 0;
    }
 
