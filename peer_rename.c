@@ -33,6 +33,12 @@ int peer_rename(char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME],
 {
    struct peer *p;
 
+   p = peer_findbyname(newnick);
+   if(p) {
+      eof_errmsg("Destination nick already existing");
+      return 0;
+   }
+
    p = peer_findbyname(oldnick);
    if(!p) {
       eof_errmsg("No such nick");
