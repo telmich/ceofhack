@@ -969,8 +969,7 @@ Number of peers & EOFsdt: size & How many peers follow & 20\\
 Peer & EOFsdt: nick & The nickname & telmich\\
 \hline
 \end{longtable}
-The last field is repeated as many times as specified in number of
-peers.
+The last field is repeated as many times as specified in number of peers.
 % Nico: 1.0
 %% -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
@@ -996,17 +995,18 @@ Possible answers:
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2102: /peer add}
+The UI adds a peer to the list of known peers.
 \index{Command!/peer add}%
 \begin{longtable}{|c|c|c|c|}
-\caption{/peer add parameters}\\
+\caption{2102: /peer add parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Nick & EOFsdt & Name you identify the peer with & telmich\\
+Nick & EOFsdt: nick & Name you identify the peer with & telmich\\
 \hline
-Address & EOFsdt & Where we can make the first contact & tcp:10.0.42.42:4242\\
+Address & EOFsdt: addr & Where we can make the first contact & tcp:10.0.42.42:4242\\
 \hline
-Keyid & EOFsdt & PGP fingerprint of the peers key & F27987E34E66...\\
+Keyid & EOFsdt: keyid & PGP fingerprint of the peers key & F27987E34E66...\\
 \hline
 \end{longtable}
 Possible answers:
@@ -1017,15 +1017,16 @@ Possible answers:
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2103: /peer send}
+The UI wants to submit a message to a peer.
 \index{Command!/peer send}%
 \begin{longtable}{|c|c|c|c|}
-\caption{/peer send parameters}\\
+\caption{2103: /peer send parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Nick & EOFsdt & Name you identify the peer with & telmich\\
+Nick & EOFsdt: nick & Name you identify the peer with & telmich\\
 \hline
-Msgtext & EOFsdt & The message itself & Hallo, wie geht es Dir?\\
+Message & EOFsdt: msgtxt & The message itself & Hallo, wie geht es Dir?\\
 \hline
 \end{longtable}
 
@@ -1034,16 +1035,12 @@ Msgtext & EOFsdt & The message itself & Hallo, wie geht es Dir?\\
 /peer send telmich Hallo, wie geht es Dir?
 \end{verbatim}
 
-
-Aftere the "`0022"' follow 128 bytes for the peer name
-and after that 128 Bytes for the message.
-Both 0-terminated, 0 padded.
-Answers from EOFi:
+Possible answers:
 \begin{itemize}
-\item \textbf{1122}: success
-\item \textbf{1221}: unknown peer
+\item 1100
+\item 1101
 \end{itemize}
-
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2104: /peer rename}
 \index{Command!/peer rename}%
@@ -1062,6 +1059,11 @@ Newnick & EOFsdt & New nick name & heinz\\
 \begin{verbatim}
 /peer rename susi heinz
 \end{verbatim}
+Possible answers:
+\begin{itemize}
+\item 1100
+\item 1101
+\end{itemize}
 
 % -----------------------------------------------------------------------------
 \subsection{2105: /peer show}
@@ -1090,18 +1092,24 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 \begin{verbatim}
 /peer show karl-otto
 \end{verbatim}
+
+Possible answers:
+\begin{itemize}
+\item 1100
+\item 1101
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer list}
-
+The UI requests the list of known peers.
+\begin{itemize}
+\item Parameters: none
+\end{itemize}
 Possible answers:
 \begin{itemize}
 \item 1101
 \item 1104
 \end{itemize}
-\end{itemize}
-\end{itemize}
-\end{itemize}
-
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2199: /quit}
 The user interface requests EOFi and all other EOFs to exit.
