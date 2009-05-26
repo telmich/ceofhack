@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: New UI commands
+desc: |-
+  Maybe for later:
+  
+  /peer addr show, del, add
+  /peer key show, fingerprint, change
+type: :task
+component: ui
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-05-26 19:24:07.387434 Z
+references: []
+
+id: 3d99084c9ebe69640116dcd52419e05be3fb1095
+log_events: 
+- - 2009-05-26 19:24:10.759191 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
