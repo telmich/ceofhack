@@ -971,7 +971,24 @@ Peer & EOFsdt: nick & The nickname & telmich\\
 \end{longtable}
 The last field is repeated as many times as specified in number of peers.
 % Nico: 1.0
-%% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{1105: Peer information}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1105 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+Keyid & EOFsdt:keyid & This peers pgp-keyid & 389E5481065EAA253...\\
+\hline
+Number of addresses & EOFsdt: size & & 1\\
+\hline
+address & EOFsdt: addr & Adress of peer & tcp:127.0.0.1:4243\\
+\hline
+\end{longtable}
+The last field is repeated as often, as specified in the number of addresses
+field.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, the UI should close the socket afterwards.
@@ -1067,24 +1084,13 @@ Possible answers:
 
 % -----------------------------------------------------------------------------
 \subsection{2105: /peer show}
-Display detailled information about a nick:
-\begin{itemize}
-\item Available PGP details like
-\begin{itemize}
-\item fingerprint,
-\item full name or
-\item e-mail.
-\end{itemize}
-\item List of address of transport protocols
-\end{itemize}
-
-\index{Command!/peer show}%
+The UI requests details about a peer.
 \begin{longtable}{|c|c|c|c|}
-\caption{/peer rename parameters}\\
+\caption{2105: /peer rename parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
+Nick name & EOFsdt & Nick name, as known by EOFi & karl-otto\\
 \hline
 \end{longtable}
 
@@ -1095,9 +1101,10 @@ Nick name & EOFsdt & Nick name as known by EOFi & karl-otto\\
 
 Possible answers:
 \begin{itemize}
-\item 1100
 \item 1101
+\item 1105
 \end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer list}
 The UI requests the list of known peers.
