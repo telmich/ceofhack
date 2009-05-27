@@ -31,6 +31,7 @@ int helper_signal_all(int sig)
    for(i=0; i < MAX_COMM; i++) {
       if(chp[i].pid) {
          if(helper_signal(&chp[i], sig) == -1) {
+            /* FIXME: report more details on failure */
             perror("helper_signal");
             ret = 0;
          }
