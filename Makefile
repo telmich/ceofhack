@@ -33,7 +33,7 @@ TRANSPORT_PROTO+=tp_listen_read.c tp_send.c tp_send_wait.c tp_getscheme.c
 
 PEER=peer_init.c peer_add.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c peer_input.c
-PEER+=peer_new.c peer_list.c peer_rename.c
+PEER+=peer_new.c peer_list.c peer_rename.c peer_show.c
 
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c

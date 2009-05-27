@@ -202,6 +202,7 @@ int peer_init();
 int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
 int peer_rename(char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME],
                 char errmsg[EOF_L_MESSAGE]);
+int peer_show(int fd[]);
 struct peer *peer_new();
 int peer_list(int fd);
 int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],

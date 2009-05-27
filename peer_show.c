@@ -47,8 +47,10 @@ int peer_show(int fd[])
    p = peer_findbyname(nick);
    if(!p) {
       eof_errmsg("No such nick");
-      eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
-                                    EOF_L_MESSAGE, errmsg);
+      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
+                                    EOF_L_MESSAGE, errmsg)) {
+         perror("peershow/0");
+      }
       return 0;
    }
 
@@ -58,6 +60,7 @@ int peer_show(int fd[])
                                     EOF_L_KEYID, p->keyid,
                                     EOF_L_SIZE, size,
                                     EOF_L_ADDRESS, p->addr)) {
+      perror("peershow/1");
       return 0;
    }
 
