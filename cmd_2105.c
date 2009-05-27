@@ -28,33 +28,7 @@
 
 int cmd_2105(int fd[])
 {
-   char oldnick[EOF_L_NICKNAME+1];
-   char newnick[EOF_L_NICKNAME+1];
-   char errmsg[EOF_L_MESSAGE+1];
-   int ret;
-
-   memset(oldnick, 0, EOF_L_NICKNAME+1);
-   memset(newnick, 0, EOF_L_NICKNAME+1);
-   memset(errmsg, 0, EOF_L_MESSAGE+1);
-
-   printf("UI: /peer rename request\n");
+   printf("UI: /peer show request\n");
    
-   if(!eof_va_read(fd[HP_READ], 2,
-                   EOF_L_NICKNAME, oldnick,
-                   EOF_L_NICKNAME, newnick)) {
-      perror("eof_va_read");
-      return 0;
-   }
-   printf("UI: /peer rename details: %s, %s\n", oldnick, newnick);
-
-   ret = peer_rename(oldnick, newnick, errmsg);
-
-   if(ret) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
-   } else {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
-   }   
-
-   return ret;
+   return peer_show(fd);
 }
