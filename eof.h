@@ -98,6 +98,9 @@ int eof_ui_peer_send(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE]);
 int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME]);
+int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
+                     char nick[EOF_L_NICKNAME], char keyid[EOF_L_KEYID],
+                                          char **addrs);
 
 
 #endif

@@ -64,6 +64,9 @@ int cmd_init()
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_RENAME, cmd_2104))) return 0;
    if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
 
+   if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_SHOW, cmd_2105))) return 0;
+   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_LIST, cmd_2106))) return 0;
    if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
 
