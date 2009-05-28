@@ -863,8 +863,19 @@ List currently known peers. This command does not accept any parameters.
 \end{verbatim}
 % Nico: 1.0
 %---------------------------------------------------------------------
+\subsection{/exit}
+Request the user interface to exit. It will deregister from EOFi,
+but EOFi will continue to run (even with no user interface attached).
+\subsubsection{Example}
+\begin{verbatim}
+/exit
+\end{verbatim}
+% Nico: 1.0
+%---------------------------------------------------------------------
 \subsection{/quit}
-Tells EOFi to quit. The EOFi will tell all EOFs to quit and quits.
+The UI tells EOFi to quit.
+The EOFi will tell all EOFs to quit and quits.
+Afterwards the UI will also quit.
 \subsubsection{Example}
 \begin{verbatim}
 /quit
