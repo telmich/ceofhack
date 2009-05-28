@@ -925,7 +925,7 @@ EOFi acknowledged the last command.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1101: Failure}
-The EOFi does not accept / understand the request.
+The last issued command did fail. Details are specified in the reason message.
 \subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1101 parameters}\\
@@ -935,7 +935,7 @@ The EOFi does not accept / understand the request.
 Reason & EOFsdt: msgtxt & Why the connection was refused & Too many UIs connected.\\
 \hline
 \end{longtable}
-EOFi will close the socket afterwards.
+If the failed command was "`2100"', EOFi will close the socket afterwards.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1102: Exit requested}

@@ -160,7 +160,6 @@ int main()
       free(p);
    }
 
-
    /*
     * init stdin and EOFi listener like in EOFi, but vice versa
     */
