@@ -24,6 +24,7 @@
 
 #include <limits.h>     /* PATH_MAX          */
 #include <stdio.h>      /* printf()          */
+#include <string.h>     /* strlen()          */
 #include <sys/socket.h> /* socket handling   */
 #include <sys/un.h>     /* Unix socket       */
 
@@ -31,7 +32,7 @@
 
 int eof_ui_connect()
 {
-   int sock;
+   int sock, len;
    struct sockaddr_un una;
 
    sock = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -41,7 +42,10 @@ int eof_ui_connect()
    eof_get_ui_socketpath(una.sun_path, 108);
    printf("socket: %s\n", una.sun_path);
 
-   if(connect(sock, (struct sockaddr *) &una, sizeof(una)) == -1) {
+   una.sun_family = AF_UNIX;
+   len = strlen(una.sun_path) + sizeof(una.sun_family);
+
+   if(connect(sock, (struct sockaddr *) &una, len) == -1) {
       return -1;
    }
 
