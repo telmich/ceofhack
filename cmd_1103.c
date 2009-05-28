@@ -18,45 +18,29 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle /peer send request
+ * Pass incoming packet to all UIs
  *
  */
 
-#include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "eof.h"        /* functions etc.    */
 
-int cmd_2103(int fd[])
+int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
 {
-   char nick[EOF_L_NICKNAME+1];
-   char msgtxt[EOF_L_MESSAGE+1];
-   char errmsg[EOF_L_MESSAGE+1];
-   char keyid[EOF_L_KEYID+1];
-   int ret;
+   int i = 0;
+   int ret = 1;
+   struct helper *hp;
 
-   memset(nick, 0, EOF_L_NICKNAME+1);
-   memset(msgtxt, 0, EOF_L_MESSAGE+1);
-   memset(keyid, 0, EOF_L_KEYID+1);
-   memset(errmsg, 0, EOF_L_MESSAGE+1);
+   printf("UI: message received: <%s> %s\n", nick, msgtxt);
 
-   printf("UI: /peer send request\n");
-   
-   if(!eof_va_read(fd[HP_READ], 2,
-                   EOF_L_NICKNAME, nick,
-                   EOF_L_MESSAGE, msgtxt)) {
-      perror("eof_va_read");
-      return 0;
+   while((hp = helper_find_by_handle(&i, ui_read))) {
+      if(!eof_va_write(hp->fds[HP_WRITE], 2, EOF_L_NICKNAME, nick,
+                                         EOF_L_MESSAGE, msgtxt)) {
+         perror("cmd_1103/!eof_va_write");
+         ret = 0;
+      }
    }
-   printf("UI: /peer send details: %s, %s\n", nick, msgtxt);
-
-   ret = peer_send(nick, msgtxt, errmsg);
-
-   if(ret) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
-   } else {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
-   }   
 
    return ret;
 }
