@@ -141,6 +141,25 @@ int main()
       free(p);
    }
 
+   /* peer show */
+   memset(keyid, 0, EOF_L_KEYID+1);
+   p = NULL;
+   printf("Show peer information for %s\n", newnick);
+   if((nop = eof_ui_peer_show(sockfd, errmsg, newnick, keyid, &p)) == -1) {
+      if(errno) {
+         perror("eof_ui_peer_show");
+      } else {
+         printf("/peer show EOFi error: %s\n", errmsg);
+      }
+   } else {
+      printf("Keyid: %s\n", keyid);
+      printf("Addresses:\n");
+      for(i=0; i < nop; i++) {
+         printf("   [%d]: %s\n", i, (p+ (i*(EOF_L_ADDRESS+1))));
+      }
+      free(p);
+   }
+
 
    /*
     * init stdin and EOFi listener like in EOFi, but vice versa
