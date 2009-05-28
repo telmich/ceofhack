@@ -35,6 +35,8 @@ void ceof_exit(int i)
    ts.tv_sec = 1;
    ts.tv_nsec =0;
 
+   ui_exit();
+
    printf("Shutting down EOF subsystems (SIGINT)...\n");
    helper_signal_all(SIGINT);
    
@@ -47,8 +49,6 @@ void ceof_exit(int i)
    if(unlink(opt.pidfile) == -1) {
       perror("ceof_exit/pidfile");
    }
-
-   ui_exit();
 
    _exit(i);
 }
