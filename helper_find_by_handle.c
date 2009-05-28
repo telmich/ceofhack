@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Return helper, if found
+ * Return first helper found with handle...
  *
  */
 
