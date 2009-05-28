@@ -170,6 +170,9 @@ int main()
    /* peer rename */
    /* peer show */
    /* quit */
+   if(!eof_ui_quit(sockfd)) {
+      perror("eof_ui_quit");
+   }
 
    /* deregister */
    if(!eof_ui_deregister(sockfd)) {
