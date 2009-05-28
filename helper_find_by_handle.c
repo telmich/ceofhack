@@ -24,14 +24,13 @@
 
 #include "ceofhack.h"            /* functions etc.                */
 
-struct helper *helper_find_by_handle(int (*handle)(int []))
+struct helper *helper_find_by_handle(int *last, int (*handle)(int []))
 {
-   int i;
-
-   for(i=0; i < MAX_COMM; i++) {
-      if(chp[i].handle == handle) {
-         return &chp[i];
+   while(*last < MAX_COMM) {
+      if(chp[*last].handle == handle) {
+         return &chp[*last];
       }
+      (*last)++;
    }
 
    return NULL;

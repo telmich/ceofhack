@@ -28,9 +28,10 @@
 void ui_disable_all()
 {
    struct helper *hp;
+   int i = 0;
 
    /* find UIs: every helper that has ui_read() registered */
-   while((hp = helper_find_by_handle(ui_read))) {
+   while((hp = helper_find_by_handle(&i, ui_read))) {
       ui_disable(hp->fds[HP_READ]);
    }
 }
