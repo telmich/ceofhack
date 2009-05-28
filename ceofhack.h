@@ -256,6 +256,7 @@ int cmd_2003(int []);
 int cmd_20xx(int []);
 
 /* UI */
+int cmd_1103(int []);
 int cmd_2100(int []);
 int cmd_2101(int []);
 int cmd_2102(int []);

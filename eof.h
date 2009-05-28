@@ -27,6 +27,7 @@
 #define EOF_CMD_UI_ACK           "1100"
 #define EOF_CMD_UI_FAIL          "1101"
 #define EOF_CMD_UI_EXITREQUEST   "1102"
+#define EOF_CMD_UI_MSGRECEIVED   "1103"
 #define EOF_CMD_UI_PEER_LISTING  "1104"
 #define EOF_CMD_UI_PEER_INFO     "1105"
 
@@ -38,9 +39,6 @@
 #define EOF_CMD_UI_PEER_RENAME   "2104"
 #define EOF_CMD_UI_PEER_SHOW     "2105"
 #define EOF_CMD_UI_PEER_LIST     "2106"
-
-/* user interfaces: not implemented */
-#define EOF_CMD_UI_MSGRECEIVED   "1103"
 #define EOF_CMD_UI_QUIT          "2199"
 
 
