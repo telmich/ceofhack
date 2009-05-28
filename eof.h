@@ -49,6 +49,7 @@
 #define EOF_CMD_EXT_DROP         "3003"
 
 /* UI commands */
+#define EOF_UI_EXIT              "/exit"
 #define EOF_UI_QUIT              "/quit"
 #define EOF_UI_PEER_ADD          "/peer add"
 #define EOF_UI_PEER_LIST         "/peer list"
