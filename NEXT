@@ -1,0 +1,13 @@
+Implementing a real cmd_1103 is kind of complex:
+
+- create external commands (3xxx):
+   - message is for you
+   - forward packet
+   - drop packet
+
+- check pgp signature, if incoming package is for me
+- pgp-sign message packets
+
+Thus implement 1103 this way:
+   - fillup nick with "UNKNOWN" for know
+
