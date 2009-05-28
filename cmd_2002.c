@@ -31,6 +31,7 @@ int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
    char plaintext[EOF_L_PKG_MAX+1];
+   char nick[EOF_L_NICKNAME];
    char *p, *endnum;
    ssize_t len, pkglen;
 
@@ -87,6 +88,12 @@ int cmd_2002(int fd[])
 
    if(len > 0) {
       printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);
+      strncpy(nick, "UNKNOWN", EOF_L_NICKNAME);
+      if(!cmd_1103(nick, plaintext)) {
+         printf("Message did not reach all UIs\n");
+      } else {
+         printf("Message did not reach all UIs\n");
+      }
    } else {
       printf("decryption failed with %ld\n", (long) len);
    }

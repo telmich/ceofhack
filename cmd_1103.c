@@ -36,8 +36,8 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
 
    while((hp = helper_find_by_handle(&i, ui_read))) {
       if(!eof_va_write(hp->fds[HP_WRITE], 2, EOF_L_NICKNAME, nick,
-                                         EOF_L_MESSAGE, msgtxt)) {
-         perror("cmd_1103/!eof_va_write");
+                                             EOF_L_MESSAGE, msgtxt)) {
+         perror("cmd_1103/eof_va_write");
          ret = 0;
       }
    }

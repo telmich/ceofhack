@@ -256,7 +256,7 @@ int cmd_2003(int []);
 int cmd_20xx(int []);
 
 /* UI */
-int cmd_1103(int []);
+int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE]);
 int cmd_2100(int []);
 int cmd_2101(int []);
 int cmd_2102(int []);
