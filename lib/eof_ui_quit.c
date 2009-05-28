@@ -25,7 +25,7 @@
 
 int eof_ui_quit(int sockfd)
 {
-   if(!eof_va_write(sockfd, 2, EOF_L_CMD, EOF_CMD_UI_QUIT)) {
+   if(!eof_va_write(sockfd, 1, EOF_L_CMD, EOF_CMD_UI_QUIT)) {
       return 0;
    } else {
       return 1;
