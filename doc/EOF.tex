@@ -918,13 +918,15 @@ on page \pageref{ui-socket}, section \ref{ui-socket}.
 % -----------------------------------------------------------------------------
 \subsection{1100: Acknowledge}
 EOFi acknowledged the last command.
+\subsubsection{Parameters}
 \begin{itemize}
-\item Parameters: none
+\item none
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1101: Failure}
 The EOFi does not accept / understand the request.
+\subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1101 parameters}\\
 \hline
@@ -939,12 +941,14 @@ EOFi will close the socket afterwards.
 \subsection{1102: Exit requested}
 This is a  shutdown request to the UI.
 After this message EOFi will exit and there is no communication possible,
+\subsubsection{Parameters}
 \begin{itemize}
-\item Parameters: none
+\item none
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1103: Recieved message}
+\subsubsection{Parameters}
 \index{Command!1102}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1103 parameters}\\
@@ -959,6 +963,7 @@ msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1104: List of peers}
+\subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1104 parameters}\\
 \hline
@@ -973,6 +978,7 @@ The last field is repeated as many times as specified in number of peers.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1105: Peer information}
+\subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1105 parameters}\\
 \hline
@@ -992,10 +998,11 @@ field.
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, the UI should close the socket afterwards.
+\subsubsection{Parameters}
 \begin{itemize}
-\item Parameters: none
+\item none
 \end{itemize}
-Possible answers:
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1100
 \item 1101
@@ -1003,16 +1010,19 @@ Possible answers:
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2101: Deregister user interface}
+\subsubsection{Parameters}
 \begin{itemize}
-\item Parameters: none
+\item none
 \end{itemize}
+\subsubsection{Possible answers}
 \begin{itemize}
-\item Possible answers: none
+\item none
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2102: /peer add}
 The UI adds a peer to the list of known peers.
+\subsubsection{Parameters}
 \index{Command!/peer add}%
 \begin{longtable}{|c|c|c|c|}
 \caption{2102: /peer add parameters}\\
@@ -1026,7 +1036,8 @@ Address & EOFsdt: addr & Where we can make the first contact & tcp:10.0.42.42:42
 Keyid & EOFsdt: keyid & PGP fingerprint of the peers key & F27987E34E66...\\
 \hline
 \end{longtable}
-Possible answers:
+
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1100
 \item 1101
@@ -1035,6 +1046,7 @@ Possible answers:
 % -----------------------------------------------------------------------------
 \subsection{2103: /peer send}
 The UI wants to submit a message to a peer.
+\subsubsection{Parameters}
 \index{Command!/peer send}%
 \begin{longtable}{|c|c|c|c|}
 \caption{2103: /peer send parameters}\\
@@ -1052,7 +1064,7 @@ Message & EOFsdt: msgtxt & The message itself & Hallo, wie geht es Dir?\\
 /peer send telmich Hallo, wie geht es Dir?
 \end{verbatim}
 
-Possible answers:
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1100
 \item 1101
@@ -1060,6 +1072,9 @@ Possible answers:
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2104: /peer rename}
+The UI wants to rename a peer.
+
+\subsubsection{Parameters}
 \index{Command!/peer rename}%
 \begin{longtable}{|c|c|c|c|}
 \caption{/peer rename parameters}\\
@@ -1076,7 +1091,8 @@ Newnick & EOFsdt & New nick name & heinz\\
 \begin{verbatim}
 /peer rename susi heinz
 \end{verbatim}
-Possible answers:
+
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1100
 \item 1101
@@ -1084,6 +1100,7 @@ Possible answers:
 
 % -----------------------------------------------------------------------------
 \subsection{2105: /peer show}
+\subsubsection{Parameters}
 The UI requests details about a peer.
 \begin{longtable}{|c|c|c|c|}
 \caption{2105: /peer rename parameters}\\
@@ -1099,7 +1116,7 @@ Nick name & EOFsdt & Nick name, as known by EOFi & karl-otto\\
 /peer show karl-otto
 \end{verbatim}
 
-Possible answers:
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1101
 \item 1105
@@ -1107,11 +1124,12 @@ Possible answers:
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer list}
+\subsubsection{Parameters}
 The UI requests the list of known peers.
 \begin{itemize}
 \item Parameters: none
 \end{itemize}
-Possible answers:
+\subsubsection{Possible answers}
 \begin{itemize}
 \item 1101
 \item 1104
