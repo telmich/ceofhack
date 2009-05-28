@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Handle /peer show request
+ * Handle UI /quit request
  *
  */
 
@@ -26,9 +26,11 @@
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_2105(int fd[])
+int cmd_2199(int UNUSED(fd[]))
 {
-   printf("UI: /peer show request\n");
+   printf("UI: /quit request\n");
    
-   return peer_show(fd);
+   ceof_exit(0);
+
+   return 1;
 }
