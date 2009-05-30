@@ -43,11 +43,11 @@ int ceof_runs()
    memset(pid_c, '\0', EOF_L_PIDLEN);
 
    if(fileexists(opt.pidfile)) {
-      printf("file already exists...\n");
+//      printf("file already exists...\n");
       if(!openreadclosestatic(pid_c, opt.pidfile, EOF_L_PIDLEN)) {
          return -1;
       }
-      printf("saved pid is %s\n", pid_c);
+//      printf("saved pid is %s\n", pid_c);
       pid = strtoul(pid_c, NULL, 10);
       
       if(pid) {
