@@ -58,10 +58,6 @@ int ceof_runs()
       }
    }
 
-   /* BUUUUUUUUUUG */
-   snprintf(pid_c, EOF_L_PIDLEN, "%d\n", opt.pid);
-   printf("pid, pid_c: %d, %s", opt.pid, pid_c);
-
    if(!openwriteclose(opt.pidfile, pid_c, 7)) {
       return -1;
    }
