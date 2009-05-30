@@ -22,16 +22,16 @@
  *
  */
 
-#include <poll.h>       /* guess what     */
-#include <limits.h>     /* PATH_MAX       */
-#include <stdio.h>      /* printf()       */
-#include <string.h>     /* str()*         */
-#include <errno.h>      /* guess what     */
-#include <stdlib.h>     /* getenv         */
-#include <unistd.h>     /* STDIN_FILENO   */
+#include <poll.h>       /* guess what        */
+#include <limits.h>     /* PATH_MAX          */
+#include <stdio.h>      /* printf()          */
+#include <string.h>     /* str()*            */
+#include <errno.h>      /* guess what        */
+#include <stdlib.h>     /* getenv            */
+#include <unistd.h>     /* STDIN_FILENO      */
 
-#include "ceofhack.h"   /* functions etc. */
-#include "ceof.h"       /* clean header   */
+#include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"       /* clean header      */
 
 struct pollfd  pfd[MAX_COMM];
 struct cconfig hometree;
@@ -46,7 +46,7 @@ int main()
    if(!config_init())   return CEOF_EX_CONFIG;     /* read config          */
    switch((cnt = ceof_runs())) {
       case -1:
-         perror("ceof_runs");
+         perror("ceof_pidcheck");
          return CEOF_EX_RUNS_ERR;
       break;
 
@@ -54,11 +54,10 @@ int main()
       break;
 
       default: /* already running */
-         printf("ceof already runs as PID %d: exiting.\n", cnt);
+         printf("ceof already runs (%d), exiting.\n", cnt);
          return CEOF_EX_RUNS;                         /* no need to restart   */
       break;
    }
-   printf("cnt = %d\n", cnt);
 
    if(!helper_init())   return CEOF_EX_HELPER;     /* init helper structs  */
    if(!cgpg_init())     return CEOF_EX_GPG;        /* init gpgme           */
