@@ -30,10 +30,13 @@
 int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
+   char size[EOF_L_SIZE+1];
    char plaintext[EOF_L_PKG_MAX+1];
    char nick[EOF_L_NICKNAME];
-   char *p, *endnum;
+   char *p;
    ssize_t len, pkglen;
+
+   memset(size, 0, EOF_L_SIZE+1);
 
    printf("Received a packet!!!\n");
 
@@ -51,28 +54,18 @@ int cmd_2002(int fd[])
    }
    buf[len] = '\0'; /* terminate for print / debugging */
 
-   p = strchr(buf, '\n');
+   strncpy(size, buf, EOF_L_SIZE);
+   pkglen = strtol(size, NULL, 10);
 
-   if(!p) {
-      /* FIXME: tell tp to drop the packet */
-      printf("cmd2002: packet is missing size information\n");
-      return 0;
-   }
-
-   *p = '\0'; /* end of header reached */
-   pkglen = strtol(buf, &endnum, 10);
-
-   if(endnum != p) {
-      printf("cmd2002: Broken packet: number of bytes is not directly followed by a newline\n");
-      return 0;
-   }
-
-   p++; /* begin of real packet */
-
-   if(pkglen != (len - (p - buf))) { /* position after \n -> end */
+   if(pkglen != (len - EOF_L_SIZE)) {
       /* FIXME: tell tp to drop the packet */
       printf("cmd2002: bogus size information in packet: %ld vs %ld!\n", 
          (long) pkglen,  (long) (len - (p - buf)));
+      return 0;
+   }
+
+    if(pkglen <= 0) {
+      printf("cmd2002: Packet too small (%ld Bytes)\n", (long) pkglen);
       return 0;
    }
 
@@ -82,6 +75,7 @@ int cmd_2002(int fd[])
     * - debug for now: print to stdout
     */
 
+   p = &buf[EOF_L_SIZE];
    printf("Incoming packet: %s\n", p);
    plaintext[0] = '\0';
    len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
