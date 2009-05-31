@@ -632,13 +632,11 @@ Unterscheiden zwischen listener und send.
 \hline
 Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
-Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+Size & EOFsdt: size & Size of message, excluding this header & 424242\\
 \hline
 Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
-The ASCII number may not exceed the value 999999. Thus if there is no
-\emph{\\n} after 6 bytes, the package is damaged or malformed.
 % -----------------------------------------------------------------------------
 \subsubsection{1000: Example}
 Added linebreak after some \\0 for readability, which are \textbf{not} in
@@ -720,7 +718,7 @@ The listening transport protocol received a packet and notifies EOFi.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-Size & ASCII Number + \textbackslash{}n & Size of message, excluding this header & 424242\\
+Size & EOFsdt:size & Excluding the 2002 and this field & 42\\
 \hline
 Message & Binary data & The message & BLOB\\
 \hline
