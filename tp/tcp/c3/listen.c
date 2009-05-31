@@ -102,23 +102,18 @@ ssize_t read_socket(int sock, char input[])
    return tmp;
 }
 
-int eof_ltp_write(char *msg, int type)
+int eof_ltp_write(char *msg, size_t len)
 {
-   size_t len;
    char buf[EOF_L_PKG_MAX+1];
 
-   type = 0; /* practically ignored currently */
-   
-   len = strlen(msg); /* FIXME: will not work for binary data!!! */
-
    strncpy(buf, EOF_CMD_TPL_RECV, EOF_L_CMD);
-   ultostr(len, 10, &buf[EOF_L_CMD], EOF_L_PKG_MAX - EOF_L_CMD);
-   strncat(buf, "\n", EOF_L_PKG_MAX); /* FIXME: will not work for binary data */
-   strncat(buf, msg, EOF_L_PKG_MAX); /* FIXME: will not work for binary data */
+   snprintf(&buf[EOF_L_CMD], EOF_L_SIZE, "%ld", (long) len);
+   strncpy(&buf[EOF_L_CMD+EOF_L_SIZE], msg, len);
 
-   len = strlen(buf); /* FIXME: will not work for binary data */
+   len += EOF_L_CMD + EOF_L_SIZE; /* full length to write */
 
-   fprintf(stderr, WE "TO EOFi: len=%ld, pkg=\"%s\" ...\n", (long) len, buf);
+   fprintf(stderr, WE "TO EOFi: len=%ld (%ld), pkg=\"%s\" ...\n",
+          (long) len, (long) len - (EOF_L_CMD + EOF_L_SIZE),  buf);
    return write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
 }
 
