@@ -84,9 +84,9 @@ int cmd_2002(int fd[])
       printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);
       strncpy(nick, "UNKNOWN", EOF_L_NICKNAME);
       if(!cmd_1103(nick, plaintext)) {
-         printf("Message did not reach all UIs\n");
+         printf("UI: Message did not reach all UIs\n");
       } else {
-         printf("Message did not reach all UIs\n");
+         printf("UI: Message reached all UIs\n");
       }
    } else {
       printf("decryption failed with %ld\n", (long) len);
