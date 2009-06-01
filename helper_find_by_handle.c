@@ -26,9 +26,11 @@
 
 struct helper *helper_find_by_handle(int *last, int (*handle)(int []))
 {
-   while(*last < MAX_COMM) {
+   struct helper *hp = NULL;
+
+   while(*last < MAX_COMM && !hp) {
       if(chp[*last].handle == handle) {
-         return &chp[*last];
+         hp = &chp[*last];
       }
       (*last)++;
    }
