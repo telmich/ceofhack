@@ -29,7 +29,7 @@ struct helper *helper_find_by_pid(pid_t pid)
 {
    int i;
 
-   for(i=0; i < chp_cnt; i++) {
+   for(i=0; i < MAX_COMM; i++) {
       if(chp[i].pid == pid) {
          return &chp[i];
       }
