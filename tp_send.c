@@ -28,12 +28,11 @@
 
 int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
 {
-   char           *url, *p;
+   char           *url;
    struct cconfig *send;
    struct helper  *hp;
 //   size_t         len;
    char           buf[BIGBUF+1];
-   int            tmp;
 
    memset(buf, 0, BIGBUF+1);
 
@@ -72,36 +71,14 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
 
    strncpy(buf, EOF_CMD_TPS, EOF_L_CMD);
    strncpy(&buf[EOF_L_CMD], url, EOF_L_ADDRESS);
+
+   /* snprintf uses only len bytes including \0, but we want it excluding */
    snprintf(&buf[EOF_L_CMD+EOF_L_ADDRESS], EOF_L_SIZE+1, "%ld", (long) len);
-   strncpy(&buf[EOF_L_CMD+EOF_L_ADDRESS], msg, len);
-   len += EOF_L_CMD + EOF_L_ADDRESS;
 
-   /* FIXME: HACK: pass packet to send        */
-   if(helper_write(hp, buf, len) <= 0) {
-      eof_errmsg("Data copy to transport protocol failed!");
-      return 0;
-   }
+   printf("TP: pkg=%s, size=%s\n", buf, &buf[EOF_L_CMD+EOF_L_ADDRESS]);
 
-   return 1;
-
-   /* old crap following */
-
-   /* FIXME: always check bounds!!! */
-   p = buf;
-   strncpy(p, EOF_CMD_TPS, EOF_L_CMD);
-   p += EOF_L_CMD;
-
-   /* position after scheme */
-   tmp = strlen(tp_getscheme(url)) + 1;
-   strncpy(p, &url[tmp], EOF_L_ADDRESS);
-   p += EOF_L_ADDRESS;
-
-   len = strlen(msg);
-   tmp = ultostr(len, 10, p, BIGBUF - (p-buf));
-
-   len = EOF_L_CMD + EOF_L_ADDRESS + strlen(p) + 1 + strlen(msg);
-   strncat(p, "\n", BIGBUF);
-   strncat(p, msg, BIGBUF);
+   strncpy(&buf[EOF_L_CMD+EOF_L_ADDRESS+EOF_L_SIZE], msg, len);
+   len += EOF_L_CMD + EOF_L_ADDRESS + EOF_L_SIZE;
 
    /* FIXME: HACK: pass packet to send        */
    if(helper_write(hp, buf, len) <= 0) {
