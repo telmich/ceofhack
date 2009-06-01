@@ -37,7 +37,7 @@ set -e
 echo "Adding transport protocol tcp"
 install -D -m 0755 $__abs_mydir/../tp/tcp/c3/listen \
         ~/.ceof/tp/available/tcp/listen
-install -D -m 0755 $__abs_mydir/../tp/tcp/bash-netcat/send \
+install -D -m 0755 $__abs_mydir/../tp/tcp/c3/send \
       ~/.ceof/tp/available/tcp/send
 ###### enable tcp listening: 0.0.0.0:4242
 echo "Enabling listing on $(cat $__abs_mydir/../tp/tcp/example_url)"
