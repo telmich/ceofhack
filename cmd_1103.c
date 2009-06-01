@@ -42,5 +42,6 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
       }
    }
 
+   printf("UI: 1103 leaving\n");
    return ret;
 }
