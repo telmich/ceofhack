@@ -44,8 +44,7 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len, char errmsg[EOF_L_M
    }
 
    keyid[1] = NULL;
-   if(!cgpg_keyid_get(p, keyid)) {
-      eof_errmsg("No gpg-key found");
+   if(!cgpg_keyid_get(p, keyid, errmsg)) {
       return 0;
    }
    printf("Key info: %s <%s>\n", keyid[0]->uids->name,  keyid[0]->uids->email);

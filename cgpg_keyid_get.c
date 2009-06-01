@@ -24,19 +24,23 @@
 
 #include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
-#include "ceofhack.h"   
+#include "ceofhack.h"   /* context           */
+#include "eof.h"        /* errmsg            */
 
-int cgpg_keyid_get(char *key, gpgme_key_t keyid[])
+int cgpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE])
 {
-   gpgme_error_t gerr;
-
-   /* retrieve keyid */
-
-   gerr =  gpgme_op_keylist_start(gpg_context, key, 0);
-   if(gerr != GPG_ERR_NO_ERROR) return 0;
-   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_start(gpg_context, key, 0)) return 0;
-   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_next(gpg_context, &keyid[0])) return 0;
-   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_end(gpg_context)) return 0;
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_start(gpg_context, key, 0)) {
+      eof_errmsg("gpgme_op_keylist_start failed");
+      return 0;
+   }
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_next(gpg_context, &keyid[0])) {
+      eof_errmsg("gpgme_op_keylist_next failed");
+      return 0;
+   }
+   if(GPG_ERR_NO_ERROR != gpgme_op_keylist_end(gpg_context)) {
+      eof_errmsg("gpgme_op_keylist_end failed");
+      return 0;
+   }
    
    return 1;
 }

@@ -216,7 +216,7 @@ int peer_input(int fd[]);
 int cgpg_init();
 int cgpg_encrypt(char *nick, char *msg, char buf[], int len, char errmsg[EOF_L_MESSAGE]);
 ssize_t cgpg_decrypt(char *msg, ssize_t msglen, char buf[], ssize_t bufsize);
-int cgpg_keyid_get(char *key, gpgme_key_t keyid[]);
+int cgpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE]);
 
 /* transport protocols */
 int tp_init();
