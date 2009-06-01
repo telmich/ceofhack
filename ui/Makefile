@@ -10,12 +10,16 @@ LIB=../lib/eof_ui_connect.c ../lib/eof_get_ui_socketpath.c ../lib/eof_get_config
 LIB+=../lib/eof_ui_register.c ../lib/eof_ui_deregister.c ../lib/eof_va_write.c
 LIB+=../lib/eof_ui_peer_add.c ../lib/eof_ui_peer_list.c ../lib/eof_ui_peer_send.c
 LIB+=../lib/eof_ui_peer_rename.c ../lib/eof_ui_peer_show.c ../lib/eof_ui_quit.c
+LIB+=../lib/eof_va_read.c
 SHCL=../read_all.c ../write_all.c 
 UI=$(UI_MAIN) $(LIB) $(SHCL)
 UI_OBJ=$(UI:.c=.o)
 UI_PROG=$(UI:.c=)
 
-all: ui_cmd
+UI_LO=ui_cmd_listen.c $(LIB) $(SHCL)
+UI_LO_OBJ=$(UI_LO:.c=.o)
+
+all: ui_cmd ui_cmd_listen
 
 run: ui_cmd
 	./$^
@@ -28,4 +32,7 @@ $(UI_OBJ): ../eof.h
 # Individual make rules
 
 ui_cmd: $(UI_OBJ)
+	$(CC) -o $@ $^
+
+ui_cmd_listen: $(UI_LO_OBJ)
 	$(CC) -o $@ $^
