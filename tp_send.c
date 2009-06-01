@@ -26,14 +26,16 @@
 #include <stdio.h>         /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
 
-int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
+int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
 {
    char           *url, *p;
    struct cconfig *send;
    struct helper  *hp;
-   size_t         len;
+//   size_t         len;
    char           buf[BIGBUF+1];
    int            tmp;
+
+   memset(buf, 0, BIGBUF+1);
 
    url = peer_addr_get(nick);
    printf("Using address %s for %s\n", url, nick);
@@ -45,7 +47,7 @@ int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
       eof_errmsg("No transport protocol available!");
       return 0;
    }
-   printf("Using %s to send to %s\n", send->path, url);
+   printf("TP: Using %s to send to %s\n", send->path, url);
 
    /* create (onion) packet: post-0.1 release! */
 
@@ -67,6 +69,22 @@ int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE])
       eof_errmsg("Transport protocol failed!");
       return 0;
    }
+
+   strncpy(buf, EOF_CMD_TPS, EOF_L_CMD);
+   strncpy(&buf[EOF_L_CMD], url, EOF_L_ADDRESS);
+   snprintf(&buf[EOF_L_CMD+EOF_L_ADDRESS], EOF_L_SIZE+1, "%ld", (long) len);
+   strncpy(&buf[EOF_L_CMD+EOF_L_ADDRESS], msg, len);
+   len += EOF_L_CMD + EOF_L_ADDRESS;
+
+   /* FIXME: HACK: pass packet to send        */
+   if(helper_write(hp, buf, len) <= 0) {
+      eof_errmsg("Data copy to transport protocol failed!");
+      return 0;
+   }
+
+   return 1;
+
+   /* old crap following */
 
    /* FIXME: always check bounds!!! */
    p = buf;

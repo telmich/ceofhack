@@ -226,7 +226,7 @@ int tp_listen_init();
 int tp_listen_read(int fd[]);
 int tp_scheme_len(char *url);
 struct cconfig *tp_available(char *url, int type);
-int tp_send(char *nick, char *msg, char errmsg[EOF_L_MESSAGE]);
+int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE]);
 int tp_send_wait(int fds[]);
 char *tp_getscheme(char *url);
 
