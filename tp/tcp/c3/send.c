@@ -52,12 +52,16 @@ int main()
 {
    char input[EOF_L_PKG_MAX+1];
    char addr[EOF_L_ADDRESS+1];
+   char size[EOF_L_SIZE+1];
    char *p, *host;
    int sock;
    int16_t port;
    struct sockaddr_in ins;
+   ssize_t len, len2;
 
    memset(input, 0, EOF_L_PKG_MAX+1);
+   memset(addr, 0, EOF_L_ADDRESS+1);
+   memset(size, 0, EOF_L_SIZE+1);
 
    /* read init sequence: 1000 */
    read_all(STDIN_FILENO, input, EOF_L_CMD);
@@ -69,13 +73,12 @@ int main()
    
    /* read the url */
    read_all(STDIN_FILENO, addr, EOF_L_ADDRESS);
-   input[EOF_L_ADDRESS] = '\0';
-   fprintf(stderr, WE "using url %s\n", input);
+   fprintf(stderr, WE "using url %s\n", addr);
 
    /* find host */
-   host = strchr(input, ':');
+   host = strchr(addr, ':');
    if(!host) {
-      fprintf(stderr, WE "bad url %s\n", input);
+      fprintf(stderr, WE "bad url %s\n", addr);
       return 1;
    }
 
@@ -83,7 +86,7 @@ int main()
 
    p = strchr(host, ':');
    if(!p) {
-      fprintf(stderr, WE "bad url %s\n", input);
+      fprintf(stderr, WE "bad url %s\n", addr);
       return 1;
    }
    *p = 0;
@@ -93,6 +96,17 @@ int main()
 
    port = strtol(p, NULL, 10);
    fprintf(stderr, WE "port=%d\n", port);
+
+   /* get size */
+   read_all(STDIN_FILENO, size, EOF_L_SIZE);
+   len = strtoul(size, NULL, 10);
+   fprintf(stderr, WE "pkglen=%ld (%s)\n", (long) len, size);
+
+   /* get message */
+   if((len2 = read_all(STDIN_FILENO, input, len)) != len) {
+      fprintf(stderr, WE "read len (%ld) != len (%ld)\n", (long) len2, (long) len);
+      return 0;
+   }
 
    /* connect to it */
    memset(&ins, 0, sizeof(ins));
@@ -104,14 +118,19 @@ int main()
    }
    sock = socket(PF_INET, SOCK_STREAM, 0);
    if(sock == -1 ) {
-      perror("socket");
+      perror(WE "socket");
       return 0;
    }
 
    if(connect(sock,(struct sockaddr *)&ins,sizeof(ins)) == -1) {
-      perror("connect");
+      perror(WE "connect");
       return 0;
    }
 
-   return 0;
+   if(write_all(sock, input, len) != len) {
+      perror(WE "send message");
+      return 0;
+   }
+
+   return 1;
 }
