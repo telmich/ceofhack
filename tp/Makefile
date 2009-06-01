@@ -8,7 +8,7 @@ CC+=-I..
 DUMMY_C=dummy/c/listen.c dummy/c/send.c
 TCP_C=tcp/c/listen.c
 TCP_C2=tcp/c2/listen.c tcp/c2/send.c
-TCP_C3=tcp/c3/listen.c
+TCP_C3=tcp/c3/listen.c tcp/c3/send.c
 
 ################################################################################
 # Enabled (for compiling) transport protocols
@@ -31,5 +31,7 @@ clean:
 
 tcp/c2/listen: tcp/c2/init_socket.o tcp/c2/do_socket.o tcp/c2/sigio.o tcp/c2/handle_conn.o
 	$(CC) $^ -o $@
-tcp/c3/listen: ../read_all.o ../write_all.o ../convert.o $(TCP_C3)
+tcp/c3/listen: ../read_all.o ../write_all.o ../convert.o tcp/c3/listen.c
+	$(CC) $^ -o $@
+tcp/c3/send: ../read_all.o ../write_all.o ../convert.o tcp/c3/send.c
 	$(CC) $^ -o $@
