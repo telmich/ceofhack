@@ -23,9 +23,11 @@
  */
 
 #include <signal.h>     /* kill()         */
+#include <stdio.h>      /* printf()       */
 #include "ceofhack.h"
 
 int helper_signal(struct helper *hp, int sig)
 {
+   printf("Trying to kill %s, %d\n", hp->path, hp->pid);
    return kill(hp->pid, sig);
 }
