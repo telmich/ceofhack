@@ -201,7 +201,12 @@ int main()
 
          if(plist[1].revents & (POLLIN | POLLPRI)) {
             tmp = read_socket(plist[1].fd, &input[0]);
-            eof_ltp_write(input, 0);
+            fprintf(stderr, WE "read-socket: %d\n", tmp);
+            if(tmp == -1) {
+               perror("read_socket");
+               continue;
+            }
+            eof_ltp_write(input, tmp);
          }
 
          if(tmp == -1) {
