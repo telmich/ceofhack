@@ -19,7 +19,10 @@ UI_PROG=$(UI:.c=)
 UI_LO=ui_cmd_listen.c $(LIB) $(SHCL)
 UI_LO_OBJ=$(UI_LO:.c=.o)
 
-all: ui_cmd ui_cmd_listen
+UI_PEER_SEND=ui_cmd_peer_send.c $(LIB) $(SHCL)
+UI_PEER_SEND_OBJ=$(UI_PEER_SEND:.c=.o)
+
+all: ui_cmd ui_cmd_listen ui_cmd_peer_send
 
 run: ui_cmd
 	./$^
@@ -35,4 +38,7 @@ ui_cmd: $(UI_OBJ)
 	$(CC) -o $@ $^
 
 ui_cmd_listen: $(UI_LO_OBJ)
+	$(CC) -o $@ $^
+
+ui_cmd_peer_send: $(UI_PEER_SEND_OBJ)
 	$(CC) -o $@ $^
