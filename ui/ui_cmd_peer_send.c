@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
       } else {
          printf("/peer send EOFi error: %s\n", errmsg);
       }
+      return 1;
    }
 
    /* deregister */
