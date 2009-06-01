@@ -71,5 +71,5 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len, char errmsg[EOF_L_M
    len = gpgme_data_read(encrypted, buf, len);
    buf[len] = '\0';
 
-   return 1;
+   return len;
 }
