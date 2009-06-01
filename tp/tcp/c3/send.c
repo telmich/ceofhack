@@ -52,11 +52,10 @@ int main()
 {
    char input[EOF_L_PKG_MAX+1];
    char addr[EOF_L_ADDRESS+1];
-   char *p1;
-   int tmp, sock;
+   char *p, *host;
+   int sock;
    int16_t port;
    struct sockaddr_in ins;
-   struct pollfd plist[2];
 
    memset(input, 0, EOF_L_PKG_MAX+1);
 
@@ -65,7 +64,7 @@ int main()
    fprintf(stderr, WE "cmd %s\n", input);
    if(strncmp(input, EOF_CMD_TPS, EOF_L_CMD)) {
       fprintf(stderr, WE "wrong cmd: %s\n", input);
-      return 0;
+      return 1;
    }
    
    /* read the url */
@@ -73,89 +72,45 @@ int main()
    input[EOF_L_ADDRESS] = '\0';
    fprintf(stderr, WE "using url %s\n", input);
 
-   /* find beginning of port */
-   p1 = strchr(input, ':');
-   if(!p1) {
+   /* find host */
+   host = strchr(input, ':');
+   if(!host) {
       fprintf(stderr, WE "bad url %s\n", input);
       return 1;
    }
 
-   tmp = p1 - input;
-   strncpy(address, input, tmp);
-   address[tmp] = '\0';
-   fprintf(stderr, WE "addr=%s\n", address);
+   host++;
 
-   port = strtol(p1+1, NULL, 10);
+   p = strchr(host, ':');
+   if(!p) {
+      fprintf(stderr, WE "bad url %s\n", input);
+      return 1;
+   }
+   *p = 0;
+   p++;
+
+   fprintf(stderr, WE "host=%s\n", host);
+
+   port = strtol(p, NULL, 10);
    fprintf(stderr, WE "port=%d\n", port);
 
-
-   /* listen to it */
+   /* connect to it */
    memset(&ins, 0, sizeof(ins));
    ins.sin_family = AF_INET;
    ins.sin_port   = htons(port);
-   if(!inet_aton(address, &(ins.sin_addr) ) ) {
-      write(2,"broken ipn\n",11);
+   if(!inet_aton(host, &(ins.sin_addr) ) ) {
+      fprintf(stderr, WE "broken host/ipn\n");
       return 0;
    }
-
    sock = socket(PF_INET, SOCK_STREAM, 0);
    if(sock == -1 ) {
       perror("socket");
       return 0;
    }
 
-   tmp = 1;
-   // lose the pesky "Address already in use" error message
-   if(setsockopt(sock,SOL_SOCKET, SO_REUSEADDR, &tmp, sizeof(tmp)) == -1) {
-      perror("setsockopt");
+   if(connect(sock,(struct sockaddr *)&ins,sizeof(ins)) == -1) {
+      perror("connect");
       return 0;
-    }
-
-   if(bind(sock,(struct sockaddr *)&ins,sizeof(ins)) == -1) {
-      perror("bind");
-      return 0;
-   }
-
-   /* start listening */
-   if(listen(sock, SOCK_QUEUE) == -1) {
-      perror("listen");
-      return 0;
-   }
-
-   /* read commands from EOFi and data from socket and children */
-   while(1) {
-      memset(&plist, 0, sizeof(plist));
-      plist[0].fd       = STDIN_FILENO;
-      plist[0].events   = POLLIN | POLLPRI;
-      plist[1].fd       = sock;
-      plist[1].events   = POLLIN | POLLPRI;
-
-      if(poll(&plist[0], 2, -1) != -1) {
-         if(plist[0].revents & (POLLIN | POLLPRI)) {
-            tmp = eofi_ltp_read(plist[0].fd, &input[0]);
-         }
-
-         if(plist[1].revents & (POLLIN | POLLPRI)) {
-            tmp = read_socket(plist[1].fd, &input[0]);
-            fprintf(stderr, WE "read-socket: %d\n", tmp);
-            if(tmp == -1) {
-               perror("read_socket");
-               continue;
-            }
-            eof_ltp_write(input, tmp);
-         }
-
-         if(tmp == -1) {
-            fprintf(stderr, WE "input read error\n");
-            continue;
-         }
-            
-         input[tmp] = '\0';
-
-         fprintf(stderr, WE "input=%s\n", input);
-      } else {
-         perror(WE "poll");
-      }
    }
 
    return 0;
