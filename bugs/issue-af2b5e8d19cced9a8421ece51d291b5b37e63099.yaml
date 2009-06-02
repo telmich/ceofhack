@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Fork() for connections
+desc: |-
+  As we always read fixed length strings in blocking mode, any
+  EOFs can block whole ceof.
+  
+  Thus we can only trust ourself. So for an incoming connection,
+  create a fork() which gets all data and only passes it completly
+  to ceof, if everything is fine.
+type: :feature
+component: ceof
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-06-02 22:08:06.462165 Z
+references: []
+
+id: af2b5e8d19cced9a8421ece51d291b5b37e63099
+log_events: 
+- - 2009-06-02 22:08:07.354173 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
