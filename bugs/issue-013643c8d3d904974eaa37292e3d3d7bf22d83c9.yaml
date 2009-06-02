@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Split ceof into subsystems
+desc: |-
+  It may be senseful to splitoff ceof into smaller parts later on to
+  a) don't have a total complex program
+  b) have good privelige seperation
+  c) to do sanity checks in smaller parts and pass only correct data to ceof
+type: :feature
+component: ceof
+release: future
+reporter: Nico Schottelius <nico@ikn.schottelius.org>
+status: :unstarted
+disposition: 
+creation_time: 2009-06-02 22:10:43.985788 Z
+references: []
+
+id: 013643c8d3d904974eaa37292e3d3d7bf22d83c9
+log_events: 
+- - 2009-06-02 22:10:44.982078 Z
+  - Nico Schottelius <nico@ikn.schottelius.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
