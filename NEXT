@@ -1,3 +1,5 @@
+--> Message did not reach all UIs
+
 Implementing a real cmd_1103 is kind of complex:
 
 - create external commands (3xxx):
@@ -11,3 +13,4 @@ Implementing a real cmd_1103 is kind of complex:
 Thus implement 1103 this way:
    - fillup nick with "UNKNOWN" for know
 
+--------------------------------------------------------------------------------
