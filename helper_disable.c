@@ -29,8 +29,14 @@ void helper_disable(struct helper *hp)
 {
    hp->pid = 0;
 
-   close(hp->fds[HP_READ]);
-   close(hp->fds[HP_WRITE]);
+   if(close_all(hp->fds[HP_READ]) == -1) {
+      perror("helper/close_r");
+   }
+   if(hp->fds[HP_WRITE] != hp->fds[HP_READ]) {
+      if(close_all(hp->fds[HP_WRITE]) == -1) {
+         perror("helper/close_w");
+      }
+   }
    hp->fds[HP_READ]  = -1;  /* does not match, if searchd by fd */
    hp->fds[HP_WRITE] = -1;
 
