@@ -31,7 +31,6 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
    char           *url;
    struct cconfig *send;
    struct helper  *hp;
-//   size_t         len;
    char           buf[BIGBUF+1];
 
    memset(buf, 0, BIGBUF+1);
