@@ -65,6 +65,11 @@ int forkexecpipe(struct helper *hp)
       return 1;
    }
 
+   /* not needed in child */
+   /* FIXME: close all open fds! */
+   close(hp->fds[HP_READ]);
+   close(hp->fds[HP_WRITE]);
+
    /* child: connect stdin and stdout */
    if(dup2(hp->fds[2], STDIN_FILENO) == -1) {
       perror("dup2: stdin");
