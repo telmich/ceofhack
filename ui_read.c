@@ -32,14 +32,12 @@ int ui_read(int fd[])
    char buf[EOF_L_CMD];
 
    /* read command */
-   if((len = read(fd[HP_READ], buf, EOF_L_CMD)) == -1) {
+   if((len = read_all(fd[HP_READ], buf, EOF_L_CMD)) != EOF_L_CMD) {
       perror("ui_read");
-      return 0;
+      ui_disable(fd[HP_READ]);
    }
 
-   if(len == 0) {
-      return ui_disable(fd[HP_READ]);
-   }
+   printf("ui_read (cmd): %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
 
    return cmd_handle(EOF_I_UI, fd, buf, len);
 }
