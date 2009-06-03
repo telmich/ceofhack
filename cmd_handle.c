@@ -33,10 +33,10 @@ int cmd_handle(unsigned long cat, int fds[], char data[])
 
    cmd = cmd_find_in_cat(cat, data);
    if(!cmd) {
-      printf("No handler found for command, calling default handler!\n");
+      printf("No cmd function found for command, calling default cmd!\n");
       cmd = cmd_cat_default_cmd(cat);
    } else {
-      printf("Handler %s found...\n", cmd->num);
+      printf("CMD %s found...\n", cmd->num);
    }
 
    return cmd->handle(fds);

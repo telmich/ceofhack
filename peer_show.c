@@ -48,7 +48,7 @@ int peer_show(int fd[])
    if(!p) {
       eof_errmsg("No such nick");
       if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
-                                    EOF_L_MESSAGE, errmsg)) {
+                                        EOF_L_MESSAGE, errmsg)) {
          perror("peershow/0");
       }
       return 0;
