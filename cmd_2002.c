@@ -33,39 +33,29 @@ int cmd_2002(int fd[])
    char size[EOF_L_SIZE+1];
    char plaintext[EOF_L_PKG_MAX+1];
    char nick[EOF_L_NICKNAME];
-   char *p;
-   ssize_t len, pkglen;
+   ssize_t len;
 
    memset(size, 0, EOF_L_SIZE+1);
+   memset(buf, 0, EOF_L_PKG_MAX+1);
+   memset(plaintext, 0, EOF_L_PKG_MAX+1);
 
    printf("Received a packet!!!\n");
 
-   len = read_all(fd[HP_READ], buf, EOF_L_PKG_MAX+1);
-   if(len == -1) {
+   if(read_all(fd[HP_READ], size, EOF_L_SIZE) != EOF_L_SIZE) {
       perror("cmd2002/read");
       return 0;
    }
-   printf("cmd2002 read %ld bytes in total\n", (long) len);
+   len = strtol(size, NULL, 10);
+   printf("cmd2002 pkg should be %ld bytes in total\n", (long) len);
 
    if(len > EOF_L_PKG_MAX) {
       /* FIXME: tell tp to drop the packet */
       printf("cmd2002: packet too big\n");
       return 0;
    }
-   buf[len] = '\0'; /* terminate for print / debugging */
 
-   strncpy(size, buf, EOF_L_SIZE);
-   pkglen = strtol(size, NULL, 10);
-
-   if(pkglen != (len - EOF_L_SIZE)) {
-      /* FIXME: tell tp to drop the packet */
-      printf("cmd2002: bogus size information in packet: %ld vs %ld!\n", 
-         (long) pkglen,  (long) (len - (p - buf)));
-      return 0;
-   }
-
-    if(pkglen <= 0) {
-      printf("cmd2002: Packet too small (%ld Bytes)\n", (long) pkglen);
+   if(read_all(fd[HP_READ], buf, len) != len) {
+      perror("cmd2002/read_pkg");
       return 0;
    }
 
@@ -75,10 +65,8 @@ int cmd_2002(int fd[])
     * - debug for now: print to stdout
     */
 
-   p = &buf[EOF_L_SIZE];
-   printf("Incoming packet: %s\n", p);
-   plaintext[0] = '\0';
-   len = cgpg_decrypt(p, pkglen, plaintext, EOF_L_PKG_MAX);
+   printf("Incoming packet: %s\n", buf);
+   len = cgpg_decrypt(buf, len, plaintext, EOF_L_PKG_MAX);
 
    if(len > 0) {
       printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);
@@ -88,10 +76,11 @@ int cmd_2002(int fd[])
       } else {
          printf("UI: Message reached all UIs\n");
       }
+      return 1;
    } else {
-      printf("decryption failed with %ld\n", (long) len);
+      perror("decryption failed");
+      return 0;
    }
 
-   return 1;
 //   return write_all(STDOUT_FILENO, p+1, pkglen) > 0 ? 1 :0;
 }
