@@ -33,13 +33,17 @@ ssize_t cgpg_decrypt(char *msg, ssize_t msglen, char buf[], ssize_t bufsize)
    if(GPG_ERR_NO_ERROR != gpgme_data_new_from_mem(&encrypted, msg, msglen, 1)) {
       return -1;
    }
-   if(GPG_ERR_NO_ERROR != gpgme_data_new(&plaintext)) return -2;
-   if(GPG_ERR_NO_ERROR != gpgme_op_decrypt(gpg_context, encrypted, plaintext)) {
-      return -3;
+   if(GPG_ERR_NO_ERROR != gpgme_data_new(&plaintext)) {
+      return -1;
    }
-   if(GPG_ERR_NO_ERROR != gpgme_data_seek(plaintext, 0, SEEK_SET)) return -4;
+   if(GPG_ERR_NO_ERROR != gpgme_op_decrypt(gpg_context, encrypted, plaintext)) {
+      return -1;
+   }
+   if(GPG_ERR_NO_ERROR != gpgme_data_seek(plaintext, 0, SEEK_SET)) {
+      return -4;
+   }
+
    msglen = gpgme_data_read(plaintext, buf, bufsize);
-   buf[msglen] = '\0';
 
    return msglen;
 }
