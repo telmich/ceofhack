@@ -45,11 +45,11 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
 
    if(!eof_va_write(sockfd, 2, EOF_L_CMD, EOF_CMD_UI_PEER_SHOW,
                                EOF_L_NICKNAME, nick)) {
-      return 0;
+      return -1;
    }
 
    if(read_all(sockfd, cmd, EOF_L_CMD) != EOF_L_CMD) {
-      return 0;
+      return -1;
    }
 
    if(strncmp(cmd, EOF_CMD_UI_PEER_INFO, EOF_L_CMD)) {
@@ -57,7 +57,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
       errno = 0; /* failure, but no library failure */
       read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
-      return 0; /* failure in any case */
+      return -1; /* failure in any case */
    }
 
    if(read_all(sockfd, keyid, EOF_L_KEYID) != EOF_L_KEYID) {
@@ -79,7 +79,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
       p = *addrs + (i * (EOF_L_ADDRESS+1));
 
       if(read_all(sockfd, p, EOF_L_ADDRESS) != EOF_L_ADDRESS) {
-         return 0;
+         return -1;
       }
    }
 
