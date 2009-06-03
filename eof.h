@@ -4,6 +4,7 @@
 /* Lengths */
 #define EOF_L_CMD                4
 #define EOF_L_SIZE               6
+#define EOF_L_ID                 6
 #define EOF_L_KEYID              40
 #define EOF_L_NICKNAME           128
 #define EOF_L_MESSAGE            128
