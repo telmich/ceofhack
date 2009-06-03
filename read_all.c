@@ -28,23 +28,14 @@
 
 ssize_t read_all(int fd, void *buf, size_t count)
 {
-   ssize_t tmp = 0;
-
-   /* loop until we operate without being interrupted */
-   while((size_t) tmp < count) {
-      fprintf(stderr, "reading all....\n");
-      tmp = read(fd, buf, count);
-      if(tmp == -1) {
-         if(errno == EINTR) { /* retry */
-            continue;
-         } else {
-            perror("read_all");
-            return -1;
-         }
+   while(read(fd, buf, count) == -1) {
+      if(errno == EINTR) { /* retry */
+         continue;
+      } else {
+         return -1;
       }
-      break;
    }
    
-   return tmp;
+   return count;
 }
 
