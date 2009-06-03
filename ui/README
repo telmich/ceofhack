@@ -1,3 +1,9 @@
-This directory contains source for use in user interfaces.
+This directory contains a VERY minimalistic user inferface:
 
-It provides sample functions and tests.
+   - ui_cmd: tests most of the functions, developer use only
+   - ui_cmd_listen: wait for messages from ceof
+   - ui_cmd_peer_send: send message to a peer
+   - ui_cmd_quit: tell ceof and all EOFs to quit
+
+You are encouraged to write your own, better user interface,
+using the functions found in ../lib/.
