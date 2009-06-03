@@ -22,7 +22,10 @@ UI_LO_OBJ=$(UI_LO:.c=.o)
 UI_PEER_SEND=ui_cmd_peer_send.c $(LIB) $(SHCL)
 UI_PEER_SEND_OBJ=$(UI_PEER_SEND:.c=.o)
 
-all: ui_cmd ui_cmd_listen ui_cmd_peer_send
+UI_QUIT=ui_cmd_quit.c $(LIB) $(SHCL)
+UI_QUIT_OBJ=$(UI_QUIT:.c=.o)
+
+all: ui_cmd ui_cmd_listen ui_cmd_peer_send ui_cmd_quit
 
 run: ui_cmd
 	./$^
@@ -41,4 +44,7 @@ ui_cmd_listen: $(UI_LO_OBJ)
 	$(CC) -o $@ $^
 
 ui_cmd_peer_send: $(UI_PEER_SEND_OBJ)
+	$(CC) -o $@ $^
+
+ui_cmd_quit: $(UI_QUIT)
 	$(CC) -o $@ $^
