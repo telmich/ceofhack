@@ -57,6 +57,11 @@ int forkexecpipe(struct helper *hp)
       if(fcntl(hp->fds[HP_READ], F_SETFL, O_NONBLOCK) < 0) {
          perror("fcntl");
       }
+
+      /* remove unecessary fds */
+      close(hp->fds[HP_EXT_READ]);
+      close(hp->fds[HP_EXT_WRITE]);
+      printf("fep: %ld\n", (long) hp->pid);
       return 1;
    }
 
