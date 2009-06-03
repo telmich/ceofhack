@@ -1,0 +1,8 @@
+- send address(es) with every (signed) packet?
+- check for alive of other peers?
+   - directly?
+   - PING?
+- keep track of adresses other peers know from us?
+   - notify on change
+   - send notifies about other addresses
+   - request removal of addresses
