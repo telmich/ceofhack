@@ -949,11 +949,19 @@ on page \pageref{ui-socket}, section \ref{ui-socket}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1100: Acknowledge}
-EOFi acknowledged the last command.
-\subsubsection{Parameters}
-\begin{itemize}
-\item none
-\end{itemize}
+EOFi acknowledge (i.e everything went well).
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1100 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Example}
+\begin{verbatim}
+1100abfudh
+\end{verbatim}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1101: Failure}
