@@ -313,10 +313,18 @@ This variable contains the absolute path to the socket, which should be used
 by user interfaces (UIs).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Bufferless - no queuing}
-Every connection between any EOFs and EOFi is a direct connection:
-The packet is read in one step. And after one packet is sent, the answer packet
-must be received, before the next packet may be sent.
+\subsection{Asynchronous bidirectional communication}
+Every connection between any EOFs and EOFi is asynchronous (both sides
+can start sending on their own) and bidirectional (both sides can send
+at the same time.
+
+Thus every EOFs and EOFi have to implement one (or more) queues to
+keep the state of their packet.
+
+To identify an answer to a packet, each packet contains an
+identification number, which is chosen by the sender
+(for more information have a look at section \ref{idn} on
+page \pageref{idn}).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{Paths}
