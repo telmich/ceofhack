@@ -52,11 +52,17 @@ int cmd_2103(int fd[])
    ret = peer_send(nick, msgtxt, errmsg);
 
    if(ret) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
+      if(!eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK)) {
+         perror("2103: write_ack");
+         ret = 0;
+      }
    } else {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
+      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
+                                        EOF_L_MESSAGE, errmsg)) {
+         perror("2103: write_fail");
+      }
    }   
 
+   printf("UI: /peer send exits %ld\n", (long) ret);
    return ret;
 }
