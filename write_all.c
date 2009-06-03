@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009     A. Pic. (eofdev at apic.name)
+ * 2009     Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -19,23 +19,32 @@
 
  *
  * Wrapper for write() that continues on EINTR / incomplete write
+ * Based on an idea of A. Pic. (eofdev at apic.name), 2009.
  *
  */
 
 #include <unistd.h>     /* write          */
 #include <errno.h>      /* EINTR          */
+#include <stdio.h>      /* DEBUG          */
 
 ssize_t write_all(int fd, const void *buf, size_t count)
 {
-        size_t written=0;
-        while(written < count) {
-                ssize_t n = write(fd, buf+written, count-written);
-                if(n<0 && errno == EINTR)
-                        continue;
-                if(n<=0)
-                        return n;
-                written += n;
-        }
-        return written;
+   ssize_t tmp = 0;
+   
+   while(tmp != (ssize_t) count) {
+      fprintf(stderr, "writing all %ld ...\n", (long) count);
+      tmp = write(fd, buf, count);
+      if(tmp == -1) {
+         if(errno == EINTR) {
+            continue;
+         } else {
+            return -1;
+         }
+      } else {
+         break;
+      }
+   }
+   
+   return count;
 }
 
