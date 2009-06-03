@@ -414,6 +414,37 @@ applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{EOF commands and command fields}
+An EOF command is exactly \emph{EOF\_L\_CMD} bytes long (fixed length string)
+and contains an ASCII number.
+
+EOF commands are the main method of telling for communication between
+EOFs and EOFi.
+
+The command field 0 indicates the direction.
+The command field 1 indicates the EOF subsystem.
+\begin{longtable}{|c|c|}
+\caption{Command fields}\\
+\hline
+\textbf{Value} & \textbf{Subsystem} / \textbf{Description}\\
+\hline
+1*** & Message is coming from the EOF implementation\\
+\hline
+10** & \textbf{eofi2tp}: Transport protocols\\
+\hline
+11** & \textbf{eofi2ui}: User interface\\
+\hline
+2*** & Message is coming from EOF subsystem (internally)\\
+\hline
+20** & \textbf{eofi2tp}: Transport protocols\\
+\hline
+21** & \textbf{eofi2ui}: User interface\\
+\hline
+3*** & Message is coming from outside (received packet))\\
+\hline
+\end{longtable}
+The command fields 2 and 3 are defined by the respective subsystem.
+%% -----------------------------------------------------------------------------
 \subsection{Size (size)}
 \index{eof.h (File)}%
 All sizes used in this document are "`symbolic sizes"': The real size
@@ -457,40 +488,6 @@ LC_ALL=C gpg --fingerprint  | \
 \end{verbatim}
 % Nico: 1.0
 % #############################################################################
-\section{EOF Commands}
-An EOF command is exactly \emph{EOF\_L\_CMD} bytes long (fixed length string)
-and contains an ASCII number.
-
-EOF commands are the main method of telling for communication between
-EOFs and EOFi.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Command fields}
-The command field 0 indicates the direction.
-The command field 1 indicates the EOF subsystem.
-\begin{longtable}{|c|c|}
-\caption{Command fields 0 and 1}\\
-\hline
-\textbf{Value} & \textbf{Subsystem} / \textbf{Description}\\
-\hline
-1*** & Message is coming from the EOF implementation\\
-\hline
-10** & \textbf{eofi2tp}: Transport protocols\\
-\hline
-11** & \textbf{eofi2ui}: User interface\\
-\hline
-2*** & Message is coming from EOF subsystem (internally)\\
-\hline
-20** & \textbf{eofi2tp}: Transport protocols\\
-\hline
-21** & \textbf{eofi2ui}: User interface\\
-\hline
-3*** & Message is coming from outside (received packet))\\
-\hline
-\end{longtable}
-The command fields 2 and 3 are defined by the respective subsystem.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
 \section{EOF packets ("`pkg2eofi"')}
 % -----------------------------------------------------------------------------
 \subsection{Maximum packet size}
