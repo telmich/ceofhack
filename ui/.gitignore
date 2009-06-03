@@ -1,3 +1,4 @@
 ui_cmd
 ui_cmd_listen
 ui_cmd_peer_send
+ui_cmd_quit
