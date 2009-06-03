@@ -1,0 +1,110 @@
+Situation:
+
+   Ceof and an user interface use a socket to communicate
+   with each other.
+   
+   Thus, both sides may send a packet at the same time.
+
+   In the current architecture, this leads to the problem,
+   that either side may receive data, it does not expect:
+
+   An user interface may send command 2102 (peer add)
+   and receive 1103 (packet received) as answer, which
+   it cannot handle.
+
+
+Possible solutions:
+
+   We can limit the number of unanswered packets to one:
+
+   - UI sent a cmd
+   - UI listens for a reply
+   - If the reply is the answer to the cmd, everything is fine.
+   - If it is not, the handler for the other command is called
+      - After that, no further command is issued, until the answer
+        to the first packet arrives
+
+   Introduce identification numbers:
+
+   - After every command we can append a identification number, that is
+     chosen by the sender
+   - The answer to a packet contains the same number.
+   - This way we get queuing possibilities "for free", which is needed
+     for 3xxx commands anyway
+
+
+Examples of the currently broken communication:
+
+writing: 2103, 4
+writing: telmich, 128
+writing: Hallo, wie geht es?, 128
+read all 3
+Rename telmich -> telmich_new
+VA WRITE, 3
+writing: 2104, 4
+writing: telmich, 128
+writing: telmich_new, 128
+read all 3
+returned cmd=1103 (should be 1100)
+read all 3
+/peer rename EOFi error: UNKNOWN
+Second /peer list
+VA WRITE, 1
+writing: 2106, 4
+read all 3
+returned cmd=Hall (should be 1104)
+read all 3
+/peer list EOFi error: o, wie geht es?
+Show peer information for telmich_new
+VA WRITE, 2
+writing: 2105, 4
+writing: telmich_new, 128
+read all 3
+returned cmd=1100 (should be 1105)
+read all 3
+/peer show EOFi error: 11041
+[18:46] ikn:ui% 
+
+----------> gets 1103 of message sent!!!!!!
+--> no atomic writes
+-> one way sending??????
+-> asynchronous handling?
+-> send bytes, install handler / queue
+-> read next bytes
+   -> may match
+   -> maybe something different
+
+
+Also in sender:
+
+Sending message to telmich_new
+VA WRITE, 3
+writing: 2103, 4
+writing: telmich_new, 128
+writing: hallo1, 128
+read all 3
+returned cmd=1103 (should be 1100)
+read all 3
+/peer send EOFi error: UNKNOWN
+1
+[18:57] ikn:ui% 
+
+--> how many open commands? one?
+---> 
+
+--------------------------------------------------------------------------------
+and here?
+
+<UNKNOWN> hallo32
+read all 3
+read all 3
+read all 3
+<UNKNOWN> hallo33
+read all 3
+read all 3
+read all 3
+<UNKNOWN> hallo34
+read all 3
+Unhandled cmd: 1102
+[18:56] ikn:ui% 
+
