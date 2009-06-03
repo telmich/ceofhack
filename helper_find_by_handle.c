@@ -35,5 +35,5 @@ struct helper *helper_find_by_handle(int *last, int (*handle)(int []))
       (*last)++;
    }
 
-   return NULL;
+   return hp;
 }
