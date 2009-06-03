@@ -456,8 +456,17 @@ The command fields 2 and 3 are defined by the respective subsystem.
 \subsection{Identification string (id)}
 \label{idn}
 To identify a packet, each packet contains an identification string,
-which is \emph{EOF\_L\_IDN} bytes long. It may contain only the
+which is \emph{EOF\_L\_ID} bytes long. It may contain only the
 following characters:
+\begin{itemize}
+\item A-Z (alphabet in upper case)
+\item a-z (alphabet in lower case)
+\item 0-9 (the digits)
+\end{itemize}
+The EOFs or EOFi may chose freely any of the \emph{56800235584}
+possibilities.\footnote{$(26+26+10)^6$, as long as EOF\_L\_ID is 6.}
+The characters are limited to those characters to allow easy debugging
+and to keep the non-binary command layout.
 % -----------------------------------------------------------------------------
 \subsection{Size (size)}
 \index{eof.h (File)}%
