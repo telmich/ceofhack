@@ -1,3 +1,7 @@
+Fix ui communication!
+   -> see doc/dev/asynchronous_user_interface_communication
+
+--------------------------------------------------------------------------------
 --> Message did not reach all UIs
 
 Implementing a real cmd_1103 is kind of complex:
