@@ -35,6 +35,8 @@ int ui_disable(int fd)
    if(!hp) {
       printf("UI: BUG: Strange, the UI is missing in the list...\n");
       return 0;
+   } else {
+      printf("UI: Disabling %d / %d \n", fd, hp->fds[HP_WRITE]);
    }
 
    helper_write(hp, EOF_CMD_UI_EXITREQUEST, EOF_L_CMD);

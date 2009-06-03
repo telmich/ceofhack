@@ -28,6 +28,8 @@
 
 ssize_t read_all(int fd, void *buf, size_t count)
 {
+   printf("read all %d\n", fd);
+
    while(read(fd, buf, count) == -1) {
       if(errno == EINTR) { /* retry */
          continue;

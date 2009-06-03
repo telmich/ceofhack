@@ -25,9 +25,12 @@
 
 #include <unistd.h>     /* write          */
 #include <errno.h>      /* EINTR          */
+#include <stdio.h>      /* DEBUG          */
 
 ssize_t write_all(int fd, const void *buf, size_t count)
 {
+   printf("write all %d\n", fd);
+
    while(write(fd, buf, count) == -1) {
       if(errno == EINTR) {
          continue;

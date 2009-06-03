@@ -34,14 +34,14 @@ void fd_to_poll(int *used)
    *used = 0; /* no poll entries */
 
    /*
-    * cycle through all possible connections
+    * cycle through all possible connections (found in helper list)
     * if the handler is NULL, it's either disabled
     * or has never been initialised
     */
    for(i=0; i < MAX_COMM && *used <= chp_cnt; i++) {
       if(chp[i].handle) {
-//         printf("Added poll item %d (fd: %d, helper %d: %s, %p)\n", *used,
-//                 chp[i].fds[HP_READ], i, chp[i].path, chp[i].handle);
+         printf("Added poll item %d (fd: %d, helper %d: %s, %p)\n", *used,
+                 chp[i].fds[HP_READ], i, chp[i].path, chp[i].handle);
          pfd[*used].fd = chp[i].fds[HP_READ];
          pfd[*used].events = POLLIN | POLLPRI;
          pfd[*used].revents = 0;
