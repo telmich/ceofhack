@@ -1,5 +1,4 @@
-Fix ui communication!
-   -> see doc/dev/asynchronous_user_interface_communication
+Fix ui communication: implement IDs.
 
 --------------------------------------------------------------------------------
 --> Message did not reach all UIs
