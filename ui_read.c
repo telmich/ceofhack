@@ -35,6 +35,7 @@ int ui_read(int fd[])
    if((len = read_all(fd[HP_READ], buf, EOF_L_CMD)) != EOF_L_CMD) {
       perror("ui_read");
       ui_disable(fd[HP_READ]);
+      return 0;
    }
 
    printf("ui_read (cmd): %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
