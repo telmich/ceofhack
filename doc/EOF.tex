@@ -452,7 +452,13 @@ The command field 1 indicates the EOF subsystem.
 \hline
 \end{longtable}
 The command fields 2 and 3 are defined by the respective subsystem.
-%% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{Identification string (id)}
+\label{idn}
+To identify a packet, each packet contains an identification string,
+which is \emph{EOF\_L\_IDN} bytes long. It may contain only the
+following characters:
+% -----------------------------------------------------------------------------
 \subsection{Size (size)}
 \index{eof.h (File)}%
 All sizes used in this document are "`symbolic sizes"': The real size
