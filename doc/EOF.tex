@@ -650,6 +650,8 @@ Unterscheiden zwischen listener und send.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
 Destination & EOFsdt: addr & complete URL (with "`\emph{scheme:}"') & tcp:127.0.0.3:42\\
 \hline
 Size & EOFsdt: size & Size of message, excluding this header & 424242\\
@@ -662,7 +664,7 @@ Message & Binary data & The message & BLOB\\
 Added linebreak after some \\0 for readability, which are \textbf{not} in
 the real packet!
 \begin{verbatim}
-1000127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+1000abfudh127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\010\0\0\0\0HEREISDATA
