@@ -40,7 +40,11 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
 
    if(!forkexecpipe(&chp[num])) return NULL;
 
-//   printf("he: %s: %d, %d, %d\n", path, num, chp[num].fds[HP_READ], chp[num].fds[HP_WRITE]);
+/*   printf("he (%d): %s: ", num, path);
+   for(i=0; i<4; i++) {
+      printf("%d: %d ", i, chp[num].fds[i]);
+   }
+   printf("\n"); */
 
    return &chp[num];
 }

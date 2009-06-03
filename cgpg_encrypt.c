@@ -44,6 +44,7 @@ int cgpg_encrypt(char *nick, char *msg, char buf[], int len, char errmsg[EOF_L_M
    }
 
    keyid[1] = NULL;
+   printf("encrypting with keyid=%s\n", p);
    if(!cgpg_keyid_get(p, keyid, errmsg)) {
       return 0;
    }
