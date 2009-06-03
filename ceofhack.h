@@ -243,7 +243,7 @@ ssize_t write_all(int fd, const void *buf, size_t count);
 ssize_t read_all(int fd, void *buf, size_t count);
 
 /* commands */
-int cmd_handle(unsigned long cat, int fd[], char data[], ssize_t len);
+int cmd_handle(unsigned long cat, int fd[], char data[]);
 int cmd_init();
 int cmd_cat_create(unsigned long cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));

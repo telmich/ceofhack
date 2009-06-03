@@ -28,11 +28,10 @@
 
 int tp_listen_read(int fd[])
 {
-   ssize_t len;
    char buf[EOF_L_CMD];
 
    /* read full packet */
-   if((len = read_all(fd[HP_READ], buf, EOF_L_CMD)) != EOF_L_CMD) {
+   if(read_all(fd[HP_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
       perror("tp_listen_read");
 
       /* FIXME: disable ltp? */
@@ -40,5 +39,5 @@ int tp_listen_read(int fd[])
    }
    printf("tp_listen_read (cmd) %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
 
-   return cmd_handle(EOF_I_TP, fd, buf, len);
+   return cmd_handle(EOF_I_TP, fd, buf);
 }
