@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
    }
 
    /* peer send */
-   printf("Send message to telmich\n");
+   printf("Sending message to %s\n", nick);
    if(!eof_ui_peer_send(sockfd, errmsg, nick, msgtxt)) {
       if(errno) {
          perror("eof_ui_peer_send");
