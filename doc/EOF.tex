@@ -1034,11 +1034,15 @@ msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1104: List of peers}
+This is the answer to command \emph{2106} and thus contains the
+same ID, as the \emph{2106} request command.
 \subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1104 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
 \hline
 Number of peers & EOFsdt: size & How many peers follow & 20\\
 \hline
