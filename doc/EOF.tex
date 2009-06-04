@@ -991,9 +991,18 @@ If the failed command was "`2100"', EOFi will close the socket afterwards.
 This is a  shutdown request to the UI.
 After this message EOFi will exit and there is no communication possible,
 \subsubsection{Parameters}
-\begin{itemize}
-\item none
-\end{itemize}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1102 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Example}
+\begin{verbatim}
+1102abf93a
+\end{verbatim}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1103: Recieved message}
