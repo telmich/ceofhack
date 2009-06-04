@@ -1006,14 +1006,17 @@ ID & EOFsdt: id & packet id & afdb12\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1103: Recieved message}
+This message is issued by EOFi, if a message is received.
 \subsubsection{Parameters}
-\index{Command!1102}
+\index{Command!1103}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1103 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-nick & EOFsdt & The sender  & telmich\\
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+nick & EOFsdt & The sender & telmich\\
 \hline
 msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
