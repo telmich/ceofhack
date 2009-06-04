@@ -1053,11 +1053,15 @@ The last field is repeated as many times as specified in number of peers.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1105: Peer information}
+This is the answer to command \emph{2105} and thus contains the
+same ID, as the \emph{2105} request command.
 \subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1105 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
 \hline
 Keyid & EOFsdt:keyid & This peers pgp-keyid & 389E5481065EAA253...\\
 \hline
