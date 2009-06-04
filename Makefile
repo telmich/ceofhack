@@ -60,6 +60,7 @@ CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c
 LIB+=lib/eof_va_read.c lib/eof_va_write.c
+LIB+=lib/eof_id_init.c
 
 # interface for the user interfaces
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c

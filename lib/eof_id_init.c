@@ -18,36 +18,17 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Connect the user interface to the EOFi
+ * Initialise the ID "generator"
  *
  */
 
-#include <limits.h>     /* PATH_MAX          */
-#include <stdio.h>      /* printf()          */
-#include <string.h>     /* strlen()          */
-#include <sys/socket.h> /* socket handling   */
-#include <sys/un.h>     /* Unix socket       */
-
 #include "eof.h"        /* EOF*              */
 
-int eof_ui_connect()
+unsigned long eof_id;
+
+int eof_id_init()
 {
-   int sock, len;
-   struct sockaddr_un una;
+   eof_id = 0;
 
-   sock = socket(AF_UNIX, SOCK_STREAM, 0);
-   if(sock == -1) { return -1; }
-
-   /* FIXME: what does posix specify? 108 is stolen from linux/un.h */
-   eof_get_ui_socketpath(una.sun_path, 108);
-   printf("socket: %s\n", una.sun_path);
-
-   una.sun_family = AF_UNIX;
-   len = strlen(una.sun_path) + sizeof(una.sun_family);
-
-   if(connect(sock, (struct sockaddr *) &una, len) == -1) {
-      return -1;
-   }
-
-   return sock;
+   return 1;
 }
