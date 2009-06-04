@@ -1081,6 +1081,7 @@ field.
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, the UI should close the socket afterwards.
+
 \subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 2100 parameters}\\
@@ -1090,6 +1091,7 @@ This must be the \emph{first} message sent by the UI. If the answer is not
 ID & EOFsdt: id & packet id & afdb12\\
 \hline
 \end{longtable}
+
 \subsubsection{Possible answers}
 \begin{itemize}
 \item 1100
@@ -1098,6 +1100,7 @@ ID & EOFsdt: id & packet id & afdb12\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2101: Deregister user interface}
+
 \subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 2101 parameters}\\
@@ -1107,6 +1110,7 @@ ID & EOFsdt: id & packet id & afdb12\\
 ID & EOFsdt: id & packet id & afdb12\\
 \hline
 \end{longtable}
+
 \subsubsection{Possible answers}
 \begin{itemize}
 \item none
@@ -1115,6 +1119,7 @@ ID & EOFsdt: id & packet id & afdb12\\
 % -----------------------------------------------------------------------------
 \subsection{2102: /peer add}
 The UI adds a peer to the list of known peers.
+
 \subsubsection{Parameters}
 \index{Command!2102: /peer add}%
 \begin{longtable}{|c|c|c|c|}
@@ -1141,6 +1146,7 @@ Keyid & EOFsdt: keyid & PGP fingerprint of the peers key & F27987E34E66...\\
 % -----------------------------------------------------------------------------
 \subsection{2103: /peer send}
 The UI wants to submit a message to a peer.
+
 \subsubsection{Parameters}
 \index{Command!/peer send}%
 \begin{longtable}{|c|c|c|c|}
@@ -1189,10 +1195,11 @@ Newnick & EOFsdt & New nick name & heinz\\
 
 % -----------------------------------------------------------------------------
 \subsection{2105: /peer show}
-\subsubsection{Parameters}
 The UI requests details about a peer.
+
+\subsubsection{Parameters}
 \begin{longtable}{|c|c|c|c|}
-\caption{2105: /peer rename parameters}\\
+\caption{2105: /peer show parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
@@ -1210,11 +1217,9 @@ Nick name & EOFsdt & Nick name, as known by EOFi & karl-otto\\
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2106: /peer list}
-\subsubsection{Parameters}
 The UI requests the list of known peers.
-\begin{itemize}
-\item Parameters: none
-\end{itemize}
+
+
 \subsubsection{Possible answers}
 \begin{itemize}
 \item 1101
