@@ -77,7 +77,12 @@ PROG=ceofhack
 
 DOC=doc/EOF
 
-all: $(PROG) tp-all ui-all
+all: $(PROG)
+	for eofs in $(EOFs); do make -C $$eofs $@; done
+
+clean:
+	rm -f $(CEOFHACK_O) $(PROG) *.o
+	for eofs in $(EOFs); do make -C $$eofs $@; done
 
 run: $(PROG)
 	cat doc/dev/braindumps/sample-commands
@@ -85,9 +90,6 @@ run: $(PROG)
 
 debug: $(PROG)
 	gdb ./$(PROG)
-
-clean: tp-clean
-	rm -f $(CEOFHACK_O) $(PROG) *.o
 
 tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 	$(CC) -o $@ $^
@@ -103,18 +105,6 @@ documentation: doc/EOF.tex
 
 viewdoc: documentation
 	evince doc/EOF.pdf
-
-tp-all:
-	make -C tp all
-
-tp-clean:
-	make -C tp clean
-
-ui-all:
-	make -C ui all
-
-ui-clean:
-	make -C ui clean
 
 pub:
 	git push --mirror
