@@ -48,12 +48,12 @@ int main()
    eof_get_configdir(buf, PATH_MAX+1);
    printf("configdir: %s\n", buf);
 
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
+   if((sockfd = eof_ui_init()) == -1) {
+      perror("eof_ui_init");
       return 1;
    }
 
-   if(!eof_ui_register(sockfd)) {
+   if(eof_ui_register(sockfd) == -1) {
       perror("eof_ui_register");
       return 1;
    }
