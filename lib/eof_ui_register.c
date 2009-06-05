@@ -33,11 +33,11 @@ int eof_ui_register(int sockfd)
 
    /* submit register command: cmd_2100.c */
    if(write_all(sockfd, EOF_CMD_UI_REGISTER, EOF_L_CMD) != EOF_L_CMD) {
-      return 0;
+      return -1;
    }
 
    if(read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
-      return 0;
+      return -1;
    }
 
     return 1;
