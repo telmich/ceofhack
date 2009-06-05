@@ -1,0 +1,19 @@
+ <RCC>
+    <qresource prefix="/" >      
+        <file>images/network_workgroup.png</file>
+        <file>images/network_workgroup32.png</file>
+        <file>images/exit.png</file>
+        <file>images/exit32.png</file>
+        <file>images/window_nofullscreen.png</file>
+        <file>images/window_fullscreen.png</file>
+        <file>images/package_system_16.png</file>
+        <file>images/package_system_32.png</file>
+        <file>images/speaker_16.png</file>
+        <file>images/speaker_32.png</file>
+        <file>images/style_16.png</file>
+        <file>images/style_32.png</file>
+        <file>images/info_32.png</file>
+        <file>images/list_add_user48.png</file>
+        <file>images/list_add_user_32.png</file>
+	  </qresource>
+</RCC>

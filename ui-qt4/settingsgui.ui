@@ -1,0 +1,1027 @@
+<ui version="4.0" >
+ <class>settingsgui</class>
+ <widget class="QDialog" name="settingsgui" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>602</width>
+    <height>499</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>700</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Settings</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset>
+    <normaloff>:/icons/settings.png</normaloff>:/icons/settings.png</iconset>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>false</bool>
+  </property>
+  <property name="modal" >
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <property name="margin" >
+    <number>0</number>
+   </property>
+   <item row="0" column="0" >
+    <widget class="QFrame" name="middleFrame" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize" >
+      <size>
+       <width>700</width>
+       <height>700</height>
+      </size>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3" >
+      <item row="0" column="0" >
+       <widget class="QListWidget" name="itemListWidget" >
+        <property name="sizePolicy" >
+         <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>0</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>128</width>
+          <height>700</height>
+         </size>
+        </property>
+        <property name="font" >
+         <font>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="verticalScrollBarPolicy" >
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy" >
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="showDropIndicator" stdset="0" >
+         <bool>false</bool>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="flow" >
+         <enum>QListView::TopToBottom</enum>
+        </property>
+        <property name="resizeMode" >
+         <enum>QListView::Fixed</enum>
+        </property>
+        <property name="layoutMode" >
+         <enum>QListView::SinglePass</enum>
+        </property>
+        <property name="spacing" >
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text" >
+          <string>General</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="images.qrc" >
+           <normaloff>:/images/package_system_16.png</normaloff>:/images/package_system_16.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Network</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="images.qrc" >
+           <normaloff>:/images/network_workgroup.png</normaloff>:/images/network_workgroup.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Style</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="images.qrc" >
+           <normaloff>:/images/style_16.png</normaloff>:/images/style_16.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Sound</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="images.qrc" >
+           <normaloff>:/images/speaker_16.png</normaloff>:/images/speaker_16.png</iconset>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QStackedWidget" name="stackedWidget" >
+        <property name="currentIndex" >
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="basic_page" >
+         <layout class="QGridLayout" name="gridLayout_9" >
+          <item row="0" column="0" >
+           <layout class="QGridLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item row="0" column="1" >
+             <widget class="QLabel" name="basicLabel" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize" >
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font" >
+               <font>
+                <family>Sans Serif</family>
+                <pointsize>16</pointsize>
+                <weight>75</weight>
+                <italic>true</italic>
+                <bold>true</bold>
+                <underline>true</underline>
+                <strikeout>false</strikeout>
+               </font>
+              </property>
+              <property name="text" >
+               <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:16pt; font-weight:600; font-style:italic; text-decoration: underline;">
+&lt;p style=" -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:400; font-style:normal; text-decoration:none;">General&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="basiciconlabel" >
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="pixmap" >
+               <pixmap resource="images.qrc" >:/images/package_system_32.png</pixmap>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" >
+           <spacer name="horizontalSpacer_4" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>309</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" colspan="2" >
+           <widget class="QGroupBox" name="groupBox" >
+            <property name="title" >
+             <string>Startup</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_8" >
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="checkStartMinimized" >
+               <property name="text" >
+                <string>start minimized</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2" >
+           <spacer name="verticalSpacer" >
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>378</width>
+              <height>311</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="network_Page" >
+         <widget class="QWidget" name="layoutWidget" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>118</width>
+            <height>34</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item row="0" column="0" >
+            <widget class="QLabel" name="networkiconlabel" >
+             <property name="maximumSize" >
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="pixmap" >
+              <pixmap resource="images.qrc" >:/images/network_workgroup32.png</pixmap>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QLabel" name="networkLabel" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font" >
+              <font>
+               <family>Sans Serif</family>
+               <pointsize>16</pointsize>
+               <weight>75</weight>
+               <italic>true</italic>
+               <bold>true</bold>
+               <underline>true</underline>
+               <strikeout>false</strikeout>
+              </font>
+             </property>
+             <property name="text" >
+              <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:16pt; font-weight:600; font-style:italic;">
+&lt;p style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; text-decoration: underline;">&lt;span style=" font-weight:400; font-style:normal; text-decoration:none;">Network&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="style_page" >
+         <layout class="QGridLayout" name="gridLayout_7" >
+          <item row="0" column="0" >
+           <layout class="QGridLayout" name="gridLayout_2" >
+            <item row="0" column="0" >
+             <widget class="QLabel" name="label_2" >
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="pixmap" >
+               <pixmap resource="images.qrc" >:/images/style_32.png</pixmap>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLabel" name="label" >
+              <property name="text" >
+               <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">&#xd;
+p, li { white-space: pre-wrap; }&#xd;
+&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&#xd;
+&lt;p style=" -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-size:16pt;">Style&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" >
+           <spacer name="horizontalSpacer" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>338</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" colspan="2" >
+           <widget class="QGroupBox" name="groupBox_2" >
+            <property name="title" >
+             <string>Style</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5" >
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_7" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text" >
+                <string>Style:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QComboBox" name="styleCombo" >
+               <property name="enabled" >
+                <bool>true</bool>
+               </property>
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2" >
+              <spacer name="horizontalSpacer_2" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>300</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2" >
+           <widget class="QGroupBox" name="groupBox_3" >
+            <property name="title" >
+             <string>StyleSheet</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6" >
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_8" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text" >
+                <string>Style Sheet:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QComboBox" name="styleSheetCombo" >
+               <property name="enabled" >
+                <bool>true</bool>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>16777215</width>
+                 <height>87</height>
+                </size>
+               </property>
+               <property name="font" >
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="iconSize" >
+                <size>
+                 <width>200</width>
+                 <height>87</height>
+                </size>
+               </property>
+               <item>
+                <property name="text" >
+                 <string>Default</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="2" >
+              <spacer name="horizontalSpacer_3" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>270</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2" >
+           <spacer name="verticalSpacer_2" >
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>358</width>
+              <height>243</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="Seite" >
+         <widget class="QWidget" name="layoutWidget_2" >
+          <property name="geometry" >
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>104</width>
+            <height>34</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4" >
+           <item row="0" column="0" >
+            <widget class="QLabel" name="label_24" >
+             <property name="maximumSize" >
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="pixmap" >
+              <pixmap resource="images.qrc" >:/images/speaker_32.png</pixmap>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QLabel" name="label_25" >
+             <property name="text" >
+              <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">
+&lt;p style=" -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;span style=" font-size:12pt; font-weight:600;">Sound&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_11" >
+          <property name="geometry" >
+           <rect>
+            <x>0</x>
+            <y>40</y>
+            <width>441</width>
+            <height>381</height>
+           </rect>
+          </property>
+          <property name="title" >
+           <string>Sound Events</string>
+          </property>
+          <widget class="QGroupBox" name="groupBox_12" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>421</width>
+             <height>81</height>
+            </rect>
+           </property>
+           <property name="title" >
+            <string>User</string>
+           </property>
+           <widget class="QCheckBox" name="checkBoxSound" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>go Online</string>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="checkBoxSound_2" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>go Offline</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txt_SoundFile" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>20</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txt_SoundFile2" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>50</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cmd_openFile" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>20</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cmd_openFile_2" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>50</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_13" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>100</y>
+             <width>421</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="title" >
+            <string>FileSend</string>
+           </property>
+           <widget class="QLineEdit" name="txt_SoundFile3" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>20</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cmd_openFile_3" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>20</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="checkBoxSound_3" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>Finished</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_14" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>160</y>
+             <width>421</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title" >
+            <string>FileRecive</string>
+           </property>
+           <widget class="QCheckBox" name="checkBoxSound_4" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>Incoming</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txt_SoundFile4" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>20</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cmd_openFile_4" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>20</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cmd_openFile_5" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>50</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="checkBoxSound_5" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>Finished</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txt_SoundFile5" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>50</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_15" >
+           <property name="geometry" >
+            <rect>
+             <x>10</x>
+             <y>260</y>
+             <width>421</width>
+             <height>111</height>
+            </rect>
+           </property>
+           <property name="title" >
+            <string>Chatmessage</string>
+           </property>
+           <widget class="QPushButton" name="cmd_openFile_6" >
+            <property name="geometry" >
+             <rect>
+              <x>380</x>
+              <y>20</y>
+              <width>31</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QCheckBox" name="checkBoxSound_6" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>80</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text" >
+             <string>New</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txt_SoundFile6" >
+            <property name="enabled" >
+             <bool>false</bool>
+            </property>
+            <property name="geometry" >
+             <rect>
+              <x>90</x>
+              <y>20</y>
+              <width>281</width>
+              <height>24</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2" >
+       <layout class="QGridLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item row="0" column="1" >
+         <widget class="QFrame" name="buttonFrame" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="frameShape" >
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow" >
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" >
+           <property name="margin" >
+            <number>9</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item row="0" column="0" >
+            <widget class="QPushButton" name="ok_Button" >
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>16777215</width>
+               <height>75</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>OK</string>
+             </property>
+             <property name="autoRepeat" >
+              <bool>false</bool>
+             </property>
+             <property name="default" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2" >
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType" >
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0" >
+              <size>
+               <width>16</width>
+               <height>25</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="3" >
+            <widget class="QPushButton" name="help_Button" >
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Help</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" >
+            <widget class="QPushButton" name="cancel_Button" >
+             <property name="minimumSize" >
+              <size>
+               <width>75</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>75</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Cancel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0" >
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>181</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>ok_Button</tabstop>
+  <tabstop>cancel_Button</tabstop>
+  <tabstop>help_Button</tabstop>
+ </tabstops>
+ <resources>
+  <include location="images.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>itemListWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>62</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>195</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
