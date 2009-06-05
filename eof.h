@@ -73,8 +73,14 @@
 /* macros */
 #define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
 
+/* global library variables */
+extern unsigned long eof_id;
+
+
 /* library functions */
 int  eof_ui_connect();
+int eof_id_init();
+int eof_id_new(char buf[]);
 
 #include <sys/types.h>           /* size_t   */
 void eof_get_configdir(char buf[], size_t len);

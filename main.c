@@ -59,6 +59,7 @@ int main()
       break;
    }
 
+   if(!eof_id_init())   return CEOF_EX_ID;         /* init id generator    */
    if(!helper_init())   return CEOF_EX_HELPER;     /* init helper structs  */
    if(!cgpg_init())     return CEOF_EX_GPG;        /* init gpgme           */
    if(!signals_init())  return CEOF_EX_SIGNALS;    /* catch signals        */
