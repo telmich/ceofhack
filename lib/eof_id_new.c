@@ -30,64 +30,26 @@
 int eof_id_new(char buf[EOF_L_ID])
 {
    char *convert = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-!";
-//   static size_t len = strlen(convert);
    unsigned long cur = eof_id;
    int i, index;
 
-   /* convert eof_id to a-z,A-Z,0-9 
+   /* convert decimal to base 64:
+
+      - Use highest base64 number: 64^(EOF_L_ID-1),
+      - divide the current number by it: cur/64^(EOF_L_ID-1)
+      - with shifting this results to cur >> i*6, which is the index
+      - substract the part that could be expressed: cur -= index * (1 << i*6);
+      - assign the character specified by index to the buffer element
+      - continue while EOF_L_ID-n > 0
+      - the last element can be choosen directly, because the number ("cur")
+        may only contain up to the maximum auf (64^0)-1
    
-i = 1 >  /64                  = (2^6)^1 = 2^6 
-i = 2 >  /64^2 = 4096         = (2^6)^2 = 2^12
-i = 3 >  /64^3 = 262144       = (2^6)^3 = 2^18
-
-      base 62:
-
-         a * 62^0 + b * 62^1 + c * 62^3 ... x * 62^(EOF_L_ID-1)
-
-
-         len = 64;      convert     num % 64 =     num / 64 =
-
-   0        0           0                 0           0
-   1        0           1                 1           0
-   16       0           f                16           0
-   65                   11
-   72       1           1a               10           1
-   190      3           34                4           3
-   4096
+      i = 1 >  /64                  = (2^6)^1 = 2^6 
+      i = 2 >  /64^2 = 4096         = (2^6)^2 = 2^12
+      i = 3 >  /64^3 = 262144       = (2^6)^3 = 2^18
+      ...
 
    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-!";
-             9                                                    63
-   
-   64 = 10
-   65 = 11
-
-   4160 = 65 * 64 = 64 * 64 + 64 = 100
-   4161 = 65 * 64, rest 1  = 64 * 64 + 64, rest 1 = 101
-
-   3 stellen: 64^0 64^1 64^2, maximal: (64^3)-1
-
-      4161/64^2 = 1
-
-
-   0
-   1
-   .
-   .
-   9
-   
-
-      >> 1 = 2, 2 = 4, 3 = 8, 4 = 16, 5 = 32, 6 = 64
-
-      buf[EOF_L_ID-1] = cur >> (EOF_L_ID-1)*6
-      buf[EOF_L_ID-2]
-      ...
-      buf[0]
-
-   fails at 4160, because 4160/64 = 65 ...
-
-   einmal / 64 
-
-
 
    */
 
