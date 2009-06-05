@@ -76,15 +76,9 @@
 /* global library variables */
 extern unsigned long eof_id;
 
-
-/* library functions */
-int  eof_ui_connect();
-int eof_id_init();
-int eof_id_new(char buf[]);
-
+/* library functions: generic */
 #include <sys/types.h>           /* size_t   */
 void eof_get_configdir(char buf[], size_t len);
-void eof_get_ui_socketpath(char buf[], size_t len);
 void eof_get_gpg_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
 void eof_get_pidfile(char buf[], size_t len);
@@ -95,8 +89,15 @@ int eof_ui_deregister(int sockfd);
 /* low level, normally not used directly */
 int eof_va_read(int sockfd, int nof, ...);
 int eof_va_write(int sockfd, int nof, ...);
+int eof_id_init();
+int eof_id_new(char buf[]);
 
-/* clean new functions */
+/* library functions: user interfaces (low level)*/
+void eof_get_ui_socketpath(char buf[], size_t len);
+int eof_ui_connect();
+
+/* library functions: user interfaces (high level)*/
+int eof_ui_init();
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char add[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
 int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res);
