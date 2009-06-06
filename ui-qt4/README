@@ -1,1 +1,3 @@
 Use qmake && make to build.
+
+Dependencies: qt4-dev-tools
