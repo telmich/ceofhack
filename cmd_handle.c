@@ -24,17 +24,17 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_handle(unsigned long cat, int fds[], char data[])
+int cmd_handle(unsigned long eofs, int fds[], char data[])
 {
    struct cmd *cmd;
 
-   printf("category %lu: handling cmd %c%c%c%c\n", cat,
+   printf("category %lu: handling cmd %c%c%c%c\n", eofs,
             data[0], data[1], data[2], data[3]);
 
-   cmd = cmd_find_in_cat(cat, data);
+   cmd = cmd_find_in_cat(eofs, data);
    if(!cmd) {
       printf("No cmd function found for command, calling default cmd!\n");
-      cmd = cmd_cat_default_cmd(cat);
+      cmd = cmd_cat_default_cmd(eofs);
    } else {
       printf("CMD %s found...\n", cmd->num);
    }
