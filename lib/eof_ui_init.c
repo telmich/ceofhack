@@ -25,10 +25,9 @@
 #include <errno.h>      /* errno             */
 #include "eof.h"        /* EOF*              */
 
-int eof_ui_init()
+int eof_ui_init(char id[EOF_L_ID])
 {
    int tmp;
-   char id[EOF_L_ID];
 
    errno = 0; /* reset in case we have the problem and not the library */
    if(!eof_id_init())                  { return -1; }

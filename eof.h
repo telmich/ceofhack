@@ -97,7 +97,7 @@ void eof_get_ui_socketpath(char buf[], size_t len);
 int eof_ui_connect();
 
 /* library functions: user interfaces (high level)*/
-int eof_ui_init();
+int eof_ui_init(char id[]);
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char add[EOF_L_ADDRESS], char keyid[EOF_L_KEYID]);
 int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res);
