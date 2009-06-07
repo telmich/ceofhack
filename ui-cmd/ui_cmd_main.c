@@ -40,6 +40,7 @@ int main()
    char cmd[EOF_L_CMD+1];
    char msgtxt[EOF_L_MESSAGE+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char id[EOF_L_ID+1];
    char *p;
 
    int sockfd, i, nop;
@@ -47,16 +48,6 @@ int main()
    /* just for fun */
    eof_get_configdir(buf, PATH_MAX+1);
    printf("configdir: %s\n", buf);
-
-   if((sockfd = eof_ui_init()) == -1) {
-      perror("eof_ui_init");
-      return 1;
-   }
-
-   if(eof_ui_register(sockfd) == -1) {
-      perror("eof_ui_register");
-      return 1;
-   }
 
    /* terminate, so there is at least one \0 */
    buf[PATH_MAX] = 0;
@@ -66,6 +57,14 @@ int main()
    addr[EOF_L_ADDRESS] = 0;
    msgtxt[EOF_L_MESSAGE] = 0;
    errmsg[EOF_L_MESSAGE] = 0;
+   id[EOF_L_ID] = 0;
+
+   if((sockfd = eof_ui_init(id)) == -1) {
+      perror("eof_ui_init");
+      return 1;
+   }
+   printf("Sent register command, id %s\n", id);
+   return 1;
 
    /* eof_va_write is a low level function used by the library 
    if(!eof_va_write(sockfd, 4, EOF_L_CMD, cmd, EOF_L_NICKNAME, nick,
