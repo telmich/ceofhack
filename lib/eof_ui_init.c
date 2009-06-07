@@ -28,13 +28,14 @@
 int eof_ui_init()
 {
    int tmp;
+   char id[EOF_L_ID];
 
-   if((tmp = eof_ui_connect()) == -1)  return -1;
-   if(eof_ui_register(tmp) == -1)      return -1;
-   if(!eof_id_init()) {
-      errno = 0;
-      return -1;
-   }
+   errno = 0; /* reset in case we have the problem and not the library */
+   if(!eof_id_init())                  { return -1; }
+   if(!eof_id_new(id))                 { return -1; }
+
+   if((tmp = eof_ui_connect()) == -1)  { return -1; }
+   if(eof_ui_register(tmp, id) == -1)  { return -1; }
 
    return 1;
 }
