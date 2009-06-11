@@ -75,6 +75,15 @@ The queue:
 
 struct eofs eofs_list[EOF_L_EOFST];  /* all EOF subsystem types            */
 
+enum {                                    /* EOF subsystems                */
+   EOF_EOFS_TPL,                          /* transport protocol listener   */
+   EOF_EOFS_TPS,                          /* transport protocol sender     */
+   EOF_EOFS_UI,                           /* user interfaces               */
+   EOF_EOFS_MAX                           /* maximum number of EOFs types  */
+};
+
+struct eofs eofs[EOF_EOFS_MAX];
+
 struct eofs {
    unsigned long     id;                  /* id of EOF subsystem     */
    struct cmd        *cmds;               /* all possible commands   */
