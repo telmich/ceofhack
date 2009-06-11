@@ -1,0 +1,84 @@
+Send packet XXXX, ID YYYY, channel ZZ.
+
+Incoming packet on channel ZZ.
+Read command XXXX, read ID YYYY.
+
+Search for ID YYYY on queue for channel ZZ: which command was sent?
+   Command XXX2 found.
+      Does command XXXX and XXX2 match?
+      Match means: Is XXX2 a possible answer for XXXX?
+      Call apropriate handler for XXX2.
+   No command found:
+      XXXX must be initiating the conversation.
+      Search apropriate handler for XXXX on channel ZZ.
+      Save ID.
+      
+
+So befor passing to a handler, we read
+EOF_L_Cmd
+
+--------------------------------------------------------------------------------
+Create general handler.
+
+   Always read EOF_L_CMD + EOF_L_ID.
+
+   1. Check whether this ID is already is known for this EOFs
+      (IDs are always local to one EOFs)
+   1.1 If it is known, check whether the commands fits.
+   1.1.1 If it fits, continue.
+   1.1.2 If not, tell that the EOFs
+   1.1 If it is unknown, call the specific command
+
+   Define a set a commands that are "initiating commands".
+      -> no need to search for an ID.
+         -> maybe still, to avoid conflicts.
+
+
+
+   read_
+--------------------------------------------------------------------------------
+
+If input comes from fd_x, which EOFs is it?
+Has to be registered, when the fd is added to the helper system.
+
+We read cmd, id from a fd.
+Get the queue/EOFs the fd is associated to.
+
+   Table / Relation:
+
+   EOFs        Initial commands (per EOFs)   Waiting commands
+
+   LTP,        2100, ...                     2101
+   TP,
+   UI
+
+If we get data on fd X, we search for a handler for this fd.
+This handler already knows to which eofs it belongs.
+
+
+NEXT:
+   List of eofs
+
+--------------------------------------------------------------------------------
+
+General command handling:
+- List of all EOFs
+- For each EOFs define possible incoming commands
+- For all commands define the type (question/answer)
+- Define the handler for the command
+
+The queue:
+
+struct eofs {
+   unsigned long     id;         /* id of EOF subsystem                    */
+   struct cmd        *init;      /* commands that begin the communication  */
+   struct queued     *entry;     /* pointer to the queue                   */
+};
+
+struct queueentry {
+   struct cmd        cmd;
+   char              id[EOF_L_ID];
+   struct queueentry *next;
+};
+
+
