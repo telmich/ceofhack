@@ -78,6 +78,12 @@ struct eofs {
    struct queue      *first;     /* pointer to the queue                   */
 };
 
+struct cmd {
+   char              cmd[EOF_L_CMD];   /* ascii string         */
+   int               type;             /* question / answer    */
+   int               (*handle)(int fd[]);
+};
+
 struct queue {
    struct cmd        cmd;
    char              id[EOF_L_ID];
