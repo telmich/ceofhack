@@ -62,10 +62,10 @@ NEXT:
 --------------------------------------------------------------------------------
 
 General command handling:
-- List of all EOFs
-- For each EOFs type define possible incoming commands
-- For all commands define the type (question/answer)
-- Define the handler for the command
+x List of all EOFs
+x For each EOFs type define possible commands
+x For all commands define the type (question/answer)
+x Define the handler for the command
 
 The queue:
 - Needs to belong to a EOFs type
@@ -82,12 +82,12 @@ enum {                                    /* EOF subsystems                */
    EOF_EOFS_MAX                           /* maximum number of EOFs types  */
 };
 
-struct eofs eofs[EOF_EOFS_MAX];
-
 struct eofs {
-   unsigned long     id;                  /* id of EOF subsystem     */
-   struct cmd        *cmds;               /* all possible commands   */
+   unsigned long     id;                  /* id of EOF subsystem  - NEEDED?*/
+   struct cmd        *cmds;               /* all possible commands         */
 };
+
+struct eofs eofs[EOF_EOFS_MAX];           /* all possible EOFs             */
 
 enum {
    EOF_CMD_ASR = 1,
@@ -95,16 +95,17 @@ enum {
 };
 
 struct cmd {
-   char              cmd[EOF_L_CMD];      /* ascii string            */
-   int               type;                /* question / answer       */
-   int               (*handle)(int fd[]); /* handling function       */
-   struct cmd        *next;               /* next in list            */
+   char              cmd[EOF_L_CMD];      /* ascii string                  */
+   int               type;                /* question / answer             */
+   int               (*handle)(int fd[]); /* handling function             */
+   struct cmd        *next;               /* next in list                  */
 };
 
 struct queue {
-   struct cmd        cmd;
-   char              id[EOF_L_ID];
-   struct queueentry *next;
+   struct eofs       *type;               /* pointer to type of EOFs       */
+   int               fd;                  /* incoming data arrives here    */
+   struct queueentry *next;               /* pointer to the first entry    */
 };
 
 
+   char              id[EOF_L_ID];
