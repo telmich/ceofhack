@@ -49,7 +49,7 @@ void helper_check_input(int possible, int *have_data)
              * save in the helper structure!
              */
             if(!hp->handle(hp->fds)) {
-               printf("Handler for fd %d failed!\n", pfd[i].fd);
+               printf("FIXME: close communcation, because handler for fd %d failed!\n", pfd[i].fd);
             }
             --(*have_data);
          }

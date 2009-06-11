@@ -95,7 +95,7 @@ struct options {
 #include <sys/types.h>           /* POSIX for pid_t               */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
-   int fds[HP_FDCNT];            /* file deskriptors used by poll */
+   int fds[HP_FDCNT];            /* file deskriptors used by poll */ /* FIXME: use in/out int */
    char path[PATH_MAX+1];        /* absolute path                 */
    int (*handle)(int []);        /* pointer to the handler        */
    int (*exit)(int []);          /* pointer to the exit function  */

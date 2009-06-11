@@ -64,6 +64,9 @@ int main()
       return 1;
    }
    printf("Sent register command, id %s\n", id);
+
+   /* next: read cmd, read id. */
+
    return 1;
 
    /* eof_va_write is a low level function used by the library 

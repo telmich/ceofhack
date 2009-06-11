@@ -28,7 +28,7 @@ int cmd_handle(unsigned long eofs, int fds[], char data[])
 {
    struct cmd *cmd;
 
-   printf("category %lu: handling cmd %c%c%c%c\n", eofs,
+   printf("EOFs %lu: handling cmd %c%c%c%c\n", eofs,
             data[0], data[1], data[2], data[3]);
 
    cmd = cmd_find_in_cat(eofs, data);
