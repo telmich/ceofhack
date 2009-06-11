@@ -73,16 +73,23 @@ The queue:
 - Needs to store the command number of the question
 - Need one queue per EOFs (even for the same type of EOFs)
 
+struct eofs eofs_list[EOF_L_EOFST];  /* all EOF subsystem types            */
+
 struct eofs {
-   unsigned long     id;         /* id of EOF subsystem                    */
-   struct cmd        *cmds;      /* all possible commands                  */
+   unsigned long     id;                  /* id of EOF subsystem     */
+   struct cmd        *cmds;               /* all possible commands   */
+};
+
+enum {
+   EOF_CMD_ASR = 1,
+   EOF_CMD_QSN = 2
 };
 
 struct cmd {
-   char              cmd[EOF_L_CMD];   /* ascii string         */
-   int               type;             /* question / answer    */
-   int               (*handle)(int fd[]);
-   struct cmd        *next;            /* next in list         */
+   char              cmd[EOF_L_CMD];      /* ascii string            */
+   int               type;                /* question / answer       */
+   int               (*handle)(int fd[]); /* handling function       */
+   struct cmd        *next;               /* next in list            */
 };
 
 struct queue {
