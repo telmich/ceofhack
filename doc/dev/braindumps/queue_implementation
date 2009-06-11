@@ -68,20 +68,21 @@ General command handling:
 - Define the handler for the command
 
 The queue:
+- Needs to belong to a EOFs type
 - Needs to store the ID of questions
 - Needs to store the command number of the question
 - Need one queue per EOFs (even for the same type of EOFs)
 
 struct eofs {
    unsigned long     id;         /* id of EOF subsystem                    */
-   struct cmd        *init;      /* commands that begin the communication  */
-   struct queue      *first;     /* pointer to the queue                   */
+   struct cmd        *cmds;      /* all possible commands                  */
 };
 
 struct cmd {
    char              cmd[EOF_L_CMD];   /* ascii string         */
    int               type;             /* question / answer    */
    int               (*handle)(int fd[]);
+   struct cmd        *next;            /* next in list         */
 };
 
 struct queue {
