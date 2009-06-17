@@ -75,6 +75,12 @@ The queue:
 
 struct eofs eofs_list[EOF_L_EOFST];  /* all EOF subsystem types            */
 
+list of commands for eof subsystem:
+
+struct eofs eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
+
+   { cmd }
+
 enum {                                    /* EOF subsystems                */
    EOF_EOFS_TPL,                          /* transport protocol listener   */
    EOF_EOFS_TPS,                          /* transport protocol sender     */
@@ -99,6 +105,12 @@ struct cmd {
    int               type;                /* question / answer             */
    int               (*handle)(int fd[]); /* handling function             */
    struct cmd        *next;               /* next in list                  */
+   struct cmd_answer *answer;             /* first answer                  */
+};
+
+struct cmd_answer {
+   struct cmd        *cmd;
+   struct cmd_answer *next;
 };
 
 struct queue {
@@ -107,5 +119,9 @@ struct queue {
    struct queueentry *next;               /* pointer to the first entry    */
 };
 
-
+struct queueentry {
    char              id[EOF_L_ID];
+   struct cmd        cmd;                 /* the questioning command       */
+   struct queueentry *next;               /* pointer to the next entry     */
+
+};
