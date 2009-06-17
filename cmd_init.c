@@ -28,10 +28,30 @@
 struct cmd_cat cmdlist[HACK_CMD_CAT];
 int cmdlist_cnt;
 
+enum {                                    /* List of EOF subsystems        */
+   EOF_EOFS_TPL,                          /* transport protocol listener   */
+   EOF_EOFS_TPS,                          /* transport protocol sender     */
+   EOF_EOFS_UI,                           /* user interfaces               */
+   EOF_EOFS_MAX                           /* maximum number of EOFs types  */
+};
+
+struct cmdnew {
+   char              cmd[EOF_L_CMD];      /* ascii string                  */
+   int               type;                /* question / answer             */
+   int               (*handle)(int fd[]); /* handling function             */
+   struct cmd        *next;               /* next in list                  */
+   struct cmd        answer[];            /* list of answers               */
+};
+
+
+
 int cmd_init()
 {
    struct cmd *newcmd;
    cmdlist_cnt = 0; /* no categories available */
+
+   struct cmdnew eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
+
 
    /* create categories */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
@@ -116,33 +136,11 @@ The queue:
 
 ****/
 
-enum {                                    /* List of EOF subsystems        */
-   EOF_EOFS_TPL,                          /* transport protocol listener   */
-   EOF_EOFS_TPS,                          /* transport protocol sender     */
-   EOF_EOFS_UI,                           /* user interfaces               */
-   EOF_EOFS_MAX                           /* maximum number of EOFs types  */
-};
-
-struct eofs eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
-
-struct eofs {
-   unsigned long     id;                  /* id of EOF subsystem  - NEEDED?*/
-   struct cmd        *cmds;               /* all possible commands         */
-};
-
 struct eofs eofs[EOF_EOFS_MAX];           /* all possible EOFs             */
 
 enum {
    EOF_CMD_ASR = 1,
    EOF_CMD_QSN = 2
-};
-
-struct cmd {
-   char              cmd[EOF_L_CMD];      /* ascii string                  */
-   int               type;                /* question / answer             */
-   int               (*handle)(int fd[]); /* handling function             */
-   struct cmd        *next;               /* next in list                  */
-   struct cmd        answer[];            /* list of answers               */
 };
 
 struct cmd_answer {
