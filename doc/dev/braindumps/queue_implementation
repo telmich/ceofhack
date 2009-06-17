@@ -42,6 +42,8 @@ If input comes from fd_x, which EOFs is it?
 Has to be registered, when the fd is added to the helper system.
 
 We read cmd, id from a fd.
+/**** the idea
+
 Get the queue/EOFs the fd is associated to.
 
    Table / Relation:
@@ -73,20 +75,16 @@ The queue:
 - Needs to store the command number of the question
 - Need one queue per EOFs (even for the same type of EOFs)
 
-struct eofs eofs_list[EOF_L_EOFST];  /* all EOF subsystem types            */
+****/
 
-list of commands for eof subsystem:
-
-struct eofs eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
-
-   { cmd }
-
-enum {                                    /* EOF subsystems                */
+enum {                                    /* List of EOF subsystems        */
    EOF_EOFS_TPL,                          /* transport protocol listener   */
    EOF_EOFS_TPS,                          /* transport protocol sender     */
    EOF_EOFS_UI,                           /* user interfaces               */
    EOF_EOFS_MAX                           /* maximum number of EOFs types  */
 };
+
+struct eofs eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
 
 struct eofs {
    unsigned long     id;                  /* id of EOF subsystem  - NEEDED?*/
@@ -105,7 +103,7 @@ struct cmd {
    int               type;                /* question / answer             */
    int               (*handle)(int fd[]); /* handling function             */
    struct cmd        *next;               /* next in list                  */
-   struct cmd_answer *answer;             /* first answer                  */
+   struct cmd        answer[];            /* list of answers               */
 };
 
 struct cmd_answer {
