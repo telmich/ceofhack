@@ -79,3 +79,86 @@ int cmd_init()
 
    return 1;
 }
+
+
+/**** the idea
+
+Get the queue/EOFs the fd is associated to.
+
+   Table / Relation:
+
+   EOFs        Initial commands (per EOFs)   Waiting commands
+
+   LTP,        2100, ...                     2101
+   TP,
+   UI
+
+If we get data on fd X, we search for a handler for this fd.
+This handler already knows to which eofs it belongs.
+
+
+NEXT:
+   List of eofs
+
+--------------------------------------------------------------------------------
+
+General command handling:
+x List of all EOFs
+x For each EOFs type define possible commands
+x For all commands define the type (question/answer)
+x Define the handler for the command
+
+The queue:
+- Needs to belong to a EOFs type
+- Needs to store the ID of questions
+- Needs to store the command number of the question
+- Need one queue per EOFs (even for the same type of EOFs)
+
+****/
+
+enum {                                    /* List of EOF subsystems        */
+   EOF_EOFS_TPL,                          /* transport protocol listener   */
+   EOF_EOFS_TPS,                          /* transport protocol sender     */
+   EOF_EOFS_UI,                           /* user interfaces               */
+   EOF_EOFS_MAX                           /* maximum number of EOFs types  */
+};
+
+struct eofs eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
+
+struct eofs {
+   unsigned long     id;                  /* id of EOF subsystem  - NEEDED?*/
+   struct cmd        *cmds;               /* all possible commands         */
+};
+
+struct eofs eofs[EOF_EOFS_MAX];           /* all possible EOFs             */
+
+enum {
+   EOF_CMD_ASR = 1,
+   EOF_CMD_QSN = 2
+};
+
+struct cmd {
+   char              cmd[EOF_L_CMD];      /* ascii string                  */
+   int               type;                /* question / answer             */
+   int               (*handle)(int fd[]); /* handling function             */
+   struct cmd        *next;               /* next in list                  */
+   struct cmd        answer[];            /* list of answers               */
+};
+
+struct cmd_answer {
+   struct cmd        *cmd;
+   struct cmd_answer *next;
+};
+
+struct queue {
+   struct eofs       *type;               /* pointer to type of EOFs       */
+   int               fd;                  /* incoming data arrives here    */
+   struct queueentry *next;               /* pointer to the first entry    */
+};
+
+struct queueentry {
+   char              id[EOF_L_ID];
+   struct cmd        cmd;                 /* the questioning command       */
+   struct queueentry *next;               /* pointer to the next entry     */
+
+};
