@@ -74,8 +74,7 @@ struct cmd {
 
 /* EOF commands categories */
 struct cmd_cat {
-   unsigned long cat;         /* no more than 32 categories */
-   struct cmd *next;          /* pointer to first cmd       */
+   struct cmd *first;         /* pointer to first cmd       */
    struct cmd *def;           /* pointer to default handler */
 };
 
@@ -112,7 +111,6 @@ struct tpl {                     /* listening transport protocols */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
-/* FIXME: needed? */
 /* cmd categories, use in other places as well, need to be '&'-able  */
 enum {
    TPN = 0x0,     /* TP nothing / none    */
@@ -122,9 +120,16 @@ enum {
    UIL = 0x8      /* UI listening         */
 };
 
-/* incoming data  categories */
-#define EOF_I_TP                 0x01       /* transport protocols */
+/* incoming data categories == subsystems == EOFs */
+#define EOF_I_TP                 0x01       /* listening transport protocols */
 #define EOF_I_UI                 0x02       /* user interfaces     */
+
+enum {                                    /* List of EOF subsystems        */  
+   EOF_EOFS_TPL,                          /* transport protocol listener   */  
+   EOF_EOFS_TPS,                          /* transport protocol sender     */  
+   EOF_EOFS_UI,                           /* user interfaces               */  
+   EOF_EOFS_MAX                           /* maximum number of EOFs types  */  
+};
 
 
 /* hacking cconfig lib into ceofhack */
@@ -153,9 +158,8 @@ extern struct tpl       tpls[EOF_L_TPL];
 extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
 
-/* commands */
-extern struct cmd_cat   cmdlist[HACK_CMD_CAT];
-extern int              cmdlist_cnt;
+/* categories of EOFs */
+extern struct cmd_cat   categories[EOF_EOFS_MAX];
 
 /* gpgme */
 #include <gpgme.h>      /* gpgme             */
@@ -245,7 +249,7 @@ ssize_t read_all(int fd, void *buf, size_t count);
 /* commands */
 int cmd_handle(unsigned long cat, int fd[], char data[]);
 int cmd_init();
-int cmd_cat_create(unsigned long cat, struct cmd *);
+int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 struct cmd *cmd_cat_default_cmd(unsigned long cat);
 
