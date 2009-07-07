@@ -35,12 +35,17 @@ enum {                                    /* List of EOF subsystems        */
    EOF_EOFS_MAX                           /* maximum number of EOFs types  */
 };
 
+enum {
+   EOF_CMD_ASR = 1,
+   EOF_CMD_QSN = 2
+};
+
 struct cmdnew {
    char              cmd[EOF_L_CMD];      /* ascii string                  */
    int               type;                /* question / answer             */
    int               (*handle)(int fd[]); /* handling function             */
+   struct cmd        *answer[];           /* list of answers               */
    struct cmd        *next;               /* next in list                  */
-   struct cmd        answer[];            /* list of answers               */
 };
 
 
@@ -50,7 +55,11 @@ int cmd_init()
    struct cmd *newcmd;
    cmdlist_cnt = 0; /* no categories available */
 
-   struct cmdnew eofs_list[EOF_L_EOFST][];     /* cmds for each EOF subsystem   */
+   struct cmdnew eofs_list[EOF_EOFS_MAX][] = {
+      { /* EOF_EOFS_TPL */
+         { EOF_CMD_TPS_SENT, EOF_CMD_ASR, cmd_2000, { cmd_20xx, cmd_21xx, NULL } },
+      }
+   };
 
 
    /* create categories */
@@ -137,11 +146,6 @@ The queue:
 ****/
 
 struct eofs eofs[EOF_EOFS_MAX];           /* all possible EOFs             */
-
-enum {
-   EOF_CMD_ASR = 1,
-   EOF_CMD_QSN = 2
-};
 
 struct cmd_answer {
    struct cmd        *cmd;

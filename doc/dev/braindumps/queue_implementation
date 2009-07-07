@@ -123,3 +123,17 @@ struct queueentry {
    struct queueentry *next;               /* pointer to the next entry     */
 
 };
+--------------------------------------------------------------------------------
+It is not possible to create a dynamic field in C as in:
+
+   struct cmdnew eofs_list[EOF_EOFS_MAX][] = { 
+      { /* EOF_EOFS_TPL */
+         { EOF_CMD_TPS_SENT, EOF_CMD_ASR, cmd_2000, { cmd_20xx, cmd_21xx, NULL } },
+      }   
+   };  
+
+Thus we need to stick to an array of linked lists!
+
+Thus we can also stick to the current layout:
+   - linked list of categories (= subsystems)
+   - linked list of commands below categories
