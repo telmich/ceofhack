@@ -18,26 +18,13 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Create a command category
+ * Add a command as default to a category
  *
  */
 
-#include <stdio.h>      /* printf()       */
-#include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_cat_create(unsigned long cat, struct cmd *def)
+void cmd_cat_default_cmd(int cat, struct cmd *def)
 {
-   if(cmdlist_cnt >= HACK_CMD_CAT) {
-      printf("Too many commands\n");
-      return 0;
-   }
-
-   cmdlist[cmdlist_cnt].cat  = cat;
-   cmdlist[cmdlist_cnt].next = NULL;
-   cmdlist[cmdlist_cnt].def  = def;
-
-   ++cmdlist_cnt;
-
-   return 1;
+   categories[cat].def  = def;
 }

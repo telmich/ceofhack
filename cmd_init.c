@@ -25,15 +25,7 @@
 #include "ceofhack.h"   /* functions etc. */
 
 /* global array */
-struct cmd_cat cmdlist[HACK_CMD_CAT];
-int cmdlist_cnt;
-
-enum {                                    /* List of EOF subsystems        */
-   EOF_EOFS_TPL,                          /* transport protocol listener   */
-   EOF_EOFS_TPS,                          /* transport protocol sender     */
-   EOF_EOFS_UI,                           /* user interfaces               */
-   EOF_EOFS_MAX                           /* maximum number of EOFs types  */
-};
+struct cmd_cat categories[EOF_EOFS_MAX];
 
 enum {
    EOF_CMD_ASR = 1,
@@ -55,16 +47,10 @@ int cmd_init()
    struct cmd *newcmd;
    cmdlist_cnt = 0; /* no categories available */
 
-   struct cmdnew eofs_list[EOF_EOFS_MAX][] = {
-      { /* EOF_EOFS_TPL */
-         { EOF_CMD_TPS_SENT, EOF_CMD_ASR, cmd_2000, { cmd_20xx, cmd_21xx, NULL } },
-      }
-   };
-
-
    /* create categories */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
    if(!cmd_cat_create(EOF_I_TP, newcmd)) return 0;
+
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
    if(!cmd_cat_create(EOF_I_UI, newcmd)) return 0;
 

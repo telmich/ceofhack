@@ -77,6 +77,10 @@ The queue:
 
 ****/
 
+Category = Type of EOFs
+Queue = An instance of an EOFs
+   -> picture!
+
 enum {                                    /* List of EOF subsystems        */
    EOF_EOFS_TPL,                          /* transport protocol listener   */
    EOF_EOFS_TPS,                          /* transport protocol sender     */
