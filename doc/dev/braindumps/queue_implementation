@@ -99,7 +99,7 @@ enum {
 };
 
 struct cmd {
-   char              cmd[EOF_L_CMD];      /* ascii string                  */
+   char              *cmd;                /* (constant) ascii string       */
    int               type;                /* question / answer             */
    int               (*handle)(int fd[]); /* handling function             */
    struct cmd        *next;               /* next in list                  */
