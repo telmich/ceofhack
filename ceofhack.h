@@ -251,8 +251,8 @@ int cmd_handle(unsigned long cat, int fd[], char data[]);
 int cmd_init();
 int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
-void cmd_cat_set_default_cmd(int cat, struct cmd *def);
-struct cmd *cmd_cat_get_default_cmd(unsigned long cat);
+void cmd_cat_init(int cat, struct cmd *def);
+struct cmd *cmd_cat_get_default_cmd(int cat);
 
 int cmd_2000(int []);
 int cmd_2002(int []);

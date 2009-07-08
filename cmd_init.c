@@ -31,26 +31,16 @@ enum {
    EOF_CMD_QSN = 2
 };
 
-struct cmdnew {
-   char              cmd[EOF_L_CMD];      /* ascii string                  */
-   int               type;                /* question / answer             */
-   int               (*handle)(int fd[]); /* handling function             */
-   struct cmd        *answer[];           /* list of answers               */
-   struct cmd        *next;               /* next in list                  */
-};
-
-
-
 int cmd_init()
 {
    struct cmd *newcmd;
 
    /* CATEGORIES: Add default handler */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
-   cmd_cat_set_default_cmd(EOF_CAT_TPS, newcmd);
+   cmd_cat_init(EOF_CAT_TPS, newcmd);
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
-   cmd_cat_set_default_cmd(EOF_CAT_UI, newcmd);
+   cmd_cat_init(EOF_CAT_UI, newcmd);
 
    /* TRANSPORT PROTOCOLS */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
@@ -128,8 +118,6 @@ The queue:
 - Need one queue per EOFs (even for the same type of EOFs)
 
 ****/
-
-struct eofs eofs[EOF_CAT_MAX];            /* all possible Categories       */
 
 struct queue {
    struct eofs       *type;               /* pointer to type of EOFs       */

@@ -22,9 +22,11 @@
  *
  */
 
+#include <stdio.h>
 #include "ceofhack.h"   /* functions etc. */
 
-void cmd_cat_default_cmd(int cat, struct cmd *def)
+void cmd_cat_init(int cat, struct cmd *def)
 {
-   categories[cat].def  = def;
+   categories[cat].def     = def;
+   categories[cat].first   = NULL;
 }
