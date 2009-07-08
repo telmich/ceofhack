@@ -25,18 +25,15 @@
 #include <string.h>     /* strncmp()      */
 #include "ceofhack.h"   /* functions etc. */
 
-struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[])
+struct cmd *cmd_find_in_cat(int cat, char cmd[])
 {
-   struct cmd_cat *cc = cmd_cat_find(cat);
-   struct cmd *c = NULL;
+   struct cmd *c;
 
-   if(!cc) return NULL;
-   
-   for(c = cc->next; c != NULL; c = c->next) {
+   for(c = categories[cat].first; c != NULL; c = c->next) {
       if(!strncmp(cmd, c->num, EOF_L_CMD)) {
-         break;
+         return c;
       }
    }
 
-   return c;
+   return NULL;
 }
