@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Initialise command handler tree (similar to ui_cmd_init)
+ * Initialise commands in categories
  *
  */
 
@@ -26,23 +26,18 @@
 
 struct cmd_cat categories[EOF_CAT_MAX];
 
-enum {
-   EOF_CMD_ASR = 1,
-   EOF_CMD_QSN = 2
-};
-
 int cmd_init()
 {
    struct cmd *newcmd;
 
    /* CATEGORIES: Add default handler */
-   if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
-   cmd_cat_init(EOF_CAT_TPS, newcmd);
-
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
    cmd_cat_init(EOF_CAT_UI, newcmd);
 
-   /* TRANSPORT PROTOCOLS */
+   /* TRANSPORT PROTOCOL SENDING */
+   if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
+   cmd_cat_init(EOF_CAT_TPS, newcmd);
+
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
    if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
 

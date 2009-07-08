@@ -111,26 +111,12 @@ struct tpl {                     /* listening transport protocols */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
-/* cmd categories, use in other places as well, need to be '&'-able  */
-enum {
-   TPN = 0x0,     /* TP nothing / none    */
-   TPL = 0x1,     /* TP listen            */
-   TPS = 0x2,     /* TP sending           */
-   EXR = 0x4,     /* Externally received  */
-   UIL = 0x8      /* UI listening         */
-};
-
-/* incoming data categories == subsystems == EOFs */
-#define EOF_I_TP                 0x01       /* listening transport protocols */
-#define EOF_I_UI                 0x02       /* user interfaces     */
-
 enum {                                    /* List of EOF categories        */  
    EOF_CAT_TPL,                           /* transport protocol listener   */  
    EOF_CAT_TPS,                           /* transport protocol sender     */  
    EOF_CAT_UI,                            /* user interfaces               */  
    EOF_CAT_MAX                            /* maximum number of EOFs types  */  
 };
-
 
 /* hacking cconfig lib into ceofhack */
 struct cconfig {
@@ -246,14 +232,15 @@ int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 ssize_t read_all(int fd, void *buf, size_t count);
 
-/* commands */
+/* commands and categories */
 int cmd_handle(unsigned long cat, int fd[], char data[]);
 int cmd_init();
 int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
+
 void cmd_cat_init(int cat, struct cmd *def);
-struct cmd *cmd_cat_get_default_cmd(int cat);
 int cmd_cat_add(int cat, struct cmd *cmd);
+struct cmd *cmd_cat_get_default_cmd(int cat);
 struct cmd *cmd_find_in_cat(int cat, char cmd[]);
 
 int cmd_2000(int []);
