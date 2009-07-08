@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Check whether we have a handler for the url
+ * Check whether we have a transport protocol for the url
  *
  */
 
@@ -26,19 +26,18 @@
 #include <stdio.h>               /* printf                        */
 #include <string.h>              /* str*                          */
 
-
 #include "ceofhack.h"   /* functions etc. */
 
-struct cconfig *tp_available(char *url, int type)
+struct cconfig *tp_available(char *url, int cat)
 {
    int i;
 
    for(i=0; i < tpa_cnt; i++) {
 //      printf("LTP/TP: %s / %s [%lu]\n", url, tpa[i].scheme, strlen(tpa[i].scheme));
       if(!strncmp(url, tpa[i].scheme, strlen(tpa[i].scheme))) {
-         if(type & TPL && tpa[i].listen) {
+         if(cat == EOF_CAT_TPL && tpa[i].listen) {
             return tpa[i].listen;
-         } else if(type & TPS && tpa[i].send) {
+         } else if(cat == EOF_CAT_TPS && tpa[i].send) {
             return tpa[i].send;
          }
       }
