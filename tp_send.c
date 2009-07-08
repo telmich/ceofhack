@@ -39,7 +39,7 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
    printf("Using address %s for %s\n", url, nick);
 
    /* search for transport protocol */
-   send = tp_available(url, TPS);
+   send = tp_available(url, EOF_CAT_TPS);
 
    if(!send) {
       eof_errmsg("No transport protocol available!");
