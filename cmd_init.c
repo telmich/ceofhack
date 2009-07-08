@@ -30,10 +30,6 @@ int cmd_init()
 {
    struct cmd *newcmd;
 
-   /* CATEGORIES: Add default handler */
-   if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
-   cmd_cat_init(EOF_CAT_UI, newcmd);
-
    /* TRANSPORT PROTOCOL SENDING */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
    cmd_cat_init(EOF_CAT_TPS, newcmd);
@@ -48,6 +44,9 @@ int cmd_init()
    if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
 
    /* USER INTERFACE */
+   if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
+   cmd_cat_init(EOF_CAT_UI, newcmd);
+
    if(!(newcmd = cmd_create(EOF_CMD_UI_REGISTER, cmd_2100))) return 0;
    if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
 
