@@ -25,7 +25,7 @@
 #include <string.h>     /* strncmp()      */
 #include "ceofhack.h"   /* functions etc. */
 
-struct cmd *cmd_cat_default_cmd(unsigned long cat)
+struct cmd *cmd_cat_get_default_cmd(int cat)
 {
    struct cmd_cat *cc = cmd_cat_find(cat);
 

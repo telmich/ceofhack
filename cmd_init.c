@@ -24,8 +24,7 @@
 
 #include "ceofhack.h"   /* functions etc. */
 
-/* global array */
-struct cmd_cat categories[EOF_EOFS_MAX];
+struct cmd_cat categories[EOF_CAT_MAX];
 
 enum {
    EOF_CMD_ASR = 1,
@@ -45,14 +44,13 @@ struct cmdnew {
 int cmd_init()
 {
    struct cmd *newcmd;
-   cmdlist_cnt = 0; /* no categories available */
 
-   /* create categories */
+   /* CATEGORIES: Add default handler */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;
-   if(!cmd_cat_create(EOF_I_TP, newcmd)) return 0;
+   cmd_cat_set_default_cmd(EOF_CAT_TPS, newcmd);
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
-   if(!cmd_cat_create(EOF_I_UI, newcmd)) return 0;
+   cmd_cat_set_default_cmd(EOF_CAT_UI, newcmd);
 
    /* TRANSPORT PROTOCOLS */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
@@ -131,12 +129,7 @@ The queue:
 
 ****/
 
-struct eofs eofs[EOF_EOFS_MAX];           /* all possible EOFs             */
-
-struct cmd_answer {
-   struct cmd        *cmd;
-   struct cmd_answer *next;
-};
+struct eofs eofs[EOF_CAT_MAX];            /* all possible Categories       */
 
 struct queue {
    struct eofs       *type;               /* pointer to type of EOFs       */

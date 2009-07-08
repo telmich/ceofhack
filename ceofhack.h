@@ -124,11 +124,11 @@ enum {
 #define EOF_I_TP                 0x01       /* listening transport protocols */
 #define EOF_I_UI                 0x02       /* user interfaces     */
 
-enum {                                    /* List of EOF subsystems        */  
-   EOF_EOFS_TPL,                          /* transport protocol listener   */  
-   EOF_EOFS_TPS,                          /* transport protocol sender     */  
-   EOF_EOFS_UI,                           /* user interfaces               */  
-   EOF_EOFS_MAX                           /* maximum number of EOFs types  */  
+enum {                                    /* List of EOF categories        */  
+   EOF_CAT_TPL,                           /* transport protocol listener   */  
+   EOF_CAT_TPS,                           /* transport protocol sender     */  
+   EOF_CAT_UI,                            /* user interfaces               */  
+   EOF_CAT_MAX                            /* maximum number of EOFs types  */  
 };
 
 
@@ -159,7 +159,7 @@ extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
 
 /* categories of EOFs */
-extern struct cmd_cat   categories[EOF_EOFS_MAX];
+extern struct cmd_cat   categories[EOF_CAT_MAX];
 
 /* gpgme */
 #include <gpgme.h>      /* gpgme             */
@@ -251,7 +251,8 @@ int cmd_handle(unsigned long cat, int fd[], char data[]);
 int cmd_init();
 int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
-struct cmd *cmd_cat_default_cmd(unsigned long cat);
+void cmd_cat_set_default_cmd(int cat, struct cmd *def);
+struct cmd *cmd_cat_get_default_cmd(unsigned long cat);
 
 int cmd_2000(int []);
 int cmd_2002(int []);
