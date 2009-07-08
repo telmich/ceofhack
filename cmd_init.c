@@ -35,41 +35,41 @@ int cmd_init()
    cmd_cat_init(EOF_CAT_TPS, newcmd);
 
    if(!(newcmd = cmd_create(EOF_CMD_TPS_SENT, cmd_2000))) return 0;
-   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_TPL, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_TPL_RECV, cmd_2002))) return 0;
-   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_TPL, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_TPL_LISTENING, cmd_2003))) return 0;
-   if(!cmd_cat_add(EOF_I_TP, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_TPL, newcmd)) return 0;
 
    /* USER INTERFACE */
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEFAULT, cmd_21xx))) return 0;
    cmd_cat_init(EOF_CAT_UI, newcmd);
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_REGISTER, cmd_2100))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_DEREGISTER, cmd_2101))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_ADD, cmd_2102))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_SEND, cmd_2103))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_RENAME, cmd_2104))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_SHOW, cmd_2105))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_PEER_LIST, cmd_2106))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
    if(!(newcmd = cmd_create(EOF_CMD_UI_QUIT, cmd_2199))) return 0;
-   if(!cmd_cat_add(EOF_I_UI, newcmd)) return 0;
+   if(!cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
 //   if(!(newcmd = cmd_create(EOF_CMD_EXT_MESSAGE, cmd_3000))) return 0;
 //   if(!cmd_cat_add(EXR, newcmd)) return 0;
