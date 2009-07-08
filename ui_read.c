@@ -41,5 +41,5 @@ int ui_read(int fd[])
 
    printf("ui_read (cmd): %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
 
-   return cmd_handle(EOF_I_UI, fd, buf);
+   return cmd_handle(EOF_CAT_UI, fd, buf);
 }
