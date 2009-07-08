@@ -18,18 +18,13 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Find a command in a category
+ * Return the default command
  *
  */
 
-#include <string.h>     /* strncmp()      */
 #include "ceofhack.h"   /* functions etc. */
 
 struct cmd *cmd_cat_get_default_cmd(int cat)
 {
-   struct cmd_cat *cc = cmd_cat_find(cat);
-
-   if(!cc) return NULL;
-   
-   return cc->def;
+   return categories[cat].def;
 }
