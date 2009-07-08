@@ -253,6 +253,8 @@ int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));
 void cmd_cat_init(int cat, struct cmd *def);
 struct cmd *cmd_cat_get_default_cmd(int cat);
+int cmd_cat_add(int cat, struct cmd *cmd);
+struct cmd *cmd_find_in_cat(int cat, char cmd[]);
 
 int cmd_2000(int []);
 int cmd_2002(int []);
@@ -272,8 +274,6 @@ int cmd_2199(int []);
 int cmd_21xx(int []);
 
 //int cmd_3000(int []);
-int cmd_cat_add(unsigned long, struct cmd *cmd);
-struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 
 /* user interfaces */
 int ui_init();
