@@ -273,7 +273,6 @@ int cmd_21xx(int []);
 
 //int cmd_3000(int []);
 int cmd_cat_add(unsigned long, struct cmd *cmd);
-struct cmd_cat *cmd_cat_find(unsigned long cat);
 struct cmd *cmd_find_in_cat(unsigned long cat, char cmd[]);
 
 /* user interfaces */
