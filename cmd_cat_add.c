@@ -22,21 +22,12 @@
  *
  */
 
-#include <stdio.h>      /* printf         */
-#include <stdlib.h>     /* NULL           */
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_cat_add(unsigned long cat, struct cmd *cmd)
+int cmd_cat_add(int cat, struct cmd *cmd)
 {
-   struct cmd_cat *has_cat;
-
-   has_cat = cmd_cat_find(cat);
-   if(!has_cat) return 0;
-
-   cmd->next = has_cat->next;
-   has_cat->next = cmd;
-
-//   printf("Added cmd %s to category %lu\n", cmd->num, cat);
+   cmd->next = categories[cat].first;
+   categories[cat].first = cmd;
 
    return 1;
 }
