@@ -125,6 +125,19 @@ struct cconfig {
    struct cconfig *entries;   /* directory entries */
 };
 
+struct queue {
+   struct eofs       *type;               /* pointer to type of EOFs       */
+   int               fd;                  /* incoming data arrives here    */
+   struct queueentry *next;               /* pointer to the first entry    */
+};
+
+struct queueentry {
+   char              id[EOF_L_ID];
+   struct cmd        cmd;                 /* the questioning command       */
+   struct queueentry *next;               /* pointer to the next entry     */
+
+};
+
 /****************** Global variables  */
 extern struct pollfd    pfd[MAX_COMM];
 extern struct peer      plist;
