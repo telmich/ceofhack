@@ -77,9 +77,6 @@ The queue:
 
 ****/
 
-Category = Type of EOFs
-Queue = An instance of an EOFs
-   -> picture!
 
 enum {                                    /* List of EOF subsystems        */
    EOF_EOFS_TPL,                          /* transport protocol listener   */
@@ -141,3 +138,23 @@ Thus we need to stick to an array of linked lists!
 Thus we can also stick to the current layout:
    - linked list of categories (= subsystems)
    - linked list of commands below categories
+
+--------------------------------------------------------------------------------
+Category = Type of EOFs
+Queue = An instance of an EOFs
+   -> picture!
+   queue has a fd assigned!
+
+queue_new()
+   - fd[] to operate on
+   - category the queue belongs to
+
+queue_read()
+   - has fd
+   - has command
+   - has id
+   - handler for helper
+
+queue_find_by_fd()
+   - find correct queue to operate on
+
