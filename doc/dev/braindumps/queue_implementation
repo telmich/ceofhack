@@ -143,10 +143,10 @@ Thus we can also stick to the current layout:
 Category = Type of EOFs
 Queue = An instance of an EOFs
    -> picture!
-   queue has a fd assigned!
+   queue has a fd(-array) assigned!
 
 queue_new()
-   - fd[] to operate on
+   - fd[] to operate on?
    - category the queue belongs to
 
 queue_read()
@@ -156,5 +156,8 @@ queue_read()
    - handler for helper
 
 queue_find_by_fd()
-   - find correct queue to operate on
+   - find correct queue by fd (to operate on)
+
+
+--------------------------------------------------------------------------------
 

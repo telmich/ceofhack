@@ -135,7 +135,6 @@ struct queueentry {
    char              id[EOF_L_ID];
    struct cmd        cmd;                 /* the questioning command       */
    struct queueentry *next;               /* pointer to the next entry     */
-
 };
 
 /****************** Global variables  */
@@ -282,5 +281,8 @@ int ui_read(int []);
 int ui_disable(int);
 void ui_disable_all();
 void ui_exit();
+
+/* queues */
+int queue_read(int []);
 
 #endif
