@@ -520,8 +520,12 @@ No packet (including everything) may exceed the size of \emph{EOF\_L\_PKG\_MAX}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Types of packets}
-EOF knows about encrypted ("`Onion packets"') and
-unencrypted ("`plaintext packets"') packets.
+EOF knows about
+\begin{itemize}
+\item transport protocol dependent, encrypted packets ("`postcard"')
+\item plain encrypted ("`Onion packets"') and
+\item unencrypted ("`plaintext packets"') packets.
+\end{itemize}
 Only encrypted packets are sent out on the network.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
@@ -927,7 +931,7 @@ Should be an alias for \textit{/peer show $<$nick$>$}
 
 % #############################################################################
 
-\Gsection{Interface to the user interface ("`eofi2ui"')}
+\section{Interface to the user interface ("`eofi2ui"')}
 This section specifies the commands used between the EOFs
 "`user interface"' and EOFi. As the user interface has to translate
 the user commands ("`ui2user"') to \emph{eofi2ui} commands, the
