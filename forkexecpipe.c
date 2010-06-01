@@ -33,6 +33,8 @@
 
 int forkexecpipe(struct helper *hp)
 {
+   char *argv[2];
+
    /* read from EOFi [0], write from TP [1] */
    if(pipe(&hp->fds[0]) == -1) {
       perror("pipe");
@@ -81,7 +83,10 @@ int forkexecpipe(struct helper *hp)
       _exit(1);
    }
 
-   execv(hp->path, NULL);
+   argv[0] = hp->path;
+   argv[1] = NULL;
+
+   execv(hp->path, argv);
    perror("execv");
    _exit(1);
 }
