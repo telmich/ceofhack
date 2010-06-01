@@ -24,12 +24,12 @@
 
 #include <string.h>     /* strlen            */
 #include <stdio.h>      /* printf            */
-#include "eof.h"        /* EOF*              */
+#include <eof.h>        /* EOF*              */
 
 
 int eof_id_new(char buf[EOF_L_ID])
 {
-   char *convert = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-!";
+   static char *convert = EOF_QUEUE_ID_CHARS;
    unsigned long cur = eof_id;
    int i, index;
 

@@ -29,6 +29,26 @@
 int queue_new(int fd, int cat)
 {
    char buf[EOF_L_CMD];
+   struct queue *nq = NULL;
+
+   /* create new queue */
+   nq = calloc(sizeof(struct queue));
+   if(!nq) return 0;
+
+FIXME: here
+
+   /* initialise new queue struct */
+   nq->type = eof_find_by_cat(cat); -> needed? or is cat array index?
+   /* find EOFs, add pointer */
+   /* return new queue? */
+   /* add queue to queues ? */
+
+
+
+
+
+
+
    int queue_id;
 
    /* find queue by fd */

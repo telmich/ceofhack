@@ -53,6 +53,7 @@ int tp_listen_init()
       /* FIXME: cwd into configdir */
 
       if(!(hp = helper_exec(tpls[i].listen->path, queue_read, NULL))) return 0;
+
       if(!queue_new(hp->fds[HP_READ], EOF_CAT_TPL)) return 0;
 
       /* FIXME: cwd back */

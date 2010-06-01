@@ -24,6 +24,9 @@
 #define EOF_CMD_TPL_RECV         "2002"
 #define EOF_CMD_TPL_LISTENING    "2003"
 
+/* queue/id */
+#define EOF_QUEUE_ID_CHARS       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-!"
+
 /* user interfaces: already implemented */
 #define EOF_CMD_UI_ACK           "1100"
 #define EOF_CMD_UI_FAIL          "1101"
@@ -109,5 +112,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char nick[EOF_L_NICKNAME], char keyid[EOF_L_KEYID],
                                           char **addrs);
 int eof_ui_quit(int sockfd);
+
+/* queue */
 
 #endif

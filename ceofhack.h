@@ -284,5 +284,6 @@ void ui_exit();
 
 /* queues */
 int queue_read(int []);
+int queue_new(int fd, int cat);
 
 #endif
