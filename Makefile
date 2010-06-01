@@ -72,7 +72,6 @@ CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
-
 PROG=ceofhack
 
 DOC=doc/EOF
@@ -90,6 +89,11 @@ run: $(PROG)
 
 debug: $(PROG)
 	gdb ./$(PROG)
+
+# tests
+tests/t_queue_int_to_idstr:
+	#$(CC) -lcheck -o $@ $^
+	$(CC) -lcheck -o $@ tests/t_queue_int_to_idstr.c
 
 tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 	$(CC) -o $@ $^
