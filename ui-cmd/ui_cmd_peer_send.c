@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -28,19 +28,21 @@
 #include <errno.h>      /*                   */
 #include <stdlib.h>     /* free()            */
 
-#include "eof.h"        /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 
 int main(int argc, char *argv[])
 {
    char nick[EOF_L_NICKNAME+1];
    char msgtxt[EOF_L_MESSAGE+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char id[EOF_L_ID+1];
    int sockfd;
 
    /* terminate, so there is at least one \0 */
    nick[EOF_L_NICKNAME] = 0;
    msgtxt[EOF_L_MESSAGE] = 0;
    errmsg[EOF_L_MESSAGE] = 0;
+   id[EOF_L_ID] = 0;
 
    if(argc != 3) {
       printf("%s: <nick> <msg>\n", argv[0]);
@@ -49,13 +51,8 @@ int main(int argc, char *argv[])
    strncpy(nick, argv[1], EOF_L_NICKNAME);
    strncpy(msgtxt, argv[2], EOF_L_MESSAGE);
 
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
-   }
-
-   if(!eof_ui_register(sockfd)) {
-      perror("eof_ui_register");
+   if((sockfd = eof_ui_init(id)) == -1) {
+      perror("eof_ui_init");
       return 1;
    }
 

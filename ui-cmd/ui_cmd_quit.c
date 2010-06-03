@@ -23,7 +23,7 @@
  */
 
 #include <stdio.h>      /* printf()          */
-#include "eof.h"        /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 
 int main()
 {

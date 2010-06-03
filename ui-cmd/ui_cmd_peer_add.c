@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -28,7 +28,7 @@
 #include <errno.h>      /*                   */
 #include <stdlib.h>     /* free()            */
 
-#include "eof.h"        /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
    char addr[EOF_L_ADDRESS+1];
    char keyid[EOF_L_KEYID+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char id[EOF_L_ID+1];
    int sockfd;
 
    /* terminate, so there is at least one \0 */
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
    memset(addr, 0, EOF_L_ADDRESS+1);
    memset(keyid, 0, EOF_L_KEYID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
+   memset(id, 0, EOF_L_ID+1);
 
    if(argc != 4) {
       printf("%s: <nick> <address> <keyid>\n", argv[0]);
@@ -52,13 +54,8 @@ int main(int argc, char *argv[])
    strncpy(addr, argv[2], EOF_L_ADDRESS);
    strncpy(keyid, argv[3], EOF_L_KEYID);
 
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
-   }
-
-   if(!eof_ui_register(sockfd)) {
-      perror("eof_ui_register");
+   if((sockfd = eof_ui_init(id)) == -1) {
+      perror("eof_ui_init");
       return 1;
    }
 

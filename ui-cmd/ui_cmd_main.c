@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -28,7 +28,7 @@
 #include <errno.h>      /*                   */
 #include <stdlib.h>     /* free()            */
 
-#include "eof.h"        /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 
 int main()
 {

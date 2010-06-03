@@ -28,7 +28,7 @@
 #include <errno.h>      /*                   */
 #include <stdlib.h>     /* free()            */
 
-#include "eof.h"        /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 #include "shcl.h"       /* simple helper     */
 
 int main()
@@ -36,24 +36,20 @@ int main()
    char nick[EOF_L_NICKNAME+1];
    char msgtxt[EOF_L_MESSAGE+1];
    char cmd[EOF_L_CMD+1];
+   char id[EOF_L_ID+1];
    struct pollfd  pfd;
    int sockfd, cnt;
-
-
-   if((sockfd = eof_ui_connect()) == -1) {
-      perror("eof_ui_connect");
-      return 1;
-   }
-
-   if(!eof_ui_register(sockfd)) {
-      perror("eof_ui_register");
-      return 1;
-   }
 
    /* terminate, so there is at least one \0 */
    cmd[EOF_L_CMD] = 0;
    nick[EOF_L_NICKNAME] = 0;
    msgtxt[EOF_L_MESSAGE] = 0;
+   id[EOF_L_ID] = 0;
+
+   if((sockfd = eof_ui_init(id)) == -1) {
+      perror("eof_ui_init");
+      return 1;
+   }
 
    while(1) {
       pfd.fd = sockfd;
