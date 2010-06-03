@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,26 +18,13 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read incoming data from a listening transport protocol
+ * Set listen category
  *
  */
 
-#include <unistd.h>     /* read           */
-#include <stdio.h>      /* perror         */
 #include "ceofhack.h"   /* functions etc. */
 
 int tp_listen_read(int fd[])
 {
-   char buf[EOF_L_CMD];
-
-   /* read full packet */
-   if(read_all(fd[HP_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
-      perror("tp_listen_read");
-
-      /* FIXME: disable ltp? */
-      return 0;
-   }
-   printf("tp_listen_read (cmd) %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
-
-   return cmd_handle(EOF_CAT_TPL, fd, buf);
+   return cmd_handle(EOF_CAT_TPL, fd);
 }

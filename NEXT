@@ -1,3 +1,14 @@
+- Make cmd_handle more intelligent:
+
+   - read command
+   - retrieve category
+      - run category default command if unmatching
+   - check if command needs entry in queue
+
+And replace:
+   ui_cmd_read, peer_input tp_listen_read tp_send_wait
+--------------------------------------------------------------------------------
+
 - Fix categories
 
 Fix ui communication: implement IDs.

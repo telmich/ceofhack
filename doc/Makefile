@@ -15,3 +15,6 @@ $(DOC).ind: $(DOC).idx
 
 viewdoc: all
 	evince EOF.pdf
+clean:
+	rm -f *.aux *.dvi *.idx *.ilg *.ind *.log *.pdf *.toc
+

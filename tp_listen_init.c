@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -52,9 +52,9 @@ int tp_listen_init()
 
       /* FIXME: cwd into configdir */
 
-      if(!(hp = helper_exec(tpls[i].listen->path, queue_read, NULL))) return 0;
+      if(!(hp = helper_exec(tpls[i].listen->path, tp_listen_read, NULL))) return 0;
 
-      if(!queue_new(hp->fds[HP_READ], EOF_CAT_TPL)) return 0;
+      //if(!queue_new(hp->fds[HP_READ], EOF_CAT_TPL)) return 0;
 
       /* FIXME: cwd back */
 

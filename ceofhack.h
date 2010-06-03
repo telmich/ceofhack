@@ -4,7 +4,7 @@
 /****************** Includes  */
 #include <poll.h>    /* pollfd */
 
-#include "eof.h"     /* the clean library header   */
+#include <eof.h>     /* the clean library header   */
 #include "shcl.h"    /* small helper c library     */
 
 /****************** Defines  */
@@ -245,7 +245,7 @@ ssize_t write_all(int fd, const void *buf, size_t count);
 ssize_t read_all(int fd, void *buf, size_t count);
 
 /* commands and categories */
-int cmd_handle(unsigned long cat, int fd[], char data[]);
+int cmd_handle(unsigned long cat, int fd[]);
 int cmd_init();
 int cmd_cat_default(int cat, struct cmd *);
 struct cmd *cmd_create(char num[], int (*handle)(int []));

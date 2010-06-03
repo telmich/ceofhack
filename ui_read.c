@@ -28,18 +28,5 @@
 
 int ui_read(int fd[])
 {
-   char buf[EOF_L_CMD];
-   int dbg;
-
-   /* read command */
-   if((dbg = read_all(fd[HP_READ], buf, EOF_L_CMD)) != EOF_L_CMD) {
-      perror("ui_read");
-      ui_disable(fd[HP_READ]);
-      return 0;
-   }
-   printf("dbg: %d\n", dbg);
-
-   printf("ui_read (cmd): %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
-
-   return cmd_handle(EOF_CAT_UI, fd, buf);
+   return cmd_handle(EOF_CAT_UI, fd);
 }

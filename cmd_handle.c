@@ -22,11 +22,24 @@
  *
  */
 
+#include <unistd.h>     /* read */
+#include <stdio.h>      /* perror         */
+
 #include "ceofhack.h"   /* functions etc. */
 
-int cmd_handle(unsigned long eofs, int fds[], char data[])
+int cmd_handle(unsigned long eofs, int fd[])
 {
    struct cmd *cmd;
+   char data[EOF_L_CMD];
+   int len;
+
+   /* always read a command first */
+   if((len = read(fd[HP_READ], data, EOF_L_CMD)) == -1) {
+      perror("cmd_handle/cmd");
+      return 0;
+   }
+
+   /* tp_listen_read: return cmd_handle(EOF_CAT_TPL, fd, buf) */
 
    printf("EOFs %lu: handling cmd %c%c%c%c\n", eofs,
             data[0], data[1], data[2], data[3]);
@@ -39,5 +52,5 @@ int cmd_handle(unsigned long eofs, int fds[], char data[])
       printf("CMD %s found...\n", cmd->num);
    }
 
-   return cmd->handle(fds);
+   return cmd->handle(fd);
 }
