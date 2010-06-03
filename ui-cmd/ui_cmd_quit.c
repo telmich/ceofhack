@@ -28,13 +28,18 @@
 int main()
 {
    int sockfd;
+   char idbuf[EOF_L_ID];
+
+   if(!eof_id_init()) return 1;
 
    if((sockfd = eof_ui_connect()) == -1) {
       perror("eof_ui_connect");
       return 1;
    }
+   
+   if(!eof_id_new(idbuf)) return 1;
 
-   if(!eof_ui_register(sockfd)) {
+   if(!eof_ui_register(sockfd, idbuf)) {
       perror("eof_ui_register");
       return 1;
    }
