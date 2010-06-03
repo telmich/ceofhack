@@ -15,3 +15,5 @@ dia/*.dia~
 /.ditz-config
 # ditz generated
 /html
+*.dia~
+tests
