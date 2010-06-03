@@ -23,7 +23,7 @@
  */
 
 #include <errno.h>      /* errno             */
-#include "eof.h"        /* EOF*              */
+#include <eof.h>        /* EOF*              */
 
 int eof_ui_init(char id[EOF_L_ID])
 {
@@ -36,5 +36,5 @@ int eof_ui_init(char id[EOF_L_ID])
    if((tmp = eof_ui_connect()) == -1)  { return -1; }
    if(eof_ui_register(tmp, id) == -1)  { return -1; }
 
-   return 1;
+   return tmp;
 }
