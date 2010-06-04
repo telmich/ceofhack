@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,6 +26,7 @@
 #include <stdio.h>      /* perror         */
 
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"       /* functions etc. */
 
 int cmd_handle(unsigned long eofs, int fd[])
 {
@@ -39,9 +40,7 @@ int cmd_handle(unsigned long eofs, int fd[])
       return 0;
    }
 
-   /* tp_listen_read: return cmd_handle(EOF_CAT_TPL, fd, buf) */
-
-   printf("EOFs %lu: handling cmd %c%c%c%c\n", eofs,
+   printf(MSG_CEOF_PROMPT "EOFs %lu: handling cmd %c%c%c%c\n", eofs,
             data[0], data[1], data[2], data[3]);
 
    cmd = cmd_find_in_cat(eofs, data);

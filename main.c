@@ -73,7 +73,7 @@ int main()
       /* always reinit, poll array may have changed */
       fd_to_poll(&pfd_cnt);
 
-      printf("Polling %d helper channels...\n", pfd_cnt);
+      printf(MSG_CEOF_NAME "Polling %d helper channels...\n", pfd_cnt);
       cnt = poll(pfd, pfd_cnt, -1);
       if(cnt == -1) {
          if(errno != EINTR) {

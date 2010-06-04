@@ -602,10 +602,12 @@ You are the last recipient and there's nothing interesting left.
 Just drop the packet and continue work.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\section{EOF network packets ("`net2eofi"')}
+\section{EOF network packets ("`postcards"')}
 All data that is transferred over the network must be encrypted.
 The EOF packets described in the previous section are multiple times
 encrypted and assembled according to the calculated source route.
+These packets are codenamed "`postcards"', as it is assumed they can be read
+by an attacker.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Routing}
@@ -638,6 +640,12 @@ The following description of the content describes the pakckets
 in their unencrypted form.
 
 % Nico: 1.0
+% #############################################################################
+\section{Asynchronous communication}
+Most communication of EOFi to EOFs is asynchronous. To be able to keep
+\subsection{id }
+
+% Nico: XXXXXXXXX 
 % #############################################################################
 \section{Transport protocols ("`eofi2tp"')}
 \label{tp}

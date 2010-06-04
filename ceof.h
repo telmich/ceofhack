@@ -26,8 +26,10 @@
 #define CEOF_H
 
 /* constants */
-#define MSG_CEOF_VERSION         "ceofhack> Version 0.5\n"
-#define MSG_CEOF_STARTED         "ceofhack> Started. Please enter commands.\n"
+#define MSG_CEOF_NAME            "ceofhack"
+#define MSG_CEOF_PROMPT          MSG_CEOF_NAME "> "
+#define MSG_CEOF_VERSION         MSG_CEOF_PROMPT "Version 0.5\n"
+#define MSG_CEOF_STARTED         MSG_CEOF_PROMPT "Started. Please enter commands.\n"
 
 enum {
    CEOF_EX_RUNS = 0,

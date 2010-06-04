@@ -69,6 +69,7 @@ struct ui_cmd {
 struct cmd {
    char *num;
    int (*handle)(int []);
+   int queue_req;
    struct cmd *next;
 };
 
