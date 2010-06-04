@@ -1,3 +1,6 @@
+Doc: 3000 / pkg2eofi
+--------------------------------------------------------------------------------
+
 - Make cmd_handle more intelligent:
 
    - read command

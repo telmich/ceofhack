@@ -303,7 +303,7 @@ configuration directory.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsubsection{\$EOF\_HOME}
-The ceof configuration directory. If set by before EOFi starts, it will
+The EOFi configuration directory. If set by before EOFi starts, it will
 skip the autodetection of the configuration directory.
 This variable is exported to all EOFs.
 % Nico: 1.0
@@ -358,7 +358,7 @@ to the socket "`ui/socket"' below the EOFi configuration directory
 The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
 % Nico: FIXME for 1.0: cite
 % -----------------------------------------------------------------------------
-\section{Basic data types}
+\section{Basic data types ("`EOFbdt"')}
 This section specifies the basic datatypes used in EOF.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
@@ -367,16 +367,15 @@ The zero byte is a byte with the value 0.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Line feed}
-The line feed, "`\textbackslash{}n"', is/was often used to terminate data
-sections, but is \emph{DEPRECATED} now (though still in use).
+The line feed, "`\textbackslash{}n"', was used to terminate data
+sections, but is \emph{DEPRECATED} now.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{ASCII numbers}
 ASCII numbers use the decimal string representation of a number (versus
 binary representation, which is \emph{never} used between EOFi and EOFs).
-ASCII numbers are often used in a packet header and terminated by a
-line feed. ASCII numbers are used to specify the length of the packet
-(excluding itself).
+ASCII numbers are often used in a packet header.
+ASCII numbers are used to specify the length of the packet (excluding itself).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Strings in general}
@@ -405,7 +404,6 @@ sends packets in a fixed interval, it needs to have data to encrypt and send.
 Noise can be any type of random data. As the current random number generators
 are quite expensive, it is recommend to use a huge dictionary, old
 messages, logfiles, public emails, etc. for noise input.
-
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Unused}
@@ -1481,7 +1479,7 @@ same for listen and send?
    listenurl, sendurl, config in curdir
 Yes!
 
-The maximum length of the URL is defined in ceofhack.h (EOF\_L\_ADDRESS).
+The maximum length of the URL is defined in eof.h (EOF\_L\_ADDRESS).
 If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
 
 IMPORTANT!
