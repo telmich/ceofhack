@@ -519,27 +519,22 @@ LC_ALL=C gpg --fingerprint  | \
 % Nico: 1.0
 % #############################################################################
 \section{EOF packets ("`EOFpkg"')}
+\label{eofpkg}
 % -----------------------------------------------------------------------------
-\subsection{Types of packets}
+\subsection{Introduction}
+No packet (including everything) may exceed the size of \emph{EOF\_L\_PKG\_MAX}.
+
 EOF knows about
 \begin{itemize}
 \item commands: internal plaintext packets.
 \item onions: multiple times encrypted packets including routing information
 \item postcards: packets containing transport protocol dependent header
 \end{itemize}
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Maximum packet size}
-No packet (including everything) may exceed the size of \emph{EOF\_L\_PKG\_MAX}.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Packet layout}
 Commands are the innermost packet type and only seen within EOFi and EOFs.
 Commands are then bundled into a multi layer onion. Each layer contains
 commands after decryption.
 Onions are put onto a postcard afterwards and are sent out on the network.
 \textbf{Only encrypted packets are sent out on the network.}
-% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Commands}
 Command packets are used for the communication inside of EOFi and EOFs and
@@ -549,6 +544,16 @@ are described in detail in the following sections:
 \item eofi2ui, \ref{eofi2ui}, page \pageref{eofi2ui}
 \end{itemize}
 % Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Onions}
+Onions are sent out on the network and are multiple times encrypted.
+They are building the base for the EOF protocol.
+Onions are described in detail in chapter \ref{onions}, page \pageref{onions}.
+% -----------------------------------------------------------------------------
+\subsection{Postcards}
+Onions are afterwards encapsulated into the transport protocol specific
+packet type and sent out onto the network.
+Postcards are described in detail in chapter \ref{postcards}, page \pageref{postcards}.
 % -----------------------------------------------------------------------------
 % #############################################################################
 \section{Transport protocols ("`eofi2tp"')}
@@ -1368,6 +1373,7 @@ Just drop the packet and continue work.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{EOF network packets ("`postcards"')}
+\label{postcards}
 All data that is transferred over the network must be encrypted.
 The EOF packets described in the previous section are multiple times
 encrypted and assembled according to the calculated source route.
