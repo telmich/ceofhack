@@ -420,12 +420,11 @@ applications. The recommened name for use in source
 code is added in parentheses after the human understandable name.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{EOF commands and command fields}
+\subsection{EOF commands and command fields (mapping table)}
 An EOF command is exactly \emph{EOF\_L\_CMD} bytes long (fixed length string)
 and contains an ASCII number.
 
-EOF commands are the main method of telling for communication between
-EOFs and EOFi.
+EOF commands are the main method of communication between EOFs and EOFi.
 
 The command field 0 indicates the direction.
 The command field 1 indicates the EOF subsystem.
@@ -440,13 +439,21 @@ The command field 1 indicates the EOF subsystem.
 \hline
 11** & \textbf{eofi2ui}: User interface\\
 \hline
+12** & \textbf{eofi2politiker}: Crypto engine\\
+\hline
+13** & \textbf{eofi2noise}: Noise generator\\
+\hline
 2*** & Message is coming from EOF subsystem (internally)\\
 \hline
 20** & \textbf{eofi2tp}: Transport protocols\\
 \hline
 21** & \textbf{eofi2ui}: User interface\\
 \hline
-3*** & Message is coming from outside (received packet))\\
+22** & \textbf{eofi2politiker}: Crypto engine\\
+\hline
+23** & \textbf{eofi2noise}: Noise generator\\
+\hline
+3*** & Message is coming from outside ("`onion packet"'))\\
 \hline
 \end{longtable}
 The command fields 2 and 3 are defined by the respective subsystem.
