@@ -40,7 +40,7 @@ int cmd_handle(unsigned long eofs, int fd[])
       return 0;
    }
 
-   printf(MSG_CEOF_PROMPT "EOFs %lu: handling cmd %c%c%c%c\n", eofs,
+   printf(CEOF_MSG_PROMPT "EOFs %lu: handling cmd %c%c%c%c\n", eofs,
             data[0], data[1], data[2], data[3]);
 
    cmd = cmd_find_in_cat(eofs, data);

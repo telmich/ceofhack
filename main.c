@@ -41,7 +41,7 @@ int main()
    int cnt;
    int pfd_cnt;
 
-   ceof_banner(MSG_CEOF_VERSION);   /* up and starting..... */
+   ceof_banner(CEOF_MSG_VERSION);   /* up and starting..... */
 
    if(!config_init())   return CEOF_EX_CONFIG;     /* read config          */
    switch((cnt = ceof_runs())) {
@@ -68,12 +68,12 @@ int main()
    if(!peer_init())     return CEOF_EX_PEER;       /* handling of peers    */
    if(!ui_init())       return CEOF_EX_UI;         /* enable UI connector  */
 
-   ceof_banner(MSG_CEOF_STARTED);   /* finally, we're there */
+   ceof_banner(CEOF_MSG_STARTED);   /* finally, we're there */
    while(1) {
       /* always reinit, poll array may have changed */
       fd_to_poll(&pfd_cnt);
 
-      printf(MSG_CEOF_NAME "Polling %d helper channels...\n", pfd_cnt);
+      printf(CEOF_MSG_NAME "Polling %d helper channels...\n", pfd_cnt);
       cnt = poll(pfd, pfd_cnt, -1);
       if(cnt == -1) {
          if(errno != EINTR) {

@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,10 +26,10 @@
 #define CEOF_H
 
 /* constants */
-#define MSG_CEOF_NAME            "ceofhack"
-#define MSG_CEOF_PROMPT          MSG_CEOF_NAME "> "
-#define MSG_CEOF_VERSION         MSG_CEOF_PROMPT "Version 0.5\n"
-#define MSG_CEOF_STARTED         MSG_CEOF_PROMPT "Started. Please enter commands.\n"
+#define CEOF_MSG_NAME            "ceofhack"
+#define CEOF_MSG_PROMPT          CEOF_MSG_NAME "> "
+#define CEOF_MSG_VERSION         CEOF_MSG_PROMPT "Version 0.5\n"
+#define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started. Please enter commands.\n"
 
 enum {
    CEOF_EX_RUNS = 0,
