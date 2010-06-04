@@ -518,136 +518,41 @@ LC_ALL=C gpg --fingerprint  | \
 \end{verbatim}
 % Nico: 1.0
 % #############################################################################
-\section{EOF packets ("`pkg2eofi"')}
+\section{EOF packets ("`EOFpkg"')}
+% -----------------------------------------------------------------------------
+\subsection{Types of packets}
+EOF knows about
+\begin{itemize}
+\item commands: internal plaintext packets.
+\item onions: multiple times encrypted packets including routing information
+\item postcards: packets containing transport protocol dependent header
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Maximum packet size}
 No packet (including everything) may exceed the size of \emph{EOF\_L\_PKG\_MAX}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Types of packets}
-EOF knows about
-\begin{itemize}
-\item transport protocol dependent, encrypted packets ("`postcard"')
-\item plain encrypted ("`Onion packets"') and
-\item unencrypted ("`plaintext packets"') packets.
-\end{itemize}
-Only encrypted packets are sent out on the network.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Plaintext packets}
-Plaintext packets are used for the communication Inside of EOFi and EOFs.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
 \subsection{Packet layout}
-All EOF packets begin with an EOF command. Packets that leave the internal
-flow of EOFi and EOFs are encrypted ("`Onion packets"') and encapsulated into
-a transport protocol specific packet ("`postcard packet"').
+Commands are the innermost packet type and only seen within EOFi and EOFs.
+Commands are then bundled into a multi layer onion. Each layer contains
+commands after decryption.
+Onions are put onto a postcard afterwards and are sent out on the network.
+\textbf{Only encrypted packets are sent out on the network.}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{3000: Message}
-The command 3000 is placed in front of the message packet and is
-followed \emph{EOF\_L\_MESSAGE} bytes for the message.
-\index{Command!3000}%
-\begin{longtable}{|c|c|c|c|}
-\caption{Command 3000 parameters}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-addr & EOFsdt & unused in cmd 3000 &\\
-\hline
-group & EOFsdt & The destination group & !eof\\
-\hline
-msgtext & EOFsdt & The message & Hallo, mein Freund!\\
-\hline
-\end{longtable}
+\subsection{Commands}
+Command packets are used for the communication inside of EOFi and EOFs and
+are described in detail in the following sections:
 \begin{itemize}
-\item If the first byte of the group is the zero byte, the message
-is a private message (i.e. only sent to you).
+\item eofi2tp, \ref{eofi2tp}, page \pageref{eofi2tp}
+\item eofi2ui, \ref{eofi2ui}, page \pageref{eofi2ui}
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{3001: Forward packet}
-If a peer receives a packet with the command 3001, it simply forwards
-the message to the specified peer. All data contained in the message
-is noise. After the message has been forwarded to the next peer, it
-should be dropped. If the peer is unreachable, the message should also
-be dropped.
-\index{Command!3001}%
-\begin{longtable}{|c|c|c|c|}
-\caption{Command 3001 parameters}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-addr & EOFsdt & Address of peer to forward packet to&\\
-\hline
-group & EOFsdt & unused in cmd 3001\\
-\hline
-msgtext & EOFsdt & unused in cmd 3001\\
-\hline
-\end{longtable}
-% -----------------------------------------------------------------------------
-\subsection{3002: Message and forward}
-The command 3002 is a combination of command 3000 and 3001.
-\index{Command!3002}%
-\begin{longtable}{|c|c|c|c|}
-\caption{Command 3002 parameters}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-addr & EOFsdt & Address of peer to forward packet to&\\
-\hline
-group & EOFsdt & The destination group & !eof\\
-\hline
-msgtext & EOFsdt & The message & Hallo, mein Freund!\\
-\hline
-\end{longtable}
-% -----------------------------------------------------------------------------
-\subsection{3003: Drop packet}
-You are the last recipient and there's nothing interesting left.
-Just drop the packet and continue work.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\section{EOF network packets ("`postcards"')}
-All data that is transferred over the network must be encrypted.
-The EOF packets described in the previous section are multiple times
-encrypted and assembled according to the calculated source route.
-These packets are codenamed "`postcards"', as it is assumed they can be read
-by an attacker.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Routing}
-This version of EOF does not know how to create a route.
-All packages are transferred directly to the final peer (which is an
-incredible big huge bug) in this version of EOF. Source routing will be
-described and defined in future versions.
-% Nico: 1.0
-% -----------------------------------------------------------------------------
-\subsection{Onion packets}
-An onion packet is a (multiple times) encrypted packet.
-An onion packet contains at least one plaintext packet, but can also contain
-already encrypted packets. It may look like as follows:
-% -----------------------------------------------------------------------------
-\subsubsection{Example onion packet}
-\begin{itemize}
-\item 
-\end{itemize}
-% Nico: FIXME for 1.0
-% -----------------------------------------------------------------------------
-\subsection{Postcard packets}
-A postcard "`packet"' contains one onion packet plus the transport protocol
-shell.  Postcard packets are the only packet type that is seen by a possible
-attacker.  The name postcard was choosen to reflect the fact, that anyone
-passing the postcard can read what is written on it.
-
-All packets must be signed by the sender and encrypted for the receiver.
-The different datatypes are just concatenated in the order described.
-The following description of the content describes the pakckets
-in their unencrypted form.
-
-% Nico: 1.0
 % #############################################################################
 \section{Transport protocols ("`eofi2tp"')}
-\label{tp}
+\label{eofi2tp}
 Environment variables: CWD for listener
 URLs are used as defined in RFC3986\cite{uri-1}.
 Transport protocols use EOF command ID 0.
@@ -939,6 +844,7 @@ Should be an alias for \textit{/peer show $<$nick$>$}
 % #############################################################################
 
 \section{Interface to the user interface ("`eofi2ui"')}
+\label{eofi2ui}
 This section specifies the commands used between the EOFs
 "`user interface"' and EOFi. As the user interface has to translate
 the user commands ("`ui2user"') to \emph{eofi2ui} commands, the
@@ -1396,6 +1302,109 @@ either
 If the response is \textit{3020}, \textbf{EOFi} should send the messsage,
 otherwise this session is finished and the next thing the crypto expects
 is a command.
+% -----------------------------------------------------------------------------
+\section{Onion packets}
+\subsection{3000: Message}
+The command 3000 is placed in front of the message packet and is
+followed \emph{EOF\_L\_MESSAGE} bytes for the message.
+\index{Command!3000}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3000 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+addr & EOFsdt & unused in cmd 3000 &\\
+\hline
+group & EOFsdt & The destination group & !eof\\
+\hline
+msgtext & EOFsdt & The message & Hallo, mein Freund!\\
+\hline
+\end{longtable}
+\begin{itemize}
+\item If the first byte of the group is the zero byte, the message
+is a private message (i.e. only sent to you).
+\end{itemize}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{3001: Forward packet}
+If a peer receives a packet with the command 3001, it simply forwards
+the message to the specified peer. All data contained in the message
+is noise. After the message has been forwarded to the next peer, it
+should be dropped. If the peer is unreachable, the message should also
+be dropped.
+\index{Command!3001}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+addr & EOFsdt & Address of peer to forward packet to&\\
+\hline
+group & EOFsdt & unused in cmd 3001\\
+\hline
+msgtext & EOFsdt & unused in cmd 3001\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsection{3002: Message and forward}
+The command 3002 is a combination of command 3000 and 3001.
+\index{Command!3002}%
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 3002 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+addr & EOFsdt & Address of peer to forward packet to&\\
+\hline
+group & EOFsdt & The destination group & !eof\\
+\hline
+msgtext & EOFsdt & The message & Hallo, mein Freund!\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsection{3003: Drop packet}
+You are the last recipient and there's nothing interesting left.
+Just drop the packet and continue work.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\section{EOF network packets ("`postcards"')}
+All data that is transferred over the network must be encrypted.
+The EOF packets described in the previous section are multiple times
+encrypted and assembled according to the calculated source route.
+These packets are codenamed "`postcards"', as it is assumed they can be read
+by an attacker.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Routing}
+This version of EOF does not know how to create a route.
+All packages are transferred directly to the final peer (which is an
+incredible big huge bug) in this version of EOF. Source routing will be
+described and defined in future versions.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Onion packets}
+An onion packet is a (multiple times) encrypted packet.
+An onion packet contains at least one plaintext packet, but can also contain
+already encrypted packets. It may look like as follows:
+% -----------------------------------------------------------------------------
+\subsubsection{Example onion packet}
+\begin{itemize}
+\item 
+\end{itemize}
+% Nico: FIXME for 1.0
+% -----------------------------------------------------------------------------
+\subsection{Postcard packets}
+A postcard "`packet"' contains one onion packet plus the transport protocol
+shell.  Postcard packets are the only packet type that is seen by a possible
+attacker.  The name postcard was choosen to reflect the fact, that anyone
+passing the postcard can read what is written on it.
+
+All packets must be signed by the sender and encrypted for the receiver.
+The different datatypes are just concatenated in the order described.
+The following description of the content describes the pakckets
+in their unencrypted form.
+
+% Nico: 1.0
 % #############################################################################
 \chapter{Transport protocols}
 % -----------------------------------------------------------------------------
