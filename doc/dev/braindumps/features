@@ -1,0 +1,3 @@
+* Add caching client, which saves the messages and can be used
+  by UIs to retrieve earlier messages; Probably even out-of-band
+  (i.e. directly) - 2010-06-04, Nico
