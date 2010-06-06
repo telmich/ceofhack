@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -49,7 +49,7 @@ void helper_check_input(int possible, int *have_data)
              * save in the helper structure!
              */
             if(!hp->handle(hp->fds)) {
-               printf("FIXME: close communcation, because handler for fd %d failed!\n", pfd[i].fd);
+               helper_disable(hp);
             }
             --(*have_data);
          }
