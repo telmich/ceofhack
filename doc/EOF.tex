@@ -1187,61 +1187,11 @@ ID & EOFsdt: id & packet id & afdb12\\
 % Nico: 1.0
 % #############################################################################
 \section{Interface to the encryption engine ("`eofi2crypto"')}
-
-2007-11-12 v0.1-train / telmich
-
-\subsection{Introduction}
-This document specifies the commands send from crypto to and from
-EOFi\footnote{the central EOF-1 application} to the crypto.
-
+\label{eofi2crypto}
 % -----------------------------------------------------------------------------
 \subsection{Connection}
-The crypto is started by EOFi at startup and communicates through stdin
+The crypto engine is started by EOFi at startup and communicates through stdin
 and stdout.
-% -----------------------------------------------------------------------------
-\subsection{Commands}
-All commands are send as uint32\_t types.
-\textbf{Politiker commands} always begin with
-\textbf{3} ("`3042"' for instance),
-\textbf{answers} or \textbf{notifications} from
-EOFi begin with \textbf{1} ("`1023"' for instance).
-After each command follows individual data. The second byte indicates the type of message:
-\begin{itemize}
-\item \textbf{30}: crypto messages
-\begin{itemize}
-\item \textbf{300}: (De-)Initialisation
-\item \textbf{301}: Peer related messages
-\item \textbf{302}: Message related messages
-\end{itemize}
-\item \textbf{10}: EOFi messages
-\begin{itemize}
-\item \textbf{100}: (De-)Initialisation
-\item \textbf{101}: Peer related messages
-\item \textbf{102}: Message related messages
-\item \textbf{103}: Message related answers
-\end{itemize}
-\end{itemize}
-
-% -----------------------------------------------------------------------------
-\subsection{30: Politiker messages}
-% -----------------------------------------------------------------------------
-\subsection{3000: Register politker}
-After the "`3000"' the politker directly appends an
-\textit{uint32\_t} containing the version of the politker to EOFi protocol
-it speaks. This specification uses version number "`0"'.
-Answers from EOFi:
-\begin{itemize}
-\item \textbf{1100}: sucess, you are connected
-\item \textbf{1200}: version not supported
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{3001: Deregister crypto}
-The politker has some problem and has to exit. EOFi will restart a new
-instance of it.
-Answers from EOFi:
-\begin{itemize}
-\item none
-\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{3010: Retrieve random peer address and fingerprint}
 The politker needs some peer information to be used as a hop.
