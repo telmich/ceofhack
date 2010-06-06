@@ -46,7 +46,7 @@ int main()
    if(!config_init())   return CEOF_EX_CONFIG;     /* read config          */
    switch((cnt = ceof_runs())) {
       case -1:
-         perror("ceof_pidcheck");
+         perror(CEOF_MSG_PROMPT "ceof_pidcheck");
          return CEOF_EX_RUNS_ERR;
       break;
 
@@ -54,7 +54,7 @@ int main()
       break;
 
       default: /* already running */
-         printf("ceof already runs (%d), exiting.\n", cnt);
+         printf(CEOF_MSG_PROMPT "An EOFi already runs (%d), exiting.\n", cnt);
          return CEOF_EX_RUNS;                         /* no need to restart   */
       break;
    }
@@ -73,11 +73,11 @@ int main()
       /* always reinit, poll array may have changed */
       fd_to_poll(&pfd_cnt);
 
-      printf(CEOF_MSG_NAME "Polling %d helper channels...\n", pfd_cnt);
+      printf(CEOF_MSG_PROMPT "Polling %d helper channels...\n", pfd_cnt);
       cnt = poll(pfd, pfd_cnt, -1);
       if(cnt == -1) {
          if(errno != EINTR) {
-            perror("poll");
+            perror(CEOF_MSG_PROMPT "poll");
             return CEOF_EX_POLL;
          }
       } else {

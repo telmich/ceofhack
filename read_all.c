@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009     Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read all incoming data
+ * Read all incoming data, up to count
  *
  */
 
@@ -28,12 +28,13 @@
 
 ssize_t read_all(int fd, void *buf, size_t count)
 {
-   printf("read all %d\n", fd);
+   printf("reading %d from %d\n", (int) count, fd);
 
    while(read(fd, buf, count) == -1) {
       if(errno == EINTR) { /* retry */
          continue;
       } else {
+         printf("read_all FAiLED\n");
          return -1;
       }
    }

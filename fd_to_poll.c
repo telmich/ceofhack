@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,6 +26,7 @@
 #include <stdio.h>
 
 #include "ceofhack.h"  /* functions etc. */
+#include "ceof.h"
 
 void fd_to_poll(int *used)
 {
@@ -40,7 +41,7 @@ void fd_to_poll(int *used)
     */
    for(i=0; i < MAX_COMM && *used <= chp_cnt; i++) {
       if(chp[i].handle) {
-         printf("Added poll item %d (fd: %d, helper %d: %s, %p)\n", *used,
+         printf(CEOF_MSG_PROMPT "Added poll item %d (fd: %d, helper %d: %s, %p)\n", *used,
                  chp[i].fds[HP_READ], i, chp[i].path, chp[i].handle);
          pfd[*used].fd = chp[i].fds[HP_READ];
          pfd[*used].events = POLLIN | POLLPRI;

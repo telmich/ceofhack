@@ -30,6 +30,8 @@
 #define CEOF_MSG_PROMPT          CEOF_MSG_NAME "> "
 #define CEOF_MSG_VERSION         CEOF_MSG_PROMPT "Version 0.5\n"
 #define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started, waiting for connections.\n"
+#define CEOF_MSG_UINAME          "ui"
+#define CEOF_MSG_UIPROMPT        CEOF_MSG_UINAME "> "
 
 enum {
    CEOF_EX_RUNS = 0,

@@ -45,10 +45,10 @@ int cmd_handle(unsigned long eofs, int fd[])
 
    cmd = cmd_find_in_cat(eofs, data);
    if(!cmd) {
-      printf("No cmd function found for command, calling default cmd!\n");
+      printf(CEOF_MSG_PROMPT "No cmd function found for command, calling default cmd!\n");
       cmd = cmd_cat_get_default_cmd(eofs);
    } else {
-      printf("CMD %s found...\n", cmd->num);
+      printf(CEOF_MSG_PROMPT "CMD %s found...\n", cmd->num);
    }
 
    return cmd->handle(fd);
