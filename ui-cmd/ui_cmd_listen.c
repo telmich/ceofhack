@@ -27,23 +27,20 @@
 #include <string.h>     /* strncpy()         */
 #include <errno.h>      /*                   */
 #include <stdlib.h>     /* free()            */
+#include <unistd.h>     /* read              */
 
 #include <eof.h>        /* functions etc.    */
 #include "shcl.h"       /* simple helper     */
 
 int main()
 {
-   char nick[EOF_L_NICKNAME+1];
-   char msgtxt[EOF_L_MESSAGE+1];
-   char cmd[EOF_L_CMD+1];
+   char data[EOF_L_PKG_MAX+1];
    char id[EOF_L_ID+1];
    struct pollfd  pfd;
    int sockfd, cnt;
+   ssize_t bread;
 
    /* terminate, so there is at least one \0 */
-   cmd[EOF_L_CMD] = 0;
-   nick[EOF_L_NICKNAME] = 0;
-   msgtxt[EOF_L_MESSAGE] = 0;
    id[EOF_L_ID] = 0;
 
    if((sockfd = eof_ui_init(id)) == -1) {
@@ -56,37 +53,34 @@ int main()
       pfd.events = POLLIN | POLLPRI;
       pfd.revents = 0;
 
-      memset(cmd, 0, EOF_L_CMD+1);
       memset(id, 0, EOF_L_ID+1);
-      memset(nick, 0, EOF_L_NICKNAME+1);
-      memset(msgtxt, 0, EOF_L_MESSAGE+1);
+      memset(data, 0, EOF_L_PKG_MAX+1);
 
       cnt = poll(&pfd, 1, -1);
       if(cnt == -1) {
          if(errno != EINTR) {
             perror("poll");
             return 1;
-         }   
-      } else { /* EOFi packet coming in */
-         if(read_all(sockfd, cmd, EOF_L_CMD) != EOF_L_CMD) {
-            printf("no EOFi command...dying\n");
-            return 1;
          }
-         if(strncmp(cmd, EOF_CMD_UI_MSGRECEIVED, EOF_L_CMD)) {
-            printf("Unhandled cmd: %s\n", cmd);
-            return 1;
-         }
+      }
 
-         if(!eof_va_read(sockfd, 2, EOF_L_NICKNAME, nick, EOF_L_MESSAGE, msgtxt)) {
-            perror("!eof_va_read");
+      /* EOFi packet coming in */
+      bread = read(sockfd, data, EOF_L_PKG_MAX);
+      if(bread == -1) {
+         if(errno != EINTR) {
+            perror("read");
             return 1;
+         } else {
+            continue;
          }
+      }
 
-         printf("<%s> %s\n", nick, msgtxt);
-      }   
+      data[bread] = 0;
+
+      printf("%s\n", data);
    }   
 
-   /* FIXME: deregister on ctrl-c */
+   /* will never be called, because ctrl-c exits us */
    if(!eof_ui_deregister(sockfd)) {
       perror("eof_ui_derigester");
       return 255;

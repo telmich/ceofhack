@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -25,7 +25,7 @@
 #include <stdio.h>      /* perror()          */
 
 #include "shcl.h"   /* functions etc.    */
-#include "eof.h"    /* defines           */
+#include <eof.h>    /* defines           */
 
 int eof_ui_deregister(int sockfd)
 {
