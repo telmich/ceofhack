@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,19 +23,27 @@
  */
 
 #include <stdio.h>      /* perror()          */
+#include <string.h>     /* perror()          */
 
 #include "shcl.h"   /* functions etc.    */
-#include "eof.h"    /* defines           */
+#include <eof.h>    /* defines           */
 
 int eof_ui_register(int sockfd, char id[])
 {
    if(!eof_id_new(id)) return -1;
+   char answer[EOF_L_CMD];
 
    /* submit register command: cmd_2100.c */
    if(!eof_va_write(sockfd, 2, EOF_L_CMD, EOF_CMD_UI_REGISTER,
                                EOF_L_ID, id)) {
       return -1;
    }
+
+   if(!eof_va_read(sockfd, 1, EOF_L_CMD, answer)) {
+      return -1;
+   }
+
+   if(strncmp(answer, EOF_CMD_UI_ACK, EOF_L_CMD)) return 0;
 
     return 1;
 }

@@ -29,7 +29,7 @@
 #define CEOF_MSG_NAME            "ceofhack"
 #define CEOF_MSG_PROMPT          CEOF_MSG_NAME "> "
 #define CEOF_MSG_VERSION         CEOF_MSG_PROMPT "Version 0.5\n"
-#define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started. Please enter commands.\n"
+#define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started, waiting for connections.\n"
 
 enum {
    CEOF_EX_RUNS = 0,

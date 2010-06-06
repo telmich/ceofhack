@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -27,9 +27,13 @@
 
 int cmd_2100(int fd[])
 {
-   printf("Successfully registered an UI\n");
+   char id[EOF_L_ID+1];
 
+   id[EOF_L_ID] = 0;
 
+   if(eof_va_read(fd[HP_READ], 1 , EOF_L_ID, id) != EOF_L_ID) return 0;
+
+   printf("Successfully registered an UI (id=%s)\n", id);
 
    return (write_all(fd[HP_WRITE], EOF_CMD_UI_ACK, EOF_L_CMD) == EOF_L_CMD) ?
       1 : 0;

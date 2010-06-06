@@ -1,4 +1,5 @@
 Doc: 3000 / pkg2eofi
+   onion vs. crypto engine
 --------------------------------------------------------------------------------
 
 - Make cmd_handle more intelligent:

@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -57,6 +57,7 @@ int main()
       pfd.revents = 0;
 
       memset(cmd, 0, EOF_L_CMD+1);
+      memset(id, 0, EOF_L_ID+1);
       memset(nick, 0, EOF_L_NICKNAME+1);
       memset(msgtxt, 0, EOF_L_MESSAGE+1);
 
