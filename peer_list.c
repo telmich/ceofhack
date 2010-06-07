@@ -26,6 +26,7 @@
 #include <stdlib.h>     /* calloc         */
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
+#include "ceof.h"
 
 int peer_list(int fd)
 {
@@ -39,12 +40,12 @@ int peer_list(int fd)
    strncpy(intro, EOF_CMD_UI_PEER_LISTING, EOF_L_CMD);
    snprintf(intro+EOF_L_CMD, EOF_L_SIZE, "%d", i);
    
-   printf("/peer list intro: %s\n", intro);
+   printf(CEOF_MSG_UIPROMPT "/peer list intro: %s\n", intro);
    if(write_all(fd, intro, EOF_L_CMD+EOF_L_SIZE) != (EOF_L_CMD+EOF_L_SIZE)) 
       return 0;
 
    for(p = plist.next; p != NULL; p = p->next) {
-      printf("/peer list: %s\n", p->name);
+      printf(CEOF_MSG_UIPROMPT "/peer list: %s\n", p->name);
       if(write_all(fd, p->name, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
          return 0;
       }

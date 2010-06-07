@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -29,6 +29,7 @@
 
 
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 int tp_add_available(char *name, struct cconfig entry)
 {
@@ -41,13 +42,13 @@ int tp_add_available(char *name, struct cconfig entry)
 
    /* none there? that's a boo boo! */
    if(!tpnew.listen && !tpnew.send) {
-      printf("TP: Error: dummy transport protocol %s!\n", name);
+      printf(CEOF_MSG_TPPROMPT "Error: dummy transport protocol %s!\n", name);
       return 0;
    }
 
    len = strlen(name);
    if(len > EOF_L_ADDRESS) {
-      printf("TP: Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
+      printf(CEOF_MSG_TPPROMPT "Error: identifier (%s) to long (%d > %d)!\n", name, len, EOF_L_ADDRESS);
       return 0;
    }
    
@@ -58,7 +59,7 @@ int tp_add_available(char *name, struct cconfig entry)
 
       ++tpa_cnt;
    }
-   printf("TP %d %s successfully added\n", tpa_cnt, name);
+   printf(CEOF_MSG_TPPROMPT "%s (%d) successfully added\n", name, tpa_cnt);
 
    return 1;
 }

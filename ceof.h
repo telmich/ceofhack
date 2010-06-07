@@ -32,6 +32,8 @@
 #define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started, waiting for connections.\n"
 #define CEOF_MSG_UINAME          "ui"
 #define CEOF_MSG_UIPROMPT        CEOF_MSG_UINAME "> "
+#define CEOF_MSG_TPNAME          "tp"
+#define CEOF_MSG_TPPROMPT        CEOF_MSG_TPNAME "> "
 
 enum {
    CEOF_EX_RUNS = 0,

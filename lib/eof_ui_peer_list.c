@@ -28,8 +28,8 @@
 #include <stdlib.h>     /* strtoul, calloc   */
 #include <errno.h>      /*                   */
 
+#include <eof.h>        /* defines            */
 #include "shcl.h"       /* functions etc.     */
-#include "eof.h"        /* defines            */
 
 int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res)
 {

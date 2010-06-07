@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -29,6 +29,7 @@
 
 
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 int tp_listen_add(char *name, struct cconfig entry)
 {
@@ -44,7 +45,7 @@ int tp_listen_add(char *name, struct cconfig entry)
 
    /* something missing? */
    if(!url) {
-      printf("LTP: Error: url missing for listening transport protocol %s!\n", name);
+      printf(CEOF_MSG_TPPROMPT "Error: url missing for listening transport protocol %s!\n", name);
       return 0;
    }
 
@@ -55,9 +56,9 @@ int tp_listen_add(char *name, struct cconfig entry)
       memcpy(&tpls[tpls_cnt], &tplnew, sizeof(tpls[tpls_cnt]));
 
       ++tpls_cnt;
-      printf("LTP %d %s listening at %s\n", tpls_cnt, name, tplnew.url);
+      printf(CEOF_MSG_TPPROMPT "%d %s listening at %s\n", tpls_cnt, name, tplnew.url);
    } else {
-      printf("LTP: Error: Maximum number of listening TPs!\n");
+      printf(CEOF_MSG_TPPROMPT "Error: Maximum number of listening TPs!\n");
       return 0;
    }
 

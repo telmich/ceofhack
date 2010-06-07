@@ -34,13 +34,11 @@
 
 int main()
 {
+   int sockfd, nop, i;
+   char *peers;
+
    char id[EOF_L_ID+1];
    char errmsg[EOF_L_MESSAGE+1];
-
-   int sockfd;
-
-   int nop, i;
-   char *peers;
    
    memset(id, 0, EOF_L_ID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);

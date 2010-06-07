@@ -1188,36 +1188,18 @@ ID & EOFsdt: id & packet id & afdb12\\
 \label{eofi2crypto}
 % -----------------------------------------------------------------------------
 \subsection{Connection}
-The crypto engine is started by EOFi at startup and communicates through stdin
-and stdout.
+The crypto engine is started by EOFi at startup and communicates with EOFi
+through stdin and stdout.
 % -----------------------------------------------------------------------------
-\subsection{3010: Retrieve random peer address and fingerprint}
-The politker needs some peer information to be used as a hop.
-EOFi forwards that request to \textbf{pmg}\footnote{peer manager} and returns
-the answer to the crypto.
-Answers from EOFi:
-\begin{itemize}
-\item 1010: Data follows
-\begin{itemize}
-\item \textit{peer\_address}: 128 Bytes, 0 padded, 0 terminated
-\item \textit{peer\_fingerprint}: 40 Bytes char array
-\end{itemize}
-\end{itemize}
+\subsection{1200: Encrypt packet}
 % -----------------------------------------------------------------------------
-\subsection{3011: Retrieve number of available peers}
-The politker needs to know how much "`unique"' peers are available,
-so it can match the required minimum.
-EOFi forwards that request to \textbf{pmg} and returns the answer to the
-crypto.
-Answers from EOFi:
-\begin{itemize}
-\item 1010: Data follows
-\begin{itemize}
-\item \textit{number\_of\_peers}: uint32\_t
-\end{itemize}
-\end{itemize}
+\subsection{1201: Decrypt packet}
 % -----------------------------------------------------------------------------
-\subsection{3020: Created an encrypted packet}
+\subsection{2200: Encrypted a packet}
+% -----------------------------------------------------------------------------
+\subsection{2200: Decrypted a packet}
+% -----------------------------------------------------------------------------
+\subsection{3020: 
 Passes the following information to EOFi:
 \begin{itemize}
 \item The length of the packet (uint32\_t) (\textit{pck\_len})

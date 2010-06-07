@@ -1,4 +1,7 @@
+create something useable, documentated, key export, ui support
+--------------------------------------------------------------------------------
 Doc: 3000 / pkg2eofi
+
    onion vs. crypto engine
 --------------------------------------------------------------------------------
 
@@ -18,11 +21,6 @@ And replace:
 
 --------------------------------------------------------------------------------
 
-- Fix categories
-
-Fix ui communication: implement IDs.
-
---------------------------------------------------------------------------------
 --> Message did not reach all UIs
 
 Implementing a real cmd_1103 is kind of complex:
