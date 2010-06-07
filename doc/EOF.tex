@@ -1211,52 +1211,89 @@ Passes the following information to the crypto:
 % -----------------------------------------------------------------------------
 \subsection{2200: Decrypted a packet}
 % -----------------------------------------------------------------------------
-\subsection{10: EOFi messages}
+% #############################################################################
+\section{EOF crypto packets ("`3***: onions"')}
+Onions are the result of decrypting an incoming packet (respective vice versa
+when sending out).
 % -----------------------------------------------------------------------------
-\section{EOF crypto packets ("`onions"')}
-\subsection{3000: Message}
-The command 3000 is placed in front of the message packet and is
-followed \emph{EOF\_L\_MESSAGE} bytes for the message.
-\index{Command!3000}%
+\subsection{Introduction}
+The following types are defined:
+
+\begin{itemize}
+\item 3000: Drop packet
+\item 3001: Forward packet
+\item 3002: Message + drop packet
+\item 3003: Message + forward packet
+\item 3004: Acknowledge
+\end{itemize}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{Command 3*** parameters}
+All \textbf{3***} packets have the same length and contain the same fields:
+\begin{longtable}{|c|c|c|c|c|}
+\caption{Command 3*** parameters}\\
+\hline
+\textbf{Command} & \textbf{id} & \textbf{addr} & \textbf{group} & \textbf{msgtext}\\
+\hline
+3000 & - & - & - & - \\
+\hline
+3001 & - & x & - & - \\
+\hline
+3002 & x & - & x & x \\
+\hline
+3003 & x & x & x & x \\
+\hline
+3004 & x & - & - & -\\
+\hline
+\end{longtable}
+
+\begin{itemize}
+\item -: Not used
+\item x: Used
+\end{itemize}
+
 \begin{longtable}{|c|c|c|c|}
-\caption{Command 3000 parameters}\\
+\caption{Command 3*** parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
-addr & EOFsdt & unused in cmd 3000 &\\
+id & EOFsdt & Packet id & alg4f!\\
+\hline
+addr & EOFsdt & Adress of next peer & tcp:123.123.123.132:8080\\
 \hline
 group & EOFsdt & The destination group & !eof\\
 \hline
 msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
 \end{longtable}
-\begin{itemize}
-\item If the first byte of the group is the zero byte, the message
-is a private message (i.e. only sent to you).
-\end{itemize}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{3000: Drop packet}
+You are the last recipient and there's nothing interesting left.
+Just drop the packet and continue work.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{3001: Forward packet}
 If a peer receives a packet with the command 3001, it simply forwards
-the message to the specified peer. All data contained in the message
+the message to the peer specified in the \textbf{addr} field.
+All data contained in the message
 is noise. After the message has been forwarded to the next peer, it
 should be dropped. If the peer is unreachable, the message should also
 be dropped.
-\index{Command!3001}%
-\begin{longtable}{|c|c|c|c|}
-\caption{Command 3001 parameters}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-addr & EOFsdt & Address of peer to forward packet to&\\
-\hline
-group & EOFsdt & unused in cmd 3001\\
-\hline
-msgtext & EOFsdt & unused in cmd 3001\\
-\hline
-\end{longtable}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{3002: Message and forward}
+\subsection{3002: Message / no forwarding}
+This packet contains a messages to be read and does not need to be forwarded
+anymore: You are the last peer in the chain.
+\begin{itemize}
+\item If the first byte of the group is the zero byte, the message
+is a private message (i.e. only sent to you).
+\item If the first byte of the group field is \textbf{non-zero} the message
+is addressed to the specified group.
+\end{itemize}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsection{3003: Message and forward}
 The command 3002 is a combination of command 3000 and 3001.
 \index{Command!3002}%
 \begin{longtable}{|c|c|c|c|}
@@ -1271,11 +1308,6 @@ group & EOFsdt & The destination group & !eof\\
 msgtext & EOFsdt & The message & Hallo, mein Freund!\\
 \hline
 \end{longtable}
-% -----------------------------------------------------------------------------
-\subsection{3003: Drop packet}
-You are the last recipient and there's nothing interesting left.
-Just drop the packet and continue work.
-% Nico: 1.0
 % -----------------------------------------------------------------------------
 \section{EOF network packets ("`postcards"')}
 \label{postcards}

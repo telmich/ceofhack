@@ -1,3 +1,28 @@
+/*******************************************************************************
+ *
+ * 2010      Nico Schottelius (nico-ceofhack at schottelius.org)
+ *
+ * This file is part of ceofhack.
+
+ * ceofhack is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * ceofhack is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
+
+ *
+ * Library header
+ *
+ */
+
+
 #ifndef EOF_H
 #define EOF_H
 
@@ -11,6 +36,7 @@
 #define EOF_L_ADDRESS            128
 #define EOF_L_GROUP              128
 #define EOF_L_UI_INPUT           256
+#define EOF_L_PKG_ONION          EOF_L_CMD+EOF_L_ID+EOF_L_ADDRESS+EOF_L_GROUP+EOF_L_MESSAGE
 #define EOF_L_PKG_MAX            65536
 
 /* commands */
