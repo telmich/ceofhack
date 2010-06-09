@@ -32,15 +32,18 @@ int cmd_2104(int fd[])
    char oldnick[EOF_L_NICKNAME+1];
    char newnick[EOF_L_NICKNAME+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char id[EOF_L_ID+1];
    int ret;
 
    memset(oldnick, 0, EOF_L_NICKNAME+1);
    memset(newnick, 0, EOF_L_NICKNAME+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
+   memset(id, 0, EOF_L_ID+1);
 
    printf(CEOF_MSG_UIPROMPT "/peer rename request\n");
    
-   if(!eof_va_read(fd[HP_READ], 2,
+   if(!eof_va_read(fd[HP_READ], 3,
+                   EOF_L_ID, id,
                    EOF_L_NICKNAME, oldnick,
                    EOF_L_NICKNAME, newnick)) {
       perror("eof_va_read");
@@ -51,10 +54,11 @@ int cmd_2104(int fd[])
    ret = peer_rename(oldnick, newnick, errmsg);
 
    if(ret) {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK);
+      eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id);
    } else {
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);
-      eof_va_write(fd[HP_WRITE], 1, EOF_L_MESSAGE, errmsg);
+      eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL, 
+                                    EOF_L_ID, id,
+                                    EOF_L_MESSAGE, errmsg);
    }   
 
    return ret;
