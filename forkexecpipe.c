@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -53,6 +53,10 @@ int forkexecpipe(struct helper *hp)
       return 0;
    }
 
+   /* mark parent fds to be closed on exec (for _any_ child, not only this one) */
+   if(!close_on_exec(hp->fds[HP_READ])) return 0;
+   if(!close_on_exec(hp->fds[HP_WRITE])) return 0;
+
    /* parent */
    if(hp->pid > 0) { 
       /* Don't block reads in ceof */
@@ -63,14 +67,9 @@ int forkexecpipe(struct helper *hp)
       /* remove unecessary fds */
       close(hp->fds[HP_EXT_READ]);
       close(hp->fds[HP_EXT_WRITE]);
-      printf("fep: %ld\n", (long) hp->pid);
+
       return 1;
    }
-
-   /* not needed in child */
-   /* FIXME: close all open fds! */
-   close(hp->fds[HP_READ]);
-   close(hp->fds[HP_WRITE]);
 
    /* child: connect stdin and stdout */
    if(dup2(hp->fds[2], STDIN_FILENO) == -1) {
