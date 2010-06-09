@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -33,32 +33,36 @@ int cmd_2103(int fd[])
    char msgtxt[EOF_L_MESSAGE+1];
    char errmsg[EOF_L_MESSAGE+1];
    char keyid[EOF_L_KEYID+1];
+   char id[EOF_L_ID+1];
    int ret;
 
    memset(nick, 0, EOF_L_NICKNAME+1);
    memset(msgtxt, 0, EOF_L_MESSAGE+1);
    memset(keyid, 0, EOF_L_KEYID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
+   memset(id, 0, EOF_L_ID+1);
 
    printf(CEOF_MSG_UIPROMPT "/peer send request\n");
    
-   if(!eof_va_read(fd[HP_READ], 2,
+   if(!eof_va_read(fd[HP_READ], 3,
+                   EOF_L_ID, id,
                    EOF_L_NICKNAME, nick,
                    EOF_L_MESSAGE, msgtxt)) {
       perror("eof_va_read");
       return 0;
    }
-   printf(CEOF_MSG_UIPROMPT "/peer send details: %s, %s\n", nick, msgtxt);
+   printf(CEOF_MSG_UIPROMPT "/peer send details: %s, %s, %s\n", id, nick, msgtxt);
 
    ret = peer_send(nick, msgtxt, errmsg);
 
    if(ret) {
-      if(!eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_ACK)) {
+      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
          perror("2103: write_ack");
          ret = 0;
       }
    } else {
-      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
+      if(!eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
+                                        EOF_L_ID, id,
                                         EOF_L_MESSAGE, errmsg)) {
          perror("2103: write_fail");
       }
