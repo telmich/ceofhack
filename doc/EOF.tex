@@ -1222,13 +1222,13 @@ The following types are defined:
 \begin{itemize}
 \item 3000: Drop packet
 \item 3001: Forward packet
-\item 3002: Message + drop packet
-\item 3003: Message + forward packet
+\item 3002: Message / drop packet
+\item 3003: Message / forward packet
 \item 3004: Acknowledge
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Command 3*** parameters}
+\subsection{Parameters}
 All \textbf{3***} packets have the same length and contain the same fields:
 \begin{longtable}{|c|c|c|c|c|}
 \caption{Command 3*** parameters}\\
@@ -1282,7 +1282,7 @@ should be dropped. If the peer is unreachable, the message should also
 be dropped.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{3002: Message / no forwarding}
+\subsection{3002: Message / drop packet}
 This packet contains a messages to be read and does not need to be forwarded
 anymore: You are the last peer in the chain.
 \begin{itemize}
@@ -1293,21 +1293,13 @@ is addressed to the specified group.
 \end{itemize}
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{3003: Message and forward}
-The command 3002 is a combination of command 3000 and 3001.
-\index{Command!3002}%
-\begin{longtable}{|c|c|c|c|}
-\caption{Command 3002 parameters}\\
-\hline
-\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
-\hline
-addr & EOFsdt & Address of peer to forward packet to&\\
-\hline
-group & EOFsdt & The destination group & !eof\\
-\hline
-msgtext & EOFsdt & The message & Hallo, mein Freund!\\
-\hline
-\end{longtable}
+\subsection{3003: Message / forward packet}
+The command 3002 is a combination of command 3001 and 3002.
+% -----------------------------------------------------------------------------
+\subsection{3004: Acknowledge}
+Acknowledge the receipt of a received message. The ID must be the same as
+the one specified in the original messages packet.
+Every message packet must be acknowledged.
 % -----------------------------------------------------------------------------
 \section{EOF network packets ("`postcards"')}
 \label{postcards}
