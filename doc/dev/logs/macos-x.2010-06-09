@@ -1,0 +1,19 @@
+eofhack> Version 0.5
+gpg> Version 1.2.0
+tp> tcp (1) successfully added
+tp> 1 tcpv4-any-4242 listening at tcp:127.0.0.1:4242
+
+fep: 62690
+tp> Init LTP /Users/USERNAME/.ceof/tp/available/tcp/listen: 1001127.0.0.1:4242
+
+write all 6
+hfdo: 1, 4, 4
+ceofhack> Started, waiting for connections.
+ceofhack> Added poll item 0 (fd: 3, helper 0: /Users/USERNAME/.ceof/tp/available/tcp/listen, 0x1000029b8)
+ceofhack> Added poll item 1 (fd: 4, helper 1: , 0x100005f5e)
+ceofhack> Polling 2 helper channels...
+tcp/c3/ltp:cmd 1001
+tcp/c3/ltp:using url 127.0.0.1:4242
+
+tcp/c3/ltp:addr=127.0.0.1
+tcp/c3/ltp:port=4242
