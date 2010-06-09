@@ -36,7 +36,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char **addrs)
 {
    char cmd[EOF_L_CMD+1];
-   char size[EOF_L_CMD+1];
+   char size[EOF_L_SIZE+1];
    char *p;
    int i, nop; /* number of peers */
 
