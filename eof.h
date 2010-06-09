@@ -73,10 +73,11 @@
 
 
 /* decoded packets from outside */
-#define EOF_CMD_EXT_MESSAGE      "3000"
-#define EOF_CMD_EXT_FORWARD      "3001"
-#define EOF_CMD_EXT_MSGFWD       "3002"
-#define EOF_CMD_EXT_DROP         "3003"
+#define EOF_CMD_ONION_DROP         "3000"
+#define EOF_CMD_ONION_FORWARD      "3001"
+#define EOF_CMD_ONION_MSG_DROP     "3002"
+#define EOF_CMD_ONION_MSG_FORWARD  "3003"
+#define EOF_CMD_ONION_ACK          "3004"
 
 /* UI commands */
 #define EOF_UI_EXIT              "/exit"
