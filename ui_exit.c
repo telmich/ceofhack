@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,13 +24,14 @@
 
 #include <unistd.h>     /* unlink()       */
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 void ui_exit()
 {
-   printf("UI: Disabling all...\n");
+   printf(CEOF_MSG_UIPROMPT "Disabling all...\n");
    ui_disable_all();
 
-   printf("UI: Removing socket...\n");
+   printf(CEOF_MSG_UIPROMPT "Removing socket...\n");
    if(unlink(opt.uisocket) == -1) {
       perror("ui_exit");
    }

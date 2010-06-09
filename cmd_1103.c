@@ -23,8 +23,9 @@
  */
 
 #include <stdio.h>      /* printf()          */
+#include <eof.h>        /* functions etc.    */
 #include "ceofhack.h"   /* functions etc.    */
-#include "eof.h"        /* functions etc.    */
+#include "ceof.h"
 
 int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
 {
@@ -32,7 +33,7 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
    int ret = 1;
    struct helper *hp;
 
-   printf("UI: message received: <%s> %s\n", nick, msgtxt);
+   printf(CEOF_MSG_UIPROMPT "message received: <%s> %s\n", nick, msgtxt);
 
    while((hp = helper_find_by_handle(&i, ui_read))) {
       if(!eof_va_write(hp->fds[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_MSGRECEIVED,
@@ -43,6 +44,6 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
       }
    }
 
-   printf("UI: 1103 leaving\n");
+   printf(CEOF_MSG_UIPROMPT "1103 leaving\n");
    return ret;
 }

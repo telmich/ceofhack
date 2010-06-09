@@ -22,13 +22,13 @@
  *
  */
 
-#include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2199(int UNUSED(fd[]))
 {
-   printf("UI: /quit request\n");
+   printf(CEOF_MSG_UIPROMPT "/quit request\n");
    
    ceof_exit(0);
 

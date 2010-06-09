@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -27,6 +27,7 @@
 #include <stdio.h>      /* printf()       */
 
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 int ui_handle(int fds[])
 {
@@ -34,13 +35,12 @@ int ui_handle(int fds[])
 
    while((nsock = accept(fds[HP_READ], NULL, NULL)) != -1) {
       /* accept socket and add to helper list */
-      printf("UI: got connection %d on %d\n", nsock, fds[HP_READ]);
+      printf(CEOF_MSG_UIPROMPT "got connection %d on %d\n", nsock, fds[HP_READ]);
       if(!helper_fdonly(nsock, nsock, &ui_read, NULL)) {
          return 0;
       }
    }
 
-   /* FIXME: is EWOULDBLOCK posix? */
    if(errno & (EAGAIN | EWOULDBLOCK)) {
       nsock = 1;
    } else {

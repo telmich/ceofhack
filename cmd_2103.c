@@ -25,6 +25,7 @@
 #include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2103(int fd[])
 {
@@ -39,7 +40,7 @@ int cmd_2103(int fd[])
    memset(keyid, 0, EOF_L_KEYID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
 
-   printf("UI: /peer send request\n");
+   printf(CEOF_MSG_UIPROMPT "/peer send request\n");
    
    if(!eof_va_read(fd[HP_READ], 2,
                    EOF_L_NICKNAME, nick,
@@ -47,7 +48,7 @@ int cmd_2103(int fd[])
       perror("eof_va_read");
       return 0;
    }
-   printf("UI: /peer send details: %s, %s\n", nick, msgtxt);
+   printf(CEOF_MSG_UIPROMPT "/peer send details: %s, %s\n", nick, msgtxt);
 
    ret = peer_send(nick, msgtxt, errmsg);
 
@@ -63,6 +64,6 @@ int cmd_2103(int fd[])
       }
    }   
 
-   printf("UI: /peer send exits %ld\n", (long) ret);
+   printf(CEOF_MSG_UIPROMPT "/peer send exits %ld\n", (long) ret);
    return ret;
 }

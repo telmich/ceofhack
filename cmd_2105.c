@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,13 +22,13 @@
  *
  */
 
-#include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2105(int fd[])
 {
-   printf("UI: /peer show request\n");
+   printf(CEOF_MSG_UIPROMPT "/peer show request\n");
    
    return peer_show(fd);
 }

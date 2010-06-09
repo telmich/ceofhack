@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -25,6 +25,7 @@
 #include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2102(int fd[])
 {
@@ -39,7 +40,7 @@ int cmd_2102(int fd[])
    memset(keyid, 0, EOF_L_KEYID+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
 
-   printf("UI: /peer add request\n");
+   printf(CEOF_MSG_UIPROMPT "/peer add request\n");
    
    if(!eof_va_read(fd[HP_READ], 3,
                    EOF_L_NICKNAME, nick,
@@ -48,7 +49,7 @@ int cmd_2102(int fd[])
       perror("eof_va_read");
       return 0;
    }
-   printf("UI: /peer add details: %s, %s, %s\n", nick, addr, keyid);
+   printf(CEOF_MSG_UIPROMPT "/peer add details: %s, %s, %s\n", nick, addr, keyid);
 
    if(peer_findbyname(nick)) {
       eof_va_write(fd[HP_WRITE], 1, EOF_L_CMD, EOF_CMD_UI_FAIL);

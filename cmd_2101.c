@@ -24,9 +24,10 @@
 
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2101(int fd[])
 {
-   printf("UI: Deregistering an UI\n");
+   printf(CEOF_MSG_UIPROMPT "Deregistering an UI\n");
    return ui_disable(fd[HP_READ]);
 }

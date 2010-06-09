@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,19 +24,20 @@
 
 #include <stdio.h>      /* printf         */
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 int ui_disable(int fd)
 {
    struct helper *hp;
 
-   printf("UI: Closing connection...\n");
+   printf(CEOF_MSG_UIPROMPT "Closing connection...\n");
 
    hp = helper_find_by_fd(HP_READ, fd);
    if(!hp) {
-      printf("UI: BUG: Strange, the UI is missing in the list...\n");
+      printf(CEOF_MSG_UIPROMPT "BUG: Strange, the UI is missing in the list...\n");
       return 0;
    } else {
-      printf("UI: Disabling %d / %d \n", fd, hp->fds[HP_WRITE]);
+      printf(CEOF_MSG_UIPROMPT "Disabling %d / %d \n", fd, hp->fds[HP_WRITE]);
    }
 
    helper_write(hp, EOF_CMD_UI_EXITREQUEST, EOF_L_CMD);

@@ -26,7 +26,7 @@
 #include <unistd.h>     /* read()            */
 #include <string.h>     /* strchr()          */
 #include "ceofhack.h"   /* functions etc.    */
-
+#include "ceof.h"       /* clean header      */
 int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
@@ -72,9 +72,9 @@ int cmd_2002(int fd[])
       printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);
       strncpy(nick, "UNKNOWN", EOF_L_NICKNAME);
       if(!cmd_1103(nick, plaintext)) {
-         printf("UI: Message did not reach all UIs\n");
+         printf(CEOF_MSG_UIPROMPT "Message did not reach all UIs\n");
       } else {
-         printf("UI: Message reached all UIs\n");
+         printf(CEOF_MSG_UIPROMPT "Message reached all UIs\n");
       }
       return 1;
    } else {

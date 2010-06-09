@@ -26,6 +26,7 @@
 #include <stdlib.h>     /* calloc         */
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
+#include "ceof.h"       /* clean header   */
 
 int peer_show(int fd[])
 {
@@ -43,7 +44,7 @@ int peer_show(int fd[])
       return 0;
    }   
 
-   printf("UI: peer show: %s\n", nick);
+   printf(CEOF_MSG_UIPROMPT "peer show: %s\n", nick);
    p = peer_findbyname(nick);
    if(!p) {
       eof_errmsg("No such nick");

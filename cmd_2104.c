@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -25,6 +25,7 @@
 #include <string.h>     /* memset()          */
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int cmd_2104(int fd[])
 {
@@ -37,7 +38,7 @@ int cmd_2104(int fd[])
    memset(newnick, 0, EOF_L_NICKNAME+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
 
-   printf("UI: /peer rename request\n");
+   printf(CEOF_MSG_UIPROMPT "/peer rename request\n");
    
    if(!eof_va_read(fd[HP_READ], 2,
                    EOF_L_NICKNAME, oldnick,
@@ -45,7 +46,7 @@ int cmd_2104(int fd[])
       perror("eof_va_read");
       return 0;
    }
-   printf("UI: /peer rename details: %s, %s\n", oldnick, newnick);
+   printf(CEOF_MSG_UIPROMPT "/peer rename details: %s, %s\n", oldnick, newnick);
 
    ret = peer_rename(oldnick, newnick, errmsg);
 
