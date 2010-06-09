@@ -54,7 +54,10 @@ int cmd_2104(int fd[])
    ret = peer_rename(oldnick, newnick, errmsg);
 
    if(ret) {
-      eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id);
+      eof_va_write(fd[HP_WRITE], 4, EOF_L_CMD, EOF_CMD_UI_PEER_RENAMED,
+                                    EOF_L_ID, id,
+                                    EOF_L_NICKNAME, oldnick,
+                                    EOF_L_NICKNAME, newnick);
    } else {
       eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL, 
                                     EOF_L_ID, id,

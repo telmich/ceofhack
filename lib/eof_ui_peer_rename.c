@@ -48,11 +48,13 @@ int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
       return 0;
    }
 
-   if(!eof_va_read(sockfd, 2, EOF_L_CMD, cmd, EOF_L_ID, id)) {
+   if(!eof_va_read(sockfd, 4, EOF_L_CMD, cmd, EOF_L_ID, id,
+                              EOF_L_NICKNAME, oldnick,
+                              EOF_L_NICKNAME, newnick)) {
       return 0;
    }
 
-   if(strncmp(cmd, EOF_CMD_UI_ACK, EOF_L_CMD)) {
+   if(strncmp(cmd, EOF_CMD_UI_PEER_RENAMED, EOF_L_CMD)) {
       errno = 0; /* failure, but no library failure */
       read_all(sockfd, errmsg, EOF_L_MESSAGE);
 

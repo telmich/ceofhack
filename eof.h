@@ -60,6 +60,7 @@
 #define EOF_CMD_UI_MSGRECEIVED   "1103"
 #define EOF_CMD_UI_PEER_LISTING  "1104"
 #define EOF_CMD_UI_PEER_INFO     "1105"
+#define EOF_CMD_UI_PEER_RENAMED  "1106"
 
 #define EOF_CMD_UI_DEFAULT       "21xx"
 #define EOF_CMD_UI_REGISTER      "2100"
