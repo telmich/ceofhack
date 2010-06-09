@@ -35,6 +35,9 @@ int cmd_2100(int fd[])
    if(!eof_va_read(fd[HP_READ], 1 , EOF_L_ID, id)) return 0;
    printf(CEOF_MSG_UIPROMPT "Successfully registered an UI (id=%s)\n", id);
 
-   return (write_all(fd[HP_WRITE], EOF_CMD_UI_ACK, EOF_L_CMD) == EOF_L_CMD) ?
-      1 : 0;
+   if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
+      return 0;
+   }
+
+   return 1;
 }
