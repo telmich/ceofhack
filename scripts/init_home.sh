@@ -35,10 +35,11 @@ set -e
 ######### transport protocols
 ###### tcp
 echo "Adding transport protocol tcp"
-install -D -m 0755 $__abs_mydir/../tp/tcp/c3/listen \
-        ~/.ceof/tp/available/tcp/listen
-install -D -m 0755 $__abs_mydir/../tp/tcp/c3/send \
-      ~/.ceof/tp/available/tcp/send
+mkdir -p ~/.ceof/tp/available/tcp/
+
+install -m 0755 $__abs_mydir/../tp/tcp/c3/listen ~/.ceof/tp/available/tcp/listen
+install -m 0755 $__abs_mydir/../tp/tcp/c3/send ~/.ceof/tp/available/tcp/send
+
 ###### enable tcp listening: 0.0.0.0:4242
 echo "Enabling listing on $(cat $__abs_mydir/../tp/tcp/example_url)"
 install -d -m 0755 ~/.ceof/tp/listen/tcpv4-any-4242
@@ -62,4 +63,3 @@ fi
 mkdir -p ~/.ceof/ui
 
 echo "done."
-
