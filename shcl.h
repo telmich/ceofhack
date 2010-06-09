@@ -19,5 +19,6 @@ int close_all(int fd);
 int fileexists(char *filename);
 int openwriteclose(char *fn, char buf[], int len);
 
+int close_on_exec(int fd);
 
 #endif
