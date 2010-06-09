@@ -3,10 +3,11 @@ LDFLAGS=$(shell gpgme-config --libs)
 #CFLAGS=-std=c99 -Wall -Wextra -Werror -pedantic -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 #CFLAGS=-std=c99 -Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
 # above are too strict right now :-/
-CFLAGS=-Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.
+CFLAGS=-Wall -Wextra -Werror -pipe -g -D_FILE_OFFSET_BITS=64 -I.
 CFLAGS+=$(shell gpgme-config --cflags)
 
 
 CC=gcc $(CFLAGS)
+LD=gcc $(LDFLAGS)
 
 EOFs=tp ui-cmd

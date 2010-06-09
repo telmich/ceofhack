@@ -101,7 +101,7 @@ tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 
 $(CEOFHACK_O): ceofhack.h ceof.h eof.h Makefile Makefile.include
 ceofhack: $(CEOFHACK_O)
-	$(CC) -o $@ $^
+	$(LD) -o $@ $^
 
 
 documentation: doc/EOF.tex
