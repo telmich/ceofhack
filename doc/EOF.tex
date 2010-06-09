@@ -7,7 +7,7 @@
 \begin{document}
 \title{EOF\\Eris Onion Forwarding\\
 The secure, peer-to-peer, decentralised anonymous chat network}
-\date{2009-03-12}
+%\date{...}
 \author{Nico -telmich- Schottelius, !eof}
 
 \maketitle
@@ -1007,6 +1007,27 @@ The last field is repeated as often, as specified in the number of addresses
 field.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{1106: Peer renamed}
+This is the answer to command \emph{2104} and thus contains the
+same ID, as the \emph{2104} request command. It is sent out to
+\textbf{all} connected user interfaces.
+\subsubsection{Parameters}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1106 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+Keyid & EOFsdt:keyid & This peers pgp-keyid & 389E5481065EAA253...\\
+\hline
+Oldnick & EOFsdt & Old nick name & susi\\
+\hline
+Newnick & EOFsdt & New nick name & heinz\\
+\hline
+\end{longtable}
+% Nico: 1.0
+% -----------------------------------------------------------------------------
 \subsection{2100: Register user interface}
 This must be the \emph{first} message sent by the UI. If the answer is not
 \emph{1100}, the UI should close the socket afterwards.
@@ -1116,7 +1137,7 @@ Newnick & EOFsdt & New nick name & heinz\\
 
 \subsubsection{Possible answers}
 \begin{itemize}
-\item 1100
+\item 1106
 \item 1101
 \end{itemize}
 
