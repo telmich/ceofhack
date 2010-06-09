@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2010      Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Add a peer
+ * Rename peer
  *
  */
 
@@ -32,27 +32,24 @@
 
 int main(int argc, char *argv[])
 {
-   char nick[EOF_L_NICKNAME+1];
-   char addr[EOF_L_ADDRESS+1];
-   char keyid[EOF_L_KEYID+1];
+   char oldnick[EOF_L_NICKNAME+1];
+   char newnick[EOF_L_NICKNAME+1];
    char errmsg[EOF_L_MESSAGE+1];
    char id[EOF_L_ID+1];
    int sockfd;
 
    /* terminate, so there is at least one \0 */
-   memset(nick, 0, EOF_L_NICKNAME+1);
-   memset(addr, 0, EOF_L_ADDRESS+1);
-   memset(keyid, 0, EOF_L_KEYID+1);
+   memset(oldnick, 0, EOF_L_NICKNAME+1);
+   memset(newnick, 0, EOF_L_NICKNAME+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
    memset(id, 0, EOF_L_ID+1);
 
-   if(argc != 4) {
-      printf("%s: <nick> <address> <keyid>\n", argv[0]);
+   if(argc != 3) {
+      printf("%s: <oldnick> <newnick>\n", argv[0]);
       return 1;
    }
-   strncpy(nick, argv[1], EOF_L_NICKNAME);
-   strncpy(addr, argv[2], EOF_L_ADDRESS);
-   strncpy(keyid, argv[3], EOF_L_KEYID);
+   strncpy(oldnick, argv[1], EOF_L_NICKNAME);
+   strncpy(newnick, argv[2], EOF_L_NICKNAME);
 
    if((sockfd = eof_ui_init(id)) == -1) {
       perror("eof_ui_init");
@@ -60,12 +57,12 @@ int main(int argc, char *argv[])
    }
 
    /* peer add */
-   printf("Adding peer %s@%s with keyid %s\n", nick, addr, keyid);
-   if(!eof_ui_peer_add(sockfd, errmsg, nick, addr, keyid)) {
+   printf("Renaming peer %s->%s\n", oldnick, newnick);
+   if(!eof_ui_peer_rename(sockfd, errmsg, oldnick, newnick)) {
       if(errno) {
-         perror("eof_ui_peer_add");
+         perror("eof_ui_peer_rename");
       } else {
-         printf("/peer add EOFi error: %s\n", errmsg);
+         printf("/peer rename EOFi error: %s\n", errmsg);
       }
    }
 

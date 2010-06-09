@@ -4,3 +4,4 @@ ui_cmd_peer_send
 ui_cmd_quit
 ui_cmd_peer_add
 ui_cmd_peer_list
+ui_cmd_peer_rename
