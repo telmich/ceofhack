@@ -54,7 +54,7 @@ int cmd_2102(int fd[])
    printf(CEOF_MSG_UIPROMPT "/peer add details: %s, %s, %s, %s\n", id, nick, addr, keyid);
 
    if(peer_findbyname(nick)) {
-      strncpy(errmsg, "Peer already known", EOF_L_MESSAGE);
+      strncpy(errmsg, "Peer already exists", EOF_L_MESSAGE);
       eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
                                     EOF_L_ID, id,
                                     EOF_L_MESSAGE, errmsg);

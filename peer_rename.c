@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009        Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010   Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,9 +24,10 @@
 
 #include <string.h>     /* memset, str*   */
 #include <stdio.h>      /* printf         */
+#include <eof.h>        /* EOF             */
 
 #include "ceofhack.h"   /* functions etc.  */
-#include "eof.h"        /* EOF             */
+#include "ceof.h"
 
 int peer_rename(char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME],
                 char errmsg[EOF_L_MESSAGE])
@@ -47,7 +48,7 @@ int peer_rename(char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME],
 
    strncpy(p->name, newnick, EOF_L_NICKNAME);
 
-   printf("/peer renamed: %s->%s\n",oldnick, p->name);
+   printf(CEOF_MSG_UIPROMPT "/peer renamed: %s->%s\n",oldnick, p->name);
 
    return 1;
 }

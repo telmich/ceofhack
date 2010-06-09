@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -27,28 +27,32 @@
 #include <stdlib.h>     /* strtoul, calloc   */
 #include <errno.h>      /*                   */
 
+#include <eof.h>        /* defines            */
 #include "shcl.h"       /* functions etc.     */
-#include "eof.h"        /* defines            */
 
 int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char oldnick[EOF_L_NICKNAME], char newnick[EOF_L_NICKNAME])
 {
-   char buf[EOF_L_CMD+1];
+   char cmd[EOF_L_CMD+1];
+   char id[EOF_L_ID+1];
 
-   memset(buf, 0, EOF_L_CMD+1);
+   memset(cmd, 0, EOF_L_CMD+1);
+   memset(id, 0, EOF_L_ID+1);
 
-   if(!eof_va_write(sockfd, 3, EOF_L_CMD, EOF_CMD_UI_PEER_RENAME,
+   eof_id_new(id);
+
+   if(!eof_va_write(sockfd, 4, EOF_L_CMD, EOF_CMD_UI_PEER_RENAME,
+                               EOF_L_ID, id,
                                EOF_L_NICKNAME, oldnick,
                                EOF_L_NICKNAME, newnick)) {
       return 0;
    }
 
-   if(read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
+   if(!eof_va_read(sockfd, 2, EOF_L_CMD, cmd, EOF_L_ID, id)) {
       return 0;
    }
 
-   if(strncmp(buf, EOF_CMD_UI_ACK, EOF_L_CMD)) {
-      printf("returned cmd=%s (should be %s)\n", buf, EOF_CMD_UI_ACK);
+   if(strncmp(cmd, EOF_CMD_UI_ACK, EOF_L_CMD)) {
       errno = 0; /* failure, but no library failure */
       read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
