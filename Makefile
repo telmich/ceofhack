@@ -91,8 +91,8 @@ debug: $(PROG)
 	gdb ./$(PROG)
 
 # tests
-tests: tests.o $(LIB:.c=.o)
-	echo $(CC) -lcheck -o $@ $^
+tests: tests.o $(LIB:.c=.o) $(SHCL:.c=.o)
+	$(CC) -lcheck -o $@ $^
 	./tests
 
 tests/testcconfig: tests/testcconfig.c cconfig_tree.c

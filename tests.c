@@ -30,6 +30,25 @@
 
 unsigned long eof_id = 42;
 
+START_TEST (t_id)
+{
+   char buf[EOF_L_ID+1];
+   int i;
+   int a, b;
+   a = 2; b = 2;
+
+   buf[EOF_L_ID] = 0;
+
+   eof_id_init();
+   for(i=0; i<1000; i++) {
+      eof_id_new(buf);
+      printf("id: %s\n", buf);
+   }
+
+   fail_unless ((a) == (b), "Not equal");
+}
+END_TEST
+
 START_TEST (t_eof_id_new)
 {
    char buf[EOF_L_ID];
@@ -50,6 +69,8 @@ Suite *queue_suite (void)
   TCase *tc_core = tcase_create ("Core");
   tcase_add_test (tc_core, t_eof_id_new);
   suite_add_tcase (s, tc_core);
+
+  tcase_add_test (tc_core, t_id);
 
   return s;
 }

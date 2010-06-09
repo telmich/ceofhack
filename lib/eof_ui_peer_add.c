@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,8 +26,8 @@
 #include <string.h>  /* strncmp()         */
 #include <errno.h>   /*                   */
 
+#include <eof.h>    /* defines           */
 #include "shcl.h"   /* functions etc.    */
-#include "eof.h"    /* defines           */
 
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID])

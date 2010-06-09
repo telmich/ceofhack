@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -29,9 +29,12 @@
 
 int eof_id_new(char buf[EOF_L_ID])
 {
-   static char *convert = EOF_QUEUE_ID_CHARS;
+   static const char *convert = EOF_QUEUE_ID_CHARS;
+   size_t len = strlen(convert), index;
+
    unsigned long cur = eof_id;
-   int i, index;
+   int i;
+
 
    /* convert decimal to base 64:
 
@@ -55,16 +58,16 @@ int eof_id_new(char buf[EOF_L_ID])
 
    for(i=EOF_L_ID-1; i > 0; i--) {
       index = cur >> i*6;
-      if(index > 64) {
-         fprintf(stderr, "Ohh, the eof_id is too big (%lu)! resetting it\n", eof_id);
+      if(index > len) {
+//         fprintf(stderr, "Ohh, the eof_id is too big (%lu)! resetting it\n", eof_id);
          eof_id = 0;
          index = 0;
       }
-//      printf("%lu-%lu: id[%d] = %d \n", cur, (long) 1 << i*6, i, index);
+//      printf("%lu-%lu: id[%d] = %d \n", cur, (long) 1 << i*6, i, (int) index);
       cur -= index * (1 << i*6);
       buf[i] = convert[index];
    }
-//   printf("%lu, idx=%d\n", cur, index);
+//   printf("%lu, idx=%d\n", cur, (int) index);
    buf[0] = convert[cur];
 
    ++eof_id;
