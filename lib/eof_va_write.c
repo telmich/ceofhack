@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -38,7 +38,6 @@ int eof_va_write(int sockfd, int nof, ...) /* nof = number of fields */
    char *data;
 
    va_start(ap, nof);
-      printf("VA WRITE, %d\n", nof);
    
    while(nof > 0) {
       len =    va_arg(ap, int);

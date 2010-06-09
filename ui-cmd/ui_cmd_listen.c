@@ -63,6 +63,10 @@ int main()
             return 1;
          }
       }
+      if(pfd.revents & POLLHUP) {
+         printf("ceof vanished, exiting.\n");
+         return 0;
+      }
 
       /* EOFi packet coming in */
       bread = read(sockfd, data, EOF_L_PKG_MAX);
