@@ -32,8 +32,11 @@
 int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICKNAME],
                     char addr[EOF_L_ADDRESS], char keyid[EOF_L_KEYID])
 {
-   char cmd[EOF_L_CMD];
-   char id[EOF_L_ID];
+   char cmd[EOF_L_CMD+1];
+   char id[EOF_L_ID+1];
+
+   cmd[EOF_L_CMD] = 0;
+   id[EOF_L_ID] = 0;
 
    eof_id_new(id);
 
@@ -53,6 +56,8 @@ int eof_ui_peer_add(int sockfd, char errmsg[EOF_L_MESSAGE], char nick[EOF_L_NICK
    if(strncmp(cmd, EOF_CMD_UI_ACK, EOF_L_CMD)) {
       errno = 0; /* failure, but no library failure */
       read_all(sockfd, errmsg, EOF_L_MESSAGE);
+
+      printf("%s, %s, errmsg: %s\n", errmsg, cmd, id);
 
       return 0; /* failure in any case */
    }

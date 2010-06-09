@@ -65,9 +65,8 @@ int main(int argc, char *argv[])
       if(errno) {
          perror("eof_ui_peer_add");
       } else {
-         printf("/peer send EOFi error: %s\n", errmsg);
+         printf("/peer add EOFi error: %s\n", errmsg);
       }
-      return 1;
    }
 
    /* deregister */

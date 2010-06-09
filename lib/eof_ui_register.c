@@ -39,7 +39,7 @@ int eof_ui_register(int sockfd, char id[])
       return -1;
    }
 
-   if(!eof_va_read(sockfd, 1, EOF_L_CMD, answer)) {
+   if(!eof_va_read(sockfd, 2, EOF_L_CMD, answer, EOF_L_ID, id)) {
       return -1;
    }
 
