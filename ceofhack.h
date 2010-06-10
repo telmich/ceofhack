@@ -127,7 +127,7 @@ struct cconfig {
 };
 
 struct queue {
-   struct eofs       *type;               /* pointer to type of EOFs       */
+   struct eofsiaeiae       *type;               /* pointer to type of EOFs       */
    int               fd;                  /* incoming data arrives here    */
    struct queueentry *next;               /* pointer to the first entry    */
 };
@@ -136,6 +136,12 @@ struct queueentry {
    char              id[EOF_L_ID];
    struct cmd        cmd;                 /* the questioning command       */
    struct queueentry *next;               /* pointer to the next entry     */
+};
+
+/****************** Connected subsystems */
+struct eofs_list {
+   struct helper hp;          /* helper that identifies it  */
+   struct eofs_list *next;    /* pointer to the list        */
 };
 
 /****************** Global variables  */

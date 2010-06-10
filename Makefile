@@ -50,6 +50,9 @@ CMD+=cmd_21xx.c cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c
 CMD+=cmd_2105.c cmd_2106.c cmd_2199.c
 CMD+=cmd_3000.c
 
+# EOF subsystems
+EOFS=eofs_init.c eofs_iterate.c
+
 # gpg (crypto)
 GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
 
@@ -69,7 +72,7 @@ UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=config_init.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
-CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB)
+CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB) $(EOFS)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 PROG=ceofhack

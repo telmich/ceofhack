@@ -58,6 +58,8 @@ int cmd_2104(int fd[])
                                     EOF_L_ID, id,
                                     EOF_L_NICKNAME, oldnick,
                                     EOF_L_NICKNAME, newnick);
+
+   //   FIXME: also notify all users uis
    } else {
       eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL, 
                                     EOF_L_ID, id,

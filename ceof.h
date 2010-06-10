@@ -48,10 +48,19 @@ enum {
    CEOF_EX_PEER,
    CEOF_EX_UI,
    CEOF_EX_POLL,
+   CEOF_EX_EOFS,
    CEOF_EX_NOWAY
 };
 
+/* structures */
+
+
+
 /* functions */
 void ceof_banner(char *);
+
+/* eof subsystem handler */
+int eofs_init();
+int eofs_iterate(int , struct eofs_list **);
 
 #endif

@@ -1,3 +1,8 @@
+2104:
+   notify all uis of changes
+   -> create list of uis
+      -> create list of all connected eofs
+--------------------------------------------------------------------------------
 create something useable, documentated, key export, ui support
 --------------------------------------------------------------------------------
 Doc: 3000 / pkg2eofi
