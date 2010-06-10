@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
    }
 
    /* peer show */
-   if((noa = eof_ui_peer_show(sockfd, errmsg, nick, keyid, &addr) == -1)) {
+   if((noa = eof_ui_peer_show(sockfd, errmsg, nick, keyid, &addr)) == -1) {
       if(errno) {
          perror("eof_ui_peer_show");
       } else {
@@ -66,7 +66,8 @@ int main(int argc, char *argv[])
       return 1;
    }
 
-   printf("%s: %s", nick, keyid);
+   printf("Peer %s (%s) %d:", nick, keyid, noa);
+
    for(i=0; i<noa; i++) {
       printf(" %s", addr + (EOF_L_NICKNAME+1)*i);
    }

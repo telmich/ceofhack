@@ -29,6 +29,9 @@ UI_PEER_ADD_OBJ=$(UI_PEER_ADD:.c=.o)
 UI_PEER_RENAME=ui_cmd_peer_rename.c $(LIB) $(SHCL)
 UI_PEER_RENAME_OBJ=$(UI_PEER_RENAME:.c=.o)
 
+UI_PEER_SHOW=ui_cmd_peer_show.c $(LIB) $(SHCL)
+UI_PEER_SHOW_OBJ=$(UI_PEER_SHOW:.c=.o)
+
 UI_PEER_LIST=ui_cmd_peer_list.c $(LIB) $(SHCL)
 UI_PEER_LIST_OBJ=$(UI_PEER_LIST:.c=.o)
 
@@ -36,7 +39,7 @@ UI_QUIT=ui_cmd_quit.c $(LIB) $(SHCL)
 UI_QUIT_OBJ=$(UI_QUIT:.c=.o)
 
 PROG=ui_cmd ui_cmd_listen ui_cmd_peer_send ui_cmd_quit ui_cmd_peer_add ui_cmd_peer_list
-PROG+=ui_cmd_peer_rename
+PROG+=ui_cmd_peer_rename ui_cmd_peer_show
 
 all: $(PROG)
 
@@ -60,6 +63,9 @@ ui_cmd_peer_add: $(UI_PEER_ADD_OBJ)
 	$(CC) -o $@ $^
 
 ui_cmd_peer_rename: $(UI_PEER_RENAME_OBJ)
+	$(CC) -o $@ $^
+
+ui_cmd_peer_show: $(UI_PEER_SHOW_OBJ)
 	$(CC) -o $@ $^
 
 ui_cmd_peer_list: $(UI_PEER_LIST_OBJ)

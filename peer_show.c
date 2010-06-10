@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -34,12 +34,16 @@ int peer_show(int fd[])
    char nick[EOF_L_NICKNAME+1];
    char size[EOF_L_SIZE+1];
    char errmsg[EOF_L_MESSAGE+1];
+   char id[EOF_L_ID+1];
 
    memset(nick, 0, EOF_L_NICKNAME+1);
    memset(size, 0, EOF_L_SIZE+1);
    memset(errmsg, 0, EOF_L_MESSAGE+1);
+   memset(id, 0, EOF_L_ID+1);
 
-   if(!eof_va_read(fd[HP_READ], 1, EOF_L_NICKNAME, nick)) {
+   if(!eof_va_read(fd[HP_READ], 2,
+                        EOF_L_ID, id,
+                        EOF_L_NICKNAME, nick)) {
       perror("eof_va_read");
       return 0;
    }   
@@ -48,7 +52,8 @@ int peer_show(int fd[])
    p = peer_findbyname(nick);
    if(!p) {
       eof_errmsg("No such nick");
-      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_FAIL,
+      if(!eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
+                                        EOF_L_ID, id,
                                         EOF_L_MESSAGE, errmsg)) {
          perror("peershow/0");
       }
@@ -57,7 +62,8 @@ int peer_show(int fd[])
 
    /* FIXME: currently only one address is supported */
    strncpy(size, "1", EOF_L_SIZE);
-   if(!eof_va_write(fd[HP_WRITE], 4, EOF_L_CMD, EOF_CMD_UI_PEER_INFO,
+   if(!eof_va_write(fd[HP_WRITE], 5, EOF_L_CMD, EOF_CMD_UI_PEER_INFO,
+                                    EOF_L_ID, id,
                                     EOF_L_KEYID, p->keyid,
                                     EOF_L_SIZE, size,
                                     EOF_L_ADDRESS, p->addr)) {

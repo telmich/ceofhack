@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -35,20 +35,25 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
                      char nick[EOF_L_NICKNAME], char keyid[EOF_L_KEYID],
                      char **addrs)
 {
+   char *p;
+   int i, noa; /* number of addresses */
+
    char cmd[EOF_L_CMD+1];
    char size[EOF_L_SIZE+1];
-   char *p;
-   int i, nop; /* number of peers */
+   char id[EOF_L_ID+1];
 
    memset(cmd, 0, EOF_L_CMD+1);
    memset(size, 0, EOF_L_SIZE+1);
+   memset(id, 0, EOF_L_ID+1);
 
-   if(!eof_va_write(sockfd, 2, EOF_L_CMD, EOF_CMD_UI_PEER_SHOW,
+   if(!eof_va_write(sockfd, 3, EOF_L_CMD, EOF_CMD_UI_PEER_SHOW,
+                               EOF_L_ID, id,
                                EOF_L_NICKNAME, nick)) {
       return -1;
    }
 
-   if(read_all(sockfd, cmd, EOF_L_CMD) != EOF_L_CMD) {
+   if(!eof_va_read(sockfd, 2, EOF_L_CMD, cmd,
+                               EOF_L_ID, id)) {
       return -1;
    }
 
@@ -60,22 +65,21 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
       return -1; /* failure in any case */
    }
 
-   if(read_all(sockfd, keyid, EOF_L_KEYID) != EOF_L_KEYID) {
+   if(!eof_va_read(sockfd, 2, EOF_L_KEYID, keyid,
+                              EOF_L_SIZE, size)) {
       return -1;
    }
 
-   if(read_all(sockfd, size, EOF_L_SIZE) != EOF_L_SIZE) {
-      return -1;
-   }
+   noa = strtoul(size, NULL, 10);
+   printf("Addresses reported from EOFi: %d\n", noa);
 
-   nop = strtoul(size, NULL, 10);
-   *addrs = calloc(nop, EOF_L_ADDRESS+1);
+   *addrs = calloc(noa, EOF_L_ADDRESS+1);
    if(!(*addrs)) {
       strncpy(errmsg, "calloc()", EOF_L_MESSAGE);
-      return 0;
+      return -1;
    }
 
-   for(i=0; i < nop; i++) {
+   for(i=0; i < noa; i++) {
       p = *addrs + (i * (EOF_L_ADDRESS+1));
 
       if(read_all(sockfd, p, EOF_L_ADDRESS) != EOF_L_ADDRESS) {
@@ -83,5 +87,6 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
       }
    }
 
-   return nop;
+   printf("Addresses before end / from EOFi: %d\n", noa);
+   return noa;
 }
