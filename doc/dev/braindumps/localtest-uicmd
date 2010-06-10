@@ -1,0 +1,12 @@
+How to test ceofhack with 2 users
+
+ceof:
+./ceofhack
+./ui_cmd_listen
+
+./ui_cmd_peer_add nico tcp:127.0.0.1:4242 A310FB220BA776083559C8276A8817C51B70A5DF
+./ui_cmd_peer_add ceof tcp:127.0.0.1:6667 B189CE99F2DF8F46D100F7393D10FB7A47A4CAD4
+./ui_cmd_peer_send nico "Zu Nico"
+./ui_cmd_peer_send ceof "Und zurueck"
+
+
