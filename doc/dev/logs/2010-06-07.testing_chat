@@ -1,0 +1,95 @@
+[17:58] kr:ceofhack% gpg --homedir ~/.ceof/gpg --list-keys 
+/home/users/nico/.ceof/gpg/pubring.gpg
+--------------------------------------
+pub   1024D/1B70A5DF 2009-05-11
+uid                  nico (EOF-2)
+sub   1024g/BFF87164 2009-05-11
+
+[17:59] kr:ceofhack% gpg --homedir ~/.ceof/gpg  -a --export 1B70A5DF 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+mQGiBEoIUmcRBAD1fCBGc4ZtWC2dYuXgHGA9PNKYzIN5lp15HWDpHIXC4O7N8CRa
+8aEzQEbqtggdkcL3Lj8tc66/lRvVAH6aKPAFtJ6rmc9frVBXyX/naGiOKSeuD0W9
+qIGpgn4oJF3Y9xwWuVjdM9oZJ12nvu39nerEYt+QawdAcCGmXL5KiBnoGwCg4kzb
+CopAEgZUJkW9Uw1X9JUcotsEANlFZlkYGgf/0ByQyFIRaiw/S7pOHX02Dtrt9Khz
+3MwCMVBnhQnn9kVSaGO+ARpo/4KacnI/JjvWzDjnQQ6PpyxejVt+uZVN7IaWeQtq
+vidfPAJC2ZlAu3xGKID6MgGSMHrxKpRqjnt77nttsqyGByc9E5kxRRHIy5yat0X2
+MZAoBACBzTBABsfVlW8GkDN6iiZS319tCzAKDnYhRZj5gRgNvRM86pK4ha/YjQz8
+swoaZUmQesbvA42O9IEmRZ1Q1ZeqXROwjXvAsdK9rjflb8nuSVc3fURf7ayvyQOA
+KbaF+/npvkpULQgiAC3/EpYNgL5AnQvxZOi5DMEa4LiYDvUKpLQMbmljbyAoRU9G
+LTIpiGAEExECACAFAkoIUmcCGyMGCwkIBwMCBBUCCAMEFgIDAQIeAQIXgAAKCRBq
+iBfFG3Cl39vDAKDAK9gAlGprzWJ3/7Ei+xgd0L410wCfcTSgfr5ctlnjmJFOztwq
+oQ1jPFO5AQ0ESghSZxAEALeoi3k+Pp5DO3muSJfiX4JT1S7aYmWnph3bOuTr1ZlM
+z/tyzQrJ/qrpoS48MOKFd+SpExqNI4obA7Hs/ZUfdwEVi5XO/SqImhmmb0+Z2MFI
+yeqQlcHxRrD4NDnZ4iOyUKbsZ+1TUdZHs8SNZl/AMgFRAz+AbixtLqhWg8boUf0v
+AAURA/4jYQJ6znAhEoYuoEkR44wL2V9MI+iMS42FN8v7Q/RPtRbls9eZBEa1U97g
+cv1lDdNQfNgqBnFug/pLf7PVT2+fCI4e+060B1EZMeQgkl0am7v+/aoE5+EFDMhU
+3R03i0EC1dFE7RY3R3dQmPJcxV47f7mXP7DEiLWwxLJ+Q+dMSIhJBBgRAgAJBQJK
+CFJnAhsMAAoJEGqIF8UbcKXfUAYAoKMprZLg1IZG7wpw8Sut0XKiIL4GAJwLPJAB
+Y/i1Qlie7NZMu+wqoRjfWw==
+=aEPv
+-----END PGP PUBLIC KEY BLOCK-----
+
+[18:01] kr:~% gpg  --homedir ~/.ceof/gpg --list-keys
+/home/users/ceof/.ceof/gpg/pubring.gpg
+--------------------------------------
+pub   1024D/47A4CAD4 2010-06-06
+uid                  ceof (EOF-2)
+sub   1024g/7D8FE08E 2010-06-06
+
+[18:01] kr:~% gpg  --homedir ~/.ceof/gpg  -a --export 47A4CAD4
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+mQGiBEwMJUQRBACPwsNkLp7L8B3eLewFzPaCrujmXhoEUXZHoGi8heF2XyI/1/to
+QgL9fYx7NT9UINnTEqq03CVaceZuiz83s/lZBpik+vM/nJ6VDHE07xpuVh8dmc/o
+G8rZCys81rqiuqJRtFNqumzWp+09gO5xKBbKXBkz2wEMCoDWRhdVO6P8gwCg1t3w
++nh2ndpU0qn7UoIIaenPQvUD/1QvDC4OHWsXF0dJOQwE/xvgwNtCeIgnrWs5hdtd
+OEOwYatXG21NAU/i0u58K2S23GKzwbb1alBbu/7/l9GJAKD+66ZUPvIrsvfs+bAa
+WLGMdb6Hu1kqkw2iPid8XGw25XXdLKwGozshlwKXojPyZYix1zMzT1Y1dLRQPc/R
+PKi7A/9D2m1Y3g6eoFeM+Qy04HLDBaxqoAaNflbdaukBB2mWE1S++CaieUc7gjGd
+Sghx1+8jSZrJaRax+f4vE9RmCCFp8Lfg98sZKqxiqUpS0/dc47ArGWba28rR1BHN
+iku3V9HByOoIwmc1Sbf4SIzLnvLqjc9ooTREZDcu4dnNQAyGX7QMY2VvZiAoRU9G
+LTIpiGIEExECACIFAkwMJUQCGyMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJ
+ED0Q+3pHpMrUOzEAnROX+9rf6ikUr4v4Y7MNQlngtvIUAJ9QV3sFMd1GmpThIgz8
+PmtN4OWaerkBDQRMDCVEEAQApuAyAqg957frzcZgXx/I4e2giZwajqpfDvAgDwSR
+mGmDRd165Em4BXu9MiJFl7zEY+bGQmSZSZTllPBco/DGQiS86hIQgbVWdWmS1O2n
+lJZtAmLmuBAaro0DsmnMBOrAP37pMuPw4HYthWBQbKV+E7gIZ3HcB/e1jC+RTmhc
+reMAAwUD/jNuq9+p9o6BXVEFQUcqaB+54gFEIc5Hp+77Qddejv80pxzNvD9goOZI
+ygsIbYZDbmotpD6b14EIe4dWs2/3Hg0VndAquhYQYl+V/Z1LkZpabxE57AeFEJjs
+XTYAsQDtCZBCEedyoZf6RuadMQmvZ0DnGwe8fIhT8QcF662wO6nDiEkEGBECAAkF
+AkwMJUQCGwwACgkQPRD7ekekytSUGgCfXnRxiVmOQfjen1pr+zXiPgQBX+kAn235
+6O4kdvPKkoEXEPRTQYebbj7t
+=1rHT
+-----END PGP PUBLIC KEY BLOCK-----
+[18:02] kr:~% 
+
+[18:02] kr:ceofhack% gpg --homedir ~/.ceof/gpg  -a --import ~ceof/ceof.key
+gpg: Schlüssel 47A4CAD4: Öffentlicher Schlüssel "ceof (EOF-2)" importiert
+gpg: Anzahl insgesamt bearbeiteter Schlüssel: 1
+gpg:                              importiert: 1
+[18:03] kr:ceofhack% 
+
+[18:03] kr:~% gpg  --homedir ~/.ceof/gpg  -a --import key.nico           
+gpg: Schlüssel 1B70A5DF: Öffentlicher Schlüssel "nico (EOF-2)" importiert
+gpg: Anzahl insgesamt bearbeiteter Schlüssel: 1
+gpg:                              importiert: 1
+zsh: permission denied: /home/users/nico/Maildir/
+[18:03] kr:~% 
+
+[18:04] kr:ceofhack% gpg --homedir ~/.ceof/gpg  --fingerprint | sed 's/ //g'
+/home/users/nico/.ceof/gpg/pubring.gpg
+--------------------------------------
+pub1024D/1B70A5DF2009-05-11
+Schl.-Fingerabdruck=A310FB220BA776083559C8276A8817C51B70A5DF
+uidnico(EOF-2)
+sub1024g/BFF871642009-05-11
+
+pub1024D/47A4CAD42010-06-06
+Schl.-Fingerabdruck=B189CE99F2DF8F46D100F7393D10FB7A47A4CAD4
+uidceof(EOF-2)
+sub1024g/7D8FE08E2010-06-06
+
+[18:04] kr:ceofhack% 
+
