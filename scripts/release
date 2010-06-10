@@ -27,7 +27,7 @@ __myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
 ddir="$HOME/niconetz/software/ceofhack"
 version="$(git describe)"
-file="$ddir/ceofhack-${version}.xz"
+file="$ddir/ceofhack-${version}.tar.xz"
 dfile="$ddir/EOF-${version}.pdf"
 
 # check that everything works
