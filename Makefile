@@ -51,7 +51,8 @@ CMD+=cmd_2105.c cmd_2106.c cmd_2199.c
 CMD+=cmd_3000.c
 
 # EOF subsystems
-EOFS=eofs_init.c eofs_iterate.c
+#EOFS=eofs_init.c eofs_iterate.c
+EOFS=
 
 # gpg (crypto)
 GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c

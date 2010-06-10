@@ -61,6 +61,6 @@ void ceof_banner(char *);
 
 /* eof subsystem handler */
 int eofs_init();
-int eofs_iterate(int , struct eofs_list **);
+//int eofs_iterate(int , struct eofs_list **);
 
 #endif
