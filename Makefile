@@ -118,3 +118,6 @@ pub:
 	git push --mirror
 	git push --mirror github
 	git push --mirror gitorious
+
+release: pub
+	./scripts/release

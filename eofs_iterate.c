@@ -33,5 +33,6 @@ int eofs_iterate(int cat, struct eofs_list **cur)
    } else {
       *cur = (*cur)->next;
    }
+
    return (*cur) ? 1 : 0;
 }
