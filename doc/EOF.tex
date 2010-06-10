@@ -6,9 +6,10 @@
 
 \begin{document}
 \title{EOF\\Eris Onion Forwarding\\
-The secure, peer-to-peer, decentralised anonymous chat network}
+The secure, peer-to-peer, decentralised
+anonymous chat network\thanks{Version 0.6}}
 %\date{...}
-\author{Nico -telmich- Schottelius, !eof}
+\author{Nico -telmich- Schottelius}
 
 \maketitle
 \tableofcontents
@@ -255,12 +256,30 @@ features, protocol specifications, paths, interfaces and environment definition,
 etc. are described.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\section{Version}
+\section{Introduction}
+% -----------------------------------------------------------------------------
+\subsection{Version}
 As soon as this standard is usable and the first version of \emph{rEOFi}
 is released, it will version number \textbf{01} of the standard.
 Further changes will be documented in this section. All version numbers
 are two ASCII digits (see below).
 % Nico: FIXME for 1.0
+% -----------------------------------------------------------------------------
+\subsection{Modular setup}
+As there are many parts needed to realise such a chat system, the EOF
+standard defines a modular setup to be used:
+\begin{itemize}
+\item EOFi is the central EOFi implementation
+\item EOFi is the central connection point for all other EOFs 
+\end{itemize}
+This modular design allows different developers to code each EOFs
+in a different way (and probably different programming language).
+A complete implementation consists of at least:
+\begin{itemize}
+\item EOFi - central communication daemon
+\item UI - at least one user interface
+\item TP - at least one transport protocol
+\end{itemize}
 % -----------------------------------------------------------------------------
 \section{Interface description ("`eofi2any"')}
 This section defines which interfaces EOFi offers to communicate with
