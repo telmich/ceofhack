@@ -400,6 +400,7 @@ ASCII numbers are used to specify the length of the packet (excluding itself).
 \subsection{Strings in general}
 Strings are transmitted without termination (i.e. no new line, no 0 byte),
 but are padded with zero bytes, if shorter than the specified length.
+The encoding to be used is always \textbf{UTF-8}\cite{utf8}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Fixed length strings}
@@ -1528,6 +1529,7 @@ Sort sections by alphabet.
 \bibitem{uri-1} RFC 3986: http://www.faqs.org/rfcs/rfc3986.html
 \bibitem{!eof} https://www.eof.name
 \bibitem{stegano-1} http://en.wikipedia.org/wiki/Steganography
+\bibitem{utf8} RFC3629: UTF-8: http://www.ietf.org/rfc/rfc3629.txt
 \end{thebibliography}
 
 \printindex

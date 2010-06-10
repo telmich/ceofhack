@@ -1,13 +1,5 @@
-2104:
-   notify all uis of changes
-   -> create list of uis
-      -> create list of all connected eofs
 --------------------------------------------------------------------------------
 create something useable, documentated, key export, ui support
---------------------------------------------------------------------------------
-Doc: 3000 / pkg2eofi
-
-   onion vs. crypto engine
 --------------------------------------------------------------------------------
 
 - Make cmd_handle more intelligent:
@@ -20,9 +12,6 @@ Doc: 3000 / pkg2eofi
 And replace:
    ui_cmd_read, peer_input tp_listen_read tp_send_wait
 
-
---------------------------------------------------------------------------------
-   Encoding == UTF-8!
 
 --------------------------------------------------------------------------------
 
