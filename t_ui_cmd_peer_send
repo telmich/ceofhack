@@ -25,5 +25,5 @@ __pwd="$(pwd -P)"
 __mydir="${0%/*}"; __abs_mydir="$(cd "$__mydir" && pwd -P)"
 __myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
-./ui-cmd/ui_cmd_peer_add nico abc def
-./ui-cmd/ui_cmd_peer_send nico text
+./ui_cmd/ui_cmd_peer_add nico abc def
+./ui_cmd/ui_cmd_peer_send nico text

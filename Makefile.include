@@ -10,4 +10,4 @@ CFLAGS+=$(shell gpgme-config --cflags)
 CC=gcc $(CFLAGS)
 LD=gcc $(LDFLAGS)
 
-EOFs=tp ui-cmd
+EOFs=tp ui_cmd
