@@ -25,8 +25,10 @@ __pwd="$(pwd -P)"
 __mydir="${0%/*}"; __abs_mydir="$(cd "$__mydir" && pwd -P)"
 __myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
 
+version="$1"
+: ${version:=$(git describe)}
+
 ddir="$HOME/niconetz/software/ceofhack"
-version="$(git describe)"
 file="$ddir/ceofhack-${version}.tar.xz"
 dfile="$ddir/EOF-${version}.pdf"
 
@@ -34,5 +36,5 @@ dfile="$ddir/EOF-${version}.pdf"
 set -e
 make clean && make -j8
 
-git archive "$version" | xz -c > "$file"
+git archive --prefix="ceofhack-$version/" "$version" | xz -c > "$file"
 cp doc/EOF.pdf "$dfile"
