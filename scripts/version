@@ -1,0 +1,64 @@
+#!/bin/sh
+# 
+# 2010      Nico Schottelius (nico-ceofhack at schottelius.org)
+# 
+# This file is part of ceofhack.
+#
+# ceofhack is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# ceofhack is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with ceofhack. If not, see <http://www.gnu.org/licenses/>.
+#
+# Create version
+#
+
+#
+# Standard variables (stolen from cconf)
+#
+__pwd="$(pwd -P)"
+__mydir="${0%/*}"; __abs_mydir="$(cd "$__mydir" && pwd -P)"
+__myname=${0##*/}; __abs_myname="$__abs_mydir/$__myname"
+
+headerfile="${__mydir}/../version.h"
+
+# different versions to consider
+fallbackversion="NO VERSION DEFINED"
+savedvesion="$(cat "$__{mydir}/../.version" 2>/dev/null)"
+#headerversion="$(awk '/^#define CEOF_VERSION/ { print $3 }' "$headerfile"} 2>/dev/null)"
+headerversion="$(awk '/^#define CEOF_VERSION "/ { print $3 }' "${headerfile}" | sed 's/"//g')"
+gitversion="$(git describe 2>/dev/null)"
+
+# use git, if existing
+version="$gitversion"
+
+# otherwise fallback to the release version
+[ "${version}" ] || version="${savedversion}"
+
+# otherwise fallback to unsensible default
+[ "${version}" ] || version="${fallbackversion}"
+
+# compare with header and only regenerate on change
+if [ "$version" != "$headerversion" ]; then
+   echo "Regenerating $headerfile ... "
+   cat << eof > "${headerfile}"
+#ifndef CEOF_VERSION_HEADER
+#define CEOF_VERSION_HEADER
+
+#define CEOF_VERSION "$version"
+
+#endif
+eof
+
+fi
+
+
+echo $version
+echo $headerversion
