@@ -45,7 +45,7 @@ enum {
    CEOF_EX_CONFIG,
    CEOF_EX_ID,
    CEOF_EX_HELPER,
-   CEOF_EX_GPG,
+   CEOF_EX_CRYPTO,
    CEOF_EX_SIGNALS,
    CEOF_EX_CMD,
    CEOF_EX_TP,
@@ -72,6 +72,10 @@ struct options {
 
 /* functions */
 void ceof_banner(char *);
+
+/* crypto */
+int crypto_init();
+int crypto_gpg_init();
 
 /* eof subsystem handler */
 int eofs_init();

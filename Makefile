@@ -55,7 +55,8 @@ CMD+=cmd_3000.c
 EOFS=
 
 # gpg (crypto)
-GPG=crypto/cgpg_init.c crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
+CRYPTO=crypto/crypto_init.c crypto/crypto_gpg_init.c
+CRYPTO+=crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
 
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
@@ -73,7 +74,7 @@ UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=config_init.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
-CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB) $(EOFS)
+CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 # headers

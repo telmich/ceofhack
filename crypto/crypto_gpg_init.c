@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -32,7 +32,7 @@ gpgme_ctx_t    gpg_context;
 gpgme_data_t   gpg_encrypt;
 gpgme_data_t   gpg_decrypt;
 
-int cgpg_init()
+int crypto_gpg_init()
 {
    char *p;
    gpgme_error_t gerr;
