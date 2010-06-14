@@ -78,7 +78,6 @@ CEOFHACK_O=$(CEOFHACK:.c=.o)
 
 # headers
 HEADERS=ceofhack.h ceof.h eof.h version.h
-MAKEFILES=Makefile Makefile.include
 
 PROG=ceofhack
 
@@ -111,7 +110,7 @@ tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 	$(CC) -o $@ $^
 
 
-$(CEOFHACK_O): $(HEADERS) $(MAKEFILes)
+$(CEOFHACK_O): $(HEADERS) Makefile Makefile.include
 ceofhack: $(CEOFHACK_O)
 	$(LD) -o $@ $^
 
