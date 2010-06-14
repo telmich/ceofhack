@@ -1,3 +1,7 @@
+Retrieve our own key(id)
+
+--------------------------------------------------------------------------------
+
 - Sign messages
    - cleanup crypto area
 - Add 3xxx header to outgoing messages
