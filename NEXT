@@ -1,23 +1,9 @@
---------------------------------------------------------------------------------
-create something useable, documentated, key export, ui support
---------------------------------------------------------------------------------
-
-- Make cmd_handle more intelligent:
-
-   - read command
-   - retrieve category
-      - run category default command if unmatching
-   - check if command needs entry in queue
-
-And replace:
-   ui_cmd_read, peer_input tp_listen_read tp_send_wait
-
+Fix 1103, also include message.
+Thus implement 1103 this way:
+   - fillup nick with "UNKNOWN" for know
 
 --------------------------------------------------------------------------------
 
---> Message did not reach all UIs
-
-Implementing a real cmd_1103 is kind of complex:
 
 - create external commands (3xxx):
    - message is for you
@@ -27,7 +13,8 @@ Implementing a real cmd_1103 is kind of complex:
 - check pgp signature, if incoming package is for me
 - pgp-sign message packets
 
-Thus implement 1103 this way:
-   - fillup nick with "UNKNOWN" for know
-
 --------------------------------------------------------------------------------
+
+ - Switch to asynchronous within ceofhack.
+   -> no answers in functions?
+   -> answer via handler?

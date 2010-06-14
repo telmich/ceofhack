@@ -1,3 +1,5 @@
+DESTDIR=
+
 LDFLAGS=$(shell gpgme-config --libs)
 
 #CFLAGS=-std=c99 -Wall -Wextra -Werror -pedantic -pipe -g -D_FILE_OFFSET_BITS=64 -lgpgme -I.

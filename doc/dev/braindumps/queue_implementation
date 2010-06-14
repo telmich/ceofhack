@@ -160,4 +160,11 @@ queue_find_by_fd()
 
 
 --------------------------------------------------------------------------------
+- Make cmd_handle more intelligent:
+
+   - read command
+   - retrieve category
+      - run category default command if unmatching
+   - check if command needs entry in queue
+
 
