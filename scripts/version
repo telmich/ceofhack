@@ -58,7 +58,3 @@ if [ "$version" != "$headerversion" ]; then
 eof
 
 fi
-
-
-echo $version
-echo $headerversion

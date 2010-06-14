@@ -25,10 +25,12 @@
 #ifndef CEOF_H
 #define CEOF_H
 
+#include "version.h"
+
 /* constants */
 #define CEOF_MSG_NAME            "ceofhack"
 #define CEOF_MSG_PROMPT          CEOF_MSG_NAME "> "
-#define CEOF_MSG_VERSION         CEOF_MSG_PROMPT "Version 0.5\n"
+#define CEOF_MSG_VERSION         CEOF_MSG_PROMPT "Version " CEOF_VERSION "\n"
 #define CEOF_MSG_STARTED         CEOF_MSG_PROMPT "Started, waiting for connections.\n"
 #define CEOF_MSG_UINAME          "ui"
 #define CEOF_MSG_UIPROMPT        CEOF_MSG_UINAME "> "

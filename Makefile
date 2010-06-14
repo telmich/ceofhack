@@ -76,6 +76,10 @@ CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(GPG) $(UI) $(LIB) $(EOFS)
 CEOFHACK_O=$(CEOFHACK:.c=.o)
 
+# headers
+HEADERS=ceofhack.h ceof.h eof.h version.h
+MAKEFILES=Makefile Makefile.include
+
 PROG=ceofhack
 
 DOC=doc/EOF
@@ -91,6 +95,10 @@ run: $(PROG)
 	cat doc/dev/braindumps/sample-commands
 	./$(PROG)
 
+version.h: .savedversion
+.savedversion:
+	./scripts/version
+
 debug: $(PROG)
 	gdb ./$(PROG)
 
@@ -103,7 +111,7 @@ tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 	$(CC) -o $@ $^
 
 
-$(CEOFHACK_O): ceofhack.h ceof.h eof.h Makefile Makefile.include
+$(CEOFHACK_O): $(HEADERS) $(MAKEFILes)
 ceofhack: $(CEOFHACK_O)
 	$(LD) -o $@ $^
 

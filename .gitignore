@@ -17,3 +17,4 @@ dia/*.dia~
 /html
 *.dia~
 tests
+version.h
