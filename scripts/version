@@ -31,9 +31,8 @@ headerfile="${__mydir}/../version.h"
 
 # different versions to consider
 fallbackversion="NO VERSION DEFINED"
-savedvesion="$(cat "$__{mydir}/../.version" 2>/dev/null)"
-#headerversion="$(awk '/^#define CEOF_VERSION/ { print $3 }' "$headerfile"} 2>/dev/null)"
-headerversion="$(awk '/^#define CEOF_VERSION "/ { print $3 }' "${headerfile}" | sed 's/"//g')"
+savedversion="$(cat "${__mydir}/../.version" 2>/dev/null)"
+headerversion="$(grep '^#define CEOF_VERSION "' "$headerfile" | sed 's/.*"\(.*\)"/\1/g' 2>/dev/null)"
 gitversion="$(git describe 2>/dev/null)"
 
 # use git, if existing

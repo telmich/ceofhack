@@ -38,3 +38,4 @@ make clean && make -j8
 
 git archive --prefix="ceofhack-$version/" "$version" | xz -c > "$file"
 cp doc/EOF.pdf "$dfile"
+echo "${version}" > "$__{mydir}/../.version"
