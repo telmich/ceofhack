@@ -1,9 +1,14 @@
+- Sign messages
+   - cleanup crypto area
+- Add 3xxx header to outgoing messages
+
+--------------------------------------------------------------------------------
+
 Fix 1103, also include message.
 Thus implement 1103 this way:
    - fillup nick with "UNKNOWN" for know
 
 --------------------------------------------------------------------------------
-
 
 - create external commands (3xxx):
    - message is for you
