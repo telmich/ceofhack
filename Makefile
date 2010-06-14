@@ -55,13 +55,13 @@ CMD+=cmd_3000.c
 EOFS=
 
 # gpg (crypto)
-GPG=cgpg_init.c cgpg_keyid_get.c cgpg_encrypt.c cgpg_decrypt.c
+GPG=crypto/cgpg_init.c crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
 
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 
 # objects from the upcoming library for EOFi (=ceofhack)
-LIB=lib/eof_get_configdir.c lib/eof_get_gpg_dir.c lib/eof_get_tp_dir.c
+LIB=lib/eof_get_configdir.c lib/eof_get_crypto_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c
 LIB+=lib/eof_va_read.c lib/eof_va_write.c
 LIB+=lib/eof_id_init.c lib/eof_id_new.c

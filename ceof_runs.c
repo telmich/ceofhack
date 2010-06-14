@@ -34,6 +34,7 @@
 
 #include "shcl.h"          /* helper         */
 #include "ceofhack.h"      /* internals      */
+#include "ceof.h"          /* internals      */
 
 int ceof_runs()
 {

@@ -80,19 +80,8 @@ struct cmd_cat {
 };
 
 /* further structs with external dependencies */
-#include <limits.h>              /* PATH_MAX                      */
-struct options {
-   char home[PATH_MAX+1];
-   char gpghome[PATH_MAX+1];
-   char tphome[PATH_MAX+1];
-   char uisocket[PATH_MAX+1];
-   char pidfile[PATH_MAX+1];
-   pid_t pid;
-
-   char gpg[PATH_MAX+1];
-};
-
 #include <sys/types.h>           /* POSIX for pid_t               */
+#include <limits.h>              /* PATH_MAX                      */
 struct helper {                  /* for the subprojects           */
    pid_t pid;                    /* process id                    */
    int fds[HP_FDCNT];            /* file deskriptors used by poll */ /* FIXME: use in/out int */

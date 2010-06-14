@@ -32,6 +32,7 @@
 
 #include "ceofhack.h"   /* functions etc.    */
 #include "shcl.h"       /* helper            */
+#include "ceof.h"
 
 int ui_init()
 {

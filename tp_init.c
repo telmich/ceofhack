@@ -29,6 +29,7 @@
 
 
 #include "ceofhack.h"   /* functions etc. */
+#include "ceof.h"
 
 struct tp tpa[EOF_L_TPA];
 int    tpa_cnt;

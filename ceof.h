@@ -36,6 +36,8 @@
 #define CEOF_MSG_UIPROMPT        CEOF_MSG_UINAME "> "
 #define CEOF_MSG_TPNAME          "tp"
 #define CEOF_MSG_TPPROMPT        CEOF_MSG_TPNAME "> "
+#define CEOF_MSG_CRYPTONAME      "crypto"
+#define CEOF_MSG_CRYPTOPROMPT    CEOF_MSG_CRYPTONAME "> "
 
 enum {
    CEOF_EX_RUNS = 0,
@@ -55,7 +57,17 @@ enum {
 };
 
 /* structures */
+#include <limits.h>              /* PATH_MAX                      */
+struct options {
+   char home[PATH_MAX+1];
+   char cryptohome[PATH_MAX+1];
+   char tphome[PATH_MAX+1];
+   char uisocket[PATH_MAX+1];
+   char pidfile[PATH_MAX+1];
+   pid_t pid;
 
+   char gpg[PATH_MAX+1];
+};
 
 
 /* functions */

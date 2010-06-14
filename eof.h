@@ -97,9 +97,10 @@
 #define EOF_P_SLASH              "/"
 #define EOF_P_CONFIGDIR          ".ceof"
 #define EOF_P_UI_SOCKET          EOF_P_SLASH "ui" EOF_P_SLASH "socket"
-#define EOF_P_GPG_DIR            EOF_P_SLASH "gpg"
 #define EOF_P_TP_DIR             EOF_P_SLASH "tp"
 #define EOF_P_PIDFILE            EOF_P_SLASH "pid"
+#define EOF_P_CRYPTO_DIR         EOF_P_SLASH "crypto"
+#define EOF_P_CRYPTO_KEY         EOF_P_CRYPTO_DIR EOF_P_SLASH "mykeyid"
 
 /* macros */
 #define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
@@ -110,7 +111,7 @@ extern unsigned long eof_id;
 /* library functions: generic */
 #include <sys/types.h>           /* size_t   */
 void eof_get_configdir(char buf[], size_t len);
-void eof_get_gpg_dir(char buf[], size_t len);
+void eof_get_crypto_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
 void eof_get_pidfile(char buf[], size_t len);
 int eof_ui_register(int sockfd, char id[]);

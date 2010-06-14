@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,9 +26,9 @@
 #include <string.h>  /* memset, str*   */
 #include "eof.h"     /* eof            */
 
-void eof_get_gpg_dir(char buf[], size_t len)
+void eof_get_crypto_dir(char buf[], size_t len)
 {
    memset(buf, '\0', len);
    eof_get_configdir(buf, len);
-   strncat(buf, EOF_P_GPG_DIR, len-1);
+   strncat(buf, EOF_P_CRYPTO_DIR, len-1);
 }

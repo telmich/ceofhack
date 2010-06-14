@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -27,6 +27,7 @@
 #include <stdlib.h>     /* getenv         */
 #include <unistd.h>     /* getpid()       */
 #include "ceofhack.h"   /* functions etc.  */
+#include "ceof.h"
 
 struct options opt;
 
@@ -35,7 +36,7 @@ int config_init()
    eof_get_configdir(opt.home, PATH_MAX+1);
 
    eof_get_tp_dir(opt.tphome, PATH_MAX+1);
-   eof_get_gpg_dir(opt.gpghome, PATH_MAX+1);
+   eof_get_crypto_dir(opt.cryptohome, PATH_MAX+1);
    eof_get_ui_socketpath(opt.uisocket, PATH_MAX+1);
    eof_get_tp_dir(opt.tphome, PATH_MAX+1);
    eof_get_pidfile(opt.pidfile, PATH_MAX+1);
