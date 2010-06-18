@@ -114,6 +114,7 @@ void eof_get_configdir(char buf[], size_t len);
 void eof_get_crypto_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
 void eof_get_pidfile(char buf[], size_t len);
+void eof_get_mykeyid_file(char buf[], size_t len);
 int eof_ui_register(int sockfd, char id[]);
 int eof_ui_deregister(int sockfd);
 

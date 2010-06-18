@@ -40,6 +40,7 @@ int config_init()
    eof_get_ui_socketpath(opt.uisocket, PATH_MAX+1);
    eof_get_tp_dir(opt.tphome, PATH_MAX+1);
    eof_get_pidfile(opt.pidfile, PATH_MAX+1);
+   eof_get_mykeyid_file(opt.mykeyidfile, PATH_MAX+1);
 
    opt.pid = getpid();
 

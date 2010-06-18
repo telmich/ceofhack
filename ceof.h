@@ -26,6 +26,7 @@
 #define CEOF_H
 
 #include "version.h"
+#include "eof.h"
 
 /* constants */
 #define CEOF_MSG_NAME            "ceofhack"
@@ -64,9 +65,12 @@ struct options {
    char tphome[PATH_MAX+1];
    char uisocket[PATH_MAX+1];
    char pidfile[PATH_MAX+1];
+   char mykeyidfile[PATH_MAX+1];
+   char gpg[PATH_MAX+1];
+
+   char mykeyid[EOF_L_KEYID+1];
    pid_t pid;
 
-   char gpg[PATH_MAX+1];
 };
 
 

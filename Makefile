@@ -1,5 +1,5 @@
 # 
-# 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+# 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
 # 
 # This file is part of ceofhack.
 #
@@ -63,7 +63,7 @@ CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 
 # objects from the upcoming library for EOFi (=ceofhack)
 LIB=lib/eof_get_configdir.c lib/eof_get_crypto_dir.c lib/eof_get_tp_dir.c
-LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c
+LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c lib/eof_get_mykeyid_file.c
 LIB+=lib/eof_va_read.c lib/eof_va_write.c
 LIB+=lib/eof_id_init.c lib/eof_id_new.c
 
