@@ -23,6 +23,7 @@
  */
 
 #include <stdio.h>      /* printf            */
+#include <string.h>     /* memset()          */
 #include <gpgme.h>      /* gpgme             */
 #include <locale.h>     /* locales           */
 #include "ceofhack.h"   /* functions etc.    */
@@ -32,6 +33,10 @@ int crypto_init()
 {
 
    /* read my key id */
+   memset(opt.mykeyid, '\0', EOF_L_PIDLEN);
+   if(!openreadclosestatic(opt.mykeyid, opt.mykeyidfile, EOF_L_KEYID)) {
+      return 0;
+   }
 
    /* init gpg */
    if(!crypto_gpg_init()) return 0;
