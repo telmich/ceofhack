@@ -25,7 +25,6 @@
  */
 
 #define EOF_L_PIDLEN    32       /* maximum length of a pid       */
-#define EOF_L_GUI       256
 #define EOF_L_TPA       256      /* max available tp (all)        */
 #define EOF_L_TPL       256      /* max available tp listener     */
 #define MAX_RCP         1        /* gpgme recipients              */

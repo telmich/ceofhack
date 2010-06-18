@@ -18,7 +18,8 @@
 # along with ceofhack. If not, see <http://www.gnu.org/licenses/>.
 #
 
-gpgdir="$HOME/.ceof/gpg"
+gpgdir="$HOME/.ceof/crypto"
+mykeyid="${gpgdir}/mykeyid"
 
 # gpg wants a secure directory
 umask 077
@@ -42,12 +43,14 @@ cat > keygen.batch << EOF
 	Subkey-Type: ELG-E
 	Subkey-Length: 1024
 	Name-Real: $USER
-	Name-Comment: EOF-2
+	Name-Comment: EOF-3
 	Expire-Date: 0
 	%commit
 	%echo done
 EOF
 
 gpg --homedir "$gpgdir" --batch --gen-key keygen.batch
+gpg --homedir "$gpgdir" --fingerprint --with-colons $USER | awk -F: '/^fpr/ { print $10 }' > \
+   "$mykeyid"
 
 exit 0
