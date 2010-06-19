@@ -30,7 +30,7 @@ char *peer_keyid_get(char *nick)
 {
    struct peer *p;
 
-   for(p = plist.next; p != NULL; p = p->next) {
+   for(p = peers_list.next; p != NULL; p = p->next) {
       if(!strncmp(nick, p->name, EOF_L_NICKNAME)) {
          printf("Keyid (%s) for peer %s found!\n", p->keyid, p->name);
          return p->keyid;

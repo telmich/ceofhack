@@ -71,6 +71,8 @@ struct options {
    pid_t pid;
 };
 
+/* global vars */
+extern struct peer      peers_list;
 
 /* functions */
 void ceof_banner(char *);

@@ -26,6 +26,7 @@
 #include <stdio.h>      /* printf         */
 
 #include "ceofhack.h"   /* functions etc.  */
+#include "ceof.h"   /* functions etc.  */
 #include "eof.h"        /* EOF             */
 
 int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS],
@@ -41,8 +42,8 @@ int peer_add(char nick[EOF_L_NICKNAME], char addr[EOF_L_ADDRESS],
    strncpy(p->addr, addr, EOF_L_ADDRESS);
    strncpy(p->keyid, keyid, EOF_L_KEYID);
 
-   p->next = plist.next;
-   plist.next = p;
+   p->next = peers_list.next;
+   peers_list.next = p;
 
    printf("/peer add: Added <%s>@<%s>:<%s>\n",p->name, p->addr, p->keyid);
 

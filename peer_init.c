@@ -25,11 +25,11 @@
 #include <stdio.h>      /* NULL              */
 #include "ceofhack.h"   /* functions etc.    */
 
-struct peer plist;
+struct peer peers_list;
 
 int peer_init()
 {
-   plist.next = NULL; /* explicit */
+   peers_list.next = NULL; /* explicit */
 
    return 1;
 }

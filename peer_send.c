@@ -43,6 +43,7 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    /* register into queue for retrieval of pkg */
    /* send encrypt msg for $keyid */
    /* handle send in queue handler */
+
    if(!(len = cgpg_encrypt(nick, msg, buf, BIGBUF, errmsg))) return 0;
    printf("Encrypted message: %s\n", buf);
    

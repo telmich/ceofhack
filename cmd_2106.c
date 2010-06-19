@@ -27,5 +27,5 @@
 
 int cmd_2106(int fd[])
 {
-   return peer_list(fd[HP_WRITE]);
+   return peers_list(fd[HP_WRITE]);
 }

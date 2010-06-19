@@ -128,7 +128,6 @@ struct eofs_list {
 
 /****************** Global variables  */
 extern struct pollfd    pfd[MAX_COMM];
-extern struct peer      plist;
 extern struct options   opt;
 
 /* helper subsystem */

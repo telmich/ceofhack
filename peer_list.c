@@ -28,13 +28,13 @@
 #include "ceofhack.h"  /* functions etc.  */
 #include "ceof.h"
 
-int peer_list(int fd)
+int peers_list(int fd)
 {
    struct peer *p;
    char intro[EOF_L_CMD+EOF_L_SIZE+1];
    int i = 0;
 
-   for(p = plist.next; p != NULL; p = p->next) ++i;
+   for(p = peers_list.next; p != NULL; p = p->next) ++i;
    
    memset(intro, '\0', EOF_L_CMD+EOF_L_SIZE+1);
    strncpy(intro, EOF_CMD_UI_PEER_LISTING, EOF_L_CMD);
@@ -44,7 +44,7 @@ int peer_list(int fd)
    if(write_all(fd, intro, EOF_L_CMD+EOF_L_SIZE) != (EOF_L_CMD+EOF_L_SIZE)) 
       return 0;
 
-   for(p = plist.next; p != NULL; p = p->next) {
+   for(p = peers_list.next; p != NULL; p = p->next) {
       printf(CEOF_MSG_UIPROMPT "/peer list: %s\n", p->name);
       if(write_all(fd, p->name, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
          return 0;
