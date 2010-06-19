@@ -26,9 +26,9 @@
 #define CEOF_CRYPTO_H
 
 /* constants */
-#define CEOF_MSG_CRYPTO_USAGE    "ceof-crypto: gpg-dir"
 #define CEOF_MSG_CRYPTO_NAME     "ceof-crypto"
 #define CEOF_MSG_CRYPTO_PROMPT   CEOF_MSG_CRYPTO_NAME "> "
+#define CEOF_MSG_CRYPTO_USAGE    CEOF_MSG_CRYPTO_PROMPT "Arguments: gpg-dir\n"
 
 /* depending libs */
 #include <gpgme.h>      /* gpgme             */

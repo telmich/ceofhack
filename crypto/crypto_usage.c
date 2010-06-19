@@ -29,7 +29,7 @@
 
 void crypto_usage()
 {
-   printf(CEOF_MSG_CRYPTO_USAGE);
+   fprintf(stderr, CEOF_MSG_CRYPTO_USAGE);
 
    _exit(1);
 }
