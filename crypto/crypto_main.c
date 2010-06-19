@@ -29,7 +29,7 @@
 #include <stdlib.h>     /* getenv            */
 #include <unistd.h>     /* STDIN_FILENO      */
 
-
+#include <fcntl.h>         /* fcntl          */
 #include <string.h>     /* memset            */
 
 #include <eof.h>       /* EOF */
@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 {
    char cmd[EOF_L_CMD+1];
    int fds[EOF_L_RW_SIZE];
+   int flags;
 
    cmd[1] = 0;
 
@@ -55,9 +56,24 @@ int main(int argc, char **argv)
 
    fds[EOF_CMD_READ] = STDIN_FILENO;
    fds[EOF_CMD_WRITE] = STDOUT_FILENO;
+
+   /* always wait for input */
+   flags = fcntl(fds[EOF_CMD_READ], F_GETFL);
+   flags ^= O_NONBLOCK;
+   if(fcntl(fds[EOF_CMD_READ], F_SETFL, flags) < 0) {
+      perror("fcntl");
+   }
+   flags = fcntl(fds[EOF_CMD_WRITE], F_GETFL);
+   flags ^= O_NONBLOCK;
+   if(fcntl(fds[EOF_CMD_WRITE], F_SETFL, flags) < 0) {
+      perror("fcntl");
+   }
    
    while(1) {
-      eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds);
+      if(!eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds)) {
+         fprintf(stderr, "Handler failed\n");
+         return 1;
+      }
    }
 
    return 0;
