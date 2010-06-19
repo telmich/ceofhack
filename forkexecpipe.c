@@ -42,12 +42,17 @@ int forkexecpipe(struct helper *hp)
       perror("pipe");
       return 0;
    }
+   hp->fds[EOF_CMD_READ] = fd_from_extern[0];
+   if(!close_on_exec(hp->fds[EOF_CMD_READ])) return 0;
 
    /* write from EOFi [1], read from extern [0] */
    if(pipe(&fd_to_extern[2]) == -1) {
       perror("pipe2");
       return 0;
    }
+   hp->fds[EOF_CMD_WRITE] = fd_to_extern[1];
+   if(!close_on_exec(hp->fds[EOF_CMD_WRITE])) return 0;
+
 
    hp->pid = fork();
    if(hp->pid == -1) {
@@ -55,15 +60,11 @@ int forkexecpipe(struct helper *hp)
       return 0;
    }
 
-   /* mark parent fds to be closed on exec (for _any_ child, not only this one) */
-   if(!close_on_exec(hp->fds[EOF_CMD_READ])) return 0;
-   if(!close_on_exec(hp->fds[EOF_CMD_WRITE])) return 0;
-
    /* parent */
    if(hp->pid > 0) { 
       /* remove unecessary fds */
-      close(hp->fds[HP_EXT_READ]);
-      close(hp->fds[HP_EXT_WRITE]);
+      close(fd_from_extern[1]);
+      close(fd_to_extern[0]);
 
       /* Don't block reads in ceof */
       if(fcntl(hp->fds[EOF_CMD_READ], F_SETFL, O_NONBLOCK) < 0) {
@@ -78,12 +79,12 @@ int forkexecpipe(struct helper *hp)
    }
 
    /* child: connect stdin and stdout */
-   if(dup2(hp->fds[2], STDIN_FILENO) == -1) {
+   if(dup2(fd_to_extern[0], STDIN_FILENO) == -1) {
       perror("dup2: stdin");
       _exit(1);
    }
 
-   if(dup2(hp->fds[1], STDOUT_FILENO) == -1) {
+   if(dup2(fd_from_extern[1], STDOUT_FILENO) == -1) {
       perror("dup2: stdout");
       _exit(1);
    }
