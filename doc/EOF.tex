@@ -1238,7 +1238,8 @@ ID & EOFsdt: id & packet id & afdb12\\
 % -----------------------------------------------------------------------------
 \subsection{Connection}
 The crypto engine is started by EOFi at startup and communicates with EOFi
-through stdin and stdout.
+through stdin and stdout. It also gets the path to the gpg-homedir as the
+first parameter.
 % -----------------------------------------------------------------------------
 \subsection{1200: Encrypt packet}
 Passes the following information to the crypto:
@@ -1251,6 +1252,10 @@ Passes the following information to the crypto:
 
 % -----------------------------------------------------------------------------
 \subsection{1201: Decrypt packet}
+% -----------------------------------------------------------------------------
+\subsection{1202: Sign packet}
+% -----------------------------------------------------------------------------
+\subsection{1203: Get signer of packet}
 % -----------------------------------------------------------------------------
 \subsection{2200: Encrypted a packet}
 \begin{itemize}
