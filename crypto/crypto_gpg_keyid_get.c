@@ -24,7 +24,7 @@
 
 #include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
-#include "ceofhack.h"   /* context           */
+#include "crypto.h"     /* context           */
 #include "eof.h"        /* errmsg            */
 
 int crypto_gpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE])

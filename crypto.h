@@ -32,6 +32,7 @@
 
 /* depending libs */
 #include <gpgme.h>      /* gpgme             */
+#include <eof.h>        /* EOF               */
 
 /* structures */
 #include <limits.h>              /* PATH_MAX                      */
