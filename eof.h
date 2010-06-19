@@ -185,6 +185,7 @@ int eof_ui_quit(int sockfd);
 int eof_cmd_init(int categories);
 struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []));
 void eof_cmd_cat_init(int cat, struct eof_cmd *def);
+int eof_cmd_handle(unsigned long cat, int fd[]);
 
 
 #endif
