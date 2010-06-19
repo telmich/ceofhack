@@ -29,7 +29,8 @@
 #include <stdlib.h>     /* getenv            */
 #include <unistd.h>     /* STDIN_FILENO      */
 
-#include <fcntl.h>         /* fcntl          */
+#include <sys/select.h> /* select()          */
+#include <fcntl.h>      /* fcntl             */
 #include <string.h>     /* memset            */
 
 #include <eof.h>       /* EOF */
@@ -42,7 +43,8 @@ int main(int argc, char **argv)
 {
    char cmd[EOF_L_CMD+1];
    int fds[EOF_L_RW_SIZE];
-   int flags;
+   int tmp;
+   fd_set readfds;
 
    cmd[1] = 0;
 
@@ -57,23 +59,37 @@ int main(int argc, char **argv)
    fds[EOF_CMD_READ] = STDIN_FILENO;
    fds[EOF_CMD_WRITE] = STDOUT_FILENO;
 
-   /* always wait for input */
-   flags = fcntl(fds[EOF_CMD_READ], F_GETFL);
-   flags ^= O_NONBLOCK;
-   if(fcntl(fds[EOF_CMD_READ], F_SETFL, flags) < 0) {
+   /* make sure that it's not blocking */
+   tmp = fcntl(fds[EOF_CMD_READ], F_GETFL);
+   tmp |= O_NONBLOCK;
+   if(fcntl(fds[EOF_CMD_READ], F_SETFL, tmp) < 0) {
       perror("fcntl");
    }
-   flags = fcntl(fds[EOF_CMD_WRITE], F_GETFL);
-   flags ^= O_NONBLOCK;
-   if(fcntl(fds[EOF_CMD_WRITE], F_SETFL, flags) < 0) {
+   tmp = fcntl(fds[EOF_CMD_WRITE], F_GETFL);
+   tmp |= O_NONBLOCK;
+   if(fcntl(fds[EOF_CMD_WRITE], F_SETFL, tmp) < 0) {
       perror("fcntl");
    }
    
    while(1) {
-      if(!eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds)) {
-         fprintf(stderr, "Handler failed\n");
-         return 1;
+      FD_ZERO(&readfds);
+      FD_SET(fds[EOF_CMD_READ],&readfds);
+
+      fprintf(stderr, "goingr for %d\n", fds[EOF_CMD_READ]);
+
+      tmp = select(1, &readfds, NULL, NULL, NULL);
+      if(tmp == -1) {
+         if(errno != EINTR) {
+            perror("select");
+            return 1;
+         } else fprintf(stderr, "INTR\n");
+      } else if (FD_ISSET(fds[EOF_CMD_READ],&readfds)) {
+         if(( tmp = eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds)) < 1) {
+            fprintf(stderr, "Handler failed or eof reached, %d\n", tmp);
+            return 1;
+         }
       }
+      fprintf(stderr, "back in main, %d \n", tmp);
    }
 
    return 0;

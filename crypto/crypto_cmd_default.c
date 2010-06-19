@@ -28,5 +28,6 @@
 int crypto_cmd_default(int fd[])
 {
    fprintf(stderr, "Don't know how to handle unknown cmds\n");
-   _exit(1);
+   return 1;
+   //_exit(1);
 }

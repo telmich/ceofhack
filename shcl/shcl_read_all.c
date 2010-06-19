@@ -27,7 +27,9 @@
 
 ssize_t shcl_read_all(int fd, void *buf, size_t count)
 {
-   while(read(fd, buf, count) == -1) {
+   ssize_t ret;
+
+   while((ret = read(fd, buf, count)) == -1) {
       if(errno == EINTR) { /* retry */
          continue;
       } else {
@@ -35,5 +37,5 @@ ssize_t shcl_read_all(int fd, void *buf, size_t count)
       }
    }
    
-   return count;
+   return ret;
 }
