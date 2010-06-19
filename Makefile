@@ -54,9 +54,13 @@ CMD+=cmd_3000.c
 #EOFS=eofs_init.c eofs_iterate.c
 EOFS=
 
-# gpg (crypto)
+# Crypto parts within ceofhack
 CRYPTO=crypto/crypto_init.c crypto/crypto_gpg_init.c
 CRYPTO+=crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
+
+# Crypto part within ceof-crypto (standalone)
+CEOF_CRYPTO=crypto/crypto_init.c crypto/crypto_gpg_init.c
+CEOF_CRYPTO+=crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
 
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
@@ -75,12 +79,18 @@ CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
 CEOFHACK+=config_init.c
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
+
+# objects
 CEOFHACK_O=$(CEOFHACK:.c=.o)
+CEOF_CRYPTO_O=$(CEOFHACK:.c=.o)
 
 # headers
-HEADERS=ceofhack.h ceof.h eof.h version.h
+HEADERS_GENERIC=eof.h
+HEADERS_CEOF=ceof.h version.h
+HEADERS_CEOFHACK=ceofhack.h $(HEADERS_GENERIC) $(HEADERS_CEOF)
+HEADERS_CRYPTO=crypto.h  $(HEADERS_GENERIC) $(HEADERS_CEOF)
 
-PROG=ceofhack
+PROG=ceofhack ceof-crypto
 
 DOC=doc/EOF
 
@@ -113,6 +123,9 @@ tests/testcconfig: tests/testcconfig.c cconfig_tree.c
 
 $(CEOFHACK_O): $(HEADERS) Makefile Makefile.include
 ceofhack: $(CEOFHACK_O)
+	$(LD) -o $@ $^
+
+ceof-crypto: $(CEOF_CRYPTO_O)
 	$(LD) -o $@ $^
 
 # Install

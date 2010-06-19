@@ -33,12 +33,6 @@
                                   * channels contains stdin, listen
                                   * sockets and outgoing sockets
                                   */
-#define HACK_CMD_CAT    32       /* number of command categories:
-                                  * - Sending transport protocols (TPS)
-                                  * - Listening transport protocols (TPL)
-                                  * - user interfaces (UI)
-                                  * uses an unsigned long it -> 32 is maximum!
-                                  */
 #define EOF_L_PEER_INPUT  256    /* FIXME: HACKs */
 #define EOF_L_MAX_UI_WAIT  32    /* FIXME: HACKs */
 

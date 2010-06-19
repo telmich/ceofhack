@@ -66,11 +66,9 @@ struct options {
    char uisocket[PATH_MAX+1];
    char pidfile[PATH_MAX+1];
    char mykeyidfile[PATH_MAX+1];
-   char gpg[PATH_MAX+1];
 
    char mykeyid[EOF_L_KEYID+1];
    pid_t pid;
-
 };
 
 
