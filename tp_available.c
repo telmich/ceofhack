@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,14 +26,14 @@
 #include <stdio.h>               /* printf                        */
 #include <string.h>              /* str*                          */
 
-#include "ceofhack.h"   /* functions etc. */
+#include "ceofhack.h"
+#include "ceof.h"
 
 struct cconfig *tp_available(char *url, int cat)
 {
    int i;
 
    for(i=0; i < tpa_cnt; i++) {
-//      printf("LTP/TP: %s / %s [%lu]\n", url, tpa[i].scheme, strlen(tpa[i].scheme));
       if(!strncmp(url, tpa[i].scheme, strlen(tpa[i].scheme))) {
          if(cat == EOF_CAT_TPL && tpa[i].listen) {
             return tpa[i].listen;

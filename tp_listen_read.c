@@ -22,9 +22,10 @@
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
+#include "ceof.h"
 
 int tp_listen_read(int fd[])
 {
-   return cmd_handle(EOF_CAT_TPL, fd);
+   return eof_cmd_handle(EOF_CAT_TPL, fd);
 }

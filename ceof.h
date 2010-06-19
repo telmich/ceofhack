@@ -40,6 +40,7 @@
 #define CEOF_MSG_CRYPTONAME      "crypto"
 #define CEOF_MSG_CRYPTOPROMPT    CEOF_MSG_CRYPTONAME "> "
 
+/* exit codes */
 enum {
    CEOF_EX_RUNS = 0,
    CEOF_EX_RUNS_ERR,
@@ -56,6 +57,15 @@ enum {
    CEOF_EX_EOFS,
    CEOF_EX_NOWAY
 };
+
+/* command categories */
+enum {                                    /* List of EOF categories        */  
+   EOF_CAT_TPL,                           /* transport protocol listener   */  
+   EOF_CAT_TPS,                           /* transport protocol sender     */  
+   EOF_CAT_UI,                            /* user interfaces               */  
+   EOF_CAT_MAX                            /* maximum number of EOFs types  */  
+};
+
 
 /* structures */
 #include <limits.h>              /* PATH_MAX                      */

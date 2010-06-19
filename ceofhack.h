@@ -69,13 +69,6 @@ struct tpl {                     /* listening transport protocols */
    struct cconfig *listen;       /* program that can decode stuff */
 };
 
-enum {                                    /* List of EOF categories        */  
-   EOF_CAT_TPL,                           /* transport protocol listener   */  
-   EOF_CAT_TPS,                           /* transport protocol sender     */  
-   EOF_CAT_UI,                            /* user interfaces               */  
-   EOF_CAT_MAX                            /* maximum number of EOFs types  */  
-};
-
 /* hacking cconfig lib into ceofhack */
 struct cconfig {
    char path[PATH_MAX+1];     /* full path         */

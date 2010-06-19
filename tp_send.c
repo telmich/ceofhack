@@ -25,6 +25,7 @@
 #include <string.h>        /* strlen()          */
 #include <stdio.h>         /* NULL              */
 #include "ceofhack.h"      /* functions etc.    */
+#include "ceof.h"
 
 int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
 {
