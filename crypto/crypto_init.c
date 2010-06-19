@@ -40,8 +40,7 @@ int crypto_init()
 
    printf(CEOF_MSG_CRYPTOPROMPT "My keyid: %s\n", opt.mykeyid);
 
-   /* init gpg */
-   if(!crypto_gpg_init()) return 0;
+   /* init ceof-crpyto */
 
    return 1;
 }

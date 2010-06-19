@@ -37,16 +37,17 @@ struct crypto_options opt;
 
 int main(int argc, char **argv)
 {
+   char cmd[EOF_L_CMD];
 
    if(argc != 2) crypto_usage();
 
    strncpy(opt.cryptohome, argv[1], PATH_MAX);
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
-   
 
+   if(!crypto_gpg_init()) return 0;
+   
    while(1) {
-      /* always reinit, poll array may have changed */
-      fd_to_poll(&pfd_cnt);
+      /* read command */
 
       printf(CEOF_MSG_PROMPT "Polling %d helper channels...\n", pfd_cnt);
       cnt = poll(pfd, pfd_cnt, -1);

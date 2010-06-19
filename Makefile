@@ -55,8 +55,7 @@ CMD+=cmd_3000.c
 EOFS=
 
 # Crypto parts within ceofhack
-CRYPTO=crypto/crypto_init.c crypto/crypto_gpg_init.c
-CRYPTO+=crypto/cgpg_keyid_get.c crypto/cgpg_encrypt.c crypto/cgpg_decrypt.c
+CRYPTO=crypto/crypto_init.c
 
 # Crypto part within ceof-crypto (standalone)
 CEOF_CRYPTO=crypto/crypto_init.c crypto/crypto_gpg_init.c
@@ -82,7 +81,7 @@ CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
 
 # objects
 CEOFHACK_O=$(CEOFHACK:.c=.o)
-CEOF_CRYPTO_O=$(CEOFHACK:.c=.o)
+CEOF_CRYPTO_O=$(CEOF_CRYPTO:.c=.o)
 
 # headers
 HEADERS_GENERIC=eof.h

@@ -44,8 +44,5 @@ int config_init()
 
    opt.pid = getpid();
 
-   /* FIXME: use symlink in configuration directory */
-   strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
-
    return 1;
 }
