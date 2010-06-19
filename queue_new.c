@@ -60,7 +60,7 @@ FIXME: here
    /* what about the ID? */
 
    /* read cmd and id */
-   if(read_all(fd[HP_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
+   if(shcl_read_all(fd[HP_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
       perror("queue_read");
 
       /* FIXME: disable input? */

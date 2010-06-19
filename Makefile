@@ -24,8 +24,9 @@ CCONFIG=cconfig_tree.c cconfig_find_fn.c cconfig_tree_dump.c cconfig_entries_get
 CCONFIG+=cconfig_entry_fn.c
 
 # Small helper c library
-SHCL=openreadclosestatic.c convert.c read_all.c write_all.c forkexecpipe.c
+SHCL=openreadclosestatic.c convert.c forkexecpipe.c
 SHCL+=fileexists.c openwriteclose.c close_all.c close_on_exec.c
+SHCL+=shcl/shcl_read_all.c shcl/shcl_write_all.c
 
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_listen_add.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c

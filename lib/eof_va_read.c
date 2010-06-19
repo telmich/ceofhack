@@ -42,7 +42,7 @@ int eof_va_read(int fd, int nof, ...) /* nof = number of fields */
       len =    va_arg(ap, int);
       data =   va_arg(ap, char *);
 
-      if(read_all(fd, data, len) != len) {
+      if(shcl_read_all(fd, data, len) != len) {
          return 0;
       }
 

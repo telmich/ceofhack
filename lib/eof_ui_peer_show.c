@@ -60,7 +60,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
    if(strncmp(cmd, EOF_CMD_UI_PEER_INFO, EOF_L_CMD)) {
       printf("returned cmd=%s (should be %s)\n", cmd, EOF_CMD_UI_PEER_INFO);
       errno = 0; /* failure, but no library failure */
-      read_all(sockfd, errmsg, EOF_L_MESSAGE);
+      shcl_read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
       return -1; /* failure in any case */
    }
@@ -82,7 +82,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
    for(i=0; i < noa; i++) {
       p = *addrs + (i * (EOF_L_ADDRESS+1));
 
-      if(read_all(sockfd, p, EOF_L_ADDRESS) != EOF_L_ADDRESS) {
+      if(shcl_read_all(sockfd, p, EOF_L_ADDRESS) != EOF_L_ADDRESS) {
          return -1;
       }
    }

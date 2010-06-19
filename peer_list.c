@@ -41,12 +41,12 @@ int peers_list(int fd)
    snprintf(intro+EOF_L_CMD, EOF_L_SIZE, "%d", i);
    
    printf(CEOF_MSG_UIPROMPT "/peer list intro: %s\n", intro);
-   if(write_all(fd, intro, EOF_L_CMD+EOF_L_SIZE) != (EOF_L_CMD+EOF_L_SIZE)) 
+   if(shcl_write_all(fd, intro, EOF_L_CMD+EOF_L_SIZE) != (EOF_L_CMD+EOF_L_SIZE)) 
       return 0;
 
    for(p = peers_list.next; p != NULL; p = p->next) {
       printf(CEOF_MSG_UIPROMPT "/peer list: %s\n", p->name);
-      if(write_all(fd, p->name, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
+      if(shcl_write_all(fd, p->name, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
          return 0;
       }
    }

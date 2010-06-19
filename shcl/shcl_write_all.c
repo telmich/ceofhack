@@ -18,17 +18,18 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Read all incoming data, up to count
+ * Wrapper for write() that continues on EINTR / incomplete write
+ * Based on an idea of A. Pic. (eofdev at apic.name), 2009.
  *
  */
 
 #include <unistd.h>     /* write          */
-#include <errno.h>      /* errno          */
+#include <errno.h>      /* EINTR          */
 
-ssize_t read_all(int fd, void *buf, size_t count)
+ssize_t shcl_write_all(int fd, const void *buf, size_t count)
 {
-   while(read(fd, buf, count) == -1) {
-      if(errno == EINTR) { /* retry */
+   while(write(fd, buf, count) == -1) {
+      if(errno == EINTR) {
          continue;
       } else {
          return -1;

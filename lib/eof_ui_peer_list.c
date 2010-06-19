@@ -43,20 +43,20 @@ int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res)
       return -1;
    }
 
-   if(read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
+   if(shcl_read_all(sockfd, buf, EOF_L_CMD) != EOF_L_CMD) {
       return -1;
    }
 
    if(strncmp(buf, EOF_CMD_UI_PEER_LISTING, EOF_L_CMD)) {
       printf("returned cmd=%s (should be %s)\n", buf, EOF_CMD_UI_PEER_LISTING);
       errno = 0; /* failure, but no library failure */
-      read_all(sockfd, errmsg, EOF_L_MESSAGE);
+      shcl_read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
       return -1; /* failure in any case */
    }
 
    buf[EOF_L_SIZE] = 0;
-   if(read_all(sockfd, buf, EOF_L_SIZE) != EOF_L_SIZE) {
+   if(shcl_read_all(sockfd, buf, EOF_L_SIZE) != EOF_L_SIZE) {
       return -1;
    }
 
@@ -70,7 +70,7 @@ int eof_ui_peer_list(int sockfd, char errmsg[EOF_L_MESSAGE], char **res)
    for(i=0; i < nop; i++) {
       p = *res + (i * (EOF_L_NICKNAME+1));
 
-      if(read_all(sockfd, p, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
+      if(shcl_read_all(sockfd, p, EOF_L_NICKNAME) != EOF_L_NICKNAME) {
          return -1;
       }
    }

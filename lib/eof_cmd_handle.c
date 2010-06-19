@@ -25,10 +25,9 @@
 #include <unistd.h>     /* read           */
 #include <stdio.h>      /* perror         */
 
-#include "ceofhack.h"   /* functions etc. */
-#include "ceof.h"       /* functions etc. */
+#include <eof.h>       /* functions etc. */
 
-int cmd_handle(unsigned long eofs, int fd[])
+int eof_cmd_handle(unsigned long eofs, int fd[])
 {
    struct cmd *cmd;
    char data[EOF_L_CMD];

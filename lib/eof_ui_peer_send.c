@@ -55,7 +55,7 @@ int eof_ui_peer_send(int sockfd, char errmsg[EOF_L_MESSAGE],
    if(strncmp(cmd, EOF_CMD_UI_ACK, EOF_L_CMD)) {
       printf("Returned cmd=%s (should be %s)\n", cmd, EOF_CMD_UI_ACK);
       errno = 0; /* failure, but no library failure */
-      read_all(sockfd, errmsg, EOF_L_MESSAGE);
+      shcl_read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
       return 0; /* failure in any case */
    }

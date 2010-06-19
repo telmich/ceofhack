@@ -44,7 +44,7 @@ int eof_va_write(int sockfd, int nof, ...) /* nof = number of fields */
       data =   va_arg(ap, char *);
       printf("writing: %s, %d\n", data, len);
 
-      if(write_all(sockfd, data, len) != len) {
+      if(shcl_write_all(sockfd, data, len) != len) {
          return 0;
       }
 

@@ -42,20 +42,18 @@ int main(int argc, char **argv)
 {
    char cmd[EOF_L_CMD+1];
 
+   cmd[1] = 0;
+
    if(argc != 2) crypto_usage();
 
    strncpy(opt.cryptohome, argv[1], PATH_MAX);
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
 
    if(!crypto_gpg_init()) return 1;
-   if(!crypto_cmd_init(1)) return 2;
+   if(!crypto_cmd_init()) return 2;
    
    while(1) {
-      /* read command */
-      memset(cmd, 0, EOF_L_CMD+1);
-      if(!eof_va_read(STDIN_FILENO, 1, EOF_L_CMD, cmd)) {
-         return 1;
-      }
+//      eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, 
 
    }
 

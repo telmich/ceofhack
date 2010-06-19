@@ -56,7 +56,7 @@ int eof_ui_peer_rename(int sockfd, char errmsg[EOF_L_MESSAGE],
 
    if(strncmp(cmd, EOF_CMD_UI_PEER_RENAMED, EOF_L_CMD)) {
       errno = 0; /* failure, but no library failure */
-      read_all(sockfd, errmsg, EOF_L_MESSAGE);
+      shcl_read_all(sockfd, errmsg, EOF_L_MESSAGE);
 
       return 0; /* failure in any case */
    }

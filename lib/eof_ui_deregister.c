@@ -30,7 +30,7 @@
 int eof_ui_deregister(int sockfd)
 {
    /* submit deregister command: cmd_2101.c */
-   if(write_all(sockfd, EOF_CMD_UI_DEREGISTER, EOF_L_CMD) != EOF_L_CMD) {
+   if(shcl_write_all(sockfd, EOF_CMD_UI_DEREGISTER, EOF_L_CMD) != EOF_L_CMD) {
       return 0;
    }
 
