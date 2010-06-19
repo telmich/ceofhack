@@ -35,8 +35,8 @@ int crypto_cmd_init()
    if(!(newcmd = eof_cmd_create(EOF_CMD_CRYPTO_DEFAULT, crypto_cmd_default))) return 0;
    eof_cmd_cat_init(CEOF_CRYPTO_CAT_CEOF, newcmd);
 
-//   if(!(newcmd = cmd_create(EOF_CMD_CRYPTO_ENCRYPT, cmd_1200))) return 0;
-//   if(!cmd_cat_add(CEOF_CRYPTO_CAT_CEOF, newcmd)) return 0;
+   if(!(newcmd = cmd_create(EOF_CMD_CRYPTO_ENCRYPT, cmd_1200))) return 0;
+   if(!cmd_cat_add(CEOF_CRYPTO_CAT_CEOF, newcmd)) return 0;
 
    return 1;
 }

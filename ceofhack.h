@@ -194,8 +194,6 @@ ssize_t read_all(int fd, void *buf, size_t count);
 
 /* commands and categories */
 int cmd_init();
-int cmd_cat_default(int cat, struct eof_cmd *);
-struct eof_cmd *cmd_create(char num[], int (*handle)(int []));
 
 int cmd_2000(int []);
 int cmd_2002(int []);
