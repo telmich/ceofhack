@@ -1,27 +1,10 @@
-Retrieve our own key(id)
+Long term aim:
+   -> Send and retrieve key(id) with signed messages.
+     ->  Cleanup crypto and create ceof-crypto.
+      -> Cleanup cmd_handle & friends to be used in crypto
 
 --------------------------------------------------------------------------------
-
-- Sign messages
-   - cleanup crypto area
 - Add 3xxx header to outgoing messages
-
---------------------------------------------------------------------------------
-
-Fix 1103, also include message.
-Thus implement 1103 this way:
-   - fillup nick with "UNKNOWN" for know
-
---------------------------------------------------------------------------------
-
-- create external commands (3xxx):
-   - message is for you
-   - forward packet
-   - drop packet
-
-- check pgp signature, if incoming package is for me
-- pgp-sign message packets
-
 --------------------------------------------------------------------------------
 
  - Switch to asynchronous within ceofhack.
