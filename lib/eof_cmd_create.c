@@ -24,9 +24,9 @@
 
 #include <stdio.h>      /* printf            */
 #include <stdlib.h>     /* malloc, NULL      */
-#include "ceofhack.h"   /* functions etc.    */
+#include <eof.h>        /* functions etc.    */
 
-struct cmd *cmd_create(char num[], int (*handle)(int []))
+struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []))
 {
    struct cmd *new;
 
@@ -35,8 +35,6 @@ struct cmd *cmd_create(char num[], int (*handle)(int []))
 
    new->num    = num;
    new->handle = handle;
-
-//   printf("Created cmd %s\n", num);
 
    return new;
 }

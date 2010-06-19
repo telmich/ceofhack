@@ -58,14 +58,6 @@ struct ui_cmd {
    struct ui_cmd *next;
 };
 
-/* EOF commands */
-struct cmd {
-   char *num;
-   int (*handle)(int []);
-   int queue_req;
-   struct cmd *next;
-};
-
 /* further structs with external dependencies */
 #include <sys/types.h>           /* POSIX for pid_t               */
 #include <limits.h>              /* PATH_MAX                      */

@@ -73,7 +73,12 @@
 #define EOF_CMD_UI_QUIT             "2199"
 
 /* crypto engine */
-#define EOF_CMD_CRYPTO_ENCRYPT      "2199"
+#define EOF_CMD_CRYPTO_ENCRYPT      "1200"
+#define EOF_CMD_CRYPTO_DECRYPT      "1201"
+
+#define EOF_CMD_CRYPTO_DEFAULT      "22xx"
+#define EOF_CMD_CRYPTO_ENCRYPTED    "2200"
+#define EOF_CMD_CRYPTO_DECRYPTED    "2201"
 
 /* decoded packets from outside */
 #define EOF_CMD_ONION_DROP          "3000"
@@ -110,6 +115,14 @@
 /*******************************************************************************
  * Structures
  */
+
+/* EOF commands */
+struct eof_cmd {
+   char *num;
+   int (*handle)(int []);
+   int queue_req;
+   struct cmd *next;
+};
 
 /* EOF commands categories */
 struct eof_cmd_cat {
@@ -170,5 +183,7 @@ int eof_ui_quit(int sockfd);
 
 /* library functions: command handler */
 int eof_cmd_init(int categories);
+struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []));
+
 
 #endif
