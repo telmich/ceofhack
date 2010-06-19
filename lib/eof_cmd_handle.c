@@ -29,9 +29,8 @@
 
 int eof_cmd_handle(unsigned long eofs, int fd[])
 {
-   struct cmd *cmd;
+   struct eof_cmd *cmd;
    char data[EOF_L_CMD];
-   int len;
 
    /* always read a command first */
    if(shcl_read_all(fd[HP_READ], data, EOF_L_CMD) == -1) {
@@ -39,12 +38,9 @@ int eof_cmd_handle(unsigned long eofs, int fd[])
       return 0;
    }
 
-   cmd = cmd_find_in_cat(eofs, data);
+   cmd = eof_cmd_find_in_cat(eofs, data);
    if(!cmd) {
-      printf(CEOF_MSG_PROMPT "No cmd function found for command, calling default cmd!\n");
-      cmd = cmd_cat_get_default_cmd(eofs);
-   } else {
-      printf(CEOF_MSG_PROMPT "CMD %s found...\n", cmd->num);
+      cmd = eof_cmd_cat_get_default_cmd(eofs);
    }
 
    return cmd->handle(fd);
