@@ -54,15 +54,6 @@ CMD+=cmd_3000.c
 #EOFS=eofs_init.c eofs_iterate.c
 EOFS=
 
-# Crypto parts within ceofhack
-CRYPTO=crypto_init.c
-
-# Crypto part within ceof-crypto (standalone)
-CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
-CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
-CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
-CEOF_CRYPTO+=crypto/crypto_usage.c
-
 # ceof (the next generation EOFi ;-))
 CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 
@@ -74,6 +65,17 @@ LIB+=lib/eof_id_init.c lib/eof_id_new.c
 
 # interface for the user interfaces
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
+
+# Crypto parts within ceofhack
+CRYPTO=crypto_init.c
+
+# Crypto part within ceof-crypto (standalone)
+CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
+CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
+CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
+CEOF_CRYPTO+=crypto/crypto_usage.c
+CEOF_CRYPTO+=$(LIB) $(SHCL)
+
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c

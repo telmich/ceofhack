@@ -25,12 +25,14 @@
 #include <poll.h>       /* guess what        */
 #include <limits.h>     /* PATH_MAX          */
 #include <stdio.h>      /* printf()          */
-#include <string.h>     /* str()*            */
 #include <errno.h>      /* guess what        */
 #include <stdlib.h>     /* getenv            */
 #include <unistd.h>     /* STDIN_FILENO      */
 
-#include "eof.h"       /* EOF */
+
+#include <string.h>     /* memset            */
+
+#include <eof.h>       /* EOF */
 #include "crypto.h"    /* eof-crypto */
 
 
@@ -38,7 +40,7 @@ struct crypto_options opt;
 
 int main(int argc, char **argv)
 {
-//   char cmd[EOF_L_CMD];
+   char cmd[EOF_L_CMD+1];
 
    if(argc != 2) crypto_usage();
 
@@ -47,8 +49,12 @@ int main(int argc, char **argv)
 
    if(!crypto_gpg_init()) return 0;
    
-   while(0) {
+   while(1) {
       /* read command */
+      memset(cmd, 0, EOF_L_CMD+1);
+      if(!eof_va_read(STDIN_FILENO, 1, EOF_L_CMD, cmd)) {
+         return 1;
+      }
 
    }
 
