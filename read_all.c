@@ -24,21 +24,16 @@
 
 #include <unistd.h>     /* write          */
 #include <errno.h>      /* errno          */
-#include <stdio.h>      /* perror         */
 
 ssize_t read_all(int fd, void *buf, size_t count)
 {
-   printf("reading %d from %d\n", (int) count, fd);
-
    while(read(fd, buf, count) == -1) {
       if(errno == EINTR) { /* retry */
          continue;
       } else {
-         printf("read_all FAiLED\n");
          return -1;
       }
    }
    
    return count;
 }
-
