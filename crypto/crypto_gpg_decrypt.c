@@ -23,9 +23,9 @@
  */
 
 #include <gpgme.h>      /* gpgme             */
-#include "ceofhack.h"   /* functions etc.    */
+#include "crypto.h"     /* functions etc.    */
 
-ssize_t cgpg_decrypt(char *msg, ssize_t msglen, char buf[], ssize_t bufsize)
+ssize_t crypto_gpg_decrypt(char *msg, ssize_t msglen, char buf[], ssize_t bufsize)
 {
    gpgme_data_t plaintext;
    gpgme_data_t encrypted;

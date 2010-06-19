@@ -18,3 +18,4 @@ dia/*.dia~
 *.dia~
 tests
 version.h
+ceof-crypto

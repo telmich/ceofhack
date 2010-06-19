@@ -60,7 +60,7 @@ CRYPTO=crypto_init.c
 # Crypto part within ceof-crypto (standalone)
 CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
 CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
-CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/cgpg_decrypt.c
+CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
 CEOF_CRYPTO+=crypto/crypto_usage.c
 
 # ceof (the next generation EOFi ;-))
