@@ -1,7 +1,7 @@
-Long term aim:
-   -> Send and retrieve key(id) with signed messages.
-     ->  Cleanup crypto and create ceof-crypto.
+Long term aim: Send and retrieve key(id) with signed messages.
+   ->  Cleanup crypto and create ceof-crypto.
       -> Cleanup cmd_handle & friends to be used in crypto
+         -> cleanup helper, so HP_READ and co. can vanish (like pipe(2))
 
 --------------------------------------------------------------------------------
 - Add 3xxx header to outgoing messages
