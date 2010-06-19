@@ -25,7 +25,7 @@
 #include <stdio.h>     /* printf         */
 #include "ceofhack.h"  /* functions etc.  */
 
-int ui_help(char *UNUSED(str))
+int ui_help(char *str)
 {
    printf("Your EOF lifesaver:\n\n"
           "Currently supported commands:\n\n"

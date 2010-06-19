@@ -25,7 +25,7 @@
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_2000(int UNUSED(fd[]))
+int cmd_2000(int fd[])
 {
    /* FIXME: mark packet as sent to next peer in queue (no queue implemented yet) */
 

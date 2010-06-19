@@ -26,7 +26,7 @@
 #include "ceofhack.h"   /* functions etc.    */
 #include "ceof.h"
 
-int cmd_2199(int UNUSED(fd[]))
+int cmd_2199(int fd[])
 {
    printf(CEOF_MSG_UIPROMPT "/quit request\n");
    

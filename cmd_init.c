@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,13 +22,15 @@
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
 
-struct cmd_cat categories[EOF_CAT_MAX];
+#include "ceofhack.h"   /* functions etc. */
 
 int cmd_init()
 {
    struct cmd *newcmd;
+
+   if(!eof_cmd_init(EOF_CAT_MAX)) return 0;
 
    /* TRANSPORT PROTOCOL SENDING */
    if(!(newcmd = cmd_create(EOF_CMD_TPS_DEFAULT, cmd_20xx))) return 0;

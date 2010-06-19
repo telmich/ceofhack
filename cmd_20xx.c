@@ -24,7 +24,7 @@
 
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_20xx(int UNUSED(fd[]))
+int cmd_20xx(int fd[])
 {
    return 1; /* dummy */
 }

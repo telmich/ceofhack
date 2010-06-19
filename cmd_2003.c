@@ -25,7 +25,7 @@
 #include <stdio.h>      /* printf()          */
 #include "ceofhack.h"   /* functions etc.    */
 
-int cmd_2003(int UNUSED(fd[]))
+int cmd_2003(int fd[])
 {
    /* FIXME: mark tpl as enabled and announce it to peers */
 

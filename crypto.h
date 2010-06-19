@@ -30,10 +30,15 @@
 #include <eof.h>        /* EOF               */
 #include "version.h"
 
-/* constants */
+/* messages */
 #define CEOF_MSG_CRYPTO_NAME     "ceof-crypto"
 #define CEOF_MSG_CRYPTO_PROMPT   CEOF_MSG_CRYPTO_NAME "> "
 #define CEOF_MSG_CRYPTO_USAGE    CEOF_MSG_CRYPTO_PROMPT "Version " CEOF_VERSION "; arguments: gpg-dir\n"
+
+
+/* limits/sizes */
+#define CEOF_CRYPTO_CMD_CATS     1        /* only communicate with ceof */
+#define CEOF_CRYPTO_CAT_CEOF     0        /* category id                */
 
 /* structures */
 #include <limits.h>              /* PATH_MAX                      */
@@ -46,6 +51,10 @@ struct crypto_options {
 void crypto_usage();
 int crypto_gpg_init();
 int crypto_gpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE]);
+int crypto_cmd_init();
+int crypto_cmd_default(int fd[]);
+
+
 
 /* global vars */
 extern struct crypto_options opt;
@@ -53,7 +62,5 @@ extern struct crypto_options opt;
 extern gpgme_ctx_t    gpg_context;
 extern gpgme_data_t   gpg_encrypt;
 extern gpgme_data_t   gpg_decrypt;
-
-
 
 #endif

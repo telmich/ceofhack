@@ -22,6 +22,8 @@
  *
  */
 
+#include <unistd.h>
+
 int crypto_cmd_default(int fd[])
 {
    _exit(1);

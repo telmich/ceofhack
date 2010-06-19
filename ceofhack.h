@@ -8,14 +8,6 @@
 #include "shcl.h"    /* small helper c library     */
 
 /****************** Defines  */
-/* ugly hack to satisfy -Wextra */
-#ifdef UNUSED
-#elif defined(__GNUC__)
-# define UNUSED(x) UNUSED_ ## x __attribute__((unused))
-#else
-# define UNUSED(x) x
-#endif
-
 /* the library version is not yet used */
 #define LIBEOF_VERSION "E.O.F"
 
@@ -102,7 +94,7 @@ struct queue {
 
 struct queueentry {
    char              id[EOF_L_ID];
-   struct cmd        cmd;                 /* the questioning command       */
+   struct eof_cmd     cmd;                 /* the questioning command       */
    struct queueentry *next;               /* pointer to the next entry     */
 };
 

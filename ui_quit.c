@@ -26,7 +26,7 @@
 
 #include "ceofhack.h"
 
-int ui_quit(char *UNUSED(args))
+int ui_quit(char *args)
 {
    ceof_exit(1);
 
