@@ -25,14 +25,15 @@
 #ifndef CEOF_CRYPTO_H
 #define CEOF_CRYPTO_H
 
+/* depending libs/headers */
+#include <gpgme.h>      /* gpgme             */
+#include <eof.h>        /* EOF               */
+#include "version.h"
+
 /* constants */
 #define CEOF_MSG_CRYPTO_NAME     "ceof-crypto"
 #define CEOF_MSG_CRYPTO_PROMPT   CEOF_MSG_CRYPTO_NAME "> "
-#define CEOF_MSG_CRYPTO_USAGE    CEOF_MSG_CRYPTO_PROMPT "Arguments: gpg-dir\n"
-
-/* depending libs */
-#include <gpgme.h>      /* gpgme             */
-#include <eof.h>        /* EOF               */
+#define CEOF_MSG_CRYPTO_USAGE    CEOF_MSG_CRYPTO_PROMPT "Version " CEOF_VERSION "; arguments: gpg-dir\n"
 
 /* structures */
 #include <limits.h>              /* PATH_MAX                      */
