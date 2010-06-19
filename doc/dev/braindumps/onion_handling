@@ -1,0 +1,16 @@
+- Send packet from ceofhack:
+
+   - Create onion with n layers
+   - All functions need to accept previously generated layers
+
+
+--------------------------------------------------------------------------------
+We need functions, which realise the following push/pop (or add/del) methods:
+
+forward()      - somewhere
+msg_forward()  - somewhere
+msg_drop()     - always the last in the chain?
+drop()         - always the last in the chain?
+
+We also need some random (noise!) input to decide, which packets to use
+in which order.
