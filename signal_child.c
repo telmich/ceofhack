@@ -23,6 +23,7 @@
  */
 
 #include <sys/wait.h>   /* waitpid()         */
+#include <stdio.h>      /* printf            */
 #include "ceofhack.h"   /* functions etc.    */
 
 void signal_child(int tmp)

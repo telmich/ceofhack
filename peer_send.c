@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -40,7 +40,9 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    }
 
    printf("Encrypting message...\n");
-   /* encrypt msg for $nick */
+   /* register into queue for retrieval of pkg */
+   /* send encrypt msg for $keyid */
+   /* handle send in queue handler */
    if(!(len = cgpg_encrypt(nick, msg, buf, BIGBUF, errmsg))) return 0;
    printf("Encrypted message: %s\n", buf);
    

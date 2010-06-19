@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>               /* perror()                      */
 #include <stdlib.h>              /* NULL                          */
 #include <string.h>              /* str*                          */
 #include <limits.h>              /* PATH_MAX                      */

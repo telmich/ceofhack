@@ -77,10 +77,5 @@ void ceof_banner(char *);
 
 /* crypto */
 int crypto_init();
-int crypto_gpg_init();
-
-/* eof subsystem handler */
-int eofs_init();
-//int eofs_iterate(int , struct eofs_list **);
 
 #endif
