@@ -1272,11 +1272,26 @@ Packet & Binary data & The plaintext & BLOB\\
 % -----------------------------------------------------------------------------
 \subsection{1203: Get verified keyid of signer of packet}
 % -----------------------------------------------------------------------------
-\subsection{2200: Encrypted a packet}
+\subsection{2200: Encrypted packet}
+\subsubsection{Parameters}
+\begin{longtable}{|c|c|c|c|}
+\caption{2200: Encrypted packet}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id of 1200 request & afdb12\\
+\hline
+Size & EOFsdt: size & Size of packet, excluding this header & 424242\\
+\hline
+Packet & Binary data & The plaintext & BLOB\\
+\hline
+\end{longtable}
+
+\subsubsection{Possible answers}
 \begin{itemize}
-\item The length of the packet (uint32\_t) (\textit{pck\_len})
-\item The packet (\textit{pck})
+\item none
 \end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{2201: Decrypted packet}
 % -----------------------------------------------------------------------------
