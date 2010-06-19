@@ -27,6 +27,11 @@
 
 /* constants */
 #define CEOF_MSG_CRYPTO_USAGE    "ceof-crypto: gpg-dir"
+#define CEOF_MSG_CRYPTO_NAME     "ceof-crypto"
+#define CEOF_MSG_CRYPTO_PROMPT   CEOF_MSG_CRYPTO_NAME "> "
+
+/* depending libs */
+#include <gpgme.h>      /* gpgme             */
 
 /* structures */
 #include <limits.h>              /* PATH_MAX                      */
@@ -35,8 +40,18 @@ struct crypto_options {
    char gpg[PATH_MAX+1];
 };
 
-/* crypto */
-//int crypto_init();
-//int crypto_gpg_init();
+/* functions */
+void crypto_usage();
+int crypto_gpg_init();
+int crypto_gpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE]);
+
+/* global vars */
+extern struct crypto_options opt;
+
+extern gpgme_ctx_t    gpg_context;
+extern gpgme_data_t   gpg_encrypt;
+extern gpgme_data_t   gpg_decrypt;
+
+
 
 #endif

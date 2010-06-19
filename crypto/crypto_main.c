@@ -30,35 +30,26 @@
 #include <stdlib.h>     /* getenv            */
 #include <unistd.h>     /* STDIN_FILENO      */
 
-#include "eof.h"       /* clean header      */
+#include "eof.h"       /* EOF */
+#include "crypto.h"    /* eof-crypto */
 
 
 struct crypto_options opt;
 
 int main(int argc, char **argv)
 {
-   char cmd[EOF_L_CMD];
+//   char cmd[EOF_L_CMD];
 
    if(argc != 2) crypto_usage();
 
    strncpy(opt.cryptohome, argv[1], PATH_MAX);
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
 
-   if(!crypto_gpg_init()) return 0;
+ //  if(!crypto_gpg_init()) return 0;
    
-   while(1) {
+   while(0) {
       /* read command */
 
-      printf(CEOF_MSG_PROMPT "Polling %d helper channels...\n", pfd_cnt);
-      cnt = poll(pfd, pfd_cnt, -1);
-      if(cnt == -1) {
-         if(errno != EINTR) {
-            perror(CEOF_MSG_PROMPT "poll");
-            return CEOF_EX_POLL;
-         }
-      } else {
-         helper_check_input(pfd_cnt, &cnt);
-      }
    }
 
    return 0;

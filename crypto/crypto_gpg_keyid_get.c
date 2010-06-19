@@ -27,7 +27,7 @@
 #include "ceofhack.h"   /* context           */
 #include "eof.h"        /* errmsg            */
 
-int cgpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE])
+int crypto_gpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE])
 {
    if(GPG_ERR_NO_ERROR != gpgme_op_keylist_start(gpg_context, key, 0)) {
       eof_errmsg("gpgme_op_keylist_start failed");

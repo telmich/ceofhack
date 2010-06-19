@@ -25,8 +25,7 @@
 #include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
 #include <locale.h>     /* locales           */
-#include "ceofhack.h"   /* functions etc.    */
-#include "ceof.h"       /* functions etc.    */
+#include "crypto.h"       /* functions etc.    */
 
 gpgme_ctx_t    gpg_context;
 gpgme_data_t   gpg_encrypt;
@@ -40,15 +39,16 @@ int crypto_gpg_init()
    setlocale (LC_ALL, "");
    p = (char *) gpgme_check_version(NULL);
    gpgme_set_locale (NULL, LC_CTYPE, setlocale (LC_CTYPE, NULL));
+
 #ifdef LC_MESSAGES
    gpgme_set_locale (NULL, LC_MESSAGES, setlocale (LC_MESSAGES, NULL));
 #endif
 
-   printf(CEOF_MSG_CRYPTOPROMPT "Version %s\n", p);
+   printf(CEOF_MSG_CRYPTO_PROMPT "Version %s\n", p);
 
    gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
    if(gerr != GPG_ERR_NO_ERROR) {
-      printf(CEOF_MSG_CRYPTOPROMPT "Your gpgme library seems not to support OpenPGP!\n");
+      printf(CEOF_MSG_CRYPTO_PROMPT "Your gpgme library seems not to support OpenPGP!\n");
       return 0;
    }
 

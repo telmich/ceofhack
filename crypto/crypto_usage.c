@@ -22,13 +22,12 @@
  *
  */
 
-#include <unistd.h>     /* STDIN_FILENO, _exit */
 #include <stdio.h>      /* printf */
+#include <unistd.h>     /* _exit()*/
 
-#include <eof.h>
 #include "crypto.h"     /* crypto specific      */
 
-int crypto_usage()
+void crypto_usage()
 {
    printf(CEOF_MSG_CRYPTO_USAGE);
 
