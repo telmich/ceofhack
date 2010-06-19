@@ -130,9 +130,6 @@ extern struct tpl       tpls[EOF_L_TPL];
 extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
 
-/* categories of EOFs */
-extern struct cmd_cat   categories[EOF_CAT_MAX];
-
 /****************** Functions  */
 /* generic */
 int config_init();

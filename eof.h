@@ -126,8 +126,8 @@ struct eof_cmd {
 
 /* EOF commands categories */
 struct eof_cmd_cat {
-   struct cmd *first;         /* pointer to first cmd       */
-   struct cmd *def;           /* pointer to default handler */
+   struct eof_cmd *first;         /* pointer to first cmd       */
+   struct eof_cmd *def;           /* pointer to default handler */
 };
 
 /*******************************************************************************
@@ -184,6 +184,7 @@ int eof_ui_quit(int sockfd);
 /* library functions: command handler */
 int eof_cmd_init(int categories);
 struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []));
+void eof_cmd_cat_init(int cat, struct eof_cmd *def);
 
 
 #endif

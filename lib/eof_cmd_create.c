@@ -28,9 +28,9 @@
 
 struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []))
 {
-   struct cmd *new;
+   struct eof_cmd *new;
 
-   new = malloc(sizeof(struct cmd));
+   new = malloc(sizeof(struct eof_cmd));
    if(!new) return NULL;
 
    new->num    = num;

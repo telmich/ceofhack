@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,10 +23,10 @@
  */
 
 #include <stdio.h>
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
 
-void cmd_cat_init(int cat, struct cmd *def)
+void eof_cmd_cat_init(int cat, struct eof_cmd *def)
 {
-   categories[cat].def     = def;
-   categories[cat].first   = NULL;
+   eof_categories[cat].def     = def;
+   eof_categories[cat].first   = NULL;
 }
