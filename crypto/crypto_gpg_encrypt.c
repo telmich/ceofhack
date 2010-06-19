@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -26,38 +26,37 @@
 #include <stdio.h>      /* printf            */
 #include <gpgme.h>      /* gpgme             */
 #include <locale.h>     /* locales           */
-#include "ceofhack.h"   /* functions etc.    */
 
-int cgpg_encrypt(char *nick, char *msg, char buf[], int len, char errmsg[EOF_L_MESSAGE])
+#include <eof.h>        /* EOF               */
+#include "crypto.h"
+
+int crypto_gpg_encrypt(char *keyid, char *pkg, size_t pkglen, char buf[], size_t buflen, char errmsg[EOF_L_MESSAGE])
 {
 //   gpgme_error_t gerr;
-   gpgme_key_t keyid[2];
+   gpgme_key_t gpg_keyid[2];
    gpgme_data_t plaintext;
    gpgme_data_t encrypted;
-   char *p;
+   ssize_t len = 1;
+
+   pkglen = buflen = 1;
 
    /* retrieve keyid    */
-   p = peer_keyid_get(nick);
-   if(!p) {
-      eof_errmsg("No key-ID registered");
-      return 0;
-   }
+      //eof_errmsg("No key-ID registered");
 
-   keyid[1] = NULL;
-   printf("encrypting with keyid=%s\n", p);
-   if(!cgpg_keyid_get(p, keyid, errmsg)) {
+   gpg_keyid[1] = NULL;
+   if(!crypto_gpg_keyid_get(keyid, gpg_keyid, errmsg)) {
       return 0;
    }
-   printf("Key info: %s <%s>\n", keyid[0]->uids->name,  keyid[0]->uids->email);
+   printf("Key info: %s <%s>\n", gpg_keyid[0]->uids->name,  gpg_keyid[0]->uids->email);
 
    /* allocate buffer: non copying!   */
-   if(GPG_ERR_NO_ERROR != gpgme_data_new_from_mem(&plaintext, msg, strlen(msg), 0))
-      return 0;
+   /* FIXME: strlen does not work */
+   if(GPG_ERR_NO_ERROR != gpgme_data_new_from_mem(&plaintext, pkg, strlen(pkg), 0)) return 0;
    if(GPG_ERR_NO_ERROR != gpgme_data_new(&encrypted)) return 0;
 
    /* encrypt  buffer   */
    /* FIXME: remove GPGME_ENCRYPT_ALWAYS_TRUST and use trustlevels */
-   if(GPG_ERR_NO_ERROR != gpgme_op_encrypt(gpg_context, keyid,
+   if(GPG_ERR_NO_ERROR != gpgme_op_encrypt(gpg_context, gpg_keyid,
       GPGME_ENCRYPT_ALWAYS_TRUST, plaintext, encrypted)) {
       eof_errmsg("Encryption failed");
       return 0;
