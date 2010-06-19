@@ -109,6 +109,10 @@
 #define EOF_P_CRYPTO_DIR         EOF_P_SLASH "crypto"
 #define EOF_P_CRYPTO_KEY         EOF_P_CRYPTO_DIR EOF_P_SLASH "mykeyid"
 
+/* mimic pipe(2) */
+#define EOF_CMD_HANDLE_READ     0
+#define EOF_CMD_HANDLE_WRITE    1
+
 /* macros */
 #define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
 

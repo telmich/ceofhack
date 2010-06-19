@@ -35,6 +35,8 @@
 #define HP_WRITE           3
 #define HP_FDCNT           4     /* number of fds used by helper structure */
 
+/* PIPE:  fildes[1]  = WRITE–. fildes[0] = read */
+
 /****************** Structures  */
 struct peer {
    char name[EOF_L_NICKNAME+1];
