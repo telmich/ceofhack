@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,9 +22,9 @@
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>   /* functions etc. */
 
-struct cmd *cmd_cat_get_default_cmd(int cat)
+struct eof_cmd *eof_cmd_cat_get_default_cmd(int cat)
 {
-   return categories[cat].def;
+   return eof_categories[cat].def;
 }

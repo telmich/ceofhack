@@ -34,16 +34,17 @@
 int forkexecpipe(struct helper *hp)
 {
    char *argv[2];
-   int fds[2*EOF_L_RW_SIZE];
+   int fd_from_extern[EOF_L_RW_SIZE];
+   int fd_to_extern[EOF_L_RW_SIZE];
 
    /* read from EOFi [0], write from extern [1] */
-   if(pipe(&fds[0]) == -1) {
+   if(pipe(&fd_from_extern[0]) == -1) {
       perror("pipe");
       return 0;
    }
 
-   /* write from EOFi [3], read from extern [2] */
-   if(pipe(&fds[2]) == -1) {
+   /* write from EOFi [1], read from extern [0] */
+   if(pipe(&fd_to_extern[2]) == -1) {
       perror("pipe2");
       return 0;
    }

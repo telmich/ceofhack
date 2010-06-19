@@ -44,7 +44,7 @@ HELPER+=helper_find_by_handle.c
 
 # command handling (ceof internal)
 CMD=cmd_init.c
-CMD+=cmd_cat_add.c cmd_cat_get_default_cmd.c
+CMD+=cmd_cat_add.c
 CMD+=cmd_20xx.c cmd_2000.c cmd_2002.c cmd_2003.c
 CMD+=cmd_1103.c
 CMD+=cmd_21xx.c cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c
@@ -62,7 +62,7 @@ CEOF=ceof_exit.c ceof_banner.c ceof_runs.c
 LIB=lib/eof_get_configdir.c lib/eof_get_crypto_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c lib/eof_get_mykeyid_file.c
 LIB+=lib/eof_va_read.c lib/eof_va_write.c
-LIB+=lib/eof_id_init.c lib/eof_id_new.c lib/eof_cmd_handle.c 
+LIB+=lib/eof_id_init.c lib/eof_id_new.c lib/eof_cmd_handle.c lib/eof_cmd_cat_get_default_cmd.c
 LIB+=lib/eof_cmd_init.c lib/eof_cmd_cat_init.c lib/eof_cmd_create.c lib/eof_cmd_find_in_cat.c 
 
 # interface for the user interfaces
@@ -77,7 +77,7 @@ CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
 CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
 CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
 CEOF_CRYPTO+=crypto/crypto_usage.c crypto/crypto_cmd_init.c
-CEOF_CRYPTO+=$(LIB) $(SHCL) $(CEOF_CRYPTO_CMD) read_all.c write_all.c
+CEOF_CRYPTO+=$(LIB) $(CEOF_CRYPTO_CMD) shcl/shcl_read_all.c shcl/shcl_write_all.c
 
 
 # ceofhack internal
