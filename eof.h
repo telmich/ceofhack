@@ -105,11 +105,34 @@
 /* macros */
 #define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
 
+/*******************************************************************************
+ * Structures
+ */
+
+/* EOF commands categories */
+struct eof_cmd_cat {
+   struct cmd *first;         /* pointer to first cmd       */
+   struct cmd *def;           /* pointer to default handler */
+};
+
+/*******************************************************************************
+ * Variables
+ */
+
 /* global library variables */
 extern unsigned long eof_id;
+extern struct eof_cmd_cat *eof_categories;
+
+/*******************************************************************************
+ * Headers/libs
+ */
+#include <sys/types.h>           /* size_t   */
+
+/*******************************************************************************
+ * Functions
+ */
 
 /* library functions: generic */
-#include <sys/types.h>           /* size_t   */
 void eof_get_configdir(char buf[], size_t len);
 void eof_get_crypto_dir(char buf[], size_t len);
 void eof_get_tp_dir(char buf[], size_t len);
@@ -143,6 +166,7 @@ int eof_ui_peer_show(int sockfd, char errmsg[EOF_L_MESSAGE],
                                           char **addrs);
 int eof_ui_quit(int sockfd);
 
-/* queue */
+/* library functions: command handler */
+int eof_cmd_init(int categories);
 
 #endif

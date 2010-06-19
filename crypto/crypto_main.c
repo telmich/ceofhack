@@ -47,7 +47,8 @@ int main(int argc, char **argv)
    strncpy(opt.cryptohome, argv[1], PATH_MAX);
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
 
-   if(!crypto_gpg_init()) return 0;
+   if(!crypto_gpg_init()) return 1;
+   if(!eof_cmd_init(1)) return 2;
    
    while(1) {
       /* read command */

@@ -62,6 +62,7 @@ LIB=lib/eof_get_configdir.c lib/eof_get_crypto_dir.c lib/eof_get_tp_dir.c
 LIB+=lib/eof_get_ui_socketpath.c lib/eof_get_pidfile.c lib/eof_get_mykeyid_file.c
 LIB+=lib/eof_va_read.c lib/eof_va_write.c
 LIB+=lib/eof_id_init.c lib/eof_id_new.c
+LIB+=lib/eof_cmd_init.c
 
 # interface for the user interfaces
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
@@ -74,7 +75,7 @@ CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
 CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
 CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
 CEOF_CRYPTO+=crypto/crypto_usage.c
-CEOF_CRYPTO+=$(LIB) $(SHCL)
+CEOF_CRYPTO+=$(LIB) read_all.c write_all.c
 
 
 # ceofhack internal

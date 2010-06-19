@@ -66,12 +66,6 @@ struct cmd {
    struct cmd *next;
 };
 
-/* EOF commands categories */
-struct cmd_cat {
-   struct cmd *first;         /* pointer to first cmd       */
-   struct cmd *def;           /* pointer to default handler */
-};
-
 /* further structs with external dependencies */
 #include <sys/types.h>           /* POSIX for pid_t               */
 #include <limits.h>              /* PATH_MAX                      */

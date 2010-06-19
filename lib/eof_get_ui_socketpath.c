@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,7 +24,7 @@
 
 #include <string.h>     /* memset, str*   */
 #include <stdlib.h>     /* getenv         */
-#include "ceofhack.h"   /* functions etc.  */
+#include "eof.h"   /* functions etc.  */
 
 void eof_get_ui_socketpath(char buf[], size_t len)
 {
