@@ -32,6 +32,6 @@ void ui_disable_all()
 
    /* find UIs: every helper that has ui_read() registered */
    while((hp = helper_find_by_handle(&i, ui_read))) {
-      ui_disable(hp->fds[HP_READ]);
+      ui_disable(hp->fds[EOF_CMD_READ]);
    }
 }

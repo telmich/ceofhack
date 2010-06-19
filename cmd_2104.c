@@ -42,7 +42,7 @@ int cmd_2104(int fd[])
 
    printf(CEOF_MSG_UIPROMPT "/peer rename request\n");
    
-   if(!eof_va_read(fd[HP_READ], 3,
+   if(!eof_va_read(fd[EOF_CMD_READ], 3,
                    EOF_L_ID, id,
                    EOF_L_NICKNAME, oldnick,
                    EOF_L_NICKNAME, newnick)) {
@@ -54,14 +54,14 @@ int cmd_2104(int fd[])
    ret = peer_rename(oldnick, newnick, errmsg);
 
    if(ret) {
-      eof_va_write(fd[HP_WRITE], 4, EOF_L_CMD, EOF_CMD_UI_PEER_RENAMED,
+      eof_va_write(fd[EOF_CMD_WRITE], 4, EOF_L_CMD, EOF_CMD_UI_PEER_RENAMED,
                                     EOF_L_ID, id,
                                     EOF_L_NICKNAME, oldnick,
                                     EOF_L_NICKNAME, newnick);
 
    //   FIXME: also notify all users uis -> depends on eofs implementation
    } else {
-      eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL, 
+      eof_va_write(fd[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL, 
                                     EOF_L_ID, id,
                                     EOF_L_MESSAGE, errmsg);
    }   

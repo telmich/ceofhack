@@ -32,15 +32,15 @@ int queue_read(int fd[])
    int queue_id;
 
    /* find queue by fd */
-   queue_id = queue_find_by_fd(fd[HP_READ]);
+   queue_id = queue_find_by_fd(fd[EOF_CMD_READ]);
 
    /* check whether command is valid in the category of the queue */
-   queue_is_cmd_valid(fd[HP_READ]);
+   queue_is_cmd_valid(fd[EOF_CMD_READ]);
 
    /* what about the ID? */
 
    /* read cmd and id */
-   if(shcl_read_all(fd[HP_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
+   if(shcl_read_all(fd[EOF_CMD_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
       perror("queue_read");
 
       /* FIXME: disable input? */

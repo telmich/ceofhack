@@ -43,7 +43,7 @@ int cmd_2102(int fd[])
 
    printf(CEOF_MSG_UIPROMPT "/peer add request\n");
    
-   if(!eof_va_read(fd[HP_READ], 4,
+   if(!eof_va_read(fd[EOF_CMD_READ], 4,
                    EOF_L_ID, id,
                    EOF_L_NICKNAME, nick,
                    EOF_L_ADDRESS, addr,
@@ -55,7 +55,7 @@ int cmd_2102(int fd[])
 
    if(peer_findbyname(nick)) {
       strncpy(errmsg, "Peer already exists", EOF_L_MESSAGE);
-      eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
+      eof_va_write(fd[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
                                     EOF_L_ID, id,
                                     EOF_L_MESSAGE, errmsg);
       printf(CEOF_MSG_UIPROMPT "%s tried to re-add %s\n", id, nick);
@@ -64,14 +64,14 @@ int cmd_2102(int fd[])
 
    if(!peer_add(nick, addr, keyid)) {
       strncpy(errmsg, "Internal error", EOF_L_MESSAGE);
-      eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
+      eof_va_write(fd[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
                                  EOF_L_ID, id,
                                  EOF_L_MESSAGE, errmsg);
       printf(CEOF_MSG_UIPROMPT "BUG: interal peer_add() failed!\n");
       return 0;
    }
 
-   eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK,
+   eof_va_write(fd[EOF_CMD_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK,
                                  EOF_L_ID, id);
    return 1;
 }

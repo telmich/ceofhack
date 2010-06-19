@@ -26,5 +26,5 @@
 
 int helper_write(struct helper *hp, char *buf, int len)
 {
-   return shcl_write_all(hp->fds[HP_WRITE], buf, len);
+   return shcl_write_all(hp->fds[EOF_CMD_WRITE], buf, len);
 }

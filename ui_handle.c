@@ -33,9 +33,9 @@ int ui_handle(int fds[])
 {
    int nsock;
 
-   while((nsock = accept(fds[HP_READ], NULL, NULL)) != -1) {
+   while((nsock = accept(fds[EOF_CMD_READ], NULL, NULL)) != -1) {
       /* accept socket and add to helper list */
-      printf(CEOF_MSG_UIPROMPT "got connection %d on %d\n", nsock, fds[HP_READ]);
+      printf(CEOF_MSG_UIPROMPT "got connection %d on %d\n", nsock, fds[EOF_CMD_READ]);
       if(!helper_fdonly(nsock, nsock, &ui_read, NULL)) {
          return 0;
       }

@@ -32,10 +32,10 @@ int cmd_2100(int fd[])
    id[EOF_L_ID] = 0;
 
    printf(CEOF_MSG_UIPROMPT "Reading ui queue id (%d)....\n", EOF_L_ID);
-   if(!eof_va_read(fd[HP_READ], 1 , EOF_L_ID, id)) return 0;
+   if(!eof_va_read(fd[EOF_CMD_READ], 1 , EOF_L_ID, id)) return 0;
    printf(CEOF_MSG_UIPROMPT "Successfully registered an UI (id=%s)\n", id);
 
-   if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
+   if(!eof_va_write(fd[EOF_CMD_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
       return 0;
    }
 

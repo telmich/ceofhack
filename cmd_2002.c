@@ -41,7 +41,7 @@ int cmd_2002(int fd[])
 
    printf("Received a packet!!!\n");
 
-   if(shcl_read_all(fd[HP_READ], size, EOF_L_SIZE) != EOF_L_SIZE) {
+   if(shcl_read_all(fd[EOF_CMD_READ], size, EOF_L_SIZE) != EOF_L_SIZE) {
       perror("cmd2002/read");
       return 0;
    }
@@ -54,7 +54,7 @@ int cmd_2002(int fd[])
       return 0;
    }
 
-   if(shcl_read_all(fd[HP_READ], buf, len) != len) {
+   if(shcl_read_all(fd[EOF_CMD_READ], buf, len) != len) {
       perror("cmd2002/read_pkg");
       return 0;
    }

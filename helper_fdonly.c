@@ -35,8 +35,8 @@ int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []))
    printf("hfdo: %d, %d, %d\n", num, in, out);
 
    chp[num].pid            = 0;
-   chp[num].fds[HP_READ]   = in;
-   chp[num].fds[HP_WRITE]  = out;
+   chp[num].fds[EOF_CMD_READ]   = in;
+   chp[num].fds[EOF_CMD_WRITE]  = out;
    chp[num].fds[HP_EXT_READ]   = -1;
    chp[num].fds[HP_EXT_WRITE]  = -1;
    chp[num].handle         = handle;

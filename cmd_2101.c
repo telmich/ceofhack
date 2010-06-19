@@ -29,5 +29,5 @@
 int cmd_2101(int fd[])
 {
    printf(CEOF_MSG_UIPROMPT "Deregistering an UI\n");
-   return ui_disable(fd[HP_READ]);
+   return ui_disable(fd[EOF_CMD_READ]);
 }

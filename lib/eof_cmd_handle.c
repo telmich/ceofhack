@@ -33,7 +33,7 @@ int eof_cmd_handle(unsigned long eofs, int fd[])
    char data[EOF_L_CMD];
 
    /* always read a command first */
-   if(shcl_read_all(fd[HP_READ], data, EOF_L_CMD) == -1) {
+   if(shcl_read_all(fd[EOF_CMD_READ], data, EOF_L_CMD) == -1) {
       perror("cmd_handle/cmd");
       return 0;
    }

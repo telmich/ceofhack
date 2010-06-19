@@ -36,7 +36,7 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
    printf(CEOF_MSG_UIPROMPT "message received: <%s> %s\n", nick, msgtxt);
 
    while((hp = helper_find_by_handle(&i, ui_read))) {
-      if(!eof_va_write(hp->fds[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_MSGRECEIVED,
+      if(!eof_va_write(hp->fds[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_MSGRECEIVED,
                                              EOF_L_NICKNAME, nick,
                                              EOF_L_MESSAGE, msgtxt)) {
          perror("cmd_1103/eof_va_write");

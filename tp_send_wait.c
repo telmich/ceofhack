@@ -35,7 +35,7 @@ int tp_send_wait(int fds[])
 
    buf[EOF_L_CMD] = '\0';
 
-   shcl_read_all(fds[HP_READ], buf, EOF_L_CMD);
+   shcl_read_all(fds[EOF_CMD_READ], buf, EOF_L_CMD);
 
    fprintf(stderr, "Reply from a TP: %s\n", buf);
 

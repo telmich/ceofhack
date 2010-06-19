@@ -54,13 +54,13 @@ int forkexecpipe(struct helper *hp)
    }
 
    /* mark parent fds to be closed on exec (for _any_ child, not only this one) */
-   if(!close_on_exec(hp->fds[HP_READ])) return 0;
-   if(!close_on_exec(hp->fds[HP_WRITE])) return 0;
+   if(!close_on_exec(hp->fds[EOF_CMD_READ])) return 0;
+   if(!close_on_exec(hp->fds[EOF_CMD_WRITE])) return 0;
 
    /* parent */
    if(hp->pid > 0) { 
       /* Don't block reads in ceof */
-      if(fcntl(hp->fds[HP_READ], F_SETFL, O_NONBLOCK) < 0) {
+      if(fcntl(hp->fds[EOF_CMD_READ], F_SETFL, O_NONBLOCK) < 0) {
          perror("fcntl");
       }
 

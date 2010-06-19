@@ -29,10 +29,10 @@
 #define EOF_L_MAX_UI_WAIT  32    /* FIXME: HACKs */
 
 /* parts of the pipe array _we_ use */
-#define HP_READ            0
+#define EOF_CMD_READ            0
 #define HP_EXT_WRITE       1
 #define HP_EXT_READ        2
-#define HP_WRITE           3
+#define EOF_CMD_WRITE           3
 #define HP_FDCNT           4     /* number of fds used by helper structure */
 
 /* PIPE:  fildes[1]  = WRITE–. fildes[0] = read */

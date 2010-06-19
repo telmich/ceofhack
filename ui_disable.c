@@ -32,12 +32,12 @@ int ui_disable(int fd)
 
    printf(CEOF_MSG_UIPROMPT "Closing connection...\n");
 
-   hp = helper_find_by_fd(HP_READ, fd);
+   hp = helper_find_by_fd(EOF_CMD_READ, fd);
    if(!hp) {
       printf(CEOF_MSG_UIPROMPT "BUG: Strange, the UI is missing in the list...\n");
       return 0;
    } else {
-      printf(CEOF_MSG_UIPROMPT "Disabling %d / %d \n", fd, hp->fds[HP_WRITE]);
+      printf(CEOF_MSG_UIPROMPT "Disabling %d / %d \n", fd, hp->fds[EOF_CMD_WRITE]);
    }
 
    helper_write(hp, EOF_CMD_UI_EXITREQUEST, EOF_L_CMD);

@@ -35,7 +35,7 @@ void helper_check_input(int possible, int *have_data)
    for(i=0; i < possible && *have_data > 0; i++) {
       if(pfd[i].revents & (POLLIN | POLLPRI)) {
 //         printf("data on channel %d\n",i);
-         hp = helper_find_by_fd(HP_READ, pfd[i].fd);
+         hp = helper_find_by_fd(EOF_CMD_READ, pfd[i].fd);
          if(!hp) {
             /* there is i race condition when the child is cleared, but
                the poll list still contains the item. thus just ignore 
@@ -43,7 +43,7 @@ void helper_check_input(int possible, int *have_data)
             printf("BUG: Check input on %d/%d (fd=%d): no handler\n", i, possible, pfd[i].fd);
             */
          } else {
-            printf("hci: %d, %d, %d, %d\n", i, pfd[i].fd, hp->fds[HP_READ], hp->fds[HP_WRITE]);
+            printf("hci: %d, %d, %d, %d\n", i, pfd[i].fd, hp->fds[EOF_CMD_READ], hp->fds[EOF_CMD_WRITE]);
             /*
              * found fd in set of hp, submit the whole set, that is
              * save in the helper structure!

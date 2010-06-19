@@ -44,7 +44,7 @@ int cmd_2103(int fd[])
 
    printf(CEOF_MSG_UIPROMPT "/peer send request\n");
    
-   if(!eof_va_read(fd[HP_READ], 3,
+   if(!eof_va_read(fd[EOF_CMD_READ], 3,
                    EOF_L_ID, id,
                    EOF_L_NICKNAME, nick,
                    EOF_L_MESSAGE, msgtxt)) {
@@ -56,12 +56,12 @@ int cmd_2103(int fd[])
    ret = peer_send(nick, msgtxt, errmsg);
 
    if(ret) {
-      if(!eof_va_write(fd[HP_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
+      if(!eof_va_write(fd[EOF_CMD_WRITE], 2, EOF_L_CMD, EOF_CMD_UI_ACK, EOF_L_ID, id)) {
          perror("2103: write_ack");
          ret = 0;
       }
    } else {
-      if(!eof_va_write(fd[HP_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
+      if(!eof_va_write(fd[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_FAIL,
                                         EOF_L_ID, id,
                                         EOF_L_MESSAGE, errmsg)) {
          perror("2103: write_fail");

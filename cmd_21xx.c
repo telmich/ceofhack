@@ -26,5 +26,5 @@
 
 int cmd_21xx(int fd[])
 {
-   return ui_disable(fd[HP_READ]);
+   return ui_disable(fd[EOF_CMD_READ]);
 }
