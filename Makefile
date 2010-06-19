@@ -77,7 +77,7 @@ CEOF_CRYPTO=crypto/crypto_main.c crypto/crypto_gpg_init.c
 CEOF_CRYPTO+=crypto/crypto_gpg_encrypt.c
 CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
 CEOF_CRYPTO+=crypto/crypto_usage.c crypto/crypto_cmd_init.c
-CEOF_CRYPTO+=$(LIB) $(CEOF_CRYPTO_CMD) read_all.c write_all.c
+CEOF_CRYPTO+=$(LIB) $(SHCL) $(CEOF_CRYPTO_CMD) read_all.c write_all.c
 
 
 # ceofhack internal

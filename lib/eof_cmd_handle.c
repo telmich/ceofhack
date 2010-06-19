@@ -26,6 +26,7 @@
 #include <stdio.h>      /* perror         */
 
 #include <eof.h>       /* functions etc. */
+#include "shcl.h"      /* helper */
 
 int eof_cmd_handle(unsigned long eofs, int fd[])
 {

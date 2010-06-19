@@ -27,6 +27,7 @@
 #define EOF_H
 
 /* Lengths */
+#define EOF_L_RW_SIZE               2  /* size of fd array */
 #define EOF_L_CMD                   4
 #define EOF_L_SIZE                  6
 #define EOF_L_ID                    6
@@ -125,7 +126,7 @@ struct eof_cmd {
    char *num;
    int (*handle)(int []);
    int queue_req;
-   struct cmd *next;
+   struct eof_cmd *next;
 };
 
 /* EOF commands categories */
@@ -190,6 +191,12 @@ int eof_cmd_init(int categories);
 struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []));
 void eof_cmd_cat_init(int cat, struct eof_cmd *def);
 int eof_cmd_handle(unsigned long cat, int fd[]);
+struct eof_cmd *eof_cmd_find_in_cat(int cat, char cmd[]);
+struct eof_cmd *eof_cmd_cat_get_default_cmd(int cat);
+int eof_cmd_cat_add(int cat, struct eof_cmd *cmd);
+
+
+
 
 
 #endif

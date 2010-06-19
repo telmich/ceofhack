@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,13 +23,13 @@
  */
 
 #include <string.h>     /* strncmp()      */
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
 
-struct cmd *cmd_find_in_cat(int cat, char cmd[])
+struct eof_cmd *eof_cmd_find_in_cat(int cat, char cmd[])
 {
-   struct cmd *c;
+   struct eof_cmd *c;
 
-   for(c = categories[cat].first; c != NULL; c = c->next) {
+   for(c = eof_categories[cat].first; c != NULL; c = c->next) {
       if(!strncmp(cmd, c->num, EOF_L_CMD)) {
          return c;
       }

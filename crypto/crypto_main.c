@@ -41,6 +41,7 @@ struct crypto_options opt;
 int main(int argc, char **argv)
 {
    char cmd[EOF_L_CMD+1];
+   int fds[EOF_L_RW_SIZE];
 
    cmd[1] = 0;
 
@@ -51,10 +52,12 @@ int main(int argc, char **argv)
 
    if(!crypto_gpg_init()) return 1;
    if(!crypto_cmd_init()) return 2;
+
+   fds[EOF_CMD_READ] = STDIN_FILENO;
+   fds[EOF_CMD_WRITE] = STDOUT_FILENO;
    
    while(1) {
-//      eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, 
-
+      eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds);
    }
 
    return 0;

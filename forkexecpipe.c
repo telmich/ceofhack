@@ -34,15 +34,16 @@
 int forkexecpipe(struct helper *hp)
 {
    char *argv[2];
+   int fds[2*EOF_L_RW_SIZE];
 
-   /* read from EOFi [0], write from TP [1] */
-   if(pipe(&hp->fds[0]) == -1) {
+   /* read from EOFi [0], write from extern [1] */
+   if(pipe(&fds[0]) == -1) {
       perror("pipe");
       return 0;
    }
 
-   /* write from EOFi [3], read from TP [2] */
-   if(pipe(&hp->fds[2]) == -1) {
+   /* write from EOFi [3], read from extern [2] */
+   if(pipe(&fds[2]) == -1) {
       perror("pipe2");
       return 0;
    }
@@ -59,14 +60,18 @@ int forkexecpipe(struct helper *hp)
 
    /* parent */
    if(hp->pid > 0) { 
+      /* remove unecessary fds */
+      close(hp->fds[HP_EXT_READ]);
+      close(hp->fds[HP_EXT_WRITE]);
+
       /* Don't block reads in ceof */
       if(fcntl(hp->fds[EOF_CMD_READ], F_SETFL, O_NONBLOCK) < 0) {
          perror("fcntl");
       }
 
-      /* remove unecessary fds */
-      close(hp->fds[HP_EXT_READ]);
-      close(hp->fds[HP_EXT_WRITE]);
+      if(fcntl(hp->fds[EOF_CMD_WRITE], F_SETFL, O_NONBLOCK) < 0) {
+         perror("fcntl");
+      }
 
       return 1;
    }
