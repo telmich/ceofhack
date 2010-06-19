@@ -1242,20 +1242,35 @@ through stdin and stdout. It also gets the path to the gpg-homedir as the
 first parameter.
 % -----------------------------------------------------------------------------
 \subsection{1200: Encrypt packet}
-Passes the following information to the crypto:
-\begin{itemize}
-\item GPG-Fingerprint of the peer (40 Bytes char array) (\textit{fpr})
-\item Adress of the peer (128 Bytes, 0 padded, 0 terminated) (\textit{address})
-\item The length of the message (uint32\_t) (\textit{msg\_len})
-\item The message (\textit{msg})
-\end{itemize}
+Passes the following information to the crypto engine:
+\subsubsection{Parameters}
+\begin{longtable}{|c|c|c|c|}
+\caption{1200: Encrypt packet}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+Keyid & EOFsdt:keyid & This peers pgp-keyid & 389E5481065EAA253...\\
+\hline
+Size & EOFsdt: size & Size of message, excluding this header & 424242\\
+\hline
+Packet & Binary data & The plaintext & BLOB\\
+\hline
+\end{longtable}
 
+\subsubsection{Possible answers}
+\begin{itemize}
+\item 2200
+\item 2299
+\end{itemize}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1201: Decrypt packet}
 % -----------------------------------------------------------------------------
 \subsection{1202: Sign packet}
 % -----------------------------------------------------------------------------
-\subsection{1203: Get signer of packet}
+\subsection{1203: Get verified keyid of signer of packet}
 % -----------------------------------------------------------------------------
 \subsection{2200: Encrypted a packet}
 \begin{itemize}
@@ -1263,7 +1278,14 @@ Passes the following information to the crypto:
 \item The packet (\textit{pck})
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsection{2200: Decrypted a packet}
+\subsection{2201: Decrypted packet}
+% -----------------------------------------------------------------------------
+\subsection{2202: Signed packet}
+% -----------------------------------------------------------------------------
+\subsection{2299: Error}
+An unrecoverable error happened. The crypto engine will exit, the EOFi
+can restart it afterwards. This may happen due to out-of-memory errors or
+library errors.
 % -----------------------------------------------------------------------------
 % #############################################################################
 \section{EOF crypto packets ("`3***: onions"')}
