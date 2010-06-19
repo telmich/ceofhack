@@ -34,13 +34,10 @@ int eof_cmd_handle(unsigned long eofs, int fd[])
    int len;
 
    /* always read a command first */
-   if((len = read(fd[HP_READ], data, EOF_L_CMD)) == -1) {
+   if(shcl_read_all(fd[HP_READ], data, EOF_L_CMD) == -1) {
       perror("cmd_handle/cmd");
       return 0;
    }
-
-   printf(CEOF_MSG_PROMPT "EOFs %lu: handling cmd %c%c%c%c\n", eofs,
-            data[0], data[1], data[2], data[3]);
 
    cmd = cmd_find_in_cat(eofs, data);
    if(!cmd) {
