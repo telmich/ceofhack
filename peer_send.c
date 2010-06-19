@@ -30,7 +30,8 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
               char errmsg[EOF_L_MESSAGE])
 {
    struct peer *p;
-   char buf[BIGBUF+1];
+   char buf[EOF_L_PKG_MAX+1];
+   char id[EOF_L_ID+1];
    int len;
 
    p = peer_findbyname(nick);
@@ -39,8 +40,9 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
       return 0;
    }
 
-   printf("Encrypting message...\n");
    /* register into queue for retrieval of pkg */
+   eof_id_new(id);
+
    /* send encrypt msg for $keyid */
    /* handle send in queue handler */
 

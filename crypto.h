@@ -53,6 +53,7 @@ int crypto_gpg_init();
 int crypto_gpg_keyid_get(char *key, gpgme_key_t keyid[], char errmsg[EOF_L_MESSAGE]);
 int crypto_cmd_init();
 int crypto_cmd_default(int fd[]);
+int cmd_1200(int fd[]);
 
 
 

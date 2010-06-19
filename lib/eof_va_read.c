@@ -28,7 +28,7 @@
 #include <stdarg.h>  /* va_*)             */
 
 #include "shcl.h"    /* functions etc.    */
-#include "eof.h"     /* defines           */
+#include <eof.h>     /* defines           */
 
 int eof_va_read(int fd, int nof, ...) /* nof = number of fields */
 {

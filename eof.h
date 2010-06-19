@@ -195,8 +195,4 @@ struct eof_cmd *eof_cmd_find_in_cat(int cat, char cmd[]);
 struct eof_cmd *eof_cmd_cat_get_default_cmd(int cat);
 int eof_cmd_cat_add(int cat, struct eof_cmd *cmd);
 
-
-
-
-
 #endif

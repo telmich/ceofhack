@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,12 +22,12 @@
  *
  */
 
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
 
-int cmd_cat_add(int cat, struct cmd *cmd)
+int eof_cmd_cat_add(int cat, struct eof_cmd *cmd)
 {
-   cmd->next = categories[cat].first;
-   categories[cat].first = cmd;
+   cmd->next = eof_categories[cat].first;
+   eof_categories[cat].first = cmd;
 
    return 1;
 }
