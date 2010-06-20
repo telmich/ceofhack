@@ -33,13 +33,6 @@
 /* PIPE:  fildes[1]  = WRITE–. fildes[0] = read */
 
 /****************** Structures  */
-struct peer {
-   char name[EOF_L_NICKNAME+1];
-   char addr[EOF_L_ADDRESS+1];
-   char keyid[EOF_L_KEYID+1];
-   struct peer *next;
-};
-
 /* user interface commands */
 struct ui_cmd {
    char *name;
@@ -218,5 +211,8 @@ void ui_exit();
 /* queues */
 int queue_read(int []);
 int queue_new(int fd, int cat);
+
+/* onion stuff */
+void onion_partial_create_msg_drop(char [], char [], char []);
 
 #endif

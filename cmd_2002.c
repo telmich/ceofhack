@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,11 +22,13 @@
  *
  */
 
+#include <stdio.h>      /* perror and co     */
 #include <stdlib.h>     /* strtol()          */
 #include <unistd.h>     /* read()            */
 #include <string.h>     /* strchr()          */
 #include "ceofhack.h"   /* functions etc.    */
 #include "ceof.h"       /* clean header      */
+
 int cmd_2002(int fd[])
 {
    char buf[EOF_L_PKG_MAX+1];
@@ -66,7 +68,8 @@ int cmd_2002(int fd[])
     */
 
    printf("Incoming packet: %s\n", buf);
-   len = cgpg_decrypt(buf, len, plaintext, EOF_L_PKG_MAX);
+   /* FIXME: add asynchronous decrypt request */
+//   len = cgpg_decrypt(buf, len, plaintext, EOF_L_PKG_MAX);
 
    if(len > 0) {
       printf("ceofhack> Incoming plaintext [%ld]: %s\n", (long) len, plaintext);

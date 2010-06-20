@@ -30,25 +30,28 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
               char errmsg[EOF_L_MESSAGE])
 {
    struct peer *p;
-   char buf[EOF_L_PKG_MAX+1];
-   char id[EOF_L_ID+1];
-   int len;
+   char pkg[EOF_L_PKG_MAX+1];
+   char pkg_id[EOF_L_ID+1];
 
    p = peer_findbyname(nick);
    if(!p) {
       eof_errmsg("Unknown peer");
       return 0;
    }
+   printf("/peer send: Sending %s->%s ...\n", msg, nick);
+
+   /* create partial onion packet */
+   onion_partial_create_msg_drop(nick, msg, pkg);
 
    /* register into queue for retrieval of pkg */
-   eof_id_new(id);
+   eof_id_new(pkg_id);
+
+//   queue_add(queue_id, pkg_id, fptr);
 
    /* send encrypt msg for $keyid */
-   /* handle send in queue handler */
-
-   if(!(len = cgpg_encrypt(nick, msg, buf, BIGBUF, errmsg))) return 0;
-   printf("Encrypted message: %s\n", buf);
+//   crypto_encrypt_request(pkg_id, pkg);
    
-   printf("/peer send: Sending %s->%s ...\n", msg, nick);
-   return tp_send(nick, buf, len, errmsg);
+   /* handle send in queue handler */
+//   return tp_send(nick, buf, len, errmsg);
+   return 1;
 }

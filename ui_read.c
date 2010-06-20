@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -24,9 +24,10 @@
 
 #include <unistd.h>     /* read           */
 #include <stdio.h>      /* perror         */
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
+#include "ceof.h"   /* functions etc. */
 
 int ui_read(int fd[])
 {
-   return cmd_handle(EOF_CAT_UI, fd);
+   return eof_cmd_handle(EOF_CAT_UI, fd, &cmd_handle_rr);
 }

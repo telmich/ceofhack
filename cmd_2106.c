@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -27,5 +27,5 @@
 
 int cmd_2106(int fd[])
 {
-   return peers_list(fd[EOF_CMD_WRITE]);
+   return peer_list(fd[EOF_CMD_WRITE]);
 }

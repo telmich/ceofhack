@@ -39,6 +39,8 @@
 #define CEOF_MSG_TPPROMPT        CEOF_MSG_TPNAME "> "
 #define CEOF_MSG_CRYPTONAME      "crypto"
 #define CEOF_MSG_CRYPTOPROMPT    CEOF_MSG_CRYPTONAME "> "
+#define CEOF_MSG_PEERNAME        "peer"
+#define CEOF_MSG_PEERPROMPT      CEOF_MSG_PEERNAME "> "
 
 /* exit codes */
 enum {
@@ -80,6 +82,14 @@ struct options {
    char mykeyid[EOF_L_KEYID+1];
    pid_t pid;
 };
+
+struct peer {
+   char name[EOF_L_NICKNAME+1];
+   char addr[EOF_L_ADDRESS+1];
+   char keyid[EOF_L_KEYID+1];
+   struct peer *next;
+};
+
 
 /* global vars */
 extern struct peer      peers_list;

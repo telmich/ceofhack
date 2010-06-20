@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>      /* printf()       */
 #include "ceofhack.h"            /* functions etc.                */
 
 struct helper *helper_find_by_handle(int *last, int (*handle)(int []))

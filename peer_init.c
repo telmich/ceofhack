@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2009      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2009-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,7 +23,7 @@
  */
 
 #include <stdio.h>      /* NULL              */
-#include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"   /* functions etc.    */
 
 struct peer peers_list;
 

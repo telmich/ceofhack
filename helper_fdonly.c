@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -37,8 +37,6 @@ int helper_fdonly(int in, int out, int (*handle)(int []), int (*exit)(int []))
    chp[num].pid            = 0;
    chp[num].fds[EOF_CMD_READ]   = in;
    chp[num].fds[EOF_CMD_WRITE]  = out;
-   chp[num].fds[HP_EXT_READ]   = -1;
-   chp[num].fds[HP_EXT_WRITE]  = -1;
    chp[num].handle         = handle;
    chp[num].exit           = exit;
 

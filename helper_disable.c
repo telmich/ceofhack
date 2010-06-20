@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -23,6 +23,7 @@
  */
 
 #include <unistd.h>     /* close()        */
+#include <stdio.h>
 #include "ceofhack.h"   /* functions etc. */
 
 void helper_disable(struct helper *hp)

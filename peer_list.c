@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -28,7 +28,7 @@
 #include "ceofhack.h"  /* functions etc.  */
 #include "ceof.h"
 
-int peers_list(int fd)
+int peer_list(int fd)
 {
    struct peer *p;
    char intro[EOF_L_CMD+EOF_L_SIZE+1];

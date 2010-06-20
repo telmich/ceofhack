@@ -22,7 +22,8 @@
  *
  */
 
-#include <string.h>     /* memset, str*   */
+#include <stdio.h>     /* memset, str*   */
+#include "ceof.h"  /* functions etc.  */
 #include "ceofhack.h"  /* functions etc.  */
 
 char *peer_addr_get(char *nick)
@@ -31,7 +32,7 @@ char *peer_addr_get(char *nick)
 
    p = peer_findbyname(nick);
    if(!p) {
-      printf("No such peer: %s!\n", nick);
+      printf(CEOF_MSG_PEERPROMPT "Unknown peer: %s!\n", nick);
       return NULL;
    }
 

@@ -23,6 +23,7 @@
  */
 
 #include <unistd.h>     /* unlink()       */
+#include <stdio.h>      /* unlink()       */
 #include "ceofhack.h"   /* functions etc. */
 #include "ceof.h"
 

@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -22,6 +22,7 @@
  *
  */
 
+#include <stdio.h>               /* NULL */
 #include "ceofhack.h"            /* functions etc.                */
 
 struct helper *helper_find_by_fd(int num, int fd)

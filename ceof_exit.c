@@ -27,6 +27,7 @@
 #include <signal.h>     /* kill()         */
 #include <unistd.h>     /* _exit()        */
 #include <time.h>       /* nanosleep()    */
+#include <stdio.h>      /* perror()       */
 #include "ceofhack.h"
 #include "ceof.h"
 
