@@ -190,7 +190,7 @@ int eof_ui_quit(int sockfd);
 int eof_cmd_init(int categories);
 struct eof_cmd *eof_cmd_create(char num[], int (*handle)(int []));
 void eof_cmd_cat_init(int cat, struct eof_cmd *def);
-int eof_cmd_handle(unsigned long cat, int fd[]);
+int eof_cmd_handle(unsigned long cat, int fd[], ssize_t *);
 struct eof_cmd *eof_cmd_find_in_cat(int cat, char cmd[]);
 struct eof_cmd *eof_cmd_cat_get_default_cmd(int cat);
 int eof_cmd_cat_add(int cat, struct eof_cmd *cmd);

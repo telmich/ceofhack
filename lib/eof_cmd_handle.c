@@ -28,18 +28,17 @@
 #include <eof.h>       /* functions etc. */
 #include "shcl.h"      /* helper */
 
-int eof_cmd_handle(unsigned long eofs, int fd[])
+int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
 {
    struct eof_cmd *cmd;
    char data[EOF_L_CMD];
-   ssize_t len;
 
    /* always read a command first */
-   len = shcl_read_all(fd[EOF_CMD_READ], data, EOF_L_CMD);
+   *rr = shcl_read_all(fd[EOF_CMD_READ], data, EOF_L_CMD);
 
    /* catch error and end-of-file */
-   if(len < 1) {
-      return len;
+   if(*rr < 1) {
+      return *rr;
    }
 
    cmd = eof_cmd_find_in_cat(eofs, data);

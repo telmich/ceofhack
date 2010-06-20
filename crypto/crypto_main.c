@@ -44,6 +44,7 @@ int main(int argc, char **argv)
    char cmd[EOF_L_CMD+1];
    int fds[EOF_L_RW_SIZE];
    int tmp;
+   ssize_t rr;
    fd_set readfds;
 
    cmd[1] = 0;
@@ -75,21 +76,18 @@ int main(int argc, char **argv)
       FD_ZERO(&readfds);
       FD_SET(fds[EOF_CMD_READ],&readfds);
 
-      fprintf(stderr, "goingr for %d\n", fds[EOF_CMD_READ]);
-
       tmp = select(1, &readfds, NULL, NULL, NULL);
       if(tmp == -1) {
          if(errno != EINTR) {
             perror("select");
             return 1;
-         } else fprintf(stderr, "INTR\n");
+         }
       } else if (FD_ISSET(fds[EOF_CMD_READ],&readfds)) {
-         if(( tmp = eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds)) < 1) {
+         if(( tmp = eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds, &rr)) < 1) {
             fprintf(stderr, "Handler failed or eof reached, %d\n", tmp);
             return 1;
          }
       }
-      fprintf(stderr, "back in main, %d \n", tmp);
    }
 
    return 0;
