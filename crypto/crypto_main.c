@@ -84,8 +84,17 @@ int main(int argc, char **argv)
          }
       } else if (FD_ISSET(fds[EOF_CMD_READ],&readfds)) {
          if(( tmp = eof_cmd_handle(CEOF_CRYPTO_CAT_CEOF, fds, &rr)) < 1) {
-            fprintf(stderr, "Handler failed or eof reached, %d\n", tmp);
-            return 1;
+
+            /* check for errors within read routine */
+            if(rr == 0) {
+               fprintf(stderr, "EOF reached!\n");
+               return 1;
+            } else if (rr == -1) {
+               perror("cmd/read");
+               return 1;
+            }
+
+            fprintf(stderr, "Handler failed, continuing ...\n");
          }
       }
    }
