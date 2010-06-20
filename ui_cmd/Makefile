@@ -12,7 +12,7 @@ LIB+=../lib/eof_ui_peer_add.c ../lib/eof_ui_peer_list.c ../lib/eof_ui_peer_send.
 LIB+=../lib/eof_ui_peer_rename.c ../lib/eof_ui_peer_show.c ../lib/eof_ui_quit.c
 LIB+=../lib/eof_va_read.c ../lib/eof_id_init.c ../lib/eof_id_new.c
 LIB+=../lib/eof_ui_init.c
-SHCL=../read_all.c ../write_all.c 
+SHCL=../shcl/shcl_read_all.c ../shcl/shcl_write_all.c 
 UI=$(UI_MAIN) $(LIB) $(SHCL)
 UI_OBJ=$(UI:.c=.o)
 UI_PROG=$(UI:.c=)

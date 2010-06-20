@@ -42,6 +42,8 @@ HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
 HELPER+=helper_signal_all.c helper_check_input.c helper_signal.c
 HELPER+=helper_find_by_handle.c
 
+ONION=onion_partial_create_msg_drop.c onion_partial_create.c
+
 # command handling (ceof internal)
 CMD=cmd_init.c
 CMD+=cmd_20xx.c cmd_2000.c cmd_2002.c cmd_2003.c
@@ -82,7 +84,7 @@ CEOF_CRYPTO+=$(LIB) $(CEOF_CRYPTO_CMD) shcl/shcl_read_all.c shcl/shcl_write_all.
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
-CEOFHACK+=config_init.c
+CEOFHACK+=config_init.c $(ONION)
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
 

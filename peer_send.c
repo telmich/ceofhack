@@ -41,7 +41,8 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    printf("/peer send: Sending %s->%s ...\n", msg, nick);
 
    /* create partial onion packet */
-   onion_partial_create_msg_drop(nick, msg, pkg);
+   onion_partial_create_msg_drop(pkg_id, msg, pkg);
+
 
    /* register into queue for retrieval of pkg */
    eof_id_new(pkg_id);

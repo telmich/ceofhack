@@ -213,6 +213,7 @@ int queue_read(int []);
 int queue_new(int fd, int cat);
 
 /* onion stuff */
-void onion_partial_create_msg_drop(char [], char [], char []);
+void onion_partial_create(char cmd[], char id[], char addr[], char group[], char text[], char pkg[]);
+void onion_partial_create_msg_drop(char id[], char msg[], char pkg[]);
 
 #endif
