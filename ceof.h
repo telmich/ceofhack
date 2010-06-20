@@ -83,6 +83,7 @@ struct options {
 
 /* global vars */
 extern struct peer      peers_list;
+extern ssize_t          cmd_handle_rr;
 
 /* functions */
 void ceof_banner(char *);

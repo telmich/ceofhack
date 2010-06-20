@@ -27,5 +27,5 @@
 
 int tp_listen_read(int fd[])
 {
-   return eof_cmd_handle(EOF_CAT_TPL, fd);
+   return eof_cmd_handle(EOF_CAT_TPL, fd, &cmd_handle_rr);
 }

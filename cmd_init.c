@@ -24,7 +24,9 @@
 
 #include <eof.h>
 
-#include "ceofhack.h"   /* functions etc. */
+//#include "ceofhack.h"   /* functions etc. */
+
+ssize_t cmd_handle_rr;
 
 int cmd_init()
 {
