@@ -178,6 +178,9 @@ int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 ssize_t read_all(int fd, void *buf, size_t count);
 
+/* crypto */
+int crypto_read(int fd[]);
+
 /* commands and categories */
 int cmd_init();
 

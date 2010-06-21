@@ -71,7 +71,7 @@ LIB+=lib/eof_cmd_cat_add.c
 UI=ui_init.c ui_handle.c ui_read.c ui_disable.c ui_disable_all.c ui_exit.c
 
 # Crypto parts within ceofhack
-CRYPTO=crypto_init.c
+CRYPTO=crypto_init.c crypto_read.c
 
 # Crypto part within ceof-crypto (standalone)
 CEOF_CRYPTO_CMD=crypto/crypto_cmd_default.c crypto/cmd_1200.c

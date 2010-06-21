@@ -18,29 +18,14 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Initialise the crypto stuff
+ * Listen to crypto packets
  *
  */
 
-#include <stdio.h>      /* printf            */
-#include <string.h>     /* memset()          */
-#include <gpgme.h>      /* gpgme             */
-#include <locale.h>     /* locales           */
-#include "ceofhack.h"   /* functions etc.    */
-#include "ceof.h"       /* functions etc.    */
+#include <eof.h>
+#include "ceof.h"
 
-int crypto_init()
+int crypto_read(int fd[])
 {
-   struct helper *hp;
-
-   /* read my key id */
-   memset(opt.mykeyid, '\0', EOF_L_PIDLEN+1);
-   if(!openreadclosestatic(opt.mykeyid, opt.mykeyidfile, EOF_L_KEYID)) return 0;
-
-   printf(CEOF_MSG_CRYPTOPROMPT "My keyid: %s\n", opt.mykeyid);
-
-   /* init ceof-crpyto */
-   if(!(hp = helper_exec("ceof-crypto", crypto_read, NULL))) return 0; 
-
-   return 1;
+   return eof_cmd_handle(EOF_CAT_CRYPTO, fd, &cmd_handle_rr);
 }

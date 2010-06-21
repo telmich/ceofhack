@@ -44,7 +44,7 @@ int crypto_gpg_init()
    gpgme_set_locale (NULL, LC_MESSAGES, setlocale (LC_MESSAGES, NULL));
 #endif
 
-   printf(CEOF_MSG_CRYPTO_PROMPT "Version %s\n", p);
+   printf(CEOF_MSG_CRYPTO_PROMPT "GPG-Version %s\n", p);
 
    gerr = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
    if(gerr != GPG_ERR_NO_ERROR) {
