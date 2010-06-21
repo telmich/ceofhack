@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -39,12 +39,6 @@ struct helper *helper_exec(char *path, int (*handle)(int []), int (*exit)(int []
    chp[num].exit     = exit;
 
    if(!forkexecpipe(&chp[num])) return NULL;
-
-/*   printf("he (%d): %s: ", num, path);
-   for(i=0; i<4; i++) {
-      printf("%d: %d ", i, chp[num].fds[i]);
-   }
-   printf("\n"); */
 
    return &chp[num];
 }

@@ -31,12 +31,9 @@
 
 int crypto_init()
 {
-
    /* read my key id */
    memset(opt.mykeyid, '\0', EOF_L_PIDLEN+1);
-   if(!openreadclosestatic(opt.mykeyid, opt.mykeyidfile, EOF_L_KEYID)) {
-      return 0;
-   }
+   if(!openreadclosestatic(opt.mykeyid, opt.mykeyidfile, EOF_L_KEYID)) return 0;
 
    printf(CEOF_MSG_CRYPTOPROMPT "My keyid: %s\n", opt.mykeyid);
 

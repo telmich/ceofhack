@@ -49,9 +49,7 @@ int main(int argc, char **argv)
 
    cmd[1] = 0;
 
-   if(argc != 2) crypto_usage();
-
-   strncpy(opt.cryptohome, argv[1], PATH_MAX);
+   eof_get_crypto_dir(opt.cryptohome, PATH_MAX);
    strncpy(opt.gpg, "/usr/bin/gpg", PATH_MAX);
 
    if(!crypto_gpg_init()) return 1;
