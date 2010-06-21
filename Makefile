@@ -50,6 +50,7 @@ CMD+=cmd_20xx.c cmd_2000.c cmd_2002.c cmd_2003.c
 CMD+=cmd_1103.c
 CMD+=cmd_21xx.c cmd_2100.c cmd_2101.c cmd_2102.c cmd_2103.c cmd_2104.c
 CMD+=cmd_2105.c cmd_2106.c cmd_2199.c
+CMD+=cmd_22xx.c
 CMD+=cmd_3000.c
 
 # EOF subsystems

@@ -18,27 +18,13 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Initialise the crypto stuff
+ * Default handler for 22 (CRYPTO)
  *
  */
 
-#include <stdio.h>      /* printf            */
-#include <string.h>     /* memset()          */
 #include "ceofhack.h"   /* functions etc.    */
-#include "ceof.h"       /* functions etc.    */
 
-struct crypto crypto;
-
-int crypto_init()
+int cmd_22xx(int fd[])
 {
-   /* read my key id */
-   memset(opt.mykeyid, '\0', EOF_L_PIDLEN+1);
-   if(!openreadclosestatic(opt.mykeyid, opt.mykeyidfile, EOF_L_KEYID)) return 0;
-
-   printf(CEOF_MSG_CRYPTOPROMPT "My keyid: %s\n", opt.mykeyid);
-
-   /* init ceof-crpyto */
-   if(!(crypto.hp = helper_exec("ceof-crypto", crypto_read, NULL))) return 0; 
-
-   return 1;
+   return 1; /* dummy */
 }

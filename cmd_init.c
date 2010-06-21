@@ -75,8 +75,9 @@ int cmd_init()
    if(!(newcmd = eof_cmd_create(EOF_CMD_UI_QUIT, cmd_2199))) return 0;
    if(!eof_cmd_cat_add(EOF_CAT_UI, newcmd)) return 0;
 
-//   if(!(newcmd = eof_cmd_create(EOF_CMD_EXT_MESSAGE, cmd_3000))) return 0;
-//   if(!eof_cmd_cat_add(EXR, newcmd)) return 0;
+   /* CRYPTO ENGINE */
+   if(!(newcmd = eof_cmd_create(EOF_CMD_CRYPTO_DEFAULT, cmd_22xx))) return 0;
+   eof_cmd_cat_init(EOF_CAT_CRYPTO, newcmd);
 
    return 1;
 }

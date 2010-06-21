@@ -81,6 +81,11 @@ struct queueentry {
    struct queueentry *next;               /* pointer to the next entry     */
 };
 
+struct crypto {
+   struct helper *hp;         /* how to reach the crypto engine */
+};
+
+
 /****************** Connected subsystems */
 struct eofs_list {
    struct helper hp;          /* helper that identifies it  */
@@ -178,9 +183,6 @@ int openreadclosestatic(char buf[], char *fn, int len);
 ssize_t write_all(int fd, const void *buf, size_t count);
 ssize_t read_all(int fd, void *buf, size_t count);
 
-/* crypto */
-int crypto_read(int fd[]);
-
 /* commands and categories */
 int cmd_init();
 
@@ -200,16 +202,17 @@ int cmd_2105(int []);
 int cmd_2106(int []);
 int cmd_2199(int []);
 int cmd_21xx(int []);
-
-//int cmd_3000(int []);
-
-/* user interfaces */
 int ui_init();
 int ui_handle(int []);
 int ui_read(int []);
 int ui_disable(int);
 void ui_disable_all();
 void ui_exit();
+
+
+/* crypto */
+int cmd_22xx(int []);
+int crypto_read(int fd[]);
 
 /* queues */
 int queue_read(int []);
