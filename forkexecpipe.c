@@ -46,7 +46,7 @@ int forkexecpipe(struct helper *hp)
    if(!close_on_exec(hp->fds[EOF_CMD_READ])) return 0;
 
    /* write from EOFi [1], read from extern [0] */
-   if(pipe(&fd_to_extern[2]) == -1) {
+   if(pipe(&fd_to_extern[0]) == -1) {
       perror("pipe2");
       return 0;
    }
@@ -63,8 +63,8 @@ int forkexecpipe(struct helper *hp)
    /* parent */
    if(hp->pid > 0) { 
       /* remove unecessary fds */
-      close(fd_from_extern[1]);
       close(fd_to_extern[0]);
+      close(fd_from_extern[1]);
 
       /* Don't block reads in ceof */
       if(fcntl(hp->fds[EOF_CMD_READ], F_SETFL, O_NONBLOCK) < 0) {
