@@ -22,26 +22,17 @@
  *
  */
 
-#include <fcntl.h>               /* fcntl()                       */
-#include <stdio.h>               /* printf                        */
-#include <string.h>              /* str*                          */
-#include <unistd.h>      /* unlink           */
-
-#include <sys/socket.h> /* socket handling   */
-
 #include "ceofhack.h"   /* functions etc.    */
-#include "shcl.h"       /* helper            */
 #include "ceof.h"
 
 #include <eof.h>
 
 void onion_partial_create_msg_drop(char id[], char msg[], char pkg[])
 {
-   /* FIXME: noise needed */
    char addr[EOF_L_ADDRESS];
    char group[EOF_L_GROUP];
    
-
+   noise_fill(addr, EOF_L_ADDRESS);
+   noise_fill(group, EOF_L_GROUP);
    onion_partial_create(EOF_CMD_ONION_MSG_DROP, id, addr, group, msg, pkg);
-
 }

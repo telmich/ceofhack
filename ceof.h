@@ -102,4 +102,7 @@ void ceof_banner(char *);
 /* crypto */
 int crypto_init();
 
+/* noise */
+void noise_fill(char [], size_t);
+
 #endif
