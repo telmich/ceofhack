@@ -25,6 +25,7 @@
 #include <string.h>     /* memset, str*      */
 #include <stdio.h>      /* printf            */
 #include "ceofhack.h"   /* functions etc.    */
+#include "ceof.h"
 
 int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
               char errmsg[EOF_L_MESSAGE])
