@@ -612,13 +612,13 @@ Message & Binary data & The message & BLOB\\
 \end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{1000: Example}
-Added linebreak after some \\\\0 for readability, which are \textbf{not} in
+Added linebreak after some \textbackslash{}0 for readability, which are \textbf{not} in
 the real packet!
 \begin{verbatim}
 1000abfudh127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
-\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
-\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
-\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\010\0\0\0\0HEREISDATA
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
+\0\0\0\0\0\0\0\0\0\010\0\0\0\0HEREISDATA
 \end{verbatim}
 % -----------------------------------------------------------------------------
 \subsection{1001: Enable listening}
@@ -629,9 +629,9 @@ transport protocol as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
-ID & EOFsdt: id & packet id & afdb12\\
-\hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
 \hline
 Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
