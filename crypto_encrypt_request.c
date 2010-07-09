@@ -29,7 +29,7 @@
 #include "ceofhack.h"   /* functions etc.    */
 #include "ceof.h"       /* functions etc.    */
 
-void crypto_encrypt_request()
+void crypto_encrypt_request(char pkg[)
 {
 
    /* read my key id */

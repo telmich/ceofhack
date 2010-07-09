@@ -82,10 +82,13 @@ CEOF_CRYPTO+=crypto/crypto_gpg_keyid_get.c crypto/crypto_gpg_decrypt.c
 CEOF_CRYPTO+=crypto/crypto_usage.c crypto/crypto_cmd_init.c
 CEOF_CRYPTO+=$(LIB) $(CEOF_CRYPTO_CMD) shcl/shcl_read_all.c shcl/shcl_write_all.c
 
+# Noise (the beginning)
+NOISE=noise_fill.c
+
 
 # ceofhack internal
 CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
-CEOFHACK+=config_init.c $(ONION)
+CEOFHACK+=config_init.c $(ONION) $(NOISE)
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
 

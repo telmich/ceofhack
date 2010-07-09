@@ -33,6 +33,7 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    char pkg[EOF_L_PKG_MAX+1];
    char pkg_id[EOF_L_ID+1];
 
+   memset(pkg, 0, EOF_L_PKG_MAX+1);
    p = peer_findbyname(nick);
    if(!p) {
       eof_errmsg("Unknown peer");
@@ -43,11 +44,14 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
    /* create partial onion packet */
    onion_partial_create_msg_drop(pkg_id, msg, pkg);
 
-
    /* register into queue for retrieval of pkg */
    eof_id_new(pkg_id);
+   queue_add(queue_id (encrypt ßueue), pkg_id, fptr);
+   FIXME:
+      - submit package and create entry in queue
+         - register handler, which looks up in the right
+            queue?
 
-//   queue_add(queue_id, pkg_id, fptr);
 
    /* send encrypt msg for $keyid */
 //   crypto_encrypt_request(pkg_id, pkg);
