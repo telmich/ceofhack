@@ -34,4 +34,6 @@ void onion_partial_create(char cmd[], char id[], char addr[], char group[], char
    strncpy(&pkg[offset], addr, EOF_L_ADDRESS);  offset += EOF_L_ADDRESS;
    strncpy(&pkg[offset], group, EOF_L_GROUP);   offset += EOF_L_GROUP;
    strncpy(&pkg[offset], msg, EOF_L_MESSAGE);   offset += EOF_L_MESSAGE;
+
+//   return offset;
 }

@@ -37,7 +37,7 @@
 
 
 #include "eof.h"        /* EOF */
-#include "ceofhack.h"   /* read_all */
+#include "ceofhack.h"   /* shcl_read_all */
 #include "shcl.h"       /* use helpers */
 
 #define WE "tcp/c3/tp:"
@@ -64,7 +64,7 @@ int main()
    memset(size, 0, EOF_L_SIZE+1);
 
    /* read init sequence: 1000 */
-   read_all(STDIN_FILENO, input, EOF_L_CMD);
+   shcl_read_all(STDIN_FILENO, input, EOF_L_CMD);
    fprintf(stderr, WE "cmd %s\n", input);
    if(strncmp(input, EOF_CMD_TPS, EOF_L_CMD)) {
       fprintf(stderr, WE "wrong cmd: %s\n", input);
@@ -72,7 +72,7 @@ int main()
    }
    
    /* read the url */
-   read_all(STDIN_FILENO, addr, EOF_L_ADDRESS);
+   shcl_read_all(STDIN_FILENO, addr, EOF_L_ADDRESS);
    fprintf(stderr, WE "using url %s\n", addr);
 
    /* find host */
@@ -98,12 +98,12 @@ int main()
    fprintf(stderr, WE "port=%d\n", port);
 
    /* get size */
-   read_all(STDIN_FILENO, size, EOF_L_SIZE);
+   shcl_read_all(STDIN_FILENO, size, EOF_L_SIZE);
    len = strtoul(size, NULL, 10);
    fprintf(stderr, WE "pkglen=%ld (%s)\n", (long) len, size);
 
    /* get message */
-   if((len2 = read_all(STDIN_FILENO, input, len)) != len) {
+   if((len2 = shcl_read_all(STDIN_FILENO, input, len)) != len) {
       fprintf(stderr, WE "read len (%ld) != len (%ld)\n", (long) len2, (long) len);
       return 0;
    }
@@ -127,7 +127,7 @@ int main()
       return 0;
    }
 
-   if(write_all(sock, input, len) != len) {
+   if(shcl_write_all(sock, input, len) != len) {
       perror(WE "send message");
       return 0;
    }

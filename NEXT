@@ -1,3 +1,5 @@
+tp_send.c
+--------------------------------------------------------------------------------
 Long term aim: Send and retrieve key(id) with signed messages.
    ->  Cleanup crypto and create ceof-crypto.
 
@@ -8,3 +10,4 @@ Long term aim: Send and retrieve key(id) with signed messages.
  - Switch to asynchronous within ceofhack.
    -> no answers in functions?
    -> answer via handler?
+--------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -37,7 +37,7 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
    memset(buf, 0, BIGBUF+1);
 
    url = peer_addr_get(nick);
-   printf("Using address %s for %s\n", url, nick);
+   printf("Sending msg to %s using %s\n", nick, url);
 
    /* search for transport protocol */
    send = tp_available(url, EOF_CAT_TPS);
@@ -46,7 +46,7 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
       eof_errmsg("No transport protocol available!");
       return 0;
    }
-   printf("TP: Using %s to send to %s\n", send->path, url);
+   printf(CEOF_MSG_TPPROMPT "Using %s for %s\n", send->path, url);
 
    /* create (onion) packet: post-0.1 release! */
 

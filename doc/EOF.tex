@@ -585,13 +585,9 @@ Postcards are described in detail in chapter \ref{postcards}, page \pageref{post
 % #############################################################################
 \section{Transport protocols ("`eofi2tp"')}
 \label{eofi2tp}
-Environment variables: CWD for listener
+% -----------------------------------------------------------------------------
+\subsection{Introduction}
 URLs are used as defined in RFC3986\cite{uri-1}.
-Transport protocols use EOF command ID 0.
-
-Stateless: source routing, usage of acks.
-
-Unterscheiden zwischen listener und send.
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \index{Command!1000}
@@ -609,9 +605,14 @@ Size & EOFsdt: size & Size of message, excluding this header & 424242\\
 Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item 2000
+\item 2001
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{1000: Example}
-Added linebreak after some \\0 for readability, which are \textbf{not} in
+Added linebreak after some \\\\0 for readability, which are \textbf{not} in
 the real packet!
 \begin{verbatim}
 1000abfudh127.0.0.3:42\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
@@ -623,8 +624,8 @@ the real packet!
 \subsection{1001: Enable listening}
 \index{Command!1001}%
 When the listening transport protocol starts up, EOFi sends this command and
-waits for an acknowledge (\emph{2003}, before it marks the
-listening transport protocol as enabled.
+waits for the acknowledge package, before it marks the listening
+transport protocol as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
@@ -635,6 +636,10 @@ ID & EOFsdt: id & packet id & afdb12\\
 Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 \hline
 \end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item 2003
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{1001: Example}
 \begin{verbatim}
@@ -650,13 +655,18 @@ This command requests a listening transport protocol to
 shutdown. It should free all ressources and exit.
 After a grace time (maybe seconds, not yet defined), EOFi will kill the badly
 behaving transport protocol.
-listening transport protocol as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
 \end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item none
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsubsection{1002: Example}
 \begin{verbatim}
@@ -666,22 +676,28 @@ listening transport protocol as enabled.
 \subsection{2000: Packet successfully sent}
 This code is returned by the transport protocol subsystem to EOFi on success.
 After this return code, the transport protocol exits.
-% -----------------------------------------------------------------------------
-\subsubsection{Example}
-\begin{verbatim}
-2000
-\end{verbatim}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2000 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{2001: Packet not sent}
 \index{Command!2001}
 This code is returned by the transport protocol subsystem to the
 EOF implementation on failure.
 After this return code, the transport protocol exits.
-% -----------------------------------------------------------------------------
-\subsubsection{Example}
-\begin{verbatim}
-2001
-\end{verbatim}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2001 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{2002: Received packet}
 \index{Command!2002}
@@ -691,28 +707,27 @@ The listening transport protocol received a packet and notifies EOFi.
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
 Size & EOFsdt:size & Excluding the 2002 and this field & 42\\
 \hline
 Message & Binary data & The message & BLOB\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
-\subsubsection{Example}
-\begin{verbatim}
-200212
-RECEIVEDDATA
-\end{verbatim}
-% -----------------------------------------------------------------------------
 \subsection{2003: Listening}
 \index{Command!2003}
 This code is returned by the listening transport protocol, as soon as the
 listening process is ready to receive data. After that, EOFi can announce
 the listening URL to other EOFi.
-% -----------------------------------------------------------------------------
-\subsubsection{Example}
-\begin{verbatim}
-2003
-\end{verbatim}
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2003 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
 % #############################################################################
 \section{The user interface ("`ui2user"')}
 This section specifies the appereance of a user interface to the user.

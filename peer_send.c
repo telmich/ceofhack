@@ -39,24 +39,24 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
       eof_errmsg("Unknown peer");
       return 0;
    }
-   printf("/peer send: Sending %s->%s ...\n", msg, nick);
+   printf(CEOF_MSG_PROMPT "/peer send: Sending %s->%s ...\n", msg, nick);
 
    /* create partial onion packet */
+   eof_id_new(pkg_id);
    onion_partial_create_msg_drop(pkg_id, msg, pkg);
 
    /* register into queue for retrieval of pkg */
-   eof_id_new(pkg_id);
-   queue_add(queue_id (encrypt ßueue), pkg_id, fptr);
-   FIXME:
+//   queue_add(queue_id (encrypt ßueue), pkg_id, fptr);
+/*   FIXME:
       - submit package and create entry in queue
          - register handler, which looks up in the right
-            queue?
+            queue? */
 
 
    /* send encrypt msg for $keyid */
 //   crypto_encrypt_request(pkg_id, pkg);
    
    /* handle send in queue handler */
-//   return tp_send(nick, buf, len, errmsg);
-   return 1;
+   return tp_send(nick, pkg, EOF_L_PKG_MAX, errmsg);
+//   return 1;
 }

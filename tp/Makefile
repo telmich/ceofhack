@@ -31,7 +31,7 @@ clean:
 
 tcp/c2/listen: tcp/c2/init_socket.o tcp/c2/do_socket.o tcp/c2/sigio.o tcp/c2/handle_conn.o
 	$(CC) $^ -o $@
-tcp/c3/listen: ../read_all.o ../write_all.o ../convert.o tcp/c3/listen.c
+tcp/c3/listen: ../shcl/shcl_read_all.o ../shcl/shcl_write_all.o ../convert.o tcp/c3/listen.c
 	$(CC) $^ -o $@
-tcp/c3/send: ../read_all.o ../write_all.o ../convert.o tcp/c3/send.c
+tcp/c3/send: ../shcl/shcl_read_all.o ../shcl/shcl_write_all.o ../convert.o tcp/c3/send.c
 	$(CC) $^ -o $@

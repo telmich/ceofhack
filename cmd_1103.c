@@ -33,7 +33,7 @@ int cmd_1103(char nick[EOF_L_NICKNAME], char msgtxt[EOF_L_MESSAGE])
    int ret = 1;
    struct helper *hp;
 
-   printf(CEOF_MSG_UIPROMPT "message received: <%s> %s\n", nick, msgtxt);
+   printf(CEOF_MSG_UIPROMPT "message received: <%s>: %s\n", nick, msgtxt);
 
    while((hp = helper_find_by_handle(&i, ui_read))) {
       if(!eof_va_write(hp->fds[EOF_CMD_WRITE], 3, EOF_L_CMD, EOF_CMD_UI_MSGRECEIVED,

@@ -37,7 +37,7 @@
 
 
 #include "eof.h"        /* EOF */
-#include "ceofhack.h"   /* read_all */
+#include "ceofhack.h"   /* shcl_read_all */
 #include "shcl.h"       /* use helpers */
 
 #define WE "tcp/c3/ltp:"
@@ -53,7 +53,7 @@ ssize_t eofi_ltp_read(int fd, char input[])
 {
    ssize_t len;
 
-   len = read_all(fd, input, EOF_L_PKG_MAX+1);
+   len = shcl_read_all(fd, input, EOF_L_PKG_MAX+1);
    if(len < 0) {
       perror(WE "EOFi read");
       return -1;
@@ -96,7 +96,7 @@ ssize_t read_socket(int sock, char input[])
       fprintf(stderr, WE "result = %d\n",nsock);
    } while(nsock == -1);
 
-   tmp = read_all(nsock, input, EOF_L_PKG_MAX);
+   tmp = shcl_read_all(nsock, input, EOF_L_PKG_MAX);
    close(nsock);
 
    return tmp;
@@ -114,7 +114,7 @@ int eof_ltp_write(char *msg, size_t len)
 
    fprintf(stderr, WE "TO EOFi: len=%ld (%ld), pkg=\"%s\" ...\n",
           (long) len, (long) len - (EOF_L_CMD + EOF_L_SIZE),  buf);
-   return write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
+   return shcl_write_all(STDOUT_FILENO, buf, len) < 0 ? 0 : 1;
 }
 
 int main()
