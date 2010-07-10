@@ -348,7 +348,8 @@ page \pageref{idn}).
 % -----------------------------------------------------------------------------
 \section{Paths}
 % -----------------------------------------------------------------------------
-\subsection{EOFi configuration directory}
+\subsection{EOFi configuration directory (p\_eofi\_d)}
+\label{peofid}
 % -----------------------------------------------------------------------------
 \subsubsection{Default case}
 Normally, \$HOME is set and \$EOF\_HOME is not set. In that case
@@ -365,19 +366,25 @@ If the environment variable "`\textit{\$EOF\_DIR}`" is set,
 its content will be used to refer to the configuration directory.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{User interface (unix socket)}
-\label{ui-socket}
+\subsection{User interface (p\_ui\_socket)}
+\label{puisocket}
 If the environment variable \textit{\$EOF\_UI\_SOCKET} is set, the user
 interface should connect to this unix socket. Otherwise it should connect
 to the socket "`ui/socket"' below the EOFi configuration directory
 (see above for rules how to locate that).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
-\subsection{Crypto engine}
-\label{crypto-key}
+\subsection{Crypto engine (p\_crypto\_d, p\_crypto\_mykeyid)}
+\label{pcryptod}
+\label{pcryptomykeyid}
 The directory "'\textbf{crypto}"' below the EOFi configuration directory contains
 all crypto related files. The file "'\textbf{mykeyid}"' contains the
 keyid used for signing messages.
+% -----------------------------------------------------------------------------
+\subsection{Transport protocols (p\_tp\_d)}
+\label{ptpd}
+The directory "'\textbf{tp}"' below the EOFi configuration directory contains
+all transport protocol related files.
 % -----------------------------------------------------------------------------
 \section{Configuration}
 The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
@@ -924,7 +931,7 @@ register, list joined groups, list open queries, list marktschreier.
 % -----------------------------------------------------------------------------
 \subsection{Connection}
 All user interfaces connect to the user interface socket, as specified
-on page \pageref{ui-socket}, section \ref{ui-socket}.
+on page \pageref{puisocket}, section \ref{puisocket}.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1100: Acknowledge}
