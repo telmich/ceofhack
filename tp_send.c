@@ -31,14 +31,13 @@ int tp_send(char *url, char *pkg, int len, char errmsg[EOF_L_MESSAGE])
 {
    struct cconfig *send;
    struct helper  *hp;
-
-   memset(buf, 0, BIGBUF+1);
+   char   tppkg[EOF_L_MAX];
 
    /* search for transport protocol */
    send = tp_available(url, EOF_CAT_TPS);
 
    if(!send) {
-      eof_errmsg("No transport protocol available!");
+      eof_errmsg(CEOF_MSG_TPPROMPT "No transport protocol available!");
       return 0;
    }
    printf(CEOF_MSG_TPPROMPT "Using %s for %s\n", send->path, url);

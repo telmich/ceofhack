@@ -1,4 +1,7 @@
 tp_send.c
+   add pkg to queue
+   FIXME: have tps and tp always running, not only on demand
+      tps_init()
 --------------------------------------------------------------------------------
 Long term aim: Send and retrieve key(id) with signed messages.
    ->  Cleanup crypto and create ceof-crypto.
