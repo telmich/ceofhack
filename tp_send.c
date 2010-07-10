@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Send data to peer
+ * Send data to peer (i.e. gets onion packet)
  *
  */
 
@@ -27,17 +27,12 @@
 #include "ceofhack.h"      /* functions etc.    */
 #include "ceof.h"
 
-int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE])
+int tp_send(char *url, char *pkg, int len, char errmsg[EOF_L_MESSAGE])
 {
-   char           *url;
    struct cconfig *send;
    struct helper  *hp;
-   char           buf[BIGBUF+1];
 
    memset(buf, 0, BIGBUF+1);
-
-   url = peer_addr_get(nick);
-   printf("Sending msg to %s using %s\n", nick, url);
 
    /* search for transport protocol */
    send = tp_available(url, EOF_CAT_TPS);

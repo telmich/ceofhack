@@ -44,7 +44,7 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
 
    /* create partial onion packet */
    eof_id_new(pkg_id);
-   onion_partial_create_msg_drop(pkg_id, msg, pkg);
+   len = onion_partial_create_msg_drop(pkg_id, msg, pkg);
 
    /* register into queue for retrieval of pkg */
 //   queue_add(queue_id (encrypt ßueue), pkg_id, fptr);
@@ -53,11 +53,12 @@ int peer_send(char nick[EOF_L_NICKNAME+1], char msg[EOF_L_MESSAGE+1],
          - register handler, which looks up in the right
             queue? */
 
+   url = peer_addr_get(nick);
 
    /* send encrypt msg for $keyid */
 //   crypto_encrypt_request(pkg_id, pkg);
    
    /* handle send in queue handler */
-   return tp_send(nick, pkg, EOF_L_PKG_MAX, errmsg);
+   return tp_send(url, pkg, EOF_L_PKG_MAX, errmsg);
 //   return 1;
 }
