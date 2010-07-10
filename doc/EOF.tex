@@ -599,6 +599,7 @@ For schemes only lower-case names are allowed
 (to prevent problems with broken filesystems).
 % -----------------------------------------------------------------------------
 \subsection{Paths}
+\label{tppaths}
 All paths are relative to the directory p\_tp\_d, as described
 in \ref{ptpd} on p. \pageref{ptpd}.
 \begin{longtable}{|c|c|}
@@ -619,12 +620,14 @@ in \ref{ptpd} on p. \pageref{ptpd}.
 \end{longtable}
 % -----------------------------------------------------------------------------
 \subsubsection{Enabling a scheme}
+\label{tpscheme}
 To enable support for the scheme \verb=http=
 create both, the \verb=listen= and the \verb=send= executable below
 \verb=available/http=.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsubsection{Enabling a listener}
+\label{tplisten}
 To enable a listener for the scheme \emph{http} at the URL
 \emph{http://www.example.com/eof}, create
 the directory \verb=listen/http-example= and the file
@@ -637,6 +640,7 @@ scheme is supported.
 % Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Required implementations}
+\label{tprequired}
 This version of the EOF standard requires support for the following
 transport protocols in the implementation:
 \begin{longtable}{|c|c|c|c|}
@@ -649,6 +653,7 @@ tcp & IP/TCP & \verb=tcp:host:port= & Plain tcp\\
 \end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{Upcoming implementations}
+\label{tpupcoming}
 The following transport protocol implementations have been proposed,
 but are not yet implemented and thus not yet part of the standard:
 
@@ -677,49 +682,30 @@ udp & IP/UPD      & \verb=udp:host:port= & Plain UDP\\
 \hline
 \end{longtable}
 % -----------------------------------------------------------------------------
-\subsection{Developing implementations}
-The following sections cover existent protocol implementations.
-The name of the section is the name of the registered implementation.
-Every section must at least contain:
+\subsection{Developing and integrating implementations}
+If you want to create a new transport protocol, create the two
+executables as described in \ref{tppaths} and put them in their
+scheme directory.
+If the implementation works fine and you would like to add it to EOF,
+create the directory \verb=tp/<scheme>/<implementation_name>= within
+the EOFi source directory and update the following
+sections of this document:
 \begin{itemize}
-\item Supported scheme
+\item \ref{tprequired}
+\item \ref{tprequired} / new subsubsection for the new scheme
+\item \ref{tpupcoming}
+\end{itemize}
+
+The name of the subsubsection is the name of the scheme
+plus the registered implementation ("`like tcp-c"').
+Every such subsubsection must at least contain:
+\begin{itemize}
 \item Author contact information
 \item URL of website
 \item Programming language
-\item EOF-Version that introduces support for the protocol
 \end{itemize}
-You should add your implementation to the directory "`tp"' within the
-repository.
-Sort sections by alphabet.
-
-% -----------------------------------------------------------------------------
-\subsection{Integrating implementations}
-If you want to add an implementation of the transport protocol
-\emph{http} for instance:
-\begin{itemize}
-\item Create the directories
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/tp/available/\emph{tptest}}.
-\end{itemize}
-\item Create (link or copy) the executables to the filenames \textbf{listen}
-and \textbf{send}.
-\end{itemize}
-The EOF implementation will register the transport protocol automatically
-at the next start. You may register only the \textbf{listen} or
-\textbf{send} part of a protocol.
-% -----------------------------------------------------------------------------
-
-Will do chdir() to the directory! tp can open config files in current dir.
-what about url?
-
-same for listen and send?
-   listenurl, sendurl, config in curdir
-Yes!
-
-The maximum length of the URL is defined in eof.h (EOF\_L\_ADDRESS).
-If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
-
-IMPORTANT!
+Keep the subsubsections sorted by alphabet.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \index{Command!1000}
