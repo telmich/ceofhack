@@ -595,6 +595,8 @@ Postcards are described in detail in chapter \ref{postcards}, page \pageref{post
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
 URLs are used as defined in RFC3986\cite{uri-1}.
+For schemes only lower-case names are allowed
+(to prevent problems with broken filesystems).
 % -----------------------------------------------------------------------------
 \subsection{Required implementations}
 This version of the EOF standard requires support for the following
@@ -636,6 +638,67 @@ tcps & IP/TCP/SSL & \verb=tcps:host:port= & tcp with ssl around\\
 udp & IP/UPD      & \verb=udp:host:port= & Plain UDP\\
 \hline
 \end{longtable}
+% -----------------------------------------------------------------------------
+\subsection{Adding a transport protocol}
+If you want to add the transport protocol \emph{tptest}:
+\begin{itemize}
+\item Create the directories
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/tp/available/\emph{tptest}}.
+\end{itemize}
+\item Create (link or copy) the executables to the filenames \textbf{listen}
+and \textbf{send}.
+\end{itemize}
+The EOF implementation will register the transport protocol automatically
+at the next start. You may register only the \textbf{listen} or
+\textbf{send} part of a protocol.
+% -----------------------------------------------------------------------------
+\subsection{Using a transport protocol}
+So far the EOF implementation knows about the implementation, and may also
+already use it for \emph{sending} packets. But there is no listener configured
+yet.
+To enable a listener for the protocol \emph{tptest} at the URL
+\emph{tptest:somewhere@protocol-specific}
+\begin{itemize}
+\item create a directory below
+\begin{itemize}
+\item \textbf{\$HOME/.ceof/tp/enabled/}
+\end{itemize}
+\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
+\item Then add the URL to the file named $<\textbf{url}>$.
+\item If the transport protocol needs or allows additional configuration files,
+you need to create them in that directory.
+\end{itemize}
+The EOF implementation will parse the URL and check whether a supporting
+listener application is available.
+
+Will do chdir() to the directory! tp can open config files in current dir.
+what about url?
+
+same for listen and send?
+   listenurl, sendurl, config in curdir
+Yes!
+
+The maximum length of the URL is defined in eof.h (EOF\_L\_ADDRESS).
+If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
+
+IMPORTANT!
+% -----------------------------------------------------------------------------
+\section{Implementations}
+The following sections cover existent protocol implementations.
+The name of the section is the name of the registered implementation.
+Every section must at least contain:
+\begin{itemize}
+\item Supported scheme
+\item Author contact information
+\item URL of website
+\item Programming language
+\item EOF-Version that introduces support for the protocol
+\end{itemize}
+You should add your implementation to the directory "`tp"' within the
+repository.
+Sort sections by alphabet.
+
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \index{Command!1000}
@@ -1506,99 +1569,6 @@ The different datatypes are just concatenated in the order described.
 The following description of the content describes the pakckets
 in their unencrypted form.
 % Nico: 1.0
-% #############################################################################
-\chapter{Transport protocols}
-% -----------------------------------------------------------------------------
-\section{Introduction}
-Only lower-case names are allowed (to prevent problems with broken filesystems).
-% -----------------------------------------------------------------------------
-\section{Examples}
-This sections shows some theoretic (theoretic because nobody implemented
-them yet) transport protocols.
-% -----------------------------------------------------------------------------
-\section{Embedding into EOF}
-This section explains how to integrate a transport protocol into EOF.
-% -----------------------------------------------------------------------------
-\subsection{Adding a transport protocol}
-If you want to add the transport protocol \emph{tptest}:
-\begin{itemize}
-\item Create the directories
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/tp/available/\emph{tptest}}.
-\end{itemize}
-\item Create (link or copy) the executables to the filenames \textbf{listen}
-and \textbf{send}.
-\end{itemize}
-The EOF implementation will register the transport protocol automatically
-at the next start. You may register only the \textbf{listen} or
-\textbf{send} part of a protocol.
-% -----------------------------------------------------------------------------
-\subsection{Using a transport protocol}
-So far the EOF implementation knows about the implementation, and may also
-already use it for \emph{sending} packets. But there is no listener configured
-yet.
-To enable a listener for the protocol \emph{tptest} at the URL
-\emph{tptest:somewhere@protocol-specific}
-\begin{itemize}
-\item create a directory below
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/tp/enabled/}
-\end{itemize}
-\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
-\item Then add the URL to the file named $<\textbf{url}>$.
-\item If the transport protocol needs or allows additional configuration files,
-you need to create them in that directory.
-\end{itemize}
-The EOF implementation will parse the URL and check whether a supporting
-listener application is available.
-
-Will do chdir() to the directory! tp can open config files in current dir.
-what about url?
-
-same for listen and send?
-   listenurl, sendurl, config in curdir
-Yes!
-
-The maximum length of the URL is defined in eof.h (EOF\_L\_ADDRESS).
-If it is longer, it will be truncated after \textbf{EOF\_L\_ADDRESS} bytes.
-
-IMPORTANT!
-% -----------------------------------------------------------------------------
-\section{Implementations}
-The following sections cover existent protocol implementations.
-The name of the section is the name of the registered implementation.
-Every section must at least contain:
-\begin{itemize}
-\item Supported scheme
-\item Author contact information
-\item URL of website
-\item Programming language
-\item EOF-Version that introduces support for the protocol
-\end{itemize}
-You should add your implementation to the directory "`tp"' within the
-repository.
-Sort sections by alphabet.
-
-% FIXME: maybe create a longtable containing all protocols
-% FIXME: only add further information to subsections
-% -----------------------------------------------------------------------------
-\subsection{dummy/c}
-\begin{itemize}
-\item dummy
-\item Nico Schottelius [nico-eof-tp-dummy-c =at= schottelius.org]
-\item https://www.eof.name
-\item C
-\item Version: 1
-\end{itemize}
-% -----------------------------------------------------------------------------
-\subsection{tcp-apic}
-\begin{itemize}
-\item tcp
-\item A. Pic
-\item ?
-\item C
-\item Version: 1
-\end{itemize}
 % -----------------------------------------------------------------------------
 \appendix
 \chapter{Sources}
