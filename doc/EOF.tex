@@ -601,21 +601,40 @@ For schemes only lower-case names are allowed
 \subsection{Paths}
 All paths are relative to the directory p\_tp\_d, as described
 in \ref{ptpd} on p. \pageref{ptpd}.
-
-To enable a listener for the protocol \emph{tptest} at the URL
-\emph{tptest:somewhere@protocol-specific}
-\begin{itemize}
-\item create a directory below
-\begin{itemize}
-\item \textbf{\$HOME/.ceof/tp/enabled/}
-\end{itemize}
-\item with a name of your choice (f.i. \emph{tptest-somwhere} or \emph{http-80}).
-\item Then add the URL to the file named $<\textbf{url}>$.
-\item If the transport protocol needs or allows additional configuration files,
-you need to create them in that directory.
-\end{itemize}
-The EOF implementation will parse the URL and check whether a supporting
-listener application is available.
+\begin{longtable}{|c|c|}
+\caption{Required transport protocols}\\
+\hline
+\textbf{Scheme} & \textbf{Name}\\
+\hline
+\verb=available/= & Available transport procols\\
+\hline
+\verb=available/<scheme>/listen= & Listener (executable) for the scheme\\
+\hline
+\verb=available/<scheme>/send= & Sender (executable) for the scheme\\
+\hline
+\verb=listen/= & Enabled listeners\\
+\hline
+\verb=listen/<freeform>/url= & URL \\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsubsection{Enabling a scheme}
+To enable support for the scheme \verb=http=
+create both, the \verb=listen= and the \verb=send= executable below
+\verb=available/http=.
+% Nico: 1.0
+% -----------------------------------------------------------------------------
+\subsubsection{Enabling a listener}
+To enable a listener for the scheme \emph{http} at the URL
+\emph{http://www.example.com/eof}, create
+the directory \verb=listen/http-example= and the file
+\verb=listen/http-example/url= with the content
+\verb=http://www.example.com/eof=.
+If the transport protocol implementation needs or allows additional
+configuration files, they should be placed in the same directory.
+The EOF implementation will parse the URL and check whether the
+scheme is supported.
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{Required implementations}
 This version of the EOF standard requires support for the following
