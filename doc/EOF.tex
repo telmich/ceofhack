@@ -346,6 +346,10 @@ identification number, which is chosen by the sender
 page \pageref{idn}).
 % Nico: 1.0
 % -----------------------------------------------------------------------------
+\subsection{Configuration}
+The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
+% Nico: FIXME for 1.0: cite
+% -----------------------------------------------------------------------------
 \section{Paths}
 % -----------------------------------------------------------------------------
 \subsection{EOFi configuration directory (p\_eofi\_d)}
@@ -385,10 +389,6 @@ keyid used for signing messages.
 \label{ptpd}
 The directory "'\textbf{tp}"' below the EOFi configuration directory contains
 all transport protocol related files.
-% -----------------------------------------------------------------------------
-\section{Configuration}
-The configuration of EOFi is stored in the cconfig\cite{cconfig} format.
-% Nico: FIXME for 1.0: cite
 % -----------------------------------------------------------------------------
 \section{Basic data types ("`EOFbdt"')}
 This section specifies the basic datatypes used in EOF.
@@ -595,6 +595,47 @@ Postcards are described in detail in chapter \ref{postcards}, page \pageref{post
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
 URLs are used as defined in RFC3986\cite{uri-1}.
+% -----------------------------------------------------------------------------
+\subsection{Required implementations}
+This version of the EOF standard requires support for the following
+transport protocols in the implementation:
+\begin{longtable}{|c|c|c|c|}
+\caption{Required transport protocols}\\
+\hline
+\textbf{Scheme} & \textbf{Name} & \textbf{Format} & \textbf{Description}\\
+\hline
+tcp & IP/TCP & \verb=tcp:host:port= & Plain tcp\\
+\hline
+\end{longtable}
+% -----------------------------------------------------------------------------
+\subsection{Upcoming implementations}
+The following transport protocol implementations have been proposed,
+but are not yet implemented and thus not yet part of the standard:
+
+\begin{longtable}{|c|c|c|c|}
+\caption{Upcoming transport protocols}\\
+\hline
+\textbf{Scheme} & \textbf{Name} & \textbf{Format} & \textbf{Description}\\
+\hline
+dns & DNS       & \verb=dns:host:port:type= & Package via DNS\\
+\hline
+http & HTTP       & \verb=http:host:port/path= & Plain http\\
+\hline
+https & HTTPS     & \verb=https:host:port/path= & http with ssl\\
+\hline
+mailto & E-Mail   & \verb=mailo:address= & Send package as e-mail\\
+\hline
+mediawiki & Mediawiki   & \verb=mediawiki:host:port:page= & Transfer via Mediawiki\\
+\hline
+smb  & SMB     & \verb=smb:[user[:password]@]host:path= & Server message block\\
+\hline
+smtp & SMTP     & \verb=smtp:[user[:password]@]host:port= & http with ssl\\
+\hline
+tcps & IP/TCP/SSL & \verb=tcps:host:port= & tcp with ssl around\\
+\hline
+udp & IP/UPD      & \verb=udp:host:port= & Plain UDP\\
+\hline
+\end{longtable}
 % -----------------------------------------------------------------------------
 \subsection{1000: Send packet}
 \index{Command!1000}
@@ -1464,7 +1505,6 @@ All packets must be signed by the sender and encrypted for the receiver.
 The different datatypes are just concatenated in the order described.
 The following description of the content describes the pakckets
 in their unencrypted form.
-
 % Nico: 1.0
 % #############################################################################
 \chapter{Transport protocols}
@@ -1475,43 +1515,6 @@ Only lower-case names are allowed (to prevent problems with broken filesystems).
 \section{Examples}
 This sections shows some theoretic (theoretic because nobody implemented
 them yet) transport protocols.
-% -----------------------------------------------------------------------------
-\subsection{tcp}
-% -----------------------------------------------------------------------------
-\subsection{tcps}
-% -----------------------------------------------------------------------------
-\subsection{udp}
-% -----------------------------------------------------------------------------
-\subsection{http}
-% -----------------------------------------------------------------------------
-\subsection{https}
-% -----------------------------------------------------------------------------
-\subsection{smtp}
-connect to smtp server
-% -----------------------------------------------------------------------------
-\subsection{smtps}
-% -----------------------------------------------------------------------------
-\subsection{mediawiki}
-url, user, password
-% -----------------------------------------------------------------------------
-\subsection{smb}
-write on windows shares
-% -----------------------------------------------------------------------------
-\subsection{mailto}
-Write an email to some address. Needs smtp-server set in configuration.
-May have different methods for retrieval (like connecting to imap,pop,
-read from mbox/maildir directly).
-% -----------------------------------------------------------------------------
-\subsubsection{Example URLs}
-\begin{verbatim}
-mailto:nico-eof@eof.eof.name
-\end{verbatim}
-% -----------------------------------------------------------------------------
-\subsection{dns}
-Use dns traffic to transport EOF protocols.
-% -----------------------------------------------------------------------------
-\subsection{media}
-like images, videos, sounds, real noise, spam, ...
 % -----------------------------------------------------------------------------
 \section{Embedding into EOF}
 This section explains how to integrate a transport protocol into EOF.
