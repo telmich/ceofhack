@@ -594,9 +594,13 @@ Postcards are described in detail in chapter \ref{postcards}, page \pageref{post
 \label{eofi2tp}
 % -----------------------------------------------------------------------------
 \subsection{Introduction}
+Every transport protocol consists of a listening (\verb=listen=)
+and sending (\verb=send=) part. When the EOFi starts, it starts all
+transport protocols, which should the remain started and listen
+for commands issued by the EOFi.
 URLs are used as defined in RFC3986\cite{uri-1}.
 For schemes only lower-case names are allowed
-(to prevent problems with broken filesystems).
+(to prevent problems with case-insensitive filesystems).
 % -----------------------------------------------------------------------------
 \subsection{Paths}
 \label{tppaths}
@@ -738,12 +742,12 @@ the real packet!
 \0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
 \0\0\0\0\0\0\0\0\0\010\0\0\0\0HEREISDATA
 \end{verbatim}
+% Nico: 1.0
 % -----------------------------------------------------------------------------
 \subsection{1001: Enable listening}
 \index{Command!1001}%
 When the listening transport protocol starts up, EOFi sends this command and
-waits for the acknowledge package, before it marks the listening
-transport protocol as enabled.
+waits for the acknowledge package, before it marks the transport protocol as enabled.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
