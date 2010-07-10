@@ -63,6 +63,7 @@ int main()
    if(!helper_init())   return CEOF_EX_HELPER;     /* init helper structs  */
    if(!crypto_init())   return CEOF_EX_CRYPTO;     /* init crypto          */
    if(!signals_init())  return CEOF_EX_SIGNALS;    /* catch signals        */
+   if(!queue_init())    return CEOF_EX_QUEUE;      /* queues               */
    if(!cmd_init())      return CEOF_EX_CMD;        /* enable EOF commands  */
    if(!tp_init())       return CEOF_EX_TP;         /* transport protocols  */
    if(!peer_init())     return CEOF_EX_PEER;       /* handling of peers    */

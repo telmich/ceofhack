@@ -30,7 +30,13 @@
 
 /* parts of the pipe array _we_ use */
 #define HP_FDCNT           2     /* only save read/write and not partner side */
-/* PIPE:  fildes[1]  = WRITE–. fildes[0] = read */
+
+enum {
+   CEOF_QUEUE_CRYPTO,
+   CEOF_QUEUE_TPS,
+   CEOF_QUEUE_UI,
+   CEOF_QUEUE_MAX,
+};
 
 /****************** Structures  */
 /* user interface commands */
@@ -70,14 +76,13 @@ struct cconfig {
 };
 
 struct queue {
-   struct eofsiaeiae       *type;               /* pointer to type of EOFs       */
    int               fd;                  /* incoming data arrives here    */
    struct queueentry *next;               /* pointer to the first entry    */
 };
 
 struct queueentry {
-   char              id[EOF_L_ID];
    struct eof_cmd     cmd;                 /* the questioning command       */
+   char              id[EOF_L_ID];
    struct queueentry *next;               /* pointer to the next entry     */
 };
 
@@ -217,6 +222,7 @@ int crypto_read(int fd[]);
 /* queues */
 int queue_read(int []);
 int queue_new(int fd, int cat);
+int queue_init();
 
 /* onion stuff */
 void onion_partial_create(char cmd[], char id[], char addr[], char group[], char text[], char pkg[]);

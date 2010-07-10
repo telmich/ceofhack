@@ -36,6 +36,8 @@ PEER=peer_init.c peer_add.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c
 PEER+=peer_new.c peer_list.c peer_rename.c peer_show.c
 
+QUEUE=queue_init.c
+
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
 HELPER+=helper_write.c helper_find_by_pid.c helper_disable.c helper_find_by_fd.c
@@ -87,8 +89,8 @@ NOISE=noise_fill.c
 
 
 # ceofhack internal
-CEOFHACK=main.c fd_to_poll.c signals_init.c signal_child.c
-CEOFHACK+=config_init.c $(ONION) $(NOISE)
+CEOFHACK=main.c config_init.c fd_to_poll.c signals_init.c signal_child.c
+CEOFHACK+=$(ONION) $(NOISE) $(QUEUE)
 CEOFHACK+=$(CCONFIG) $(TRANSPORT_PROTO) $(SHCL) $(PEER) $(HELPER)
 CEOFHACK+=$(UI_CMD) $(CMD) $(CEOF) $(CRYPTO) $(UI) $(LIB) $(EOFS)
 

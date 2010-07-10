@@ -57,6 +57,7 @@ enum {
    CEOF_EX_UI,
    CEOF_EX_POLL,
    CEOF_EX_EOFS,
+   CEOF_EX_QUEUE,
    CEOF_EX_NOWAY
 };
 
