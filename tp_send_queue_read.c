@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008      Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,31 +18,14 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Called by the helper application, if data as available
+ * Redirect to tp queue
  *
  */
 
-#include <unistd.h>     /* read           */
-#include <stdio.h>      /* perror         */
-#include "ceofhack.h"   /* functions etc. */
+#include <eof.h>
+#include "ceof.h"
 
-int queue_read(int qid, int fd[])
+int tp_send_queue_read(int fd[])
 {
-   char buf[EOF_L_CMD];
-
-   /* check whether command is valid in the category of the queue */
-   queue_cmd_valid(fd[EOF_CMD_READ]);
-
-   /* what about the ID? */
-
-   /* read cmd and id */
-   if(shcl_read_all(fd[EOF_CMD_READ], buf, EOF_L_CMD) != EOF_L_CMD) {
-      perror("queue_read");
-
-      /* FIXME: disable input? */
-      return 0;
-   }
-   printf("queue_read (cmd) %c%c%c%c\n", buf[0], buf[1], buf[2], buf[3]);
-
-   return cmd_handle(EOF_CAT_TPL, fd, buf);
+   return queue_read(EOF_CAT_TPL, fd, &cmd_handle_rr);
 }

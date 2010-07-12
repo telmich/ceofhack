@@ -35,6 +35,7 @@ int tp_send_init()
    int i, len;
    struct helper *hp;
    char cmd[EOF_L_CMD+1]; /* FIXME: +1 is only for testing */
+   char id[EOF_L_ID];
 
    strncpy(cmd, EOF_CMD_TPL_START, EOF_L_CMD);
    cmd[EOF_L_CMD+EOF_L_ADDRESS] = '\0';
@@ -47,11 +48,14 @@ int tp_send_init()
        * 
        */
 
-      /* FIXME: cwd into configdir? */
+      /* FIXME: cwd into configdir? add cwd option to helper_exec? */
 
-      if(!(hp = helper_exec(tpls[i].listen->path, tp_listen_read, NULL))) return 0;
+      eof_id_new(id);
+      queue_add_entry(id, 
 
-      /* FIXME: cwd back */
+      if(!(hp = helper_exec(tpa[i].send->path, tps_queue_read, NULL))) return 0;
+
+      /* FIXME: cwd back? */
 
       /* FIXME: write start command including URL (excluding scheme) */
       len = tp_scheme_len(tpls[i].url);
