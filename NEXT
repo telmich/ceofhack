@@ -1,3 +1,5 @@
+lib/eof_cmd_handle.c
+
 tp_send_init.c:
    init all senders
 tp_send.c

@@ -31,17 +31,18 @@
 int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
 {
    struct eof_cmd *cmd;
-   char data[EOF_L_CMD];
+   char i_cmd[EOF_L_CMD];
+   char i_id[EOF_L_ID];
 
    /* always read a command first */
-   *rr = shcl_read_all(fd[EOF_CMD_READ], data, EOF_L_CMD);
+   *rr = shcl_read_all(fd[EOF_CMD_READ], i_cmd, EOF_L_CMD);
 
    /* catch error and end-of-file */
    if(*rr < 1) {
       return *rr;
    }
 
-   cmd = eof_cmd_find_in_cat(eofs, data);
+   cmd = eof_cmd_find_in_cat(eofs, i_cmd);
    if(!cmd) {
       cmd = eof_cmd_cat_get_default_cmd(eofs);
    }
