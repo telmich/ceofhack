@@ -61,6 +61,7 @@ int tp_send(char *url, char *pkg, int len, char errmsg[EOF_L_MESSAGE])
    strncpy(buf, EOF_CMD_TPS, EOF_L_CMD);
    strncpy(&buf[EOF_L_CMD], url, EOF_L_ADDRESS);
 
+   /* FIXME: size is always 6 chars */
    /* snprintf uses only len bytes including \0, but we want it excluding */
    snprintf(&buf[EOF_L_CMD+EOF_L_ADDRESS], EOF_L_SIZE+1, "%ld", (long) len);
 

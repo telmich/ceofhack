@@ -42,7 +42,6 @@ int tp_send_init()
  
    for(i=0; i < tpa_cnt;; i++) {
       /* start it:
-       * - FIXME: cwd to dir before!
        * - add handler for LTP (generic?): tp_listen_read
        * - send 1001<url> cmd
        * 
@@ -54,7 +53,7 @@ int tp_send_init()
       eof_id_new(id);
       queue_add_entry(CEOF_QUEUE_TPS, id, 
 
-      if(!(hp = helper_exec(tpa[i].send->path, tps_queue_read, NULL))) return 0;
+      if(!(hp = helper_exec(tpa[i].send->path, tp_send_queue_read, NULL))) return 0;
 
       /* FIXME: cwd back? */
 

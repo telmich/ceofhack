@@ -178,6 +178,8 @@ int tp_send(char *nick, char *msg, int len, char errmsg[EOF_L_MESSAGE]);
 int tp_send_wait(int fds[]);
 char *tp_getscheme(char *url);
 
+int tp_send_init();
+
 /* cconfig */
 int cconfig_tree(struct cconfig *cg);
 struct cconfig *cconfig_find_fn(char *fn, struct cconfig src, struct cconfig *dst);
