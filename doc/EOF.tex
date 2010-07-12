@@ -790,10 +790,23 @@ ID & EOFsdt: id & packet id & afdb12\\
 \item none
 \end{itemize}
 % -----------------------------------------------------------------------------
-\subsubsection{1002: Example}
-\begin{verbatim}
-1002
-\end{verbatim}
+\subsection{1003: Prepare sending}
+\index{Command!1003}%
+This command requests a transport protocol sender to prepare for sending out
+data. The transport protocol should initialise itself and acknowledge
+when it is ready for sending.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1003 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item none
+\end{itemize}
 % -----------------------------------------------------------------------------
 \subsection{2000: Packet successfully sent}
 This code is returned by the transport protocol subsystem to EOFi on success.
