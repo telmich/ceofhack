@@ -58,11 +58,6 @@ int tp_send(char *url, char *pkg, int len, char errmsg[EOF_L_MESSAGE])
     * - remove from queue, if successful!
     */
 
-   if(!(hp = helper_exec(send->path, tp_send_wait, NULL))) {
-      eof_errmsg("Transport protocol failed!");
-      return 0;
-   }
-
    strncpy(buf, EOF_CMD_TPS, EOF_L_CMD);
    strncpy(&buf[EOF_L_CMD], url, EOF_L_ADDRESS);
 
