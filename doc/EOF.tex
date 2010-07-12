@@ -913,6 +913,40 @@ ID & EOFsdt: id & packet id & afdb12\\
 \begin{itemize}
 \item none
 \end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{2005: Ready for sending}
+\index{Command!2005}
+This code is returned by the transport protocol sender, as soon as the
+process is ready to send data.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2005 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item none
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{2006: Sender preperation error}
+\index{Command!2006}
+If something happended that makes the transport protocol sender
+unable to startup, it issues this command and exits afterwards.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 2006 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item none
+\end{itemize}
 % #############################################################################
 \section{The user interface ("`ui2user"')}
 This section specifies the appereance of a user interface to the user.
