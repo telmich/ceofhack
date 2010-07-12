@@ -41,8 +41,8 @@ int tp_add_available(char *name, struct cconfig entry)
    tpnew.send   = cconfig_find_fn("send", entry, NULL);
 
    /* none there? that's a boo boo! */
-   if(!tpnew.listen && !tpnew.send) {
-      printf(CEOF_MSG_TPPROMPT "Error: dummy transport protocol %s!\n", name);
+   if(!tpnew.listen || !tpnew.send) {
+      printf(CEOF_MSG_TPPROMPT "Error: incomplete transport protocol %s!\n", name);
       return 0;
    }
 
