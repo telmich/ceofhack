@@ -773,10 +773,9 @@ Destination & EOFsdt: addr & URL without "`\emph{scheme:}"' & 127.0.0.3:42\\
 % -----------------------------------------------------------------------------
 \subsection{1002: Stop listening}
 \index{Command!1002}%
-This command requests a listening transport protocol to 
-shutdown. It should free all ressources and exit.
-After a grace time (maybe seconds, not yet defined), EOFi will kill the badly
-behaving transport protocol.
+This command requests a listening transport protocol to shutdown.
+It should free all ressources and exit. After a grace time (maybe seconds,
+not yet defined), EOFi will kill the badly behaving transport protocol.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1001 parameters}\\
 \hline
@@ -797,6 +796,24 @@ data. The transport protocol should initialise itself and acknowledge
 when it is ready for sending.
 \begin{longtable}{|c|c|c|c|}
 \caption{Command 1003 parameters}\\
+\hline
+\textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
+\hline
+ID & EOFsdt: id & packet id & afdb12\\
+\hline
+\end{longtable}
+\subsubsection{Possible answers}
+\begin{itemize}
+\item none
+\end{itemize}
+% -----------------------------------------------------------------------------
+\subsection{1004: Stop sending}
+\index{Command!1004}%
+This command requests a transport protocol sender to shutdown.
+It should free all ressources and exit. After a grace time (maybe seconds,
+not yet defined), EOFi will kill the badly behaving transport protocol.
+\begin{longtable}{|c|c|c|c|}
+\caption{Command 1004 parameters}\\
 \hline
 \textbf{Parameter} & \textbf{Type} & \textbf{Description} & \textbf{Example}\\
 \hline
