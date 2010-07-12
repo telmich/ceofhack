@@ -50,8 +50,9 @@ int tp_send_init()
 
       /* FIXME: cwd into configdir? add cwd option to helper_exec? */
 
+      /* Create init packet + listener for it on our side */
       eof_id_new(id);
-      queue_add_entry(id, 
+      queue_add_entry(CEOF_QUEUE_TPS, id, 
 
       if(!(hp = helper_exec(tpa[i].send->path, tps_queue_read, NULL))) return 0;
 

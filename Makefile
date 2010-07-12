@@ -31,6 +31,7 @@ SHCL+=shcl/shcl_read_all.c shcl/shcl_write_all.c
 TRANSPORT_PROTO=tp_init.c tp_add_available.c tp_listen_add.c tp_listen_init.c
 TRANSPORT_PROTO+=tp_scheme_len.c tp_available.c
 TRANSPORT_PROTO+=tp_listen_read.c tp_send.c tp_send_wait.c tp_getscheme.c
+TRANSPORT_PROTO+=tp_send_queue_read.c
 
 PEER=peer_init.c peer_add.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c

@@ -22,10 +22,9 @@
  *
  */
 
-#include <eof.h>
-#include "ceof.h"
+#include "ceofhack.h"
 
 int tp_send_queue_read(int fd[])
 {
-   return queue_read(EOF_CAT_TPL, fd, &cmd_handle_rr);
+   return queue_read(CEOF_QUEUE_TPS, fd);
 }
