@@ -55,8 +55,6 @@ int tp_listen_init()
 
       if(!(hp = helper_exec(tpls[i].listen->path, tp_listen_read, NULL))) return 0;
 
-      //if(!queue_new(hp->fds[EOF_CMD_READ], EOF_CAT_TPL)) return 0;
-
       /* FIXME: cwd back */
 
       /* FIXME: write start command including URL (excluding scheme) */

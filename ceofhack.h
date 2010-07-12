@@ -33,6 +33,8 @@
 
 enum {
    CEOF_QUEUE_CRYPTO,
+   CEOF_QUEUE_PKG,
+   CEOF_QUEUE_TPL,
    CEOF_QUEUE_TPS,
    CEOF_QUEUE_UI,
    CEOF_QUEUE_MAX,
@@ -76,13 +78,13 @@ struct cconfig {
 };
 
 struct queue {
-   int               fd;                  /* incoming data arrives here    */
    struct queueentry *next;               /* pointer to the first entry    */
 };
 
 struct queueentry {
-   struct eof_cmd     cmd;                 /* the questioning command       */
-   char              id[EOF_L_ID];
+   struct eof_cmd    cmd;                 /* the questioning command       */
+   char              id[EOF_L_ID];        /* id to react on                */
+   int               fd;                  /* fd to react on                */
    struct queueentry *next;               /* pointer to the next entry     */
 };
 

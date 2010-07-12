@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * 2008-2009 Nico Schottelius (nico-ceofhack at schottelius.org)
+ * 2008-2010 Nico Schottelius (nico-ceofhack at schottelius.org)
  *
  * This file is part of ceofhack.
 
@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Init transport protocols
+ * Init transport protocols (listen & send!)
  *
  */
 
@@ -26,7 +26,6 @@
 #include <stdio.h>               /* printf                        */
 #include <string.h>              /* str*                          */
 #include <limits.h>              /* PATH_MAX                      */
-
 
 #include "ceofhack.h"   /* functions etc. */
 #include "ceof.h"
@@ -58,7 +57,7 @@ int tp_init()
 
    /* search for all available protocols */
    if(!cconfig_find_fn("available", tp_tree, &tmp)) {
-      printf("No transport protocols available!\n");
+      printf(CEOF_MSG_TPPROMPT "No transport protocols available!\n");
       return 0;
    }
 
@@ -84,8 +83,8 @@ int tp_init()
       if(!tp_listen_add(p, entry)) return 0;
    }
  
-   /* enable listener protocols */
-   if(!tp_listen_init()) return 0;
+   /* enable transport protocols */
+   if(!tp_listen_init() || !tp_send_init()) return 0;
 
    return 1;
 }
