@@ -22,9 +22,10 @@
  *
  */
 
+#include "ceof.h"       /* categories */
 #include "ceofhack.h"   /* functions etc. */
 
-struct queue queues[CEOF_QUEUE_MAX];
+struct queue queues[EOF_CAT_MAX];
 
 int queue_init()
 {
