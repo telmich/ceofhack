@@ -69,14 +69,14 @@ struct cconfig {
 };
 
 struct queue {
-   struct queueentry *next;               /* pointer to the first entry    */
+   struct queue_entry *next;               /* pointer to the first entry    */
 };
 
-struct queueentry {
+struct queue_entry {
    struct eof_cmd    cmd;                 /* the questioning command       */
    char              id[EOF_L_ID];        /* id to react on                */
    int               fd;                  /* fd to react on                */
-   struct queueentry *next;               /* pointer to the next entry     */
+   struct queue_entry *next;              /* pointer to the next entry     */
 };
 
 struct crypto {

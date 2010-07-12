@@ -73,7 +73,7 @@ enum {                                    /* List of EOF categories        */
 
 
 /* structures */
-#include <limits.h>              /* PATH_MAX                      */
+#include <limits.h>                       /* PATH_MAX                      */
 struct options {
    char home[PATH_MAX+1];
    char cryptohome[PATH_MAX+1];

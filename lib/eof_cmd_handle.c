@@ -31,6 +31,7 @@
 int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
 {
    struct eof_cmd *cmd;
+   struct queue_entry *qe;
    char i_cmd[EOF_L_CMD];
    char i_id[EOF_L_ID];
 
@@ -38,21 +39,28 @@ int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
    *rr = shcl_read_all(fd[EOF_CMD_READ], i_cmd, EOF_L_CMD);
 
    /* catch error and end-of-file */
-   if(*rr < 1) {
-      return *rr;
-   }
+   if(*rr < 1) return *rr;
 
    cmd = eof_cmd_find_in_cat(eofs, i_cmd);
-   if(!cmd) {
-      cmd = eof_cmd_cat_get_default_cmd(eofs);
-   }
+   if(!cmd) cmd = eof_cmd_cat_get_default_cmd(eofs);
 
    /* entry in queue required ? */
    if(cmd->queue_req) {
+      *rr = shcl_read_all(fd[EOF_CMD_READ], i_id, EOF_L_ID);
+      if(*rr < 1) return *rr;
 
-      queue_entry_find(eofs, 
+      qe = queue_pop_entry(eofs, i_id);
 
+      if(qe) {
+         /* check whether meta data matches queue entry */
+         //queue_verify_source(qe, fd);
+      } else {
+         /* bogus packet - close connection */
+         answer_no_queue_entry
+         return nogood;
+      }
    }
 
+   /* cmd knows that it has an entry */
    return cmd->handle(fd);
 }

@@ -52,7 +52,7 @@ int tp_send_init()
       /* Create init packet + listener for it on our side */
       eof_id_new(id);
       STOPPED
-      queue_add_entry(CEOF_QUEUE_TPS, id, wrapper_for_eof_cmd_handle!!!??? 
+      queue_push_entry(EOF_CAT_TPS, id, wrapper_for_eof_cmd_handle!!!??? 
 
       if(!(hp = helper_exec(tpa[i].send->path, tp_send_queue_read, NULL))) return 0;
 
