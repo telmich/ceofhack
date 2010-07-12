@@ -20,7 +20,7 @@
 #define EOF_L_TPA       256      /* max available tp (all)        */
 #define EOF_L_TPL       256      /* max available tp listener     */
 #define MAX_RCP         1        /* gpgme recipients              */
-#define BIGBUF          65536
+#define BIGBUF          65536    /* FIXME: HACK                   */
 #define MAX_COMM        256      /* maximum number of communication
                                   * channels contains stdin, listen
                                   * sockets and outgoing sockets
@@ -30,15 +30,6 @@
 
 /* parts of the pipe array _we_ use */
 #define HP_FDCNT           2     /* only save read/write and not partner side */
-
-enum {
-   CEOF_QUEUE_CRYPTO,
-   CEOF_QUEUE_PKG,
-   CEOF_QUEUE_TPL,
-   CEOF_QUEUE_TPS,
-   CEOF_QUEUE_UI,
-   CEOF_QUEUE_MAX,
-};
 
 /****************** Structures  */
 /* user interface commands */

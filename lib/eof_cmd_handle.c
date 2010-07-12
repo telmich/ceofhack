@@ -46,5 +46,12 @@ int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
       cmd = eof_cmd_cat_get_default_cmd(eofs);
    }
 
+   /* entry in queue required ? */
+   if(cmd->queue_req) {
+
+      queue_entry_find(eofs, 
+
+   }
+
    return cmd->handle(fd);
 }
