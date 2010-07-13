@@ -61,17 +61,6 @@ enum {
    CEOF_EX_NOWAY
 };
 
-/* command categories */
-enum {                                    /* List of EOF categories        */  
-   EOF_CAT_TPL,                           /* transport protocol listener   */  
-   EOF_CAT_TPS,                           /* transport protocol sender     */  
-   EOF_CAT_UI,                            /* user interfaces               */  
-   EOF_CAT_CRYPTO,                        /* user interfaces               */  
-   EOF_CAT_PKG,                           /* onion packets FIXME: rename?  */
-   EOF_CAT_MAX                            /* maximum number of EOFs types  */  
-};
-
-
 /* structures */
 #include <limits.h>                       /* PATH_MAX                      */
 struct options {

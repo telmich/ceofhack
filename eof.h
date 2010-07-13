@@ -114,6 +114,17 @@
 #define EOF_CMD_READ     0
 #define EOF_CMD_WRITE    1
 
+/* command categories */
+enum {                                    /* List of EOF categories        */  
+   EOF_CAT_TPL,                           /* transport protocol listener   */  
+   EOF_CAT_TPS,                           /* transport protocol sender     */  
+   EOF_CAT_UI,                            /* user interfaces               */  
+   EOF_CAT_CRYPTO,                        /* user interfaces               */  
+   EOF_CAT_PKG,                           /* onion packets FIXME: rename?  */
+   EOF_CAT_MAX                            /* maximum number of EOFs types  */  
+};
+
+
 /* macros */
 #define eof_errmsg(msg) (snprintf(errmsg, EOF_L_MESSAGE, msg))
 
