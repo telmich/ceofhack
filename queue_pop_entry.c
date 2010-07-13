@@ -24,23 +24,30 @@
 
 #include <stdio.h>      /* NULL           */
 #include <string.h>     /* str*           */
+#include <stdlib.h>     /* free           */
 #include <eof.h>
 #include "ceofhack.h"   /* functions etc. */
 
-struct queue_entry *queue_pop_entry(int cat, char id[])
+struct queue_entry *queue_pop_entry(int cat, char id[], struct queue_entry *save)
 {
-   struct queue_entry *qp, *qe;
+   struct queue_entry *qe, *qp;
 
-   qe = qp = NULL;
-
-   qe = (queues[cat]).first;
+   qp = qe = (queues[cat]).first;
 
    while(qe) {
+      if(!strncmp(qe->id, id, EOF_L_ID)) {
+         memcpy(save, qe, sizeof(struct queue_entry));
+
+         /* remove qe from list and memory */
+         qp->next = qe->next;
+         free(qe);
+         qe = save;
+
+         break;
+      }
       qp = qe;
-      if(!strncmp(qe->id, id, EOF_L_ID)) break;
       qe = qe->next;
    }
 
    return qe;
-
 }
