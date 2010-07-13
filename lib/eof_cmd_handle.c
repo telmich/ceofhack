@@ -27,11 +27,14 @@
 
 #include <eof.h>       /* functions etc. */
 #include "shcl.h"      /* helper */
+#include "ceofhack.h"      /* helper */
 
 int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
 {
-   struct eof_cmd *cmd;
-   struct queue_entry *qe;
+   struct eof_cmd       *cmd;
+   struct queue_entry   *qe;
+   struct helper        *hp;
+
    char i_cmd[EOF_L_CMD];
    char i_id[EOF_L_ID];
 
@@ -56,8 +59,10 @@ int eof_cmd_handle(unsigned long eofs, int fd[], ssize_t *rr)
          //queue_verify_source(qe, fd);
       } else {
          /* bogus packet - close connection */
-         answer_no_queue_entry
-         return nogood;
+         printf(CEOF_MSG_PROMPT "Bogus packet on %d\n", fd[EOF_CMD_READ]);
+         hp = helper_find_by_fd(EOF_CMD_READ, fd);
+         if(hp) helper_disable(hp);
+         return 0;
       }
    }
 

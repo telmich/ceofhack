@@ -24,6 +24,7 @@
 
 #include <string.h>        /* strlen()          */
 #include <stdio.h>         /* NULL              */
+#include <eof.h>
 #include "ceofhack.h"      /* functions etc.    */
 #include "ceof.h"
 
@@ -31,7 +32,7 @@ int tp_send(char *url, char *pkg, int len, char errmsg[EOF_L_MESSAGE])
 {
    struct cconfig *send;
    struct helper  *hp;
-   char   tppkg[EOF_L_MAX];
+   char   tp_pkg[EOF_L_PKG_MAX];
 
    /* search for transport protocol */
    send = tp_available(url, EOF_CAT_TPS);
