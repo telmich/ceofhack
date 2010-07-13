@@ -18,29 +18,28 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Retrieve a queue entry and remove from queue
+ * Add an item to the queue
  *
  */
 
 #include <stdio.h>      /* NULL           */
-#include <string.h>     /* str*           */
+#include <stdlib.h>     /* calloc         */
+#include <string.h>     /* strncpy        */
 #include <eof.h>
 #include "ceofhack.h"   /* functions etc. */
 
-struct queue_entry *queue_pop_entry(int cat, char id[])
+struct queue_entry *queue_push_entry(int cat, char id[])
 {
-   struct queue_entry *qp, *qe;
+   struct queue_entry *qe;
 
-   qe = qp = NULL;
+   qe = calloc(1, sizeof(struct queue_entry));
+   if(qe) {
+      strncpy(qe->id, id, EOF_L_ID);
 
-   qe = (queues[cat]).first;
-
-   while(qe) {
-      qp = qe;
-      if(!strncmp(qe->id, id, EOF_L_ID)) break;
-      qe = qe->next;
+      /* add as first item */
+      qe->next = queues[cat].first;
+      queues[cat].first = qe;
    }
 
    return qe;
-
 }
