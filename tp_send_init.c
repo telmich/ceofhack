@@ -18,7 +18,7 @@
  * along with ceofhack.  If not, see <http://www.gnu.org/licenses/>.
 
  *
- * Check and init listening protocols
+ * Init senders
  *
  */
 

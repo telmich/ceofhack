@@ -1,7 +1,9 @@
-lib/eof_cmd_handle.c
+queue_push_entry.c
 
 tp_send_init.c:
    init all senders
+lib/eof_cmd_handle.c
+
 tp_send.c
    add pkg to queue
    FIXME: have tps and tp always running, not only on demand
