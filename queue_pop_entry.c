@@ -29,11 +29,14 @@
 
 struct queue_entry *queue_pop_entry(int cat, char id[])
 {
-   struct queue_entry *qe = NULL;
+   struct queue_entry *qp, *qe;
+
+   qe = qp = NULL;
 
    qe = (queues[cat]).first;
 
    while(qe) {
+      qp = qe;
       if(!strncmp(qe->id, id, EOF_L_ID)) break;
       qe = qe->next;
    }

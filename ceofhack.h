@@ -69,7 +69,7 @@ struct cconfig {
 };
 
 struct queue {
-   struct queue_entry *next;               /* pointer to the first entry    */
+   struct queue_entry *first;               /* pointer to the first entry    */
 };
 
 struct queue_entry {
@@ -107,6 +107,9 @@ extern int              tpa_cnt;
 extern struct tpl       tpls[EOF_L_TPL];
 extern int              tpls_cnt;
 extern struct cconfig   tp_tree;
+
+/* transport */
+extern struct queue     queues[EOF_CAT_MAX];
 
 /****************** Functions  */
 /* generic */

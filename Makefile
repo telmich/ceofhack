@@ -38,7 +38,7 @@ PEER=peer_init.c peer_add.c peer_findbyname.c peer_send.c
 PEER+=peer_keyid_get.c peer_addr_get.c
 PEER+=peer_new.c peer_list.c peer_rename.c peer_show.c
 
-QUEUE=queue_init.c
+QUEUE=queue_init.c queue_pop_entry.c
 
 # help to execute external stuff
 HELPER=helper_init.c helper_fdonly.c helper_new.c helper_exec.c
